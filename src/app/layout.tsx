@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   keywords: ['Code', 'LLM', 'Testing', 'Evaluation'],
   authors: [{ name: 'Code TREAT Team' }],
   robots: 'index, follow',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   openGraph: {
     type: 'website',
     locale: 'en_US',

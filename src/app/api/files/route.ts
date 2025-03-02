@@ -4,13 +4,15 @@ import path from 'path';
 import { createReadStream } from 'fs';
 import readline from 'readline';
 
+// 添加动态配置
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
     const directory = searchParams.get('directory');
     const file = searchParams.get('file');
-    const page = parseInt(searchParams.get('page') || '1');
-    const pageSize = parseInt(searchParams.get('pageSize') || '5000');
 
     if (!directory) {
       return NextResponse.json({ error: 'Directory parameter is required' }, { status: 400 });
@@ -32,7 +34,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // 如果指定了文件，则分页读取文件内容
+    // 如果指定了文件，则读取文件内容
     const filePath = path.join(fullPath, file);
     
     try {

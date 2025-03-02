@@ -1,2 +1,0 @@
-# 配置 Git LFS 追踪的文件类型
-data/**/*.jsonl filter=lfs diff=lfs merge=lfs -text

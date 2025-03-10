@@ -234,13 +234,13 @@ export default function Home() {
         const processedResults = await processResults(currentTask, filters);
         console.log('Results processed:', !!processedResults);
         
-        const formattedResults = formatResults(processedResults) as ResultItem[];
+        const formattedResults = formatResults(processedResults, filters);
         console.log('Results formatted:', formattedResults.length);
         
         if (isMounted) {
           if (formattedResults.length > 0) {
             console.log('Setting new results');
-            setResults(formattedResults);
+            setResults(formattedResults as ResultItem[]);
             setSortConfig(getDefaultSortConfig(currentTask));
           }
           setIsLoading(false);

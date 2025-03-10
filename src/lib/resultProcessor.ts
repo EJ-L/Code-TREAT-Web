@@ -298,7 +298,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 }
 
 // 格式化结果为显示格式
-export function formatResults(results: ProcessedResult[]): Array<Record<string, string | number>> {
+export function formatResults(results: ProcessedResult[], filters?: FilterOptions): Array<Record<string, string | number>> {
   console.log('开始格式化结果:', {
     totalResults: results.length,
     sampleResult: results[0]
@@ -324,8 +324,33 @@ export function formatResults(results: ProcessedResult[]): Array<Record<string, 
     }
     if (result.executionAccuracy !== null) formatted['Execution'] = result.executionAccuracy;
 
-    // 使用实际的语言值
-    formatted.ability = result.lang || '-';
+    // 根据过滤器状态决定显示的能力
+    if (filters && (filters.langs?.length || filters.datasets?.length)) {
+      // 如果有过滤器，显示具体语言
+      formatted.ability = result.lang || '-';
+    } else {
+      // 如果没有过滤器，显示"All Languages"或更合适的描述
+      switch (result.task) {
+        case 'code generation':
+          formatted.ability = 'All Languages';
+          break;
+        case 'code translation':
+          formatted.ability = result.targetLang ? `${result.sourceLang || 'All'} → ${result.targetLang}` : 'All Translations';
+          break;
+        case 'code summarization':
+          formatted.ability = 'All Languages';
+          break;
+        case 'code execution':
+          formatted.ability = 'All Languages';
+          break;
+        case 'overall':
+          formatted.ability = 'All Abilities';
+          break;
+        default:
+          formatted.ability = result.lang || 'All';
+      }
+    }
+    
     formatted.task = result.task.charAt(0).toUpperCase() + result.task.slice(1);
 
     return formatted;

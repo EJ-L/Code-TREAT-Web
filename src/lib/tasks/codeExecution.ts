@@ -63,19 +63,19 @@ export function aggregateCodeExecutionResults(results: ProcessedResult[]): Proce
   // 计算每个模型的平均值
   const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
     const validResults = {
-      pass: modelResults.filter(r => r.pass !== null),
-      score: modelResults.filter(r => r.score !== null),
+      executionAccuracy: modelResults.filter(r => r.executionAccuracy !== null),
+      pass1: modelResults.filter(r => r.pass1 !== null),
     };
     
     const avgResult = { ...modelResults[0] };
     
     // 计算平均值
-    avgResult.pass = validResults.pass.length > 0
-      ? validResults.pass.reduce((sum, r) => sum + r.pass!, 0) / validResults.pass.length
+    avgResult.executionAccuracy = validResults.executionAccuracy.length > 0
+      ? validResults.executionAccuracy.reduce((sum, r) => sum + r.executionAccuracy!, 0) / validResults.executionAccuracy.length
       : null;
     
-    avgResult.score = validResults.score.length > 0
-      ? validResults.score.reduce((sum, r) => sum + r.score!, 0) / validResults.score.length
+    avgResult.pass1 = validResults.pass1.length > 0
+      ? validResults.pass1.reduce((sum, r) => sum + r.pass1!, 0) / validResults.pass1.length
       : null;
     
     return avgResult;

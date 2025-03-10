@@ -98,6 +98,16 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
     // 使用目标语言作为语言显示
     avgResult.lang = avgResult.targetLang || '';
     
+    console.log(`Aggregated metrics for model ${modelName}:`, {
+      metrics: {
+        pass1: avgResult.pass1,
+        pass3: avgResult.pass3,
+        pass5: avgResult.pass5,
+        codebleu: avgResult.codebleu
+      },
+      language: avgResult.lang
+    });
+    
     return avgResult;
   });
 

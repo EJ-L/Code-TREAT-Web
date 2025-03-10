@@ -1,10 +1,13 @@
 import { ProcessedResult, FilterOptions } from '../types';
 
 export function processCodeTranslation(results: ProcessedResult[], filters: FilterOptions): ProcessedResult[] {
-  console.log('Processing code translation task:', {
-    totalResults: results.length,
-    filters: filters
-  });
+  // 移除大部分日志，只保留最基本的信息
+  console.log(`Processing ${results.length} code translation results`);
+
+  // 如果没有code translation任务的数据，直接返回空数组
+  if (!results.some(r => r.task === 'code translation')) {
+    return [];
+  }
 
   const filteredResults = results.filter((result) => {
     // 1. 检查任务类型
@@ -12,9 +15,14 @@ export function processCodeTranslation(results: ProcessedResult[], filters: Filt
       return false;
     }
 
-    // 2. 检查数据集
-    if (filters.datasets?.length > 0 && !filters.datasets.includes(result.dataset)) {
-      return false;
+    // 2. 检查数据集 - 修改为不区分大小写的比较
+    if (filters.datasets?.length > 0) {
+      const datasetLower = result.dataset.toLowerCase();
+      const allowedDatasets = filters.datasets.map(d => d.toLowerCase());
+      
+      if (!allowedDatasets.includes(datasetLower)) {
+        return false;
+      }
     }
 
     // 3. 检查语言 - 只检查目标语言
@@ -30,69 +38,25 @@ export function processCodeTranslation(results: ProcessedResult[], filters: Filt
       });
 
       if (!isLanguageMatched) {
-        console.log('Translation result filtered out:', {
-          modelName: result.modelName,
-          targetLang,
-          allowedLangs,
-          matched: false
-        });
         return false;
       }
-
-      console.log('Translation result matched:', {
-        modelName: result.modelName,
-        targetLang,
-        allowedLangs,
-        matched: true
-      });
     }
 
     return true;
   });
 
-  console.log('After translation filtering:', {
-    totalFilteredResults: filteredResults.length,
-    sampleResult: filteredResults[0]
-  });
+  console.log(`Filtered to ${filteredResults.length} code translation results`);
 
   return filteredResults;
 }
 
 export function aggregateCodeTranslationResults(results: ProcessedResult[]): ProcessedResult[] {
-  const groupedResults = new Map<string, ProcessedResult[]>();
-  
-  // 添加调试日志：打印所有结果
-  console.log('All translation results before grouping:', results.map(r => ({
-    modelName: r.modelName,
-    task: r.task,
-    dataset: r.dataset,
-    targetLang: r.targetLang,
-    metrics: {
-      pass1: r.pass1,
-      pass3: r.pass3,
-      pass5: r.pass5,
-      codebleu: r.codebleu
-    }
-  })));
-
-  // 特别检查deepseek相关的数据
-  const deepseekResults = results.filter(r => r.modelName.toLowerCase().includes('deepseek'));
-  if (deepseekResults.length > 0) {
-    console.log('Found Deepseek results:', deepseekResults.map(r => ({
-      modelName: r.modelName,
-      task: r.task,
-      dataset: r.dataset,
-      targetLang: r.targetLang,
-      metrics: {
-        pass1: r.pass1,
-        pass3: r.pass3,
-        pass5: r.pass5,
-        codebleu: r.codebleu
-      }
-    })));
-  } else {
-    console.log('No Deepseek results found in translation task');
+  // 检查输入结果是否为空
+  if (!results || results.length === 0) {
+    return [];
   }
+  
+  const groupedResults = new Map<string, ProcessedResult[]>();
   
   // 按模型分组
   results.forEach(result => {
@@ -105,11 +69,6 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
   
   // 计算每个模型的平均值
   const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
-    console.log(`Aggregating results for model ${modelName}:`, {
-      totalResults: modelResults.length,
-      languages: modelResults.map(r => r.targetLang)
-    });
-
     const validResults = {
       pass1: modelResults.filter(r => r.pass1 !== null),
       pass3: modelResults.filter(r => r.pass3 !== null),
@@ -138,16 +97,6 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
     
     // 使用目标语言作为语言显示
     avgResult.lang = avgResult.targetLang || '';
-    
-    console.log(`Aggregated metrics for model ${modelName}:`, {
-      metrics: {
-        pass1: avgResult.pass1,
-        pass3: avgResult.pass3,
-        pass5: avgResult.pass5,
-        codebleu: avgResult.codebleu
-      },
-      language: avgResult.lang
-    });
     
     return avgResult;
   });

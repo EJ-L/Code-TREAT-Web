@@ -3,17 +3,51 @@ import { processCodeGeneration, aggregateCodeGenerationResults } from './codeGen
 import { processCodeTranslation, aggregateCodeTranslationResults } from './codeTranslation';
 import { processCodeSummarization, aggregateCodeSummarizationResults } from './codeSummarization';
 import { processCodeExecution, aggregateCodeExecutionResults } from './codeExecution';
+import { processVulnerabilityDetection, aggregateVulnerabilityDetectionResults } from './vulnerabilityDetection';
+import { loadAllData, processResult } from '../dataLoader';
 
-export function processOverall(results: ProcessedResult[], filters: FilterOptions): ProcessedResult[] {
+export async function processOverall(rawResults: ProcessedResult[], filters: FilterOptions): Promise<ProcessedResult[]> {
   console.log('Processing overall task:', {
-    totalResults: results.length,
+    totalResults: rawResults.length,
     filters: filters
   });
 
-  // 首先进行语言过滤
-  let filteredResults = results;
+  // 需要原始数据来处理所有任务
+  const rawData = await loadAllData();
+  const processedRawData = rawData.map(processResult);
+  
+  // 收集所有任务的处理结果
+  const allTasksResults: ProcessedResult[] = [];
+
+  // Apply all relevant filters to raw results
+  let filteredResults = rawResults;
+
+  // Filter by dataset if specified
+  if (filters.datasets?.length > 0) {
+    filteredResults = filteredResults.filter(result => {
+      const resultDataset = result.dataset?.toLowerCase();
+      if (!resultDataset) {
+        console.log('Filtered out due to missing dataset:', {
+          modelName: result.modelName,
+          task: result.task
+        });
+        return false;
+      }
+      const isIncluded = filters.datasets.map(d => d.toLowerCase()).includes(resultDataset);
+      if (!isIncluded) {
+        console.log('Filtered out due to dataset mismatch:', {
+          modelName: result.modelName,
+          dataset: result.dataset,
+          allowedDatasets: filters.datasets
+        });
+      }
+      return isIncluded;
+    });
+  }
+
+  // Filter by language if specified
   if (filters.langs?.length > 0) {
-    filteredResults = results.filter(result => {
+    filteredResults = filteredResults.filter(result => {
       const resultLang = result.lang?.toLowerCase();
       if (!resultLang) {
         console.log('Filtered out due to missing language:', {
@@ -34,15 +68,158 @@ export function processOverall(results: ProcessedResult[], filters: FilterOption
     });
   }
 
-  console.log('After language filtering:', {
-    totalFilteredResults: filteredResults.length
+  // Filter by modality if specified
+  if (filters.modalities?.length > 0) {
+    console.log('Applying modality filter in Overall task:', {
+      selectedModalities: filters.modalities,
+      totalResultsBefore: filteredResults.length
+    });
+    
+    // 预先处理modalities数组以避免每次过滤时都要处理
+    const modalityPatterns = filters.modalities
+      .filter(modality => modality)
+      .map(modality => modality.toLowerCase());
+    
+    if (modalityPatterns.length > 0) {
+      filteredResults = filteredResults.filter(result => {
+        // 创建要检查的字符串数组，避免每次都要检查对象是否存在
+        const stringsToCheck: string[] = [];
+        if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
+        if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
+        if (result.task) stringsToCheck.push(result.task.toLowerCase());
+        if (result.lang) stringsToCheck.push(result.lang.toLowerCase());
+        
+        // 使用some进行短路操作
+        return modalityPatterns.some(pattern => 
+          stringsToCheck.some(str => str.includes(pattern))
+        );
+      });
+    }
+    
+    console.log('After modality filtering in Overall task:', {
+      totalResultsAfter: filteredResults.length,
+      remainingModels: filteredResults.length > 0 ? 
+        [...new Set(filteredResults.slice(0, 5).map(r => r.modelName))].concat(
+          filteredResults.length > 5 ? ['...更多'] : []
+        ) : []
+    });
+  }
+
+  console.log('After filtering:', {
+    totalFilteredResults: filteredResults.length,
+    appliedFilters: {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    }
   });
 
-  // 按模型名称分组
+  // 处理各种任务类型的数据
+  // 1. 处理代码生成任务
+  try {
+    console.log('Processing code generation task with filters:', {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    });
+    const codeGenResults = processCodeGeneration(processedRawData, filters);
+    const aggregatedCodeGenResults = aggregateCodeGenerationResults(codeGenResults);
+    allTasksResults.push(...aggregatedCodeGenResults);
+  } catch (error) {
+    console.error('Error processing code generation task:', error);
+  }
+
+  // 2. 处理代码翻译任务
+  try {
+    console.log('Processing code translation task with filters:', {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    });
+    const codeTransResults = processCodeTranslation(processedRawData, filters);
+    const aggregatedCodeTransResults = aggregateCodeTranslationResults(codeTransResults);
+    allTasksResults.push(...aggregatedCodeTransResults);
+  } catch (error) {
+    console.error('Error processing code translation task:', error);
+  }
+
+  // 3. 处理代码摘要任务
+  try {
+    console.log('Processing code summarization task with filters:', {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    });
+    const codeSumResults = processCodeSummarization(rawData, filters);
+    const aggregatedCodeSumResults = aggregateCodeSummarizationResults(codeSumResults);
+    allTasksResults.push(...aggregatedCodeSumResults);
+  } catch (error) {
+    console.error('Error processing code summarization task:', error);
+  }
+
+  // 4. 处理代码执行任务
+  try {
+    console.log('Processing code execution task with filters:', {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    });
+    const codeExecResults = processCodeExecution(processedRawData, filters);
+    const aggregatedCodeExecResults = aggregateCodeExecutionResults(codeExecResults);
+    allTasksResults.push(...aggregatedCodeExecResults);
+  } catch (error) {
+    console.error('Error processing code execution task:', error);
+  }
+
+  // 5. 处理漏洞检测任务
+  try {
+    console.log('Processing vulnerability detection task with filters:', {
+      datasets: filters.datasets,
+      langs: filters.langs,
+      modalities: filters.modalities
+    });
+    // 不要依赖于rawData中的漏洞检测数据，直接从JSON文件加载
+    // 强行使用一个空数组，这样函数内部会直接从JSON文件加载数据
+    const vulDetectResults = processVulnerabilityDetection([], filters);
+    console.log('漏洞检测任务处理完成:', {
+      totalResults: vulDetectResults.length,
+      modelNames: [...new Set(vulDetectResults.map(r => r.modelName))],
+      datasets: [...new Set(vulDetectResults.map(r => r.dataset))],
+      sampleResult: vulDetectResults[0]
+    });
+    
+    // 清晰地标记针对每个数据集的指标可用性
+    const hasPrimeVul = !filters.datasets || filters.datasets.length === 0 || 
+      filters.datasets.map(d => d.toLowerCase()).includes('primevul');
+    const hasPrimeVulPairs = !filters.datasets || filters.datasets.length === 0 || 
+      filters.datasets.map(d => d.toLowerCase()).includes('primevulpairs');
+      
+    console.log('漏洞检测数据集可用性:', {
+      hasPrimeVul,
+      hasPrimeVulPairs
+    });
+    
+    const aggregatedVulDetectResults = aggregateVulnerabilityDetectionResults(vulDetectResults);
+    console.log('漏洞检测结果聚合完成:', {
+      totalResults: aggregatedVulDetectResults.length,
+      sampleResult: aggregatedVulDetectResults[0]
+    });
+    
+    allTasksResults.push(...aggregatedVulDetectResults);
+  } catch (error) {
+    console.error('Error processing vulnerability detection task:', error);
+  }
+
+  // 将所有任务的结果整合到一起
+  console.log('Collected results from all tasks:', {
+    totalResults: allTasksResults.length,
+    taskTypes: [...new Set(allTasksResults.map(r => r.task))],
+    vulnDetectionResults: allTasksResults.filter(r => r.task === 'vulnerability detection').length
+  });
+
+  // Group by model name
   const groupedResults = new Map<string, ProcessedResult[]>();
-  
-  // 直接对过滤后的结果按模型分组
-  filteredResults.forEach(result => {
+  allTasksResults.forEach(result => {
     const key = result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
@@ -50,20 +227,63 @@ export function processOverall(results: ProcessedResult[], filters: FilterOption
     groupedResults.get(key)!.push(result);
   });
 
-  // 计算每个模型的总体平均值
-  return Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
-    const baseResult = modelResults[0];
+  // Calculate aggregated metrics for each model with difficulty-based grouping
+  const finalResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
+    const baseResult = { ...modelResults[0] };
+    baseResult.task = 'overall';
+    
+    // Group results by difficulty level
+    const easyResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'easy');
+    const mediumResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'medium');
+    const hardResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'hard');
+    
+    // 检查漏洞检测数据
+    const vulnResults = modelResults.filter(r => r.task === 'vulnerability detection');
+    console.log(`模型 ${modelName} 的漏洞检测结果:`, {
+      numVulnResults: vulnResults.length,
+      hasVulnResults: vulnResults.length > 0,
+      vulnDatasets: vulnResults.map(r => r.dataset).join(', '),
+      sampleVulnResult: vulnResults[0]
+    });
+    
+    // Calculate standard metrics across all results
     const metrics = {
       pass1: modelResults.filter(r => r.pass1 != null).map(r => r.pass1!),
       pass3: modelResults.filter(r => r.pass3 != null).map(r => r.pass3!),
       pass5: modelResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-      codebleu: modelResults.filter(r => r.codebleu != null).map(r => r.codebleu!),
-      llmjudge: modelResults.filter(r => r.llmjudge != null).map(r => r.llmjudge!),
+      codebleu: filters.datasets?.includes('CodeTransOcean') || !filters.datasets?.length 
+        ? modelResults.filter(r => r.codebleu != null).map(r => r.codebleu!)
+        : [],
+      llmjudge: filters.datasets?.includes('GitHub') || !filters.datasets?.length
+        ? modelResults.filter(r => r.llmjudge != null).map(r => r.llmjudge!)
+        : [],
       executionAccuracy: modelResults.filter(r => r.executionAccuracy != null).map(r => r.executionAccuracy!),
+      // 漏洞检测指标 - 不受数据集过滤影响
+      accuracy: modelResults.filter(r => r['Accuracy'] != null).map(r => r['Accuracy']!),
+      precision: modelResults.filter(r => r['Precision'] != null).map(r => r['Precision']!),
+      recall: modelResults.filter(r => r['Recall'] != null).map(r => r['Recall']!),
+      f1Score: modelResults.filter(r => r['F1 Score'] != null).map(r => r['F1 Score']!),
+      pC: modelResults.filter(r => r['P-C'] != null).map(r => r['P-C']!),
+      pV: modelResults.filter(r => r['P-V'] != null).map(r => r['P-V']!),
+      pB: modelResults.filter(r => r['P-B'] != null).map(r => r['P-B']!),
+      pR: modelResults.filter(r => r['P-R'] != null).map(r => r['P-R']!),
     };
-
-    // 计算平均值
-    return {
+    
+    // Calculate difficulty-specific metrics
+    const difficultyScopedMetrics = {
+      easyPass1: easyResults.filter(r => r.pass1 != null).map(r => r.pass1!),
+      easyPass3: easyResults.filter(r => r.pass3 != null).map(r => r.pass3!),
+      easyPass5: easyResults.filter(r => r.pass5 != null).map(r => r.pass5!),
+      mediumPass1: mediumResults.filter(r => r.pass1 != null).map(r => r.pass1!),
+      mediumPass3: mediumResults.filter(r => r.pass3 != null).map(r => r.pass3!),
+      mediumPass5: mediumResults.filter(r => r.pass5 != null).map(r => r.pass5!),
+      hardPass1: hardResults.filter(r => r.pass1 != null).map(r => r.pass1!),
+      hardPass3: hardResults.filter(r => r.pass3 != null).map(r => r.pass3!),
+      hardPass5: hardResults.filter(r => r.pass5 != null).map(r => r.pass5!),
+    };
+    
+    // Calculate averages for standard metrics
+    const aggregatedResult = {
       ...baseResult,
       task: 'overall',
       pass1: metrics.pass1.length > 0 ? metrics.pass1.reduce((a, b) => a + b) / metrics.pass1.length : null,
@@ -72,6 +292,52 @@ export function processOverall(results: ProcessedResult[], filters: FilterOption
       codebleu: metrics.codebleu.length > 0 ? metrics.codebleu.reduce((a, b) => a + b) / metrics.codebleu.length : null,
       llmjudge: metrics.llmjudge.length > 0 ? metrics.llmjudge.reduce((a, b) => a + b) / metrics.llmjudge.length : null,
       executionAccuracy: metrics.executionAccuracy.length > 0 ? metrics.executionAccuracy.reduce((a, b) => a + b) / metrics.executionAccuracy.length : null,
+      // 漏洞检测指标
+      'Accuracy': metrics.accuracy.length > 0 ? metrics.accuracy.reduce((a, b) => a + b) / metrics.accuracy.length : null,
+      'Precision': metrics.precision.length > 0 ? metrics.precision.reduce((a, b) => a + b) / metrics.precision.length : null,
+      'Recall': metrics.recall.length > 0 ? metrics.recall.reduce((a, b) => a + b) / metrics.recall.length : null,
+      'F1 Score': metrics.f1Score.length > 0 ? metrics.f1Score.reduce((a, b) => a + b) / metrics.f1Score.length : null,
+      'P-C': metrics.pC.length > 0 ? metrics.pC.reduce((a, b) => a + b) / metrics.pC.length : null,
+      'P-V': metrics.pV.length > 0 ? metrics.pV.reduce((a, b) => a + b) / metrics.pV.length : null,
+      'P-B': metrics.pB.length > 0 ? metrics.pB.reduce((a, b) => a + b) / metrics.pB.length : null,
+      'P-R': metrics.pR.length > 0 ? metrics.pR.reduce((a, b) => a + b) / metrics.pR.length : null,
+    };
+    
+    // Add difficulty-specific metrics to the result
+    return {
+      ...aggregatedResult,
+      // Easy metrics
+      easyPass1: difficultyScopedMetrics.easyPass1.length > 0 
+        ? difficultyScopedMetrics.easyPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass1.length 
+        : null,
+      easyPass3: difficultyScopedMetrics.easyPass3.length > 0 
+        ? difficultyScopedMetrics.easyPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass3.length 
+        : null,
+      easyPass5: difficultyScopedMetrics.easyPass5.length > 0 
+        ? difficultyScopedMetrics.easyPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass5.length 
+        : null,
+      // Medium metrics
+      mediumPass1: difficultyScopedMetrics.mediumPass1.length > 0 
+        ? difficultyScopedMetrics.mediumPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass1.length 
+        : null,
+      mediumPass3: difficultyScopedMetrics.mediumPass3.length > 0 
+        ? difficultyScopedMetrics.mediumPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass3.length 
+        : null,
+      mediumPass5: difficultyScopedMetrics.mediumPass5.length > 0 
+        ? difficultyScopedMetrics.mediumPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass5.length 
+        : null,
+      // Hard metrics
+      hardPass1: difficultyScopedMetrics.hardPass1.length > 0 
+        ? difficultyScopedMetrics.hardPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass1.length 
+        : null,
+      hardPass3: difficultyScopedMetrics.hardPass3.length > 0 
+        ? difficultyScopedMetrics.hardPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass3.length 
+        : null,
+      hardPass5: difficultyScopedMetrics.hardPass5.length > 0 
+        ? difficultyScopedMetrics.hardPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass5.length 
+        : null,
     };
   });
+
+  return finalResults;
 } 

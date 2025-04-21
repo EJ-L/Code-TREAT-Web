@@ -88,7 +88,24 @@ export function processCodeSummarization(results: ResultEntry[], filters: Filter
     pass5: null,
     codebleu: null,
     llmjudge: calculateLLMJudgeScore(result.metrics?.LLMJudge, filters.llmJudges),
-    executionAccuracy: null
+    executionAccuracy: null,
+    easyPass1: null,
+    mediumPass1: null,
+    hardPass1: null,
+    easyPass3: null,
+    mediumPass3: null,
+    hardPass3: null,
+    easyPass5: null,
+    mediumPass5: null,
+    hardPass5: null,
+    'P-C': null,
+    'P-V': null,
+    'P-B': null,
+    'P-R': null,
+    'Accuracy': null,
+    'Precision': null,
+    'Recall': null,
+    'F1 Score': null
   }));
 
   // 添加调试日志：最终处理后的结果
@@ -110,11 +127,23 @@ function calculateLLMJudgeScore(llmJudge: Metrics['LLMJudge'] | undefined, selec
   if (typeof llmJudge === 'object') {
     const scores = Object.entries(llmJudge);
     if (selectedJudges?.length) {
-      const filteredScores = scores.filter(([judge]) => selectedJudges.includes(judge));
+      const filteredScores = scores
+        .filter(([judge]) => selectedJudges.includes(judge))
+        .filter(([_, score]) => typeof score === 'number');
+      
       if (filteredScores.length === 0) return null;
-      return filteredScores.reduce((sum, [_, score]) => sum + score, 0) / filteredScores.length;
+      
+      const numericScores = filteredScores.map(([_, score]) => score as number);
+      return numericScores.reduce((sum, score) => sum + score, 0) / numericScores.length;
     }
-    return scores.reduce((sum, [_, score]) => sum + score, 0) / scores.length;
+    
+    const numericScores = scores
+      .filter(([_, score]) => typeof score === 'number')
+      .map(([_, score]) => score as number);
+    
+    if (numericScores.length === 0) return null;
+    
+    return numericScores.reduce((sum, score) => sum + score, 0) / numericScores.length;
   }
   
   return null;

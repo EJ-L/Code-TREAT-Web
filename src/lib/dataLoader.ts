@@ -64,6 +64,8 @@ class DataStore {
   
   // 批量添加数据并建立索引
   addBatch(entries: ResultEntry[]): void {
+    if (entries.length === 0) return; // 跳过空批次
+    
     const startIdx = this.allData.length;
     
     // 添加数据
@@ -120,8 +122,11 @@ class DataStore {
     // 清除查询缓存
     this.queryCache.clear();
     
-    // 预计算新的结果
-    this.precomputeResults();
+    // 预计算新的结果 - 仅当批量大小超过阈值时才预计算
+    // 较小的批次积累后再一次性预计算，提高性能
+    if (entries.length > 50) {
+      this.precomputeResults();
+    }
   }
   
   // 获取所有数据
@@ -254,29 +259,31 @@ class DataStore {
     this.precomputedResults.modelResults.clear();
     this.precomputedResults.taskDatasetResults.clear();
     
-    // 预处理每个任务的数据
-    this.indices.byTask.forEach((indices, task) => {
+    // 预处理每个任务的数据 - 使用数组而不是Map遍历效率更高
+    Array.from(this.indices.byTask.entries()).forEach(([task, indices]) => {
       const entries = Array.from(indices).map(idx => this.allData[idx]);
       this.precomputedResults.taskResults.set(task, entries);
     });
     
     // 预处理每个数据集的数据
-    this.indices.byDataset.forEach((indices, dataset) => {
+    Array.from(this.indices.byDataset.entries()).forEach(([dataset, indices]) => {
+      // 仅预计算经常访问的数据集，提高性能
+      if (dataset === 'unknown') return;
       const entries = Array.from(indices).map(idx => this.allData[idx]);
       this.precomputedResults.datasetResults.set(dataset, entries);
     });
     
-    // 预处理每个模型的数据
-    this.indices.byModel.forEach((indices, model) => {
-      const entries = Array.from(indices).map(idx => this.allData[idx]);
-      this.precomputedResults.modelResults.set(model, entries);
-    });
+    // 预处理每个模型的数据 - 这部分可能不太常用，跳过提高性能
+    // this.indices.byModel.forEach((indices, model) => {
+    //   const entries = Array.from(indices).map(idx => this.allData[idx]);
+    //   this.precomputedResults.modelResults.set(model, entries);
+    // });
     
-    // 预处理任务+数据集组合的数据
-    this.indices.byTaskAndDataset.forEach((indices, key) => {
-      const entries = Array.from(indices).map(idx => this.allData[idx]);
-      this.precomputedResults.taskDatasetResults.set(key, entries);
-    });
+    // 预处理任务+数据集组合的数据 - 按需加载，不预先计算
+    // this.indices.byTaskAndDataset.forEach((indices, key) => {
+    //   const entries = Array.from(indices).map(idx => this.allData[idx]);
+    //   this.precomputedResults.taskDatasetResults.set(key, entries);
+    // });
   }
 }
 
@@ -290,7 +297,11 @@ export const taskDirectories: Record<string, string> = {
   'code generation': 'data/code-generation',
   'code translation': 'data/code-translation',
   'code summarization': 'data/code-summarization',
-  'code execution': 'data/code-execution'
+  'code execution': 'data/code-execution',
+  'vulnerability detection': 'data/vulnerability-detection',
+  'code review': 'data/code-review',
+  'input prediction': 'data/input_prediction',
+  'output prediction': 'data/output_prediction'
 };
 
 // 加载单个文件的函数
@@ -334,11 +345,8 @@ export function getCachedFileData(directory: string, file: string): ResultEntry[
 export async function loadAllData(): Promise<ResultEntry[]> {
   // 检查是否已有数据
   if (dataStore.getAll().length > 0) {
-    console.log('使用已加载的数据');
     return dataStore.getAll();
   }
-
-  console.log('开始加载所有数据...');
   
   try {
     // 获取所有目录的文件列表
@@ -367,8 +375,6 @@ export async function loadAllData(): Promise<ResultEntry[]> {
     for (const { taskType, directory, files } of directories) {
       if (files.length === 0) continue;
       
-      console.log(`处理 ${taskType} 目录，包含 ${files.length} 个文件`);
-      
       // 批量处理文件，每批最多5个文件并行加载
       const batchSize = 5;
       for (let i = 0; i < files.length; i += batchSize) {
@@ -379,7 +385,20 @@ export async function loadAllData(): Promise<ResultEntry[]> {
           batch.map(async (file: string) => {
             try {
               const fileData = await loadJsonlFile(directory, file);
-              return fileData.map(entry => ({...entry, task: taskType}));
+              
+              // 特别记录code review文件的内容（仅在第一次加载时）
+              if (taskType === 'code review' && fileData.length > 0 && i === 0 && file === batch[0]) {
+                console.log(`Loaded code review file with ${fileData.length} entries`);
+              }
+              
+              // 处理数据，确保language字段被正确映射到lang字段
+              return fileData.map(entry => {
+                // 如果有language字段但没有lang字段，将language字段的值复制到lang字段
+                if (entry.language && !entry.lang) {
+                  return {...entry, lang: entry.language, task: taskType};
+                }
+                return {...entry, task: taskType};
+              });
             } catch (error) {
               console.error(`处理文件失败: ${file}`, error);
               return [];
@@ -405,7 +424,6 @@ export async function loadAllData(): Promise<ResultEntry[]> {
       return mockData;
     }
     
-    console.log(`数据加载完成，共 ${allData.length} 条记录`);
     return allData;
     
   } catch (error) {
@@ -564,19 +582,31 @@ export function processResult(entry: ResultEntry): ProcessedResult {
   }
 
   return {
-    modelId: entry.id,
+    modelId: entry.id || '',
     modelName: entry.model_name,
     dataset: (entry.dataset || '').toLowerCase(),
     task: entry.task.toLowerCase(),
     sourceLang: entry.source_lang || null,
     lang: processedLang,
     targetLang: entry.target_lang || null,
-    pass1: processMetric(entry.metrics?.['pass@1']),
-    pass3: processMetric(entry.metrics?.['pass@3']),
-    pass5: processMetric(entry.metrics?.['pass@5']),
-    codebleu: processMetric(entry.metrics?.['CodeBLEU']),
-    llmjudge: processMetric(entry.metrics?.['LLMJudge'], 'LLMJudge'),
-    executionAccuracy: processMetric(entry.metrics?.['ExecutionAccuracy'])
+    pass1: processMetric(entry.metrics?.['pass@1']) ?? null,
+    pass3: processMetric(entry.metrics?.['pass@3']) ?? null,
+    pass5: processMetric(entry.metrics?.['pass@5']) ?? null,
+    codebleu: processMetric(entry.metrics?.['CodeBLEU']) ?? null,
+    llmjudge: processMetric(entry.metrics?.['LLMJudge'], 'LLMJudge') ?? null,
+    executionAccuracy: processMetric(entry.metrics?.['ExecutionAccuracy']) ?? null,
+    // Add difficulty-based properties (will be populated by task processors)
+    easyPass1: null,
+    easyPass3: null,
+    easyPass5: null,
+    mediumPass1: null,
+    mediumPass3: null,
+    mediumPass5: null,
+    hardPass1: null,
+    hardPass3: null,
+    hardPass5: null,
+    // Extract difficulty from the entry
+    difficulty: entry.difficulty || null
   };
 }
 
@@ -591,8 +621,9 @@ function inferTaskType(entry: ResultEntry): string {
   
   // 从指标推断
   if (entry.metrics?.['CodeBLEU'] !== undefined) return 'code translation';
-  if (entry.metrics?.['ExecutionAccuracy'] !== undefined) return 'code execution';
+  // if (entry.metrics?.['ExecutionAccuracy'] !== undefined) return 'code execution';
   if (entry.metrics?.['LLMJudge'] !== undefined) return 'code summarization';
+  if (entry.metrics?.['gpt-4o'] !== undefined) return 'code review';
   
   // 从语言字段推断
   if (entry.source_lang && entry.target_lang) return 'code translation';

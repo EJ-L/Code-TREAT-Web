@@ -155,14 +155,24 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 
   // 1. 数据集过滤 (同级 OR 关系)
   if (filters.datasets && filters.datasets.length > 0) {
-    const allowedDatasets = new Set(filters.datasets.map(d => d.toLowerCase().replace(/\s+/g, '')));
+    const selectedDatasets = new Set(filters.datasets.map(d => d.toLowerCase().replace(/\s+/g, '')));
     
     // 只输出简化的日志
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
 
     filteredResults = filteredResults.filter(result => {
-      const normalizedDataset = result.dataset.toLowerCase().replace(/\s+/g, '');
-      return allowedDatasets.has(normalizedDataset);
+      // 处理可能包含多个数据集的情况
+      const resultDatasets = result.dataset.split(',').map(d => d.toLowerCase().replace(/\s+/g, ''));
+      
+      // 如果结果的任何一个数据集在选中的数据集中，就保留这个结果
+      const hasMatchingDataset = resultDatasets.some(dataset => selectedDatasets.has(dataset));
+      
+      // 如果所有选中的数据集都在结果中，也保留这个结果
+      const hasAllSelectedDatasets = Array.from(selectedDatasets).every(selected => 
+        resultDatasets.includes(selected)
+      );
+      
+      return hasMatchingDataset || hasAllSelectedDatasets;
     });
 
     // 只输出简化的日志
@@ -322,6 +332,22 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 // 格式化结果为显示格式
 export function formatResults(results: ProcessedResult[], filters?: FilterOptions): Array<Record<string, string | number>> {
   console.log(`格式化结果: ${results.length} 条`);
+  
+  // Debug: Check if we have difficulty metrics in our data
+  if (filters?.showByDifficulty && results.length > 0) {
+    console.log('难度指标数据示例:', {
+      example: results[0],
+      hasEasyPass1: results[0].easyPass1 !== null,
+      hasEasyPass3: results[0].easyPass3 !== null,
+      hasEasyPass5: results[0].easyPass5 !== null,
+      hasMediumPass1: results[0].mediumPass1 !== null,
+      hasMediumPass3: results[0].mediumPass3 !== null,
+      hasMediumPass5: results[0].mediumPass5 !== null,
+      hasHardPass1: results[0].hardPass1 !== null,
+      hasHardPass3: results[0].hardPass3 !== null,
+      hasHardPass5: results[0].hardPass5 !== null,
+    });
+  }
 
   // Get the sorted results by pass@1 values
   const sortedResults = [...results].sort((a, b) => {
@@ -339,6 +365,23 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
   });
 
   return sortedResults.map((result, index) => {
+    // Debug check for pass@3 and pass@5
+    if (filters?.showByDifficulty) {
+      const debugInfo = {
+        model: result.modelName,
+        easyPass1: result.easyPass1,
+        easyPass3: result.easyPass3,
+        easyPass5: result.easyPass5,
+        mediumPass1: result.mediumPass1,
+        mediumPass3: result.mediumPass3,
+        mediumPass5: result.mediumPass5,
+        hardPass1: result.hardPass1,
+        hardPass3: result.hardPass3,
+        hardPass5: result.hardPass5,
+      };
+      console.log("难度模式数据检查:", debugInfo);
+    }
+    
     // Create the base result object
     const formattedResult: Record<string, string | number> = {
       rank: index + 1,
@@ -349,18 +392,36 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
 
     // Add metrics based on whether we're showing by difficulty
     if (filters?.showByDifficulty) {
-      // Add difficulty-based metrics with default '-' for null values
+      // Always include all difficulty metrics regardless of null values
+      // This ensures consistency in the UI even if some metrics are missing
       formattedResult['easy_pass@1'] = result.easyPass1 !== null ? (result.easyPass1 * 100).toFixed(2) + '%' : '-';
       formattedResult['medium_pass@1'] = result.mediumPass1 !== null ? (result.mediumPass1 * 100).toFixed(2) + '%' : '-';
       formattedResult['hard_pass@1'] = result.hardPass1 !== null ? (result.hardPass1 * 100).toFixed(2) + '%' : '-';
       
+      // Always include pass@3 metrics
       formattedResult['easy_pass@3'] = result.easyPass3 !== null ? (result.easyPass3 * 100).toFixed(2) + '%' : '-';
       formattedResult['medium_pass@3'] = result.mediumPass3 !== null ? (result.mediumPass3 * 100).toFixed(2) + '%' : '-';
       formattedResult['hard_pass@3'] = result.hardPass3 !== null ? (result.hardPass3 * 100).toFixed(2) + '%' : '-';
       
+      // Always include pass@5 metrics
       formattedResult['easy_pass@5'] = result.easyPass5 !== null ? (result.easyPass5 * 100).toFixed(2) + '%' : '-';
       formattedResult['medium_pass@5'] = result.mediumPass5 !== null ? (result.mediumPass5 * 100).toFixed(2) + '%' : '-';
       formattedResult['hard_pass@5'] = result.hardPass5 !== null ? (result.hardPass5 * 100).toFixed(2) + '%' : '-';
+      
+      // Also add CodeBLEU and other metrics for all difficulty levels
+      formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(2) + '%' : '-';
+      formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(2) + '%' : '-';
+      formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(2) + '%' : '-';
+      
+      // Add vulnerability detection metrics also in difficulty mode
+      formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(2) + '%' : '-';
+      formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(2) + '%' : '-';
+      formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(2) + '%' : '-';
+      formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(2) + '%' : '-';
     } else {
       // Add standard metrics with default '-' for null values
       formattedResult['pass@1'] = result.pass1 !== null ? (result.pass1 * 100).toFixed(2) + '%' : '-';
@@ -369,19 +430,21 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     }
 
     // Add other metrics (common for both modes)
-    formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(2) + '%' : '-';
-    formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(2) + '%' : '-';
-    formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(2) + '%' : '-';
+    if (!filters?.showByDifficulty) {
+      formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(2) + '%' : '-';
+      formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(2) + '%' : '-';
+      formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(2) + '%' : '-';
 
-    // Add vulnerability detection metrics
-    formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(2) + '%' : '-';
-    formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(2) + '%' : '-';
-    formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(2) + '%' : '-';
-    formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(2) + '%' : '-';
-    formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(2) + '%' : '-';
-    formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(2) + '%' : '-';
-    formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(2) + '%' : '-';
-    formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(2) + '%' : '-';
+      // Add vulnerability detection metrics
+      formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(2) + '%' : '-';
+      formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(2) + '%' : '-';
+      formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(2) + '%' : '-';
+      formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(2) + '%' : '-';
+    }
 
     return formattedResult;
   });

@@ -35,11 +35,11 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
       }
       const isIncluded = filters.datasets.map(d => d.toLowerCase()).includes(resultDataset);
       if (!isIncluded) {
-        console.log('Filtered out due to dataset mismatch:', {
-          modelName: result.modelName,
-          dataset: result.dataset,
-          allowedDatasets: filters.datasets
-        });
+        // console.log('Filtered out due to dataset mismatch:', {
+        //   modelName: result.modelName,
+        //   dataset: result.dataset,
+        //   allowedDatasets: filters.datasets
+        // });
       }
       return isIncluded;
     });
@@ -229,115 +229,86 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
 
   // Calculate aggregated metrics for each model with difficulty-based grouping
   const finalResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
-    const baseResult = { ...modelResults[0] };
-    baseResult.task = 'overall';
-    
-    // Group results by difficulty level
-    const easyResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'easy');
-    const mediumResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'medium');
-    const hardResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'hard');
-    
-    // 检查漏洞检测数据
-    const vulnResults = modelResults.filter(r => r.task === 'vulnerability detection');
-    console.log(`模型 ${modelName} 的漏洞检测结果:`, {
-      numVulnResults: vulnResults.length,
-      hasVulnResults: vulnResults.length > 0,
-      vulnDatasets: vulnResults.map(r => r.dataset).join(', '),
-      sampleVulnResult: vulnResults[0]
-    });
-    
-    // Calculate standard metrics across all results
-    const metrics = {
-      pass1: modelResults.filter(r => r.pass1 != null).map(r => r.pass1!),
-      pass3: modelResults.filter(r => r.pass3 != null).map(r => r.pass3!),
-      pass5: modelResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-      codebleu: filters.datasets?.includes('CodeTransOcean') || !filters.datasets?.length 
-        ? modelResults.filter(r => r.codebleu != null).map(r => r.codebleu!)
-        : [],
-      llmjudge: filters.datasets?.includes('GitHub') || !filters.datasets?.length
-        ? modelResults.filter(r => r.llmjudge != null).map(r => r.llmjudge!)
-        : [],
-      executionAccuracy: modelResults.filter(r => r.executionAccuracy != null).map(r => r.executionAccuracy!),
-      // 漏洞检测指标 - 不受数据集过滤影响
-      accuracy: modelResults.filter(r => r['Accuracy'] != null).map(r => r['Accuracy']!),
-      precision: modelResults.filter(r => r['Precision'] != null).map(r => r['Precision']!),
-      recall: modelResults.filter(r => r['Recall'] != null).map(r => r['Recall']!),
-      f1Score: modelResults.filter(r => r['F1 Score'] != null).map(r => r['F1 Score']!),
-      pC: modelResults.filter(r => r['P-C'] != null).map(r => r['P-C']!),
-      pV: modelResults.filter(r => r['P-V'] != null).map(r => r['P-V']!),
-      pB: modelResults.filter(r => r['P-B'] != null).map(r => r['P-B']!),
-      pR: modelResults.filter(r => r['P-R'] != null).map(r => r['P-R']!),
-    };
-    
-    // Calculate difficulty-specific metrics
-    const difficultyScopedMetrics = {
-      easyPass1: easyResults.filter(r => r.pass1 != null).map(r => r.pass1!),
-      easyPass3: easyResults.filter(r => r.pass3 != null).map(r => r.pass3!),
-      easyPass5: easyResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-      mediumPass1: mediumResults.filter(r => r.pass1 != null).map(r => r.pass1!),
-      mediumPass3: mediumResults.filter(r => r.pass3 != null).map(r => r.pass3!),
-      mediumPass5: mediumResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-      hardPass1: hardResults.filter(r => r.pass1 != null).map(r => r.pass1!),
-      hardPass3: hardResults.filter(r => r.pass3 != null).map(r => r.pass3!),
-      hardPass5: hardResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-    };
-    
-    // Calculate averages for standard metrics
-    const aggregatedResult = {
-      ...baseResult,
-      task: 'overall',
-      pass1: metrics.pass1.length > 0 ? metrics.pass1.reduce((a, b) => a + b) / metrics.pass1.length : null,
-      pass3: metrics.pass3.length > 0 ? metrics.pass3.reduce((a, b) => a + b) / metrics.pass3.length : null,
-      pass5: metrics.pass5.length > 0 ? metrics.pass5.reduce((a, b) => a + b) / metrics.pass5.length : null,
-      codebleu: metrics.codebleu.length > 0 ? metrics.codebleu.reduce((a, b) => a + b) / metrics.codebleu.length : null,
-      llmjudge: metrics.llmjudge.length > 0 ? metrics.llmjudge.reduce((a, b) => a + b) / metrics.llmjudge.length : null,
-      executionAccuracy: metrics.executionAccuracy.length > 0 ? metrics.executionAccuracy.reduce((a, b) => a + b) / metrics.executionAccuracy.length : null,
-      // 漏洞检测指标
-      'Accuracy': metrics.accuracy.length > 0 ? metrics.accuracy.reduce((a, b) => a + b) / metrics.accuracy.length : null,
-      'Precision': metrics.precision.length > 0 ? metrics.precision.reduce((a, b) => a + b) / metrics.precision.length : null,
-      'Recall': metrics.recall.length > 0 ? metrics.recall.reduce((a, b) => a + b) / metrics.recall.length : null,
-      'F1 Score': metrics.f1Score.length > 0 ? metrics.f1Score.reduce((a, b) => a + b) / metrics.f1Score.length : null,
-      'P-C': metrics.pC.length > 0 ? metrics.pC.reduce((a, b) => a + b) / metrics.pC.length : null,
-      'P-V': metrics.pV.length > 0 ? metrics.pV.reduce((a, b) => a + b) / metrics.pV.length : null,
-      'P-B': metrics.pB.length > 0 ? metrics.pB.reduce((a, b) => a + b) / metrics.pB.length : null,
-      'P-R': metrics.pR.length > 0 ? metrics.pR.reduce((a, b) => a + b) / metrics.pR.length : null,
-    };
-    
-    // Add difficulty-specific metrics to the result
-    return {
-      ...aggregatedResult,
-      // Easy metrics
-      easyPass1: difficultyScopedMetrics.easyPass1.length > 0 
-        ? difficultyScopedMetrics.easyPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass1.length 
-        : null,
-      easyPass3: difficultyScopedMetrics.easyPass3.length > 0 
-        ? difficultyScopedMetrics.easyPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass3.length 
-        : null,
-      easyPass5: difficultyScopedMetrics.easyPass5.length > 0 
-        ? difficultyScopedMetrics.easyPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.easyPass5.length 
-        : null,
-      // Medium metrics
-      mediumPass1: difficultyScopedMetrics.mediumPass1.length > 0 
-        ? difficultyScopedMetrics.mediumPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass1.length 
-        : null,
-      mediumPass3: difficultyScopedMetrics.mediumPass3.length > 0 
-        ? difficultyScopedMetrics.mediumPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass3.length 
-        : null,
-      mediumPass5: difficultyScopedMetrics.mediumPass5.length > 0 
-        ? difficultyScopedMetrics.mediumPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.mediumPass5.length 
-        : null,
-      // Hard metrics
-      hardPass1: difficultyScopedMetrics.hardPass1.length > 0 
-        ? difficultyScopedMetrics.hardPass1.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass1.length 
-        : null,
-      hardPass3: difficultyScopedMetrics.hardPass3.length > 0 
-        ? difficultyScopedMetrics.hardPass3.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass3.length 
-        : null,
-      hardPass5: difficultyScopedMetrics.hardPass5.length > 0 
-        ? difficultyScopedMetrics.hardPass5.reduce((a, b) => a + b) / difficultyScopedMetrics.hardPass5.length 
-        : null,
-    };
+    return processOverallTask(modelResults);
   });
 
   return finalResults;
+}
+
+function processOverallTask(modelResults: ProcessedResult[]): ProcessedResult {
+  const baseResult = { ...modelResults[0] };
+  baseResult.task = 'overall';
+  
+  // 计算标准指标的平均值
+  const metrics = ['pass1', 'pass3', 'pass5', 'codebleu', 'llmjudge'] as const;
+  metrics.forEach(metric => {
+    const validResults = modelResults.filter(r => r[metric] !== null);
+    if (validResults.length > 0) {
+      baseResult[metric] = validResults.reduce((sum, r) => sum + r[metric]!, 0) / validResults.length;
+    } else {
+      baseResult[metric] = null;
+    }
+  });
+
+  // 添加漏洞检测指标
+  const vulnMetrics = ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'] as const;
+  vulnMetrics.forEach(metric => {
+    const validResults = modelResults.filter(r => r[metric as keyof ProcessedResult] !== null && r[metric as keyof ProcessedResult] !== undefined);
+    if (validResults.length > 0) {
+      (baseResult as any)[metric] = validResults.reduce((sum, r) => sum + (r[metric as keyof ProcessedResult] as number), 0) / validResults.length;
+    } else {
+      (baseResult as any)[metric] = null;
+    }
+  });
+
+  // 计算难度特定指标
+  // Easy difficulty
+  const validEasyPass1Results = modelResults.filter(r => r.easyPass1 !== null);
+  if (validEasyPass1Results.length > 0) {
+    baseResult.easyPass1 = validEasyPass1Results.reduce((sum, r) => sum + r.easyPass1!, 0) / validEasyPass1Results.length;
+  }
+  
+  const validEasyPass3Results = modelResults.filter(r => r.easyPass3 !== null);
+  if (validEasyPass3Results.length > 0) {
+    baseResult.easyPass3 = validEasyPass3Results.reduce((sum, r) => sum + r.easyPass3!, 0) / validEasyPass3Results.length;
+  }
+  
+  const validEasyPass5Results = modelResults.filter(r => r.easyPass5 !== null);
+  if (validEasyPass5Results.length > 0) {
+    baseResult.easyPass5 = validEasyPass5Results.reduce((sum, r) => sum + r.easyPass5!, 0) / validEasyPass5Results.length;
+  }
+  
+  // Medium difficulty
+  const validMediumPass1Results = modelResults.filter(r => r.mediumPass1 !== null);
+  if (validMediumPass1Results.length > 0) {
+    baseResult.mediumPass1 = validMediumPass1Results.reduce((sum, r) => sum + r.mediumPass1!, 0) / validMediumPass1Results.length;
+  }
+  
+  const validMediumPass3Results = modelResults.filter(r => r.mediumPass3 !== null);
+  if (validMediumPass3Results.length > 0) {
+    baseResult.mediumPass3 = validMediumPass3Results.reduce((sum, r) => sum + r.mediumPass3!, 0) / validMediumPass3Results.length;
+  }
+  
+  const validMediumPass5Results = modelResults.filter(r => r.mediumPass5 !== null);
+  if (validMediumPass5Results.length > 0) {
+    baseResult.mediumPass5 = validMediumPass5Results.reduce((sum, r) => sum + r.mediumPass5!, 0) / validMediumPass5Results.length;
+  }
+  
+  // Hard difficulty
+  const validHardPass1Results = modelResults.filter(r => r.hardPass1 !== null);
+  if (validHardPass1Results.length > 0) {
+    baseResult.hardPass1 = validHardPass1Results.reduce((sum, r) => sum + r.hardPass1!, 0) / validHardPass1Results.length;
+  }
+  
+  const validHardPass3Results = modelResults.filter(r => r.hardPass3 !== null);
+  if (validHardPass3Results.length > 0) {
+    baseResult.hardPass3 = validHardPass3Results.reduce((sum, r) => sum + r.hardPass3!, 0) / validHardPass3Results.length;
+  }
+  
+  const validHardPass5Results = modelResults.filter(r => r.hardPass5 !== null);
+  if (validHardPass5Results.length > 0) {
+    baseResult.hardPass5 = validHardPass5Results.reduce((sum, r) => sum + r.hardPass5!, 0) / validHardPass5Results.length;
+  }
+  
+  return baseResult;
 } 

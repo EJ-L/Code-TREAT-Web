@@ -76,11 +76,6 @@ export function aggregateCodeGenerationResults(results: ProcessedResult[]): Proc
   const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     
-    // Group results by difficulty level
-    const easyResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'easy');
-    const mediumResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'medium');
-    const hardResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'hard');
-    
     // 计算标准指标的平均值
     const metrics = ['pass1', 'pass3', 'pass5'] as const;
     metrics.forEach(metric => {
@@ -91,58 +86,52 @@ export function aggregateCodeGenerationResults(results: ProcessedResult[]): Proc
     });
 
     // 计算难度特定指标
-    // Easy
-    if (easyResults.length > 0) {
-      const easyPass1Results = easyResults.filter(r => r.pass1 !== null);
-      if (easyPass1Results.length > 0) {
-        baseResult.easyPass1 = easyPass1Results.reduce((sum, r) => sum + r.pass1!, 0) / easyPass1Results.length;
-      }
-      
-      const easyPass3Results = easyResults.filter(r => r.pass3 !== null);
-      if (easyPass3Results.length > 0) {
-        baseResult.easyPass3 = easyPass3Results.reduce((sum, r) => sum + r.pass3!, 0) / easyPass3Results.length;
-      }
-      
-      const easyPass5Results = easyResults.filter(r => r.pass5 !== null);
-      if (easyPass5Results.length > 0) {
-        baseResult.easyPass5 = easyPass5Results.reduce((sum, r) => sum + r.pass5!, 0) / easyPass5Results.length;
-      }
+    // Easy difficulty
+    const validEasyPass1Results = modelResults.filter(r => r.easyPass1 !== null);
+    if (validEasyPass1Results.length > 0) {
+      baseResult.easyPass1 = validEasyPass1Results.reduce((sum, r) => sum + r.easyPass1!, 0) / validEasyPass1Results.length;
     }
     
-    // Medium
-    if (mediumResults.length > 0) {
-      const mediumPass1Results = mediumResults.filter(r => r.pass1 !== null);
-      if (mediumPass1Results.length > 0) {
-        baseResult.mediumPass1 = mediumPass1Results.reduce((sum, r) => sum + r.pass1!, 0) / mediumPass1Results.length;
-      }
-      
-      const mediumPass3Results = mediumResults.filter(r => r.pass3 !== null);
-      if (mediumPass3Results.length > 0) {
-        baseResult.mediumPass3 = mediumPass3Results.reduce((sum, r) => sum + r.pass3!, 0) / mediumPass3Results.length;
-      }
-      
-      const mediumPass5Results = mediumResults.filter(r => r.pass5 !== null);
-      if (mediumPass5Results.length > 0) {
-        baseResult.mediumPass5 = mediumPass5Results.reduce((sum, r) => sum + r.pass5!, 0) / mediumPass5Results.length;
-      }
+    const validEasyPass3Results = modelResults.filter(r => r.easyPass3 !== null);
+    if (validEasyPass3Results.length > 0) {
+      baseResult.easyPass3 = validEasyPass3Results.reduce((sum, r) => sum + r.easyPass3!, 0) / validEasyPass3Results.length;
     }
     
-    // Hard
-    if (hardResults.length > 0) {
-      const hardPass1Results = hardResults.filter(r => r.pass1 !== null);
-      if (hardPass1Results.length > 0) {
-        baseResult.hardPass1 = hardPass1Results.reduce((sum, r) => sum + r.pass1!, 0) / hardPass1Results.length;
-      }
-      
-      const hardPass3Results = hardResults.filter(r => r.pass3 !== null);
-      if (hardPass3Results.length > 0) {
-        baseResult.hardPass3 = hardPass3Results.reduce((sum, r) => sum + r.pass3!, 0) / hardPass3Results.length;
-      }
-      
-      const hardPass5Results = hardResults.filter(r => r.pass5 !== null);
-      if (hardPass5Results.length > 0) {
-        baseResult.hardPass5 = hardPass5Results.reduce((sum, r) => sum + r.pass5!, 0) / hardPass5Results.length;
-      }
+    const validEasyPass5Results = modelResults.filter(r => r.easyPass5 !== null);
+    if (validEasyPass5Results.length > 0) {
+      baseResult.easyPass5 = validEasyPass5Results.reduce((sum, r) => sum + r.easyPass5!, 0) / validEasyPass5Results.length;
+    }
+    
+    // Medium difficulty
+    const validMediumPass1Results = modelResults.filter(r => r.mediumPass1 !== null);
+    if (validMediumPass1Results.length > 0) {
+      baseResult.mediumPass1 = validMediumPass1Results.reduce((sum, r) => sum + r.mediumPass1!, 0) / validMediumPass1Results.length;
+    }
+    
+    const validMediumPass3Results = modelResults.filter(r => r.mediumPass3 !== null);
+    if (validMediumPass3Results.length > 0) {
+      baseResult.mediumPass3 = validMediumPass3Results.reduce((sum, r) => sum + r.mediumPass3!, 0) / validMediumPass3Results.length;
+    }
+    
+    const validMediumPass5Results = modelResults.filter(r => r.mediumPass5 !== null);
+    if (validMediumPass5Results.length > 0) {
+      baseResult.mediumPass5 = validMediumPass5Results.reduce((sum, r) => sum + r.mediumPass5!, 0) / validMediumPass5Results.length;
+    }
+    
+    // Hard difficulty
+    const validHardPass1Results = modelResults.filter(r => r.hardPass1 !== null);
+    if (validHardPass1Results.length > 0) {
+      baseResult.hardPass1 = validHardPass1Results.reduce((sum, r) => sum + r.hardPass1!, 0) / validHardPass1Results.length;
+    }
+    
+    const validHardPass3Results = modelResults.filter(r => r.hardPass3 !== null);
+    if (validHardPass3Results.length > 0) {
+      baseResult.hardPass3 = validHardPass3Results.reduce((sum, r) => sum + r.hardPass3!, 0) / validHardPass3Results.length;
+    }
+    
+    const validHardPass5Results = modelResults.filter(r => r.hardPass5 !== null);
+    if (validHardPass5Results.length > 0) {
+      baseResult.hardPass5 = validHardPass5Results.reduce((sum, r) => sum + r.hardPass5!, 0) / validHardPass5Results.length;
     }
     
     return baseResult;

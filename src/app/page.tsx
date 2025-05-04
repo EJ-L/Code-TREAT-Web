@@ -1167,10 +1167,10 @@ export default function Home() {
                     {getTableHeaders(currentTask).map((header) => (
                       <th 
                         key={header.key} 
-                        className={`px-6 py-4 text-left text-sm font-bold uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
+                        className={`px-6 py-4 text-left text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
                           isDarkMode 
-                            ? 'text-slate-400 bg-[#151d2a]' 
-                            : 'text-slate-500 bg-slate-50'
+                            ? 'text-slate-300 bg-[#151d2a]' 
+                            : 'text-slate-600 bg-slate-50'
                         }`}
                         onClick={() => {
                           // Enable sorting for all numeric columns including difficulty-based metrics

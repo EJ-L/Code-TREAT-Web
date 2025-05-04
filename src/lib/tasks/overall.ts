@@ -54,7 +54,17 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
     const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
     const codeSumResults = processCodeSummarization(rawData, emptyFilters);
     const aggregatedCodeSumResults = aggregateCodeSummarizationResults(codeSumResults);
-    allTasksResults.push(...aggregatedCodeSumResults);
+    
+    // Filter out Code Summarization Human Baseline from overall results
+    const filteredCodeSumResults = aggregatedCodeSumResults.filter(result => 
+      result.modelName !== 'Code Summarization Human Baseline'
+    );
+    console.log('Filtered out Code Summarization Human Baseline from overall results:', {
+      originalCount: aggregatedCodeSumResults.length,
+      filteredCount: filteredCodeSumResults.length
+    });
+    
+    allTasksResults.push(...filteredCodeSumResults);
   } catch (error) {
     console.error('Error processing code summarization task:', error);
   }

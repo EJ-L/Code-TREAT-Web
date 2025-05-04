@@ -27,17 +27,20 @@ export const MODEL_URLS: Record<string, string> = {
   "claude-3-5-haiku": "https://www.anthropic.com/news/3-5-models-and-computer-use",
   "claude-3.7-sonnet": "https://www.anthropic.com/news/claude-3-7-sonnet",
   "claude-3.7": "https://www.anthropic.com/news/claude-3-7-sonnet",
+  "Claude-Sonnet-4": "https://www.anthropic.com/news/claude-4",
 
   // DeepSeek models
   "deepseek-v3": "https://github.com/deepseek-ai/DeepSeek-V3",
   "deepseek-r1": "https://github.com/deepseek-ai/DeepSeek-R1",
-  
+  "deepseek-chat": "https://chat.deepseek.com/",
+
   // Gemini models
   "gemini-1.5-pro": "https://developers.googleblog.com/zh-hans/updated-gemini-models-reduced-15-pro-pricing-increased-rate-limits-and-more/",
   "gemini-1.5-flash": "https://developers.googleblog.com/en/gemini-15-pro-and-15-flash-now-available/",
   "Gemini-2.0-flash": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
   "gemini-2.0": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
-  
+  "Gemini-2.5-Pro": "https://deepmind.google/models/gemini/pro/",
+
   // Gemma models
   "gemma-2-27b-it": "https://huggingface.co/google/gemma-2-27b-it",
   "gemma-2-9b-it": "https://huggingface.co/google/gemma-2-9b-it",

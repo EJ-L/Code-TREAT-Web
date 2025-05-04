@@ -26,6 +26,7 @@ export const MODEL_URLS: Record<string, string> = {
   // Gemma models
   "google/gemma-2-27b-it": "https://huggingface.co/google/gemma-2-27b-it",
   "google/gemma-2-9b-it": "https://huggingface.co/google/gemma-2-9b-it",
+  "google/gemma-3-27b-it": "https://huggingface.co/google/gemma-3-27b-it",
 
   // Qwen models
   "Qwen/Qwen2.5-72B-Instruct": "https://huggingface.co/papers/2407.10671",

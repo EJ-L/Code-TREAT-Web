@@ -19,110 +19,16 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
   // 收集所有任务的处理结果
   const allTasksResults: ProcessedResult[] = [];
 
-  // Apply all relevant filters to raw results
-  let filteredResults = rawResults;
-
-  // Filter by dataset if specified
-  if (filters.datasets?.length > 0) {
-    filteredResults = filteredResults.filter(result => {
-      const resultDataset = result.dataset?.toLowerCase();
-      if (!resultDataset) {
-        console.log('Filtered out due to missing dataset:', {
-          modelName: result.modelName,
-          task: result.task
-        });
-        return false;
-      }
-      const isIncluded = filters.datasets.map(d => d.toLowerCase()).includes(resultDataset);
-      if (!isIncluded) {
-        console.log('Filtered out due to dataset mismatch:', {
-          modelName: result.modelName,
-          dataset: result.dataset,
-          allowedDatasets: filters.datasets
-        });
-      }
-      return isIncluded;
-    });
-  }
-
-  // Filter by language if specified
-  if (filters.langs?.length > 0) {
-    filteredResults = filteredResults.filter(result => {
-      const resultLang = result.lang?.toLowerCase();
-      if (!resultLang) {
-        console.log('Filtered out due to missing language:', {
-          modelName: result.modelName,
-          task: result.task
-        });
-        return false;
-      }
-      const isIncluded = filters.langs.map(l => l.toLowerCase()).includes(resultLang);
-      if (!isIncluded) {
-        console.log('Filtered out due to language mismatch:', {
-          modelName: result.modelName,
-          lang: result.lang,
-          allowedLangs: filters.langs
-        });
-      }
-      return isIncluded;
-    });
-  }
-
-  // Filter by modality if specified
-  if (filters.modalities?.length > 0) {
-    console.log('Applying modality filter in Overall task:', {
-      selectedModalities: filters.modalities,
-      totalResultsBefore: filteredResults.length
-    });
-    
-    // 预先处理modalities数组以避免每次过滤时都要处理
-    const modalityPatterns = filters.modalities
-      .filter(modality => modality)
-      .map(modality => modality.toLowerCase());
-    
-    if (modalityPatterns.length > 0) {
-      filteredResults = filteredResults.filter(result => {
-        // 创建要检查的字符串数组，避免每次都要检查对象是否存在
-        const stringsToCheck: string[] = [];
-        if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
-        if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
-        if (result.task) stringsToCheck.push(result.task.toLowerCase());
-        if (result.lang) stringsToCheck.push(result.lang.toLowerCase());
-        
-        // 使用some进行短路操作
-        return modalityPatterns.some(pattern => 
-          stringsToCheck.some(str => str.includes(pattern))
-        );
-      });
-    }
-    
-    console.log('After modality filtering in Overall task:', {
-      totalResultsAfter: filteredResults.length,
-      remainingModels: filteredResults.length > 0 ? 
-        [...new Set(filteredResults.slice(0, 5).map(r => r.modelName))].concat(
-          filteredResults.length > 5 ? ['...更多'] : []
-        ) : []
-    });
-  }
-
-  console.log('After filtering:', {
-    totalFilteredResults: filteredResults.length,
-    appliedFilters: {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    }
-  });
+  // For overall view, we want to use all data without filtering
+  console.log('For overall view, using all data without applying filters');
 
   // 处理各种任务类型的数据
   // 1. 处理代码生成任务
   try {
-    console.log('Processing code generation task with filters:', {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    });
-    const codeGenResults = processCodeGeneration(processedRawData, filters);
+    console.log('Processing code generation task for overall view (no filters)');
+    // Use empty filters to get all results
+    const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
+    const codeGenResults = processCodeGeneration(processedRawData, emptyFilters);
     const aggregatedCodeGenResults = aggregateCodeGenerationResults(codeGenResults);
     allTasksResults.push(...aggregatedCodeGenResults);
   } catch (error) {
@@ -131,12 +37,10 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
 
   // 2. 处理代码翻译任务
   try {
-    console.log('Processing code translation task with filters:', {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    });
-    const codeTransResults = processCodeTranslation(processedRawData, filters);
+    console.log('Processing code translation task for overall view (no filters)');
+    // Use empty filters to get all results
+    const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
+    const codeTransResults = processCodeTranslation(processedRawData, emptyFilters);
     const aggregatedCodeTransResults = aggregateCodeTranslationResults(codeTransResults);
     allTasksResults.push(...aggregatedCodeTransResults);
   } catch (error) {
@@ -145,12 +49,10 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
 
   // 3. 处理代码摘要任务
   try {
-    console.log('Processing code summarization task with filters:', {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    });
-    const codeSumResults = processCodeSummarization(rawData, filters);
+    console.log('Processing code summarization task for overall view (no filters)');
+    // Use empty filters to get all results
+    const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
+    const codeSumResults = processCodeSummarization(rawData, emptyFilters);
     const aggregatedCodeSumResults = aggregateCodeSummarizationResults(codeSumResults);
     allTasksResults.push(...aggregatedCodeSumResults);
   } catch (error) {
@@ -159,12 +61,10 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
 
   // 4. 处理代码执行任务
   try {
-    console.log('Processing code execution task with filters:', {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    });
-    const codeExecResults = processCodeExecution(processedRawData, filters);
+    console.log('Processing code execution task for overall view (no filters)');
+    // Use empty filters to get all results
+    const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
+    const codeExecResults = processCodeExecution(processedRawData, emptyFilters);
     const aggregatedCodeExecResults = aggregateCodeExecutionResults(codeExecResults);
     allTasksResults.push(...aggregatedCodeExecResults);
   } catch (error) {
@@ -173,30 +73,17 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
 
   // 5. 处理漏洞检测任务
   try {
-    console.log('Processing vulnerability detection task with filters:', {
-      datasets: filters.datasets,
-      langs: filters.langs,
-      modalities: filters.modalities
-    });
+    console.log('Processing vulnerability detection task for overall view (no filters)');
+    // Use empty filters to get all results
+    const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
     // 不要依赖于rawData中的漏洞检测数据，直接从JSON文件加载
     // 强行使用一个空数组，这样函数内部会直接从JSON文件加载数据
-    const vulDetectResults = processVulnerabilityDetection([], filters);
+    const vulDetectResults = processVulnerabilityDetection([], emptyFilters);
     console.log('漏洞检测任务处理完成:', {
       totalResults: vulDetectResults.length,
       modelNames: [...new Set(vulDetectResults.map(r => r.modelName))],
       datasets: [...new Set(vulDetectResults.map(r => r.dataset))],
       sampleResult: vulDetectResults[0]
-    });
-    
-    // 清晰地标记针对每个数据集的指标可用性
-    const hasPrimeVul = !filters.datasets || filters.datasets.length === 0 || 
-      filters.datasets.map(d => d.toLowerCase()).includes('primevul');
-    const hasPrimeVulPairs = !filters.datasets || filters.datasets.length === 0 || 
-      filters.datasets.map(d => d.toLowerCase()).includes('primevulpairs');
-      
-    console.log('漏洞检测数据集可用性:', {
-      hasPrimeVul,
-      hasPrimeVulPairs
     });
     
     const aggregatedVulDetectResults = aggregateVulnerabilityDetectionResults(vulDetectResults);
@@ -251,12 +138,8 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
       pass1: modelResults.filter(r => r.pass1 != null).map(r => r.pass1!),
       pass3: modelResults.filter(r => r.pass3 != null).map(r => r.pass3!),
       pass5: modelResults.filter(r => r.pass5 != null).map(r => r.pass5!),
-      codebleu: filters.datasets?.includes('CodeTransOcean') || !filters.datasets?.length 
-        ? modelResults.filter(r => r.codebleu != null).map(r => r.codebleu!)
-        : [],
-      llmjudge: filters.datasets?.includes('GitHub') || !filters.datasets?.length
-        ? modelResults.filter(r => r.llmjudge != null).map(r => r.llmjudge!)
-        : [],
+      codebleu: modelResults.filter(r => r.codebleu != null).map(r => r.codebleu!),
+      llmjudge: modelResults.filter(r => r.llmjudge != null).map(r => r.llmjudge!),
       executionAccuracy: modelResults.filter(r => r.executionAccuracy != null).map(r => r.executionAccuracy!),
       // 漏洞检测指标 - 不受数据集过滤影响
       accuracy: modelResults.filter(r => r['Accuracy'] != null).map(r => r['Accuracy']!),

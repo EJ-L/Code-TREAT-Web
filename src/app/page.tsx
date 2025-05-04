@@ -197,6 +197,9 @@ export default function Home() {
     if (task === 'code review') {
       // 不应用llmJudge过滤器，以便查看所有结果
       setSortConfig({ key: 'llmjudge', direction: 'desc' });
+    } else if (task === 'overall') {
+      // 对于overall任务，我们使用未过滤的数据计算平均值
+      setSortConfig({ key: 'pass@1', direction: 'desc' });
     } else {
       setSortConfig(getDefaultSortConfig(task));
     }
@@ -359,6 +362,18 @@ export default function Home() {
           filterOptions.llmJudges = []; // 清空LLM Judge过滤器
           filterOptions.langs = []; // 清空语言过滤器
           filterOptions.datasets = []; // 清空数据集过滤器
+        }
+        
+        // 特殊处理overall任务 - 不应用任何过滤器，确保获取所有结果的平均值
+        if (currentTask === 'overall') {
+          filterOptions.llmJudges = []; // 清空LLM Judge过滤器
+          filterOptions.langs = []; // 清空语言过滤器
+          filterOptions.datasets = []; // 清空数据集过滤器
+          filterOptions.modalities = []; // 清空模态过滤器
+          filterOptions.knowledge = []; // 清空知识领域过滤器
+          filterOptions.reasoning = []; // 清空推理类型过滤器
+          filterOptions.robustness = []; // 清空鲁棒性过滤器
+          filterOptions.security = []; // 清空安全性过滤器
         }
         
         // 使用setTimeout推迟处理，让UI有机会更新加载状态
@@ -1010,7 +1025,7 @@ export default function Home() {
           <Card className={`w-full max-w-7xl mx-auto ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
             <CardContent className="space-y-4 p-4">
               {/* Dataset Filter */}
-              {taskAbilities[currentTask].dataset.length > 0 && (
+              {currentTask !== 'overall' && taskAbilities[currentTask].dataset.length > 0 && (
                 <div className="flex flex-col space-y-2">
                   <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
                   <div className="flex flex-wrap gap-2">
@@ -1036,7 +1051,7 @@ export default function Home() {
               )}
 
               {/* LLM Judge Filter */}
-              {(currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
+              {currentTask !== 'overall' && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
                 <div className="flex flex-col space-y-2">
                   <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
                   <div className="flex flex-wrap gap-2">
@@ -1062,7 +1077,7 @@ export default function Home() {
               )}
 
               {/* Other Filters */}
-              {(Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
+              {currentTask !== 'overall' && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
                 .filter(([key]) => !['dataset', 'llmJudges'].includes(key))
                 .map(([key, values]) => (
                   values.length > 0 && (
@@ -1095,6 +1110,15 @@ export default function Home() {
 
               {/* Divider */}
               <div className={`border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} my-4`} />
+
+              {/* Notes for overall view */}
+              {currentTask === 'overall' && (
+                <div className="text-sm text-center mb-2">
+                  <p className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                    Showing overall results based on the average of all available metrics across tasks.
+                  </p>
+                </div>
+              )}
 
               {/* Note about "-" symbol */}
               <div className={`flex items-center justify-end gap-2 ${

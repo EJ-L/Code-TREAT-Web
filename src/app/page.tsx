@@ -424,156 +424,155 @@ export default function Home() {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
-        { key: 'pass@1', label: 'Pass@1' },
-        { key: 'pass@3', label: 'Pass@3' },
-        { key: 'pass@5', label: 'Pass@5' },
-        { key: 'CodeBLEU', label: 'CodeBLEU' },
-        { key: 'llmjudge', label: 'LLM Judge' },
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' },
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' },
         // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy' },
-        { key: 'Precision', label: 'Precision' },
-        { key: 'Recall', label: 'Recall' },
-        { key: 'F1 Score', label: 'F1 Score' },
-        { key: 'P-C', label: 'P-C' },
-        { key: 'P-V', label: 'P-V' },
-        { key: 'P-B', label: 'P-B' },
-        { key: 'P-R', label: 'P-R' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
+        { key: 'Precision', label: 'Precision', width: 'w-24' },
+        { key: 'Recall', label: 'Recall', width: 'w-24' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
+        { key: 'P-C', label: 'P-C', width: 'w-20' },
+        { key: 'P-V', label: 'P-V', width: 'w-20' },
+        { key: 'P-B', label: 'P-B', width: 'w-20' },
+        { key: 'P-R', label: 'P-R', width: 'w-20' }
       ],
       'code generation': [
-        { key: 'pass@1', label: 'Pass@1' },
-        { key: 'pass@3', label: 'Pass@3' },
-        { key: 'pass@5', label: 'Pass@5' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
       ],
       'code translation': [
-        { key: 'pass@1', label: 'Pass@1' },
-        { key: 'pass@3', label: 'Pass@3' },
-        { key: 'pass@5', label: 'Pass@5' },
-        { key: 'CodeBLEU', label: 'CodeBLEU' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
       ],
       'input prediction': [
-        { key: 'pass@1', label: 'Pass@1' },
-        { key: 'pass@3', label: 'Pass@3' },
-        { key: 'pass@5', label: 'Pass@5' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
       ],
       'output prediction': [
-        { key: 'pass@1', label: 'Pass@1' },
-        { key: 'pass@3', label: 'Pass@3' },
-        { key: 'pass@5', label: 'Pass@5' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
       ],
       'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy' },
-        { key: 'Precision', label: 'Precision' },
-        { key: 'Recall', label: 'Recall' },
-        { key: 'F1 Score', label: 'F1 Score' },
-        { key: 'P-C', label: 'P-C' },
-        { key: 'P-V', label: 'P-V' },
-        { key: 'P-B', label: 'P-B' },
-        { key: 'P-R', label: 'P-R' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
+        { key: 'Precision', label: 'Precision', width: 'w-24' },
+        { key: 'Recall', label: 'Recall', width: 'w-24' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
+        { key: 'P-C', label: 'P-C', width: 'w-20' },
+        { key: 'P-V', label: 'P-V', width: 'w-20' },
+        { key: 'P-B', label: 'P-B', width: 'w-20' },
+        { key: 'P-R', label: 'P-R', width: 'w-20' }
       ],
-
     };
 
     // 特定的难度表头配置
     const difficultyHeaders = {
       'overall': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5' },
-        { key: 'CodeBLEU', label: 'CodeBLEU' },
-        { key: 'llmjudge', label: 'LLM Judge' },
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' },
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' },
         // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy' },
-        { key: 'Precision', label: 'Precision' },
-        { key: 'Recall', label: 'Recall' },
-        { key: 'F1 Score', label: 'F1 Score' },
-        { key: 'P-C', label: 'P-C' },
-        { key: 'P-V', label: 'P-V' },
-        { key: 'P-B', label: 'P-B' },
-        { key: 'P-R', label: 'P-R' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
+        { key: 'Precision', label: 'Precision', width: 'w-24' },
+        { key: 'Recall', label: 'Recall', width: 'w-24' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
+        { key: 'P-C', label: 'P-C', width: 'w-20' },
+        { key: 'P-V', label: 'P-V', width: 'w-20' },
+        { key: 'P-B', label: 'P-B', width: 'w-20' },
+        { key: 'P-R', label: 'P-R', width: 'w-20' }
       ],
       'code generation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
       ],
       'code translation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5' },
-        { key: 'CodeBLEU', label: 'CodeBLEU' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
       ],
       'input prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
       ],
       'output prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
       ],
       'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy' },
-        { key: 'Precision', label: 'Precision' },
-        { key: 'Recall', label: 'Recall' },
-        { key: 'F1 Score', label: 'F1 Score' },
-        { key: 'P-C', label: 'P-C' },
-        { key: 'P-V', label: 'P-V' },
-        { key: 'P-B', label: 'P-B' },
-        { key: 'P-R', label: 'P-R' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
+        { key: 'Precision', label: 'Precision', width: 'w-24' },
+        { key: 'Recall', label: 'Recall', width: 'w-24' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
+        { key: 'P-C', label: 'P-C', width: 'w-20' },
+        { key: 'P-V', label: 'P-V', width: 'w-20' },
+        { key: 'P-B', label: 'P-B', width: 'w-20' },
+        { key: 'P-R', label: 'P-R', width: 'w-20' }
       ]
     };
 
     const commonHeaders = [
-      { key: 'rank', label: 'Rank' },
-      { key: 'model', label: 'Model Name' },
+      { key: 'rank', label: 'Rank', width: 'w-16' },
+      { key: 'model', label: 'Model Name', width: 'w-48' },
     ];
 
     const abilityHeaders = [
-      { key: 'ability', label: 'Ability' },
-      { key: 'task', label: 'Task' },
+      { key: 'ability', label: 'Ability', width: 'w-32' },
+      { key: 'task', label: 'Task', width: 'w-32' },
     ];
 
     // If showing by difficulty, use difficulty-specific headers
@@ -605,27 +604,36 @@ export default function Home() {
           {getTableHeaders(currentTask).map(header => (
             <td 
               key={header.key}
-              className={`px-6 py-4 whitespace-nowrap text-sm ${
+              className={`px-6 py-4 whitespace-nowrap text-base font-jetbrains-mono ${header.width} ${
                 header.key === 'model' 
                   ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
                   : isDarkMode ? 'text-slate-300' : 'text-slate-600'
               }`}
             >
-              {(() => {
-                const value = result[header.key as keyof typeof result];
-                if (value === null || value === undefined || value === '') {
-                  return '-';
-                }
-                if (typeof value === 'number') {
-                  // 处理一般百分比显示
-                  if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-                    return (value * 100).toFixed(2) + '%';
-                  } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
-                    return ((value / 5) * 100).toFixed(2) + '%';
+              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'text-center' : 'text-left'}`}>
+                {(() => {
+                  const value = result[header.key as keyof typeof result];
+                  if (value === null || value === undefined || value === '') {
+                    return '-';
                   }
-                }
-                return value;
-              })()}
+                  if (typeof value === 'number') {
+                    // 处理一般百分比显示
+                    if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+                      return (value * 100).toFixed(1);
+                    } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
+                      return ((value / 5) * 100).toFixed(1);
+                    }
+                  }
+                  // If the value is a string but contains a percentage, convert it to the new format
+                  if (typeof value === 'string' && value.endsWith('%')) {
+                    const numValue = parseFloat(value);
+                    if (!isNaN(numValue)) {
+                      return numValue.toFixed(1);
+                    }
+                  }
+                  return value;
+                })()}
+              </div>
             </td>
           ))}
         </tr>
@@ -784,7 +792,7 @@ export default function Home() {
       {/* Leaderboard Section */}
       <section id="evaluation" className="relative flex items-center pt-0">
         <div className="relative w-full max-w-7xl mx-auto px-4 py-0">
-          <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24">
+          <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24 font-jetbrains-mono">
             Leaderboard
           </h1>
 
@@ -1016,13 +1024,13 @@ export default function Home() {
           {/* Results Table */}
           <Card className={`mt-4 ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl overflow-hidden shadow-sm`}>
             <div className="overflow-x-auto">
-              <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+              <table className={`min-w-full table-fixed divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
                 <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
                   <tr>
                     {getTableHeaders(currentTask).map((header) => (
                       <th 
                         key={header.key} 
-                        className={`px-6 py-4 text-left text-xs font-medium uppercase tracking-wider cursor-pointer ${
+                        className={`px-6 py-4 text-left text-sm font-medium uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
                           isDarkMode 
                             ? 'text-slate-400 bg-[#151d2a]' 
                             : 'text-slate-500 bg-slate-50'
@@ -1045,10 +1053,10 @@ export default function Home() {
                           }
                         }}
                       >
-                        <div className="flex items-center space-x-1">
+                        <div className={`flex items-center ${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'justify-center' : 'justify-start'}`}>
                           <span>{header.label}</span>
                           {/* Sort indicator */}
-                          <span className="text-xs opacity-50">
+                          <span className="ml-1 text-xs opacity-50">
                             {sortConfig && sortConfig.key === header.key ? (
                               sortConfig.direction === 'asc' ? '↑' : '↓'
                             ) : '↕'}

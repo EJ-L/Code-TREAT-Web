@@ -611,7 +611,7 @@ export default function Home() {
                   : isDarkMode ? 'text-slate-300' : 'text-slate-600'
               }`}
             >
-              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'text-center' : 'text-left'}`}>
+              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'text-center' : 'text-left'} font-semibold`}>
                 {(() => {
                   const value = result[header.key as keyof typeof result];
                   if (value === null || value === undefined || value === '') {
@@ -627,7 +627,7 @@ export default function Home() {
                           href={modelUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className={`hover:underline hover:text-blue-500 transition-colors`}
+                          className={`hover:underline hover:text-blue-500 transition-colors font-semibold`}
                         >
                           {value}
                         </a>
@@ -1049,7 +1049,7 @@ export default function Home() {
                     {getTableHeaders(currentTask).map((header) => (
                       <th 
                         key={header.key} 
-                        className={`px-6 py-4 text-left text-sm font-medium uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
+                        className={`px-6 py-4 text-left text-sm font-bold uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
                           isDarkMode 
                             ? 'text-slate-400 bg-[#151d2a]' 
                             : 'text-slate-500 bg-slate-50'

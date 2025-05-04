@@ -106,6 +106,7 @@ const glowAnimation = {
 type ResultItem = {
   rank: number;
   model: string;
+  model_url?: string;
   'pass@1'?: string | number;
   'pass@3'?: string | number;
   'pass@5'?: string | number;
@@ -616,6 +617,24 @@ export default function Home() {
                   if (value === null || value === undefined || value === '') {
                     return '-';
                   }
+                  
+                  // Special handling for model names with links
+                  if (header.key === 'model') {
+                    const modelUrl = result['model_url'] as string;
+                    if (modelUrl) {
+                      return (
+                        <a 
+                          href={modelUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={`hover:underline hover:text-blue-500 transition-colors`}
+                        >
+                          {value}
+                        </a>
+                      );
+                    }
+                  }
+                  
                   if (typeof value === 'number') {
                     // 处理一般百分比显示
                     if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {

@@ -1,5 +1,5 @@
 import { ProcessedResult, FilterOptions, TaskType, ResultEntry } from './types';
-import { loadAllData, processResult } from './dataLoader';
+import { loadAllData, processResult, getModelData } from './dataLoader';
 import { processCodeGeneration, aggregateCodeGenerationResults } from './tasks/codeGeneration';
 import { processCodeTranslation, aggregateCodeTranslationResults } from './tasks/codeTranslation';
 import { processCodeSummarization, aggregateCodeSummarizationResults } from './tasks/codeSummarization';
@@ -9,6 +9,7 @@ import { processCodeReview, aggregateCodeReviewResults } from './tasks/codeRevie
 import { processInputPrediction, aggregateInputPredictionResults } from './tasks/inputPrediction';
 import { processOutputPrediction, aggregateOutputPredictionResults } from './tasks/outputPrediction';
 import { processOverall } from './tasks/overall';
+import { MODEL_URLS } from './constants';
 
 // 辅助函数：标准化语言名称
 export const normalizeLanguage = (lang: string): string => {
@@ -339,10 +340,14 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
   });
 
   return sortedResults.map((result, index) => {
+    // Use the explicit MODEL_URLS mapping for model URLs
+    const modelUrl = MODEL_URLS[result.modelName] || "";
+    
     // Create the base result object
     const formattedResult: Record<string, string | number> = {
       rank: index + 1,
       model: result.modelName,
+      model_url: modelUrl,
       ability: filters?.langs?.length ? (result.lang || '-') : 'All',
       task: (filters?.tasks && filters.tasks.length > 1) ? (result.task || '-') : 'All',
     };

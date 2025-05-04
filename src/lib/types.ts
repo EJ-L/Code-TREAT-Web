@@ -36,6 +36,7 @@ export type ResultEntry = {
   target_lang?: string;
   metrics: Metrics;
   difficulty?: string;
+  url?: string;
 };
 
 export type ProcessedResult = {

@@ -450,10 +450,10 @@ export default function Home() {
         { key: 'Precision', label: 'Precision', width: 'w-24' },
         { key: 'Recall', label: 'Recall', width: 'w-24' },
         { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-20' },
-        { key: 'P-V', label: 'P-V', width: 'w-20' },
-        { key: 'P-B', label: 'P-B', width: 'w-20' },
-        { key: 'P-R', label: 'P-R', width: 'w-20' }
+        { key: 'P-C', label: 'P-C', width: 'w-16' },
+        { key: 'P-V', label: 'P-V', width: 'w-16' },
+        { key: 'P-B', label: 'P-B', width: 'w-16' },
+        { key: 'P-R', label: 'P-R', width: 'w-16' }
       ],
       'code generation': [
         { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
@@ -487,10 +487,10 @@ export default function Home() {
         { key: 'Precision', label: 'Precision', width: 'w-24' },
         { key: 'Recall', label: 'Recall', width: 'w-24' },
         { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-20' },
-        { key: 'P-V', label: 'P-V', width: 'w-20' },
-        { key: 'P-B', label: 'P-B', width: 'w-20' },
-        { key: 'P-R', label: 'P-R', width: 'w-20' }
+        { key: 'P-C', label: 'P-C', width: 'w-16' },
+        { key: 'P-V', label: 'P-V', width: 'w-16' },
+        { key: 'P-B', label: 'P-B', width: 'w-16' },
+        { key: 'P-R', label: 'P-R', width: 'w-16' }
       ],
     };
 
@@ -513,10 +513,10 @@ export default function Home() {
         { key: 'Precision', label: 'Precision', width: 'w-24' },
         { key: 'Recall', label: 'Recall', width: 'w-24' },
         { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-20' },
-        { key: 'P-V', label: 'P-V', width: 'w-20' },
-        { key: 'P-B', label: 'P-B', width: 'w-20' },
-        { key: 'P-R', label: 'P-R', width: 'w-20' }
+        { key: 'P-C', label: 'P-C', width: 'w-16' },
+        { key: 'P-V', label: 'P-V', width: 'w-16' },
+        { key: 'P-B', label: 'P-B', width: 'w-16' },
+        { key: 'P-R', label: 'P-R', width: 'w-16' }
       ],
       'code generation': [
         { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
@@ -574,10 +574,10 @@ export default function Home() {
         { key: 'Precision', label: 'Precision', width: 'w-24' },
         { key: 'Recall', label: 'Recall', width: 'w-24' },
         { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-20' },
-        { key: 'P-V', label: 'P-V', width: 'w-20' },
-        { key: 'P-B', label: 'P-B', width: 'w-20' },
-        { key: 'P-R', label: 'P-R', width: 'w-20' }
+        { key: 'P-C', label: 'P-C', width: 'w-16' },
+        { key: 'P-V', label: 'P-V', width: 'w-16' },
+        { key: 'P-B', label: 'P-B', width: 'w-16' },
+        { key: 'P-R', label: 'P-R', width: 'w-16' }
       ]
     };
 
@@ -605,9 +605,12 @@ export default function Home() {
     // 只有在第一次加载且没有结果时才显示 Loading
     if (isLoading && results.length === 0) {
       return (
-        <tr>
-          <td colSpan={getTableHeaders(currentTask).length} className="px-6 py-4 text-center">
-            Loading results...
+        <tr className="w-full">
+          <td colSpan={getTableHeaders(currentTask).length} className="text-center">
+            <div className="flex flex-col items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-t-2 border-blue-500 mb-4"></div>
+              <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>Loading results...</span>
+            </div>
           </td>
         </tr>
       );
@@ -626,7 +629,7 @@ export default function Home() {
                   : isDarkMode ? 'text-slate-300' : 'text-slate-600'
               }`}
             >
-              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'text-center' : 'text-left'} font-semibold`}>
+              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'].includes(header.key) ? 'text-center' : 'text-left'} font-semibold`}>
                 {(() => {
                   const value = result[header.key as keyof typeof result];
                   if (value === null || value === undefined || value === '') {
@@ -676,9 +679,14 @@ export default function Home() {
 
     // 如果没有结果且不在加载中，显示无结果信息
     return (
-      <tr>
-        <td colSpan={getTableHeaders(currentTask).length} className="px-6 py-4 text-center">
-          No results found
+      <tr className="w-full">
+        <td colSpan={getTableHeaders(currentTask).length} className="text-center">
+          <div className="flex flex-col items-center justify-center py-20">
+            <svg className="w-12 h-12 mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>No results found</span>
+          </div>
         </td>
       </tr>
     );
@@ -1214,7 +1222,7 @@ export default function Home() {
                           }
                         }}
                       >
-                        <div className={`flex items-center ${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge'].includes(header.key) ? 'justify-center' : 'justify-start'}`}>
+                        <div className={`flex items-center ${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'].includes(header.key) ? 'justify-center' : 'justify-start'}`}>
                           <span>{header.label}</span>
                           {/* Sort indicator */}
                           <span className="ml-1 text-xs opacity-50">

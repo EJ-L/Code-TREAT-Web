@@ -9,6 +9,7 @@ import { getAvailableLLMJudges as getSummarizationJudges } from '@/lib/tasks/cod
 import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview';
 import { loadAllData } from '@/lib/dataLoader';
 
+
 interface LeaderboardProps {
   taskAbilities: Record<TaskType, Ability>;
   isDarkMode: boolean;
@@ -332,7 +333,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           if (!isMounted) return;
           
           try {
-            // Process data
+            // Process data (this will handle data loading internally)
             const processedResults = await processResults(currentTask, filterOptions);
             
             if (processedResults.length > 0 && isMounted) {

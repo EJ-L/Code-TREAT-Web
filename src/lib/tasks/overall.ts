@@ -78,7 +78,7 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
     const emptyFilters = { ...filters, datasets: [], langs: [], modalities: [], knowledge: [], reasoning: [], robustness: [], security: [] };
     // 不要依赖于rawData中的漏洞检测数据，直接从JSON文件加载
     // 强行使用一个空数组，这样函数内部会直接从JSON文件加载数据
-    const vulDetectResults = processVulnerabilityDetection([], emptyFilters);
+    const vulDetectResults = await processVulnerabilityDetection([], emptyFilters);
     console.log('漏洞检测任务处理完成:', {
       totalResults: vulDetectResults.length,
       modelNames: [...new Set(vulDetectResults.map(r => r.modelName))],

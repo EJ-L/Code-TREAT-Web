@@ -293,6 +293,10 @@ const dataStore = new DataStore();
 // 文件缓存
 const fileCache: Map<string, ResultEntry[]> = new Map();
 
+// Loading state management
+let isLoadingData = false;
+let loadingDataPromise: Promise<ResultEntry[]> | null = null;
+
 export const taskDirectories: Record<string, string> = {
   'code generation': 'data/code-generation',
   'code translation': 'data/code-translation',
@@ -300,7 +304,7 @@ export const taskDirectories: Record<string, string> = {
   // 'code execution': 'data/code-execution',
   'vulnerability detection': 'data/vulnerability-detection',
   'code review': 'data/code-review',
-  'input prediction': 'data/input_prediction',
+  // 'input prediction': 'data/input_prediction', // Directory doesn't exist
   'output prediction': 'data/output_prediction',
   'code-web': 'data/code-web',
   'interaction-2-code': 'data/interaction-2-code',
@@ -323,14 +327,16 @@ async function loadJsonlFile(directory: string, file: string): Promise<ResultEnt
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    const { data, totalEntries } = await response.json();
-    if (!Array.isArray(data)) {
-      throw new Error('Invalid data format');
+    const responseData = await response.json();
+    
+    // This function is specifically for JSONL files (arrays of entries)
+    if (!responseData.data || !Array.isArray(responseData.data)) {
+      throw new Error('Invalid data format - expected JSONL format with data array');
     }
     
     // 缓存数据
-    fileCache.set(cacheKey, data);
-    return data;
+    fileCache.set(cacheKey, responseData.data);
+    return responseData.data;
     
   } catch (error) {
     console.error(`加载文件失败: ${directory}/${file}`, error);
@@ -351,7 +357,47 @@ export async function loadAllData(): Promise<ResultEntry[]> {
     return dataStore.getAll();
   }
   
+  // If currently loading, wait for the existing promise
+  if (isLoadingData && loadingDataPromise) {
+    return loadingDataPromise;
+  }
+  
+  // Set loading flag and create promise
+  isLoadingData = true;
+  loadingDataPromise = performDataLoad();
+  
   try {
+    const result = await loadingDataPromise;
+    return result;
+  } finally {
+    isLoadingData = false;
+    loadingDataPromise = null;
+  }
+}
+
+async function performDataLoad(): Promise<ResultEntry[]> {
+  try {
+    // First try to ensure GitHub data is downloaded locally
+    console.log('Checking if GitHub data needs to be downloaded...');
+    
+    try {
+      const downloadResponse = await fetch('/api/download-github-data', {
+        method: 'POST'
+      });
+      
+      if (downloadResponse.ok) {
+        const result = await downloadResponse.json();
+        console.log('GitHub data download result:', result.message);
+      } else {
+        console.warn('Failed to download GitHub data, will use existing local data if available');
+      }
+    } catch (downloadError) {
+      console.warn('Error downloading GitHub data:', downloadError);
+    }
+    
+    console.log('Loading data from local files...');
+    
+    // Fallback to local file system
     // 获取所有目录的文件列表
     const directoriesPromises = Object.entries(taskDirectories)
       .filter(([taskType]) => taskType !== 'overall')
@@ -383,9 +429,9 @@ export async function loadAllData(): Promise<ResultEntry[]> {
       for (let i = 0; i < files.length; i += batchSize) {
         const batch = files.slice(i, i + batchSize);
         
-        // 并行加载一批文件
+        // 并行加载一批文件 (只处理JSONL文件)
         const batchResults = await Promise.all(
-          batch.map(async (file: string) => {
+          batch.filter((file: string) => file.endsWith('.jsonl')).map(async (file: string) => {
             try {
               const fileData = await loadJsonlFile(directory, file);
               
@@ -431,6 +477,9 @@ export async function loadAllData(): Promise<ResultEntry[]> {
     
   } catch (error) {
     console.error('加载数据过程中发生错误:', error);
+    
+    // If both GitHub and local loading fail, use mock data
+    console.log('Both GitHub and local data loading failed, using mock data');
     const mockData = getMockData();
     dataStore.addBatch(mockData);
     return mockData;
@@ -461,6 +510,8 @@ export function getTaskAndDatasetData(taskType: string, dataset: string): Result
 export function clearCache(): void {
   dataStore.reset();
   fileCache.clear();
+  isLoadingData = false;
+  loadingDataPromise = null;
 }
 
 // 获取所有可用的任务

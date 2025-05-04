@@ -2,7 +2,7 @@
 const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify is enabled by default in Next.js 13+ and this option is deprecated
   webpack: (config, { isServer }) => {
     // 优化 webpack 配置
     config.optimization = {

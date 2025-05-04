@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Card } from "@/app/components/ui/card";
-import { CSVLink } from 'react-csv';
+import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
 import { TaskType } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
@@ -151,7 +151,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               Compare
             </button>
             
-            <CSVLink
+            <ClientOnlyCSVLink
               data={csvData.data}
               headers={csvData.headers}
               filename={csvFilename}
@@ -160,13 +160,12 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600
                 flex items-center gap-2
               `}
-              target="_blank"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
               Export
-            </CSVLink>
+            </ClientOnlyCSVLink>
           </div>
         </div>
         

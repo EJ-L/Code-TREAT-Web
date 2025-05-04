@@ -84,7 +84,7 @@ const filterAndAggregateByLanguages = (results: ProcessedResult[], selectedLangs
 
 export async function processResults(task: TaskType, filters: FilterOptions): Promise<ProcessedResult[]> {
   // 加载所有数据
-  const rawData = await loadAllData();
+  const data = await loadAllData();
   
   console.log('处理任务开始:', {
     task: task,
@@ -102,51 +102,52 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
   // 根据任务类型选择处理器
   switch (task.toLowerCase()) {
     case 'code generation':
-      processedResults = aggregateCodeGenerationResults(processCodeGeneration(rawData.map(processResult), filters));
+      processedResults = aggregateCodeGenerationResults(processCodeGeneration(data.map(processResult), filters));
       break;
       
     case 'code translation':
-      processedResults = aggregateCodeTranslationResults(processCodeTranslation(rawData.map(processResult), filters));
+      processedResults = aggregateCodeTranslationResults(processCodeTranslation(data.map(processResult), filters));
       break;
       
     case 'code summarization': {
-      const summarizationResults = processCodeSummarization(rawData, filters);
+      const summarizationResults = processCodeSummarization(data, filters);
       processedResults = aggregateCodeSummarizationResults(summarizationResults);
       break;
     }
     
     case 'code review': {
-      const reviewResults = processCodeReview(rawData, filters);
+      const reviewResults = processCodeReview(data, filters);
       processedResults = aggregateCodeReviewResults(reviewResults);
       break;
     }
       
     case 'code execution':
-      processedResults = aggregateCodeExecutionResults(processCodeExecution(rawData.map(processResult), filters));
+      processedResults = aggregateCodeExecutionResults(processCodeExecution(data.map(processResult), filters));
       break;
       
     case 'vulnerability detection':
-      processedResults = aggregateVulnerabilityDetectionResults(processVulnerabilityDetection(rawData.map(processResult), filters));
+      const vulnResults = await processVulnerabilityDetection(data.map(processResult), filters);
+      processedResults = aggregateVulnerabilityDetectionResults(vulnResults);
       break;
       
     case 'input prediction':
-      processedResults = aggregateInputPredictionResults(processInputPrediction(rawData.map(processResult), filters));
+      processedResults = aggregateInputPredictionResults(processInputPrediction(data.map(processResult), filters));
       break;
       
     case 'output prediction':
-      processedResults = aggregateOutputPredictionResults(processOutputPrediction(rawData.map(processResult), filters));
+      processedResults = aggregateOutputPredictionResults(processOutputPrediction(data.map(processResult), filters));
       break;
       
     case 'overall':
       // overall任务是异步的，需要await
-      processedResults = await processOverall(rawData.map(processResult), filters);
+      processedResults = await processOverall(data.map(processResult), filters);
       break;
       
     case 'code-web':
     case 'interaction-2-code':
     case 'code-robustness':
       // For these new tasks, process results directly using the raw data and metrics
-      const rawTaskData = rawData.filter(entry => entry.task === task);
+      const rawTaskData = data.filter(entry => entry.task === task);
       
       // Apply filters at the raw data level first, before aggregation
       let filteredRawData = rawTaskData;

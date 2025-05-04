@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
     if (!file) {
       try {
         const files = await fs.readdir(fullPath);
-        const jsonlFiles = files.filter(f => f.endsWith('.jsonl'));
-        return NextResponse.json(jsonlFiles);
+        const dataFiles = files.filter(f => f.endsWith('.jsonl') || f.endsWith('.json'));
+        return NextResponse.json(dataFiles);
       } catch (error) {
         console.error('Error reading directory:', error);
         return NextResponse.json({ error: 'Failed to read directory' }, { status: 500 });
@@ -44,26 +44,42 @@ export async function GET(request: NextRequest) {
 
     // Read the file as a string
     const fileContent = await fs.readFile(filePath, 'utf8');
-    const lines = fileContent.split('\n').filter(line => line.trim() !== '');
     
-    const data: any[] = [];
-    let lineCount = lines.length;
-
-    // Parse each line as JSON
-    for (const line of lines) {
+    // Handle different file types
+    if (file.endsWith('.json')) {
+      // Handle single JSON file
       try {
-        const jsonData = JSON.parse(line);
-        data.push(jsonData);
+        const jsonData = JSON.parse(fileContent);
+        return NextResponse.json(jsonData);
       } catch (error) {
-        console.error(`Error parsing JSON line:`, error);
+        console.error(`Error parsing JSON file:`, error);
+        return NextResponse.json({ error: 'Invalid JSON file' }, { status: 400 });
       }
-    }
+    } else if (file.endsWith('.jsonl')) {
+      // Handle JSONL file (line-by-line JSON)
+      const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+      
+      const data: any[] = [];
+      let lineCount = lines.length;
 
-    return NextResponse.json({
-      data,
-      totalLines: lineCount,
-      totalEntries: data.length
-    });
+      // Parse each line as JSON
+      for (const line of lines) {
+        try {
+          const jsonData = JSON.parse(line);
+          data.push(jsonData);
+        } catch (error) {
+          console.error(`Error parsing JSON line:`, error);
+        }
+      }
+
+      return NextResponse.json({
+        data,
+        totalLines: lineCount,
+        totalEntries: data.length
+      });
+    } else {
+      return NextResponse.json({ error: 'Unsupported file type' }, { status: 400 });
+    }
 
   } catch (error) {
     console.error('API Error:', error);

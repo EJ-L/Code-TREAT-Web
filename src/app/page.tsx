@@ -9,6 +9,8 @@ import { FilterOptions, TaskType, Ability } from '@/lib/types';
 import { getAvailableLLMJudges as getSummarizationJudges } from '@/lib/tasks/codeSummarization';
 import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview';
 import { loadAllData } from '@/lib/dataLoader';
+import { CSVLink } from 'react-csv';
+import ModelComparisonModal from '@/components/ui/ModelComparisonModal';
 
 // 临时模拟数据
 const mockData = [
@@ -144,6 +146,7 @@ export default function Home() {
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>({});
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const TASKS_PER_PAGE = 4;
+  const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   // Helper function to get tasks for current page
   const getCurrentPageTasks = () => {
@@ -198,6 +201,7 @@ export default function Home() {
     
     setCurrentTask(task);
     setSelectedAbilities({});  // 重置所有过滤器
+    setIsComparisonModalOpen(false);  // Close comparison modal when switching tasks
     
     // 注意：对于code review任务，我们暂时不应用任何过滤器
     if (task === 'code review') {
@@ -774,24 +778,17 @@ export default function Home() {
 
   // Define a function to determine if a column should be center-aligned
   const isColumnCentered = (key: string) => {
-    // List all columns that should be center-aligned
-    return ['pass@1', 'pass@3', 'pass@5', 
-      'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-      'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-      'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-      'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score',
-      'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'
-    ].includes(key);
+    // All columns should be center-aligned except for model
+    return key !== 'model';
   };
 
   // Define a function to determine column text alignment
   const getColumnAlignment = (key: string) => {
-    if (key === 'rank') {
-      return 'text-center'; // Rank should be centered
-    } else if (isColumnCentered(key)) {
-      return 'text-center'; // Metrics are centered
+    // Model name should be left-aligned, everything else centered
+    if (key === 'model') {
+      return 'text-left';
     } else {
-      return 'text-left'; // Model name and others are left-aligned
+      return 'text-center';
     }
   };
 
@@ -965,8 +962,67 @@ export default function Home() {
     return Math.max(columnWidth - 60, 10);
   };
 
+  // Function to generate CSV data from current leaderboard
+  const csvData = useMemo(() => {
+    if (!sortedResults.length) return {
+      headers: [],
+      data: []
+    };
+    
+    // Get headers from current task
+    const headers = getTableHeaders(currentTask).map(header => ({
+      label: header.label,
+      key: header.key
+    }));
+    
+    // Format the data specifically for CSV export to ensure proper formatting
+    const formattedData = sortedResults.map(result => {
+      const csvRow: Record<string, string | number> = {};
+      
+      // Process each field from the result using a type-safe approach
+      Object.entries(result).forEach(([key, value]) => {
+        // Format numerical values correctly
+        if (typeof value === 'number') {
+          if (key === 'rank') {
+            csvRow[key] = value;
+          } else if ([
+            'pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution',
+            'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+            'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+            'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+            'Accuracy', 'Precision', 'Recall', 'F1 Score',
+            'P-C', 'P-V', 'P-B', 'P-R'
+          ].includes(key)) {
+            csvRow[key] = (value * 100).toFixed(1);
+          } else if (key === 'llmjudge' || key === 'LLMJudge') {
+            csvRow[key] = ((value / 5) * 100).toFixed(1);
+          } else {
+            csvRow[key] = value;
+          }
+        } else if (value === '-' || value === undefined) {
+          csvRow[key] = 'N/A';
+        } else {
+          csvRow[key] = value as string;
+        }
+      });
+      
+      return csvRow;
+    });
+    
+    return {
+      headers,
+      data: formattedData
+    };
+  }, [sortedResults, currentTask, getTableHeaders]);
+
+  // CSV filename based on current task
+  const csvFilename = useMemo(() => {
+    const date = new Date().toISOString().split('T')[0];
+    return `code-treat-${currentTask.replace(/\s+/g, '-')}-${date}.csv`;
+  }, [currentTask]);
+
   return (
-    <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-[#0a0f1a]' : 'bg-slate-50'}`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-[#09101f] text-white' : 'bg-slate-50 text-black'}`}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm border-b ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'}`}>
@@ -1464,88 +1520,137 @@ export default function Home() {
           </Card>
 
           {/* Results Table */}
-          <Card className={`mt-4 ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl overflow-hidden shadow-sm`}>
-            <div className="overflow-x-auto relative"> {/* Add relative positioning for the indicator */}
-              <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
-                <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
-                  <tr>
-                    {getTableHeaders(currentTask).map((header) => {
-                      // Use the shared alignment function
-                      const alignment = getColumnAlignment(header.key);
-                      
-                      return (
-                        <th 
-                          key={header.key} 
-                          className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
-                            isDarkMode 
-                              ? 'text-slate-300 bg-[#151d2a]' 
-                              : 'text-slate-600 bg-slate-50'
-                          }`}
-                          style={{ 
-                            width: `${columnWidths[header.key] || 100}px`,
-                            transition: resizingColumn ? 'none' : 'width 0.1s ease'
-                          }}
-                          onClick={() => {
-                            // Enable sorting for all numeric columns including difficulty-based metrics
-                            const sortableColumns = [
-                              'rank', 
-                              'pass@1', 'pass@3', 'pass@5', 
-                              'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-                              'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-                              'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-                              'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
-                              // 漏洞检测特定指标
-                              'Accuracy', 'Precision', 'Recall', 'F1 Score',
-                              'P-C', 'P-V', 'P-B', 'P-R'
-                            ];
-                            if (sortableColumns.includes(header.key)) {
-                              handleSort(header.key);
-                            }
-                          }}
-                        >
-                          <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
-                            <span 
-                              className="truncate block" 
-                              style={{ 
-                                maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
-                                width: isColumnCentered(header.key) ? '100%' : 'auto'
-                              }}
-                              title={header.label}
-                            >
-                              {header.label}
-                            </span>
-                            {/* Sort indicator */}
-                            <span className="ml-1 text-xs opacity-50 shrink-0">
-                              {sortConfig && sortConfig.key === header.key ? (
-                                sortConfig.direction === 'asc' ? '↑' : '↓'
-                              ) : '↕'}
-                            </span>
-                          </div>
-                          {/* Resize handle - a more subtle line that doesn't extend to the edges */}
-                          <div 
-                            className={`absolute right-0 top-0 h-full cursor-col-resize flex items-center justify-center`}
-                            onMouseDown={(e) => handleResizeStart(e, header.key)}
-                            onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
+          <Card className={isDarkMode ? 'bg-[#0f1729]/80 border-slate-700/50' : 'bg-white/90 border-slate-200'}>
+            <div className="overflow-hidden">
+              <div className="flex justify-between items-center p-4">
+                <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+                  {currentTask.charAt(0).toUpperCase() + currentTask.slice(1)} Results
+                </h2>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => setIsComparisonModalOpen(true)}
+                    className={`
+                      px-4 py-2 rounded-lg text-white transition-all
+                      bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600
+                      flex items-center gap-2
+                    `}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
+                    </svg>
+                    Compare
+                  </button>
+                  
+                  <CSVLink
+                    data={csvData.data}
+                    headers={csvData.headers}
+                    filename={csvFilename}
+                    className={`
+                      px-4 py-2 rounded-lg text-white transition-all
+                      bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600
+                      flex items-center gap-2
+                    `}
+                    target="_blank"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                    Export
+                  </CSVLink>
+                </div>
+              </div>
+              
+              <div className="overflow-x-auto relative">
+                <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+                  <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
+                    <tr>
+                      {getTableHeaders(currentTask).map((header) => {
+                        // Use the shared alignment function
+                        const alignment = getColumnAlignment(header.key);
+                        
+                        return (
+                          <th 
+                            key={header.key} 
+                            className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
+                              isDarkMode 
+                                ? 'text-slate-300 bg-[#151d2a]' 
+                                : 'text-slate-600 bg-slate-50'
+                            }`}
+                            style={{ 
+                              width: `${columnWidths[header.key] || 100}px`,
+                              transition: resizingColumn ? 'none' : 'width 0.1s ease'
+                            }}
+                            onClick={() => {
+                              // Enable sorting for all numeric columns including difficulty-based metrics
+                              const sortableColumns = [
+                                'rank', 
+                                'pass@1', 'pass@3', 'pass@5', 
+                                'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+                                'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+                                'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+                                'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
+                                // 漏洞检测特定指标
+                                'Accuracy', 'Precision', 'Recall', 'F1 Score',
+                                'P-C', 'P-V', 'P-B', 'P-R'
+                              ];
+                              if (sortableColumns.includes(header.key)) {
+                                handleSort(header.key);
+                              }
+                            }}
                           >
-                            {resizingColumn === header.key ? (
-                              <div className={`h-[60%] w-px ${isDarkMode ? 'bg-blue-400' : 'bg-blue-500'}`}></div>
-                            ) : (
-                              <div className={`h-[60%] w-px ${isDarkMode ? 'bg-gray-600/60' : 'bg-gray-300'}`}></div>
-                            )}
-                            {/* Add a slight expansion effect for easier targeting */}
-                            <div className="absolute inset-y-0 -inset-x-1.5 hover:bg-blue-400/10 group-hover:bg-blue-400/5"></div>
-                          </div>
-                        </th>
-                      );
-                    })}
-                  </tr>
-                </thead>
-                <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
-                  {renderResultsTable()}
-                </tbody>
-              </table>
+                            <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
+                              <span 
+                                className="truncate block" 
+                                style={{ 
+                                  maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
+                                  width: isColumnCentered(header.key) ? '100%' : 'auto'
+                                }}
+                                title={header.label}
+                              >
+                                {header.label}
+                              </span>
+                              {/* Sort indicator */}
+                              <span className="ml-1 text-xs opacity-50 shrink-0">
+                                {sortConfig && sortConfig.key === header.key ? (
+                                  sortConfig.direction === 'asc' ? '↑' : '↓'
+                                ) : '↕'}
+                              </span>
+                            </div>
+                            {/* Resize handle - a more subtle line that doesn't extend to the edges */}
+                            <div 
+                              className={`absolute right-0 top-0 h-full cursor-col-resize flex items-center justify-center`}
+                              onMouseDown={(e) => handleResizeStart(e, header.key)}
+                              onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
+                            >
+                              {resizingColumn === header.key ? (
+                                <div className={`h-[60%] w-px ${isDarkMode ? 'bg-blue-400' : 'bg-blue-500'}`}></div>
+                              ) : (
+                                <div className={`h-[60%] w-px ${isDarkMode ? 'bg-gray-600/60' : 'bg-gray-300'}`}></div>
+                              )}
+                              {/* Add a slight expansion effect for easier targeting */}
+                              <div className="absolute inset-y-0 -inset-x-1.5 hover:bg-blue-400/10 group-hover:bg-blue-400/5"></div>
+                            </div>
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+                    {renderResultsTable()}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </Card>
+
+          {/* Model Comparison Modal */}
+          <ModelComparisonModal 
+            isOpen={isComparisonModalOpen}
+            onClose={() => setIsComparisonModalOpen(false)}
+            results={sortedResults}
+            isDarkMode={isDarkMode}
+            currentTask={currentTask}
+          />
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 // import Image from "next/image";
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { SunIcon, MoonIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -141,6 +141,8 @@ export default function Home() {
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
   const [currentTaskPage, setCurrentTaskPage] = useState(0);
   const [showByDifficulty, setShowByDifficulty] = useState(false);
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({});
+  const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const TASKS_PER_PAGE = 4;
 
   // Helper function to get tasks for current page
@@ -190,6 +192,10 @@ export default function Home() {
   // 处理任务切换
   const handleTaskChange = (task: TaskType) => {
     console.log(`任务切换到: ${task}`);
+    
+    // We don't need to reset column widths here anymore
+    // as we have a dedicated useEffect for that
+    
     setCurrentTask(task);
     setSelectedAbilities({});  // 重置所有过滤器
     
@@ -435,8 +441,8 @@ export default function Home() {
     });
   }, [sortConfig]);
 
-  // 获取表格标题
-  const getTableHeaders = (task: TaskType) => {
+  // Define a table headers helper function (not memoized)
+  const tableHeadersHelper = (task: TaskType) => {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
@@ -600,6 +606,203 @@ export default function Home() {
     return [...commonHeaders, ...tableHeaders[task], ...abilityHeaders];
   };
 
+  // Memoize the getTableHeaders function
+  const getTableHeaders = useCallback(tableHeadersHelper, [showByDifficulty]);
+
+  // Add a dedicated effect specifically for initializing column widths when task changes
+  useEffect(() => {
+    // Reset column widths when task changes
+    setColumnWidths({});
+  }, [currentTask]);
+  
+  // Initialize column widths if not already set
+  useEffect(() => {
+    // Skip if we already have widths for all columns
+    const headers = getTableHeaders(currentTask);
+    const allHeadersHaveWidth = headers.every(header => columnWidths[header.key]);
+    
+    // If all headers already have widths, no need to recalculate
+    if (allHeadersHaveWidth) return;
+    
+    let initialWidths: Record<string, number> = {};
+    
+    // Calculate initial width for each column
+    headers.forEach(header => {
+      // If width is already set, use it
+      if (columnWidths[header.key]) {
+        initialWidths[header.key] = columnWidths[header.key];
+        return;
+      }
+      
+      // Extract the base width from Tailwind class (e.g., w-16, w-24, etc.)
+      const sizeMatch = header.width.match(/w-(\d+)/);
+      if (sizeMatch && sizeMatch[1]) {
+        const remSize = parseInt(sizeMatch[1]) / 4; // Tailwind uses 4 as a base
+        const baseWidth = remSize * 16; // 1rem = 16px typically
+        
+        // Set minimum width for specific column types
+        let minWidth = 0;
+        
+        if (header.key === 'model') {
+          // Model names can be quite long
+          minWidth = 220; // Increased to ensure no truncation
+        } else if (header.key === 'rank') {
+          // Rank is usually short
+          minWidth = 70;
+        } else if (header.key === 'ability' || header.key === 'task') {
+          minWidth = 150;
+        } else if (header.key.includes('pass') || header.key.includes('Pass')) {
+          // Pass metrics should be wide enough for the percentage
+          minWidth = Math.max(120, header.label.length * 12);
+        } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
+          // LLM judge needs extra width
+          minWidth = 150;
+        } else if (header.key === 'CodeBLEU') {
+          minWidth = 140;
+        } else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
+          minWidth = 120;
+        } else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+          minWidth = 90;
+        } else {
+          // For other headers, calculate width based on text length
+          minWidth = header.label.length * 12 + 40; // Add padding for sort indicator
+        }
+        
+        // Use the larger of the calculated width or base width from Tailwind
+        initialWidths[header.key] = Math.max(baseWidth, minWidth);
+      } else {
+        // Default width if no match
+        initialWidths[header.key] = 140;
+      }
+    });
+    
+    // Task-specific adjustments
+    if (currentTask === 'code summarization' || currentTask === 'code review') {
+      // Force larger width for specific columns in these views
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 250);
+      if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 150);
+      if (initialWidths['ability']) initialWidths['ability'] = Math.max(initialWidths['ability'], 150);
+      if (initialWidths['task']) initialWidths['task'] = Math.max(initialWidths['task'], 150);
+    } else if (currentTask === 'overall') {
+      // Ensure Overall task has appropriate widths
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 250);
+      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 120);
+      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 120);
+      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 120);
+    } else if (currentTask === 'vulnerability detection') {
+      // Ensure vulnerability detection has appropriate widths
+      if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 120);
+      if (initialWidths['Precision']) initialWidths['Precision'] = Math.max(initialWidths['Precision'], 120);
+      if (initialWidths['Recall']) initialWidths['Recall'] = Math.max(initialWidths['Recall'], 120);
+      if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 120);
+    }
+    
+    // Update column widths with the new values if there's a change needed
+    if (Object.keys(initialWidths).length > 0) {
+      setColumnWidths(prev => {
+        // Only update if there are changes
+        let hasChanges = false;
+        for (const key in initialWidths) {
+          if (!prev[key] || prev[key] !== initialWidths[key]) {
+            hasChanges = true;
+            break;
+          }
+        }
+        return hasChanges ? initialWidths : prev;
+      });
+    }
+  }, [currentTask, showByDifficulty, columnWidths, getTableHeaders]);
+  
+  // Remove the previous lastTask ref as we now handle this differently
+  // Keep track of the last task to detect task changes
+  // const lastTask = useRef<TaskType>(currentTask);
+
+  // Handle column resize start
+  const handleResizeStart = (e: React.MouseEvent, key: string) => {
+    e.preventDefault();
+    setResizingColumn(key);
+    
+    // Add a cursor style to the entire document during resize
+    document.body.style.cursor = 'col-resize';
+    document.body.classList.add('select-none'); // Prevent text selection during resize
+
+    // Create a visual indicator for the column being resized
+    const resizeIndicator = document.createElement('div');
+    resizeIndicator.id = 'column-resize-indicator';
+    resizeIndicator.style.position = 'absolute';
+    resizeIndicator.style.top = '0';
+    resizeIndicator.style.bottom = '0';
+    resizeIndicator.style.width = '2px';
+    resizeIndicator.style.backgroundColor = isDarkMode ? 'rgba(200, 200, 200, 0.7)' : 'rgba(20, 20, 20, 0.7)';
+    resizeIndicator.style.left = `${e.currentTarget.getBoundingClientRect().right}px`;
+    resizeIndicator.style.zIndex = '50';
+    document.body.appendChild(resizeIndicator);
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      moveEvent.preventDefault();
+      
+      // Update the indicator position
+      if (resizeIndicator) {
+        resizeIndicator.style.left = `${moveEvent.clientX}px`;
+      }
+      
+      setColumnWidths(prev => ({
+        ...prev,
+        [key]: Math.max(40, prev[key] + moveEvent.movementX)
+      }));
+    };
+
+    const handleMouseUp = () => {
+      setResizingColumn(null);
+      // Reset cursor style when done resizing
+      document.body.style.cursor = '';
+      document.body.classList.remove('select-none');
+      
+      // Remove the indicator
+      const indicator = document.getElementById('column-resize-indicator');
+      if (indicator) {
+        indicator.remove();
+      }
+      
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  // Define a function to determine if a column should be center-aligned
+  const isColumnCentered = (key: string) => {
+    // List all columns that should be center-aligned
+    return ['pass@1', 'pass@3', 'pass@5', 
+      'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+      'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+      'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+      'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score',
+      'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'
+    ].includes(key);
+  };
+
+  // Define a function to determine column text alignment
+  const getColumnAlignment = (key: string) => {
+    if (key === 'rank') {
+      return 'text-center'; // Rank should be centered
+    } else if (isColumnCentered(key)) {
+      return 'text-center'; // Metrics are centered
+    } else {
+      return 'text-left'; // Model name and others are left-aligned
+    }
+  };
+
+  // Add styles for numeric values to ensure they're consistently aligned
+  const getNumericStyles = (key: string) => {
+    if (isColumnCentered(key)) {
+      return 'tabular-nums lining-nums';
+    }
+    return '';
+  };
+
   // Results Table 部分 - 使用缓存的排序结果
   const renderResultsTable = () => {
     // 只有在第一次加载且没有结果时才显示 Loading
@@ -620,59 +823,105 @@ export default function Home() {
     if (sortedResults.length > 0) {
       return sortedResults.map((result, index) => (
         <tr key={index} className={isDarkMode ? 'hover:bg-[#1f2b3d]' : 'hover:bg-slate-50'}>
-          {getTableHeaders(currentTask).map(header => (
-            <td 
-              key={header.key}
-              className={`px-6 py-4 whitespace-nowrap text-base font-jetbrains-mono ${header.width} ${
-                header.key === 'model' 
-                  ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
-                  : isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}
-            >
-              <div className={`${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'].includes(header.key) ? 'text-center' : 'text-left'} font-semibold`}>
-                {(() => {
-                  const value = result[header.key as keyof typeof result];
-                  if (value === null || value === undefined || value === '') {
-                    return '-';
-                  }
-                  
-                  // Special handling for model names with links
-                  if (header.key === 'model') {
-                    const modelUrl = result['model_url'] as string;
-                    if (modelUrl) {
+          {getTableHeaders(currentTask).map(header => {
+            // Get alignment consistently using the shared function
+            const alignment = getColumnAlignment(header.key);
+            const numericStyles = getNumericStyles(header.key);
+            
+            return (
+              <td 
+                key={header.key}
+                className={`px-6 py-4 whitespace-nowrap text-base font-jetbrains-mono ${alignment} ${numericStyles} ${
+                  header.key === 'model' 
+                    ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
+                    : isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                }`}
+                style={{ 
+                  width: `${columnWidths[header.key] || 100}px`,
+                  transition: resizingColumn ? 'none' : 'width 0.1s ease'
+                }}
+              >
+                <div className={`w-full ${alignment} font-semibold`}>
+                  {(() => {
+                    const value = result[header.key as keyof typeof result];
+                    if (value === null || value === undefined || value === '') {
+                      return '-';
+                    }
+                    
+                    // Get available content width for this column
+                    const contentWidth = getContentWidth(columnWidths[header.key] || 100);
+                    
+                    // Special handling for model names with links
+                    if (header.key === 'model') {
+                      const modelUrl = result['model_url'] as string;
+                      const displayText = truncateText(value as string, contentWidth);
+                      
+                      if (modelUrl) {
+                        return (
+                          <a 
+                            href={modelUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className={`hover:underline hover:text-blue-500 transition-colors font-semibold truncate inline-block text-left`}
+                            title={value as string}
+                            style={{ maxWidth: `${contentWidth}px` }}
+                          >
+                            {displayText}
+                          </a>
+                        );
+                      }
                       return (
-                        <a 
-                          href={modelUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className={`hover:underline hover:text-blue-500 transition-colors font-semibold`}
+                        <span 
+                          title={value as string} 
+                          className="truncate inline-block text-left"
+                          style={{ maxWidth: `${contentWidth}px` }}
                         >
-                          {value}
-                        </a>
+                          {displayText}
+                        </span>
                       );
                     }
-                  }
-                  
-                  if (typeof value === 'number') {
-                    // 处理一般百分比显示
-                    if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-                      return (value * 100).toFixed(1);
-                    } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
-                      return ((value / 5) * 100).toFixed(1);
+                    
+                    if (typeof value === 'number') {
+                      // 处理一般百分比显示
+                      if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+                        return (value * 100).toFixed(1);
+                      } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
+                        return ((value / 5) * 100).toFixed(1);
+                      }
+                      // For rank, just show the number
+                      return value;
                     }
-                  }
-                  // If the value is a string but contains a percentage, convert it to the new format
-                  if (typeof value === 'string' && value.endsWith('%')) {
-                    const numValue = parseFloat(value);
-                    if (!isNaN(numValue)) {
-                      return numValue.toFixed(1);
+                    // If the value is a string but contains a percentage, convert it to the new format
+                    if (typeof value === 'string' && value.endsWith('%')) {
+                      const numValue = parseFloat(value);
+                      if (!isNaN(numValue)) {
+                        return numValue.toFixed(1);
+                      }
                     }
-                  }
-                  return value;
-                })()}
-              </div>
-            </td>
-          ))}
+                    
+                    // For other string values, truncate if needed
+                    if (typeof value === 'string') {
+                      const style = isColumnCentered(header.key) ? 'text-center' : 'text-left';
+                      return (
+                        <span 
+                          title={value} 
+                          className={`truncate inline-block ${style}`}
+                          style={{ 
+                            maxWidth: `${contentWidth}px`,
+                            width: isColumnCentered(header.key) ? '100%' : 'auto'
+                          }}
+                        >
+                          {truncateText(value, contentWidth)}
+                        </span>
+                      );
+                    }
+                    
+                    return value;
+                  })()}
+                </div>
+              </td>
+            );
+          })}
         </tr>
       ));
     }
@@ -690,6 +939,30 @@ export default function Home() {
         </td>
       </tr>
     );
+  };
+
+  // Add a helper function to truncate text based on available width
+  const truncateText = (text: string, maxWidth: number) => {
+    if (!text) return '';
+    
+    // Approximate character width in pixels (this is an estimate)
+    const charWidth = 8; // Assuming monospace font where each char is ~8px
+    const maxChars = Math.floor(maxWidth / charWidth);
+    
+    if (text.length <= maxChars) return text;
+    
+    // Keep at least 3 chars if possible
+    if (maxChars <= 5) return text.substring(0, maxChars);
+    
+    // Otherwise truncate with ellipsis
+    return text.substring(0, maxChars - 3) + '...';
+  };
+
+  // Compute available content width for a column
+  const getContentWidth = (columnWidth: number) => {
+    // Account for padding (px-6 = 1.5rem = 24px on each side = 48px total)
+    // and some extra margin for sort indicators and other elements
+    return Math.max(columnWidth - 60, 10);
   };
 
   return (
@@ -1192,47 +1465,79 @@ export default function Home() {
 
           {/* Results Table */}
           <Card className={`mt-4 ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl overflow-hidden shadow-sm`}>
-            <div className="overflow-x-auto">
-              <table className={`min-w-full table-fixed divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+            <div className="overflow-x-auto relative"> {/* Add relative positioning for the indicator */}
+              <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
                 <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
                   <tr>
-                    {getTableHeaders(currentTask).map((header) => (
-                      <th 
-                        key={header.key} 
-                        className={`px-6 py-4 text-left text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono ${header.width} ${
-                          isDarkMode 
-                            ? 'text-slate-300 bg-[#151d2a]' 
-                            : 'text-slate-600 bg-slate-50'
-                        }`}
-                        onClick={() => {
-                          // Enable sorting for all numeric columns including difficulty-based metrics
-                          const sortableColumns = [
-                            'rank', 
-                            'pass@1', 'pass@3', 'pass@5', 
-                            'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-                            'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-                            'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-                            'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
-                            // 漏洞检测特定指标
-                            'Accuracy', 'Precision', 'Recall', 'F1 Score',
-                            'P-C', 'P-V', 'P-B', 'P-R'
-                          ];
-                          if (sortableColumns.includes(header.key)) {
-                            handleSort(header.key);
-                          }
-                        }}
-                      >
-                        <div className={`flex items-center ${['pass@1', 'pass@3', 'pass@5', 'easy_pass@1', 'medium_pass@1', 'hard_pass@1', 'easy_pass@3', 'medium_pass@3', 'hard_pass@3', 'easy_pass@5', 'medium_pass@5', 'hard_pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'llmjudge', 'LLMJudge', 'ability', 'task'].includes(header.key) ? 'justify-center' : 'justify-start'}`}>
-                          <span>{header.label}</span>
-                          {/* Sort indicator */}
-                          <span className="ml-1 text-xs opacity-50">
-                            {sortConfig && sortConfig.key === header.key ? (
-                              sortConfig.direction === 'asc' ? '↑' : '↓'
-                            ) : '↕'}
-                          </span>
-                        </div>
-                      </th>
-                    ))}
+                    {getTableHeaders(currentTask).map((header) => {
+                      // Use the shared alignment function
+                      const alignment = getColumnAlignment(header.key);
+                      
+                      return (
+                        <th 
+                          key={header.key} 
+                          className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
+                            isDarkMode 
+                              ? 'text-slate-300 bg-[#151d2a]' 
+                              : 'text-slate-600 bg-slate-50'
+                          }`}
+                          style={{ 
+                            width: `${columnWidths[header.key] || 100}px`,
+                            transition: resizingColumn ? 'none' : 'width 0.1s ease'
+                          }}
+                          onClick={() => {
+                            // Enable sorting for all numeric columns including difficulty-based metrics
+                            const sortableColumns = [
+                              'rank', 
+                              'pass@1', 'pass@3', 'pass@5', 
+                              'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+                              'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+                              'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+                              'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
+                              // 漏洞检测特定指标
+                              'Accuracy', 'Precision', 'Recall', 'F1 Score',
+                              'P-C', 'P-V', 'P-B', 'P-R'
+                            ];
+                            if (sortableColumns.includes(header.key)) {
+                              handleSort(header.key);
+                            }
+                          }}
+                        >
+                          <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
+                            <span 
+                              className="truncate block" 
+                              style={{ 
+                                maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
+                                width: isColumnCentered(header.key) ? '100%' : 'auto'
+                              }}
+                              title={header.label}
+                            >
+                              {header.label}
+                            </span>
+                            {/* Sort indicator */}
+                            <span className="ml-1 text-xs opacity-50 shrink-0">
+                              {sortConfig && sortConfig.key === header.key ? (
+                                sortConfig.direction === 'asc' ? '↑' : '↓'
+                              ) : '↕'}
+                            </span>
+                          </div>
+                          {/* Resize handle - a more subtle line that doesn't extend to the edges */}
+                          <div 
+                            className={`absolute right-0 top-0 h-full cursor-col-resize flex items-center justify-center`}
+                            onMouseDown={(e) => handleResizeStart(e, header.key)}
+                            onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
+                          >
+                            {resizingColumn === header.key ? (
+                              <div className={`h-[60%] w-px ${isDarkMode ? 'bg-blue-400' : 'bg-blue-500'}`}></div>
+                            ) : (
+                              <div className={`h-[60%] w-px ${isDarkMode ? 'bg-gray-600/60' : 'bg-gray-300'}`}></div>
+                            )}
+                            {/* Add a slight expansion effect for easier targeting */}
+                            <div className="absolute inset-y-0 -inset-x-1.5 hover:bg-blue-400/10 group-hover:bg-blue-400/5"></div>
+                          </div>
+                        </th>
+                      );
+                    })}
                   </tr>
                 </thead>
                 <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>

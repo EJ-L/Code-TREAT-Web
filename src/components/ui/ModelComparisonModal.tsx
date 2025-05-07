@@ -22,7 +22,7 @@ const ModelComparisonModal = ({
   currentTask
 }: ModelComparisonModalProps) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
-
+  
   // Clear selected models when modal opens or closes
   useEffect(() => {
     if (!isOpen) {
@@ -44,14 +44,15 @@ const ModelComparisonModal = ({
 
   const handleModelToggle = useCallback((modelName: string) => {
     setSelectedModels(prev => {
+      // If model is already selected, remove it
       if (prev.includes(modelName)) {
         return prev.filter(m => m !== modelName);
-      } else {
-        if (prev.length < MAX_MODELS) {
-          return [...prev, modelName];
-        }
-        return prev;
+      } 
+      // Otherwise add it if we're under the limit
+      else if (prev.length < MAX_MODELS) {
+        return [...prev, modelName];
       }
+      return prev;
     });
   }, []);
 
@@ -102,6 +103,12 @@ const ModelComparisonModal = ({
   }, [onClose]);
 
   if (!isOpen) return null;
+
+  // Selected models map for the active chart controls
+  const selectedModelsMap = selectedModels.reduce((acc, model) => ({
+    ...acc,
+    [model]: true
+  }), {});
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black bg-opacity-50">
@@ -170,12 +177,14 @@ const ModelComparisonModal = ({
                     <ModelComparisonBarChart 
                       data={radarData} 
                       models={selectedModels} 
+                      activeModels={selectedModelsMap}
                       isDarkMode={isDarkMode} 
                     />
                   ) : (
                     <ModelComparisonRadarChart 
                       data={radarData} 
-                      models={selectedModels} 
+                      models={selectedModels}
+                      activeModels={selectedModelsMap}
                       isDarkMode={isDarkMode} 
                     />
                   )

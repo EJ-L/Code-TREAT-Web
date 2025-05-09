@@ -11,6 +11,8 @@ import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview
 import { loadAllData } from '@/lib/dataLoader';
 import { CSVLink } from 'react-csv';
 import ModelComparisonModal from '@/components/ui/ModelComparisonModal';
+import OrganizationLogo from '@/components/ui/OrganizationLogo';
+import { getOrganizationFromModel } from '@/lib/organization-logos';
 
 // 临时模拟数据
 const mockData = [
@@ -450,20 +452,20 @@ export default function Home() {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' },
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' },
+        { key: 'pass@1', label: 'Pass@1', width: 'w-28' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-28' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-28' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32' },
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-32' },
         // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
-        { key: 'Precision', label: 'Precision', width: 'w-24' },
-        { key: 'Recall', label: 'Recall', width: 'w-24' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-16' },
-        { key: 'P-V', label: 'P-V', width: 'w-16' },
-        { key: 'P-B', label: 'P-B', width: 'w-16' },
-        { key: 'P-R', label: 'P-R', width: 'w-16' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-28' },
+        { key: 'Precision', label: 'Precision', width: 'w-28' },
+        { key: 'Recall', label: 'Recall', width: 'w-28' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-28' },
+        { key: 'P-C', label: 'P-C', width: 'w-20' },
+        { key: 'P-V', label: 'P-V', width: 'w-20' },
+        { key: 'P-B', label: 'P-B', width: 'w-20' },
+        { key: 'P-R', label: 'P-R', width: 'w-20' }
       ],
       'code generation': [
         { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
@@ -592,7 +594,7 @@ export default function Home() {
     };
 
     const commonHeaders = [
-      { key: 'rank', label: 'Rank', width: 'w-16' },
+      { key: 'rank', label: 'Rank', width: 'w-28' },
       { key: 'model', label: 'Model Name', width: 'w-48' },
     ];
 
@@ -649,10 +651,10 @@ export default function Home() {
         
         if (header.key === 'model') {
           // Model names can be quite long
-          minWidth = 220; // Increased to ensure no truncation
+          minWidth = 250; // Increased to ensure no truncation and to accommodate organization logo
         } else if (header.key === 'rank') {
-          // Rank is usually short
-          minWidth = 70;
+          // Rank is usually short but needs enough width to prevent gaps
+          minWidth = 130; // Increased from 100 to ensure no gap with model column
         } else if (header.key === 'ability' || header.key === 'task') {
           minWidth = 150;
         } else if (header.key.includes('pass') || header.key.includes('Pass')) {
@@ -660,23 +662,23 @@ export default function Home() {
           minWidth = Math.max(120, header.label.length * 12);
         } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
           // LLM judge needs extra width
-          minWidth = 150;
+          minWidth = Math.max(150, header.label.length * 12);
         } else if (header.key === 'CodeBLEU') {
-          minWidth = 140;
+          minWidth = Math.max(140, header.label.length * 12);
         } else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
-          minWidth = 120;
+          minWidth = Math.max(120, header.label.length * 12);
         } else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-          minWidth = 90;
+          minWidth = Math.max(90, header.label.length * 12);
         } else {
           // For other headers, calculate width based on text length
           minWidth = header.label.length * 12 + 40; // Add padding for sort indicator
         }
         
         // Use the larger of the calculated width or base width from Tailwind
-        initialWidths[header.key] = Math.max(baseWidth, minWidth);
+        initialWidths[header.key] = Math.max(baseWidth, minWidth, calculateMinWidthForText(header.label));
       } else {
         // Default width if no match
-        initialWidths[header.key] = 140;
+        initialWidths[header.key] = Math.max(140, calculateMinWidthForText(header.label));
       }
     });
     
@@ -689,10 +691,17 @@ export default function Home() {
       if (initialWidths['task']) initialWidths['task'] = Math.max(initialWidths['task'], 150);
     } else if (currentTask === 'overall') {
       // Ensure Overall task has appropriate widths
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 250);
-      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 120);
-      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 120);
-      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 120);
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 280); // Increased for logo
+      if (initialWidths['rank']) initialWidths['rank'] = Math.max(initialWidths['rank'], 140);
+      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 140);
+      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 140);
+      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 140);
+      if (initialWidths['CodeBLEU']) initialWidths['CodeBLEU'] = Math.max(initialWidths['CodeBLEU'], 160);
+      if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 160);
+      if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 150);
+      if (initialWidths['Precision']) initialWidths['Precision'] = Math.max(initialWidths['Precision'], 150);
+      if (initialWidths['Recall']) initialWidths['Recall'] = Math.max(initialWidths['Recall'], 150);
+      if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 150);
     } else if (currentTask === 'vulnerability detection') {
       // Ensure vulnerability detection has appropriate widths
       if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 120);
@@ -800,6 +809,62 @@ export default function Home() {
     return '';
   };
 
+  // Compute available content width for a column
+  const getContentWidth = (columnWidth: number) => {
+    // Account for padding (px-6 = 1.5rem = 24px on each side = 48px total)
+    // and some extra margin for sort indicators and other elements
+    return Math.max(columnWidth - 50, 10); // Reduced padding from 60 to 50 to provide more content space
+  };
+
+  // Helper function to determine if a column should be sticky
+  const getStickyStyles = (key: string) => {
+    if (key === 'rank' || key === 'model') {
+      return `sticky z-10 ${isDarkMode ? 'shadow-[5px_0_5px_-5px_rgba(0,0,0,0.4)]' : 'shadow-[5px_0_5px_-5px_rgba(0,0,0,0.1)]'}`;
+    }
+    return '';
+  };
+
+  // Helper function to calculate the left position for sticky columns
+  const getStickyLeftPosition = (key: string) => {
+    if (key === 'rank') {
+      return '0px';
+    } else if (key === 'model') {
+      return `var(--rank-width, ${columnWidths['rank'] || 140}px)`;
+    }
+    return 'auto';
+  };
+
+  // Effect to update the CSS variable for rank width
+  useEffect(() => {
+    const updateRankWidth = () => {
+      const rankHeader = document.querySelector('th[data-key="rank"]');
+      if (rankHeader) {
+        document.documentElement.style.setProperty('--rank-width', `${rankHeader.clientWidth}px`);
+      }
+    };
+
+    // Update on initial render, window resize, and column resize
+    updateRankWidth();
+    window.addEventListener('resize', updateRankWidth);
+    
+    // Also update when column widths change
+    return () => {
+      window.removeEventListener('resize', updateRankWidth);
+    };
+  }, [columnWidths]);
+
+  // Helper function to get the background color for table cells based on the column and dark mode
+  const getBackgroundColor = (key: string, isHeader: boolean = false) => {
+    if (key === 'rank' || key === 'model') {
+      if (isHeader) {
+        return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
+      } else {
+        return isDarkMode ? 'bg-[#0f1729]' : 'bg-white';
+      }
+    }
+    return '';
+  };
+
   // Results Table 部分 - 使用缓存的排序结果
   const renderResultsTable = () => {
     // 只有在第一次加载且没有结果时才显示 Loading
@@ -824,18 +889,22 @@ export default function Home() {
             // Get alignment consistently using the shared function
             const alignment = getColumnAlignment(header.key);
             const numericStyles = getNumericStyles(header.key);
+            const stickyStyles = getStickyStyles(header.key);
+            const bgColor = getBackgroundColor(header.key, false);
             
             return (
               <td 
                 key={header.key}
+                data-key={header.key}
                 className={`px-6 py-4 whitespace-nowrap text-base font-jetbrains-mono ${alignment} ${numericStyles} ${
                   header.key === 'model' 
                     ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
                     : isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}
+                } ${stickyStyles} ${bgColor}`}
                 style={{ 
                   width: `${columnWidths[header.key] || 100}px`,
-                  transition: resizingColumn ? 'none' : 'width 0.1s ease'
+                  transition: resizingColumn ? 'none' : 'width 0.1s ease',
+                  left: getStickyLeftPosition(header.key)
                 }}
               >
                 <div className={`w-full ${alignment} font-semibold`}>
@@ -852,6 +921,22 @@ export default function Home() {
                     if (header.key === 'model') {
                       const modelUrl = result['model_url'] as string;
                       const displayText = truncateText(value as string, contentWidth);
+                      const organization = getOrganizationFromModel(value as string);
+                      
+                      const modelContent = (
+                        <div className="flex items-center gap-2">
+                          {organization && organization !== 'unknown' && (
+                            <OrganizationLogo organization={organization} size={16} />
+                          )}
+                          <span 
+                            title={value as string}
+                            className="truncate inline-block"
+                            style={{ maxWidth: `${contentWidth - (organization && organization !== 'unknown' ? 24 : 0)}px` }}
+                          >
+                            {displayText}
+                          </span>
+                        </div>
+                      );
                       
                       if (modelUrl) {
                         return (
@@ -859,23 +944,18 @@ export default function Home() {
                             href={modelUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className={`hover:underline hover:text-blue-500 transition-colors font-semibold truncate inline-block text-left`}
+                            className={`hover:underline hover:text-blue-500 transition-colors font-semibold text-left`}
                             title={value as string}
-                            style={{ maxWidth: `${contentWidth}px` }}
+                            style={{ 
+                              maxWidth: `${contentWidth}px`,
+                              display: 'block'
+                            }}
                           >
-                            {displayText}
+                            {modelContent}
                           </a>
                         );
                       }
-                      return (
-                        <span 
-                          title={value as string} 
-                          className="truncate inline-block text-left"
-                          style={{ maxWidth: `${contentWidth}px` }}
-                        >
-                          {displayText}
-                        </span>
-                      );
+                      return modelContent;
                     }
                     
                     if (typeof value === 'number') {
@@ -955,13 +1035,6 @@ export default function Home() {
     return text.substring(0, maxChars - 3) + '...';
   };
 
-  // Compute available content width for a column
-  const getContentWidth = (columnWidth: number) => {
-    // Account for padding (px-6 = 1.5rem = 24px on each side = 48px total)
-    // and some extra margin for sort indicators and other elements
-    return Math.max(columnWidth - 60, 10);
-  };
-
   // Function to generate CSV data from current leaderboard
   const csvData = useMemo(() => {
     if (!sortedResults.length) return {
@@ -1021,6 +1094,15 @@ export default function Home() {
     return `code-treat-${currentTask.replace(/\s+/g, '-')}-${date}.csv`;
   }, [currentTask]);
 
+  // Add a helper function to calculate min width for a text
+  const calculateMinWidthForText = (text: string, isHeader: boolean = true) => {
+    // For headers add extra space for sort indicator
+    const extraSpace = isHeader ? 40 : 20;
+    // Approximate character width in pixels (this is an estimate)
+    const charWidth = 12; // Increased from 10px to 12px per character for header text for better visibility
+    return text.length * charWidth + extraSpace;
+  };
+  
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-[#09101f] text-white' : 'bg-slate-50 text-black'}`}>
       {/* Header */}
@@ -1560,25 +1642,29 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="overflow-x-auto relative">
+              <div className="overflow-x-auto relative custom-scrollbar">
                 <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
                   <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
                     <tr>
                       {getTableHeaders(currentTask).map((header) => {
                         // Use the shared alignment function
                         const alignment = getColumnAlignment(header.key);
+                        const stickyStyles = getStickyStyles(header.key);
+                        const bgColor = getBackgroundColor(header.key, true);
                         
                         return (
                           <th 
                             key={header.key} 
+                            data-key={header.key}
                             className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
                               isDarkMode 
                                 ? 'text-slate-300 bg-[#151d2a]' 
                                 : 'text-slate-600 bg-slate-50'
-                            }`}
+                            } ${stickyStyles} ${bgColor}`}
                             style={{ 
                               width: `${columnWidths[header.key] || 100}px`,
-                              transition: resizingColumn ? 'none' : 'width 0.1s ease'
+                              transition: resizingColumn ? 'none' : 'width 0.1s ease',
+                              left: getStickyLeftPosition(header.key)
                             }}
                             onClick={() => {
                               // Enable sorting for all numeric columns including difficulty-based metrics
@@ -1600,17 +1686,19 @@ export default function Home() {
                           >
                             <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
                               <span 
-                                className="truncate block" 
+                                className="text-ellipsis overflow-hidden whitespace-nowrap block" 
                                 style={{ 
                                   maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
-                                  width: isColumnCentered(header.key) ? '100%' : 'auto'
+                                  width: isColumnCentered(header.key) ? '100%' : 'auto',
+                                  // Adding padding to ensure text is fully visible on initial load
+                                  minWidth: header.label.length * 10 + 'px'
                                 }}
                                 title={header.label}
                               >
                                 {header.label}
                               </span>
                               {/* Sort indicator */}
-                              <span className="ml-1 text-xs opacity-50 shrink-0">
+                              <span className="ml-1 text-xs opacity-50 shrink-0 min-w-[12px]">
                                 {sortConfig && sortConfig.key === header.key ? (
                                   sortConfig.direction === 'asc' ? '↑' : '↓'
                                 ) : '↕'}
@@ -1618,8 +1706,8 @@ export default function Home() {
                             </div>
                             {/* Resize handle - a more subtle line that doesn't extend to the edges */}
                             <div 
-                              className={`absolute right-0 top-0 h-full cursor-col-resize flex items-center justify-center`}
-                              onMouseDown={(e) => handleResizeStart(e, header.key)}
+                              className={`absolute right-0 top-0 h-full ${header.key === 'rank' ? '' : 'cursor-col-resize'} flex items-center justify-center`}
+                              onMouseDown={(e) => header.key !== 'rank' && handleResizeStart(e, header.key)}
                               onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
                             >
                               {resizingColumn === header.key ? (

@@ -452,155 +452,155 @@ export default function Home() {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-28' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-28' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-28' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32' },
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-32' },
+        { key: 'pass@1', label: 'Pass@1', width: 'w-28', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-28', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-28', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' },
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-32', description: '' },
         // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-28' },
-        { key: 'Precision', label: 'Precision', width: 'w-28' },
-        { key: 'Recall', label: 'Recall', width: 'w-28' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-28' },
-        { key: 'P-C', label: 'P-C', width: 'w-20' },
-        { key: 'P-V', label: 'P-V', width: 'w-20' },
-        { key: 'P-B', label: 'P-B', width: 'w-20' },
-        { key: 'P-R', label: 'P-R', width: 'w-20' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-28', description: '' },
+        { key: 'Precision', label: 'Precision', width: 'w-28', description: '' },
+        { key: 'Recall', label: 'Recall', width: 'w-28', description: '' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-28', description: '' },
+        { key: 'P-C', label: 'P-C', width: 'w-20', description: 'Correctly predicts both elements' },
+        { key: 'P-V', label: 'P-V', width: 'w-20', description: 'Both predicted as vulnerable' },
+        { key: 'P-B', label: 'P-B', width: 'w-20', description: 'Both predicted as benign' },
+        { key: 'P-R', label: 'P-R', width: 'w-20', description: 'Inversely predicted labels' }
       ],
       'code generation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
       ],
       'code translation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'input prediction': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
       ],
       'output prediction': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
       ],
       'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
-        { key: 'Precision', label: 'Precision', width: 'w-24' },
-        { key: 'Recall', label: 'Recall', width: 'w-24' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-16' },
-        { key: 'P-V', label: 'P-V', width: 'w-16' },
-        { key: 'P-B', label: 'P-B', width: 'w-16' },
-        { key: 'P-R', label: 'P-R', width: 'w-16' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24', description: '' },
+        { key: 'Precision', label: 'Precision', width: 'w-24', description: '' },
+        { key: 'Recall', label: 'Recall', width: 'w-24', description: '' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24', description: '' },
+        { key: 'P-C', label: 'P-C', width: 'w-16', description: 'Correctly predicts both elements' },
+        { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
+        { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
+        { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
       ],
     };
 
     // 特定的难度表头配置
     const difficultyHeaders = {
       'overall': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' },
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' },
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' },
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' },
         // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
-        { key: 'Precision', label: 'Precision', width: 'w-24' },
-        { key: 'Recall', label: 'Recall', width: 'w-24' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-16' },
-        { key: 'P-V', label: 'P-V', width: 'w-16' },
-        { key: 'P-B', label: 'P-B', width: 'w-16' },
-        { key: 'P-R', label: 'P-R', width: 'w-16' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24', description: '' },
+        { key: 'Precision', label: 'Precision', width: 'w-24', description: '' },
+        { key: 'Recall', label: 'Recall', width: 'w-24', description: '' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24', description: '' },
+        { key: 'P-C', label: 'P-C', width: 'w-16', description: 'Correctly predicts both elements' },
+        { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
+        { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
+        { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
       ],
       'code generation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
       ],
       'code translation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28' }
+        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'input prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
       ],
       'output prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32' }
+        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
+        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
+        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
+        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
+        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
+        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
+        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
+        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
+        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
       ],
       'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24' },
-        { key: 'Precision', label: 'Precision', width: 'w-24' },
-        { key: 'Recall', label: 'Recall', width: 'w-24' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24' },
-        { key: 'P-C', label: 'P-C', width: 'w-16' },
-        { key: 'P-V', label: 'P-V', width: 'w-16' },
-        { key: 'P-B', label: 'P-B', width: 'w-16' },
-        { key: 'P-R', label: 'P-R', width: 'w-16' }
+        { key: 'Accuracy', label: 'Accuracy', width: 'w-24', description: '' },
+        { key: 'Precision', label: 'Precision', width: 'w-24', description: '' },
+        { key: 'Recall', label: 'Recall', width: 'w-24', description: '' },
+        { key: 'F1 Score', label: 'F1 Score', width: 'w-24', description: '' },
+        { key: 'P-C', label: 'P-C', width: 'w-16', description: 'Correctly predicts both elements' },
+        { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
+        { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
+        { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
       ]
     };
 
     const commonHeaders = [
-      { key: 'rank', label: 'Rank', width: 'w-28' },
-      { key: 'model', label: 'Model Name', width: 'w-48' },
+      { key: 'rank', label: 'Rank', width: 'w-28', description: '' },
+      { key: 'model', label: 'Model Name', width: 'w-48', description: '' },
     ];
 
     const abilityHeaders = [
-      { key: 'ability', label: 'Ability', width: 'w-32' },
-      { key: 'task', label: 'Task', width: 'w-32' },
+      { key: 'ability', label: 'Ability', width: 'w-32', description: '' },
+      { key: 'task', label: 'Task', width: 'w-32', description: '' },
     ];
 
     // If showing by difficulty, use difficulty-specific headers
@@ -621,6 +621,38 @@ export default function Home() {
     setColumnWidths({});
   }, [currentTask]);
   
+  // Add a helper function to calculate minimum width for a column based on its type
+  const getMinColumnWidth = useCallback((key: string): number => {
+    // Get the appropriate minimum width based on column type
+    let minWidth = 40; // Default minimum width
+    
+    if (key === 'model') {
+      minWidth = 250; // Model names need more space
+    } else if (key === 'rank') {
+      minWidth = 80; // Reduced from 130
+    } else if (key === 'ability' || key === 'task') {
+      minWidth = 100; // Reduced from 150
+    } else if (key.includes('pass') || key.includes('Pass')) {
+      // Pass metrics should be wide enough for percentages
+      const header = getTableHeaders(currentTask).find(h => h.key === key);
+      minWidth = Math.max(80, header?.label.length ? header.label.length * 8 : 80); // Reduced from 120
+    } else if (key === 'llmjudge' || key === 'LLMJudge') {
+      minWidth = 100; // Reduced from 150
+    } else if (key === 'CodeBLEU') {
+      minWidth = 90; // Reduced from 140
+    } else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(key)) {
+      minWidth = 80; // Reduced from 120
+    } else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(key)) {
+      minWidth = 60; // Reduced from 90
+    } else {
+      // For other headers, get the header object to calculate min width based on label
+      const header = getTableHeaders(currentTask).find(h => h.key === key);
+      minWidth = header?.label.length ? header.label.length * 8 + 24 : 80; // Reduced from 12*label.length + 40
+    }
+    
+    return minWidth;
+  }, [currentTask, getTableHeaders]);
+
   // Initialize column widths if not already set
   useEffect(() => {
     // Skip if we already have widths for all columns
@@ -646,33 +678,8 @@ export default function Home() {
         const remSize = parseInt(sizeMatch[1]) / 4; // Tailwind uses 4 as a base
         const baseWidth = remSize * 16; // 1rem = 16px typically
         
-        // Set minimum width for specific column types
-        let minWidth = 0;
-        
-        if (header.key === 'model') {
-          // Model names can be quite long
-          minWidth = 250; // Increased to ensure no truncation and to accommodate organization logo
-        } else if (header.key === 'rank') {
-          // Rank is usually short but needs enough width to prevent gaps
-          minWidth = 130; // Increased from 100 to ensure no gap with model column
-        } else if (header.key === 'ability' || header.key === 'task') {
-          minWidth = 150;
-        } else if (header.key.includes('pass') || header.key.includes('Pass')) {
-          // Pass metrics should be wide enough for the percentage
-          minWidth = Math.max(120, header.label.length * 12);
-        } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
-          // LLM judge needs extra width
-          minWidth = Math.max(150, header.label.length * 12);
-        } else if (header.key === 'CodeBLEU') {
-          minWidth = Math.max(140, header.label.length * 12);
-        } else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
-          minWidth = Math.max(120, header.label.length * 12);
-        } else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-          minWidth = Math.max(90, header.label.length * 12);
-        } else {
-          // For other headers, calculate width based on text length
-          minWidth = header.label.length * 12 + 40; // Add padding for sort indicator
-        }
+        // Get minimum width for this column type
+        const minWidth = getMinColumnWidth(header.key);
         
         // Use the larger of the calculated width or base width from Tailwind
         initialWidths[header.key] = Math.max(baseWidth, minWidth, calculateMinWidthForText(header.label));
@@ -724,7 +731,7 @@ export default function Home() {
         return hasChanges ? initialWidths : prev;
       });
     }
-  }, [currentTask, showByDifficulty, columnWidths, getTableHeaders]);
+  }, [currentTask, showByDifficulty, columnWidths, getTableHeaders, getMinColumnWidth]);
   
   // Remove the previous lastTask ref as we now handle this differently
   // Keep track of the last task to detect task changes
@@ -759,10 +766,19 @@ export default function Home() {
         resizeIndicator.style.left = `${moveEvent.clientX}px`;
       }
       
-      setColumnWidths(prev => ({
-        ...prev,
-        [key]: Math.max(40, prev[key] + moveEvent.movementX)
-      }));
+      setColumnWidths(prev => {
+        // Calculate the new width
+        const newWidth = prev[key] + moveEvent.movementX;
+        
+        // Get minimum width for this column using the shared helper function
+        const minWidth = getMinColumnWidth(key);
+        
+        // Return the new state object with the updated width
+        return {
+          ...prev,
+          [key]: Math.max(minWidth, newWidth)
+        };
+      });
     };
 
     const handleMouseUp = () => {
@@ -1693,7 +1709,7 @@ export default function Home() {
                                   // Adding padding to ensure text is fully visible on initial load
                                   minWidth: header.label.length * 10 + 'px'
                                 }}
-                                title={header.label}
+                                {...(header.description ? { title: header.description } : {})}
                               >
                                 {header.label}
                               </span>

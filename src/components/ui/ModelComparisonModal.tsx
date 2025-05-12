@@ -62,7 +62,7 @@ const ModelComparisonModal = ({
     // Get all numeric metrics for the current task
     const allMetrics = Object.keys(results[0] || {}).filter(key => {
       // Skip non-numeric or special fields
-      if (['rank', 'model', 'model_url', 'ability', 'task'].includes(key)) {
+      if (['rank', 'model', 'model_url'].includes(key)) {
         return false;
       }
       

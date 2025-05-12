@@ -452,9 +452,9 @@ export default function Home() {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-28', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-28', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-28', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
+        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
         { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' },
         { key: 'llmjudge', label: 'LLM Judge', width: 'w-32', description: '' },
         // 漏洞检测特定指标
@@ -468,15 +468,15 @@ export default function Home() {
         { key: 'P-R', label: 'P-R', width: 'w-20', description: 'Inversely predicted labels' }
       ],
       'code generation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
       ],
       'code translation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' }
+        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
+        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
+        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
+        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' }
       ],
       'code summarization': [
         { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
@@ -598,18 +598,13 @@ export default function Home() {
       { key: 'model', label: 'Model Name', width: 'w-48', description: '' },
     ];
 
-    const abilityHeaders = [
-      { key: 'ability', label: 'Ability', width: 'w-32', description: '' },
-      { key: 'task', label: 'Task', width: 'w-32', description: '' },
-    ];
-
     // If showing by difficulty, use difficulty-specific headers
     if (showByDifficulty) {
-      return [...commonHeaders, ...difficultyHeaders[task], ...abilityHeaders];
+      return [...commonHeaders, ...difficultyHeaders[task]];
     }
 
     // Otherwise, use standard headers
-    return [...commonHeaders, ...tableHeaders[task], ...abilityHeaders];
+    return [...commonHeaders, ...tableHeaders[task]];
   };
 
   // Memoize the getTableHeaders function
@@ -627,15 +622,12 @@ export default function Home() {
     let minWidth = 40; // Default minimum width
     
     if (key === 'model') {
-      minWidth = 250; // Model names need more space
+      minWidth = 300; // Increased for better model name display
     } else if (key === 'rank') {
       minWidth = 80; // Reduced from 130
-    } else if (key === 'ability' || key === 'task') {
-      minWidth = 100; // Reduced from 150
     } else if (key.includes('pass') || key.includes('Pass')) {
       // Pass metrics should be wide enough for percentages
-      const header = getTableHeaders(currentTask).find(h => h.key === key);
-      minWidth = Math.max(80, header?.label.length ? header.label.length * 8 : 80); // Reduced from 120
+      minWidth = 160; // Increased to ensure label fits
     } else if (key === 'llmjudge' || key === 'LLMJudge') {
       minWidth = 100; // Reduced from 150
     } else if (key === 'CodeBLEU') {
@@ -692,17 +684,15 @@ export default function Home() {
     // Task-specific adjustments
     if (currentTask === 'code summarization' || currentTask === 'code review') {
       // Force larger width for specific columns in these views
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 250);
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
       if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 150);
-      if (initialWidths['ability']) initialWidths['ability'] = Math.max(initialWidths['ability'], 150);
-      if (initialWidths['task']) initialWidths['task'] = Math.max(initialWidths['task'], 150);
     } else if (currentTask === 'overall') {
       // Ensure Overall task has appropriate widths
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 280); // Increased for logo
-      if (initialWidths['rank']) initialWidths['rank'] = Math.max(initialWidths['rank'], 140);
-      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 140);
-      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 140);
-      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 140);
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300); // Increased for logo
+      if (initialWidths['rank']) initialWidths['rank'] = Math.max(initialWidths['rank'], 80);
+      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 160);
+      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 160);
+      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 160);
       if (initialWidths['CodeBLEU']) initialWidths['CodeBLEU'] = Math.max(initialWidths['CodeBLEU'], 160);
       if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 160);
       if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 150);
@@ -711,10 +701,17 @@ export default function Home() {
       if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 150);
     } else if (currentTask === 'vulnerability detection') {
       // Ensure vulnerability detection has appropriate widths
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
       if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 120);
       if (initialWidths['Precision']) initialWidths['Precision'] = Math.max(initialWidths['Precision'], 120);
       if (initialWidths['Recall']) initialWidths['Recall'] = Math.max(initialWidths['Recall'], 120);
       if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 120);
+    } else {
+      // For code generation and other tasks with Pass metrics
+      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
+      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 160);
+      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 160);
+      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 160);
     }
     
     // Update column widths with the new values if there's a change needed
@@ -940,7 +937,7 @@ export default function Home() {
                       const organization = getOrganizationFromModel(value as string);
                       
                       const modelContent = (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 w-full">
                           {organization && organization !== 'unknown' && (
                             <OrganizationLogo organization={organization} size={16} />
                           )}
@@ -960,12 +957,8 @@ export default function Home() {
                             href={modelUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className={`hover:underline hover:text-blue-500 transition-colors font-semibold text-left`}
+                            className="hover:underline hover:text-blue-500 transition-colors font-semibold text-left w-full block"
                             title={value as string}
-                            style={{ 
-                              maxWidth: `${contentWidth}px`,
-                              display: 'block'
-                            }}
                           >
                             {modelContent}
                           </a>

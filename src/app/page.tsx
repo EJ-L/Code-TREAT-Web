@@ -14,6 +14,9 @@ import ModelComparisonModal from '@/components/ui/ModelComparisonModal';
 import OrganizationLogo from '@/components/ui/OrganizationLogo';
 import { getOrganizationFromModel } from '@/lib/organization-logos';
 
+// Define tasks that have difficulty-based results
+const tasksWithDifficulty = ['overall', 'code generation', 'code translation', 'input prediction', 'output prediction'];
+
 // 临时模拟数据
 const mockData = [
   {
@@ -909,7 +912,7 @@ export default function Home() {
               <td 
                 key={header.key}
                 data-key={header.key}
-                className={`px-6 py-4 whitespace-nowrap text-base font-jetbrains-mono ${alignment} ${numericStyles} ${
+                className={`px-6 py-4 whitespace-nowrap text-lg font-jetbrains-mono ${alignment} ${numericStyles} ${
                   header.key === 'model' 
                     ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
                     : isDarkMode ? 'text-slate-300' : 'text-slate-600'
@@ -1119,18 +1122,18 @@ export default function Home() {
         <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm border-b ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'}`}>
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div className="flex items-center">
-              <a href="#home" className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              <a href="#home" className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
                 Code TREAT
               </a>
             </div>
             <div className="flex items-center space-x-8">
               <nav className="flex items-center space-x-8">
-                <a href="#home" className={`${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>Home</a>
-                <a href="#about" className={`${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>About</a>
-                <a href="#evaluation" className={`${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>Evaluation</a>
+                <a href="#home" className={`text-lg ${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>Home</a>
+                <a href="#about" className={`text-lg ${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>About</a>
+                <a href="#evaluation" className={`text-lg ${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}>Evaluation</a>
                 <a 
                   href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                  className={`${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}
+                  className={`text-lg ${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}
                 >
                   Contact
                 </a>
@@ -1170,7 +1173,7 @@ export default function Home() {
       <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16" id="home">
         <div className="relative mt-[180px]">
           <motion.h1 
-            className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-12"
+            className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -1178,7 +1181,7 @@ export default function Home() {
             Code TREAT
           </motion.h1>
           <motion.h2 
-            className={`text-3xl ${isDarkMode ? 'text-blue-200' : 'text-slate-800'} mb-8 max-w-3xl mx-auto leading-relaxed`}
+            className={`text-4xl ${isDarkMode ? 'text-blue-200' : 'text-slate-800'} mb-8 max-w-3xl mx-auto leading-relaxed`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -1186,7 +1189,7 @@ export default function Home() {
             Code LLM Trustworthiness/Reliability Evaluation and Testing
           </motion.h2>
           <motion.p 
-            className={`text-xl ${isDarkMode ? 'text-blue-200/80' : 'text-slate-600'} mb-8 max-w-2xl mx-auto`}
+            className={`text-2xl ${isDarkMode ? 'text-blue-200/80' : 'text-slate-600'} mb-8 max-w-2xl mx-auto`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -1202,6 +1205,9 @@ export default function Home() {
                 overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               <div className="flex items-center gap-6">
                 <span className="relative z-10 flex items-center justify-center">
@@ -1235,6 +1241,9 @@ export default function Home() {
                 overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
               <div className="flex items-center gap-6">
                 <span className="relative z-10 flex items-center justify-center">
@@ -1268,6 +1277,9 @@ export default function Home() {
                 overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
               <div className="flex items-center gap-6">
                 <span className="relative z-10 flex items-center justify-center">
@@ -1299,6 +1311,9 @@ export default function Home() {
                 overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
             >
               <div className="flex items-center gap-6">
                 <span className="relative z-10 flex items-center justify-center">
@@ -1336,32 +1351,32 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text 
+          <h2 className="text-5xl font-bold text-center text-transparent bg-clip-text 
             bg-gradient-to-r from-blue-500 to-purple-500 mb-24">
             About Code TREAT
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
             <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm p-6 rounded-xl text-center border ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} shadow-sm`}>
-              <h3 className="text-lg font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
                 Trustworthiness Analysis
               </h3>
-              <p className={`text-sm ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
+              <p className={`text-xl ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
                 Evaluate the reliability of code generated by Large Language Models
               </p>
             </div>
             <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm p-6 rounded-xl text-center border ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} shadow-sm`}>
-              <h3 className="text-lg font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
                 Reliability Testing
               </h3>
-              <p className={`text-sm ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
+              <p className={`text-xl ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
                 Comprehensive testing framework for AI-generated code
               </p>
             </div>
             <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm p-6 rounded-xl text-center border ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} shadow-sm`}>
-              <h3 className="text-lg font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
                 Performance Metrics
               </h3>
-              <p className={`text-sm ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
+              <p className={`text-xl ${isDarkMode ? 'text-blue-200' : 'text-slate-600'}`}>
                 Detailed analysis of code quality and performance
               </p>
             </div>
@@ -1372,7 +1387,7 @@ export default function Home() {
       {/* Leaderboard Section */}
       <section id="evaluation" className="relative flex items-center pt-0">
         <div className="relative w-full max-w-7xl mx-auto px-4 py-0">
-          <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24 font-jetbrains-mono">
+          <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24 font-jetbrains-mono">
             Leaderboard
           </h1>
 
@@ -1414,7 +1429,7 @@ export default function Home() {
                       }
                     `}
                   >
-                    <span className="relative z-10 text-base font-medium">
+                    <span className="relative z-10 text-lg font-medium">
                       {task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                     </span>
                     {currentTask === task && (
@@ -1455,7 +1470,7 @@ export default function Home() {
               {/* Dataset Filter */}
               {currentTask !== 'overall' && taskAbilities[currentTask].dataset.length > 0 && (
                 <div className="flex flex-col space-y-2">
-                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
+                  <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
                   <div className="flex flex-wrap gap-2">
                     {taskAbilities[currentTask].dataset.map((value: string) => (
                       <motion.button
@@ -1464,7 +1479,7 @@ export default function Home() {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleAbilityChange('dataset', value)}
                         className={`
-                          px-4 py-2 rounded-lg text-center transition-all
+                          px-4 py-2 rounded-lg text-center transition-all text-base
                           ${selectedAbilities.dataset?.includes(value)
                             ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                             : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
@@ -1481,7 +1496,7 @@ export default function Home() {
               {/* LLM Judge Filter */}
               {currentTask !== 'overall' && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
                 <div className="flex flex-col space-y-2">
-                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
+                  <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
                   <div className="flex flex-wrap gap-2">
                     {availableLLMJudges.map((judge: string) => (
                       <motion.button
@@ -1510,7 +1525,7 @@ export default function Home() {
                 .map(([key, values]) => (
                   values.length > 0 && (
                     <div key={key} className="flex flex-col space-y-2">
-                      <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
+                      <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -1541,7 +1556,7 @@ export default function Home() {
 
               {/* Notes for overall view */}
               {currentTask === 'overall' && (
-                <div className="text-sm text-center mb-2">
+                <div className="text-xl text-center mb-2">
                   <p className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                     Showing overall results based on the average of all available metrics across tasks.
                   </p>
@@ -1553,7 +1568,7 @@ export default function Home() {
                 isDarkMode ? 'text-slate-400' : 'text-slate-500'
               }`}>
                 <span className="font-mono">—</span>
-                <span className="text-sm">Denotes data is not yet available.</span>
+                <span className="text-lg">Denotes data is not yet available.</span>
               </div>
 
               {/* Vulnerability Detection Metrics Explanation */}
@@ -1587,26 +1602,28 @@ export default function Home() {
                 </div>
               )}
 
-              {/* Difficulty toggle */}
-              <div className="flex justify-end mt-4">
-                <label className="inline-flex items-center cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    checked={showByDifficulty}
-                    onChange={() => setShowByDifficulty(!showByDifficulty)}
-                    className={`form-checkbox h-5 w-5 ${
-                      isDarkMode 
-                        ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
-                        : 'text-blue-600 bg-slate-100 border-slate-300'
-                    } rounded focus:ring-blue-500`} 
-                  />
-                  <span className={`ml-2 text-sm ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                  }`}>
-                    Show results by difficulty
-                  </span>
-                </label>
-              </div>
+              {/* Difficulty toggle - only show for tasks that support it */}
+              {tasksWithDifficulty.includes(currentTask) && (
+                <div className="flex justify-end mt-4">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={showByDifficulty}
+                      onChange={() => setShowByDifficulty(!showByDifficulty)}
+                      className={`form-checkbox h-5 w-5 ${
+                        isDarkMode 
+                          ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
+                          : 'text-blue-600 bg-slate-100 border-slate-300'
+                      } rounded focus:ring-blue-500`} 
+                    />
+                    <span className={`ml-2 text-l ${
+                      isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                    }`}>
+                      Show results by difficulty
+                    </span>
+                  </label>
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -1614,14 +1631,14 @@ export default function Home() {
           <Card className={isDarkMode ? 'bg-[#0f1729]/80 border-slate-700/50' : 'bg-white/90 border-slate-200'}>
             <div className="overflow-hidden">
               <div className="flex justify-between items-center p-4">
-                <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>
+                <h2 className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500`}>
                   {currentTask.charAt(0).toUpperCase() + currentTask.slice(1)} Results
                 </h2>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setIsComparisonModalOpen(true)}
                     className={`
-                      px-4 py-2 rounded-lg text-white transition-all
+                      px-4 py-2 rounded-lg text-white transition-all text-base
                       bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600
                       flex items-center gap-2
                     `}
@@ -1637,7 +1654,7 @@ export default function Home() {
                     headers={csvData.headers}
                     filename={csvFilename}
                     className={`
-                      px-4 py-2 rounded-lg text-white transition-all
+                      px-4 py-2 rounded-lg text-white transition-all text-base
                       bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600
                       flex items-center gap-2
                     `}
@@ -1695,7 +1712,7 @@ export default function Home() {
                           >
                             <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
                               <span 
-                                className="text-ellipsis overflow-hidden whitespace-nowrap block" 
+                                className="text-ellipsis overflow-hidden whitespace-nowrap block text-lg" 
                                 style={{ 
                                   maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
                                   width: isColumnCentered(header.key) ? '100%' : 'auto',
@@ -1707,7 +1724,7 @@ export default function Home() {
                                 {header.label}
                               </span>
                               {/* Sort indicator */}
-                              <span className="ml-1 text-xs opacity-50 shrink-0 min-w-[12px]">
+                              <span className="ml-1 text-sm opacity-50 shrink-0 min-w-[12px]">
                                 {sortConfig && sortConfig.key === header.key ? (
                                   sortConfig.direction === 'asc' ? '↑' : '↓'
                                 ) : '↕'}

@@ -455,20 +455,8 @@ export default function Home() {
     // 任务特定的表头配置
     const tableHeaders = {
       'overall': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' },
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-32', description: '' },
-        // 漏洞检测特定指标
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-28', description: '' },
-        { key: 'Precision', label: 'Precision', width: 'w-28', description: '' },
-        { key: 'Recall', label: 'Recall', width: 'w-28', description: '' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-28', description: '' },
-        { key: 'P-C', label: 'P-C', width: 'w-20', description: 'Correctly predicts both elements' },
-        { key: 'P-V', label: 'P-V', width: 'w-20', description: 'Both predicted as vulnerable' },
-        { key: 'P-B', label: 'P-B', width: 'w-20', description: 'Both predicted as benign' },
-        { key: 'P-R', label: 'P-R', width: 'w-20', description: 'Inversely predicted labels' }
+        { key: 'rank', label: 'Rank', width: 'w-32', description: '' },
+        { key: 'model', label: 'Model Name', width: 'w-192', description: '' } // Significantly increased width for model names
       ],
       'code generation': [
         { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
@@ -606,6 +594,11 @@ export default function Home() {
       return [...commonHeaders, ...difficultyHeaders[task]];
     }
 
+    // For overall task, return only the overall headers without adding common headers
+    if (task === 'overall') {
+      return tableHeaders[task];
+    }
+
     // Otherwise, use standard headers
     return [...commonHeaders, ...tableHeaders[task]];
   };
@@ -625,12 +618,17 @@ export default function Home() {
     let minWidth = 40; // Default minimum width
     
     if (key === 'model') {
-      minWidth = 300; // Increased for better model name display
+      // Give more space for model name in overall task
+      if (currentTask === 'overall') {
+        minWidth = 800; // Doubled from previous 400px to ensure full model names display
+      } else {
+        minWidth = 300; // Increased for better model name display in other tasks too
+      }
     } else if (key === 'rank') {
       minWidth = 80; // Reduced from 130
     } else if (key.includes('pass') || key.includes('Pass')) {
       // Pass metrics should be wide enough for percentages
-      minWidth = 160; // Increased to ensure label fits
+      minWidth = 80; // Reduced to ensure label fits
     } else if (key === 'llmjudge' || key === 'LLMJudge') {
       minWidth = 100; // Reduced from 150
     } else if (key === 'CodeBLEU') {
@@ -733,10 +731,6 @@ export default function Home() {
     }
   }, [currentTask, showByDifficulty, columnWidths, getTableHeaders, getMinColumnWidth]);
   
-  // Remove the previous lastTask ref as we now handle this differently
-  // Keep track of the last task to detect task changes
-  // const lastTask = useRef<TaskType>(currentTask);
-
   // Handle column resize start
   const handleResizeStart = (e: React.MouseEvent, key: string) => {
     e.preventDefault();
@@ -828,20 +822,31 @@ export default function Home() {
   // Compute available content width for a column
   const getContentWidth = (columnWidth: number) => {
     // Account for padding (px-6 = 1.5rem = 24px on each side = 48px total)
-    // and some extra margin for sort indicators and other elements
-    return Math.max(columnWidth - 50, 10); // Reduced padding from 60 to 50 to provide more content space
+    // Use a smaller padding reduction to allow more content to be visible
+    return Math.max(columnWidth - 40, 20); // Reduced padding from 50 to 40 to provide more content space
   };
 
   // Helper function to determine if a column should be sticky
   const getStickyStyles = (key: string) => {
+    // Don't apply sticky styling for overall task since we only have two columns
+    if (currentTask === 'overall') {
+      return '';
+    }
+    
+    // Apply sticky styling to rank and model columns for other tasks
     if (key === 'rank' || key === 'model') {
-      return `sticky z-10 ${isDarkMode ? 'shadow-[5px_0_5px_-5px_rgba(0,0,0,0.4)]' : 'shadow-[5px_0_5px_-5px_rgba(0,0,0,0.1)]'}`;
+      return 'sticky left-0 z-10';
     }
     return '';
   };
 
   // Helper function to calculate the left position for sticky columns
   const getStickyLeftPosition = (key: string) => {
+    // Don't apply sticky positioning for overall task
+    if (currentTask === 'overall') {
+      return 'auto';
+    }
+    
     if (key === 'rank') {
       return '0px';
     } else if (key === 'model') {
@@ -871,6 +876,16 @@ export default function Home() {
 
   // Helper function to get the background color for table cells based on the column and dark mode
   const getBackgroundColor = (key: string, isHeader: boolean = false) => {
+    // Don't apply special background colors for overall task
+    if (currentTask === 'overall') {
+      if (isHeader) {
+        return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
+      } else {
+        return isDarkMode ? 'bg-[#0f1729]' : 'bg-white';
+      }
+    }
+    
+    // Apply special background colors for sticky columns in other tasks
     if (key === 'rank' || key === 'model') {
       if (isHeader) {
         return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
@@ -918,7 +933,7 @@ export default function Home() {
                     : isDarkMode ? 'text-slate-300' : 'text-slate-600'
                 } ${stickyStyles} ${bgColor}`}
                 style={{ 
-                  width: `${columnWidths[header.key] || 100}px`,
+                  width: getTaskSpecificColumnWidth(currentTask, header.key),
                   transition: resizingColumn ? 'none' : 'width 0.1s ease',
                   left: getStickyLeftPosition(header.key)
                 }}
@@ -936,18 +951,47 @@ export default function Home() {
                     // Special handling for model names with links
                     if (header.key === 'model') {
                       const modelUrl = result['model_url'] as string;
-                      const displayText = truncateText(value as string, contentWidth);
-                      const organization = getOrganizationFromModel(value as string);
+                      // Identify tasks with full model name display but different resize behaviors
+                      const isSimplifiedLeaderboard = ['overall', 'code summarization', 'code review'].includes(currentTask);
+                      // Overall task has no model column resizing
+                      const hasFixedModelWidth = currentTask === 'overall';
+                      
+                      // Make sure value is a string
+                      const modelName = String(value);
+                      
+                      // All simplified leaderboards show full model names by default
+                      const displayText = isSimplifiedLeaderboard 
+                        ? modelName // Never truncate in simplified leaderboards
+                        : truncateText(modelName, contentWidth * 1.5); // Use more generous space for other tasks
+                      
+                      const organization = getOrganizationFromModel(modelName);
+                      
+                      // Use larger logo for all simplified leaderboards
+                      const logoSize = isSimplifiedLeaderboard ? 20 : 16;
+                      const logoSpace = (organization && organization !== 'unknown') ? (logoSize + 8) : 0;
+                      
+                      // For code review and code summarization, we calculate max width based on available space
+                      // When user resizes, this will respect the new width
+                      const modelMaxWidth = hasFixedModelWidth
+                        ? 'none' // No max width for overall task (fixed percentage width)
+                        : isSimplifiedLeaderboard
+                          ? `${Math.max(contentWidth * 2, 400) - logoSpace}px` // Very generous width for code review/summarization
+                          : `${contentWidth * 1.5 - logoSpace}px`; // Normal behavior for other leaderboards
                       
                       const modelContent = (
                         <div className="flex items-center gap-2 w-full">
                           {organization && organization !== 'unknown' && (
-                            <OrganizationLogo organization={organization} size={16} />
+                            <OrganizationLogo organization={organization} size={logoSize} />
                           )}
                           <span 
-                            title={value as string}
-                            className="truncate inline-block"
-                            style={{ maxWidth: `${contentWidth - (organization && organization !== 'unknown' ? 24 : 0)}px` }}
+                            title={modelName}
+                            className={`${isSimplifiedLeaderboard ? '' : 'truncate'} inline-block`}
+                            style={{ 
+                              maxWidth: modelMaxWidth,
+                              whiteSpace: hasFixedModelWidth ? 'normal' : 'nowrap',
+                              overflow: hasFixedModelWidth ? 'visible' : 'hidden',
+                              textOverflow: 'ellipsis'
+                            }}
                           >
                             {displayText}
                           </span>
@@ -961,7 +1005,7 @@ export default function Home() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hover:underline hover:text-blue-500 transition-colors font-semibold text-left w-full block"
-                            title={value as string}
+                            title={modelName}
                           >
                             {modelContent}
                           </a>
@@ -1034,17 +1078,18 @@ export default function Home() {
   const truncateText = (text: string, maxWidth: number) => {
     if (!text) return '';
     
-    // Approximate character width in pixels (this is an estimate)
-    const charWidth = 8; // Assuming monospace font where each char is ~8px
+    // Approximate character width in pixels - reduced for more accurate estimation
+    // Previously 8px was too high for most fonts, especially in model names
+    const charWidth = 6; // Reduced from 8px to 6px per character for more accurate estimation
     const maxChars = Math.floor(maxWidth / charWidth);
     
     if (text.length <= maxChars) return text;
     
-    // Keep at least 3 chars if possible
-    if (maxChars <= 5) return text.substring(0, maxChars);
+    // Keep at least 5 chars if possible (increased from 3)
+    if (maxChars <= 7) return text.substring(0, maxChars);
     
-    // Otherwise truncate with ellipsis
-    return text.substring(0, maxChars - 3) + '...';
+    // Otherwise truncate with ellipsis - show more characters before truncating
+    return text.substring(0, maxChars - 2) + '...';
   };
 
   // Function to generate CSV data from current leaderboard
@@ -1114,6 +1159,46 @@ export default function Home() {
     const charWidth = 12; // Increased from 10px to 12px per character for header text for better visibility
     return text.length * charWidth + extraSpace;
   };
+  
+  // Helper function to determine column width based on task type and header key
+  const getTaskSpecificColumnWidth = useCallback((task: TaskType, key: string): string => {
+    // Only overall task gets fixed percentage width for model column
+    if (task === 'overall' && key === 'model') {
+      return '80%'; // Fixed percentage for model in overall view
+    }
+    
+    // For overall task rank, use fixed width
+    if (task === 'overall' && key === 'rank') {
+      return '80px'; // Fixed width for rank in overall view
+    }
+    
+    // For other tasks, use stored widths when available (allows resize to work)
+    if (columnWidths[key] && task !== 'overall') {
+      return `${columnWidths[key]}px`;
+    }
+    
+    // Default initial widths when no width has been stored yet
+    if (key === 'model') {
+      // Different initial widths based on task complexity
+      if (task === 'code summarization' || task === 'code review') {
+        return '400px'; // These tasks have only one metric column
+      } else if (task === 'input prediction' || task === 'output prediction') {
+        return '300px'; // These tasks have 3 metric columns
+      } else if (task === 'vulnerability detection') {
+        return '250px'; // This task has more metric columns
+      } else {
+        return '280px'; // Default for other tasks
+      }
+    }
+    
+    // For rank column
+    if (key === 'rank') {
+      return '80px';
+    }
+    
+    // For other columns, use the stored column width or default
+    return `${columnWidths[key] || 100}px`;
+  }, [columnWidths]);
   
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-[#09101f] text-white' : 'bg-slate-50 text-black'}`}>
@@ -1603,7 +1688,7 @@ export default function Home() {
               )}
 
               {/* Difficulty toggle - only show for tasks that support it */}
-              {tasksWithDifficulty.includes(currentTask) && (
+              {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
                 <div className="flex justify-end mt-4">
                   <label className="inline-flex items-center cursor-pointer">
                     <input 
@@ -1669,7 +1754,7 @@ export default function Home() {
               </div>
               
               <div className="overflow-x-auto relative custom-scrollbar">
-                <table className={`min-w-full divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+                <table className={`min-w-full ${currentTask === 'overall' ? 'w-full' : ''} divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
                   <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
                     <tr>
                       {getTableHeaders(currentTask).map((header) => {
@@ -1677,6 +1762,11 @@ export default function Home() {
                         const alignment = getColumnAlignment(header.key);
                         const stickyStyles = getStickyStyles(header.key);
                         const bgColor = getBackgroundColor(header.key, true);
+                        
+                        // Calculate column width - give model column more space in overall task
+                        const columnWidth = (currentTask === 'overall' && header.key === 'model') 
+                          ? '80%' // Give model column 80% of table width in overall task
+                          : `${columnWidths[header.key] || 100}px`;
                         
                         return (
                           <th 
@@ -1688,7 +1778,7 @@ export default function Home() {
                                 : 'text-slate-600 bg-slate-50'
                             } ${stickyStyles} ${bgColor}`}
                             style={{ 
-                              width: `${columnWidths[header.key] || 100}px`,
+                              width: getTaskSpecificColumnWidth(currentTask, header.key),
                               transition: resizingColumn ? 'none' : 'width 0.1s ease',
                               left: getStickyLeftPosition(header.key)
                             }}
@@ -1732,14 +1822,14 @@ export default function Home() {
                             </div>
                             {/* Resize handle - a more subtle line that doesn't extend to the edges */}
                             <div 
-                              className={`absolute right-0 top-0 h-full ${header.key === 'rank' ? '' : 'cursor-col-resize'} flex items-center justify-center`}
-                              onMouseDown={(e) => header.key !== 'rank' && handleResizeStart(e, header.key)}
+                              className={`absolute right-0 top-0 h-full ${header.key === 'rank' || (currentTask === 'overall' && header.key === 'model') ? '' : 'cursor-col-resize'} flex items-center justify-center`}
+                              onMouseDown={(e) => header.key !== 'rank' && !(currentTask === 'overall' && header.key === 'model') && handleResizeStart(e, header.key)}
                               onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
                             >
                               {resizingColumn === header.key ? (
                                 <div className={`h-[60%] w-px ${isDarkMode ? 'bg-blue-400' : 'bg-blue-500'}`}></div>
                               ) : (
-                                <div className={`h-[60%] w-px ${isDarkMode ? 'bg-gray-600/60' : 'bg-gray-300'}`}></div>
+                                <div className={`h-[60%] w-px ${(currentTask === 'overall' && header.key === 'model') ? 'hidden' : isDarkMode ? 'bg-gray-600/60' : 'bg-gray-300'}`}></div>
                               )}
                               {/* Add a slight expansion effect for easier targeting */}
                               <div className="absolute inset-y-0 -inset-x-1.5 hover:bg-blue-400/10 group-hover:bg-blue-400/5"></div>

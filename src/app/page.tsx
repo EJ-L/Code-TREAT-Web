@@ -349,6 +349,13 @@ export default function Home() {
     setSortConfig({ key, direction: initialDirection });
   }, [sortConfig]);
 
+  // Add a dedicated effect to reset showByDifficulty when task changes to overall
+  useEffect(() => {
+    if (currentTask === 'overall') {
+      setShowByDifficulty(false);
+    }
+  }, [currentTask]);
+
   // 处理数据加载和过滤 - 添加优化逻辑
   useEffect(() => {
     let isMounted = true; // 防止组件卸载后的状态更新
@@ -369,7 +376,7 @@ export default function Home() {
           robustness: selectedAbilities.robustness || [],
           security: selectedAbilities.privacy || [],
           llmJudges: selectedAbilities.llmJudges || [],
-          showByDifficulty: showByDifficulty
+          showByDifficulty: currentTask === 'overall' ? false : showByDifficulty
         };
         
         // 特殊处理code review任务 - 临时不应用任何过滤器，确保能看到所有数据
@@ -389,6 +396,7 @@ export default function Home() {
           filterOptions.reasoning = []; // 清空推理类型过滤器
           filterOptions.robustness = []; // 清空鲁棒性过滤器
           filterOptions.security = []; // 清空安全性过滤器
+          filterOptions.showByDifficulty = false; // 确保overall视图永远不使用difficulty
         }
         
         // 使用setTimeout推迟处理，让UI有机会更新加载状态
@@ -608,10 +616,62 @@ export default function Home() {
 
   // Add a dedicated effect specifically for initializing column widths when task changes
   useEffect(() => {
-    // Reset column widths when task changes
-    setColumnWidths({});
+    initializeColumnWidths();
   }, [currentTask]);
   
+  // Consolidated function to initialize column widths based on task type
+  const initializeColumnWidths = () => {
+    // Create a new width configuration based on the current task
+    const newWidths: Record<string, number> = {};
+    const headers = getTableHeaders(currentTask);
+    
+    // Configure default width for every column based on header information
+    headers.forEach(header => {
+      // Set task-specific default widths with sensible values
+      if (header.key === 'rank') {
+        newWidths[header.key] = 100;
+      } 
+      else if (header.key === 'model') {
+        if (currentTask === 'code summarization' || currentTask === 'code review') {
+          newWidths[header.key] = 250; // As adjusted in your changes
+        } else {
+          newWidths[header.key] = 300;
+        }
+      }
+      else if (header.key === 'llmjudge') {
+        if (currentTask === 'code summarization' || currentTask === 'code review') {
+          newWidths[header.key] = 370; // As adjusted in your changes
+        } else {
+          newWidths[header.key] = 160;
+        }
+      }
+      else if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU'].includes(header.key)) {
+        newWidths[header.key] = 160;
+      }
+      else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
+        newWidths[header.key] = 120;
+      }
+      else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+        newWidths[header.key] = 90;
+      }
+      else {
+        // For any other column types, calculate based on label length
+        newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
+      }
+    });
+    
+    // Update the column widths state
+    setColumnWidths(newWidths);
+  };
+
+  // Remove the old initialization effect since we now have a dedicated function
+  // Keeping only the effect for resetting showByDifficulty
+  useEffect(() => {
+    if (currentTask === 'overall') {
+      setShowByDifficulty(false);
+    }
+  }, [currentTask]);
+
   // Add a helper function to calculate minimum width for a column based on its type
   const getMinColumnWidth = useCallback((key: string): number => {
     // Get the appropriate minimum width based on column type
@@ -646,91 +706,6 @@ export default function Home() {
     return minWidth;
   }, [currentTask, getTableHeaders]);
 
-  // Initialize column widths if not already set
-  useEffect(() => {
-    // Skip if we already have widths for all columns
-    const headers = getTableHeaders(currentTask);
-    const allHeadersHaveWidth = headers.every(header => columnWidths[header.key]);
-    
-    // If all headers already have widths, no need to recalculate
-    if (allHeadersHaveWidth) return;
-    
-    let initialWidths: Record<string, number> = {};
-    
-    // Calculate initial width for each column
-    headers.forEach(header => {
-      // If width is already set, use it
-      if (columnWidths[header.key]) {
-        initialWidths[header.key] = columnWidths[header.key];
-        return;
-      }
-      
-      // Extract the base width from Tailwind class (e.g., w-16, w-24, etc.)
-      const sizeMatch = header.width.match(/w-(\d+)/);
-      if (sizeMatch && sizeMatch[1]) {
-        const remSize = parseInt(sizeMatch[1]) / 4; // Tailwind uses 4 as a base
-        const baseWidth = remSize * 16; // 1rem = 16px typically
-        
-        // Get minimum width for this column type
-        const minWidth = getMinColumnWidth(header.key);
-        
-        // Use the larger of the calculated width or base width from Tailwind
-        initialWidths[header.key] = Math.max(baseWidth, minWidth, calculateMinWidthForText(header.label));
-      } else {
-        // Default width if no match
-        initialWidths[header.key] = Math.max(140, calculateMinWidthForText(header.label));
-      }
-    });
-    
-    // Task-specific adjustments
-    if (currentTask === 'code summarization' || currentTask === 'code review') {
-      // Force larger width for specific columns in these views
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
-      if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 150);
-    } else if (currentTask === 'overall') {
-      // Ensure Overall task has appropriate widths
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300); // Increased for logo
-      if (initialWidths['rank']) initialWidths['rank'] = Math.max(initialWidths['rank'], 80);
-      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 160);
-      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 160);
-      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 160);
-      if (initialWidths['CodeBLEU']) initialWidths['CodeBLEU'] = Math.max(initialWidths['CodeBLEU'], 160);
-      if (initialWidths['llmjudge']) initialWidths['llmjudge'] = Math.max(initialWidths['llmjudge'], 160);
-      if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 150);
-      if (initialWidths['Precision']) initialWidths['Precision'] = Math.max(initialWidths['Precision'], 150);
-      if (initialWidths['Recall']) initialWidths['Recall'] = Math.max(initialWidths['Recall'], 150);
-      if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 150);
-    } else if (currentTask === 'vulnerability detection') {
-      // Ensure vulnerability detection has appropriate widths
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
-      if (initialWidths['Accuracy']) initialWidths['Accuracy'] = Math.max(initialWidths['Accuracy'], 120);
-      if (initialWidths['Precision']) initialWidths['Precision'] = Math.max(initialWidths['Precision'], 120);
-      if (initialWidths['Recall']) initialWidths['Recall'] = Math.max(initialWidths['Recall'], 120);
-      if (initialWidths['F1 Score']) initialWidths['F1 Score'] = Math.max(initialWidths['F1 Score'], 120);
-    } else {
-      // For code generation and other tasks with Pass metrics
-      if (initialWidths['model']) initialWidths['model'] = Math.max(initialWidths['model'], 300);
-      if (initialWidths['pass@1']) initialWidths['pass@1'] = Math.max(initialWidths['pass@1'], 160);
-      if (initialWidths['pass@3']) initialWidths['pass@3'] = Math.max(initialWidths['pass@3'], 160);
-      if (initialWidths['pass@5']) initialWidths['pass@5'] = Math.max(initialWidths['pass@5'], 160);
-    }
-    
-    // Update column widths with the new values if there's a change needed
-    if (Object.keys(initialWidths).length > 0) {
-      setColumnWidths(prev => {
-        // Only update if there are changes
-        let hasChanges = false;
-        for (const key in initialWidths) {
-          if (!prev[key] || prev[key] !== initialWidths[key]) {
-            hasChanges = true;
-            break;
-          }
-        }
-        return hasChanges ? initialWidths : prev;
-      });
-    }
-  }, [currentTask, showByDifficulty, columnWidths, getTableHeaders, getMinColumnWidth]);
-  
   // Handle column resize start
   const handleResizeStart = (e: React.MouseEvent, key: string) => {
     e.preventDefault();
@@ -833,6 +808,11 @@ export default function Home() {
       return '';
     }
     
+    // Don't apply sticky styling for code summarization and code review tasks
+    if (currentTask === 'code summarization' || currentTask === 'code review') {
+      return '';
+    }
+    
     // Apply sticky styling to rank and model columns for other tasks
     if (key === 'rank' || key === 'model') {
       return 'sticky left-0 z-10';
@@ -847,10 +827,15 @@ export default function Home() {
       return 'auto';
     }
     
+    // Don't apply sticky positioning for code summarization and code review tasks
+    if (currentTask === 'code summarization' || currentTask === 'code review') {
+      return 'auto';
+    }
+    
     if (key === 'rank') {
       return '0px';
     } else if (key === 'model') {
-      return `var(--rank-width, ${columnWidths['rank'] || 140}px)`;
+      return `var(--rank-width, ${columnWidths['rank'] || 80}px)`;
     }
     return 'auto';
   };
@@ -875,19 +860,11 @@ export default function Home() {
   }, [columnWidths]);
 
   // Helper function to get the background color for table cells based on the column and dark mode
-  const getBackgroundColor = (key: string, isHeader: boolean = false) => {
-    // Don't apply special background colors for overall task
-    if (currentTask === 'overall') {
-      if (isHeader) {
-        return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
-      } else {
-        return isDarkMode ? 'bg-[#0f1729]' : 'bg-white';
-      }
-    }
-    
-    // Apply special background colors for sticky columns in other tasks
-    if (key === 'rank' || key === 'model') {
-      if (isHeader) {
+  const getBackgroundColor = (key: string, isHeaderCell: boolean = false) => {
+    // Only apply special background colors for sticky columns
+    if ((key === 'rank' || key === 'model') && 
+        !(currentTask === 'overall' ||  currentTask === 'code summarization' || currentTask === 'code review')) {
+      if (isHeaderCell) {
         return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
       } else {
         return isDarkMode ? 'bg-[#0f1729]' : 'bg-white';
@@ -1152,52 +1129,42 @@ export default function Home() {
   }, [currentTask]);
 
   // Add a helper function to calculate min width for a text
-  const calculateMinWidthForText = (text: string, isHeader: boolean = true) => {
+  const calculateMinWidthForText = (text: string, isHeaderCell: boolean = true) => {
     // For headers add extra space for sort indicator
-    const extraSpace = isHeader ? 40 : 20;
+    const extraSpace = isHeaderCell ? 40 : 20;
     // Approximate character width in pixels (this is an estimate)
     const charWidth = 12; // Increased from 10px to 12px per character for header text for better visibility
     return text.length * charWidth + extraSpace;
   };
   
-  // Helper function to determine column width based on task type and header key
+  // Simplified helper function to determine column width based on task type and header key
   const getTaskSpecificColumnWidth = useCallback((task: TaskType, key: string): string => {
-    // Only overall task gets fixed percentage width for model column
-    if (task === 'overall' && key === 'model') {
-      return '80%'; // Fixed percentage for model in overall view
-    }
-    
-    // For overall task rank, use fixed width
-    if (task === 'overall' && key === 'rank') {
-      return '80px'; // Fixed width for rank in overall view
-    }
-    
-    // For other tasks, use stored widths when available (allows resize to work)
-    if (columnWidths[key] && task !== 'overall') {
+    // Return the stored width if available, otherwise use sensible defaults
+    if (columnWidths[key]) {
       return `${columnWidths[key]}px`;
     }
     
-    // Default initial widths when no width has been stored yet
+    // Default values if nothing is in columnWidths yet
     if (key === 'model') {
-      // Different initial widths based on task complexity
       if (task === 'code summarization' || task === 'code review') {
-        return '400px'; // These tasks have only one metric column
-      } else if (task === 'input prediction' || task === 'output prediction') {
-        return '300px'; // These tasks have 3 metric columns
-      } else if (task === 'vulnerability detection') {
-        return '250px'; // This task has more metric columns
-      } else {
-        return '280px'; // Default for other tasks
+        return '250px';
       }
+      return '300px';
     }
     
-    // For rank column
     if (key === 'rank') {
       return '80px';
     }
     
-    // For other columns, use the stored column width or default
-    return `${columnWidths[key] || 100}px`;
+    if (key === 'llmjudge') {
+      if (task === 'code summarization' || task === 'code review') {
+        return '370px';
+      }
+      return '160px';
+    }
+    
+    // Generic defaults
+    return '100px';
   }, [columnWidths]);
   
   return (

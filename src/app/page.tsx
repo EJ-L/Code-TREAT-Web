@@ -649,7 +649,7 @@ export default function Home() {
         newWidths[header.key] = 160;
       }
       else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
-        newWidths[header.key] = 120;
+        newWidths[header.key] = 145;
       }
       else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
         newWidths[header.key] = 90;

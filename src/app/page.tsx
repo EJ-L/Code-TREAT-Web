@@ -1403,7 +1403,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-5xl font-bold text-center text-transparent bg-clip-text 
-            bg-gradient-to-r from-blue-500 to-purple-500 mb-24">
+            bg-gradient-to-r from-blue-500 to-purple-500 mb-24 max-w-7xl mx-auto px-4">
             About Code TREAT
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
@@ -1438,7 +1438,8 @@ export default function Home() {
       {/* Leaderboard Section */}
       <section id="evaluation" className="relative flex items-center pt-0">
         <div className="relative w-full max-w-7xl mx-auto px-4 py-0">
-          <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24 font-jetbrains-mono">
+          <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text 
+            bg-gradient-to-r from-blue-500 to-purple-500 mb-24 max-w-7xl mx-auto px-4 font-jetbrains-mono">
             Leaderboard
           </h1>
 
@@ -1518,78 +1519,25 @@ export default function Home() {
           {/* Ability Filters */}
           <Card className={`w-full max-w-7xl mx-auto ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
             <CardContent className="space-y-2 p-2">
-              {/* Dataset Filter */}
-              {currentTask !== 'overall' && taskAbilities[currentTask].dataset.length > 0 && (
-                <div className="flex flex-col space-y-1">
-                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
-                  <div className="flex flex-wrap gap-1">
-                    {taskAbilities[currentTask].dataset.map((value: string) => (
-                      <motion.button
-                        key={value}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAbilityChange('dataset', value)}
-                        className={`
-                          px-2 py-1 rounded text-center transition-all text-sm
-                          ${selectedAbilities.dataset?.includes(value)
-                            ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                            : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                          }
-                        `}
-                      >
-                        {value}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* LLM Judge Filter */}
-              {currentTask !== 'overall' && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
-                <div className="flex flex-col space-y-1">
-                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
-                  <div className="flex flex-wrap gap-1">
-                    {availableLLMJudges.map((judge: string) => (
-                      <motion.button
-                        key={judge}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAbilityChange('llmJudges', judge)}
-                        className={`
-                          px-2 py-1 rounded text-center transition-all text-sm
-                          ${selectedAbilities.llmJudges?.includes(judge)
-                            ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                            : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                          }
-                        `}
-                      >
-                        {judge}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Other Filters */}
-              {currentTask !== 'overall' && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
-                .filter(([key]) => !['dataset', 'llmJudges'].includes(key))
-                .map(([key, values]) => (
-                  values.length > 0 && (
-                    <div key={key} className="flex flex-col space-y-1">
-                      <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {values.map((value: string) => (
+              <div className="flex flex-row flex-wrap gap-x-12 gap-y-16">
+                {/* Dataset Filter */}
+                {(String(currentTask) !== 'overall') && taskAbilities[currentTask].dataset.length > 0 && (
+                  <div className="flex flex-col space-y-4">
+                    <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Dataset</p>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="inline-flex flex-wrap -space-x-px">
+                        {taskAbilities[currentTask].dataset.map((value: string, index) => (
                           <motion.button
                             key={value}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => handleAbilityChange(key, value)}
+                            onClick={() => handleAbilityChange('dataset', value)}
                             className={`
-                              px-2 py-1 rounded text-center transition-all text-sm
-                              ${selectedAbilities[key]?.includes(value)
-                                ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
+                              px-6 py-3 text-center transition-all text-lg font-medium min-w-[120px]
+                              ${index === 0 ? 'rounded-l-lg' : ''} 
+                              ${index === taskAbilities[currentTask].dataset.length - 1 ? 'rounded-r-lg' : ''}
+                              ${selectedAbilities.dataset?.includes(value)
+                                ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700 relative z-10' : 'bg-blue-500 text-white border border-blue-400 relative z-10'
                                 : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
                               }
                             `}
@@ -1599,9 +1547,73 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                  )
-                ))}
-
+                  </div>
+                )}
+                {/* LLM Judge Filter */}
+                {(String(currentTask) !== 'overall') && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
+                  <div className="flex flex-col space-y-4">
+                    <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>LLM Judge</p>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="inline-flex flex-wrap -space-x-px">
+                        {availableLLMJudges.map((judge: string, index) => (
+                          <motion.button
+                            key={judge}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => handleAbilityChange('llmJudges', judge)}
+                            className={`
+                              px-6 py-3 text-center transition-all text-lg font-medium min-w-[120px]
+                              ${index === 0 ? 'rounded-l-lg' : ''} 
+                              ${index === availableLLMJudges.length - 1 ? 'rounded-r-lg' : ''}
+                              ${selectedAbilities.llmJudges?.includes(judge)
+                                ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700 relative z-10' : 'bg-blue-500 text-white border border-blue-400 relative z-10'
+                                : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                              }
+                            `}
+                          >
+                            {judge}
+                          </motion.button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* Other Filters */}
+                {(String(currentTask) !== 'overall') && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
+                  .filter(([key]) => !['dataset', 'llmJudges'].includes(key))
+                  .map(([key, values]) => (
+                    values.length > 0 && (
+                      <div key={key} className="flex flex-col space-y-4">
+                        <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-4">
+                          <div className="inline-flex flex-wrap -space-x-px">
+                            {values.map((value: string, index) => (
+                              <motion.button
+                                key={value}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => handleAbilityChange(key, value)}
+                                className={`
+                                  px-6 py-3 text-center transition-all text-lg font-medium min-w-[120px]
+                                  ${index === 0 ? 'rounded-l-lg' : ''} 
+                                  ${index === values.length - 1 ? 'rounded-r-lg' : ''}
+                                  ${selectedAbilities[key]?.includes(value)
+                                    ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700 relative z-10' : 'bg-blue-500 text-white border border-blue-400 relative z-10'
+                                    : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                                  }
+                                `}
+                              >
+                                {value}
+                              </motion.button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  ))}
+              </div>
               {/* Divider */}
               <div className={`border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} my-4`} />
 

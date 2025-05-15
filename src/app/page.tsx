@@ -13,6 +13,7 @@ import { CSVLink } from 'react-csv';
 import ModelComparisonModal from '@/components/ui/ModelComparisonModal';
 import OrganizationLogo from '@/components/ui/OrganizationLogo';
 import { getOrganizationFromModel } from '@/lib/organization-logos';
+import { getModelUrl } from '@/lib/constants';
 
 // Define tasks that have difficulty-based results
 const tasksWithDifficulty = ['overall', 'code generation', 'code translation', 'input prediction', 'output prediction'];
@@ -927,7 +928,7 @@ export default function Home() {
                     
                     // Special handling for model names with links
                     if (header.key === 'model') {
-                      const modelUrl = result['model_url'] as string;
+                      const modelUrl = getModelUrl(String(value));
                       // Identify tasks with full model name display but different resize behaviors
                       const isSimplifiedLeaderboard = ['overall', 'code summarization', 'code review'].includes(currentTask);
                       // Overall task has no model column resizing

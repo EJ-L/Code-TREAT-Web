@@ -32,24 +32,34 @@ const OrganizationLogo: React.FC<OrganizationLogoProps> = ({ organization, size 
           preserveAspectRatio="xMidYMid meet"
           width={size}
           height={size}
-          style={{ maxWidth: '100%', maxHeight: '100%' }}
+          style={{ 
+            maxWidth: '100%', 
+            maxHeight: '100%',
+            display: 'block'
+          }}
         >
-          {svgInfo.paths.map((path, index) => (
-            <path 
-              key={index} 
-              d={path} 
-              fill={index === 3 && orgKey === 'google' ? '#EA4335' : 
-                   index === 2 && orgKey === 'google' ? '#FBBC05' : 
-                   index === 1 && orgKey === 'google' ? '#34A853' : 
-                   index === 0 && orgKey === 'google' ? '#4285F4' : 
-                   index === 4 && orgKey === 'google' ? 'none' : 
-                   index === 0 && orgKey === 'meta' ? '#0081fb' :
-                   index === 1 && orgKey === 'meta' ? '#0064e1' :
-                   index === 2 && orgKey === 'meta' ? '#0064e0' :
-                   orgKey === 'anthropic' ? '#000000' :
-                   'currentColor'}
-            />
-          ))}
+          <g transform={svgInfo.transform}>
+            {svgInfo.paths.map((path, index) => (
+              <path 
+                key={index} 
+                d={path} 
+                fill={index === 3 && orgKey === 'google' ? '#EA4335' : 
+                     index === 2 && orgKey === 'google' ? '#FBBC05' : 
+                     index === 1 && orgKey === 'google' ? '#34A853' : 
+                     index === 0 && orgKey === 'google' ? '#4285F4' : 
+                     index === 4 && orgKey === 'google' ? 'none' : 
+                     index === 0 && orgKey === 'meta' ? '#0081fb' :
+                     index === 1 && orgKey === 'meta' ? '#0064e1' :
+                     index === 2 && orgKey === 'meta' ? '#0064e0' :
+                     orgKey === 'anthropic' ? '#000000' :
+                     orgKey === 'xai' ? '#000000' :
+                     'currentColor'}
+                style={{
+                  fillOpacity: orgKey === 'xai' ? 1 : undefined
+                }}
+              />
+            ))}
+          </g>
         </svg>
       </div>
     );

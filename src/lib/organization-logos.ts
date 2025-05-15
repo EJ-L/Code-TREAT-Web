@@ -19,7 +19,8 @@ export const MODEL_TO_ORG_MAP: Record<string, string> = {
   'google/gemma': 'google',
   'deepseek': 'Deepseek',
   'Qwen': 'qwen',
-  'o3-mini': 'openai'
+  'o3-mini': 'openai',
+  'o4-mini': 'openai'
   // Add more as needed
 };
 

@@ -630,7 +630,11 @@ export default function Home() {
     headers.forEach(header => {
       // Set task-specific default widths with sensible values
       if (header.key === 'rank') {
-        newWidths[header.key] = 100;
+        if (currentTask === 'overall') {
+          newWidths[header.key] = 100;
+        } else {
+          newWidths[header.key] = 100;
+        }
       } 
       else if (header.key === 'model') {
         if (currentTask === 'code summarization' || currentTask === 'code review') {
@@ -646,8 +650,11 @@ export default function Home() {
           newWidths[header.key] = 160;
         }
       }
-      else if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU'].includes(header.key)) {
-        newWidths[header.key] = 160;
+      else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
+        newWidths[header.key] = 110;
+      }
+      else if (['CodeBLEU'].includes(header.key)) {
+        newWidths[header.key] = 140;
       }
       else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
         newWidths[header.key] = 145;
@@ -686,7 +693,7 @@ export default function Home() {
         minWidth = 300; // Increased for better model name display in other tasks too
       }
     } else if (key === 'rank') {
-      minWidth = 80; // Reduced from 130
+      minWidth = 60 // Reduced from 130
     } else if (key.includes('pass') || key.includes('Pass')) {
       // Pass metrics should be wide enough for percentages
       minWidth = 80; // Reduced to ensure label fits
@@ -905,9 +912,9 @@ export default function Home() {
               <td 
                 key={header.key}
                 data-key={header.key}
-                className={`px-6 py-4 whitespace-nowrap text-lg font-jetbrains-mono ${alignment} ${numericStyles} ${
+                className={`px-4 py-2 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
                   header.key === 'model' 
-                    ? isDarkMode ? 'text-slate-200 font-medium' : 'text-slate-900 font-medium'
+                    ? isDarkMode ? 'text-slate-200 font-bold' : 'text-slate-900 font-bold'
                     : isDarkMode ? 'text-slate-300' : 'text-slate-600'
                 } ${stickyStyles} ${bgColor}`}
                 style={{ 
@@ -916,7 +923,7 @@ export default function Home() {
                   left: getStickyLeftPosition(header.key)
                 }}
               >
-                <div className={`w-full ${alignment} font-semibold`}>
+                <div className={`w-full ${alignment} font-bold`}>
                   {(() => {
                     const value = result[header.key as keyof typeof result];
                     if (value === null || value === undefined || value === '') {
@@ -925,7 +932,7 @@ export default function Home() {
                     
                     // Get available content width for this column
                     const contentWidth = getContentWidth(columnWidths[header.key] || 100);
-                    
+
                     // Special handling for model names with links
                     if (header.key === 'model') {
                       const modelUrl = getModelUrl(String(value));
@@ -1129,15 +1136,6 @@ export default function Home() {
     return `code-treat-${currentTask.replace(/\s+/g, '-')}-${date}.csv`;
   }, [currentTask]);
 
-  // Add a helper function to calculate min width for a text
-  const calculateMinWidthForText = (text: string, isHeaderCell: boolean = true) => {
-    // For headers add extra space for sort indicator
-    const extraSpace = isHeaderCell ? 40 : 20;
-    // Approximate character width in pixels (this is an estimate)
-    const charWidth = 12; // Increased from 10px to 12px per character for header text for better visibility
-    return text.length * charWidth + extraSpace;
-  };
-  
   // Simplified helper function to determine column width based on task type and header key
   const getTaskSpecificColumnWidth = useCallback((task: TaskType, key: string): string => {
     // Return the stored width if available, otherwise use sensible defaults
@@ -1519,12 +1517,12 @@ export default function Home() {
 
           {/* Ability Filters */}
           <Card className={`w-full max-w-7xl mx-auto ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
-            <CardContent className="space-y-4 p-4">
+            <CardContent className="space-y-2 p-2">
               {/* Dataset Filter */}
               {currentTask !== 'overall' && taskAbilities[currentTask].dataset.length > 0 && (
-                <div className="flex flex-col space-y-2">
-                  <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
-                  <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">Dataset</p>
+                  <div className="flex flex-wrap gap-1">
                     {taskAbilities[currentTask].dataset.map((value: string) => (
                       <motion.button
                         key={value}
@@ -1532,7 +1530,7 @@ export default function Home() {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleAbilityChange('dataset', value)}
                         className={`
-                          px-4 py-2 rounded-lg text-center transition-all text-base
+                          px-2 py-1 rounded text-center transition-all text-sm
                           ${selectedAbilities.dataset?.includes(value)
                             ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                             : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
@@ -1548,9 +1546,9 @@ export default function Home() {
 
               {/* LLM Judge Filter */}
               {currentTask !== 'overall' && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
-                <div className="flex flex-col space-y-2">
-                  <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
-                  <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">LLM Judge</p>
+                  <div className="flex flex-wrap gap-1">
                     {availableLLMJudges.map((judge: string) => (
                       <motion.button
                         key={judge}
@@ -1558,7 +1556,7 @@ export default function Home() {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleAbilityChange('llmJudges', judge)}
                         className={`
-                          px-4 py-2 rounded-lg text-center transition-all
+                          px-2 py-1 rounded text-center transition-all text-sm
                           ${selectedAbilities.llmJudges?.includes(judge)
                             ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                             : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
@@ -1577,11 +1575,11 @@ export default function Home() {
                 .filter(([key]) => !['dataset', 'llmJudges'].includes(key))
                 .map(([key, values]) => (
                   values.length > 0 && (
-                    <div key={key} className="flex flex-col space-y-2">
-                      <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
+                    <div key={key} className="flex flex-col space-y-1">
+                      <p className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </p>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1">
                         {values.map((value: string) => (
                           <motion.button
                             key={value}
@@ -1589,7 +1587,7 @@ export default function Home() {
                             whileTap={{ scale: 0.98 }}
                             onClick={() => handleAbilityChange(key, value)}
                             className={`
-                              px-4 py-2 rounded-lg text-center transition-all
+                              px-2 py-1 rounded text-center transition-all text-sm
                               ${selectedAbilities[key]?.includes(value)
                                 ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                                 : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'

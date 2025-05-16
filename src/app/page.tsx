@@ -630,15 +630,13 @@ export default function Home() {
     headers.forEach(header => {
       // Set task-specific default widths with sensible values
       if (header.key === 'rank') {
-        if (currentTask === 'overall') {
-          newWidths[header.key] = 100;
-        } else {
-          newWidths[header.key] = 100;
-        }
+        newWidths[header.key] = 100;
       } 
       else if (header.key === 'model') {
         if (currentTask === 'code summarization' || currentTask === 'code review') {
           newWidths[header.key] = 250; // As adjusted in your changes
+        } else if (currentTask === 'code generation') {
+          newWidths[header.key] = 320; // To fix the gap between the rank and model name columns
         } else {
           newWidths[header.key] = 300;
         }
@@ -650,12 +648,12 @@ export default function Home() {
           newWidths[header.key] = 160;
         }
       }
-      else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
-        newWidths[header.key] = 110;
-      }
       // Add width for difficulty-based columns
       else if (header.key.indexOf('easy_') === 0 || header.key.indexOf('medium_') === 0 || header.key.indexOf('hard_') === 0) {
         newWidths[header.key] = 140; // Wider than standard pass columns
+      }
+      else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
+        newWidths[header.key] = 110;
       }
       else if (['CodeBLEU'].includes(header.key)) {
         newWidths[header.key] = 140;
@@ -1526,10 +1524,10 @@ export default function Home() {
           {/* Ability Filters */}
           <Card className={`w-full max-w-7xl mx-auto ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
             <CardContent className="space-y-2 p-2">
-              <div className="flex flex-row flex-wrap gap-x-16 gap-y-12">
+              <div className="flex flex-row flex-wrap gap-x-16 gap-y-8">
                 {/* Dataset Filter */}
                 {(String(currentTask) !== 'overall') && taskAbilities[currentTask].dataset.length > 0 && (
-                  <div className="flex flex-col space-y-4 mb-4">
+                  <div className="flex flex-col space-y-2 mb-2">
                     <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Dataset</p>
                     <div className="inline-flex flex-wrap">
                       {taskAbilities[currentTask].dataset.map((value: string, index) => (
@@ -1557,7 +1555,7 @@ export default function Home() {
                 )}
                 {/* LLM Judge Filter */}
                 {(String(currentTask) !== 'overall') && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
-                  <div className="flex flex-col space-y-4 mb-4">
+                  <div className="flex flex-col space-y-2 mb-2">
                     <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>LLM Judge</p>
                     <div className="inline-flex flex-wrap">
                       {availableLLMJudges.map((judge: string, index) => (
@@ -1588,7 +1586,7 @@ export default function Home() {
                   .filter(([key]) => !['dataset', 'llmJudges'].includes(key))
                   .map(([key, values]) => (
                     values.length > 0 && (
-                      <div key={key} className="flex flex-col space-y-4 mb-4">
+                      <div key={key} className="flex flex-col space-y-2 mb-2">
                         <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
                           {key.charAt(0).toUpperCase() + key.slice(1)}
                         </p>

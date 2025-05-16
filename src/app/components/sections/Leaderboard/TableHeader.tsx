@@ -22,6 +22,21 @@ interface TableHeaderProps {
   isDarkMode: boolean;
 }
 
+// Helper function to format difficulty headers
+const formatDifficultyHeader = (label: string): JSX.Element => {
+  // Check if it's a difficulty-specific header
+  if (label.startsWith('Easy ') || label.startsWith('Medium ') || label.startsWith('Hard ')) {
+    const [difficulty, metric] = label.split(' ');
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <span className="text-sm font-bold">{difficulty}</span>
+        <span>{metric}</span>
+      </div>
+    );
+  }
+  return <span>{label}</span>;
+};
+
 const TableHeader: FC<TableHeaderProps> = ({
   header,
   currentTask,
@@ -52,9 +67,12 @@ const TableHeader: FC<TableHeaderProps> = ({
       data-key={header.key}
       className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
         isDarkMode 
-          ? 'text-slate-300 bg-[#151d2a]' 
-          : 'text-slate-600 bg-slate-50'
-      } ${stickyStyles} ${bgColor}`}
+          ? 'text-slate-300 bg-[#121c2b]' 
+          : 'text-slate-600 bg-slate-100'
+      } ${stickyStyles} ${bgColor} ${
+        (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
+          ? 'py-5' : ''
+      }`}
       style={{ 
         width: columnWidth,
         transition: resizingColumn ? 'none' : 'width 0.1s ease',
@@ -89,7 +107,7 @@ const TableHeader: FC<TableHeaderProps> = ({
           }}
           {...(header.description ? { title: header.description } : {})}
         >
-          {header.label}
+          {formatDifficultyHeader(header.label)}
         </span>
         {/* Sort indicator */}
         <span className="ml-1 text-sm opacity-50 shrink-0 min-w-[12px]">

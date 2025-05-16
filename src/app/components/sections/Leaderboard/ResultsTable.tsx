@@ -75,7 +75,14 @@ const ResultsTable: FC<ResultsTableProps> = ({
     // If we have results, show them even during loading state
     if (sortedResults.length > 0) {
       return sortedResults.map((result, index) => (
-        <tr key={index} className={isDarkMode ? 'hover:bg-[#1f2b3d]' : 'hover:bg-slate-50'}>
+        <tr key={index} className={`
+          ${isDarkMode 
+            ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
+            : index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+          }
+          ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
+          transition-colors
+        `}>
           {getTableHeaders(currentTask).map(header => {
             const value = result[header.key];
             const modelUrl = header.key === 'model' ? getModelUrl(String(value)) : undefined;
@@ -85,6 +92,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 key={header.key}
                 header={header}
                 value={value}
+                rowIndex={index}
                 currentTask={currentTask}
                 columnWidths={columnWidths}
                 resizingColumn={resizingColumn}
@@ -164,7 +172,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
         
         <div className="overflow-x-auto relative custom-scrollbar">
           <table className={`min-w-full ${currentTask === 'overall' ? 'w-full' : ''} divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
-            <thead className={`bg-${isDarkMode ? 'slate-800' : 'slate-50'}`}>
+            <thead className={isDarkMode ? 'bg-[#121c2b]' : 'bg-slate-100'}>
               <tr>
                 {getTableHeaders(currentTask).map((header) => (
                   <TableHeader 
@@ -186,7 +194,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 ))}
               </tr>
             </thead>
-            <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+            <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/30' : 'divide-slate-200/70'}`}>
               {renderResultsTable()}
             </tbody>
           </table>

@@ -11,6 +11,7 @@ interface TableCellProps {
     description: string;
   };
   value: string | number | undefined;
+  rowIndex: number;
   currentTask: TaskType;
   columnWidths: Record<string, number>;
   resizingColumn: string | null;
@@ -30,6 +31,7 @@ interface TableCellProps {
 const TableCell: FC<TableCellProps> = ({
   header,
   value,
+  rowIndex,
   currentTask,
   columnWidths,
   resizingColumn,
@@ -48,7 +50,19 @@ const TableCell: FC<TableCellProps> = ({
   const alignment = getColumnAlignment(header.key);
   const numericStyles = getNumericStyles(header.key);
   const stickyStyles = getStickyStyles(header.key);
-  const bgColor = getBackgroundColor(header.key, false);
+  // Get the background color based on whether the cell is in a sticky column and row index
+  const getRowBackgroundColor = () => {
+    // For sticky columns, we need to explicitly manage the background color
+    if (header.key === 'rank' || header.key === 'model') {
+      return isDarkMode 
+        ? rowIndex % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]'
+        : rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50';
+    }
+    // For non-sticky columns, return empty string as the table row will handle the background
+    return '';
+  };
+  
+  const rowBgColor = getRowBackgroundColor();
   const contentWidth = getContentWidth(columnWidths[header.key] || 100);
   
   return (
@@ -59,7 +73,10 @@ const TableCell: FC<TableCellProps> = ({
         header.key === 'model' 
           ? isDarkMode ? 'text-slate-200 font-bold' : 'text-slate-900 font-bold'
           : isDarkMode ? 'text-slate-300' : 'text-slate-600'
-      } ${stickyStyles} ${bgColor}`}
+      } ${stickyStyles} ${rowBgColor} ${
+        (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
+          ? 'py-4' : ''
+      }`}
       style={{ 
         width: getTaskSpecificColumnWidth(currentTask, header.key),
         transition: resizingColumn ? 'none' : 'width 0.1s ease',

@@ -16,7 +16,7 @@ export const MODEL_TO_ORG_MAP: Record<string, string> = {
   'claude': 'anthropic',
   'meta-llama': 'meta',
   'gemini': 'google',
-  'google/gemma': 'google',
+  'gemma': 'google',
   'deepseek': 'Deepseek',
   'Qwen': 'qwen',
   'o3': 'openai',

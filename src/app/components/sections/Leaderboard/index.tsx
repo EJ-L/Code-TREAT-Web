@@ -472,7 +472,28 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   // Memoize the getTableHeaders function
   const getTableHeaders = useCallback((task: TaskType) => tableHeadersHelper(task), [showByDifficulty]);
 
-  // Function to initialize column widths
+  // Function to filter out headers that have no data in their columns
+  const getFilteredTableHeaders = useCallback((task: TaskType) => {
+    const allHeaders = tableHeadersHelper(task);
+    
+    // Keep rank and model headers
+    const fixedHeaders = allHeaders.filter(header => header.key === 'rank' || header.key === 'model');
+    
+    // Filter metric headers based on data availability
+    const metricHeaders = allHeaders.filter(header => header.key !== 'rank' && header.key !== 'model');
+    
+    // Only keep headers where at least one result has a non-empty value
+    const filteredMetricHeaders = metricHeaders.filter(header => {
+      return sortedResults.some(result => {
+        const value = result[header.key];
+        return value !== null && value !== undefined && value !== '-' && value !== '';
+      });
+    });
+    
+    return [...fixedHeaders, ...filteredMetricHeaders];
+  }, [tableHeadersHelper, sortedResults]);
+
+  // Function to initialize column widths with all headers (first pass)
   const initializeColumnWidths = useCallback(() => {
     const newWidths: Record<string, number> = {};
     const headers = getTableHeaders(currentTask);
@@ -520,10 +541,74 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     setColumnWidths(newWidths);
   }, [currentTask, getTableHeaders]);
 
-  // Initialize column widths when task changes
+  // Initialize column widths when task changes (first pass with all headers)
   useEffect(() => {
     initializeColumnWidths();
   }, [currentTask, initializeColumnWidths]);
+  
+  // Update column widths when filtered headers are available
+  useEffect(() => {
+    if (sortedResults.length === 0) return;
+    
+    const newWidths: Record<string, number> = {};
+    const filteredHeaders = getFilteredTableHeaders(currentTask);
+    const filteredHeaderKeys = new Set(filteredHeaders.map(h => h.key));
+    
+    // Only initialize widths for filtered headers
+    filteredHeaders.forEach(header => {
+      // If we already have a width for this header, use it
+      if (columnWidths[header.key]) {
+        newWidths[header.key] = columnWidths[header.key];
+      } 
+      // Otherwise calculate a new width
+      else {
+        if (header.key === 'rank') {
+          newWidths[header.key] = 100;
+        } 
+        else if (header.key === 'model') {
+          if (currentTask === 'code summarization' || currentTask === 'code review') {
+            newWidths[header.key] = 250;
+          } else if (currentTask === 'code generation') {
+            newWidths[header.key] = 320;
+          } else {
+            newWidths[header.key] = 300;
+          }
+        }
+        else if (header.key === 'llmjudge') {
+          if (currentTask === 'code summarization' || currentTask === 'code review') {
+            newWidths[header.key] = 370;
+          } else {
+            newWidths[header.key] = 160;
+          }
+        }
+        else if (header.key.indexOf('easy_') === 0 || header.key.indexOf('medium_') === 0 || header.key.indexOf('hard_') === 0) {
+          newWidths[header.key] = 140;
+        }
+        else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
+          newWidths[header.key] = 110;
+        }
+        else if (['CodeBLEU'].includes(header.key)) {
+          newWidths[header.key] = 140;
+        }
+        else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
+          newWidths[header.key] = 145;
+        }
+        else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+          newWidths[header.key] = 90;
+        }
+        else {
+          newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
+        }
+      }
+    });
+    
+    // Only update if widths actually change
+    if (Object.keys(newWidths).length !== Object.keys(columnWidths).length || 
+        Object.keys(newWidths).some(key => !columnWidths[key] || columnWidths[key] !== newWidths[key]) ||
+        Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
+      setColumnWidths(newWidths);
+    }
+  }, [currentTask, sortedResults, getFilteredTableHeaders, columnWidths]);
 
   // Helper function to get minimum column width
   const getMinColumnWidth = useCallback((key: string): number => {
@@ -721,7 +806,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       data: []
     };
     
-    const headers = getTableHeaders(currentTask).map(header => ({
+    const headers = getFilteredTableHeaders(currentTask).map(header => ({
       label: header.label,
       key: header.key
     }));
@@ -730,27 +815,30 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       const csvRow: Record<string, string | number> = {};
       
       Object.entries(result).forEach(([key, value]) => {
-        if (typeof value === 'number') {
-          if (key === 'rank') {
-            csvRow[key] = value;
-          } else if ([
-            'pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution',
-            'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-            'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-            'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-            'Accuracy', 'Precision', 'Recall', 'F1 Score',
-            'P-C', 'P-V', 'P-B', 'P-R'
-          ].includes(key)) {
-            csvRow[key] = (value * 100).toFixed(1);
-          } else if (key === 'llmjudge' || key === 'LLMJudge') {
-            csvRow[key] = ((value / 5) * 100).toFixed(1);
+        // Only include keys that are in the filtered headers
+        if (headers.some(header => header.key === key)) {
+          if (typeof value === 'number') {
+            if (key === 'rank') {
+              csvRow[key] = value;
+            } else if ([
+              'pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution',
+              'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+              'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+              'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+              'Accuracy', 'Precision', 'Recall', 'F1 Score',
+              'P-C', 'P-V', 'P-B', 'P-R'
+            ].includes(key)) {
+              csvRow[key] = (value * 100).toFixed(1);
+            } else if (key === 'llmjudge' || key === 'LLMJudge') {
+              csvRow[key] = ((value / 5) * 100).toFixed(1);
+            } else {
+              csvRow[key] = value;
+            }
+          } else if (value === '-' || value === undefined) {
+            csvRow[key] = 'N/A';
           } else {
-            csvRow[key] = value;
+            csvRow[key] = value as string;
           }
-        } else if (value === '-' || value === undefined) {
-          csvRow[key] = 'N/A';
-        } else {
-          csvRow[key] = value as string;
         }
       });
       
@@ -761,7 +849,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       headers,
       data: formattedData
     };
-  }, [sortedResults, currentTask, getTableHeaders]);
+  }, [sortedResults, currentTask, getFilteredTableHeaders]);
 
   // CSV filename based on current task
   const csvFilename = useMemo(() => {
@@ -836,7 +924,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           isLoading={isLoading}
           sortConfig={sortConfig}
           setIsComparisonModalOpen={setIsComparisonModalOpen}
-          getTableHeaders={getTableHeaders}
+          getTableHeaders={getFilteredTableHeaders}
           columnWidths={columnWidths}
           resizingColumn={resizingColumn}
           csvData={csvData}
@@ -855,7 +943,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           isDarkMode={isDarkMode}
         />
 
-        {/* Model Comparison Modal */}
+        {/* Comparison Modal */}
         <ModelComparisonModal 
           isOpen={isComparisonModalOpen}
           onClose={() => setIsComparisonModalOpen(false)}

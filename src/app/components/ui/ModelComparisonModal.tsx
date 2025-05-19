@@ -62,16 +62,19 @@ const ModelComparisonModal = ({
     // Get all numeric metrics for the current task
     const allMetrics = Object.keys(results[0] || {}).filter(key => {
       // Skip non-numeric or special fields
-      if (['rank', 'model', 'model_url'].includes(key)) {
+      if (['rank', 'model', 'model_url', 'ability', 'task'].includes(key)) {
         return false;
       }
       
       // Check if any selected model has a numeric value for this metric
-      return selectedModels.some(modelName => {
+      const hasData = selectedModels.some(modelName => {
         const modelData = results.find(r => r.model === modelName);
         const value = modelData?.[key];
         return value !== '-' && value !== undefined && !isNaN(Number(value));
       });
+      
+      // Only include metrics that have actual data
+      return hasData;
     });
 
     // Create data structure for chart

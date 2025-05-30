@@ -21,7 +21,8 @@ export const MODEL_TO_ORG_MAP: Record<string, string> = {
   'Qwen': 'qwen',
   'o3': 'openai',
   'o4': 'openai',
-  'grok': 'xai'
+  'grok': 'xai',
+  'llama': 'google'
   // Add more as needed
 };
 

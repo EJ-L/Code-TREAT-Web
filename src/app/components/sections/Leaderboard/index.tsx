@@ -507,6 +507,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           newWidths[header.key] = 250;
         } else if (currentTask === 'code generation') {
           newWidths[header.key] = 320;
+        } else if (currentTask === 'vulnerability detection') {
+          newWidths[header.key] = 350; // Wider width for vulnerability detection
         } else {
           newWidths[header.key] = 300;
         }
@@ -570,6 +572,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
             newWidths[header.key] = 250;
           } else if (currentTask === 'code generation') {
             newWidths[header.key] = 320;
+          } else if (currentTask === 'vulnerability detection') {
+            newWidths[header.key] = 350; // Wider width for vulnerability detection
           } else {
             newWidths[header.key] = 300;
           }
@@ -750,6 +754,10 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     if (key === 'rank') {
       return '0px';
     } else if (key === 'model') {
+      // Use fixed width for vulnerability detection to ensure correct initial position
+      if (currentTask === 'vulnerability detection') {
+        return '100px'; // Fixed position for rank width in vulnerability detection
+      }
       return `var(--rank-width, ${columnWidths['rank'] || 80}px)`;
     }
     return 'auto';
@@ -866,6 +874,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     if (key === 'model') {
       if (task === 'code summarization' || task === 'code review') {
         return '250px';
+      } else if (task === 'vulnerability detection') {
+        return '350px';
       }
       return '300px';
     }

@@ -5,7 +5,10 @@ export const MODEL_URLS: Record<string, string> = {
   "Meta-Llama-3.1-70B-Instruct": "https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct",
   "Llama-3.3-70B-Instruct": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
   "Llama-4-Scout-17B-16E": "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct",
-
+  "Llama-3.1-70B": "https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct",
+  "Llama-3.1-8B": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+  "Llama3.3-70B-Instruct": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+  
   // OpenAI models
   "gpt-4-turbo": "https://openai.com/index/new-models-and-developer-products-announced-at-devday/",
   "gpt-4o": "https://openai.com/index/hello-gpt-4o/",

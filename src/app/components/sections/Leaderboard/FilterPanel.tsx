@@ -28,7 +28,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
   const tasksWithDifficulty = ['overall', 'code generation', 'code translation', 'input prediction', 'output prediction'];
   
   // State for toggling advanced filters visibility
-  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(true);
 
   // Check if there are any filters available
   const hasFilters = (String(currentTask) !== 'overall') && (
@@ -41,12 +41,12 @@ const FilterPanel: FC<FilterPanelProps> = ({
   // All filters section (now under Advanced Filters)
   const renderAllFilters = () => (
     <motion.div
-      initial={{ height: 0, opacity: 0 }}
+      initial={{ height: 'auto', opacity: 1 }}
       animate={{ height: showAdvancedFilters ? 'auto' : 0, opacity: showAdvancedFilters ? 1 : 0 }}
       transition={{ duration: 0.3 }}
       className="overflow-hidden"
     >
-      <div className={`border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} pt-6 mt-2`}>
+      <div className={`${showAdvancedFilters ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` : ''} pt-6 mt-2`}>
         <div className="flex flex-row flex-wrap gap-8 pb-4">
           {/* Dataset Filter */}
           {(String(currentTask) !== 'overall') && taskAbilities[currentTask].dataset.length > 0 && (

@@ -15,6 +15,7 @@ export const MODEL_TO_ORG_MAP: Record<string, string> = {
   'gpt': 'openai',
   'claude': 'anthropic',
   'meta-llama': 'meta',
+  'Llama': 'meta',
   'gemini': 'google',
   'gemma': 'google',
   'deepseek': 'Deepseek',

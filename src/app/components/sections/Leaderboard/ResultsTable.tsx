@@ -78,7 +78,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
         <tr key={index} className={`
           ${isDarkMode 
             ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
-            : index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+            : index % 2 === 0 ? 'bg-white' : 'bg-slate-100'
           }
           ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
           transition-colors

@@ -56,7 +56,7 @@ const TableCell: FC<TableCellProps> = ({
     if (header.key === 'rank' || header.key === 'model') {
       return isDarkMode 
         ? rowIndex % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]'
-        : rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50';
+        : rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-100';
     }
     // For non-sticky columns, return empty string as the table row will handle the background
     return '';

@@ -1090,6 +1090,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           results={sortedResults}
           isDarkMode={isDarkMode}
           currentTask={currentTask}
+          selectedAbilities={selectedAbilities}
+          showByDifficulty={showByDifficulty}
         />
       </div>
     </section>

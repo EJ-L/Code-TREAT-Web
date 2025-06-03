@@ -3,6 +3,7 @@ import { Card, CardContent } from './card';
 import { motion } from 'framer-motion';
 import ModelComparisonRadarChart from './ModelComparisonRadarChart';
 import ModelComparisonBarChart from './ModelComparisonBarChart';
+import { Ability } from '@/lib/types';
 
 type ModelComparisonModalProps = {
   isOpen: boolean;
@@ -10,6 +11,8 @@ type ModelComparisonModalProps = {
   results: Array<any>;
   isDarkMode: boolean;
   currentTask: string;
+  selectedAbilities: Partial<Ability>;
+  showByDifficulty: boolean;
 };
 
 const MAX_MODELS = 5;
@@ -19,7 +22,9 @@ const ModelComparisonModal = ({
   onClose, 
   results, 
   isDarkMode,
-  currentTask
+  currentTask,
+  selectedAbilities,
+  showByDifficulty
 }: ModelComparisonModalProps) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   
@@ -55,6 +60,28 @@ const ModelComparisonModal = ({
       return prev;
     });
   }, []);
+
+  // Helper to get active filters for display
+  const getActiveFilters = useMemo(() => {
+    const filters: Array<{ type: string; value: string }> = [];
+    
+    // Add difficulty filter if enabled
+    if (showByDifficulty) {
+      filters.push({ type: 'View', value: 'By Difficulty' });
+    }
+    
+    // Add each type of filter that has selections
+    Object.entries(selectedAbilities).forEach(([key, values]) => {
+      if (values && values.length > 0) {
+        const filterType = key.charAt(0).toUpperCase() + key.slice(1);
+        values.forEach(value => {
+          filters.push({ type: filterType, value });
+        });
+      }
+    });
+    
+    return filters;
+  }, [selectedAbilities, showByDifficulty]);
 
   const radarData = useMemo(() => {
     if (!selectedModels.length) return [];
@@ -137,6 +164,30 @@ const ModelComparisonModal = ({
         </div>
         
         <div className={`p-6 max-h-[80vh] overflow-auto ${isDarkMode ? 'bg-[#0f1729]' : 'bg-white'}`}>
+          {/* Active Filters Display */}
+          {getActiveFilters.length > 0 && (
+            <div className="mb-6">
+              <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                Active Filters:
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {getActiveFilters.map((filter, index) => (
+                  <span
+                    key={index}
+                    className={`inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium ${
+                      isDarkMode 
+                        ? 'bg-blue-900/50 text-blue-200 border border-blue-700/50' 
+                        : 'bg-blue-50 text-blue-700 border border-blue-200'
+                    }`}
+                  >
+                    <span className="font-semibold mr-1">{filter.type}:</span>
+                    {filter.value}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mb-6">
             <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
               Select Models
@@ -214,4 +265,4 @@ const ModelComparisonModal = ({
   );
 };
 
-export default ModelComparisonModal; 
+export default ModelComparisonModal;

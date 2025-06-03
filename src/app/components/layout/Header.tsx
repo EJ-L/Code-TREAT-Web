@@ -1,5 +1,6 @@
 import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 import { FC } from 'react';
+import Image from 'next/image';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -12,8 +13,17 @@ const Header: FC<HeaderProps> = ({ isDarkMode, setIsDarkMode }) => {
       <div className={`${isDarkMode ? 'bg-[#0f1729]/80' : 'bg-white/90'} backdrop-blur-sm border-b ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'}`}>
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center">
-            <a href="#home" className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              Code TREAT
+            <a href="#home" className="flex items-center">
+              <Image 
+                src="/Webpage Icon.png" 
+                alt="Code TREAT Logo" 
+                width={42} 
+                height={42} 
+                className="mr-3"
+              />
+              <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+                Code TREAT
+              </span>
             </a>
           </div>
           <div className="flex items-center space-x-8">

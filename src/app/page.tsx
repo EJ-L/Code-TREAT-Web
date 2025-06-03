@@ -77,6 +77,31 @@ const taskAbilities: Record<TaskType, Ability> = {
     robustness: [],
     privacy: [],
   },
+  'code-web': {
+    modality: [],
+    knowledge: [],
+    reasoning: [],
+    dataset: ['Design Generation', 'Design Edit', 'Design Repair'],
+    robustness: [],
+    privacy: [],
+    framework: ['React', 'Vue', 'Angular', 'Vanilla'],
+  },
+  'interaction-2-code': {
+    modality: [],
+    knowledge: [],
+    reasoning: [],
+    dataset: [],
+    robustness: [],
+    privacy: [],
+  },
+  'code-robustness': {
+    modality: [],
+    knowledge: [],
+    reasoning: [],
+    dataset: ['Merge', 'CRUXEval', 'LiveCodeBench (CE)'],
+    robustness: [],
+    privacy: [],
+  },
 };
 
 export default function Home() {

@@ -87,9 +87,15 @@ const TableHeader: FC<TableHeaderProps> = ({
           'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
           'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
           'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
-          // 漏洞检测特定指标
+          // Vulnerability detection metrics
           'Accuracy', 'Precision', 'Recall', 'F1 Score',
-          'P-C', 'P-V', 'P-B', 'P-R'
+          'P-C', 'P-V', 'P-B', 'P-R',
+          // Code-web metrics
+          'CLIP', 'Compilation',
+          // Interaction-2-code metrics
+          'SSIM', 'Text', 'Position', 'Implement Rate',
+          // Code-robustness metrics
+          'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'
         ];
         if (sortableColumns.includes(header.key)) {
           handleSort(header.key);

@@ -70,6 +70,12 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         return { key: 'llmjudge', direction: 'desc' as const };
       case 'vulnerability detection':
         return { key: 'Accuracy', direction: 'desc' as const };
+      case 'code-web':
+        return { key: 'CLIP', direction: 'desc' as const };
+      case 'interaction-2-code':
+        return { key: 'CLIP', direction: 'desc' as const };
+      case 'code-robustness':
+        return { key: 'VAN', direction: 'desc' as const };
       default:
         return { key: 'pass@1', direction: 'desc' as const };
     }
@@ -211,7 +217,13 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
       // Vulnerability detection metrics
       'Accuracy', 'Precision', 'Recall', 'F1 Score',
-      'P-C', 'P-V', 'P-B', 'P-R'
+      'P-C', 'P-V', 'P-B', 'P-R',
+      // Code-web metrics
+      'CLIP', 'Compilation',
+      // Interaction-2-code metrics
+      'SSIM', 'Text', 'Position', 'Implement Rate',
+      // Code-robustness metrics
+      'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'
     ];
     
     // For rank, we sort low-to-high (asc)
@@ -251,6 +263,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           robustness: selectedAbilities.robustness || [],
           security: selectedAbilities.privacy || [],
           llmJudges: selectedAbilities.llmJudges || [],
+          framework: selectedAbilities.framework || [],
           showByDifficulty: currentTask === 'overall' ? false : showByDifficulty
         };
         
@@ -272,6 +285,46 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           filterOptions.robustness = [];
           filterOptions.security = [];
           filterOptions.showByDifficulty = false;
+        }
+        
+        // Special handling for new tasks
+        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
+          filterOptions.llmJudges = [];
+          filterOptions.showByDifficulty = false;
+          
+          // For interaction-2-code, disable most filters except datasets if needed
+          if (currentTask === 'interaction-2-code') {
+            filterOptions.langs = [];
+            filterOptions.modalities = [];
+            filterOptions.knowledge = [];
+            filterOptions.reasoning = [];
+            filterOptions.robustness = [];
+            filterOptions.security = [];
+            filterOptions.datasets = [];  // No filtering for interaction-2-code
+            filterOptions.framework = [];
+          }
+          
+          // For code-robustness, disable filters except datasets
+          if (currentTask === 'code-robustness') {
+            filterOptions.langs = [];
+            filterOptions.modalities = [];
+            filterOptions.knowledge = [];
+            filterOptions.reasoning = [];
+            filterOptions.robustness = [];
+            filterOptions.security = [];
+            filterOptions.framework = [];
+          }
+          
+          // For code-web, disable unnecessary filters
+          if (currentTask === 'code-web') {
+            filterOptions.langs = [];
+            filterOptions.modalities = [];
+            filterOptions.knowledge = [];
+            filterOptions.reasoning = [];
+            filterOptions.robustness = [];
+            filterOptions.security = [];
+            // Keep framework and datasets for code-web
+          }
         }
         
         // Use setTimeout to allow the UI to update the loading state
@@ -377,6 +430,27 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
         { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
       ],
+      'code-web': [
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'Compilation', label: 'Compilation', width: 'w-28', description: 'Code compilation success rate' }
+      ],
+      'interaction-2-code': [
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'SSIM', label: 'SSIM', width: 'w-24', description: 'Structural similarity index' },
+        { key: 'Text', label: 'Text', width: 'w-24', description: 'Text accuracy score' },
+        { key: 'Position', label: 'Position', width: 'w-24', description: 'Position accuracy score' },
+        { key: 'Implement Rate', label: 'Implement Rate', width: 'w-36', description: 'Implementation success rate' }
+      ],
+      'code-robustness': [
+        { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
+        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
+        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
+        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' },
+        { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
+        { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
+        { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
+        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' }
+      ],
     };
 
     // Difficulty-specific header configurations
@@ -447,6 +521,27 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
         { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
         { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
+      ],
+      'code-web': [
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'Compilation', label: 'Compilation', width: 'w-28', description: 'Code compilation success rate' }
+      ],
+      'interaction-2-code': [
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'SSIM', label: 'SSIM', width: 'w-24', description: 'Structural similarity index' },
+        { key: 'Text', label: 'Text', width: 'w-24', description: 'Text accuracy score' },
+        { key: 'Position', label: 'Position', width: 'w-24', description: 'Position accuracy score' },
+        { key: 'Implement Rate', label: 'Implement Rate', width: 'w-36', description: 'Implementation success rate' }
+      ],
+      'code-robustness': [
+        { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
+        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
+        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
+        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' },
+        { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
+        { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
+        { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
+        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' }
       ]
     };
 
@@ -509,6 +604,10 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           newWidths[header.key] = 320;
         } else if (currentTask === 'vulnerability detection') {
           newWidths[header.key] = 350; // Wider width for vulnerability detection
+        } else if (currentTask === 'interaction-2-code') {
+          newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
+        } else if (currentTask === 'code-robustness') {
+          newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
         } else {
           newWidths[header.key] = 300;
         }
@@ -534,6 +633,18 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       }
       else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
         newWidths[header.key] = 90;
+      }
+      else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'].includes(header.key)) {
+        newWidths[header.key] = 110;
+      }
+      else if (header.key === 'Compilation') {
+        newWidths[header.key] = 200; // Wider for code-web compilation column to avoid truncation
+      }
+      else if (header.key === 'Implement Rate') {
+        newWidths[header.key] = 230;
+      }
+      else if (['Position'].includes(header.key)) {
+        newWidths[header.key] = 150; // Wider for interaction-2-code position and implement rate columns
       }
       else {
         newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
@@ -574,6 +685,10 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
             newWidths[header.key] = 320;
           } else if (currentTask === 'vulnerability detection') {
             newWidths[header.key] = 350; // Wider width for vulnerability detection
+          } else if (currentTask === 'interaction-2-code') {
+            newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
+          } else if (currentTask === 'code-robustness') {
+            newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
           } else {
             newWidths[header.key] = 300;
           }
@@ -599,6 +714,18 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         }
         else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
           newWidths[header.key] = 90;
+        }
+        else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'].includes(header.key)) {
+          newWidths[header.key] = 110;
+        }
+        else if (header.key === 'Compilation') {
+          newWidths[header.key] = 180; // Wider for code-web compilation column to avoid truncation
+        }
+        else if (header.key === 'Implement Rate') {
+          newWidths[header.key] = 230;
+        }
+        else if (['Position'].includes(header.key)) {
+          newWidths[header.key] = 150; // Wider for interaction-2-code position and implement rate columns
         }
         else {
           newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
@@ -735,7 +862,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
 
   // Helper for sticky columns
   const getStickyStyles = useCallback((key: string) => {
-    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review') {
+    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
+        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
       return '';
     }
     
@@ -747,7 +875,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
 
   // Calculate left position for sticky columns
   const getStickyLeftPosition = useCallback((key: string) => {
-    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review') {
+    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
+        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
       return 'auto';
     }
     
@@ -783,7 +912,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   // Helper for background colors
   const getBackgroundColor = useCallback((key: string, isHeaderCell: boolean = false) => {
     if ((key === 'rank' || key === 'model') && 
-        !(currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review')) {
+        !(currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
+          currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness')) {
       if (isHeaderCell) {
         return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
       } else {

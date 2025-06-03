@@ -31,11 +31,12 @@ const FilterPanel: FC<FilterPanelProps> = ({
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(true);
 
   // Check if there are any filters available
-  const hasFilters = (String(currentTask) !== 'overall') && (
+  const hasFilters = (String(currentTask) !== 'overall') && (String(currentTask) !== 'interaction-2-code') && (
     taskAbilities[currentTask].dataset.length > 0 ||
+    (taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 0) ||
     ((currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0) ||
     (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
-      .some(([key, values]) => !['dataset', 'llmJudges'].includes(key) && values.length > 0)
+      .some(([key, values]) => !['dataset', 'llmJudges', 'framework'].includes(key) && values.length > 0)
   );
 
   // All filters section (now under Advanced Filters)
@@ -62,6 +63,32 @@ const FilterPanel: FC<FilterPanelProps> = ({
                     className={`
                       px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
                       ${selectedAbilities.dataset?.includes(value)
+                        ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
+                        : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                      }
+                    `}
+                  >
+                    {value}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Framework Filter - for code-web task */}
+          {(String(currentTask) !== 'overall') && taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 0 && (
+            <div className="flex flex-col space-y-3 mb-2">
+              <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Framework</p>
+              <div className="inline-flex flex-wrap gap-2">
+                {taskAbilities[currentTask].framework.map((value: string) => (
+                  <motion.button
+                    key={value}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleAbilityChange('framework', value)}
+                    className={`
+                      px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
+                      ${selectedAbilities.framework?.includes(value)
                         ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                         : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
                       }
@@ -102,7 +129,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           
           {/* Other Filters */}
           {(String(currentTask) !== 'overall') && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][]).
-            filter(([key]) => !['dataset', 'llmJudges'].includes(key)).
+            filter(([key]) => !['dataset', 'llmJudges', 'framework'].includes(key)).
             map(([key, values]) => (
               values.length > 0 && (
                 <div key={key} className="flex flex-col space-y-3 mb-2">

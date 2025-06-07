@@ -256,7 +256,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 
   // 1. 数据集过滤 (同级 OR 关系)
   if (filters.datasets && filters.datasets.length > 0) {
-    const allowedDatasets = new Set(filters.datasets.map(d => d.toLowerCase().replace(/\s+/g, '')));
+    const selectedDatasets = new Set(filters.datasets.map(d => d.toLowerCase().replace(/\s+/g, '')));
     
     // 只输出简化的日志
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
@@ -441,6 +441,22 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 // 格式化结果为显示格式
 export function formatResults(results: ProcessedResult[], filters?: FilterOptions): Array<Record<string, string | number>> {
   console.log(`格式化结果: ${results.length} 条`);
+  
+  // Debug: Check if we have difficulty metrics in our data
+  if (filters?.showByDifficulty && results.length > 0) {
+    console.log('难度指标数据示例:', {
+      example: results[0],
+      hasEasyPass1: results[0].easyPass1 !== null,
+      hasEasyPass3: results[0].easyPass3 !== null,
+      hasEasyPass5: results[0].easyPass5 !== null,
+      hasMediumPass1: results[0].mediumPass1 !== null,
+      hasMediumPass3: results[0].mediumPass3 !== null,
+      hasMediumPass5: results[0].mediumPass5 !== null,
+      hasHardPass1: results[0].hardPass1 !== null,
+      hasHardPass3: results[0].hardPass3 !== null,
+      hasHardPass5: results[0].hardPass5 !== null,
+    });
+  }
 
   // Get the sorted results by pass@1 values
   const sortedResults = [...results].sort((a, b) => {
@@ -472,6 +488,7 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
 
     // Add metrics based on whether we're showing by difficulty
     if (filters?.showByDifficulty) {
+
       // Add difficulty-based metrics with default '-' for null values
       formattedResult['easy_pass@1'] = result.easyPass1 !== null ? (result.easyPass1 * 100).toFixed(1) : '-';
       formattedResult['medium_pass@1'] = result.mediumPass1 !== null ? (result.mediumPass1 * 100).toFixed(1) : '-';
@@ -484,6 +501,7 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
       formattedResult['easy_pass@5'] = result.easyPass5 !== null ? (result.easyPass5 * 100).toFixed(1) : '-';
       formattedResult['medium_pass@5'] = result.mediumPass5 !== null ? (result.mediumPass5 * 100).toFixed(1) : '-';
       formattedResult['hard_pass@5'] = result.hardPass5 !== null ? (result.hardPass5 * 100).toFixed(1) : '-';
+
     } else {
       // Add standard metrics with default '-' for null values
       formattedResult['pass@1'] = result.pass1 !== null ? (result.pass1 * 100).toFixed(1) : '-';
@@ -492,6 +510,7 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     }
 
     // Add other metrics (common for both modes)
+
     formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(1) : '-';
     formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(1) : '-';
     formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(1) : '-';

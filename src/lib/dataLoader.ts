@@ -556,49 +556,23 @@ function getMockData(): ResultEntry[] {
 }
 
 export function processResult(entry: ResultEntry): ProcessedResult {
-  // 处理指标，确保是数字类型
-  const processMetric = (value: any, metricName?: string): number | null => {
-    if (value === undefined || value === null) return null;
-    
-    // 特殊处理LLMJudge对象
-    if (metricName === 'LLMJudge' && typeof value === 'object') {
-      // 如果是LLMJudge对象，计算所有评分的平均值
-      const scores = Object.values(value) as number[];
-      if (scores.length === 0) return null;
-      const avg = scores.reduce((sum: number, score: number) => sum + score, 0) / scores.length;
-      return Number(avg.toFixed(1));
-    }
-    
-    const num = Number(value);
-    if (isNaN(num)) {
-      return null;
-    }
-    return Number(num.toFixed(1));
-  };
-
-  // 根据任务类型处理语言字段
-  let processedLang = '';
-  if (entry.task?.toLowerCase() === 'code translation') {
-    processedLang = entry.target_lang || '';
-  } else {
-    processedLang = entry.lang || '';
-  }
-
-  return {
-    modelId: entry.id || '',
+  // Convert simplified result entry to standardized ProcessedResult format
+  const processedResult: ProcessedResult = {
+    modelId: `${entry.model_name}-${entry.dataset || 'unknown'}-${entry.task || 'unknown'}`,
     modelName: entry.model_name,
-    dataset: (entry.dataset || '').toLowerCase(),
-    task: entry.task.toLowerCase(),
+    dataset: entry.dataset || 'Unknown',
+    task: entry.task || 'Unknown',
     sourceLang: entry.source_lang || null,
-    lang: processedLang,
+    lang: entry.lang || (entry.language || 'Unknown'),
     targetLang: entry.target_lang || null,
-    pass1: processMetric(entry.metrics?.['pass@1']) ?? null,
-    pass3: processMetric(entry.metrics?.['pass@3']) ?? null,
-    pass5: processMetric(entry.metrics?.['pass@5']) ?? null,
-    codebleu: processMetric(entry.metrics?.['CodeBLEU']) ?? null,
-    llmjudge: processMetric(entry.metrics?.['LLMJudge'], 'LLMJudge') ?? null,
-    executionAccuracy: processMetric(entry.metrics?.['ExecutionAccuracy']) ?? null,
-    // Add difficulty-based properties (will be populated by task processors)
+    pass1: entry.metrics?.['pass@1'] !== undefined ? entry.metrics['pass@1'] : null, 
+    pass3: entry.metrics?.['pass@3'] !== undefined ? entry.metrics['pass@3'] : null,
+    pass5: entry.metrics?.['pass@5'] !== undefined ? entry.metrics['pass@5'] : null,
+    executionAccuracy: entry.metrics?.['ExecutionAccuracy'] !== undefined ? entry.metrics['ExecutionAccuracy'] : null,
+    codebleu: entry.metrics?.['CodeBLEU'] !== undefined ? entry.metrics['CodeBLEU'] : null,
+    llmjudge: (typeof entry.metrics?.['LLMJudge'] === 'number') ? entry.metrics['LLMJudge'] : null,
+    difficulty: entry.difficulty || null,
+    // Initialize difficulty metrics as null
     easyPass1: null,
     easyPass3: null,
     easyPass5: null,
@@ -607,10 +581,34 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     mediumPass5: null,
     hardPass1: null,
     hardPass3: null,
-    hardPass5: null,
-    // Extract difficulty from the entry
-    difficulty: entry.difficulty || null
+    hardPass5: null
   };
+
+  // Special handling for difficulty information
+  if (entry.difficulty) {
+    console.log(`Processing difficulty metrics: ${entry.difficulty}, pass@1:`, entry.metrics?.['pass@1']);
+    
+    // Assign metrics to the appropriate difficulty category
+    switch (entry.difficulty.toLowerCase()) {
+      case 'easy':
+        processedResult.easyPass1 = entry.metrics?.['pass@1'] !== undefined ? entry.metrics['pass@1'] : null;
+        processedResult.easyPass3 = entry.metrics?.['pass@3'] !== undefined ? entry.metrics['pass@3'] : null;
+        processedResult.easyPass5 = entry.metrics?.['pass@5'] !== undefined ? entry.metrics['pass@5'] : null;
+        break;
+      case 'medium':
+        processedResult.mediumPass1 = entry.metrics?.['pass@1'] !== undefined ? entry.metrics['pass@1'] : null;
+        processedResult.mediumPass3 = entry.metrics?.['pass@3'] !== undefined ? entry.metrics['pass@3'] : null;
+        processedResult.mediumPass5 = entry.metrics?.['pass@5'] !== undefined ? entry.metrics['pass@5'] : null;
+        break;
+      case 'hard':
+        processedResult.hardPass1 = entry.metrics?.['pass@1'] !== undefined ? entry.metrics['pass@1'] : null;
+        processedResult.hardPass3 = entry.metrics?.['pass@3'] !== undefined ? entry.metrics['pass@3'] : null;
+        processedResult.hardPass5 = entry.metrics?.['pass@5'] !== undefined ? entry.metrics['pass@5'] : null;
+        break;
+    }
+  }
+
+  return processedResult;
 }
 
 // 根据数据集名称或其他字段推断任务类型

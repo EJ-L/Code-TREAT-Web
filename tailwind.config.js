@@ -121,18 +121,6 @@ module.exports = {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
-        'jetbrains-mono': [
-          'var(--font-jetbrains-mono)',
-          'JetBrains Mono',
-          'ui-monospace', 
-          'SFMono-Regular', 
-          'Menlo', 
-          'Monaco', 
-          'Consolas', 
-          'Liberation Mono', 
-          'Courier New', 
-          'monospace'
-        ],
       },
       keyframes: {
         "accordion-down": {

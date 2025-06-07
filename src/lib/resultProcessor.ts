@@ -1,5 +1,5 @@
 import { ProcessedResult, FilterOptions, TaskType, ResultEntry } from './types';
-import { loadAllData, processResult, getModelData } from './dataLoader';
+import { loadAllData, processResult } from './dataLoader';
 import { processCodeGeneration, aggregateCodeGenerationResults } from './tasks/codeGeneration';
 import { processCodeTranslation, aggregateCodeTranslationResults } from './tasks/codeTranslation';
 import { processCodeSummarization, aggregateCodeSummarizationResults } from './tasks/codeSummarization';
@@ -9,7 +9,6 @@ import { processCodeReview, aggregateCodeReviewResults } from './tasks/codeRevie
 import { processInputPrediction, aggregateInputPredictionResults } from './tasks/inputPrediction';
 import { processOutputPrediction, aggregateOutputPredictionResults } from './tasks/outputPrediction';
 import { processOverall } from './tasks/overall';
-import { MODEL_URLS } from './constants';
 
 // 辅助函数：标准化语言名称
 export const normalizeLanguage = (lang: string): string => {
@@ -142,106 +141,6 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       processedResults = await processOverall(rawData.map(processResult), filters);
       break;
       
-    case 'code-web':
-    case 'interaction-2-code':
-    case 'code-robustness':
-      // For these new tasks, process results directly using the raw data and metrics
-      const rawTaskData = rawData.filter(entry => entry.task === task);
-      
-      // Apply filters at the raw data level first, before aggregation
-      let filteredRawData = rawTaskData;
-      
-      // Apply dataset filter
-      if (filters.datasets && filters.datasets.length > 0) {
-        filteredRawData = filteredRawData.filter(entry => {
-          const normalizedDataset = entry.dataset.toLowerCase().replace(/\s+/g, '');
-          const allowedDatasets = new Set(filters.datasets.map(d => d.toLowerCase().replace(/\s+/g, '')));
-          return allowedDatasets.has(normalizedDataset);
-        });
-      }
-      
-      // Apply framework filter (for code-web)
-      if (filters.framework && filters.framework.length > 0) {
-        filteredRawData = filteredRawData.filter(entry => {
-          return entry.framework && filters.framework && filters.framework.includes(entry.framework);
-        });
-      }
-      
-      // Group by model name and aggregate metrics
-      const modelGroups = new Map<string, ResultEntry[]>();
-      filteredRawData.forEach(entry => {
-        const modelName = entry.model_name;
-        if (!modelGroups.has(modelName)) {
-          modelGroups.set(modelName, []);
-        }
-        modelGroups.get(modelName)!.push(entry);
-      });
-      
-      // Create aggregated results for each model
-      processedResults = Array.from(modelGroups.entries()).map(([modelName, entries]) => {
-        // Aggregate metrics across all entries for this model
-        const aggregatedMetrics: Record<string, number> = {};
-        const metricCounts: Record<string, number> = {};
-        
-        entries.forEach(entry => {
-          Object.entries(entry.metrics || {}).forEach(([key, value]) => {
-            if (typeof value === 'number' && !isNaN(value)) {
-              if (!aggregatedMetrics[key]) {
-                aggregatedMetrics[key] = 0;
-                metricCounts[key] = 0;
-              }
-              aggregatedMetrics[key] += value;
-              metricCounts[key]++;
-            }
-          });
-        });
-        
-        // Calculate averages
-        Object.keys(aggregatedMetrics).forEach(key => {
-          if (metricCounts[key] > 0) {
-            aggregatedMetrics[key] = aggregatedMetrics[key] / metricCounts[key];
-          }
-        });
-        
-        // Use the first entry as base and add aggregated metrics
-        const baseEntry = entries[0];
-        
-        // Collect unique datasets and frameworks for display
-        const uniqueDatasets = [...new Set(entries.map(e => e.dataset))];
-        const uniqueFrameworks = [...new Set(entries.map(e => e.framework).filter(f => f))];
-        
-        return {
-          modelId: `${modelName}-${task}`,
-          modelName: modelName,
-          dataset: uniqueDatasets.length === 1 ? uniqueDatasets[0] : `${uniqueDatasets.length} datasets`,
-          task: task,
-          sourceLang: null,
-          lang: baseEntry.lang || 'All',
-          targetLang: null,
-          pass1: null,
-          pass3: null,
-          pass5: null,
-          easyPass1: null,
-          mediumPass1: null,
-          hardPass1: null,
-          easyPass3: null,
-          mediumPass3: null,
-          hardPass3: null,
-          easyPass5: null,
-          mediumPass5: null,
-          hardPass5: null,
-          codebleu: null,
-          llmjudge: null,
-          executionAccuracy: null,
-          difficulty: null,
-          // Add the aggregated custom metrics
-          ...aggregatedMetrics,
-          // Preserve framework info for display (if applicable)
-          framework: uniqueFrameworks.length === 1 ? uniqueFrameworks[0] : uniqueFrameworks.length > 1 ? `${uniqueFrameworks.length} frameworks` : undefined,
-        } as ProcessedResult & { framework?: string };
-      });
-      break;
-      
     default:
       throw new Error(`Unknown task type: ${task}`);
   }
@@ -261,13 +160,20 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     // 只输出简化的日志
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
 
-    // Skip dataset filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'interaction-2-code', 'code-robustness'].includes(task.toLowerCase())) {
-      filteredResults = filteredResults.filter(result => {
-        const normalizedDataset = result.dataset.toLowerCase().replace(/\s+/g, '');
-        return allowedDatasets.has(normalizedDataset);
-      });
-    }
+    filteredResults = filteredResults.filter(result => {
+      // 处理可能包含多个数据集的情况
+      const resultDatasets = result.dataset.split(',').map(d => d.toLowerCase().replace(/\s+/g, ''));
+      
+      // 如果结果的任何一个数据集在选中的数据集中，就保留这个结果
+      const hasMatchingDataset = resultDatasets.some(dataset => selectedDatasets.has(dataset));
+      
+      // 如果所有选中的数据集都在结果中，也保留这个结果
+      const hasAllSelectedDatasets = Array.from(selectedDatasets).every(selected => 
+        resultDatasets.includes(selected)
+      );
+      
+      return hasMatchingDataset || hasAllSelectedDatasets;
+    });
 
     // 只输出简化的日志
     console.log(`数据集过滤完成: 剩余 ${filteredResults.length} 条结果`);
@@ -417,21 +323,6 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`LLM Judge 过滤后: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 8. Framework 过滤 (同级 OR 关系，跨级 AND 关系) - for code-web task
-  if (filters.framework && filters.framework.length > 0) {
-    console.log(`应用 Framework 过滤: ${filters.framework.length} 种框架, ${filteredResults.length} 条结果`);
-    
-    // Skip framework filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'interaction-2-code', 'code-robustness'].includes(task.toLowerCase())) {
-      filteredResults = filteredResults.filter(result => {
-        // Check if the result has a framework field and if it matches the selected frameworks
-        return (result as any).framework && filters.framework && filters.framework.includes((result as any).framework);
-      });
-    }
-    
-    console.log(`Framework 过滤后: 剩余 ${filteredResults.length} 条结果`);
-  }
-
   // 简化最终日志
   console.log(`所有过滤器应用完成: 剩余 ${filteredResults.length} 条结果`);
 
@@ -474,75 +365,86 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
   });
 
   return sortedResults.map((result, index) => {
-    // Use the explicit MODEL_URLS mapping for model URLs
-    const modelUrl = MODEL_URLS[result.modelName] || "";
+    // Debug check for pass@3 and pass@5
+    if (filters?.showByDifficulty) {
+      const debugInfo = {
+        model: result.modelName,
+        easyPass1: result.easyPass1,
+        easyPass3: result.easyPass3,
+        easyPass5: result.easyPass5,
+        mediumPass1: result.mediumPass1,
+        mediumPass3: result.mediumPass3,
+        mediumPass5: result.mediumPass5,
+        hardPass1: result.hardPass1,
+        hardPass3: result.hardPass3,
+        hardPass5: result.hardPass5,
+      };
+      console.log("难度模式数据检查:", debugInfo);
+    }
     
     // Create the base result object
     const formattedResult: Record<string, string | number> = {
       rank: index + 1,
       model: result.modelName,
-      model_url: modelUrl,
       ability: filters?.langs?.length ? (result.lang || '-') : 'All',
       task: (filters?.tasks && filters.tasks.length > 1) ? (result.task || '-') : 'All',
     };
 
     // Add metrics based on whether we're showing by difficulty
     if (filters?.showByDifficulty) {
-
-      // Add difficulty-based metrics with default '-' for null values
-      formattedResult['easy_pass@1'] = result.easyPass1 !== null ? (result.easyPass1 * 100).toFixed(1) : '-';
-      formattedResult['medium_pass@1'] = result.mediumPass1 !== null ? (result.mediumPass1 * 100).toFixed(1) : '-';
-      formattedResult['hard_pass@1'] = result.hardPass1 !== null ? (result.hardPass1 * 100).toFixed(1) : '-';
+      // Always include all difficulty metrics regardless of null values
+      // This ensures consistency in the UI even if some metrics are missing
+      formattedResult['easy_pass@1'] = result.easyPass1 !== null ? (result.easyPass1 * 100).toFixed(2) + '%' : '-';
+      formattedResult['medium_pass@1'] = result.mediumPass1 !== null ? (result.mediumPass1 * 100).toFixed(2) + '%' : '-';
+      formattedResult['hard_pass@1'] = result.hardPass1 !== null ? (result.hardPass1 * 100).toFixed(2) + '%' : '-';
       
-      formattedResult['easy_pass@3'] = result.easyPass3 !== null ? (result.easyPass3 * 100).toFixed(1) : '-';
-      formattedResult['medium_pass@3'] = result.mediumPass3 !== null ? (result.mediumPass3 * 100).toFixed(1) : '-';
-      formattedResult['hard_pass@3'] = result.hardPass3 !== null ? (result.hardPass3 * 100).toFixed(1) : '-';
+      // Always include pass@3 metrics
+      formattedResult['easy_pass@3'] = result.easyPass3 !== null ? (result.easyPass3 * 100).toFixed(2) + '%' : '-';
+      formattedResult['medium_pass@3'] = result.mediumPass3 !== null ? (result.mediumPass3 * 100).toFixed(2) + '%' : '-';
+      formattedResult['hard_pass@3'] = result.hardPass3 !== null ? (result.hardPass3 * 100).toFixed(2) + '%' : '-';
       
-      formattedResult['easy_pass@5'] = result.easyPass5 !== null ? (result.easyPass5 * 100).toFixed(1) : '-';
-      formattedResult['medium_pass@5'] = result.mediumPass5 !== null ? (result.mediumPass5 * 100).toFixed(1) : '-';
-      formattedResult['hard_pass@5'] = result.hardPass5 !== null ? (result.hardPass5 * 100).toFixed(1) : '-';
-
+      // Always include pass@5 metrics
+      formattedResult['easy_pass@5'] = result.easyPass5 !== null ? (result.easyPass5 * 100).toFixed(2) + '%' : '-';
+      formattedResult['medium_pass@5'] = result.mediumPass5 !== null ? (result.mediumPass5 * 100).toFixed(2) + '%' : '-';
+      formattedResult['hard_pass@5'] = result.hardPass5 !== null ? (result.hardPass5 * 100).toFixed(2) + '%' : '-';
+      
+      // Also add CodeBLEU and other metrics for all difficulty levels
+      formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(2) + '%' : '-';
+      formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(2) + '%' : '-';
+      formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(2) + '%' : '-';
+      
+      // Add vulnerability detection metrics also in difficulty mode
+      formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(2) + '%' : '-';
+      formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(2) + '%' : '-';
+      formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(2) + '%' : '-';
+      formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(2) + '%' : '-';
     } else {
       // Add standard metrics with default '-' for null values
-      formattedResult['pass@1'] = result.pass1 !== null ? (result.pass1 * 100).toFixed(1) : '-';
-      formattedResult['pass@3'] = result.pass3 !== null ? (result.pass3 * 100).toFixed(1) : '-';
-      formattedResult['pass@5'] = result.pass5 !== null ? (result.pass5 * 100).toFixed(1) : '-';
+      formattedResult['pass@1'] = result.pass1 !== null ? (result.pass1 * 100).toFixed(2) + '%' : '-';
+      formattedResult['pass@3'] = result.pass3 !== null ? (result.pass3 * 100).toFixed(2) + '%' : '-';
+      formattedResult['pass@5'] = result.pass5 !== null ? (result.pass5 * 100).toFixed(2) + '%' : '-';
     }
 
     // Add other metrics (common for both modes)
+    if (!filters?.showByDifficulty) {
+      formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(2) + '%' : '-';
+      formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(2) + '%' : '-';
+      formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(2) + '%' : '-';
 
-    formattedResult['CodeBLEU'] = result.codebleu !== null ? (result.codebleu * 100).toFixed(1) : '-';
-    formattedResult['llmjudge'] = result.llmjudge !== null ? ((result.llmjudge / 5) * 100).toFixed(1) : '-';
-    formattedResult['Execution'] = result.executionAccuracy !== null ? (result.executionAccuracy * 100).toFixed(1) : '-';
-
-    // Add vulnerability detection metrics
-    formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(1) : '-';
-    formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(1) : '-';
-    formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(1) : '-';
-    formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(1) : '-';
-    formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(1) : '-';
-    formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(1) : '-';
-    formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(1) : '-';
-    formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(1) : '-';
-
-    // Add custom metrics for new tasks
-    // code-web and interaction-2-code metrics
-    formattedResult['CLIP'] = result['CLIP'] !== null && result['CLIP'] !== undefined ? (result['CLIP'] * 100).toFixed(1) : '-';
-    formattedResult['Compilation'] = result['Compilation'] !== null && result['Compilation'] !== undefined ? (result['Compilation'] * 100).toFixed(1) : '-';
-    formattedResult['SSIM'] = result['SSIM'] !== null && result['SSIM'] !== undefined ? (result['SSIM'] * 100).toFixed(1) : '-';
-    formattedResult['Text'] = result['Text'] !== null && result['Text'] !== undefined ? (result['Text'] * 100).toFixed(1) : '-';
-    formattedResult['Position'] = result['Position'] !== null && result['Position'] !== undefined ? (result['Position'] * 100).toFixed(1) : '-';
-    formattedResult['Implement Rate'] = result['Implement Rate'] !== null && result['Implement Rate'] !== undefined ? (result['Implement Rate'] * 100).toFixed(1) : '-';
-    
-    // code-robustness metrics  
-    formattedResult['VAN'] = result['VAN'] !== null && result['VAN'] !== undefined ? result['VAN'].toFixed(1) : '-';
-    formattedResult['REN'] = result['REN'] !== null && result['REN'] !== undefined ? result['REN'].toFixed(1) : '-';
-    formattedResult['RTF'] = result['RTF'] !== null && result['RTF'] !== undefined ? result['RTF'].toFixed(1) : '-';
-    formattedResult['GBC'] = result['GBC'] !== null && result['GBC'] !== undefined ? result['GBC'].toFixed(1) : '-';
-    formattedResult['ALL'] = result['ALL'] !== null && result['ALL'] !== undefined ? result['ALL'].toFixed(1) : '-';
-    formattedResult['MDC'] = result['MDC'] !== null && result['MDC'] !== undefined ? result['MDC'].toFixed(1) : '-';
-    formattedResult['MPS'] = result['MPS'] !== null && result['MPS'] !== undefined ? result['MPS'].toFixed(1) : '-';
-    formattedResult['MHC'] = result['MHC'] !== null && result['MHC'] !== undefined ? result['MHC'].toFixed(1) : '-';
+      // Add vulnerability detection metrics
+      formattedResult['P-C'] = result['P-C'] !== null && result['P-C'] !== undefined ? (result['P-C'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-V'] = result['P-V'] !== null && result['P-V'] !== undefined ? (result['P-V'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-B'] = result['P-B'] !== null && result['P-B'] !== undefined ? (result['P-B'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['P-R'] = result['P-R'] !== null && result['P-R'] !== undefined ? (result['P-R'] * 100).toFixed(2) + '%' : '-';
+      formattedResult['Accuracy'] = result.Accuracy !== null && result.Accuracy !== undefined ? (result.Accuracy * 100).toFixed(2) + '%' : '-';
+      formattedResult['Precision'] = result.Precision !== null && result.Precision !== undefined ? (result.Precision * 100).toFixed(2) + '%' : '-';
+      formattedResult['Recall'] = result.Recall !== null && result.Recall !== undefined ? (result.Recall * 100).toFixed(2) + '%' : '-';
+      formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(2) + '%' : '-';
+    }
 
     return formattedResult;
   });

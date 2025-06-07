@@ -1,4 +1,4 @@
-export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'interaction-2-code' | 'code-robustness';
+export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review';
 
 export type LLMJudgeScores = {
   [judge: string]: number | number[];
@@ -23,7 +23,6 @@ export type Ability = {
   robustness: string[];
   privacy: string[];
   llmJudges?: string[];
-  framework?: string[];  // For code-web task
 };
 
 export type ResultEntry = {
@@ -37,9 +36,6 @@ export type ResultEntry = {
   target_lang?: string;
   metrics: Metrics;
   difficulty?: string;
-  url?: string;
-  framework?: string;  // For code-web task
-  category?: string;   // For code-robustness task
 };
 
 export type ProcessedResult = {
@@ -77,23 +73,6 @@ export type ProcessedResult = {
   'Precision'?: number | null;
   'Recall'?: number | null;
   'F1 Score'?: number | null;
-  // Custom metrics for new tasks
-  // code-web and interaction-2-code metrics
-  'CLIP'?: number | null;
-  'Compilation'?: number | null;
-  'SSIM'?: number | null;
-  'Text'?: number | null;
-  'Position'?: number | null;
-  'Implement Rate'?: number | null;
-  // code-robustness metrics
-  'VAN'?: number | null;
-  'REN'?: number | null;
-  'RTF'?: number | null;
-  'GBC'?: number | null;
-  'ALL'?: number | null;
-  'MDC'?: number | null;
-  'MPS'?: number | null;
-  'MHC'?: number | null;
 };
 
 export type FilterOptions = {
@@ -106,6 +85,5 @@ export type FilterOptions = {
   robustness: string[];
   security: string[];
   llmJudges?: string[];
-  framework?: string[];  // Add framework for code-web filtering
   showByDifficulty?: boolean;
 };

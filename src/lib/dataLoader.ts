@@ -301,10 +301,7 @@ export const taskDirectories: Record<string, string> = {
   'vulnerability detection': 'data/vulnerability-detection',
   'code review': 'data/code-review',
   'input prediction': 'data/input_prediction',
-  'output prediction': 'data/output_prediction',
-  'code-web': 'data/code-web',
-  'interaction-2-code': 'data/interaction-2-code',
-  'code-robustness': 'data/code-robustness'
+  'output prediction': 'data/output_prediction'
 };
 
 // 加载单个文件的函数

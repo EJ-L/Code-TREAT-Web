@@ -1,9 +1,13 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
-import { DataLoader } from '@/components/DataLoader'
+import { Inter, JetBrains_Mono } from 'next/font/google'
+import { DataLoader } from '@/app/components/DataLoader'
 
 const inter = Inter({ subsets: ['latin'] })
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+})
 
 export const metadata: Metadata = {
   title: 'Code TREAT',
@@ -33,7 +37,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
       <body 
         className={`${inter.className} min-h-screen font-sans antialiased bg-background text-foreground 
         flex flex-col selection:bg-primary/10 selection:text-primary`}

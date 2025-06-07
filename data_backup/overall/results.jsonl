@@ -1,0 +1,4 @@
+{"id": "gpt4-1", "model_name": "GPT-4", "dataset": "HackerRank", "task": "code generation", "lang": "Python", "metrics": {"pass@1": 0.85, "pass@3": 0.92, "pass@5": 0.95}}
+{"id": "gpt4-2", "model_name": "GPT-4", "dataset": "GeeksForGeeks", "task": "code generation", "lang": "Java", "metrics": {"pass@1": 0.82, "pass@3": 0.89, "pass@5": 0.93}}
+{"id": "claude-1", "model_name": "Claude 2", "dataset": "HackerRank", "task": "code generation", "lang": "Python", "metrics": {"pass@1": 0.83, "pass@3": 0.90, "pass@5": 0.94}}
+{"id": "claude-2", "model_name": "Claude 2", "dataset": "GeeksForGeeks", "task": "code generation", "lang": "Java", "metrics": {"pass@1": 0.80, "pass@3": 0.88, "pass@5": 0.92}} 

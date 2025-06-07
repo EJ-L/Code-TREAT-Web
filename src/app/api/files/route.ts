@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { createReadStream } from 'fs';
-import readline from 'readline';
 
 // 添加动态配置
 export const dynamic = 'force-dynamic';
@@ -44,24 +42,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
     }
 
-    const fileStream = createReadStream(filePath);
-    const rl = readline.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity
-    });
-
+    // Read the file as a string
+    const fileContent = await fs.readFile(filePath, 'utf8');
+    const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+    
     const data: any[] = [];
-    let lineCount = 0;
+    let lineCount = lines.length;
 
-    // 读取所有行
-    for await (const line of rl) {
+    // Parse each line as JSON
+    for (const line of lines) {
       try {
         const jsonData = JSON.parse(line);
         data.push(jsonData);
       } catch (error) {
-        console.error(`Error parsing JSON at line ${lineCount + 1}:`, error);
+        console.error(`Error parsing JSON line:`, error);
       }
-      lineCount++;
     }
 
     return NextResponse.json({

@@ -297,7 +297,7 @@ export const taskDirectories: Record<string, string> = {
   'code generation': 'data/code-generation',
   'code translation': 'data/code-translation',
   'code summarization': 'data/code-summarization',
-  'code execution': 'data/code-execution',
+  // 'code execution': 'data/code-execution',
   'vulnerability detection': 'data/vulnerability-detection',
   'code review': 'data/code-review',
   'input prediction': 'data/input_prediction',

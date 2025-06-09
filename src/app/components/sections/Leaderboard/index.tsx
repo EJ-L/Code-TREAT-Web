@@ -450,7 +450,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
         { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
         { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
-        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' }
+        { key: 'MHC', label: 'MHC', width: 'w-26', description: 'Missing Header Comment robustness score' }
       ],
     };
 

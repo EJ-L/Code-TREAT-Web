@@ -65,7 +65,10 @@ const TaskSelector: FC<TaskSelectorProps> = ({
               `}
             >
               <span className="relative z-10 text-lg font-medium">
-                {task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                {task === 'mr-web' 
+                  ? 'MR-Web' 
+                  : task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+                }
               </span>
               {currentTask === task && (
                 <motion.div

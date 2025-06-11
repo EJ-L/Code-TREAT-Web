@@ -100,9 +100,12 @@ const TableCell: FC<TableCellProps> = ({
             const hasFixedModelWidth = currentTask === 'overall';
             
             // All simplified leaderboards show full model names by default
+            // For code-web, be more generous with text space to avoid unnecessary truncation
             const displayText = isSimplifiedLeaderboard 
               ? modelName // Never truncate in simplified leaderboards
-              : truncateText(modelName, contentWidth * 1.5); // Use more generous space for other tasks
+              : currentTask === 'code-web' 
+                ? (contentWidth >= 200 ? modelName : truncateText(modelName, contentWidth * 2)) // More generous for code-web
+                : truncateText(modelName, contentWidth * 1.5); // Use more generous space for other tasks
             
             const organization = getOrganizationFromModel(modelName);
             
@@ -116,7 +119,9 @@ const TableCell: FC<TableCellProps> = ({
               ? 'none' // No max width for overall task (fixed percentage width)
               : isSimplifiedLeaderboard
                 ? `${Math.max(contentWidth * 2, 400) - logoSpace}px` // Very generous width for code review/summarization
-                : `${contentWidth * 1.5 - logoSpace}px`; // Normal behavior for other leaderboards
+                : currentTask === 'code-web'
+                  ? `${Math.max(contentWidth * 2, 300) - logoSpace}px` // More generous width for code-web
+                  : `${contentWidth * 1.5 - logoSpace}px`; // Normal behavior for other leaderboards
             
             const modelContent = (
               <div className="flex items-center gap-2 w-full">
@@ -125,11 +130,11 @@ const TableCell: FC<TableCellProps> = ({
                 )}
                 <span 
                   title={modelName}
-                  className={`${isSimplifiedLeaderboard ? '' : 'truncate'} inline-block`}
+                  className={`${isSimplifiedLeaderboard || (currentTask === 'code-web' && contentWidth >= 200) ? '' : 'truncate'} inline-block`}
                   style={{ 
                     maxWidth: modelMaxWidth,
-                    whiteSpace: hasFixedModelWidth ? 'normal' : 'nowrap',
-                    overflow: hasFixedModelWidth ? 'visible' : 'hidden',
+                    whiteSpace: hasFixedModelWidth || (currentTask === 'code-web' && contentWidth >= 200) ? 'normal' : 'nowrap',
+                    overflow: hasFixedModelWidth || (currentTask === 'code-web' && contentWidth >= 200) ? 'visible' : 'hidden',
                     textOverflow: 'ellipsis'
                   }}
                 >

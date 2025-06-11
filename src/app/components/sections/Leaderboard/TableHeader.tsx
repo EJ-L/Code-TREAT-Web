@@ -79,9 +79,9 @@ const TableHeader: FC<TableHeaderProps> = ({
         left: getStickyLeftPosition(header.key)
       }}
       onClick={() => {
-        // Enable sorting for all numeric columns including difficulty-based metrics
+        // Enable sorting for all numeric columns including difficulty-based metrics and model names
         const sortableColumns = [
-          'rank', 
+          'rank', 'model', // Add model to sortable columns
           'pass@1', 'pass@3', 'pass@5', 
           'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
           'easy_pass@3', 'medium_pass@3', 'hard_pass@3',

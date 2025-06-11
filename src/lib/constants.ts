@@ -9,8 +9,8 @@ export const MODEL_URLS: Record<string, string> = {
   "Llama-3.1-8B": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
   "Llama3.3-70B-Instruct": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
   "LLaMA-3.1-405B-Instruct": "https://huggingface.co/meta-llama/Llama-3.1-405B-Instruct",
-  "Llama-90B": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision",
-  "Llama-11B": "https://huggingface.co/meta-llama/Llama-3.2-11B-Vision",
+  "Llama-3.2-90B-Vision": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision",
+  "Llama-3.2-11B-Vision": "https://huggingface.co/meta-llama/Llama-3.2-11B-Vision",
 
   // OpenAI models
   "gpt-4-turbo": "https://openai.com/index/new-models-and-developer-products-announced-at-devday/",
@@ -61,13 +61,14 @@ export const MODEL_URLS: Record<string, string> = {
   "Qwen-72B": "https://huggingface.co/Qwen/Qwen-72B",
   "Qwen2.5-7B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
   "Qwen2.5-14B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct",
+  "Qwen2.5-VL-3B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct",
 
   // Grok models
   "grok-3-mini": "https://x.ai/news/grok-3",
 
   // Pixtral models
   "Pixtral-12B": "https://huggingface.co/mistralai/Pixtral-12B-2409",
-  "Pixtral-124B": "https://huggingface.co/mistralai/Pixtral-Large-Instruct-2411",
+  "Pixtral-Large-Instruct-124B": "https://huggingface.co/mistralai/Pixtral-Large-Instruct-2411",
 
   // Other models - add more as needed
   "baseline": "#"

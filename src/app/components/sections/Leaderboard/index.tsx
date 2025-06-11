@@ -156,6 +156,18 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     const sortableData = [...data];
     
     sortableData.sort((a, b) => {
+      // Special handling for model names (string sorting)
+      if (sortConfig.key === 'model') {
+        const aModel = String(a[sortConfig.key] || '').toLowerCase();
+        const bModel = String(b[sortConfig.key] || '').toLowerCase();
+        
+        if (sortConfig.direction === 'asc') {
+          return aModel.localeCompare(bModel);
+        } else {
+          return bModel.localeCompare(aModel);
+        }
+      }
+
       // Parsing function to convert metric values to numbers for comparison
       const parseValue = (value: string | number | undefined) => {
         if (value === undefined) return -Infinity;
@@ -227,8 +239,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'
     ];
     
-    // For rank, we sort low-to-high (asc)
-    if (key === 'rank') {
+    // For rank and model, we sort low-to-high (asc) alphabetically
+    if (key === 'rank' || key === 'model') {
       initialDirection = 'asc';
     } else if (highToLowMetrics.includes(key)) {
       initialDirection = 'desc'; // Higher values are better
@@ -605,6 +617,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
           newWidths[header.key] = 320;
         } else if (currentTask === 'vulnerability detection') {
           newWidths[header.key] = 350; // Wider width for vulnerability detection
+        } else if (currentTask === 'code-web') {
+          newWidths[header.key] = 360;
         } else if (currentTask === 'interaction-2-code') {
           newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
         } else if (currentTask === 'code-robustness') {
@@ -686,6 +700,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
             newWidths[header.key] = 320;
           } else if (currentTask === 'vulnerability detection') {
             newWidths[header.key] = 350; // Wider width for vulnerability detection
+          } else if (currentTask === 'code-web') {
+            newWidths[header.key] = 360;
           } else if (currentTask === 'interaction-2-code') {
             newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
           } else if (currentTask === 'code-robustness') {
@@ -734,13 +750,12 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       }
     });
     
-    // Only update if widths actually change
+    // Only update if widths actually change (removed columnWidths from comparison to prevent resize reset)
     if (Object.keys(newWidths).length !== Object.keys(columnWidths).length || 
-        Object.keys(newWidths).some(key => !columnWidths[key] || columnWidths[key] !== newWidths[key]) ||
         Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
       setColumnWidths(newWidths);
     }
-  }, [currentTask, sortedResults, getFilteredTableHeaders, columnWidths]);
+  }, [currentTask, sortedResults, getFilteredTableHeaders]); // Removed columnWidths dependency to prevent resize reset
 
   // Helper function to get minimum column width
   const getMinColumnWidth = useCallback((key: string): number => {
@@ -749,6 +764,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     if (key === 'model') {
       if (currentTask === 'overall') {
         minWidth = 800;
+      } else if (currentTask === 'code-web') {
+        minWidth = 320; // Set higher minimum width for code-web to prevent truncation issues
       } else {
         minWidth = 300;
       }

@@ -102,6 +102,14 @@ const taskAbilities: Record<TaskType, Ability> = {
     robustness: [],
     privacy: [],
   },
+  'mr-web': {
+    modality: [],
+    knowledge: ['Visual', 'RER'],
+    reasoning: ['CoT', 'ZS', 'SR'],
+    dataset: ['MR-Web'],
+    robustness: [],
+    privacy: [],
+  },
 };
 
 export default function Home() {

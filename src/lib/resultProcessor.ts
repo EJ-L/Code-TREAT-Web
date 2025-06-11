@@ -146,6 +146,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     case 'code-web':
     case 'interaction-2-code':
     case 'code-robustness':
+    case 'mr-web':
       // For these new tasks, process results directly using the raw data and metrics
       const rawTaskData = data.filter(entry => entry.task === task);
       
@@ -165,6 +166,20 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       if (filters.framework && filters.framework.length > 0) {
         filteredRawData = filteredRawData.filter(entry => {
           return entry.framework && filters.framework && filters.framework.includes(entry.framework);
+        });
+      }
+      
+      // Apply knowledge filter (for mr-web subtask)
+      if (task === 'mr-web' && filters.knowledge && filters.knowledge.length > 0) {
+        filteredRawData = filteredRawData.filter(entry => {
+          return entry.subtask && filters.knowledge && filters.knowledge.includes(entry.subtask);
+        });
+      }
+      
+      // Apply reasoning filter (for mr-web method)
+      if (task === 'mr-web' && filters.reasoning && filters.reasoning.length > 0) {
+        filteredRawData = filteredRawData.filter(entry => {
+          return entry.method && filters.reasoning && filters.reasoning.includes(entry.method);
         });
       }
       
@@ -263,7 +278,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
 
     // Skip dataset filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'interaction-2-code', 'code-robustness'].includes(task.toLowerCase())) {
+    if (!['code-web', 'interaction-2-code', 'code-robustness', 'mr-web'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         const normalizedDataset = result.dataset.toLowerCase().replace(/\s+/g, '');
         return allowedDatasets.has(normalizedDataset);
@@ -285,8 +300,8 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`语言过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系)
-  if (filters.knowledge && filters.knowledge.length > 0) {
+  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled specifically
+  if (filters.knowledge && filters.knowledge.length > 0 && task !== 'mr-web') {
     // 只输出简化的日志
     console.log(`开始知识领域过滤: ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
     
@@ -309,8 +324,8 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`知识领域过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 4. 推理类型过滤 (同级 OR 关系，跨级 AND 关系)
-  if (filters.reasoning && filters.reasoning.length > 0) {
+  // 4. 推理类型过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled specifically
+  if (filters.reasoning && filters.reasoning.length > 0 && task !== 'mr-web') {
     console.log(`应用推理类型过滤: ${filters.reasoning.length} 种类型, ${filteredResults.length} 条结果`);
     
     // 预处理推理类型关键词
@@ -525,6 +540,11 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     formattedResult['MDC'] = result['MDC'] !== null && result['MDC'] !== undefined ? result['MDC'].toFixed(1) : '-';
     formattedResult['MPS'] = result['MPS'] !== null && result['MPS'] !== undefined ? result['MPS'].toFixed(1) : '-';
     formattedResult['MHC'] = result['MHC'] !== null && result['MHC'] !== undefined ? result['MHC'].toFixed(1) : '-';
+    
+    // mr-web metrics
+    formattedResult['MAE'] = result['MAE'] !== null && result['MAE'] !== undefined ? result['MAE'].toFixed(3) : '-';
+    formattedResult['NEMD'] = result['NEMD'] !== null && result['NEMD'] !== undefined ? result['NEMD'].toFixed(3) : '-';
+    formattedResult['RER'] = result['RER'] !== null && result['RER'] !== undefined ? (result['RER'] * 100).toFixed(1) : '-';
 
     return formattedResult;
   });

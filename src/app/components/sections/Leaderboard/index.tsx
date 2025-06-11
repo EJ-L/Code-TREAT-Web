@@ -77,6 +77,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         return { key: 'CLIP', direction: 'desc' as const };
       case 'code-robustness':
         return { key: 'VAN', direction: 'desc' as const };
+      case 'mr-web':
+        return { key: 'MAE', direction: 'desc' as const };
       default:
         return { key: 'pass@1', direction: 'desc' as const };
     }
@@ -236,7 +238,9 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
       // Interaction-2-code metrics
       'SSIM', 'Text', 'Position', 'Implement Rate',
       // Code-robustness metrics
-      'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'
+      'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
+      // MR-Web metrics
+      'MAE', 'NEMD', 'RER'
     ];
     
     // For rank and model, we sort low-to-high (asc) alphabetically
@@ -301,7 +305,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         }
         
         // Special handling for new tasks
-        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
+        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
           filterOptions.llmJudges = [];
           filterOptions.showByDifficulty = false;
           
@@ -337,6 +341,17 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
             filterOptions.robustness = [];
             filterOptions.security = [];
             // Keep framework and datasets for code-web
+          }
+          
+          // For mr-web, disable unnecessary filters except Task and Method
+          if (currentTask === 'mr-web') {
+            filterOptions.langs = [];
+            filterOptions.modalities = [];
+            filterOptions.robustness = [];
+            filterOptions.security = [];
+            filterOptions.framework = [];
+            filterOptions.datasets = [];
+            // Keep only knowledge (Task) and reasoning (Method) filtering for mr-web
           }
         }
         
@@ -464,6 +479,12 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
         { key: 'MHC', label: 'MHC', width: 'w-26', description: 'Missing Header Comment robustness score' }
       ],
+      'mr-web': [
+        { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },
+        { key: 'NEMD', label: 'NEMD', width: 'w-24', description: 'Normalized Edit Distance' },
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'RER', label: 'RER', width: 'w-24', description: 'Request Element Recognition' }
+      ],
     };
 
     // Difficulty-specific header configurations
@@ -555,6 +576,12 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
         { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
         { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' }
+      ],
+      'mr-web': [
+        { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },
+        { key: 'NEMD', label: 'NEMD', width: 'w-24', description: 'Normalized Edit Distance' },
+        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
+        { key: 'RER', label: 'RER', width: 'w-24', description: 'Request Element Recognition' }
       ]
     };
 
@@ -706,6 +733,8 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
             newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
           } else if (currentTask === 'code-robustness') {
             newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
+          } else if (currentTask === 'mr-web') {
+            newWidths[header.key] = 300; // Standard width for mr-web
           } else {
             newWidths[header.key] = 300;
           }
@@ -732,7 +761,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
         else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
           newWidths[header.key] = 90;
         }
-        else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'].includes(header.key)) {
+        else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'MAE', 'NEMD', 'RER'].includes(header.key)) {
           newWidths[header.key] = 110;
         }
         else if (header.key === 'Compilation') {
@@ -881,7 +910,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   // Helper for sticky columns
   const getStickyStyles = useCallback((key: string) => {
     if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
+        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
       return '';
     }
     
@@ -894,7 +923,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   // Calculate left position for sticky columns
   const getStickyLeftPosition = useCallback((key: string) => {
     if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness') {
+        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
       return 'auto';
     }
     
@@ -931,7 +960,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   const getBackgroundColor = useCallback((key: string, isHeaderCell: boolean = false) => {
     if ((key === 'rank' || key === 'model') && 
         !(currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-          currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness')) {
+          currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web')) {
       if (isHeaderCell) {
         return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
       } else {

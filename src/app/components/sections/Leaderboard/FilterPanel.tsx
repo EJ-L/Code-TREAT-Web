@@ -50,7 +50,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
       <div className={`${showAdvancedFilters ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` : ''} pt-6 mt-2`}>
         <div className="flex flex-row flex-wrap gap-8 pb-4">
           {/* Dataset Filter */}
-          {(String(currentTask) !== 'overall') && taskAbilities[currentTask].dataset.length > 0 && (
+          {(String(currentTask) !== 'overall') && (String(currentTask) !== 'mr-web') && taskAbilities[currentTask].dataset.length > 0 && (
             <div className="flex flex-col space-y-3 mb-2">
               <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Dataset</p>
               <div className="inline-flex flex-wrap gap-2">
@@ -134,7 +134,9 @@ const FilterPanel: FC<FilterPanelProps> = ({
               values.length > 0 && (
                 <div key={key} className="flex flex-col space-y-3 mb-2">
                   <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                    {currentTask === 'mr-web' && key === 'knowledge' ? 'Task' : 
+                     currentTask === 'mr-web' && key === 'reasoning' ? 'Method' :
+                     key.charAt(0).toUpperCase() + key.slice(1)}
                   </p>
                   <div className="inline-flex flex-wrap gap-2">
                     {values.map((value: string) => (

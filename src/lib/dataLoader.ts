@@ -308,7 +308,8 @@ export const taskDirectories: Record<string, string> = {
   'output prediction': 'data/output_prediction',
   'code-web': 'data/code-web',
   'interaction-2-code': 'data/interaction-2-code',
-  'code-robustness': 'data/code-robustness'
+  'code-robustness': 'data/code-robustness',
+  'mr-web': 'data/mr-web'
 };
 
 // 加载单个文件的函数
@@ -444,9 +445,27 @@ async function performDataLoad(): Promise<ResultEntry[]> {
               return fileData.map(entry => {
                 // 如果有language字段但没有lang字段，将language字段的值复制到lang字段
                 if (entry.language && !entry.lang) {
-                  return {...entry, lang: entry.language, task: taskType};
+                  const result = {...entry, lang: entry.language, task: taskType};
+                  // For mr-web, preserve the original task as subtask
+                  if (taskType === 'mr-web' && entry.task) {
+                    result.subtask = entry.task;
+                  }
+                  // For mr-web, preserve the method field
+                  if (taskType === 'mr-web' && entry.method) {
+                    result.method = entry.method;
+                  }
+                  return result;
                 }
-                return {...entry, task: taskType};
+                const result = {...entry, task: taskType};
+                // For mr-web, preserve the original task as subtask
+                if (taskType === 'mr-web' && entry.task) {
+                  result.subtask = entry.task;
+                }
+                // For mr-web, preserve the method field
+                if (taskType === 'mr-web' && entry.method) {
+                  result.method = entry.method;
+                }
+                return result;
               });
             } catch (error) {
               console.error(`处理文件失败: ${file}`, error);

@@ -50,6 +50,25 @@ export function processInputPrediction(results: ProcessedResult[], filters: Filt
     return true;
   });
 
+  // If we're showing by difficulty, populate the difficulty-specific metrics
+  if (filters.showByDifficulty) {
+    filteredResults.forEach(result => {
+      if (result.difficulty === 'Easy' && result.pass1 !== null) {
+        result.easyPass1 = result.pass1;
+        result.easyPass3 = result.pass3;
+        result.easyPass5 = result.pass5;
+      } else if (result.difficulty === 'Medium' && result.pass1 !== null) {
+        result.mediumPass1 = result.pass1;
+        result.mediumPass3 = result.pass3;
+        result.mediumPass5 = result.pass5;
+      } else if (result.difficulty === 'Hard' && result.pass1 !== null) {
+        result.hardPass1 = result.pass1;
+        result.hardPass3 = result.pass3;
+        result.hardPass5 = result.pass5;
+      }
+    });
+  }
+
   console.log('输入预测任务处理完成:', {
     totalFilteredResults: filteredResults.length,
     remainingDatasets: [...new Set(filteredResults.map(r => r.dataset))]

@@ -304,7 +304,7 @@ export const taskDirectories: Record<string, string> = {
   // 'code execution': 'data/code-execution',
   'vulnerability detection': 'data/vulnerability-detection',
   'code review': 'data/code-review',
-  'input prediction': 'data/input_prediction', // Directory doesn't exist
+  'input prediction': 'data/input_prediction',
   'output prediction': 'data/output_prediction',
   'code-web': 'data/code-web',
   'interaction-2-code': 'data/interaction-2-code',
@@ -435,6 +435,11 @@ async function performDataLoad(): Promise<ResultEntry[]> {
           batch.filter((file: string) => file.endsWith('.jsonl')).map(async (file: string) => {
             try {
               const fileData = await loadJsonlFile(directory, file);
+              
+              // Log when loading input_prediction files
+              if (taskType === 'input prediction' && fileData.length > 0) {
+                console.log(`Loaded input prediction file: ${file} with ${fileData.length} entries`);
+              }
               
               // 特别记录code review文件的内容（仅在第一次加载时）
               if (taskType === 'code review' && fileData.length > 0 && i === 0 && file === batch[0]) {

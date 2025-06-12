@@ -260,6 +260,27 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
     }
   }, [currentTask]);
 
+  // Handle showByDifficulty changes - ensure HackerRank is selected when enabled
+  useEffect(() => {
+    if (showByDifficulty && currentTask === 'code translation') {
+      // Automatically select HackerRank dataset when showing by difficulty
+      setSelectedAbilities(prev => {
+        // Check if HackerRank is already in the dataset
+        const hasHackerRank = prev.dataset?.includes('HackerRank');
+        
+        if (!hasHackerRank) {
+          // Add HackerRank to the dataset selection
+          return {
+            ...prev,
+            dataset: [...(prev.dataset || []), 'HackerRank']
+          };
+        }
+        
+        return prev;
+      });
+    }
+  }, [showByDifficulty, currentTask]);
+
   // Load and process data when filters change
   useEffect(() => {
     let isMounted = true;

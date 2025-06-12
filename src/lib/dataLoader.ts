@@ -304,7 +304,7 @@ export const taskDirectories: Record<string, string> = {
   // 'code execution': 'data/code-execution',
   'vulnerability detection': 'data/vulnerability-detection',
   'code review': 'data/code-review',
-  // 'input prediction': 'data/input_prediction', // Directory doesn't exist
+  'input prediction': 'data/input_prediction', // Directory doesn't exist
   'output prediction': 'data/output_prediction',
   'code-web': 'data/code-web',
   'interaction-2-code': 'data/interaction-2-code',

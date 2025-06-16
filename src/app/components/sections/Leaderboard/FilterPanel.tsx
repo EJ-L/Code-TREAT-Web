@@ -63,24 +63,24 @@ const FilterPanel: FC<FilterPanelProps> = ({
                                     (showByDifficulty && currentTask === 'code translation' && value === 'HackerRank');
                   
                   return (
-                    <motion.button
-                      key={value}
+                  <motion.button
+                    key={value}
                       whileHover={!isDisabled ? { scale: 1.02 } : {}}
                       whileTap={!isDisabled ? { scale: 0.98 } : {}}
                       onClick={() => !isDisabled && handleAbilityChange('dataset', value)}
                       disabled={isDisabled}
-                      className={`
-                        px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
+                    className={`
+                      px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
                         ${isSelected
-                          ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
+                        ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
                           : isDarkMode 
                               ? `bg-[#151d2a] ${isDisabled ? 'text-slate-500 cursor-not-allowed opacity-60' : 'text-slate-300 hover:bg-blue-900/20'} border border-slate-700/50` 
                               : `bg-slate-50 ${isDisabled ? 'text-slate-400 cursor-not-allowed opacity-60' : 'text-slate-600 hover:bg-slate-100'} border border-slate-200`
-                        }
-                      `}
-                    >
-                      {value}
-                    </motion.button>
+                      }
+                    `}
+                  >
+                    {value}
+                  </motion.button>
                   );
                 })}
               </div>
@@ -232,75 +232,75 @@ const FilterPanel: FC<FilterPanelProps> = ({
             
             {/* Information section - moved to bottom */}
             <div className={`${hasFilters ? 'mt-6' : 'mt-0'} pt-4 ${hasFilters ? (isDarkMode ? 'border-t border-slate-700/50' : 'border-t border-slate-200') : ''}`}>
-              {/* Flex container with note and difficulty toggle, aligned to the right */}
-              <div className="flex justify-end mb-4">
-                <div className="flex flex-col items-end space-y-2">
-                  {/* Note about "-" symbol */}
-                  <div className={`flex items-center gap-2 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                  }`}>
-                    <span className="font-mono">—</span>
-                    <span className="text-lg">Denotes data is not yet available.</span>
-                  </div>
+      {/* Flex container with note and difficulty toggle, aligned to the right */}
+      <div className="flex justify-end mb-4">
+        <div className="flex flex-col items-end space-y-2">
+          {/* Note about "-" symbol */}
+          <div className={`flex items-center gap-2 ${
+            isDarkMode ? 'text-slate-400' : 'text-slate-500'
+          }`}>
+            <span className="font-mono">—</span>
+            <span className="text-lg">Denotes data is not yet available.</span>
+          </div>
 
-                  {/* Difficulty toggle - show for tasks that support it */}
-                  {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
-                    <div className="flex items-center">
-                      <input 
-                        type="checkbox" 
-                        id="show-difficulty"
-                        checked={showByDifficulty}
-                        onChange={() => setShowByDifficulty(!showByDifficulty)}
-                        className={`form-checkbox h-5 w-5 ${
-                          isDarkMode 
-                            ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
-                            : 'text-blue-600 bg-slate-100 border-slate-300'
-                        } rounded focus:ring-blue-500`} 
-                      />
-                      <label 
-                        htmlFor="show-difficulty"
-                        className={`ml-2 text-l cursor-pointer ${
-                          isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                        }`}
-                      >
-                        Show results by difficulty
-                      </label>
-                    </div>
-                  )}
-                </div>
-              </div>
-              
-              {/* Vulnerability Detection Metrics Explanation */}
-              {currentTask === 'vulnerability detection' && (
-                <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-C:</span>
-                        <span>Correctly predicts both elements</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-V:</span>
-                        <span>Both predicted as vulnerable</span>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-B:</span>
-                        <span>Both predicted as benign</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-R:</span>
-                        <span>Inversely predicted labels</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-xs italic text-right">
-                    Note: P-C + P-V + P-B + P-R = 100%
-                  </div>
-                </div>
-              )}
+          {/* Difficulty toggle - show for tasks that support it */}
+          {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
+            <div className="flex items-center">
+              <input 
+                type="checkbox" 
+                id="show-difficulty"
+                checked={showByDifficulty}
+                onChange={() => setShowByDifficulty(!showByDifficulty)}
+                className={`form-checkbox h-5 w-5 ${
+                  isDarkMode 
+                    ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
+                    : 'text-blue-600 bg-slate-100 border-slate-300'
+                } rounded focus:ring-blue-500`} 
+              />
+              <label 
+                htmlFor="show-difficulty"
+                className={`ml-2 text-l cursor-pointer ${
+                  isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                }`}
+              >
+                Show results by difficulty
+              </label>
             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Vulnerability Detection Metrics Explanation */}
+      {currentTask === 'vulnerability detection' && (
+        <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-C:</span>
+                <span>Correctly predicts both elements</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-V:</span>
+                <span>Both predicted as vulnerable</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-B:</span>
+                <span>Both predicted as benign</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-R:</span>
+                <span>Inversely predicted labels</span>
+              </div>
+            </div>
+          </div>
+          <div className="text-xs italic text-right">
+            Note: P-C + P-V + P-B + P-R = 100%
+          </div>
+        </div>
+      )}
+    </div>
           </>
         ) : (
           // Render just the info section for tasks without filters
@@ -327,7 +327,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                       checked={showByDifficulty}
                       onChange={() => setShowByDifficulty(!showByDifficulty)}
                       className={`form-checkbox h-5 w-5 ${
-                        isDarkMode 
+                isDarkMode 
                           ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
                           : 'text-blue-600 bg-slate-100 border-slate-300'
                       } rounded focus:ring-blue-500`} 
@@ -343,7 +343,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                   </div>
                 )}
               </div>
-            </div>
+          </div>
           </>
         )}
       </CardContent>

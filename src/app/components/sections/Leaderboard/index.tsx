@@ -15,7 +15,7 @@ interface LeaderboardProps {
   isDarkMode: boolean;
 }
 
-const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
+  const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   const [currentTask, setCurrentTask] = useState<TaskType>('overall');
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
@@ -721,6 +721,32 @@ const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   useEffect(() => {
     initializeColumnWidths();
   }, [currentTask, initializeColumnWidths]);
+
+  // Listen for task change events from PaperCitationModal
+  useEffect(() => {
+    const handleTaskChangeEvent = (event: CustomEvent) => {
+      const { task } = event.detail;
+      if (task && Object.keys(taskAbilities).includes(task)) {
+        const allTasks = Object.keys(taskAbilities);
+        const taskIndex = allTasks.indexOf(task);
+        const newPage = Math.floor(taskIndex / TASKS_PER_PAGE);
+        
+        // Update task page if necessary
+        if (newPage !== currentTaskPage) {
+          setCurrentTaskPage(newPage);
+        }
+        
+        // Change to the specified task
+        handleTaskChange(task as TaskType);
+      }
+    };
+
+    window.addEventListener('changeLeaderboardTask', handleTaskChangeEvent as EventListener);
+    
+    return () => {
+      window.removeEventListener('changeLeaderboardTask', handleTaskChangeEvent as EventListener);
+    };
+  }, [taskAbilities, currentTaskPage, handleTaskChange]);
   
   // Update column widths when filtered headers are available
   useEffect(() => {

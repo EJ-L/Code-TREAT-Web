@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
+import PaperCitationModal from '../ui/PaperCitationModal';
 
 interface HeroProps {
   isDarkMode: boolean;
 }
 
 const Hero: FC<HeroProps> = ({ isDarkMode }) => {
+  const [isPaperModalOpen, setIsPaperModalOpen] = useState(false);
+
   return (
     <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16" id="home">
       <div className="relative mt-[180px]">
@@ -34,10 +37,8 @@ const Hero: FC<HeroProps> = ({ isDarkMode }) => {
           Ensuring the quality and reliability of AI-generated code through comprehensive testing and evaluation.
         </motion.p>
         <div className="flex flex-wrap justify-center gap-4">
-          <motion.a
-            href="https://arxiv.org/abs/2404.00160"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            onClick={() => setIsPaperModalOpen(true)}
             className={`relative inline-flex items-center px-6 py-4 text-lg text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg
               overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
             whileHover={{ scale: 1.05 }}
@@ -62,13 +63,13 @@ const Hero: FC<HeroProps> = ({ isDarkMode }) => {
                   ></path>
                 </svg>
               </span>
-              <span className="relative z-10">Paper</span>
+              <span className="relative z-10">Papers</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 
               group-hover:opacity-100 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/50 to-purple-400/50 blur-xl 
               opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.a>
+          </motion.button>
           
           <motion.a
             href="https://github.com/CUHK-ARISE/Code-TREAT"
@@ -177,6 +178,13 @@ const Hero: FC<HeroProps> = ({ isDarkMode }) => {
           </motion.a>
         </div>
       </div>
+
+      {/* Paper Citation Modal */}
+      <PaperCitationModal 
+        isOpen={isPaperModalOpen}
+        onClose={() => setIsPaperModalOpen(false)}
+        isDarkMode={isDarkMode}
+      />
     </main>
   );
 };

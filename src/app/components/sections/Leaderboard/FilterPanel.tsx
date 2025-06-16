@@ -56,11 +56,11 @@ const FilterPanel: FC<FilterPanelProps> = ({
               <div className="inline-flex flex-wrap gap-2">
                 {taskAbilities[currentTask].dataset.map((value: string) => {
                   // Determine if the button should be disabled
-                  // Only enable "HackerRank" when showing by difficulty
-                  const isDisabled = showByDifficulty && value !== 'HackerRank';
-                  // If showing by difficulty, auto-select HackerRank
+                  // Only disable non-HackerRank datasets for code translation when showing by difficulty
+                  const isDisabled = showByDifficulty && currentTask === 'code translation' && value !== 'HackerRank';
+                  // If showing by difficulty for code translation, auto-select HackerRank
                   const isSelected = selectedAbilities.dataset?.includes(value) || 
-                                    (showByDifficulty && value === 'HackerRank');
+                                    (showByDifficulty && currentTask === 'code translation' && value === 'HackerRank');
                   
                   return (
                     <motion.button

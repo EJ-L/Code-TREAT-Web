@@ -65,13 +65,17 @@ const TableHeader: FC<TableHeaderProps> = ({
     <th 
       key={header.key} 
       data-key={header.key}
-      className={`relative px-6 py-4 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
-        isDarkMode 
+      className={`relative px-6 py-3 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
+        // Only apply base background colors if getBackgroundColor doesn't return a custom color
+        bgColor ? '' : (isDarkMode 
           ? 'text-slate-300 bg-[#121c2b]' 
-          : 'text-slate-600 bg-slate-100'
+          : 'text-slate-600 bg-slate-100')
+      } ${
+        // Apply text color based on theme
+        isDarkMode ? 'text-slate-300' : 'text-slate-600'
       } ${stickyStyles} ${bgColor} ${
         (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
-          ? 'py-5' : ''
+          ? 'py-4' : ''
       }`}
       style={{ 
         width: columnWidth,
@@ -116,10 +120,24 @@ const TableHeader: FC<TableHeaderProps> = ({
           {formatDifficultyHeader(header.label)}
         </span>
         {/* Sort indicator */}
-        <span className="ml-1 text-sm opacity-50 shrink-0 min-w-[12px]">
+        <span className={`ml-2 shrink-0 min-w-[20px] transition-all duration-200 ${
+          sortConfig && sortConfig.key === header.key 
+            ? 'text-amber-500 opacity-100 scale-110' 
+            : isDarkMode ? 'text-slate-400 opacity-60 group-hover:text-blue-400 group-hover:opacity-80' : 'text-slate-500 opacity-60 group-hover:text-blue-500 group-hover:opacity-80'
+        }`}>
           {sortConfig && sortConfig.key === header.key ? (
-            sortConfig.direction === 'asc' ? '↑' : '↓'
-          ) : '↕'}
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              {sortConfig.direction === 'asc' ? (
+                <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+              ) : (
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              )}
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
+            </svg>
+          )}
         </span>
       </div>
       {/* Resize handle - a more subtle line that doesn't extend to the edges */}

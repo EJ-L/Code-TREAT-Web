@@ -69,7 +69,7 @@ const TableCell: FC<TableCellProps> = ({
     <td 
       key={header.key}
       data-key={header.key}
-      className={`px-4 py-2 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
+      className={`px-4 py-3 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
         header.key === 'model' 
           ? isDarkMode ? 'text-slate-200 font-bold' : 'text-slate-900 font-bold'
           : isDarkMode ? 'text-slate-300' : 'text-slate-600'
@@ -80,10 +80,13 @@ const TableCell: FC<TableCellProps> = ({
       style={{ 
         width: getTaskSpecificColumnWidth(currentTask, header.key),
         transition: resizingColumn ? 'none' : 'width 0.1s ease',
-        left: getStickyLeftPosition(header.key)
+        left: getStickyLeftPosition(header.key),
+        verticalAlign: 'middle'
       }}
     >
-      <div className={`w-full ${alignment} font-bold`}>
+      <div className={`w-full ${alignment} font-bold flex items-center ${
+        isColumnCentered(header.key) ? 'justify-center' : 'justify-start'
+      }`}>
         {(() => {
           if (value === null || value === undefined || value === '') {
             return '-';

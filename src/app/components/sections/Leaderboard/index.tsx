@@ -87,8 +87,22 @@ interface LeaderboardProps {
   // 处理任务切换
   const handleTaskChange = (task: TaskType) => {
     setCurrentTask(task);
-    setSelectedAbilities({});  // 重置所有过滤器
     setIsComparisonModalOpen(false);  // Close comparison modal when switching tasks
+    
+    // Auto-select only the first available dataset for tasks that have them
+    const newSelectedAbilities: Partial<Ability> = {};
+    
+    // For tasks other than 'overall' and 'interaction-2-code', auto-select first dataset only
+    if (task !== 'overall' && task !== 'interaction-2-code') {
+      const taskAbility = taskAbilities[task];
+      
+      // Auto-select first dataset if available
+      if (taskAbility.dataset && taskAbility.dataset.length > 0) {
+        newSelectedAbilities.dataset = [taskAbility.dataset[0]];
+      }
+    }
+    
+    setSelectedAbilities(newSelectedAbilities);
     
     // 注意：对于code review任务，我们暂时不应用任何过滤器
     if (task === 'code review') {

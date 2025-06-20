@@ -108,6 +108,38 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'GPT-4.1-2025-04-14': '2025-04-14', // Future model for testing
   'o3-mini (Med)': '2025-04-16',
   'o4-mini (Med)': '2025-04-16',
+
+  // Claude Models
+  'Claude-3.5-Sonnet-20241022': '2024-10-22',
+  'Claude-Sonnet-4': '2025-05-22',
+  'Claude-3.7-Sonnet': '2025-02-24',
+  'Claude-3.5-Haiku-20241022': '2024-10-22',
+
+  // Llama Models
+  'Llama-3.3-70B-Instruct': '2024-12-06',
+  'Llama-3.1-70B-Instruct': '2024-07-23',
+  'Llama-3.1-8B-Instruct': '2024-07-23',
+  'Llama-4-Scout-17B-16E-Instruct': '2025-04-05',
+
+  // Qwen Models
+  'Qwen3-235B-A22B': '2025-04-29',
+  'Qwen3-30B-A3B': '2025-04-29',
+  'Qwen3-32B': '2025-04-29',
+  'Qwen2.5-72B-Instruct': '2024-09-19',
+  'Qwen2.5-Coder-32B-Instruct': '2024-09-19',
+
+  // Grok Models
+  'Grok-3-Mini (High)': '2025-02-17',
+
+  // DeepSeek Models
+  'DeepSeek-R1': '2025-01-20',
+  'DeepSeek-R1 (0528)': '2025-05-28',
+  'DeepSeek-V3': '2024-12-26',
+
+  // Gemini Models
+  'Gemma-3-27B-Instruct': '2025-03-12',
+  'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
+  
 };
 
 // Dataset release dates (YYYY-MM-DD format)

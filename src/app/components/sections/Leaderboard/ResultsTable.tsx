@@ -4,7 +4,7 @@ import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
 import { TaskType } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
-import { getModelUrl } from '@/lib/constants';
+import { getModelUrl, hasDataLeakage } from '@/lib/constants';
 
 interface ResultsTableProps {
   currentTask: TaskType;
@@ -74,7 +74,11 @@ const ResultsTable: FC<ResultsTableProps> = ({
 
     // If we have results, show them even during loading state
     if (sortedResults.length > 0) {
-      return sortedResults.map((result, index) => (
+      return sortedResults.map((result, index) => {
+        // Get model name for passing to cells (but don't change row background)
+        const modelName = result.model || result.modelName || '';
+        
+        return (
         <tr key={index} className={`
           ${isDarkMode 
             ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
@@ -107,11 +111,13 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
                 isDarkMode={isDarkMode}
                 modelUrl={modelUrl}
+                modelName={modelName}
               />
             );
           })}
         </tr>
-      ));
+        );
+      });
     }
 
     // If no results and not loading, show no results message

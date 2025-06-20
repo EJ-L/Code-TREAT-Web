@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { TaskType } from '@/lib/types';
 import OrganizationLogo from '@/app/components/ui/OrganizationLogo';
 import { getOrganizationFromModel } from '@/lib/organization-logos';
+import { hasDataLeakage } from '@/lib/constants';
 
 interface TableCellProps {
   header: {
@@ -26,6 +27,7 @@ interface TableCellProps {
   getTaskSpecificColumnWidth: (task: TaskType, key: string) => string;
   isDarkMode: boolean;
   modelUrl?: string;
+  modelName?: string; // Add model name prop for data leakage detection
 }
 
 const TableCell: FC<TableCellProps> = ({
@@ -45,13 +47,23 @@ const TableCell: FC<TableCellProps> = ({
   truncateText,
   getTaskSpecificColumnWidth,
   isDarkMode,
-  modelUrl
+  modelUrl,
+  modelName
 }) => {
   const alignment = getColumnAlignment(header.key);
   const numericStyles = getNumericStyles(header.key);
   const stickyStyles = getStickyStyles(header.key);
   // Get the background color based on whether the cell is in a sticky column and row index
   const getRowBackgroundColor = () => {
+    // Only apply pink background to the model column itself
+    if (header.key === 'model' && value) {
+      const modelNameToCheck = String(value);
+      if (hasDataLeakage(modelNameToCheck, currentTask)) {
+        // Pink background for potentially leaked models - only for model column
+        return isDarkMode ? 'bg-pink-900/40' : 'bg-pink-200';
+      }
+    }
+    
     // For sticky columns, we need to explicitly manage the background color
     if (header.key === 'rank' || header.key === 'model') {
       return isDarkMode 

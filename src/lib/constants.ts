@@ -97,4 +97,55 @@ export function getModelUrl(modelName: string): string | undefined {
   }
   
   return undefined;
+}
+
+// Model publish dates (YYYY-MM-DD format)
+export const MODEL_PUBLISH_DATES: Record<string, string> = {
+  // OpenAI Models
+  'GPT-3.5-turbo-0125': '2024-01-25',
+  'GPT-4-turbo-2024-04-09': '2024-04-09',
+  'GPT-4o-2024-11-20': '2024-11-20',
+  'GPT-4.1-2025-04-14': '2025-04-14', // Future model for testing
+  'o3-mini (Med)': '2025-04-16',
+  'o4-mini (Med)': '2025-04-16',
+};
+
+// Dataset release dates (YYYY-MM-DD format)
+export const DATASET_RELEASE_DATES: Record<string, string> = {
+  'vulnerability detection': '2024-03-27', // PrimeVul dataset release date
+  // 'code generation': '2021-07-07', // HumanEval release date
+  // 'code translation': '2021-07-07', // Based on HumanEval
+  // 'code summarization': '2023-12-01', // GitHub dataset collection date
+  // 'code review': '2023-12-01', // GitHub dataset collection date
+  // 'input prediction': '2021-07-07', // Based on HumanEval
+  // 'output prediction': '2021-07-07', // Based on HumanEval
+  // 'code-robustness': '2023-06-15', // CodeCrash dataset
+  // 'code-web': '2024-09-15', // DesignBench dataset
+  // 'interaction-2-code': '2024-11-03', // Interaction2Code dataset
+  // 'mr-web': '2024-12-13', // MR-Web dataset
+  // 'overall': '2021-07-07', // Based on oldest dataset
+};
+
+// Helper function to check if a model has data leakage
+export function hasDataLeakage(modelName: string, taskName: string): boolean {
+  const modelPublishDate = MODEL_PUBLISH_DATES[modelName];
+  const datasetReleaseDate = DATASET_RELEASE_DATES[taskName];
+  
+  // Skip data leak checking if either date is missing
+  if (!modelPublishDate) {
+    // Model publish date not available, skip leak checking
+    return false;
+  }
+  
+  if (!datasetReleaseDate) {
+    // Dataset release date not available, skip leak checking
+    return false;
+  }
+  
+  // Convert dates to Date objects for comparison
+  const modelDate = new Date(modelPublishDate);
+  const datasetDate = new Date(datasetReleaseDate);
+  
+  // Model is potentially leaked if published after dataset release
+  return modelDate > datasetDate;
 } 

@@ -506,13 +506,13 @@ interface LeaderboardProps {
       ],
       'code-robustness': [
         { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
-        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
-        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
-        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' },
         { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
         { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
         { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
-        { key: 'MHC', label: 'MHC', width: 'w-26', description: 'Missing Header Comment robustness score' }
+        { key: 'MHC', label: 'MHC', width: 'w-26', description: 'Missing Header Comment robustness score' },
+        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
+        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
+        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' }
       ],
       'mr-web': [
         { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },
@@ -604,13 +604,13 @@ interface LeaderboardProps {
       ],
       'code-robustness': [
         { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
-        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
-        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
-        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' },
         { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
         { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
         { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
-        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' }
+        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' },
+        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
+        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
+        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' }
       ],
       'mr-web': [
         { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },

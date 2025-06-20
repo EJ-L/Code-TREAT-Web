@@ -11,7 +11,7 @@ import Leaderboard from '@/app/components/sections/Leaderboard';
 // Define task abilities - mapping each task type to its associated capabilities
 const taskAbilities: Record<TaskType, Ability> = {
   'overall': {
-    dataset: ['HackerRank', 'GeeksForGeeks', 'PolyHumanEval', 'CodeTransOcean', 'GitHub', 'PrimeVul', 'PrimeVulPairs'],
+    dataset: ['HackerRank', 'GeeksForGeeks', 'PolyHumanEval', 'github_2023', 'PrimeVul', 'PrimeVulPairs'],
     modality: ['Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go'],
     knowledge: ['Algorithms', 'Data Structures', 'Math'],
     reasoning: ['Direct', 'CoT Reasoning', 'Inductive'],
@@ -31,7 +31,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     modality: ['Python', 'Java'],
     knowledge: ['Algorithms', 'Data Structures', 'Math'],
     reasoning: ['Direct', 'CoT Reasoning'],
-    dataset: ['HackerRank', 'PolyHumanEval', 'CodeTransOcean'],
+    dataset: ['HackerRank', 'PolyHumanEval'],
     robustness: [],
     privacy: [],
   },
@@ -39,7 +39,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     modality: ['Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go'],
     knowledge: ['Docstring'],
     reasoning: ['Direct', 'CoT Reasoning'],
-    dataset: ['GitHub'],
+    dataset: ['github_2023'],
     robustness: [],
     privacy: [],
     llmJudges: ['gpt-4o-2024-11-20'],
@@ -48,7 +48,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     modality: ['Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go'],
     knowledge: ['Code Review'],
     reasoning: ['Direct', 'CoT Reasoning'],
-    dataset: ['GitHub'],
+    dataset: ['github_2023'],
     robustness: [],
     privacy: [],
     llmJudges: ['gpt-4o-2024-11-20'],

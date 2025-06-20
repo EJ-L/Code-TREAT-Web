@@ -30,13 +30,13 @@ const FilterPanel: FC<FilterPanelProps> = ({
   // State for toggling advanced filters visibility
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(true);
 
-  // Check if there are any filters available
+  // Check if there are any filters available (with more than one option)
   const hasFilters = (String(currentTask) !== 'overall') && (String(currentTask) !== 'interaction-2-code') && (
-    taskAbilities[currentTask].dataset.length > 0 ||
-    (taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 0) ||
-    ((currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0) ||
+    taskAbilities[currentTask].dataset.length > 1 ||
+    (taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 1) ||
+    ((currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 1) ||
     (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
-      .some(([key, values]) => !['dataset', 'llmJudges', 'framework'].includes(key) && values.length > 0)
+      .some(([key, values]) => !['dataset', 'llmJudges', 'framework'].includes(key) && values.length > 1)
   );
 
   // All filters section (now under Advanced Filters)
@@ -50,7 +50,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
       <div className={`${showAdvancedFilters ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` : ''} pt-6 mt-2`}>
         <div className="flex flex-row flex-wrap gap-8 pb-4">
           {/* Dataset Filter */}
-          {(String(currentTask) !== 'overall') && (String(currentTask) !== 'mr-web') && taskAbilities[currentTask].dataset.length > 0 && (
+          {(String(currentTask) !== 'overall') && (String(currentTask) !== 'mr-web') && taskAbilities[currentTask].dataset.length > 1 && (
             <div className="flex flex-col space-y-3 mb-2">
               <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Dataset</p>
               <div className="inline-flex flex-wrap gap-2">
@@ -88,7 +88,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           )}
 
           {/* Framework Filter - for code-web task */}
-          {(String(currentTask) !== 'overall') && taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 0 && (
+          {(String(currentTask) !== 'overall') && taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 1 && (
             <div className="flex flex-col space-y-3 mb-2">
               <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Framework</p>
               <div className="inline-flex flex-wrap gap-2">
@@ -114,7 +114,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           )}
 
           {/* LLM Judge Filter */}
-          {(String(currentTask) !== 'overall') && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 0 && (
+          {(String(currentTask) !== 'overall') && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 1 && (
             <div className="flex flex-col space-y-3 mb-2">
               <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>LLM Judge</p>
               <div className="inline-flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           {(String(currentTask) !== 'overall') && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][]).
             filter(([key]) => !['dataset', 'llmJudges', 'framework'].includes(key)).
             map(([key, values]) => (
-              values.length > 0 && (
+              values.length > 1 && (
                 <div key={key} className="flex flex-col space-y-3 mb-2">
                   <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
                     {currentTask === 'mr-web' && key === 'knowledge' ? 'Task' : 
@@ -190,6 +190,11 @@ const FilterPanel: FC<FilterPanelProps> = ({
     </div>
   );
 
+  // For interaction-2-code, return just the spacing without any content
+  if (currentTask === 'interaction-2-code') {
+    return <div className="mt-8 mb-8" />;
+  }
+
   return (
     <Card className={`w-full max-w-7xl mx-auto mt-8 mb-8 ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
       <CardContent className="p-6">
@@ -235,13 +240,20 @@ const FilterPanel: FC<FilterPanelProps> = ({
       {/* Flex container with note and difficulty toggle, aligned to the right */}
       <div className="flex justify-end mb-4">
         <div className="flex flex-col items-end space-y-2">
-          {/* Note about "-" symbol */}
-          <div className={`flex items-center gap-2 ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-500'
-          }`}>
-            <span className="font-mono">—</span>
-            <span className="text-lg">Denotes data is not yet available.</span>
-          </div>
+          {/* Note about "-" symbol - show for most tasks except specified ones */}
+          {!['code-web', 'mr-web', 'interaction-2-code', 'overall'].includes(currentTask) && (
+            <div className={`flex items-center gap-2 ${
+              isDarkMode ? 'text-slate-400' : 'text-slate-500'
+            }`}>
+              <span className="font-mono">—</span>
+              <span className="text-lg">
+                {currentTask === 'code-robustness' 
+                  ? 'Denotes data is not tested since it is already tested in other fields.'
+                  : 'Denotes data is not yet available.'
+                }
+              </span>
+            </div>
+          )}
 
           {/* Difficulty toggle - show for tasks that support it */}
           {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
@@ -310,13 +322,20 @@ const FilterPanel: FC<FilterPanelProps> = ({
             {/* Flex container with note and difficulty toggle, aligned to the right */}
             <div className="flex justify-end mb-4">
               <div className="flex flex-col items-end space-y-2">
-                {/* Note about "-" symbol */}
-                <div className={`flex items-center gap-2 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                }`}>
-                  <span className="font-mono">—</span>
-                  <span className="text-lg">Denotes data is not yet available.</span>
-                </div>
+                {/* Note about "-" symbol - show for most tasks except specified ones */}
+                {!['code-web', 'mr-web', 'interaction-2-code', 'overall'].includes(currentTask) && (
+                  <div className={`flex items-center gap-2 ${
+                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                  }`}>
+                    <span className="font-mono">—</span>
+                    <span className="text-lg">
+                      {currentTask === 'code-robustness' 
+                        ? 'Denotes data is not tested since it is already tested in other fields.'
+                        : 'Denotes data is not yet available.'
+                      }
+                    </span>
+                  </div>
+                )}
 
                 {/* Difficulty toggle - show for tasks that support it */}
                 {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
@@ -327,7 +346,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                       checked={showByDifficulty}
                       onChange={() => setShowByDifficulty(!showByDifficulty)}
                       className={`form-checkbox h-5 w-5 ${
-                isDarkMode 
+                        isDarkMode 
                           ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
                           : 'text-blue-600 bg-slate-100 border-slate-300'
                       } rounded focus:ring-blue-500`} 
@@ -343,7 +362,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                   </div>
                 )}
               </div>
-          </div>
+            </div>
           </>
         )}
       </CardContent>

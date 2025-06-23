@@ -58,81 +58,51 @@ const ResultsTable: FC<ResultsTableProps> = ({
   isDarkMode
 }) => {
   const renderResultsTable = () => {
-    // Only show loading when there are no results yet
-    if (isLoading && results.length === 0) {
+    // Show results (this function is only called when we have data)
+    return sortedResults.map((result, index) => {
+      // Get model name for passing to cells (but don't change row background)
+      const modelName = result.model || result.modelName || '';
+      
       return (
-        <tr className="w-full">
-          <td colSpan={getTableHeaders(currentTask).length} className="text-center">
-            <div className="flex flex-col items-center justify-center py-20">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-t-2 border-blue-500 mb-4"></div>
-              <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>Loading results...</span>
-            </div>
-          </td>
-        </tr>
-      );
-    }
-
-    // If we have results, show them even during loading state
-    if (sortedResults.length > 0) {
-      return sortedResults.map((result, index) => {
-        // Get model name for passing to cells (but don't change row background)
-        const modelName = result.model || result.modelName || '';
-        
-        return (
-        <tr key={index} className={`
-          ${isDarkMode 
-            ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
-            : index % 2 === 0 ? 'bg-white' : 'bg-slate-100'
-          }
-          ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
-          transition-colors
-        `}>
-          {getTableHeaders(currentTask).map(header => {
-            const value = result[header.key];
-            const modelUrl = header.key === 'model' ? getModelUrl(String(value)) : undefined;
-            
-            return (
-              <TableCell 
-                key={header.key}
-                header={header}
-                value={value}
-                rowIndex={index}
-                currentTask={currentTask}
-                columnWidths={columnWidths}
-                resizingColumn={resizingColumn}
-                getContentWidth={getContentWidth}
-                isColumnCentered={isColumnCentered}
-                getStickyStyles={getStickyStyles}
-                getStickyLeftPosition={getStickyLeftPosition}
-                getBackgroundColor={getBackgroundColor}
-                getColumnAlignment={getColumnAlignment}
-                getNumericStyles={getNumericStyles}
-                truncateText={truncateText}
-                getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
-                isDarkMode={isDarkMode}
-                modelUrl={modelUrl}
-                modelName={modelName}
-              />
-            );
-          })}
-        </tr>
-        );
-      });
-    }
-
-    // If no results and not loading, show no results message
-    return (
-      <tr className="w-full">
-        <td colSpan={getTableHeaders(currentTask).length} className="text-center">
-          <div className="flex flex-col items-center justify-center py-20">
-            <svg className="w-12 h-12 mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>No results found</span>
-          </div>
-        </td>
+      <tr key={index} className={`
+        ${isDarkMode 
+          ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
+          : index % 2 === 0 ? 'bg-white' : 'bg-slate-100'
+        }
+        ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
+        transition-colors
+      `}>
+        {getTableHeaders(currentTask).map(header => {
+          const value = result[header.key];
+          const modelUrl = header.key === 'model' ? getModelUrl(String(value)) : undefined;
+          
+          return (
+            <TableCell 
+              key={header.key}
+              header={header}
+              value={value}
+              rowIndex={index}
+              currentTask={currentTask}
+              columnWidths={columnWidths}
+              resizingColumn={resizingColumn}
+              getContentWidth={getContentWidth}
+              isColumnCentered={isColumnCentered}
+              getStickyStyles={getStickyStyles}
+              getStickyLeftPosition={getStickyLeftPosition}
+              getBackgroundColor={getBackgroundColor}
+              getColumnAlignment={getColumnAlignment}
+              getNumericStyles={getNumericStyles}
+              truncateText={truncateText}
+              getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
+              isDarkMode={isDarkMode}
+              modelUrl={modelUrl}
+              modelName={modelName}
+            />
+          );
+        })}
       </tr>
-    );
+      );
+    });
   };
   
   return (
@@ -176,33 +146,51 @@ const ResultsTable: FC<ResultsTableProps> = ({
         </div>
         
         <div className="overflow-x-auto relative custom-scrollbar">
-          <table className={`min-w-full ${currentTask === 'overall' ? 'w-full' : ''} divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
-            <thead className={isDarkMode ? 'bg-[#121c2b]' : 'bg-slate-100'}>
-              <tr>
-                {getTableHeaders(currentTask).map((header) => (
-                  <TableHeader 
-                    key={header.key}
-                    header={header}
-                    currentTask={currentTask}
-                    sortConfig={sortConfig}
-                    columnWidths={columnWidths}
-                    resizingColumn={resizingColumn}
-                    handleSort={handleSort}
-                    handleResizeStart={handleResizeStart}
-                    getContentWidth={getContentWidth}
-                    isColumnCentered={isColumnCentered}
-                    getStickyStyles={getStickyStyles}
-                    getStickyLeftPosition={getStickyLeftPosition}
-                    getBackgroundColor={getBackgroundColor}
-                    isDarkMode={isDarkMode}
-                  />
-                ))}
-              </tr>
-            </thead>
-            <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/30' : 'divide-slate-200/70'}`}>
-              {renderResultsTable()}
-            </tbody>
-          </table>
+          {isLoading ? (
+            // Show loading state only when actually loading
+            <div className="flex flex-col items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-t-2 border-blue-500 mb-4"></div>
+              <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>Loading results...</span>
+            </div>
+          ) : results.length === 0 ? (
+            // Show no results message when not loading but no data
+            <div className="flex flex-col items-center justify-center py-20">
+              <svg className="w-12 h-12 mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'} text-lg font-medium`}>No results found</span>
+              <span className={`${isDarkMode ? 'text-slate-400' : 'text-slate-500'} text-sm mt-2`}>Try adjusting your filters</span>
+            </div>
+          ) : (
+            // Show complete table when loaded and has data
+            <table className={`min-w-full ${currentTask === 'overall' ? 'w-full' : ''} divide-y ${isDarkMode ? 'divide-slate-700/50' : 'divide-slate-200'}`}>
+              <thead className={isDarkMode ? 'bg-[#121c2b]' : 'bg-slate-100'}>
+                <tr>
+                  {getTableHeaders(currentTask).map((header) => (
+                    <TableHeader 
+                      key={header.key}
+                      header={header}
+                      currentTask={currentTask}
+                      sortConfig={sortConfig}
+                      columnWidths={columnWidths}
+                      resizingColumn={resizingColumn}
+                      handleSort={handleSort}
+                      handleResizeStart={handleResizeStart}
+                      getContentWidth={getContentWidth}
+                      isColumnCentered={isColumnCentered}
+                      getStickyStyles={getStickyStyles}
+                      getStickyLeftPosition={getStickyLeftPosition}
+                      getBackgroundColor={getBackgroundColor}
+                      isDarkMode={isDarkMode}
+                    />
+                  ))}
+                </tr>
+              </thead>
+              <tbody className={`divide-y ${isDarkMode ? 'divide-slate-700/30' : 'divide-slate-200/70'}`}>
+                {renderResultsTable()}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </Card>

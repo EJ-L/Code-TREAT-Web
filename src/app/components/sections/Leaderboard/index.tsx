@@ -20,6 +20,7 @@ interface LeaderboardProps {
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDataComplete, setIsDataComplete] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>({ key: 'pass@1', direction: 'desc' });
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
   const [currentTaskPage, setCurrentTaskPage] = useState(0);
@@ -303,6 +304,7 @@ interface LeaderboardProps {
       if (!isMounted) return;
       
       setIsLoading(true);
+      setIsDataComplete(false);
       
       try {
         const filterOptions: FilterOptions = {
@@ -404,20 +406,38 @@ interface LeaderboardProps {
               
               if (formattedResults.length > 0 && isMounted) {
                 setResults(formattedResults as any[]);
+                
+                // Check if data is complete by verifying headers have data
+                const expectedHeaders = tableHeadersHelper(currentTask);
+                const hasCompleteData = expectedHeaders.every(header => {
+                  if (header.key === 'rank' || header.key === 'model') return true;
+                  return formattedResults.some(result => {
+                    const value = result[header.key];
+                    return value !== null && value !== undefined && value !== '-' && value !== '';
+                  });
+                });
+                setIsDataComplete(hasCompleteData);
               } else {
                 console.warn('No results after formatting');
                 setResults([]);
+                setIsDataComplete(true); // Consider empty results as complete
               }
             } else {
               console.warn('No results after processing');
               setResults([]);
+              setIsDataComplete(true); // Consider empty results as complete
             }
           } catch (error) {
             console.error('Error processing data:', error);
             setResults([]);
           } finally {
             if (isMounted) {
-              setIsLoading(false);
+              // Only set loading to false when data is complete
+              setTimeout(() => {
+                if (isMounted) {
+                  setIsLoading(false);
+                }
+              }, 200); // Small delay to ensure UI is stable
             }
           }
         }, 100);
@@ -440,12 +460,7 @@ interface LeaderboardProps {
   // Handle sorting separately to avoid reloading data
   useEffect(() => {
     if (results.length === 0) return;
-    setIsLoading(true);
-    
-    // Use requestAnimationFrame to delay sorting for UI responsiveness
-    requestAnimationFrame(() => {
-      setIsLoading(false);
-    });
+    // Don't set loading state for sorting - let the main data loading control it
   }, [sortConfig]);
 
   // Define table headers helper function

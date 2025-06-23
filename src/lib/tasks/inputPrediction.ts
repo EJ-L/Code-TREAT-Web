@@ -47,6 +47,37 @@ export function processInputPrediction(results: ProcessedResult[], filters: Filt
       }
     }
     
+    // 5. 检查知识领域
+    if (filters.knowledge?.length > 0) {
+      const hasMatchingKnowledge = filters.knowledge.some(knowledgeFilter => {
+        const filterLower = knowledgeFilter.toLowerCase();
+        
+        // Check domain field directly for abbreviations
+        if (result.domain) {
+          const domainLower = result.domain.toLowerCase();
+          
+          // Direct match for abbreviations
+          if (filterLower === 'algorithms' && domainLower === 'alg') return true;
+          if (filterLower === 'data structures' && domainLower === 'ds') return true;
+          if (filterLower === 'math' && domainLower === 'math') return true;
+          
+          // Direct domain field match
+          if (domainLower.includes(filterLower)) return true;
+          if (domainLower.includes(filterLower.replace(' ', ''))) return true;
+        }
+        
+        // Check other fields for broader matches
+        const stringsToCheck: string[] = [];
+        if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
+        if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
+        if (result.task) stringsToCheck.push(result.task.toLowerCase());
+        
+        return stringsToCheck.some(str => str.includes(filterLower));
+      });
+      
+      if (!hasMatchingKnowledge) return false;
+    }
+    
     return true;
   });
 

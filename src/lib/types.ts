@@ -37,6 +37,7 @@ export type ResultEntry = {
   target_lang?: string;
   metrics: Metrics;
   difficulty?: string;
+  domain?: string;  // Knowledge domain field (math, alg, ds, etc.)
   url?: string;
   framework?: string;  // For code-web task
   category?: string;   // For code-robustness task
@@ -52,6 +53,7 @@ export type ProcessedResult = {
   sourceLang: string | null;
   lang: string;
   targetLang: string | null;
+  domain?: string; // Knowledge domain field (math, alg, ds, etc.)
   pass1: number | null;
   pass3: number | null;
   pass5: number | null;

@@ -459,6 +459,10 @@ async function performDataLoad(): Promise<ResultEntry[]> {
                   if (taskType === 'mr-web' && entry.method) {
                     result.method = entry.method;
                   }
+                  // Preserve domain field if it exists
+                  if ((entry as any).domain) {
+                    result.domain = (entry as any).domain;
+                  }
                   return result;
                 }
                 const result = {...entry, task: taskType};
@@ -469,6 +473,10 @@ async function performDataLoad(): Promise<ResultEntry[]> {
                 // For mr-web, preserve the method field
                 if (taskType === 'mr-web' && entry.method) {
                   result.method = entry.method;
+                }
+                // Preserve domain field if it exists
+                if ((entry as any).domain) {
+                  result.domain = (entry as any).domain;
                 }
                 return result;
               });
@@ -640,6 +648,7 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     sourceLang: entry.source_lang || null,
     lang: entry.lang || (entry.language || 'Unknown'),
     targetLang: entry.target_lang || null,
+    domain: entry.domain || undefined,
     pass1: entry.metrics?.['pass@1'] !== undefined ? entry.metrics['pass@1'] : null, 
     pass3: entry.metrics?.['pass@3'] !== undefined ? entry.metrics['pass@3'] : null,
     pass5: entry.metrics?.['pass@5'] !== undefined ? entry.metrics['pass@5'] : null,

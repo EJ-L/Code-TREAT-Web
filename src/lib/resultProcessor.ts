@@ -301,26 +301,26 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
   }
 
   // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled specifically
-  if (filters.knowledge && filters.knowledge.length > 0 && task !== 'mr-web') {
-    // 只输出简化的日志
-    console.log(`开始知识领域过滤: ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
-    
-    // 预处理知识领域关键词
-    const knowledgePatterns = filters.knowledge.map(k => k.toLowerCase());
+  // NOTE: Knowledge filtering is now handled at the task level (before aggregation) for better results
+  // This section is kept for mr-web and any other special cases
+  if (filters.knowledge && filters.knowledge.length > 0 && task === 'mr-web') {
+    // Only handle mr-web knowledge filtering here (which uses subtask field)
+    console.log(`开始知识领域过滤 (mr-web): ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
     
     filteredResults = filteredResults.filter(result => {
-      // 创建要检查的字符串数组
-      const stringsToCheck: string[] = [];
-      if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
-      if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
-      if (result.task) stringsToCheck.push(result.task.toLowerCase());
-      
-      return knowledgePatterns.some(pattern => 
-        stringsToCheck.some(str => str.includes(pattern))
-      );
+      return filters.knowledge!.some(knowledgeFilter => {
+        const filterLower = knowledgeFilter.toLowerCase();
+        
+        // Check other fields for broader matches (fallback)
+        const stringsToCheck: string[] = [];
+        if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
+        if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
+        if (result.task) stringsToCheck.push(result.task.toLowerCase());
+        
+        return stringsToCheck.some(str => str.includes(filterLower));
+      });
     });
 
-    // 只输出简化的日志
     console.log(`知识领域过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 

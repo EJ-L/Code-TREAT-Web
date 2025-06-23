@@ -685,6 +685,8 @@ interface LeaderboardProps {
           newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
         } else if (currentTask === 'code-robustness') {
           newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
+        } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
+          newWidths[header.key] = 380; // Wider width for prediction tasks
         } else {
           newWidths[header.key] = 300;
         }
@@ -794,6 +796,8 @@ interface LeaderboardProps {
             newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
           } else if (currentTask === 'code-robustness') {
             newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
+          } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
+            newWidths[header.key] = 380; // Wider width for prediction tasks
           } else if (currentTask === 'mr-web') {
             newWidths[header.key] = 300; // Standard width for mr-web
           } else {
@@ -856,6 +860,8 @@ interface LeaderboardProps {
         minWidth = 800;
       } else if (currentTask === 'code-web') {
         minWidth = 320; // Set higher minimum width for code-web to prevent truncation issues
+      } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
+        minWidth = 350; // Higher minimum width for prediction tasks
       } else {
         minWidth = 300;
       }
@@ -965,7 +971,8 @@ interface LeaderboardProps {
 
   // Compute available content width for a column
   const getContentWidth = useCallback((columnWidth: number) => {
-    return Math.max(columnWidth - 40, 20);
+    // Be less aggressive - only subtract minimal padding
+    return Math.max(columnWidth - 24, 20);
   }, []);
 
   // Helper for sticky columns
@@ -1035,14 +1042,15 @@ interface LeaderboardProps {
   const truncateText = useCallback((text: string, maxWidth: number) => {
     if (!text) return '';
     
-    const charWidth = 6;
+    // Use more accurate character width for JetBrains Mono font at text-xl size
+    const charWidth = 8; // Slightly more conservative estimate
     const maxChars = Math.floor(maxWidth / charWidth);
     
-    if (text.length <= maxChars) return text;
+    // Only truncate if the text is significantly longer than available space
+    if (text.length <= maxChars || maxChars <= 5) return text;
     
-    if (maxChars <= 7) return text.substring(0, maxChars);
-    
-    return text.substring(0, maxChars - 2) + '...';
+    // Reserve space for ellipsis, but be generous
+    return text.substring(0, maxChars - 3) + '...';
   }, []);
 
   // Generate CSV data for export

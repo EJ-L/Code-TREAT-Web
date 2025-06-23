@@ -81,7 +81,7 @@ const TableCell: FC<TableCellProps> = ({
     <td 
       key={header.key}
       data-key={header.key}
-      className={`px-4 py-3 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
+      className={`px-6 py-3 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
         header.key === 'model' 
           ? isDarkMode ? 'text-slate-200 font-bold' : 'text-slate-900 font-bold'
           : isDarkMode ? 'text-slate-300' : 'text-slate-600'
@@ -114,29 +114,20 @@ const TableCell: FC<TableCellProps> = ({
             // Overall task has no model column resizing
             const hasFixedModelWidth = currentTask === 'overall';
             
-            // All simplified leaderboards show full model names by default
-            // For code-web, be more generous with text space to avoid unnecessary truncation
-            const displayText = isSimplifiedLeaderboard 
-              ? modelName // Never truncate in simplified leaderboards
-              : currentTask === 'code-web' 
-                ? (contentWidth >= 200 ? modelName : truncateText(modelName, contentWidth * 2)) // More generous for code-web
-                : truncateText(modelName, contentWidth * 1.5); // Use more generous space for other tasks
-            
             const organization = getOrganizationFromModel(modelName);
             
             // Use larger logo for all simplified leaderboards
             const logoSize = isSimplifiedLeaderboard ? 20 : 16;
             const logoSpace = (organization && organization !== 'unknown') ? (logoSize + 8) : 0;
             
-            // For code review and code summarization, we calculate max width based on available space
-            // When user resizes, this will respect the new width
-            const modelMaxWidth = hasFixedModelWidth
-              ? 'none' // No max width for overall task (fixed percentage width)
-              : isSimplifiedLeaderboard
-                ? `${Math.max(contentWidth * 2, 400) - logoSpace}px` // Very generous width for code review/summarization
-                : currentTask === 'code-web'
-                  ? `${Math.max(contentWidth * 2, 300) - logoSpace}px` // More generous width for code-web
-                  : `${contentWidth * 1.5 - logoSpace}px`; // Normal behavior for other leaderboards
+            // Calculate available space for text
+            // Use the EXACT same width value that the header uses
+            const actualColumnWidth = columnWidths[header.key] || 300; // Simple fallback, should never be used
+            
+            // For cells: only subtract padding (48px) + logo space  
+            // Headers need more space subtracted for sort indicators, but cells don't
+            const paddingSpace = 0; // px-6 padding
+            const availableTextWidth = Math.max(actualColumnWidth, 80);
             
             const modelContent = (
               <div className="flex items-center gap-2 w-full">
@@ -145,15 +136,12 @@ const TableCell: FC<TableCellProps> = ({
                 )}
                 <span 
                   title={modelName}
-                  className={`${isSimplifiedLeaderboard || (currentTask === 'code-web' && contentWidth >= 200) ? '' : 'truncate'} inline-block`}
-                  style={{ 
-                    maxWidth: modelMaxWidth,
-                    whiteSpace: hasFixedModelWidth || (currentTask === 'code-web' && contentWidth >= 200) ? 'normal' : 'nowrap',
-                    overflow: hasFixedModelWidth || (currentTask === 'code-web' && contentWidth >= 200) ? 'visible' : 'hidden',
-                    textOverflow: 'ellipsis'
+                  className="text-ellipsis overflow-hidden whitespace-nowrap block"
+                  style={{
+                    maxWidth: hasFixedModelWidth ? 'none' : `${availableTextWidth}px`
                   }}
                 >
-                  {displayText}
+                  {modelName}
                 </span>
               </div>
             );
@@ -199,13 +187,13 @@ const TableCell: FC<TableCellProps> = ({
             return (
               <span 
                 title={value} 
-                className={`truncate inline-block ${style}`}
+                className={`text-ellipsis overflow-hidden whitespace-nowrap inline-block ${style}`}
                 style={{ 
                   maxWidth: `${contentWidth}px`,
                   width: isColumnCentered(header.key) ? '100%' : 'auto'
                 }}
               >
-                {truncateText(value, contentWidth)}
+                {value}
               </span>
             );
           }

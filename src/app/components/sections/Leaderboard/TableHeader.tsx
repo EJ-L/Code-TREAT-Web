@@ -110,7 +110,11 @@ const TableHeader: FC<TableHeaderProps> = ({
         <span 
           className="text-ellipsis overflow-hidden whitespace-nowrap block text-lg" 
           style={{ 
-            maxWidth: `${getContentWidth(columnWidths[header.key] || 100)}px`,
+            maxWidth: `${getContentWidth(columnWidths[header.key] || (
+              currentTask === 'code summarization' || currentTask === 'code review' ? 250 :
+              currentTask === 'vulnerability detection' ? 350 :
+              300
+            ))}px`,
             width: isColumnCentered(header.key) ? '100%' : 'auto',
             // Adding padding to ensure text is fully visible on initial load
             minWidth: header.label.length * 10 + 'px'

@@ -303,8 +303,12 @@ interface LeaderboardProps {
     const loadAndProcessData = async () => {
       if (!isMounted) return;
       
-      setIsLoading(true);
-      setIsDataComplete(false);
+      // Add a small delay before starting loading to allow header animation to complete
+      setTimeout(() => {
+        if (!isMounted) return;
+        setIsLoading(true);
+        setIsDataComplete(false);
+      }, 400); // Allow time for the header animation to complete
       
       try {
         const filterOptions: FilterOptions = {
@@ -392,7 +396,7 @@ interface LeaderboardProps {
           }
         }
         
-        // Use setTimeout to allow the UI to update the loading state
+        // Use setTimeout to allow the UI to update the loading state and process data
         setTimeout(async () => {
           if (!isMounted) return;
           
@@ -440,7 +444,7 @@ interface LeaderboardProps {
               }, 200); // Small delay to ensure UI is stable
             }
           }
-        }, 100);
+        }, 500); // Delayed start for data processing to allow header animation
       } catch (error) {
         console.error('Error loading data:', error);
         if (isMounted) {

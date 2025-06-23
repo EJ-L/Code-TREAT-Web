@@ -75,6 +75,7 @@ const TaskSelector: FC<TaskSelectorProps> = ({
                   className={`absolute inset-0 bg-gradient-to-r ${isDarkMode ? 'from-blue-900 to-blue-800' : 'from-blue-600 to-blue-500'}`}
                   layoutId="activeTaskBackground"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  style={{ zIndex: 1 }}
                 />
               )}
             </motion.button>

@@ -9,6 +9,20 @@ const GITHUB_REPO = 'Code-TREAT-Data';
 // GitHub Personal Access Token (set in environment variables)
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+// Security: Validate GitHub token format
+function validateGitHubToken(token: string): boolean {
+  // GitHub tokens should start with 'ghp_' for personal access tokens
+  // or 'github_pat_' for fine-grained tokens
+  const tokenPattern = /^(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9_]+)$/;
+  return tokenPattern.test(token);
+}
+
+// Security: Mask token for logging
+function maskToken(token: string): string {
+  if (!token || token.length < 8) return '***';
+  return token.substring(0, 4) + '***' + token.substring(token.length - 4);
+}
+
 interface GitHubRelease {
   tag_name: string;
   name: string;
@@ -31,8 +45,13 @@ export async function downloadGitHubDataToLocal(): Promise<boolean> {
     
     // Add authentication for private repos
     if (GITHUB_TOKEN) {
+      // Security: Validate token format
+      if (!validateGitHubToken(GITHUB_TOKEN)) {
+        throw new Error('Invalid GitHub token format. Please check your GITHUB_TOKEN environment variable.');
+      }
+      
       headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
-      console.log('Using GitHub token for private repository access');
+      console.log(`Using GitHub token for private repository access: ${maskToken(GITHUB_TOKEN)}`);
     } else {
       console.log('No GitHub token found, assuming public repository');
     }
@@ -43,9 +62,12 @@ export async function downloadGitHubDataToLocal(): Promise<boolean> {
     
     if (!releaseResponse.ok) {
       if (releaseResponse.status === 404) {
-        throw new Error(`Repository not found or no access. Status: ${releaseResponse.status}. ${GITHUB_TOKEN ? 'Check if token has correct permissions.' : 'If repo is private, add GITHUB_TOKEN environment variable.'}`);
+        const errorMsg = GITHUB_TOKEN 
+          ? `Repository not found or token lacks permissions. Status: ${releaseResponse.status}. Check if token has correct permissions for repository ${GITHUB_OWNER}/${GITHUB_REPO}.`
+          : `Repository not found or is private. Status: ${releaseResponse.status}. If repo is private, add GITHUB_TOKEN environment variable.`;
+        throw new Error(errorMsg);
       }
-      throw new Error(`Failed to fetch release info: ${releaseResponse.status}`);
+      throw new Error(`Failed to fetch release info: ${releaseResponse.status} ${releaseResponse.statusText}`);
     }
     
     const release: GitHubRelease = await releaseResponse.json();
@@ -56,7 +78,7 @@ export async function downloadGitHubDataToLocal(): Promise<boolean> {
     const zipResponse = await fetch(zipUrl, { headers });
     
     if (!zipResponse.ok) {
-      throw new Error(`Failed to download release zip: ${zipResponse.status}`);
+      throw new Error(`Failed to download release zip: ${zipResponse.status} ${zipResponse.statusText}`);
     }
     
     const zipBuffer = await zipResponse.arrayBuffer();

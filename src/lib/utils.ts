@@ -111,4 +111,105 @@ export function deepClone<T>(obj: T): T {
   }
 
   return obj
-} 
+}
+
+/**
+ * Security: Sanitize string input to prevent XSS
+ * @param input The input string to sanitize
+ * @returns Sanitized string
+ */
+export function sanitizeInput(input: string): string {
+  if (typeof input !== 'string') return '';
+  
+  return input
+    .replace(/[<>\"'&]/g, (char) => {
+      switch (char) {
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '"': return '&quot;';
+        case "'": return '&#x27;';
+        case '&': return '&amp;';
+        default: return char;
+      }
+    })
+    .trim()
+    .slice(0, 1000); // Limit length
+}
+
+/**
+ * Security: Validate string input
+ * @param input The input to validate
+ * @param maxLength Maximum allowed length
+ * @param allowedChars Regex pattern for allowed characters
+ * @returns Validation result
+ */
+export function validateInput(
+  input: string, 
+  maxLength: number = 1000, 
+  allowedChars: RegExp = /^[a-zA-Z0-9\s\-_.,!@#$%^&*()+={}[\]:";'<>?/~`|\\]+$/
+): { isValid: boolean; error?: string } {
+  if (typeof input !== 'string') {
+    return { isValid: false, error: 'Input must be a string' };
+  }
+  
+  if (input.length > maxLength) {
+    return { isValid: false, error: `Input too long (max ${maxLength} characters)` };
+  }
+  
+  if (!allowedChars.test(input)) {
+    return { isValid: false, error: 'Input contains invalid characters' };
+  }
+  
+  return { isValid: true };
+}
+
+/**
+ * Security: Validate file extension
+ * @param filename The filename to validate
+ * @param allowedExtensions Array of allowed extensions
+ * @returns Whether the file extension is allowed
+ */
+export function validateFileExtension(filename: string, allowedExtensions: string[] = ['.json', '.jsonl']): boolean {
+  if (typeof filename !== 'string') return false;
+  
+  const extension = filename.toLowerCase().slice(filename.lastIndexOf('.'));
+  return allowedExtensions.includes(extension);
+}
+
+/**
+ * Security: Rate limiting helper (simple in-memory implementation)
+ */
+class RateLimiter {
+  private requests: Map<string, number[]> = new Map();
+  
+  constructor(
+    private maxRequests: number = 100,
+    private windowMs: number = 60 * 1000 // 1 minute
+  ) {}
+  
+  isAllowed(identifier: string): boolean {
+    const now = Date.now();
+    const windowStart = now - this.windowMs;
+    
+    if (!this.requests.has(identifier)) {
+      this.requests.set(identifier, []);
+    }
+    
+    const requestTimes = this.requests.get(identifier)!;
+    
+    // Remove old requests outside the window
+    const validRequests = requestTimes.filter(time => time > windowStart);
+    
+    if (validRequests.length >= this.maxRequests) {
+      return false;
+    }
+    
+    // Add current request
+    validRequests.push(now);
+    this.requests.set(identifier, validRequests);
+    
+    return true;
+  }
+}
+
+export const rateLimiter = new RateLimiter(); 

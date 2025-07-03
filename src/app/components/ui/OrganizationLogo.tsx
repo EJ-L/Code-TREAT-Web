@@ -57,6 +57,7 @@ const OrganizationLogo: React.FC<OrganizationLogoProps> = ({ organization, size 
                      index === 3 && orgKey === 'mistral' ? '#EE792F' :
                      index === 4 && orgKey === 'mistral' ? '#EB5829' :
                      index === 5 && orgKey === 'mistral' ? '#EA3326' :
+                     orgKey === 'deepseek' ? '#4D6BFE' :
                      orgKey === 'anthropic' ? '#000000' :
                      orgKey === 'xai' ? '#000000' :
                      'currentColor'}

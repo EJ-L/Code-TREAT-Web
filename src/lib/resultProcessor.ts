@@ -83,6 +83,28 @@ const filterAndAggregateByLanguages = (results: ProcessedResult[], selectedLangs
 };
 
 export async function processResults(task: TaskType, filters: FilterOptions): Promise<ProcessedResult[]> {
+  console.log(`🚀 processResults called for task: "${task}"`);
+  
+  // Try to use precomputed data first
+  try {
+    const { getPrecomputedResults } = await import('./dataLoader');
+    const precomputedResults = await getPrecomputedResults(task, filters, filters.showByDifficulty || false);
+    
+    if (precomputedResults.length > 0) {
+      console.log(`✅ Using precomputed data for ${task}: ${precomputedResults.length} results`);
+      
+      // Return precomputed results directly - formatResults will handle them
+      return precomputedResults as any;
+    } else {
+      console.log(`⚠️ No precomputed results found for ${task}, falling back to real-time processing`);
+    }
+  } catch (error) {
+    console.warn('❌ Failed to load precomputed data, falling back to real-time processing:', error);
+  }
+  
+  // Fallback to original real-time processing
+  console.log('Using real-time data processing (fallback)');
+  
   // 加载所有数据
   const data = await loadAllData();
   
@@ -482,9 +504,29 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 
 // 格式化结果为显示格式
 export function formatResults(results: ProcessedResult[], filters?: FilterOptions): Array<Record<string, string | number>> {
-  console.log(`格式化结果: ${results.length} 条`);
+  console.log(`📊 formatResults called with ${results.length} results`);
 
-  // Get the sorted results by pass@1 values
+  // Check if this is precomputed data (has rank field and is already formatted)
+  const isPrecomputedData = results.length > 0 && 'rank' in results[0] && 
+    (typeof (results[0] as any)['pass@1'] === 'string' || 
+     typeof (results[0] as any)['LLM Judge'] === 'string' ||
+     typeof (results[0] as any)['Accuracy'] === 'string' ||
+     typeof (results[0] as any)['CLIP'] === 'string' ||
+     typeof (results[0] as any)['VAN'] === 'string');
+  
+  if (isPrecomputedData) {
+    // For precomputed data, results are already sorted and formatted
+    console.log('✅ Using precomputed data, returning as-is');
+    const formattedResults = results.map((result: any) => ({
+      ...result,
+      model_url: MODEL_URLS[result.model] || "",
+    }));
+    return formattedResults;
+  } else {
+    console.log('⚠️ Using real-time processing data');
+  }
+
+  // Get the sorted results by pass@1 values (for non-precomputed data)
   const sortedResults = [...results].sort((a, b) => {
     // If showing by difficulty, use easyPass1 for sorting
     if (filters?.showByDifficulty) {

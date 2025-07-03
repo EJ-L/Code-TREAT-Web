@@ -250,7 +250,7 @@ interface LeaderboardProps {
       'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
       'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
       'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-      'CodeBLEU', 'LLMJudge', 'llmjudge', 'Execution',
+      'CodeBLEU', 'LLMJudge', 'llmjudge', 'LLM Judge', 'Execution',
       // Vulnerability detection metrics
       'Accuracy', 'Precision', 'Recall', 'F1 Score',
       'P-C', 'P-V', 'P-B', 'P-R',
@@ -493,10 +493,10 @@ interface LeaderboardProps {
         { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
+        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
+        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'input prediction': [
         { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
@@ -579,10 +579,10 @@ interface LeaderboardProps {
         { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' }
       ],
       'code summarization': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
+        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'code review': [
-        { key: 'llmjudge', label: 'LLM Judge', width: 'w-28', description: '' }
+        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
       ],
       'input prediction': [
         { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
@@ -679,13 +679,18 @@ interface LeaderboardProps {
     
     // Only keep headers where at least one result has a non-empty value
     const filteredMetricHeaders = metricHeaders.filter(header => {
-      return sortedResults.some(result => {
+      const hasData = sortedResults.some(result => {
         const value = result[header.key];
-        return value !== null && value !== undefined && value !== '-' && value !== '';
+        const isValid = value !== null && value !== undefined && value !== '-' && value !== '';
+        return isValid;
       });
+      
+      return hasData;
     });
     
-    return [...fixedHeaders, ...filteredMetricHeaders];
+    const finalHeaders = [...fixedHeaders, ...filteredMetricHeaders];
+    
+    return finalHeaders;
   }, [tableHeadersHelper, sortedResults]);
 
   // Function to initialize column widths with all headers (first pass)
@@ -716,7 +721,7 @@ interface LeaderboardProps {
           newWidths[header.key] = 300;
         }
       }
-      else if (header.key === 'llmjudge') {
+      else if (header.key === 'LLM Judge') {
         if (currentTask === 'code summarization' || currentTask === 'code review') {
           newWidths[header.key] = 370;
         } else {

@@ -742,4 +742,171 @@ function debounce<T extends (...args: any[]) => any>(
 export const debouncedGetTaskData = debounce(getTaskData, 100);
 export const debouncedGetDatasetData = debounce(getDatasetData, 100);
 export const debouncedGetModelData = debounce(getModelData, 100);
-export const debouncedGetTaskAndDatasetData = debounce(getTaskAndDatasetData, 100); 
+export const debouncedGetTaskAndDatasetData = debounce(getTaskAndDatasetData, 100);
+
+// Add interface for precomputed data structure
+interface PrecomputedResult {
+  rank: number;
+  model: string;
+  model_url?: string;
+  [key: string]: any; // For metrics like pass@1, LLM Judge, etc.
+}
+
+interface PrecomputedData {
+  [modelName: string]: {
+    [combinationKey: string]: PrecomputedResult;
+  };
+}
+
+// Cache for precomputed data
+const precomputedCache = new Map<string, PrecomputedData>();
+
+// Function to generate combination key from filters
+function generateCombinationKey(task: string, filters: any, showByDifficulty: boolean): string {
+  const parts: string[] = [];
+  
+  // Note: The consolidated files don't include task name in the combination keys
+  
+  // Add filter parts in consistent order - must match the naming convention used in consolidated files
+  const filterMapping: Record<string, string> = {
+    datasets: 'dataset',
+    modality: 'modality', 
+    modalities: 'modality',
+    langs: 'modality',
+    knowledge: 'knowledge',
+    reasoning: 'reasoning',
+    robustness: 'robustness',
+    privacy: 'privacy',
+    llmJudges: 'llmJudges',
+    framework: 'framework'
+  };
+  
+  // Process filters in the order they appear in the actual combination keys
+  const orderedFilterKeys = ['datasets', 'modality', 'modalities', 'langs', 'knowledge', 'reasoning', 'robustness', 'privacy', 'llmJudges', 'framework'];
+  
+  orderedFilterKeys.forEach(filterKey => {
+    const values = filters[filterKey];
+    
+    if (values && values.length > 0) {
+      const mappedKey = filterMapping[filterKey];
+      if (mappedKey) {
+        const sortedValues = [...values].sort();
+        const part = `${mappedKey}-${sortedValues.join('-')}`;
+        parts.push(part);
+      }
+    }
+  });
+  
+  // If no filters applied, use 'overall'
+  const result = parts.length === 0 ? 'overall' : parts.join('_');
+  
+  return result;
+}
+
+// Function to load precomputed data for a task
+async function loadPrecomputedData(task: string, showByDifficulty: boolean): Promise<PrecomputedData | null> {
+  const taskKey = task.replace(/\s+/g, '-');
+  const cacheKey = showByDifficulty ? `${taskKey}_difficulty` : taskKey;
+  
+  // Check cache first
+  if (precomputedCache.has(cacheKey)) {
+    return precomputedCache.get(cacheKey)!;
+  }
+  
+  try {
+    // Determine the correct consolidated file name
+    let fileName: string;
+    if (showByDifficulty) {
+      fileName = `${taskKey}_difficulty_consolidated.json`;
+    } else {
+      fileName = `${taskKey}_consolidated.json`;
+    }
+    
+    const response = await fetch(`/api/direct-files?file=data/precomputed/${fileName}`);
+    
+    if (!response.ok) {
+      console.warn(`Failed to load precomputed data: ${fileName}, status: ${response.status}`);
+      return null;
+    }
+    
+    const data: PrecomputedData = await response.json();
+    
+    // Cache the data
+    precomputedCache.set(cacheKey, data);
+    
+    console.log(`Loaded precomputed data for ${task} (${showByDifficulty ? 'difficulty' : 'normal'}) with ${Object.keys(data).length} models`);
+    
+    return data;
+  } catch (error) {
+    console.error(`Error loading precomputed data for ${task}:`, error);
+    return null;
+  }
+}
+
+// Function to get results from precomputed data
+export async function getPrecomputedResults(task: string, filters: any, showByDifficulty: boolean): Promise<PrecomputedResult[]> {
+  console.log(`🔍 getPrecomputedResults called for task: "${task}", showByDifficulty: ${showByDifficulty}`);
+  
+  const precomputedData = await loadPrecomputedData(task, showByDifficulty);
+  
+  if (!precomputedData) {
+    console.warn(`❌ No precomputed data available for task: ${task}`);
+    return [];
+  }
+  
+  // Generate the combination key for the specific filter combination
+  const combinationKey = generateCombinationKey(task, filters, showByDifficulty);
+  
+  console.log(`🎯 Looking for combination: "${combinationKey}"`);
+  
+  // Collect results from all models for this combination
+  const results: PrecomputedResult[] = [];
+  
+  for (const [modelName, modelData] of Object.entries(precomputedData)) {
+    const combinationData = modelData[combinationKey];
+    
+    if (combinationData) {
+      // The combinationData is directly the result object, not wrapped in a results array
+      results.push({
+        ...combinationData,
+        model: modelName, // Ensure model name is set correctly
+      });
+    }
+  }
+  
+  if (results.length === 0) {
+    console.warn(`❌ No results found for combination: "${combinationKey}"`);
+    const firstModel = Object.keys(precomputedData)[0];
+    const availableCombinations = firstModel ? Object.keys(precomputedData[firstModel]) : [];
+    console.log(`📋 Available combinations:`, availableCombinations);
+    
+    // Try fallback to 'overall' if generated key doesn't work
+    if (combinationKey !== 'overall' && availableCombinations.includes('overall')) {
+      console.log(`🔄 Trying fallback to 'overall' combination...`);
+      for (const [modelName, modelData] of Object.entries(precomputedData)) {
+        const overallData = modelData['overall'];
+        if (overallData) {
+          results.push({
+            ...overallData,
+            model: modelName,
+          });
+        }
+      }
+      console.log(`🔄 Fallback results: ${results.length} models`);
+    }
+  } else {
+    console.log(`✅ Found ${results.length} results for combination: "${combinationKey}"`);
+  }
+  
+  // Sort by rank (should already be sorted, but ensure consistency)
+  results.sort((a, b) => (a.rank || 0) - (b.rank || 0));
+  
+  // Re-assign ranks to ensure they're sequential
+  results.forEach((result, index) => {
+    result.rank = index + 1;
+  });
+  
+  console.log(`🎯 Returning ${results.length} results for ${task}`);
+  
+  return results;
+} 

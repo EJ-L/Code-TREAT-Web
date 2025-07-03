@@ -324,15 +324,38 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`知识领域过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 4. 推理类型过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled specifically
-  if (filters.reasoning && filters.reasoning.length > 0 && task !== 'mr-web') {
+  // 4. 推理类型过滤 (同级 OR 关系，跨级 AND 关系)
+  if (filters.reasoning && filters.reasoning.length > 0) {
     console.log(`应用推理类型过滤: ${filters.reasoning.length} 种类型, ${filteredResults.length} 条结果`);
     
     // 预处理推理类型关键词
     const reasoningPatterns = filters.reasoning.map(r => r.toLowerCase());
     
     filteredResults = filteredResults.filter(result => {
-      // 创建要检查的字符串数组
+      // 首先检查原始数据的prompt_category字段
+      const rawEntry = data.find((raw: any) => 
+        raw.model_name === result.modelName && 
+        raw.dataset?.toLowerCase() === result.dataset.toLowerCase() &&
+        raw.task === task
+      );
+      
+      if (rawEntry?.prompt_category && Array.isArray(rawEntry.prompt_category)) {
+        // 检查prompt_category数组中是否包含任何推理类型
+        return reasoningPatterns.some(pattern => 
+          rawEntry.prompt_category!.some((category: string) => 
+            category.toLowerCase() === pattern
+          )
+        );
+      }
+      
+      // 对于mr-web任务，检查method字段
+      if (task === 'mr-web' && rawEntry?.method) {
+        return reasoningPatterns.some(pattern => 
+          rawEntry.method!.toLowerCase() === pattern
+        );
+      }
+      
+      // 兜底：检查模型名和数据集名（保持向后兼容）
       const stringsToCheck: string[] = [];
       if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
       if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());

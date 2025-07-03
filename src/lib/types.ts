@@ -43,6 +43,7 @@ export type ResultEntry = {
   category?: string;   // For code-robustness task
   subtask?: string;    // For mr-web task (Visual/RER)
   method?: string;     // For mr-web task (CoT/ZS/SR)
+  prompt_category?: string[];  // For reasoning type filtering (direct/cot)
 };
 
 export type ProcessedResult = {

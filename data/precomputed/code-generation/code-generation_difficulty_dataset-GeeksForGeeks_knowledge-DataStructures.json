@@ -1,0 +1,20 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [
+      "GeeksForGeeks"
+    ],
+    "modality": [],
+    "knowledge": [
+      "Data Structures"
+    ],
+    "reasoning": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:15:18.654Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

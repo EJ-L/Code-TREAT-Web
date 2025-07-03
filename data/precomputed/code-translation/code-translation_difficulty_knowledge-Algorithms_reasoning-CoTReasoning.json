@@ -1,0 +1,20 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Algorithms"
+    ],
+    "reasoning": [
+      "CoT Reasoning"
+    ],
+    "dataset": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:16:21.922Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

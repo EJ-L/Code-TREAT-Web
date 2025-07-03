@@ -1,0 +1,84 @@
+{
+  "task": "code-web",
+  "filters": {
+    "dataset": [
+      "Design Generation",
+      "Design Edit"
+    ],
+    "framework": [
+      "React",
+      "Vanilla"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:22:20.616Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "Claude-3.7-Sonnet",
+      "model_url": "",
+      "CLIP": "83.9",
+      "Compilation": "98.9"
+    },
+    {
+      "rank": 2,
+      "model": "Qwen-72B",
+      "model_url": "",
+      "CLIP": "81.5",
+      "Compilation": "98.6"
+    },
+    {
+      "rank": 3,
+      "model": "GPT-4o",
+      "model_url": "https://openai.com/research/gpt-4",
+      "CLIP": "81.4",
+      "Compilation": "98.9"
+    },
+    {
+      "rank": 4,
+      "model": "Gemini-2.0-Flash",
+      "model_url": "",
+      "CLIP": "80.1",
+      "Compilation": "97.7"
+    },
+    {
+      "rank": 5,
+      "model": "Pixtral-Large-Instruct-124B",
+      "model_url": "",
+      "CLIP": "79.8",
+      "Compilation": "99.1"
+    },
+    {
+      "rank": 6,
+      "model": "Pixtral-12B-2409",
+      "model_url": "",
+      "CLIP": "73.6",
+      "Compilation": "96.3"
+    },
+    {
+      "rank": 7,
+      "model": "Llama-3.2-90B-Vision",
+      "model_url": "",
+      "CLIP": "68.3",
+      "Compilation": "96.5"
+    },
+    {
+      "rank": 8,
+      "model": "Llama-3.2-11B-Vision",
+      "model_url": "",
+      "CLIP": "60.2",
+      "Compilation": "79.7"
+    },
+    {
+      "rank": 9,
+      "model": "Qwen-7B",
+      "model_url": "",
+      "CLIP": "40.2",
+      "Compilation": "65.2"
+    }
+  ],
+  "metadata": {
+    "totalResults": 9,
+    "hasResults": true
+  }
+}

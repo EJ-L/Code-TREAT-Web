@@ -1,0 +1,22 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Algorithms",
+      "Math"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "HackerRank",
+      "PolyHumanEval"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:29.149Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

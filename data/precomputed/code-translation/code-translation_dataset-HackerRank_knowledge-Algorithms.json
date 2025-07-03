@@ -1,0 +1,20 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Algorithms"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "HackerRank"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:26.030Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

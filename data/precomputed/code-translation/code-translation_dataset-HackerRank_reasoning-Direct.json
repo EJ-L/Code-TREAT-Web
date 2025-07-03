@@ -1,0 +1,246 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [],
+    "knowledge": [],
+    "reasoning": [
+      "Direct"
+    ],
+    "dataset": [
+      "HackerRank"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:30.107Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "DeepSeek-R1",
+      "model_url": "",
+      "pass@1": "79.5",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 2,
+      "model": "Claude-Sonnet-4",
+      "model_url": "https://anthropic.com",
+      "pass@1": "76.2",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 3,
+      "model": "DeepSeek-R1 (0528)",
+      "model_url": "",
+      "pass@1": "76.0",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 4,
+      "model": "Gemini-2.5-Pro-Preview-05-06",
+      "model_url": "",
+      "pass@1": "75.3",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 5,
+      "model": "GPT-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "72.3",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 6,
+      "model": "o3-mini (Med)",
+      "model_url": "",
+      "pass@1": "72.2",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 7,
+      "model": "Qwen3-235B-A22B",
+      "model_url": "",
+      "pass@1": "71.5",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 8,
+      "model": "o4-mini (Med)",
+      "model_url": "",
+      "pass@1": "68.7",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 9,
+      "model": "Qwen3-32B",
+      "model_url": "",
+      "pass@1": "68.2",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 10,
+      "model": "Claude-3.7-Sonnet",
+      "model_url": "",
+      "pass@1": "67.4",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 11,
+      "model": "Grok-3-Mini (High)",
+      "model_url": "",
+      "pass@1": "66.6",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 12,
+      "model": "GPT-4o-2024-11-20",
+      "model_url": "https://openai.com/research/gpt-4",
+      "pass@1": "64.4",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 13,
+      "model": "DeepSeek-V3",
+      "model_url": "",
+      "pass@1": "63.3",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 14,
+      "model": "Qwen3-30B-A3B",
+      "model_url": "",
+      "pass@1": "61.8",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 15,
+      "model": "GPT-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "58.7",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 16,
+      "model": "Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "53.0",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 17,
+      "model": "Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "51.0",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 18,
+      "model": "Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "50.5",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 19,
+      "model": "Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "44.5",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 20,
+      "model": "GPT-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "44.4",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 21,
+      "model": "Claude-3.5-Haiku-20241022",
+      "model_url": "",
+      "pass@1": "43.0",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 22,
+      "model": "Claude-3.5-Sonnet-20241022",
+      "model_url": "",
+      "pass@1": "42.8",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 23,
+      "model": "Llama-4-Scout-17B-16E-Instruct",
+      "model_url": "",
+      "pass@1": "42.8",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 24,
+      "model": "Gemma-3-27B-Instruct",
+      "model_url": "",
+      "pass@1": "41.8",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    },
+    {
+      "rank": 25,
+      "model": "Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "26.1",
+      "pass@3": "-",
+      "pass@5": "-",
+      "CodeBLEU": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 25,
+    "hasResults": true
+  }
+}

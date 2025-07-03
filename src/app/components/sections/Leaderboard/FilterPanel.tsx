@@ -170,21 +170,21 @@ const FilterPanel: FC<FilterPanelProps> = ({
                       };
 
                       return (
-                        <motion.button
-                          key={value}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={() => handleAbilityChange(key, value)}
-                          className={`
-                            px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                            ${selectedAbilities[key]?.includes(value)
-                              ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                              : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                            }
-                          `}
-                        >
+                      <motion.button
+                        key={value}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleAbilityChange(key, value)}
+                        className={`
+                          px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
+                          ${selectedAbilities[key]?.includes(value)
+                            ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
+                            : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                          }
+                        `}
+                      >
                           {getDisplayText(value)}
-                        </motion.button>
+                      </motion.button>
                       );
                     })}
                   </div>

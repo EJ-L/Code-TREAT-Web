@@ -1,0 +1,20 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [],
+    "reasoning": [],
+    "dataset": [
+      "HackerRank"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:08:40.201Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

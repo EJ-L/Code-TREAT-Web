@@ -1,0 +1,20 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [
+      "Java"
+    ],
+    "knowledge": [],
+    "reasoning": [
+      "Direct"
+    ],
+    "dataset": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:16:18.249Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

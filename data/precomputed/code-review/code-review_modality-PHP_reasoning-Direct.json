@@ -1,0 +1,18 @@
+{
+  "task": "code review",
+  "filters": {
+    "modality": [
+      "PHP"
+    ],
+    "reasoning": [
+      "Direct"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:17:02.485Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

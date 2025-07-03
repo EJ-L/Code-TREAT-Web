@@ -1,0 +1,190 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [
+      "Java"
+    ],
+    "knowledge": [
+      "Algorithms",
+      "Math"
+    ],
+    "reasoning": [],
+    "dataset": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:04:49.686Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "grok-3-mini-beta",
+      "model_url": "",
+      "pass@1": "56.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 2,
+      "model": "o3-mini",
+      "model_url": "",
+      "pass@1": "56.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 3,
+      "model": "Qwen/Qwen3-32B",
+      "model_url": "",
+      "pass@1": "55.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 4,
+      "model": "o4-mini",
+      "model_url": "",
+      "pass@1": "53.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 5,
+      "model": "Qwen/Qwen3-30B-A3B",
+      "model_url": "",
+      "pass@1": "53.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 6,
+      "model": "deepseek/deepseek-r1:free",
+      "model_url": "",
+      "pass@1": "50.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 7,
+      "model": "claude-3-5-sonnet-20241022",
+      "model_url": "",
+      "pass@1": "45.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 8,
+      "model": "anthropic/claude-3.7-sonnet",
+      "model_url": "",
+      "pass@1": "44.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 9,
+      "model": "deepseek-chat",
+      "model_url": "",
+      "pass@1": "43.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 10,
+      "model": "gpt-4o-2024-11-20",
+      "model_url": "",
+      "pass@1": "43.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 11,
+      "model": "claude-3-5-haiku-20241022",
+      "model_url": "",
+      "pass@1": "42.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 12,
+      "model": "gpt-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "42.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 13,
+      "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "42.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 14,
+      "model": "gpt-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "41.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 15,
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "model_url": "",
+      "pass@1": "40.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 16,
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "39.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 17,
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "38.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 18,
+      "model": "google/gemma-3-27b-it",
+      "model_url": "",
+      "pass@1": "37.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 19,
+      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "35.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 20,
+      "model": "gpt-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "33.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 21,
+      "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "24.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 21,
+    "hasResults": true
+  }
+}

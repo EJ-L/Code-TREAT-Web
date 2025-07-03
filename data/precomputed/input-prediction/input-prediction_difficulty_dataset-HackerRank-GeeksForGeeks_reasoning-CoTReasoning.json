@@ -1,0 +1,21 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [],
+    "knowledge": [],
+    "reasoning": [
+      "CoT Reasoning"
+    ],
+    "dataset": [
+      "HackerRank",
+      "GeeksForGeeks"
+    ]
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:07:14.316Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

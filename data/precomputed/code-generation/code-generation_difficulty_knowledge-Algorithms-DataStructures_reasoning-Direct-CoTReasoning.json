@@ -1,0 +1,22 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [],
+    "modality": [],
+    "knowledge": [
+      "Algorithms",
+      "Data Structures"
+    ],
+    "reasoning": [
+      "Direct",
+      "CoT Reasoning"
+    ]
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:16:01.788Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

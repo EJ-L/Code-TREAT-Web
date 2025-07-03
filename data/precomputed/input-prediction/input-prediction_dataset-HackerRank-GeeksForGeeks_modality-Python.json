@@ -1,0 +1,142 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [],
+    "reasoning": [],
+    "dataset": [
+      "HackerRank",
+      "GeeksForGeeks"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:05:30.395Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "o3-mini",
+      "model_url": "",
+      "pass@1": "87.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 2,
+      "model": "gpt-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "58.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 3,
+      "model": "gpt-4o-2024-11-20",
+      "model_url": "",
+      "pass@1": "53.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 4,
+      "model": "claude-3-5-sonnet-20241022",
+      "model_url": "",
+      "pass@1": "52.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 5,
+      "model": "deepseek-chat",
+      "model_url": "",
+      "pass@1": "50.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 6,
+      "model": "gpt-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "47.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 7,
+      "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "42.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 8,
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "41.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 9,
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "36.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 10,
+      "model": "Qwen/QwQ-32B",
+      "model_url": "",
+      "pass@1": "34.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 11,
+      "model": "gpt-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "33.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 12,
+      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "30.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 13,
+      "model": "google/gemma-3-27b-it",
+      "model_url": "",
+      "pass@1": "30.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 14,
+      "model": "claude-3-5-haiku-20241022",
+      "model_url": "",
+      "pass@1": "23.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 15,
+      "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "20.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 15,
+    "hasResults": true
+  }
+}

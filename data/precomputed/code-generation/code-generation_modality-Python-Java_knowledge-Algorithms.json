@@ -1,0 +1,21 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [],
+    "modality": [
+      "Python",
+      "Java"
+    ],
+    "knowledge": [
+      "Algorithms"
+    ],
+    "reasoning": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:15:43.694Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

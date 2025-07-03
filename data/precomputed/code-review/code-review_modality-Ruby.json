@@ -1,0 +1,16 @@
+{
+  "task": "code review",
+  "filters": {
+    "modality": [
+      "Ruby"
+    ],
+    "reasoning": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:53.354Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

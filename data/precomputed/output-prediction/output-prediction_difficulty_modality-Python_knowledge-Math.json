@@ -1,0 +1,20 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [
+      "Math"
+    ],
+    "reasoning": [],
+    "dataset": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:07:57.538Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [],
+    "reasoning": [],
+    "dataset": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:08.977Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

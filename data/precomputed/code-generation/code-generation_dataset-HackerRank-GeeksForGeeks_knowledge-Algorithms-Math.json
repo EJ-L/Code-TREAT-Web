@@ -1,0 +1,22 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [
+      "HackerRank",
+      "GeeksForGeeks"
+    ],
+    "modality": [],
+    "knowledge": [
+      "Algorithms",
+      "Math"
+    ],
+    "reasoning": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:15:25.498Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

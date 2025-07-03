@@ -1,0 +1,20 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Math"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "GeeksForGeeks"
+    ]
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:06:46.290Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

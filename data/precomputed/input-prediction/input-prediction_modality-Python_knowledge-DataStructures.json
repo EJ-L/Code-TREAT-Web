@@ -1,0 +1,20 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [
+      "Data Structures"
+    ],
+    "reasoning": [],
+    "dataset": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:17:45.928Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

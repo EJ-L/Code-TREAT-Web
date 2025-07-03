@@ -1,0 +1,222 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [
+      "HackerRank",
+      "GeeksForGeeks"
+    ],
+    "modality": [
+      "Java"
+    ],
+    "knowledge": [],
+    "reasoning": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:15:11.167Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "Grok-3-Mini (High)",
+      "model_url": "",
+      "pass@1": "51.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 2,
+      "model": "Claude-Sonnet-4",
+      "model_url": "https://anthropic.com",
+      "pass@1": "51.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 3,
+      "model": "o3-mini (Med)",
+      "model_url": "",
+      "pass@1": "50.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 4,
+      "model": "GPT-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "49.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 5,
+      "model": "Claude-3.7-Sonnet",
+      "model_url": "",
+      "pass@1": "47.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 6,
+      "model": "o4-mini (Med)",
+      "model_url": "",
+      "pass@1": "44.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 7,
+      "model": "DeepSeek-R1 (0528)",
+      "model_url": "",
+      "pass@1": "43.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 8,
+      "model": "Qwen3-30B-A3B",
+      "model_url": "",
+      "pass@1": "41.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 9,
+      "model": "Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "41.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 10,
+      "model": "Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "41.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 11,
+      "model": "Qwen3-235B-A22B",
+      "model_url": "",
+      "pass@1": "40.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 12,
+      "model": "Claude-3.5-Sonnet-20241022",
+      "model_url": "",
+      "pass@1": "39.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 13,
+      "model": "DeepSeek-R1",
+      "model_url": "",
+      "pass@1": "39.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 14,
+      "model": "Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "38.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 15,
+      "model": "Qwen3-32B",
+      "model_url": "",
+      "pass@1": "38.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 16,
+      "model": "GPT-4o-2024-11-20",
+      "model_url": "https://openai.com/research/gpt-4",
+      "pass@1": "37.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 17,
+      "model": "Gemini-2.5-Pro-Preview-05-06",
+      "model_url": "",
+      "pass@1": "36.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 18,
+      "model": "GPT-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "36.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 19,
+      "model": "DeepSeek-V3",
+      "model_url": "",
+      "pass@1": "34.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 20,
+      "model": "Gemma-3-27B-Instruct",
+      "model_url": "",
+      "pass@1": "33.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 21,
+      "model": "GPT-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "32.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 22,
+      "model": "Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "30.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 23,
+      "model": "Claude-3.5-Haiku-20241022",
+      "model_url": "",
+      "pass@1": "23.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 24,
+      "model": "Llama-4-Scout-17B-16E-Instruct",
+      "model_url": "",
+      "pass@1": "20.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 25,
+      "model": "Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "17.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 25,
+    "hasResults": true
+  }
+}

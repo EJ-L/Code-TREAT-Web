@@ -1,0 +1,222 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [
+      "HackerRank"
+    ],
+    "modality": [],
+    "knowledge": [],
+    "reasoning": [
+      "Direct",
+      "CoT Reasoning"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:15:28.805Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "Claude-Sonnet-4",
+      "model_url": "https://anthropic.com",
+      "pass@1": "62.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 2,
+      "model": "Claude-3.7-Sonnet",
+      "model_url": "",
+      "pass@1": "60.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 3,
+      "model": "GPT-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "59.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 4,
+      "model": "o3-mini (Med)",
+      "model_url": "",
+      "pass@1": "59.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 5,
+      "model": "DeepSeek-R1",
+      "model_url": "",
+      "pass@1": "57.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 6,
+      "model": "DeepSeek-R1 (0528)",
+      "model_url": "",
+      "pass@1": "56.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 7,
+      "model": "Claude-3.5-Sonnet-20241022",
+      "model_url": "",
+      "pass@1": "54.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 8,
+      "model": "Grok-3-Mini (High)",
+      "model_url": "",
+      "pass@1": "53.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 9,
+      "model": "DeepSeek-V3",
+      "model_url": "",
+      "pass@1": "53.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 10,
+      "model": "Qwen3-235B-A22B",
+      "model_url": "",
+      "pass@1": "52.6",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 11,
+      "model": "Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "52.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 12,
+      "model": "Gemini-2.5-Pro-Preview-05-06",
+      "model_url": "",
+      "pass@1": "51.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 13,
+      "model": "Gemma-3-27B-Instruct",
+      "model_url": "",
+      "pass@1": "51.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 14,
+      "model": "Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "51.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 15,
+      "model": "GPT-4o-2024-11-20",
+      "model_url": "https://openai.com/research/gpt-4",
+      "pass@1": "50.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 16,
+      "model": "Qwen3-32B",
+      "model_url": "",
+      "pass@1": "50.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 17,
+      "model": "GPT-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "50.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 18,
+      "model": "o4-mini (Med)",
+      "model_url": "",
+      "pass@1": "49.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 19,
+      "model": "Qwen3-30B-A3B",
+      "model_url": "",
+      "pass@1": "48.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 20,
+      "model": "Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "47.1",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 21,
+      "model": "GPT-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "45.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 22,
+      "model": "Llama-4-Scout-17B-16E-Instruct",
+      "model_url": "",
+      "pass@1": "41.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 23,
+      "model": "Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "41.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 24,
+      "model": "Claude-3.5-Haiku-20241022",
+      "model_url": "",
+      "pass@1": "39.9",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 25,
+      "model": "Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "25.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 25,
+    "hasResults": true
+  }
+}

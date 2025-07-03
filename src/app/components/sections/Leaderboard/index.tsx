@@ -1135,11 +1135,71 @@ interface LeaderboardProps {
     };
   }, [sortedResults, currentTask, getFilteredTableHeaders]);
 
-  // CSV filename based on current task
+  // CSV filename based on current task and filters
   const csvFilename = useMemo(() => {
     const date = new Date().toISOString().split('T')[0];
-    return `code-treat-${currentTask.replace(/\s+/g, '-')}-${date}.csv`;
-  }, [currentTask]);
+    let filename = currentTask.replace(/\s+/g, '-');
+    
+    // Add difficulty suffix if enabled
+    if (showByDifficulty) {
+      filename += '_difficulty';
+    }
+    
+    // Add filter information to filename
+    const filterParts: string[] = [];
+    
+    // Add dataset filters
+    if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+      filterParts.push(`dataset-${selectedAbilities.dataset.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add modality filters  
+    if (selectedAbilities.modality && selectedAbilities.modality.length > 0) {
+      filterParts.push(`modality-${selectedAbilities.modality.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add knowledge filters
+    if (selectedAbilities.knowledge && selectedAbilities.knowledge.length > 0) {
+      filterParts.push(`knowledge-${selectedAbilities.knowledge.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add reasoning filters
+    if (selectedAbilities.reasoning && selectedAbilities.reasoning.length > 0) {
+      filterParts.push(`reasoning-${selectedAbilities.reasoning.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add robustness filters
+    if (selectedAbilities.robustness && selectedAbilities.robustness.length > 0) {
+      filterParts.push(`robustness-${selectedAbilities.robustness.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add privacy filters
+    if (selectedAbilities.privacy && selectedAbilities.privacy.length > 0) {
+      filterParts.push(`privacy-${selectedAbilities.privacy.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add LLM judge filters
+    if (selectedAbilities.llmJudges && selectedAbilities.llmJudges.length > 0) {
+      filterParts.push(`llmjudge-${selectedAbilities.llmJudges.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // Add framework filters
+    if (selectedAbilities.framework && selectedAbilities.framework.length > 0) {
+      filterParts.push(`framework-${selectedAbilities.framework.join('-').replace(/\s+/g, '')}`);
+    }
+    
+    // If no filters are applied, add "overall" to the filename
+    if (filterParts.length === 0) {
+      filterParts.push('overall');
+    }
+    
+    // Combine all parts
+    if (filterParts.length > 0) {
+      filename += '_' + filterParts.join('_');
+    }
+    
+    return `${filename}_${date}.csv`;
+  }, [currentTask, selectedAbilities, showByDifficulty]);
   
   // Column width helper
   const getTaskSpecificColumnWidth = useCallback((task: TaskType, key: string): string => {

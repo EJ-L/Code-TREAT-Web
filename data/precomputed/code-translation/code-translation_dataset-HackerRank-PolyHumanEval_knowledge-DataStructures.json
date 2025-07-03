@@ -1,0 +1,21 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Data Structures"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "HackerRank",
+      "PolyHumanEval"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:16:27.122Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "task": "input prediction",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Data Structures"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "GeeksForGeeks"
+    ]
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:06:33.349Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

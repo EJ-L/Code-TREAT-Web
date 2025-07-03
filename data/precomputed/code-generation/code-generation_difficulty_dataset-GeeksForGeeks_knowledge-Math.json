@@ -1,0 +1,20 @@
+{
+  "task": "code generation",
+  "filters": {
+    "dataset": [
+      "GeeksForGeeks"
+    ],
+    "modality": [],
+    "knowledge": [
+      "Math"
+    ],
+    "reasoning": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:15:20.253Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

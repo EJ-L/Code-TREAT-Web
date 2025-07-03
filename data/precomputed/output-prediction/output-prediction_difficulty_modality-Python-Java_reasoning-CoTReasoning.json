@@ -1,0 +1,21 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [
+      "Python",
+      "Java"
+    ],
+    "knowledge": [],
+    "reasoning": [
+      "CoT Reasoning"
+    ],
+    "dataset": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:08:37.341Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Algorithms",
+      "Data Structures"
+    ],
+    "reasoning": [],
+    "dataset": [
+      "GeeksForGeeks"
+    ]
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:09:43.021Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

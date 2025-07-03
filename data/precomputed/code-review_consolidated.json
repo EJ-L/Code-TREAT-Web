@@ -1,0 +1,352 @@
+{
+  "Gemma-3-27B-Instruct": {
+    "overall": {
+      "rank": 1,
+      "LLM Judge": "31.7"
+    },
+    "reasoning-Direct": {
+      "rank": 1,
+      "LLM Judge": "31.7"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 1,
+      "LLM Judge": "31.7"
+    }
+  },
+  "Qwen3-30B-A3B": {
+    "overall": {
+      "rank": 2,
+      "LLM Judge": "31.6"
+    },
+    "reasoning-Direct": {
+      "rank": 2,
+      "LLM Judge": "31.6"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 2,
+      "LLM Judge": "31.6"
+    }
+  },
+  "Gemini-2.5-Pro-Preview-05-06": {
+    "overall": {
+      "rank": 3,
+      "LLM Judge": "31.5"
+    },
+    "reasoning-Direct": {
+      "rank": 3,
+      "LLM Judge": "31.5"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 3,
+      "LLM Judge": "31.5"
+    }
+  },
+  "Qwen2.5-72B-Instruct": {
+    "overall": {
+      "rank": 4,
+      "LLM Judge": "31.3"
+    },
+    "reasoning-Direct": {
+      "rank": 4,
+      "LLM Judge": "31.3"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 4,
+      "LLM Judge": "31.3"
+    }
+  },
+  "DeepSeek-R1 (0528)": {
+    "overall": {
+      "rank": 5,
+      "LLM Judge": "31.1"
+    },
+    "reasoning-Direct": {
+      "rank": 5,
+      "LLM Judge": "31.1"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 5,
+      "LLM Judge": "31.1"
+    }
+  },
+  "Qwen2.5-Coder-32B-Instruct": {
+    "overall": {
+      "rank": 6,
+      "LLM Judge": "31.1"
+    },
+    "reasoning-Direct": {
+      "rank": 6,
+      "LLM Judge": "31.1"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 6,
+      "LLM Judge": "31.1"
+    }
+  },
+  "Grok-3-Mini (High)": {
+    "overall": {
+      "rank": 7,
+      "LLM Judge": "31.0"
+    },
+    "reasoning-Direct": {
+      "rank": 7,
+      "LLM Judge": "31.0"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 7,
+      "LLM Judge": "31.0"
+    }
+  },
+  "Claude-Sonnet-4": {
+    "overall": {
+      "rank": 8,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct": {
+      "rank": 8,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 8,
+      "LLM Judge": "30.9"
+    }
+  },
+  "DeepSeek-V3": {
+    "overall": {
+      "rank": 9,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct": {
+      "rank": 9,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 9,
+      "LLM Judge": "30.9"
+    }
+  },
+  "Qwen3-235B-A22B": {
+    "overall": {
+      "rank": 10,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct": {
+      "rank": 10,
+      "LLM Judge": "30.9"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 10,
+      "LLM Judge": "30.9"
+    }
+  },
+  "Llama-3.3-70B-Instruct": {
+    "overall": {
+      "rank": 11,
+      "LLM Judge": "30.7"
+    },
+    "reasoning-Direct": {
+      "rank": 11,
+      "LLM Judge": "30.7"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 11,
+      "LLM Judge": "30.7"
+    }
+  },
+  "Claude-3.5-Haiku-20241022": {
+    "overall": {
+      "rank": 12,
+      "LLM Judge": "30.6"
+    },
+    "reasoning-Direct": {
+      "rank": 12,
+      "LLM Judge": "30.6"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 12,
+      "LLM Judge": "30.6"
+    }
+  },
+  "Claude-3.7-Sonnet": {
+    "overall": {
+      "rank": 13,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct": {
+      "rank": 13,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 13,
+      "LLM Judge": "30.4"
+    }
+  },
+  "GPT-3.5-turbo-0125": {
+    "overall": {
+      "rank": 14,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct": {
+      "rank": 14,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 14,
+      "LLM Judge": "30.4"
+    }
+  },
+  "Qwen3-32B": {
+    "overall": {
+      "rank": 15,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct": {
+      "rank": 15,
+      "LLM Judge": "30.4"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 15,
+      "LLM Judge": "30.4"
+    }
+  },
+  "GPT-4o-2024-11-20": {
+    "overall": {
+      "rank": 16,
+      "LLM Judge": "30.3"
+    },
+    "reasoning-Direct": {
+      "rank": 16,
+      "LLM Judge": "30.3"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 16,
+      "LLM Judge": "30.3"
+    }
+  },
+  "Llama-3.1-70B-Instruct": {
+    "overall": {
+      "rank": 17,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct": {
+      "rank": 17,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 17,
+      "LLM Judge": "30.2"
+    }
+  },
+  "Llama-3.1-8B-Instruct": {
+    "overall": {
+      "rank": 18,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct": {
+      "rank": 18,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 18,
+      "LLM Judge": "30.2"
+    }
+  },
+  "o3-mini (Med)": {
+    "overall": {
+      "rank": 19,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct": {
+      "rank": 19,
+      "LLM Judge": "30.2"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 19,
+      "LLM Judge": "30.2"
+    }
+  },
+  "Llama-4-Scout-17B-16E-Instruct": {
+    "overall": {
+      "rank": 20,
+      "LLM Judge": "30.1"
+    },
+    "reasoning-Direct": {
+      "rank": 20,
+      "LLM Judge": "30.1"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 20,
+      "LLM Judge": "30.1"
+    }
+  },
+  "Claude-3.5-Sonnet-20241022": {
+    "overall": {
+      "rank": 21,
+      "LLM Judge": "30.0"
+    },
+    "reasoning-Direct": {
+      "rank": 21,
+      "LLM Judge": "30.0"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 21,
+      "LLM Judge": "30.0"
+    }
+  },
+  "GPT-4-turbo-2024-04-09": {
+    "overall": {
+      "rank": 22,
+      "LLM Judge": "29.7"
+    },
+    "reasoning-Direct": {
+      "rank": 22,
+      "LLM Judge": "29.7"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 22,
+      "LLM Judge": "29.7"
+    }
+  },
+  "GPT-4.1-2025-04-14": {
+    "overall": {
+      "rank": 23,
+      "LLM Judge": "29.4"
+    },
+    "reasoning-Direct": {
+      "rank": 23,
+      "LLM Judge": "29.4"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 23,
+      "LLM Judge": "29.4"
+    }
+  },
+  "o4-mini (Med)": {
+    "overall": {
+      "rank": 24,
+      "LLM Judge": "29.0"
+    },
+    "reasoning-Direct": {
+      "rank": 24,
+      "LLM Judge": "29.0"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 24,
+      "LLM Judge": "29.0"
+    }
+  },
+  "DeepSeek-R1": {
+    "overall": {
+      "rank": 25,
+      "LLM Judge": "27.3"
+    },
+    "reasoning-Direct": {
+      "rank": 25,
+      "LLM Judge": "27.3"
+    },
+    "reasoning-Direct-CoTReasoning": {
+      "rank": 25,
+      "LLM Judge": "27.3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "task": "code translation",
+  "filters": {
+    "modality": [
+      "Python",
+      "Java"
+    ],
+    "knowledge": [],
+    "reasoning": [
+      "Direct",
+      "CoT Reasoning"
+    ],
+    "dataset": []
+  },
+  "showByDifficulty": true,
+  "generatedAt": "2025-07-03T15:16:19.476Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

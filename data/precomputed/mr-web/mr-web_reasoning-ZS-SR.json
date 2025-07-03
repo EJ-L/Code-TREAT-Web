@@ -1,0 +1,45 @@
+{
+  "task": "mr-web",
+  "filters": {
+    "knowledge": [],
+    "reasoning": [
+      "ZS",
+      "SR"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:10:19.045Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "Gemini-2.0-Pro",
+      "model_url": "https://deepmind.google/technologies/gemini/",
+      "MAE": "64.900",
+      "NEMD": "0.750",
+      "CLIP": "79.1",
+      "RER": "82.7"
+    },
+    {
+      "rank": 2,
+      "model": "Claude-3.5-Sonnet",
+      "model_url": "https://anthropic.com",
+      "MAE": "69.250",
+      "NEMD": "0.728",
+      "CLIP": "79.0",
+      "RER": "65.4"
+    },
+    {
+      "rank": 3,
+      "model": "GPT-4o",
+      "model_url": "https://openai.com/research/gpt-4",
+      "MAE": "66.400",
+      "NEMD": "0.742",
+      "CLIP": "77.0",
+      "RER": "79.1"
+    }
+  ],
+  "metadata": {
+    "totalResults": 3,
+    "hasResults": true
+  }
+}

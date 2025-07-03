@@ -1,0 +1,19 @@
+{
+  "task": "code summarization",
+  "filters": {
+    "modality": [
+      "Python",
+      "Java"
+    ],
+    "reasoning": [
+      "CoT Reasoning"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:30:04.530Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [],
+    "knowledge": [
+      "Data Structures",
+      "Math"
+    ],
+    "reasoning": [
+      "Direct"
+    ],
+    "dataset": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:09:23.699Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "o3-mini",
+      "model_url": "",
+      "pass@1": "52.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 2,
+      "model": "o4-mini",
+      "model_url": "",
+      "pass@1": "52.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 3,
+      "model": "Qwen/QwQ-32B",
+      "model_url": "",
+      "pass@1": "52.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 4,
+      "model": "Qwen/Qwen3-30B-A3B",
+      "model_url": "",
+      "pass@1": "51.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 5,
+      "model": "Qwen/Qwen3-32B",
+      "model_url": "",
+      "pass@1": "51.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 6,
+      "model": "Qwen/Qwen3-235B-A22B",
+      "model_url": "",
+      "pass@1": "50.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 7,
+      "model": "deepseek-chat",
+      "model_url": "",
+      "pass@1": "34.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 8,
+      "model": "gpt-4.1-2025-04-14",
+      "model_url": "",
+      "pass@1": "33.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 9,
+      "model": "claude-3-5-sonnet-20241022",
+      "model_url": "",
+      "pass@1": "32.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 10,
+      "model": "deepseek/deepseek-r1:free",
+      "model_url": "",
+      "pass@1": "32.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 11,
+      "model": "gpt-4-turbo-2024-04-09",
+      "model_url": "",
+      "pass@1": "31.7",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 12,
+      "model": "anthropic/claude-3.7-sonnet",
+      "model_url": "",
+      "pass@1": "30.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 13,
+      "model": "Qwen/Qwen2.5-Coder-32B-Instruct",
+      "model_url": "",
+      "pass@1": "30.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 14,
+      "model": "claude-3-5-haiku-20241022",
+      "model_url": "",
+      "pass@1": "29.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 15,
+      "model": "gpt-4o-2024-11-20",
+      "model_url": "",
+      "pass@1": "28.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 16,
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "model_url": "",
+      "pass@1": "25.8",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 17,
+      "model": "gpt-3.5-turbo-0125",
+      "model_url": "",
+      "pass@1": "25.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 18,
+      "model": "grok-3-mini-beta",
+      "model_url": "",
+      "pass@1": "25.0",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 19,
+      "model": "Qwen/Qwen2.5-72B-Instruct",
+      "model_url": "",
+      "pass@1": "24.4",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 20,
+      "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+      "model_url": "",
+      "pass@1": "24.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 21,
+      "model": "google/gemma-3-27b-it",
+      "model_url": "",
+      "pass@1": "22.5",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 22,
+      "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "model_url": "",
+      "pass@1": "14.3",
+      "pass@3": "-",
+      "pass@5": "-"
+    },
+    {
+      "rank": 23,
+      "model": "meta-llama/Llama-3.3-70B-Instruct",
+      "model_url": "",
+      "pass@1": "9.2",
+      "pass@3": "-",
+      "pass@5": "-"
+    }
+  ],
+  "metadata": {
+    "totalResults": 23,
+    "hasResults": true
+  }
+}

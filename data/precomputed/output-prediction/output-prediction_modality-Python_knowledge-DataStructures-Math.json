@@ -1,0 +1,21 @@
+{
+  "task": "output prediction",
+  "filters": {
+    "modality": [
+      "Python"
+    ],
+    "knowledge": [
+      "Data Structures",
+      "Math"
+    ],
+    "reasoning": [],
+    "dataset": []
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-07-03T15:08:00.187Z",
+  "results": [],
+  "metadata": {
+    "totalResults": 0,
+    "hasResults": false
+  }
+}

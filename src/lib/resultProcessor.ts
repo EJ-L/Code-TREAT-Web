@@ -147,8 +147,12 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     case 'interaction-2-code':
     case 'code-robustness':
     case 'mr-web':
-      // For these new tasks, process results directly using the raw data and metrics
-      const rawTaskData = data.filter(entry => entry.task === task);
+      // For MR-Web, we need to filter by dataset since the raw data transformation may not have happened
+      const rawTaskData = task === 'mr-web' 
+        ? data.filter(entry => entry.dataset === 'MR-Web' || entry.task === task)
+        : data.filter(entry => entry.task === task);
+      
+
       
       // Apply filters at the raw data level first, before aggregation
       let filteredRawData = rawTaskData;
@@ -172,7 +176,9 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       // Apply knowledge filter (for mr-web subtask)
       if (task === 'mr-web' && filters.knowledge && filters.knowledge.length > 0) {
         filteredRawData = filteredRawData.filter(entry => {
-          return entry.subtask && filters.knowledge && filters.knowledge.includes(entry.subtask);
+          // For mr-web, check both the task field (raw data) and subtask field (processed data)
+          const subtaskValue = entry.subtask || entry.task;
+          return subtaskValue && filters.knowledge && filters.knowledge.includes(subtaskValue);
         });
       }
       
@@ -300,18 +306,17 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`语言过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled specifically
+  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled during raw data processing
   // NOTE: Knowledge filtering is now handled at the task level (before aggregation) for better results
-  // This section is kept for mr-web and any other special cases
-  if (filters.knowledge && filters.knowledge.length > 0 && task === 'mr-web') {
-    // Only handle mr-web knowledge filtering here (which uses subtask field)
-    console.log(`开始知识领域过滤 (mr-web): ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
+  // This section is kept for non-special tasks
+  if (filters.knowledge && filters.knowledge.length > 0 && task !== 'mr-web') {
+    console.log(`开始知识领域过滤: ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
     
     filteredResults = filteredResults.filter(result => {
       return filters.knowledge!.some(knowledgeFilter => {
         const filterLower = knowledgeFilter.toLowerCase();
         
-        // Check other fields for broader matches (fallback)
+        // Check other fields for broader matches
         const stringsToCheck: string[] = [];
         if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
         if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
@@ -332,6 +337,11 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     const reasoningPatterns = filters.reasoning.map(r => r.toLowerCase());
     
     filteredResults = filteredResults.filter(result => {
+      // 对于mr-web任务，reasoning filtering已在raw data processing阶段完成，跳过
+      if (task === 'mr-web') {
+        return true;
+      }
+      
       // 首先检查原始数据的prompt_category字段
       const rawEntry = data.find((raw: any) => 
         raw.model_name === result.modelName && 
@@ -345,13 +355,6 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
           rawEntry.prompt_category!.some((category: string) => 
             category.toLowerCase() === pattern
           )
-        );
-      }
-      
-      // 对于mr-web任务，检查method字段
-      if (task === 'mr-web' && rawEntry?.method) {
-        return reasoningPatterns.some(pattern => 
-          rawEntry.method!.toLowerCase() === pattern
         );
       }
       

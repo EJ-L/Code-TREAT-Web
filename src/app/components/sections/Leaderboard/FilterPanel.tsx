@@ -151,23 +151,42 @@ const FilterPanel: FC<FilterPanelProps> = ({
                      key.charAt(0).toUpperCase() + key.slice(1)}
                   </p>
                   <div className="inline-flex flex-wrap gap-2">
-                    {values.map((value: string) => (
-                      <motion.button
-                        key={value}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAbilityChange(key, value)}
-                        className={`
-                          px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                          ${selectedAbilities[key]?.includes(value)
-                            ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                            : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    {values.map((value: string) => {
+                      // Helper function to get display text for mr-web method values
+                      const getDisplayText = (val: string): string => {
+                        if (currentTask === 'mr-web' && key === 'reasoning') {
+                          switch (val) {
+                            case 'CoT':
+                              return 'Chain-of-Thought (CoT)';
+                            case 'ZS':
+                              return 'Zero-Shot (ZS)';
+                            case 'SR':
+                              return 'Self-Refine (SR)';
+                            default:
+                              return val;
                           }
-                        `}
-                      >
-                        {value}
-                      </motion.button>
-                    ))}
+                        }
+                        return val;
+                      };
+
+                      return (
+                        <motion.button
+                          key={value}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleAbilityChange(key, value)}
+                          className={`
+                            px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
+                            ${selectedAbilities[key]?.includes(value)
+                              ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
+                              : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                            }
+                          `}
+                        >
+                          {getDisplayText(value)}
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 </div>
               )

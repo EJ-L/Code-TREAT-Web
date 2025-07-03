@@ -478,6 +478,7 @@ async function performDataLoad(): Promise<ResultEntry[]> {
                 if ((entry as any).domain) {
                   result.domain = (entry as any).domain;
                 }
+                
                 return result;
               });
             } catch (error) {

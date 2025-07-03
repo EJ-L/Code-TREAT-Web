@@ -25,7 +25,13 @@ interface LeaderboardProps {
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
   const [currentTaskPage, setCurrentTaskPage] = useState(0);
   const [showByDifficulty, setShowByDifficulty] = useState(false);
-  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({});
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() => {
+    // Initialize with default values immediately to prevent layout shift
+    const initialWidths: Record<string, number> = {};
+    initialWidths['rank'] = 100;
+    initialWidths['model'] = 300; // Default model width
+    return initialWidths;
+  });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   
@@ -757,6 +763,11 @@ interface LeaderboardProps {
     initializeColumnWidths();
   }, [currentTask, initializeColumnWidths]);
 
+  // Reinitialize column widths when difficulty view is toggled
+  useEffect(() => {
+    initializeColumnWidths();
+  }, [showByDifficulty, initializeColumnWidths]);
+
   // Listen for task change events from PaperCitationModal
   useEffect(() => {
     const handleTaskChangeEvent = (event: CustomEvent) => {
@@ -868,7 +879,7 @@ interface LeaderboardProps {
         Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
       setColumnWidths(newWidths);
     }
-  }, [currentTask, sortedResults, getFilteredTableHeaders]); // Removed columnWidths dependency to prevent resize reset
+  }, [currentTask, sortedResults, getFilteredTableHeaders, showByDifficulty]); // Added showByDifficulty dependency
 
   // Helper function to get minimum column width
   const getMinColumnWidth = useCallback((key: string): number => {
@@ -1136,17 +1147,31 @@ interface LeaderboardProps {
       return `${columnWidths[key]}px`;
     }
     
+    // Fallback values that match initializeColumnWidths exactly
+    if (key === 'rank') {
+      return '100px';
+    }
+    
     if (key === 'model') {
       if (task === 'code summarization' || task === 'code review') {
         return '250px';
+      } else if (task === 'code generation') {
+        return '320px';
       } else if (task === 'vulnerability detection') {
         return '350px';
+      } else if (task === 'code-web') {
+        return '360px';
+      } else if (task === 'interaction-2-code') {
+        return '220px';
+      } else if (task === 'code-robustness') {
+        return '400px';
+      } else if (task === 'output prediction' || task === 'input prediction') {
+        return '380px';
+      } else if (task === 'mr-web') {
+        return '300px';
+      } else {
+        return '300px';
       }
-      return '300px';
-    }
-    
-    if (key === 'rank') {
-      return '80px';
     }
     
     if (key === 'llmjudge') {
@@ -1156,6 +1181,43 @@ interface LeaderboardProps {
       return '160px';
     }
     
+    if (key.indexOf('easy_') === 0 || key.indexOf('medium_') === 0 || key.indexOf('hard_') === 0) {
+      return '140px';
+    }
+    
+    if (['pass@1', 'pass@3', 'pass@5'].includes(key)) {
+      return '110px';
+    }
+    
+    if (['CodeBLEU'].includes(key)) {
+      return '140px';
+    }
+    
+    if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(key)) {
+      return '145px';
+    }
+    
+    if (['P-C', 'P-V', 'P-B', 'P-R'].includes(key)) {
+      return '90px';
+    }
+    
+    if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'MAE', 'NEMD', 'RER'].includes(key)) {
+      return '110px';
+    }
+    
+    if (key === 'Compilation') {
+      return '180px';
+    }
+    
+    if (key === 'Implement Rate') {
+      return '230px';
+    }
+    
+    if (['Position'].includes(key)) {
+      return '150px';
+    }
+    
+    // Default fallback
     return '100px';
   }, [columnWidths]);
 

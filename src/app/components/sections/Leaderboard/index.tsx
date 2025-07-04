@@ -93,6 +93,7 @@ interface LeaderboardProps {
 
   // 处理任务切换
   const handleTaskChange = (task: TaskType) => {
+    console.log('🔄 handleTaskChange called with task:', task);
     setCurrentTask(task);
     setIsComparisonModalOpen(false);  // Close comparison modal when switching tasks
     
@@ -102,13 +103,16 @@ interface LeaderboardProps {
     // For tasks other than 'overall' and 'interaction-2-code', auto-select first dataset only
     if (task !== 'overall' && task !== 'interaction-2-code') {
       const taskAbility = taskAbilities[task];
+      console.log('🔍 Task ability for', task, ':', taskAbility);
       
       // Auto-select first dataset if available
       if (taskAbility.dataset && taskAbility.dataset.length > 0) {
         newSelectedAbilities.dataset = [taskAbility.dataset[0]];
+        console.log('✅ Auto-selected dataset:', taskAbility.dataset[0]);
       }
     }
     
+    console.log('🎯 Setting selectedAbilities to:', newSelectedAbilities);
     setSelectedAbilities(newSelectedAbilities);
     
     // 注意：对于code review任务，我们暂时不应用任何过滤器
@@ -309,6 +313,12 @@ interface LeaderboardProps {
     const loadAndProcessData = async () => {
       if (!isMounted) return;
       
+      console.log('📊 loadAndProcessData called with:', {
+        currentTask,
+        selectedAbilities,
+        showByDifficulty
+      });
+      
       // Add a small delay before starting loading to allow header animation to complete
       setTimeout(() => {
         if (!isMounted) return;
@@ -331,18 +341,23 @@ interface LeaderboardProps {
           showByDifficulty: currentTask === 'overall' ? false : showByDifficulty
         };
         
-        // Special handling for code review task
+        console.log('🔧 Initial filterOptions:', filterOptions);
+        
+        // Special handling for code review task - don't clear llmJudges anymore
         if (currentTask === 'code review') {
-          filterOptions.llmJudges = [];
-          filterOptions.langs = [];
-          filterOptions.datasets = [];
+          // Remove the clearing of filters to allow proper filtering
+          // filterOptions.llmJudges = [];
+          // filterOptions.langs = [];
+          // filterOptions.modalities = [];
+          // filterOptions.datasets = [];
         }
         
         // Special handling for overall task
         if (currentTask === 'overall') {
           filterOptions.llmJudges = [];
           filterOptions.langs = [];
-          filterOptions.datasets = [];
+          // Don't clear datasets - allow dataset filtering for overall task
+          // filterOptions.datasets = [];
           filterOptions.modalities = [];
           filterOptions.knowledge = [];
           filterOptions.reasoning = [];
@@ -352,7 +367,7 @@ interface LeaderboardProps {
         }
         
         // Special handling for new tasks
-        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
+        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web' || currentTask === 'vulnerability detection') {
           filterOptions.llmJudges = [];
           filterOptions.showByDifficulty = false;
           
@@ -400,7 +415,21 @@ interface LeaderboardProps {
             filterOptions.datasets = [];
             // Keep only knowledge (Task) and reasoning (Method) filtering for mr-web
           }
+          
+          // For vulnerability detection, disable unnecessary filters except datasets
+          if (currentTask === 'vulnerability detection') {
+            filterOptions.langs = [];
+            filterOptions.modalities = [];
+            filterOptions.knowledge = [];
+            filterOptions.reasoning = [];
+            filterOptions.robustness = [];
+            filterOptions.security = [];
+            filterOptions.framework = [];
+            // Keep only datasets for vulnerability detection
+          }
         }
+        
+        console.log('🎯 Final filterOptions after overrides:', filterOptions);
         
         // Use setTimeout to allow the UI to update the loading state and process data
         setTimeout(async () => {

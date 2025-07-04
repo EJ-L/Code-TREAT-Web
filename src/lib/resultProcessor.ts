@@ -1,5 +1,5 @@
 import { ProcessedResult, FilterOptions, TaskType, ResultEntry } from './types';
-import { loadAllData, processResult, getModelData } from './dataLoader';
+import { loadAllData, processResult, getPrecomputedResults } from './dataLoader';
 import { processCodeGeneration, aggregateCodeGenerationResults } from './tasks/codeGeneration';
 import { processCodeTranslation, aggregateCodeTranslationResults } from './tasks/codeTranslation';
 import { processCodeSummarization, aggregateCodeSummarizationResults } from './tasks/codeSummarization';
@@ -87,7 +87,6 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
   
   // Try to use precomputed data first
   try {
-    const { getPrecomputedResults } = await import('./dataLoader');
     const precomputedResults = await getPrecomputedResults(task, filters, filters.showByDifficulty || false);
     
     if (precomputedResults.length > 0) {
@@ -505,6 +504,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
 // 格式化结果为显示格式
 export function formatResults(results: ProcessedResult[], filters?: FilterOptions): Array<Record<string, string | number>> {
   console.log(`📊 formatResults called with ${results.length} results`);
+  console.log(`📊 First result sample:`, results[0]);
 
   // Check if this is precomputed data (has rank field and is already formatted)
   const isPrecomputedData = results.length > 0 && 'rank' in results[0] && 
@@ -512,15 +512,20 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
      typeof (results[0] as any)['LLM Judge'] === 'string' ||
      typeof (results[0] as any)['Accuracy'] === 'string' ||
      typeof (results[0] as any)['CLIP'] === 'string' ||
-     typeof (results[0] as any)['VAN'] === 'string');
+     typeof (results[0] as any)['VAN'] === 'string' ||
+     typeof (results[0] as any)['easy_pass@1'] === 'string');
+  
+  console.log(`📊 Is precomputed data: ${isPrecomputedData}`);
   
   if (isPrecomputedData) {
     // For precomputed data, results are already sorted and formatted
     console.log('✅ Using precomputed data, returning as-is');
     const formattedResults = results.map((result: any) => ({
-      ...result,
-      model_url: MODEL_URLS[result.model] || "",
+      rank: result.rank,
+      model: result.model,
+      ...result
     }));
+    console.log(`📊 Formatted ${formattedResults.length} precomputed results`);
     return formattedResults;
   } else {
     console.log('⚠️ Using real-time processing data');

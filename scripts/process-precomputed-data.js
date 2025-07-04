@@ -81,8 +81,9 @@ function loadTaskData(task) {
           if (task === 'vulnerability detection' && typeof data === 'object' && !Array.isArray(data)) {
             // Convert the nested object structure to flat entries
             Object.entries(data).forEach(([modelName, modelData]) => {
-              if (modelData.primevul && modelData.primevul_pair) {
-                const entry = {
+              // Create separate entries for PrimeVul and PrimeVulPairs datasets
+              if (modelData.primevul) {
+                const primeVulEntry = {
                   model_name: modelName,
                   task: 'vulnerability detection',
                   dataset: 'PrimeVul',
@@ -90,14 +91,25 @@ function loadTaskData(task) {
                     accuracy: modelData.primevul.accuracy,
                     precision: modelData.primevul.precision,
                     recall: modelData.primevul.recall,
-                    f1: modelData.primevul.f1,
+                    f1: modelData.primevul.f1
+                  }
+                };
+                allData.push(primeVulEntry);
+              }
+              
+              if (modelData.primevul_pair && Array.isArray(modelData.primevul_pair) && modelData.primevul_pair.length > 1) {
+                const primeVulPairsEntry = {
+                  model_name: modelName,
+                  task: 'vulnerability detection',
+                  dataset: 'PrimeVulPairs',
+                  metrics: {
                     'P-C': modelData.primevul_pair[1]['P-C'],
                     'P-V': modelData.primevul_pair[1]['P-V'],
                     'P-B': modelData.primevul_pair[1]['P-B'],
                     'P-R': modelData.primevul_pair[1]['P-R']
                   }
                 };
-                allData.push(entry);
+                allData.push(primeVulPairsEntry);
               }
             });
           } else if (Array.isArray(data)) {
@@ -141,13 +153,19 @@ function applyFilters(data, task, filters) {
   if (filters.dataset && filters.dataset.length > 0) {
     filteredData = filteredData.filter(entry => {
       const entryDataset = entry.dataset || '';
-      return filters.dataset.some(filter => 
-        entryDataset.toLowerCase().includes(filter.toLowerCase()) ||
-        filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
-        // Handle specific mappings
-        (filter === 'HackerRank' && entryDataset.toLowerCase() === 'hackerrank') ||
-        (filter === 'GeeksForGeeks' && entryDataset.toLowerCase() === 'geeksforgeeks')
-      );
+      return filters.dataset.some(filter => {
+        // For vulnerability detection, use exact matching to avoid PrimeVul matching PrimeVulPairs
+        if (task === 'vulnerability detection') {
+          return entryDataset.toLowerCase() === filter.toLowerCase();
+        }
+        
+        // For other tasks, use partial matching as before
+        return entryDataset.toLowerCase().includes(filter.toLowerCase()) ||
+               filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
+               // Handle specific mappings
+               (filter === 'HackerRank' && entryDataset.toLowerCase() === 'hackerrank') ||
+               (filter === 'GeeksForGeeks' && entryDataset.toLowerCase() === 'geeksforgeeks');
+      });
     });
   }
   
@@ -278,32 +296,60 @@ function aggregateData(data, task, showByDifficulty) {
         }
       });
     } else if (task === 'vulnerability detection') {
-      // For vulnerability detection, use the existing calculated values
-      const metrics = ['accuracy', 'precision', 'recall', 'f1', 'P-C', 'P-V', 'P-B', 'P-R'];
-      const entry = entries[0]; // Should only have one entry per model
+      // For vulnerability detection, merge metrics from different datasets
+      let primeVulEntry = null;
+      let primeVulPairsEntry = null;
       
-      metrics.forEach(metric => {
-        if (entry.metrics && entry.metrics[metric] !== undefined) {
-          const value = entry.metrics[metric];
-          if (metric.startsWith('P-')) {
-            result[metric] = (value * 100).toFixed(1);
-          } else {
-            result[metric] = (value * 100).toFixed(1);
-          }
-        } else {
-          result[metric] = '-';
+      // Find entries from different datasets
+      entries.forEach(entry => {
+        if (entry.dataset === 'PrimeVul') {
+          primeVulEntry = entry;
+        } else if (entry.dataset === 'PrimeVulPairs') {
+          primeVulPairsEntry = entry;
         }
       });
       
-      // Map to display names
-      result['Accuracy'] = result['accuracy'];
-      result['Precision'] = result['precision'];
-      result['Recall'] = result['recall'];
-      result['F1 Score'] = result['f1'];
-      delete result['accuracy'];
-      delete result['precision'];
-      delete result['recall'];
-      delete result['f1'];
+      // Initialize all metrics to '-'
+      result['Accuracy'] = '-';
+      result['Precision'] = '-';
+      result['Recall'] = '-';
+      result['F1 Score'] = '-';
+      result['P-C'] = '-';
+      result['P-V'] = '-';
+      result['P-B'] = '-';
+      result['P-R'] = '-';
+      
+      // Get accuracy metrics from PrimeVul entry
+      if (primeVulEntry && primeVulEntry.metrics) {
+        if (primeVulEntry.metrics.accuracy !== undefined) {
+          result['Accuracy'] = (primeVulEntry.metrics.accuracy * 100).toFixed(1);
+        }
+        if (primeVulEntry.metrics.precision !== undefined) {
+          result['Precision'] = (primeVulEntry.metrics.precision * 100).toFixed(1);
+        }
+        if (primeVulEntry.metrics.recall !== undefined) {
+          result['Recall'] = (primeVulEntry.metrics.recall * 100).toFixed(1);
+        }
+        if (primeVulEntry.metrics.f1 !== undefined) {
+          result['F1 Score'] = (primeVulEntry.metrics.f1 * 100).toFixed(1);
+        }
+      }
+      
+      // Get P-metrics from PrimeVulPairs entry
+      if (primeVulPairsEntry && primeVulPairsEntry.metrics) {
+        if (primeVulPairsEntry.metrics['P-C'] !== undefined) {
+          result['P-C'] = (primeVulPairsEntry.metrics['P-C'] * 100).toFixed(1);
+        }
+        if (primeVulPairsEntry.metrics['P-V'] !== undefined) {
+          result['P-V'] = (primeVulPairsEntry.metrics['P-V'] * 100).toFixed(1);
+        }
+        if (primeVulPairsEntry.metrics['P-B'] !== undefined) {
+          result['P-B'] = (primeVulPairsEntry.metrics['P-B'] * 100).toFixed(1);
+        }
+        if (primeVulPairsEntry.metrics['P-R'] !== undefined) {
+          result['P-R'] = (primeVulPairsEntry.metrics['P-R'] * 100).toFixed(1);
+        }
+      }
     } else if (task === 'code review') {
       // For code review, use LLM Judge scores
       // Metrics looks like {"gpt-4o": [2], "claude": [1], ...}

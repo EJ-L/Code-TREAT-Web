@@ -1,4 +1,4 @@
-import { ResultEntry, ProcessedResult, TaskType } from './types';
+import { ResultEntry, ProcessedResult, TaskType, FilterOptions } from './types';
 
 // 高性能数据存储与索引
 class DataStore {
@@ -753,54 +753,236 @@ interface PrecomputedResult {
 }
 
 interface PrecomputedData {
+  task: string;
+  filterMappings: {
+    [combinationKey: string]: {
+      modality?: string[];
+      knowledge?: string[];
+      reasoning?: string[];
+      dataset?: string[];
+      [key: string]: any;
+    };
+  };
+  data: {
   [modelName: string]: {
     [combinationKey: string]: PrecomputedResult;
+    };
   };
 }
 
 // Cache for precomputed data
 const precomputedCache = new Map<string, PrecomputedData>();
 
-// Function to generate combination key from filters
-function generateCombinationKey(task: string, filters: any, showByDifficulty: boolean): string {
-  const parts: string[] = [];
+// Function to match user filters to available combinations
+function findMatchingCombination(userFilters: any, filterMappings: any): string | null {
+  console.log(`\n🚀 === FILTER MATCHING DEBUG ===`);
+  console.log(`🔍 User clicked filters:`, userFilters);
+  console.log(`🔍 Available combinations:`, Object.keys(filterMappings));
   
-  // Note: The consolidated files don't include task name in the combination keys
+  // Simple test: if user selected just HackerRank dataset, should match "dataset-HackerRank"
+  if (userFilters.datasets && userFilters.datasets.length === 1 && userFilters.datasets[0] === 'HackerRank') {
+    console.log(`🎯 SIMPLE TEST: User selected only HackerRank dataset`);
+    console.log(`🎯 Expected match: "dataset-HackerRank"`);
+    console.log(`🎯 Does it exist?`, filterMappings['dataset-HackerRank'] ? 'YES' : 'NO');
+    if (filterMappings['dataset-HackerRank']) {
+      console.log(`🎯 Mapping details:`, filterMappings['dataset-HackerRank']);
+    }
+  }
   
-  // Add filter parts in consistent order - must match the naming convention used in consolidated files
-  const filterMapping: Record<string, string> = {
-    datasets: 'dataset',
-    modality: 'modality', 
-    modalities: 'modality',
-    langs: 'modality',
-    knowledge: 'knowledge',
-    reasoning: 'reasoning',
-    robustness: 'robustness',
-    privacy: 'privacy',
-    llmJudges: 'llmJudges',
-    framework: 'framework'
+  console.log(`🚀 === END SIMPLE TEST ===\n`);
+  
+  // Helper function to normalize filter arrays for comparison - FIXED ORDER SENSITIVITY
+  const normalizeArray = (arr: any[]): string[] => {
+    if (!arr || arr.length === 0) return [];
+    // Sort case-insensitively to ensure consistent order regardless of user click order
+    return [...arr].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
   };
   
-  // Process filters in the order they appear in the actual combination keys
-  const orderedFilterKeys = ['datasets', 'modality', 'modalities', 'langs', 'knowledge', 'reasoning', 'robustness', 'privacy', 'llmJudges', 'framework'];
-  
-  orderedFilterKeys.forEach(filterKey => {
-    const values = filters[filterKey];
+  // Helper function to check if two filter arrays match
+  const arraysMatch = (userArray: any[], mappingArray: any[]): boolean => {
+    const normalizedUser = normalizeArray(userArray);
+    const normalizedMapping = normalizeArray(mappingArray);
     
-    if (values && values.length > 0) {
-      const mappedKey = filterMapping[filterKey];
-      if (mappedKey) {
-        const sortedValues = [...values].sort();
-        const part = `${mappedKey}-${sortedValues.join('-')}`;
-        parts.push(part);
+    console.log(`    🔍 Comparing arrays: user=[${normalizedUser.join(',')}] vs mapping=[${normalizedMapping.join(',')}]`);
+    
+    // If user has no filters for this category, it matches any mapping (including empty)
+    if (normalizedUser.length === 0) {
+      console.log(`    ✅ User has no filters for this category, matches any mapping`);
+      return true;
+    }
+    
+    // If user has filters, they must exactly match the mapping (after sorting)
+    if (normalizedUser.length !== normalizedMapping.length) {
+      console.log(`    ❌ Array length mismatch: ${normalizedUser.length} vs ${normalizedMapping.length}`);
+      return false;
+    }
+    
+    const matches = normalizedUser.every((item, index) => 
+      item.localeCompare(normalizedMapping[index], undefined, { sensitivity: 'base' }) === 0
+    );
+    
+    console.log(`    ${matches ? '✅' : '❌'} Arrays ${matches ? 'match' : 'do not match'}`);
+    return matches;
+  };
+  
+  // Special case: if all user filters are empty, return 'overall'
+  const hasAnyFilters = Object.values(userFilters).some(filterArray => 
+    Array.isArray(filterArray) && filterArray.length > 0
+  );
+  
+  console.log(`🔍 User has any filters: ${hasAnyFilters}`);
+  
+  if (!hasAnyFilters) {
+    console.log(`🎯 No filters selected, returning 'overall'`);
+    return 'overall';
+  }
+  
+  // Get all available options for each filter category from the filterMappings
+  const availableOptions: { [key: string]: Set<string> } = {};
+  
+  for (const mapping of Object.values(filterMappings)) {
+    for (const [category, values] of Object.entries(mapping as any)) {
+      if (!availableOptions[category]) {
+        availableOptions[category] = new Set();
+      }
+      if (Array.isArray(values)) {
+        values.forEach(value => availableOptions[category].add(value));
       }
     }
-  });
+  }
   
-  // If no filters applied, use 'overall'
-  const result = parts.length === 0 ? 'overall' : parts.join('_');
+  console.log(`🔍 Available options:`, Object.fromEntries(
+    Object.entries(availableOptions).map(([key, set]) => [key, Array.from(set)])
+  ));
   
-  return result;
+  // Check if user has selected ALL available options for any category
+  // If so, treat it as if no filter was selected for that category
+  const effectiveUserFilters = { ...userFilters };
+  
+  // CRITICAL FIX: Map plural field names to singular field names used in filter matching
+  if (userFilters.datasets) {
+    effectiveUserFilters.dataset = userFilters.datasets;
+  }
+  if (userFilters.modalities) {
+    effectiveUserFilters.modality = userFilters.modalities;
+  }
+  if (userFilters.langs) {
+    // langs also maps to modality
+    if (!effectiveUserFilters.modality) {
+      effectiveUserFilters.modality = userFilters.langs;
+    } else {
+      // Combine with existing modality filters
+      effectiveUserFilters.modality = [...new Set([...effectiveUserFilters.modality, ...userFilters.langs])];
+    }
+  }
+  
+  for (const [category, userValues] of Object.entries(effectiveUserFilters)) {
+    if (Array.isArray(userValues) && userValues.length > 0) {
+      const availableForCategory = availableOptions[category];
+      if (availableForCategory && userValues.length === availableForCategory.size) {
+        // Check if user selected all available options (case insensitive)
+        const allSelected = userValues.every(value => 
+          Array.from(availableForCategory).some(available => 
+            String(available).localeCompare(String(value), undefined, { sensitivity: 'base' }) === 0
+          )
+        );
+        if (allSelected) {
+          console.log(`🎯 User selected ALL ${category} options, treating as no filter`);
+          effectiveUserFilters[category] = [];
+        }
+      }
+    }
+  }
+  
+  // Handle special case: modalities and langs both map to modality
+  // Note: We already mapped modalities/langs to modality field above
+  const allUserModalities = effectiveUserFilters.modality || [];
+  const uniqueUserModalities = [...new Set(allUserModalities)];
+  
+  // Check if user selected all modalities
+  const availableModalities = availableOptions.modality;
+  if (availableModalities && uniqueUserModalities.length === availableModalities.size) {
+    const allModalitiesSelected = uniqueUserModalities.every(value =>
+      Array.from(availableModalities).some(available =>
+        String(available).localeCompare(String(value), undefined, { sensitivity: 'base' }) === 0
+      )
+    );
+    if (allModalitiesSelected) {
+      console.log(`🎯 User selected ALL modality options, treating as no filter`);
+      effectiveUserFilters.modality = [];
+    }
+  }
+  
+  console.log(`🔍 Effective user filters after processing:`, effectiveUserFilters);
+  
+  // Check again if all effective filters are empty after the "all selected" logic
+  const hasAnyEffectiveFilters = Object.values(effectiveUserFilters).some(filterArray => 
+    Array.isArray(filterArray) && filterArray.length > 0
+  );
+  
+  if (!hasAnyEffectiveFilters) {
+    console.log(`🎯 All filters are empty or "all selected", returning overall`);
+    return 'overall';
+  }
+  
+  // Find exact matching combinations - REMOVED FALLBACKS FOR PROPER "NO RESULTS" HANDLING
+  let exactMatches: string[] = [];
+  
+  console.log(`🔍 Searching through ${Object.keys(filterMappings).length} combinations for exact matches...`);
+  
+  for (const [combinationKey, mapping] of Object.entries(filterMappings)) {
+    let matches = true;
+    
+    console.log(`🔍 Checking combination: "${combinationKey}"`);
+    console.log(`  Mapping:`, mapping);
+    
+    // Check each filter category for exact match
+    const filterCategories = ['modality', 'knowledge', 'reasoning', 'dataset'];
+    
+    for (const category of filterCategories) {
+      let userFilterArray = effectiveUserFilters[category] || [];
+      const mappingFilterArray = (mapping as any)[category] || [];
+      
+      // Handle special case: modalities and langs both map to modality
+      if (category === 'modality') {
+        // Use the already-mapped modality field
+        userFilterArray = effectiveUserFilters.modality || [];
+      }
+      
+      console.log(`  🔍 Checking ${category}:`);
+      console.log(`    User: [${normalizeArray(userFilterArray).join(',')}]`);
+      console.log(`    Mapping: [${normalizeArray(mappingFilterArray).join(',')}]`);
+      
+      if (!arraysMatch(userFilterArray, mappingFilterArray)) {
+        console.log(`    ❌ No match for ${category}`);
+        matches = false;
+        break;
+      } else {
+        console.log(`    ✅ Match for ${category}`);
+      }
+    }
+    
+    if (matches) {
+      exactMatches.push(combinationKey);
+      console.log(`🎯 Found exact match: "${combinationKey}"`);
+    } else {
+      console.log(`❌ "${combinationKey}" does not match`);
+    }
+  }
+  
+  console.log(`🔍 Found ${exactMatches.length} exact matches:`, exactMatches);
+  
+  // Return the first exact match or null if no matches found
+  // DO NOT fallback to 'overall' - this allows proper "no results" handling
+  const bestMatch = exactMatches.length > 0 ? exactMatches[0] : null;
+  
+  if (bestMatch) {
+    console.log(`✅ Using exact match: "${bestMatch}"`);
+  } else {
+    console.log(`❌ No exact match found - this should result in no results`);
+  }
+  
+  return bestMatch;
 }
 
 // Function to load precomputed data for a task
@@ -834,7 +1016,7 @@ async function loadPrecomputedData(task: string, showByDifficulty: boolean): Pro
     // Cache the data
     precomputedCache.set(cacheKey, data);
     
-    console.log(`Loaded precomputed data for ${task} (${showByDifficulty ? 'difficulty' : 'normal'}) with ${Object.keys(data).length} models`);
+    console.log(`Loaded precomputed data for ${task} (${showByDifficulty ? 'difficulty' : 'normal'}) with ${Object.keys(data.data).length} models`);
     
     return data;
   } catch (error) {
@@ -844,69 +1026,74 @@ async function loadPrecomputedData(task: string, showByDifficulty: boolean): Pro
 }
 
 // Function to get results from precomputed data
-export async function getPrecomputedResults(task: string, filters: any, showByDifficulty: boolean): Promise<PrecomputedResult[]> {
-  console.log(`🔍 getPrecomputedResults called for task: "${task}", showByDifficulty: ${showByDifficulty}`);
+export async function getPrecomputedResults(task: TaskType, filters: FilterOptions): Promise<any[]> {
+  console.log('🎯 getPrecomputedResults called with:', { task, filters });
+  console.log('📋 User selected filters:', {
+    datasets: filters.datasets,
+    modalities: filters.modalities || filters.langs,
+    knowledge: filters.knowledge,
+    reasoning: filters.reasoning
+  });
   
-  const precomputedData = await loadPrecomputedData(task, showByDifficulty);
+  const precomputedData = await loadPrecomputedData(task, filters.showByDifficulty || false);
   
   if (!precomputedData) {
     console.warn(`❌ No precomputed data available for task: ${task}`);
     return [];
   }
   
-  // Generate the combination key for the specific filter combination
-  const combinationKey = generateCombinationKey(task, filters, showByDifficulty);
+  console.log(`📊 Available filter combinations:`, Object.keys(precomputedData.filterMappings));
+  console.log(`📊 Sample filter mapping:`, Object.entries(precomputedData.filterMappings).slice(0, 3));
   
-  console.log(`🎯 Looking for combination: "${combinationKey}"`);
+  // Use the new filter matching function
+  const matchingCombination = findMatchingCombination(filters, precomputedData.filterMappings);
+  
+  if (!matchingCombination) {
+    console.warn(`⚠️ No matching combination found for filters - returning empty results (this is correct behavior)`);
+    console.log(`Available combinations:`, Object.keys(precomputedData.filterMappings));
+    
+    // Try to find partial matches for debugging
+    console.log(`🔍 Debugging filter matching:`);
+    for (const [key, mapping] of Object.entries(precomputedData.filterMappings).slice(0, 5)) {
+      console.log(`  ${key}:`, mapping);
+    }
+    
+    // Return empty results - DO NOT fallback to 'overall'
+    return [];
+  }
+  
+  console.log(`🎯 Found matching combination: "${matchingCombination}"`);
+  
+  // CRITICAL FIX: Check if the combination actually has data in any model
+  let hasAnyData = false;
+  for (const [modelName, modelData] of Object.entries(precomputedData.data)) {
+    if (modelData[matchingCombination]) {
+      hasAnyData = true;
+      break;
+    }
+  }
+  
+  if (!hasAnyData) {
+    console.warn(`⚠️ Combination "${matchingCombination}" exists in filterMappings but has no actual data - returning empty results`);
+    console.log(`🔍 Available data combinations for first model:`, Object.keys(Object.values(precomputedData.data)[0] || {}));
+    return [];
+  }
   
   // Collect results from all models for this combination
   const results: PrecomputedResult[] = [];
   
-  for (const [modelName, modelData] of Object.entries(precomputedData)) {
-    const combinationData = modelData[combinationKey];
-    
-    if (combinationData) {
-      // The combinationData is directly the result object, not wrapped in a results array
-      results.push({
-        ...combinationData,
-        model: modelName, // Ensure model name is set correctly
-      });
-    }
-  }
-  
-  if (results.length === 0) {
-    console.warn(`❌ No results found for combination: "${combinationKey}"`);
-    const firstModel = Object.keys(precomputedData)[0];
-    const availableCombinations = firstModel ? Object.keys(precomputedData[firstModel]) : [];
-    console.log(`📋 Available combinations:`, availableCombinations);
-    
-    // Try fallback to 'overall' if generated key doesn't work
-    if (combinationKey !== 'overall' && availableCombinations.includes('overall')) {
-      console.log(`🔄 Trying fallback to 'overall' combination...`);
-      for (const [modelName, modelData] of Object.entries(precomputedData)) {
-        const overallData = modelData['overall'];
-        if (overallData) {
+  for (const [modelName, modelData] of Object.entries(precomputedData.data)) {
+    if (modelData[matchingCombination]) {
+      const combinationData = modelData[matchingCombination];
           results.push({
-            ...overallData,
-            model: modelName,
+            ...combinationData,
+        model: modelName, // Override with the correct model name
           });
         }
       }
-      console.log(`🔄 Fallback results: ${results.length} models`);
-    }
-  } else {
-    console.log(`✅ Found ${results.length} results for combination: "${combinationKey}"`);
-  }
-  
-  // Sort by rank (should already be sorted, but ensure consistency)
-  results.sort((a, b) => (a.rank || 0) - (b.rank || 0));
-  
-  // Re-assign ranks to ensure they're sequential
-  results.forEach((result, index) => {
-    result.rank = index + 1;
-  });
-  
-  console.log(`🎯 Returning ${results.length} results for ${task}`);
+      
+  console.log(`✅ Found ${results.length} results for combination "${matchingCombination}"`);
+  console.log(`📊 Sample result:`, results[0]);
   
   return results;
 } 

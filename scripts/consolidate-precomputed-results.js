@@ -48,6 +48,10 @@ function consolidateResults() {
     const noDifficultyData = {};
     const difficultyData = {};
     
+    // Create filter mappings for both difficulty and non-difficulty data
+    const noDifficultyFilterMappings = {};
+    const difficultyFilterMappings = {};
+    
     // Process each combination file
     combinations.forEach(combo => {
       const filePath = path.join(taskPath, combo.filename);
@@ -70,6 +74,12 @@ function consolidateResults() {
         
         // Choose the appropriate data container based on showByDifficulty
         const targetData = combo.showByDifficulty ? difficultyData : noDifficultyData;
+        const targetFilterMappings = combo.showByDifficulty ? difficultyFilterMappings : noDifficultyFilterMappings;
+        
+        // Add filter mapping for this combination ONLY if it has results
+        if (data.filters && data.results && Array.isArray(data.results) && data.results.length > 0) {
+          targetFilterMappings[comboKey] = data.filters;
+        }
         
         // Group results by model
         if (data.results && Array.isArray(data.results)) {
@@ -94,8 +104,14 @@ function consolidateResults() {
     });
     
     // Save consolidated data for no difficulty
+    const noDifficultyConsolidated = {
+      task: taskName,
+      filterMappings: noDifficultyFilterMappings,
+      data: noDifficultyData
+    };
+    
     const noDifficultyPath = path.join('data', 'precomputed', `${taskDir}_consolidated.json`);
-    fs.writeFileSync(noDifficultyPath, JSON.stringify(noDifficultyData, null, 2));
+    fs.writeFileSync(noDifficultyPath, JSON.stringify(noDifficultyConsolidated, null, 2));
     
     const noDifficultyModelCount = Object.keys(noDifficultyData).length;
     const noDifficultyCombos = combinations.filter(c => !c.showByDifficulty).length;
@@ -105,8 +121,14 @@ function consolidateResults() {
     // Save consolidated data for difficulty (only if there are difficulty combinations)
     const difficultyCombos = combinations.filter(c => c.showByDifficulty);
     if (difficultyCombos.length > 0) {
+      const difficultyConsolidated = {
+        task: taskName,
+        filterMappings: difficultyFilterMappings,
+        data: difficultyData
+      };
+      
       const difficultyPath = path.join('data', 'precomputed', `${taskDir}_difficulty_consolidated.json`);
-      fs.writeFileSync(difficultyPath, JSON.stringify(difficultyData, null, 2));
+      fs.writeFileSync(difficultyPath, JSON.stringify(difficultyConsolidated, null, 2));
       
       const difficultyModelCount = Object.keys(difficultyData).length;
       console.log(`  Saved ${difficultyPath}`);

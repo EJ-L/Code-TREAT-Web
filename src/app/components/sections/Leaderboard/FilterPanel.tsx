@@ -145,11 +145,19 @@ const FilterPanel: FC<FilterPanelProps> = ({
             map(([key, values]) => (
               values.length > 1 && (
                 <div key={key} className="flex flex-col space-y-3 mb-2">
-                  <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
-                    {currentTask === 'mr-web' && key === 'knowledge' ? 'Task' : 
-                     currentTask === 'mr-web' && key === 'reasoning' ? 'Method' :
-                     key.charAt(0).toUpperCase() + key.slice(1)}
-                  </p>
+                  <div className="flex flex-col space-y-1">
+                    <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
+                      {currentTask === 'mr-web' && key === 'knowledge' ? 'Task' : 
+                       currentTask === 'mr-web' && key === 'reasoning' ? 'Method' :
+                       key.charAt(0).toUpperCase() + key.slice(1)}
+                    </p>
+                    {/* Show restriction notice for modality in code summarization/review */}
+                    {(currentTask === 'code summarization' || currentTask === 'code review') && key === 'modality' && (
+                      <p className={`text-sm ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+                        ⚠️ Maximum 2 modalities can be selected for optimal precomputed results
+                      </p>
+                    )}
+                  </div>
                   <div className="inline-flex flex-wrap gap-2">
                     {values.map((value: string) => {
                       // Helper function to get display text for mr-web method values
@@ -169,17 +177,40 @@ const FilterPanel: FC<FilterPanelProps> = ({
                         return val;
                       };
 
+                      // Check if this is a modality filter for restricted tasks
+                      const isModalityForRestrictedTask = (currentTask === 'code summarization' || currentTask === 'code review') && 
+                                                           (key === 'modality');
+                      const currentlySelected = selectedAbilities[key] || [];
+                      const isCurrentlySelected = currentlySelected.includes(value);
+                      
+                      // For modality in code summarization/review: restrict to max 2 selections
+                      const isModalityRestricted = isModalityForRestrictedTask && 
+                                                   !isCurrentlySelected && 
+                                                   currentlySelected.length >= 2;
+
+                      const handleClick = () => {
+                        if (isModalityRestricted) {
+                          // Show a brief visual feedback that the limit is reached
+                          return;
+                        }
+                        handleAbilityChange(key, value);
+                      };
+
                       return (
                       <motion.button
                         key={value}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAbilityChange(key, value)}
+                        whileHover={!isModalityRestricted ? { scale: 1.02 } : {}}
+                        whileTap={!isModalityRestricted ? { scale: 0.98 } : {}}
+                        onClick={handleClick}
+                        disabled={isModalityRestricted}
+                        title={isModalityRestricted ? 'Maximum 2 modalities can be selected for this task' : undefined}
                         className={`
                           px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                          ${selectedAbilities[key]?.includes(value)
+                          ${isCurrentlySelected
                             ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                            : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                            : isModalityRestricted
+                              ? isDarkMode ? 'bg-[#151d2a] text-slate-500 border border-slate-700/30 cursor-not-allowed opacity-50' : 'bg-slate-50 text-slate-400 border border-slate-200 cursor-not-allowed opacity-50'
+                              : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
                           }
                         `}
                       >

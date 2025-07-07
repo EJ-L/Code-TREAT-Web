@@ -166,8 +166,14 @@ const TableCell: FC<TableCellProps> = ({
             // Special handling for percentage values
             if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
               return (value * 100).toFixed(1);
-            } else if (header.key === 'llmjudge' || header.key === 'LLMJudge') {
-              return ((value / 5) * 100).toFixed(1);
+            } else if (header.key === 'llmjudge' || header.key === 'LLMJudge' || header.key === 'LLM Judge') {
+              // For LLM Judge, the precomputed values are already percentages as strings
+              // Only apply conversion if it's a raw score (number between 0-5)
+              if (typeof value === 'number' && value <= 5) {
+                return ((value / 5) * 100).toFixed(1);
+              }
+              // For precomputed string values like "96.5", display as-is
+              return value;
             }
             // For rank, just show the number
             return value;

@@ -936,10 +936,13 @@ function findMatchingCombination(userFilters: any, filterMappings: any): string 
     console.log(`🔍 Checking combination: "${combinationKey}"`);
     console.log(`  Mapping:`, mapping);
     
-    // Check each filter category for exact match
-    const filterCategories = ['modality', 'knowledge', 'reasoning', 'dataset'];
+    // Check each filter category that exists in the mapping for exact match
+    // CRITICAL FIX: Only check categories that are defined in the mapping
+    const supportedCategories = Object.keys(mapping as any);
+    const allPossibleCategories = ['modality', 'knowledge', 'reasoning', 'dataset'];
     
-    for (const category of filterCategories) {
+    // For categories supported by this mapping, check exact match
+    for (const category of supportedCategories) {
       let userFilterArray = effectiveUserFilters[category] || [];
       const mappingFilterArray = (mapping as any)[category] || [];
       
@@ -949,7 +952,7 @@ function findMatchingCombination(userFilters: any, filterMappings: any): string 
         userFilterArray = effectiveUserFilters.modality || [];
       }
       
-      console.log(`  🔍 Checking ${category}:`);
+      console.log(`  🔍 Checking ${category} (supported by mapping):`);
       console.log(`    User: [${normalizeArray(userFilterArray).join(',')}]`);
       console.log(`    Mapping: [${normalizeArray(mappingFilterArray).join(',')}]`);
       
@@ -959,6 +962,22 @@ function findMatchingCombination(userFilters: any, filterMappings: any): string 
         break;
       } else {
         console.log(`    ✅ Match for ${category}`);
+      }
+    }
+    
+    // For categories NOT supported by this mapping, ignore user filters
+    // (i.e., if the consolidated data doesn't support datasets, ignore dataset filters)
+    if (matches) {
+      for (const category of allPossibleCategories) {
+        if (!supportedCategories.includes(category)) {
+          const userFilterArray = effectiveUserFilters[category] || [];
+          if (userFilterArray.length > 0) {
+            console.log(`  🔍 ${category} (NOT supported by mapping): User has [${normalizeArray(userFilterArray).join(',')}] - IGNORING for this task ✅`);
+          } else {
+            console.log(`  🔍 ${category} (not supported): User has no filters ✅`);
+          }
+          // DO NOT set matches = false - just ignore unsupported filters
+        }
       }
     }
     

@@ -87,15 +87,17 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
   
   // Try to use precomputed data first
   try {
-    const precomputedResults = await getPrecomputedResults(task, filters, filters.showByDifficulty || false);
+    const precomputedResults = await getPrecomputedResults(task, filters);
     
     if (precomputedResults.length > 0) {
       console.log(`✅ Using precomputed data for ${task}: ${precomputedResults.length} results`);
+      console.log(`📊 First precomputed result:`, precomputedResults[0]);
       
       // Return precomputed results directly - formatResults will handle them
       return precomputedResults as any;
     } else {
-      console.log(`⚠️ No precomputed results found for ${task}, falling back to real-time processing`);
+      console.log(`⚠️ No precomputed results found for ${task} - this is likely the root issue!`);
+      console.log(`🔍 Filter details:`, JSON.stringify(filters, null, 2));
     }
   } catch (error) {
     console.warn('❌ Failed to load precomputed data, falling back to real-time processing:', error);
@@ -519,13 +521,26 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
   
   if (isPrecomputedData) {
     // For precomputed data, results are already sorted and formatted
-    console.log('✅ Using precomputed data, returning as-is');
-    const formattedResults = results.map((result: any) => ({
-      rank: result.rank,
-      model: result.model,
-      ...result
-    }));
+    console.log('✅ Using precomputed data, processing for display');
+    const formattedResults = results.map((result: any) => {
+      // Create a properly formatted result object
+      const formattedResult: Record<string, string | number> = {
+        rank: result.rank,
+        model: result.model,
+      };
+      
+      // Copy all other fields from the precomputed data
+      // This includes metrics like 'LLM Judge', 'pass@1', etc.
+      Object.keys(result).forEach(key => {
+        if (key !== 'rank' && key !== 'model') {
+          formattedResult[key] = result[key];
+        }
+      });
+      
+      return formattedResult;
+    });
     console.log(`📊 Formatted ${formattedResults.length} precomputed results`);
+    console.log(`📊 Sample formatted result:`, formattedResults[0]);
     return formattedResults;
   } else {
     console.log('⚠️ Using real-time processing data');

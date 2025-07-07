@@ -75,7 +75,7 @@ interface LeaderboardProps {
     switch (task) {
       case 'code summarization':
       case 'code review':
-        return { key: 'llmjudge', direction: 'desc' as const };
+        return { key: 'LLM Judge', direction: 'desc' as const };
       case 'vulnerability detection':
         return { key: 'Accuracy', direction: 'desc' as const };
       case 'code-web':
@@ -100,8 +100,9 @@ interface LeaderboardProps {
     // Auto-select only the first available dataset for tasks that have them
     const newSelectedAbilities: Partial<Ability> = {};
     
-    // For tasks other than 'overall' and 'interaction-2-code', auto-select first dataset only
-    if (task !== 'overall' && task !== 'interaction-2-code') {
+    // For tasks other than 'overall', 'interaction-2-code', 'code summarization', and 'code review', auto-select first dataset only
+    // Note: code summarization and code review use precomputed data that ignores dataset filters
+    if (task !== 'overall' && task !== 'interaction-2-code' && task !== 'code summarization' && task !== 'code review') {
       const taskAbility = taskAbilities[task];
       console.log('🔍 Task ability for', task, ':', taskAbility);
       
@@ -110,6 +111,8 @@ interface LeaderboardProps {
         newSelectedAbilities.dataset = [taskAbility.dataset[0]];
         console.log('✅ Auto-selected dataset:', taskAbility.dataset[0]);
       }
+    } else if (task === 'code summarization' || task === 'code review') {
+      console.log('🎯 Skipping dataset auto-selection for', task, '(uses precomputed data that ignores datasets)');
     }
     
     console.log('🎯 Setting selectedAbilities to:', newSelectedAbilities);
@@ -118,7 +121,7 @@ interface LeaderboardProps {
     // 注意：对于code review任务，我们暂时不应用任何过滤器
     if (task === 'code review') {
       // 不应用llmJudge过滤器，以便查看所有结果
-      setSortConfig({ key: 'llmjudge', direction: 'desc' });
+      setSortConfig({ key: 'LLM Judge', direction: 'desc' });
     } else if (task === 'overall') {
       // 对于overall任务，我们使用未过滤的数据计算平均值
       setSortConfig({ key: 'pass@1', direction: 'desc' });
@@ -706,6 +709,18 @@ interface LeaderboardProps {
     // Filter metric headers based on data availability
     const metricHeaders = allHeaders.filter(header => header.key !== 'rank' && header.key !== 'model');
     
+    // For code summarization and code review, always show LLM Judge if it's defined in headers
+    // This ensures the column appears even if there are data processing issues
+    if (task === 'code summarization' || task === 'code review') {
+      const llmJudgeHeader = metricHeaders.find(h => h.key === 'LLM Judge');
+      if (llmJudgeHeader) {
+        // Always include LLM Judge header for these tasks
+        const otherHeaders = metricHeaders.filter(h => h.key !== 'LLM Judge');
+        const finalHeaders = [...fixedHeaders, llmJudgeHeader, ...otherHeaders];
+        return finalHeaders;
+      }
+    }
+    
     // Only keep headers where at least one result has a non-empty value
     const filteredMetricHeaders = metricHeaders.filter(header => {
       const hasData = sortedResults.some(result => {
@@ -868,7 +883,7 @@ interface LeaderboardProps {
             newWidths[header.key] = 300;
           }
         }
-        else if (header.key === 'llmjudge') {
+        else if (header.key === 'LLM Judge') {
           if (currentTask === 'code summarization' || currentTask === 'code review') {
             newWidths[header.key] = 370;
           } else {
@@ -937,7 +952,7 @@ interface LeaderboardProps {
       } else {
         minWidth = 80;
       }
-    } else if (key === 'llmjudge' || key === 'LLMJudge') {
+    } else if (key === 'llmjudge' || key === 'LLMJudge' || key === 'LLM Judge') {
       minWidth = 100;
     } else if (key === 'CodeBLEU') {
       minWidth = 90;
@@ -1147,7 +1162,7 @@ interface LeaderboardProps {
               'P-C', 'P-V', 'P-B', 'P-R'
             ].includes(key)) {
               csvRow[key] = (value * 100).toFixed(1);
-            } else if (key === 'llmjudge' || key === 'LLMJudge') {
+            } else if (key === 'llmjudge' || key === 'LLMJudge' || key === 'LLM Judge') {
               csvRow[key] = ((value / 5) * 100).toFixed(1);
             } else {
               csvRow[key] = value;
@@ -1268,7 +1283,7 @@ interface LeaderboardProps {
       }
     }
     
-    if (key === 'llmjudge') {
+    if (key === 'llmjudge' || key === 'LLM Judge') {
       if (task === 'code summarization' || task === 'code review') {
         return '370px';
       }

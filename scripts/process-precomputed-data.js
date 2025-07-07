@@ -161,9 +161,9 @@ function applyFilters(data, task, filters) {
         
         // For other tasks, use partial matching as before
         return entryDataset.toLowerCase().includes(filter.toLowerCase()) ||
-               filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
-               // Handle specific mappings
-               (filter === 'HackerRank' && entryDataset.toLowerCase() === 'hackerrank') ||
+        filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
+        // Handle specific mappings
+        (filter === 'HackerRank' && entryDataset.toLowerCase() === 'hackerrank') ||
                (filter === 'GeeksForGeeks' && entryDataset.toLowerCase() === 'geeksforgeeks');
       });
     });
@@ -329,7 +329,7 @@ function aggregateData(data, task, showByDifficulty) {
         }
         if (primeVulEntry.metrics.recall !== undefined) {
           result['Recall'] = (primeVulEntry.metrics.recall * 100).toFixed(1);
-        }
+          }
         if (primeVulEntry.metrics.f1 !== undefined) {
           result['F1 Score'] = (primeVulEntry.metrics.f1 * 100).toFixed(1);
         }

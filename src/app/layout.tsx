@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { DataLoader } from '@/app/components/DataLoader'
+import DebugPanel from '@/app/components/ui/DebugPanel'
 
 const inter = Inter({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({ 
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         flex flex-col selection:bg-primary/10 selection:text-primary`}
       >
         <DataLoader />
+        <DebugPanel />
         <main className="flex-1 flex flex-col">
           {children}
         </main>

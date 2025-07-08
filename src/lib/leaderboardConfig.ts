@@ -336,7 +336,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'MAE',
     width: 'w-24',
     description: 'Mean Absolute Error',
-    defaultWidth: 110,
+    defaultWidth: 115,
     minWidth: 80
   },
   'NEMD': {
@@ -344,7 +344,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'NEMD',
     width: 'w-24',
     description: 'Normalized Edit Distance',
-    defaultWidth: 110,
+    defaultWidth: 130,
     minWidth: 80
   },
   'RER': {
@@ -352,7 +352,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'RER',
     width: 'w-24',
     description: 'Request Element Recognition',
-    defaultWidth: 110,
+    defaultWidth: 115,
     minWidth: 80
   },
   // Overall leaderboard metrics
@@ -413,7 +413,7 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
     minWidth: 100
   },
   'CLIP': {
-    default: 110,
+    default: 130,
     taskSpecific: {
       'interaction-2-code': 150
     },

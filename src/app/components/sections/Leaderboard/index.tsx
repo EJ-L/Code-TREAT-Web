@@ -31,6 +31,7 @@ import {
   sortResults,
   handleSortChange
 } from '@/lib/leaderboardHelpers';
+import { debug } from '@/lib/debug';
 
 interface LeaderboardProps {
   taskAbilities: Record<TaskType, Ability>;
@@ -127,7 +128,7 @@ interface LeaderboardProps {
         }
         setAvailableLLMJudges(judges);
         } catch (error) {
-        console.error('Error loading LLM judges:', error);
+        debug.error('Error loading LLM judges:', error);
         setAvailableLLMJudges([]);
       }
     };
@@ -138,7 +139,9 @@ interface LeaderboardProps {
   // Memoize sorted results using new sorting function
   const sortedResults = useMemo(() => {
     if (!results.length) return [];
-    return sortResults(results, sortConfig);
+    const sorted = sortResults(results, sortConfig);
+    debug.leaderboard(`Sorted ${sorted.length} results. Sample sorted:`, sorted.slice(0, 3));
+    return sorted;
   }, [results, sortConfig]);
 
   // Handle sorting using new helper
@@ -173,7 +176,7 @@ interface LeaderboardProps {
           showByDifficulty
         };
 
-        console.log(`Loading data for task: ${currentTask}`, filterOptions);
+        debug.leaderboard(`Loading data for task: ${currentTask}`, filterOptions);
 
         if (currentTask === 'overall') {
           // Special handling for overall leaderboard - aggregate from other tasks
@@ -194,7 +197,7 @@ interface LeaderboardProps {
                 const results = await getPrecomputedResults(task, taskFilterOptions);
                 return { task, results: results || [] };
               } catch (error) {
-                console.warn(`Failed to load data for task ${task}:`, error);
+                debug.warn(`Failed to load data for task ${task}:`, error);
                 return { task, results: [] };
               }
             })
@@ -265,7 +268,7 @@ interface LeaderboardProps {
               tasks: result.taskCount
             }));
           
-          console.log(`Generated overall leaderboard with ${overallResults.length} models`);
+          debug.leaderboard(`Generated overall leaderboard with ${overallResults.length} models`, overallResults.slice(0, 3));
           setResults(overallResults);
           setIsDataComplete(true);
           setIsLoading(false);
@@ -275,20 +278,21 @@ interface LeaderboardProps {
           const results = await getPrecomputedResults(currentTask, filterOptions);
           
           if (!results || results.length === 0) {
-            console.warn(`No precomputed results available for task: ${currentTask}`);
+            debug.warn(`No precomputed results available for task: ${currentTask}`);
                 setResults([]);
             setIsDataComplete(false);
             setIsLoading(false);
             return;
           }
 
-          console.log(`Loaded ${results.length} results for ${currentTask}`);
+          debug.leaderboard(`Loaded ${results.length} results for ${currentTask}`, results.slice(0, 3));
+          debug.leaderboard(`Sample result object keys:`, results.length > 0 ? Object.keys(results[0]) : 'No results');
           setResults(results);
           setIsDataComplete(true);
                   setIsLoading(false);
                 }
       } catch (error) {
-        console.error('Error loading data:', error);
+        debug.error('Error loading data:', error);
           setResults([]);
         setIsDataComplete(false);
           setIsLoading(false);

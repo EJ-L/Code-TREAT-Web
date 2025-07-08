@@ -34,7 +34,7 @@ const formatDifficultyHeader = (label: string): JSX.Element => {
       </div>
     );
   }
-  return <span>{label}</span>;
+  return <span className="flex items-center justify-center">{label}</span>;
 };
 
 const TableHeader: FC<TableHeaderProps> = ({
@@ -109,22 +109,44 @@ const TableHeader: FC<TableHeaderProps> = ({
       }}
     >
       <div className={`flex items-center ${isColumnCentered(header.key) ? 'justify-center' : 'justify-start'} w-full`}>
-        <span 
-          className="text-ellipsis overflow-hidden whitespace-nowrap block text-lg" 
-          style={{ 
-            maxWidth: `${getContentWidth(columnWidths[header.key] || (
-              currentTask === 'code summarization' || currentTask === 'code review' ? 250 :
-              currentTask === 'vulnerability detection' ? 350 :
-              300
-            ))}px`,
-            width: isColumnCentered(header.key) ? '100%' : 'auto',
-            // Adding padding to ensure text is fully visible on initial load
-            minWidth: header.label.length * 10 + 'px'
-          }}
-          {...(header.description ? { title: header.description } : {})}
-        >
-          {formatDifficultyHeader(header.label)}
-        </span>
+        {/* For centered columns, we need to account for the sort indicator space */}
+        {isColumnCentered(header.key) ? (
+          <>
+            {/* Invisible spacer to balance the sort indicator on the right */}
+            <span className="w-6 h-6 shrink-0 invisible"></span>
+            <span 
+              className="text-ellipsis overflow-hidden whitespace-nowrap block text-lg flex items-center justify-center flex-1" 
+              style={{ 
+                maxWidth: `${getContentWidth(columnWidths[header.key] || (
+                  currentTask === 'code summarization' || currentTask === 'code review' ? 250 :
+                  currentTask === 'vulnerability detection' ? 350 :
+                  300
+                ))}px`,
+                minWidth: header.label.length * 10 + 'px'
+              }}
+              {...(header.description ? { title: header.description } : {})}
+            >
+              {formatDifficultyHeader(header.label)}
+            </span>
+          </>
+        ) : (
+          /* For left-aligned columns (model), use normal layout */
+          <span 
+            className="text-ellipsis overflow-hidden whitespace-nowrap block text-lg flex items-center justify-center" 
+            style={{ 
+              maxWidth: `${getContentWidth(columnWidths[header.key] || (
+                currentTask === 'code summarization' || currentTask === 'code review' ? 250 :
+                currentTask === 'vulnerability detection' ? 350 :
+                300
+              ))}px`,
+              width: 'auto',
+              minWidth: header.label.length * 10 + 'px'
+            }}
+            {...(header.description ? { title: header.description } : {})}
+          >
+            {formatDifficultyHeader(header.label)}
+          </span>
+        )}
         {/* Sort indicator */}
         <span className={`ml-2 shrink-0 min-w-[20px] transition-all duration-200 ${
           sortConfig && sortConfig.key === header.key 

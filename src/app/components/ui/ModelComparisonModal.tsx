@@ -72,7 +72,7 @@ const ModelComparisonModal = ({
     
     // Add each type of filter that has selections
     Object.entries(selectedAbilities).forEach(([key, values]) => {
-      if (values && values.length > 0) {
+      if (values && Array.isArray(values) && values.length > 0) {
         const filterType = key.charAt(0).toUpperCase() + key.slice(1);
         values.forEach(value => {
           filters.push({ type: filterType, value });

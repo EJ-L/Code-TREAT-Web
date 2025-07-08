@@ -1,0 +1,591 @@
+import { TaskType } from './types';
+
+// Header definition interface
+export interface HeaderConfig {
+  key: string;
+  label: string;
+  width: string; // Tailwind width class
+  description: string;
+  defaultWidth?: number; // Pixel width for dynamic sizing
+  minWidth?: number; // Minimum pixel width
+}
+
+// Column width configuration interface
+export interface ColumnWidthConfig {
+  default: number;
+  taskSpecific?: Partial<Record<TaskType, number>>;
+  minWidth?: number;
+}
+
+// Base header definitions (reusable across tasks)
+export const BASE_HEADERS: Record<string, HeaderConfig> = {
+  rank: {
+    key: 'rank',
+    label: 'Rank',
+    width: 'w-32',
+    description: '',
+    defaultWidth: 150,
+    minWidth: 100
+  },
+  model: {
+    key: 'model',
+    label: 'Model Name',
+    width: 'w-192',
+    description: '',
+    defaultWidth: 300,
+    minWidth: 300
+  },
+  // Pass metrics
+  'pass@1': {
+    key: 'pass@1',
+    label: 'Pass@1',
+    width: 'w-36',
+    description: 'Pass@1 is the probability of passing a given problem in one attempt.',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'pass@3': {
+    key: 'pass@3',
+    label: 'Pass@3',
+    width: 'w-36',
+    description: 'Pass@3 is the probability of passing a given problem in three attempts.',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'pass@5': {
+    key: 'pass@5',
+    label: 'Pass@5',
+    width: 'w-36',
+    description: 'Pass@5 is the probability of passing a given problem in five attempts.',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  // Difficulty-based pass metrics
+  'easy_pass@1': {
+    key: 'easy_pass@1',
+    label: 'Easy Pass@1',
+    width: 'w-32',
+    description: 'Easy Pass@1 on problems with easy difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'medium_pass@1': {
+    key: 'medium_pass@1',
+    label: 'Medium Pass@1',
+    width: 'w-32',
+    description: 'Medium Pass@1 on problems with medium difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'hard_pass@1': {
+    key: 'hard_pass@1',
+    label: 'Hard Pass@1',
+    width: 'w-32',
+    description: 'Hard Pass@1 on problems with hard difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'easy_pass@3': {
+    key: 'easy_pass@3',
+    label: 'Easy Pass@3',
+    width: 'w-32',
+    description: 'Easy Pass@3 on problems with easy difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'medium_pass@3': {
+    key: 'medium_pass@3',
+    label: 'Medium Pass@3',
+    width: 'w-32',
+    description: 'Medium Pass@3 on problems with medium difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'hard_pass@3': {
+    key: 'hard_pass@3',
+    label: 'Hard Pass@3',
+    width: 'w-32',
+    description: 'Hard Pass@3 on problems with hard difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'easy_pass@5': {
+    key: 'easy_pass@5',
+    label: 'Easy Pass@5',
+    width: 'w-32',
+    description: 'Easy Pass@5 on problems with easy difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'medium_pass@5': {
+    key: 'medium_pass@5',
+    label: 'Medium Pass@5',
+    width: 'w-32',
+    description: 'Medium Pass@5 on problems with medium difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  'hard_pass@5': {
+    key: 'hard_pass@5',
+    label: 'Hard Pass@5',
+    width: 'w-32',
+    description: 'Hard Pass@5 on problems with hard difficulty.',
+    defaultWidth: 140,
+    minWidth: 130
+  },
+  // Other metrics
+  'CodeBLEU': {
+    key: 'CodeBLEU',
+    label: 'CodeBLEU',
+    width: 'w-32',
+    description: '',
+    defaultWidth: 140,
+    minWidth: 90
+  },
+  'LLM Judge': {
+    key: 'LLM Judge',
+    label: 'LLM Judge',
+    width: 'w-28',
+    description: '',
+    defaultWidth: 160,
+    minWidth: 100
+  },
+  // Vulnerability detection metrics
+  'Accuracy': {
+    key: 'Accuracy',
+    label: 'Accuracy',
+    width: 'w-24',
+    description: '',
+    defaultWidth: 180,
+    minWidth: 80
+  },
+  'Precision': {
+    key: 'Precision',
+    label: 'Precision',
+    width: 'w-24',
+    description: '',
+    defaultWidth: 190,
+    minWidth: 80
+  },
+  'Recall': {
+    key: 'Recall',
+    label: 'Recall',
+    width: 'w-24',
+    description: '',
+    defaultWidth: 160,
+    minWidth: 80
+  },
+  'F1 Score': {
+    key: 'F1 Score',
+    label: 'F1 Score',
+    width: 'w-24',
+    description: '',
+    defaultWidth: 180,
+    minWidth: 80
+  },
+  'P-C': {
+    key: 'P-C',
+    label: 'P-C',
+    width: 'w-16',
+    description: 'Correctly predicts both elements',
+    defaultWidth: 115,
+    minWidth: 60
+  },
+  'P-V': {
+    key: 'P-V',
+    label: 'P-V',
+    width: 'w-16',
+    description: 'Both predicted as vulnerable',
+    defaultWidth: 115,
+    minWidth: 60
+  },
+  'P-B': {
+    key: 'P-B',
+    label: 'P-B',
+    width: 'w-16',
+    description: 'Both predicted as benign',
+    defaultWidth: 115,
+    minWidth: 60
+  },
+  'P-R': {
+    key: 'P-R',
+    label: 'P-R',
+    width: 'w-16',
+    description: 'Inversely predicted labels',
+    defaultWidth: 115,
+    minWidth: 60
+  },
+  // Code-web metrics
+  'CLIP': {
+    key: 'CLIP',
+    label: 'CLIP',
+    width: 'w-24',
+    description: 'CLIP score for image similarity',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'Compilation': {
+    key: 'Compilation',
+    label: 'Compilation',
+    width: 'w-28',
+    description: 'Code compilation success rate',
+    defaultWidth: 200,
+    minWidth: 100
+  },
+  // Interaction-2-code metrics
+  'SSIM': {
+    key: 'SSIM',
+    label: 'SSIM',
+    width: 'w-24',
+    description: 'Structural similarity index',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'Text': {
+    key: 'Text',
+    label: 'Text',
+    width: 'w-24',
+    description: 'Text accuracy score',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'Position': {
+    key: 'Position',
+    label: 'Position',
+    width: 'w-24',
+    description: 'Position accuracy score',
+    defaultWidth: 150,
+    minWidth: 100
+  },
+  'Implement Rate': {
+    key: 'Implement Rate',
+    label: 'Implement Rate',
+    width: 'w-36',
+    description: 'Implementation success rate',
+    defaultWidth: 230,
+    minWidth: 150
+  },
+  // Code-robustness metrics
+  'VAN': {
+    key: 'VAN',
+    label: 'VAN',
+    width: 'w-24',
+    description: 'Variable Name robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'ALL': {
+    key: 'ALL',
+    label: 'ALL',
+    width: 'w-24',
+    description: 'All transformations robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'MDC': {
+    key: 'MDC',
+    label: 'MDC',
+    width: 'w-24',
+    description: 'Missing Docstring Comment robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'MPS': {
+    key: 'MPS',
+    label: 'MPS',
+    width: 'w-24',
+    description: 'Missing Parameter Specification robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'MHC': {
+    key: 'MHC',
+    label: 'MHC',
+    width: 'w-26',
+    description: 'Missing Header Comment robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'REN': {
+    key: 'REN',
+    label: 'REN',
+    width: 'w-24',
+    description: 'Renaming robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'RTF': {
+    key: 'RTF',
+    label: 'RTF',
+    width: 'w-24',
+    description: 'Runtime Function robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  'GBC': {
+    key: 'GBC',
+    label: 'GBC',
+    width: 'w-24',
+    description: 'Global Block Comment robustness score',
+    defaultWidth: 120,
+    minWidth: 80
+  },
+  // MR-Web metrics
+  'MAE': {
+    key: 'MAE',
+    label: 'MAE',
+    width: 'w-24',
+    description: 'Mean Absolute Error',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'NEMD': {
+    key: 'NEMD',
+    label: 'NEMD',
+    width: 'w-24',
+    description: 'Normalized Edit Distance',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  'RER': {
+    key: 'RER',
+    label: 'RER',
+    width: 'w-24',
+    description: 'Request Element Recognition',
+    defaultWidth: 110,
+    minWidth: 80
+  },
+  // Overall leaderboard metrics
+  'score': {
+    key: 'score',
+    label: 'Average Score',
+    width: 'w-32',
+    description: 'Average score across all tasks',
+    defaultWidth: 140,
+    minWidth: 120
+  },
+  'tasks': {
+    key: 'tasks',
+    label: 'Tasks',
+    width: 'w-24',
+    description: 'Number of tasks completed',
+    defaultWidth: 100,
+    minWidth: 80
+  }
+};
+
+// Column width configurations with task-specific overrides
+export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
+  rank: {
+    default: 150,
+    minWidth: 100
+  },
+  model: {
+    default: 300,
+    taskSpecific: {
+      'overall': 800,
+      'code summarization': 250,
+      'code review': 250,
+      'code generation': 320,
+      'vulnerability detection': 350,
+      'code-web': 360,
+      'interaction-2-code': 220,
+      'code-robustness': 400,
+      'output prediction': 380,
+      'input prediction': 380,
+      'mr-web': 300
+    },
+    minWidth: 300
+  },
+  'LLM Judge': {
+    default: 160,
+    taskSpecific: {
+      'code summarization': 370,
+      'code review': 370
+    },
+    minWidth: 100
+  },
+  'Compilation': {
+    default: 200,
+    taskSpecific: {
+      'code-web': 180
+    },
+    minWidth: 100
+  },
+  'CLIP': {
+    default: 110,
+    taskSpecific: {
+      'interaction-2-code': 120
+    },
+    minWidth: 80
+  },
+  'SSIM': {
+    default: 110,
+    taskSpecific: {
+      'interaction-2-code': 120
+    },
+    minWidth: 80
+  },
+  'Text': {
+    default: 110,
+    taskSpecific: {
+      'interaction-2-code': 120
+    },
+    minWidth: 80
+  },
+  'Position': {
+    default: 150,
+    taskSpecific: {
+      'interaction-2-code': 190
+    },
+    minWidth: 100
+  },
+  'Implement Rate': {
+    default: 230,
+    taskSpecific: {
+      'interaction-2-code': 250
+    },
+    minWidth: 150
+  }
+};
+
+// Task-specific header configurations
+export const TASK_HEADERS: Record<TaskType, string[]> = {
+  'overall': ['score', 'tasks'],
+  'code generation': ['pass@1', 'pass@3', 'pass@5'],
+  'code translation': ['pass@1', 'pass@3', 'pass@5', 'CodeBLEU'],
+  'code summarization': ['LLM Judge'],
+  'code review': ['LLM Judge'],
+  'input prediction': ['pass@1', 'pass@3', 'pass@5'],
+  'output prediction': ['pass@1', 'pass@3', 'pass@5'],
+  'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
+  'code-web': ['CLIP', 'Compilation'],
+  'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'REN', 'RTF', 'GBC'],
+  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
+};
+
+// Difficulty-based header configurations
+export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
+  'overall': ['score', 'tasks'],
+  'code generation': [
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
+  'code translation': [
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+    'CodeBLEU'
+  ],
+  'code summarization': ['LLM Judge'],
+  'code review': ['LLM Judge'],
+  'input prediction': [
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
+  'output prediction': [
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
+  'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
+  'code-web': ['CLIP', 'Compilation'],
+  'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'REN', 'RTF', 'GBC'],
+  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
+};
+
+// Tasks that support difficulty-based results
+export const TASKS_WITH_DIFFICULTY = [
+  'overall', 'code generation', 'code translation', 'input prediction', 'output prediction'
+];
+
+// Helper functions
+export function getTaskHeaders(task: TaskType, showByDifficulty: boolean = false): HeaderConfig[] {
+  const commonHeaders = ['rank', 'model'];
+  
+  // For overall task, only return rank and model in normal mode
+  if (task === 'overall' && !showByDifficulty) {
+    return commonHeaders.map(key => BASE_HEADERS[key]);
+  }
+  
+  const headerKeys = showByDifficulty 
+    ? [...commonHeaders, ...(DIFFICULTY_HEADERS[task] || [])]
+    : [...commonHeaders, ...(TASK_HEADERS[task] || [])];
+  
+  return headerKeys.map(key => BASE_HEADERS[key]).filter(Boolean);
+}
+
+export function getColumnWidth(task: TaskType, headerKey: string): number {
+  const config = COLUMN_WIDTH_CONFIG[headerKey];
+  if (config) {
+    return config.taskSpecific?.[task] || config.default;
+  }
+  
+  const baseHeader = BASE_HEADERS[headerKey];
+  if (baseHeader?.defaultWidth) {
+    return baseHeader.defaultWidth;
+  }
+  
+  // Fallback calculation
+  return Math.max(100, (baseHeader?.label.length || 4) * 12 + 40);
+}
+
+export function getMinColumnWidth(task: TaskType, headerKey: string): number {
+  const config = COLUMN_WIDTH_CONFIG[headerKey];
+  if (config?.minWidth) {
+    return config.minWidth;
+  }
+  
+  const baseHeader = BASE_HEADERS[headerKey];
+  if (baseHeader?.minWidth) {
+    return baseHeader.minWidth;
+  }
+  
+  // Special cases
+  if (headerKey === 'model') {
+    if (task === 'overall') return 800;
+    if (task === 'code-web') return 320;
+    if (task === 'output prediction' || task === 'input prediction') return 350;
+    return 300;
+  }
+  
+  // Fallback calculation
+  return Math.max(40, (baseHeader?.label.length || 4) * 8 + 24);
+}
+
+export function getStickyColumnTasks(): TaskType[] {
+  return [
+    'code generation', 'code translation', 'input prediction', 
+    'output prediction', 'vulnerability detection', 'code-robustness'
+  ];
+}
+
+export function shouldUseSticky(task: TaskType): boolean {
+  return !getStickyColumnTasks().includes(task);
+}
+
+// Sorting configuration
+export const HIGH_TO_LOW_METRICS = [
+  'pass@1', 'pass@3', 'pass@5', 
+  'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+  'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+  'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
+  'CodeBLEU', 'LLMJudge', 'llmjudge', 'LLM Judge', 'Execution',
+  'Accuracy', 'Precision', 'Recall', 'F1 Score',
+  'P-C', 'P-V', 'P-B', 'P-R',
+  'CLIP', 'Compilation',
+  'SSIM', 'Text', 'Position', 'Implement Rate',
+  'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
+  'MAE', 'NEMD', 'RER'
+];
+
+export function getDefaultSortDirection(key: string): 'asc' | 'desc' {
+  if (key === 'rank' || key === 'model') {
+    return 'asc';
+  }
+  return HIGH_TO_LOW_METRICS.includes(key) ? 'desc' : 'asc';
+} 

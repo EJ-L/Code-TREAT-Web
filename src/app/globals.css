@@ -340,9 +340,159 @@
   }
 }
 
-/* 暗色模式过渡效果 */
+/* Theme transition */
 .transition-theme {
-  transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ResultsTable Component Styles - Override conflicting CSS */
+.results-table-container {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.results-table-container.dark {
+  background-color: #0f1729 !important;
+  border-color: #374151 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.results-table-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px !important;
+  background-color: white !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.results-table-header.dark {
+  background-color: #0f1729 !important;
+  border-bottom-color: #374151 !important;
+}
+
+/* More specific selectors to override any conflicts */
+div.results-table-container {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+div.results-table-container.dark {
+  background-color: #0f1729 !important;
+  border-color: #374151 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+div.results-table-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px !important;
+  background-color: white !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+div.results-table-header.dark {
+  background-color: #0f1729 !important;
+  border-bottom-color: #374151 !important;
+}
+
+/* Very specific class names for ResultsTable component */
+.RESULTS-TABLE-COMPONENT {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.RESULTS-TABLE-COMPONENT.dark {
+  background-color: #0f1729 !important;
+  border-color: #374151 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.RESULTS-TABLE-HEADER {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px !important;
+  background-color: white !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.RESULTS-TABLE-HEADER.dark {
+  background-color: #0f1729 !important;
+  border-bottom-color: #374151 !important;
+}
+
+/* Sticky column styles for horizontal scrolling */
+.sticky {
+  position: sticky !important;
+}
+
+/* Ensure sticky columns have proper z-index and background */
+th.sticky, td.sticky {
+  position: sticky !important;
+  z-index: 10 !important;
+}
+
+/* Higher z-index for sticky headers */
+th.sticky {
+  z-index: 11 !important;
+}
+
+/* Ensure table container allows horizontal scrolling */
+.table-container {
+  overflow-x: auto !important;
+  position: relative !important;
+}
+
+/* Make sure sticky columns maintain their background during scroll */
+.sticky[data-key="rank"],
+.sticky[data-key="model"] {
+  background-clip: padding-box !important;
+}
+
+/* Ensure consistent vertical alignment between headers and cells */
+table th,
+table td {
+  vertical-align: middle !important;
+}
+
+/* Ensure centered columns are perfectly aligned */
+th.text-center > div,
+td.text-center > div {
+  justify-content: center !important;
+}
+
+th.text-left > div,
+td.text-left > div {
+  justify-content: flex-start !important;
 }

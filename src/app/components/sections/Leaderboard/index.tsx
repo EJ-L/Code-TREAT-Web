@@ -4,11 +4,33 @@ import TaskSelector from './TaskSelector';
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
-import { processResults, formatResults } from '@/lib/resultProcessor';
 import { getAvailableLLMJudges as getSummarizationJudges } from '@/lib/tasks/codeSummarization';
 import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview';
-import { loadAllData } from '@/lib/dataLoader';
 
+// Import new configuration system
+import { 
+  getTaskHeaders, 
+  getMinColumnWidth, 
+  TASKS_WITH_DIFFICULTY 
+} from '@/lib/leaderboardConfig';
+import {
+  initializeColumnWidths,
+  getFilteredTableHeaders,
+  updateColumnWidthsForFilteredHeaders,
+  isColumnCentered,
+  getColumnAlignment,
+  getNumericStyles,
+  getContentWidth,
+  getStickyStyles,
+  getStickyLeftPosition,
+  getBackgroundColor,
+  truncateText,
+  getTaskSpecificColumnWidth,
+  getDefaultSortConfig,
+  supportsShowByDifficulty,
+  sortResults,
+  handleSortChange
+} from '@/lib/leaderboardHelpers';
 
 interface LeaderboardProps {
   taskAbilities: Record<TaskType, Ability>;
@@ -21,23 +43,20 @@ interface LeaderboardProps {
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDataComplete, setIsDataComplete] = useState(false);
-  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>({ key: 'pass@1', direction: 'desc' });
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(
+    getDefaultSortConfig('overall')
+  );
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
   const [currentTaskPage, setCurrentTaskPage] = useState(0);
   const [showByDifficulty, setShowByDifficulty] = useState(false);
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() => {
     // Initialize with default values immediately to prevent layout shift
-    const initialWidths: Record<string, number> = {};
-    initialWidths['rank'] = 100;
-    initialWidths['model'] = 300; // Default model width
-    return initialWidths;
+    return initializeColumnWidths('overall');
   });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   
   const TASKS_PER_PAGE = 4;
-  // Define tasks that have difficulty-based results
-  const tasksWithDifficulty = ['overall', 'code generation', 'code translation', 'input prediction', 'output prediction'];
 
   // Helper function to get tasks for current page
   const getCurrentPageTasks = useCallback(() => {
@@ -52,288 +71,98 @@ interface LeaderboardProps {
     return (currentTaskPage + 1) * TASKS_PER_PAGE < allTasks.length;
   }, [currentTaskPage, taskAbilities]);
 
-  // Helper function to check if there are previous tasks
-  const hasPreviousPage = useCallback(() => {
-    return currentTaskPage > 0;
-  }, [currentTaskPage]);
-
-  // Navigation functions
   const handleNextPage = () => {
     if (hasNextPage()) {
-      setCurrentTaskPage(prev => prev + 1);
+      setCurrentTaskPage(currentTaskPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
-    if (hasPreviousPage()) {
-      setCurrentTaskPage(prev => prev - 1);
+    if (currentTaskPage > 0) {
+      setCurrentTaskPage(currentTaskPage - 1);
     }
   };
 
-  // 获取默认排序配置
-  const getDefaultSortConfig = (task: TaskType) => {
-    switch (task) {
-      case 'code summarization':
-      case 'code review':
-        return { key: 'LLM Judge', direction: 'desc' as const };
-      case 'vulnerability detection':
-        return { key: 'Accuracy', direction: 'desc' as const };
-      case 'code-web':
-        return { key: 'CLIP', direction: 'desc' as const };
-      case 'interaction-2-code':
-        return { key: 'CLIP', direction: 'desc' as const };
-      case 'code-robustness':
-        return { key: 'VAN', direction: 'desc' as const };
-      case 'mr-web':
-        return { key: 'MAE', direction: 'desc' as const };
-      default:
-        return { key: 'pass@1', direction: 'desc' as const };
-    }
-  };
-
-  // 处理任务切换
   const handleTaskChange = (task: TaskType) => {
-    console.log('🔄 handleTaskChange called with task:', task);
     setCurrentTask(task);
-    setIsComparisonModalOpen(false);  // Close comparison modal when switching tasks
-    
-    // Auto-select only the first available dataset for tasks that have them
-    const newSelectedAbilities: Partial<Ability> = {};
-    
-    // For tasks other than 'overall', 'interaction-2-code', 'code summarization', and 'code review', auto-select first dataset only
-    // Note: code summarization and code review use precomputed data that ignores dataset filters
-    if (task !== 'overall' && task !== 'interaction-2-code' && task !== 'code summarization' && task !== 'code review') {
-      const taskAbility = taskAbilities[task];
-      console.log('🔍 Task ability for', task, ':', taskAbility);
-      
-      // Auto-select first dataset if available
-      if (taskAbility.dataset && taskAbility.dataset.length > 0) {
-        newSelectedAbilities.dataset = [taskAbility.dataset[0]];
-        console.log('✅ Auto-selected dataset:', taskAbility.dataset[0]);
-      }
-    } else if (task === 'code summarization' || task === 'code review') {
-      console.log('🎯 Skipping dataset auto-selection for', task, '(uses precomputed data that ignores datasets)');
-    }
-    
-    console.log('🎯 Setting selectedAbilities to:', newSelectedAbilities);
-    setSelectedAbilities(newSelectedAbilities);
-    
-    // 注意：对于code review任务，我们暂时不应用任何过滤器
-    if (task === 'code review') {
-      // 不应用llmJudge过滤器，以便查看所有结果
-      setSortConfig({ key: 'LLM Judge', direction: 'desc' });
-    } else if (task === 'overall') {
-      // 对于overall任务，我们使用未过滤的数据计算平均值
-      setSortConfig({ key: 'pass@1', direction: 'desc' });
-    } else {
       setSortConfig(getDefaultSortConfig(task));
+    setSelectedAbilities({});
+    
+    // Reset showByDifficulty if task doesn't support it
+    if (!supportsShowByDifficulty(task)) {
+      setShowByDifficulty(false);
     }
-
-    // Initialize column widths for the new task
-    initializeColumnWidths();
   };
 
-  // Handle filter selection
   const handleAbilityChange = (key: keyof Ability, value: string) => {
-    setSelectedAbilities((prev: Partial<Ability>) => {
-      const newAbilities = {
+    setSelectedAbilities(prev => {
+      const currentValues = prev[key] || [];
+      
+      // Ensure currentValues is always an array
+      const currentArray = Array.isArray(currentValues) ? currentValues : [];
+      
+      // Toggle behavior: if value exists, remove it; if not, add it
+      const newValues = currentArray.includes(value)
+        ? currentArray.filter(v => v !== value)  // Remove if exists
+        : [...currentArray, value];              // Add if doesn't exist
+      
+      return {
         ...prev,
-        [key]: prev[key]?.includes(value)
-          ? prev[key]?.filter((v: string) => v !== value)
-          : [...(prev[key] || []), value]
+        [key]: newValues
       };
-      setSortConfig(getDefaultSortConfig(currentTask));
-      return newAbilities;
     });
   };
 
-  // Load available LLM Judges
+  // Load LLM judges for tasks that support them
   useEffect(() => {
     const loadLLMJudges = async () => {
-      if (currentTask === 'code summarization' || currentTask === 'code review' || currentTask === 'overall') {
         try {
-          const rawData = await loadAllData();
-          
-          // Choose the appropriate judge detection function based on task type
           let judges: string[] = [];
-          if (currentTask === 'code review') {
-            judges = getReviewJudges(rawData);
-          } else {
-            judges = getSummarizationJudges(rawData);
+        if ((currentTask === 'code summarization' || currentTask === 'code review') && results.length > 0) {
+          if (currentTask === 'code summarization') {
+            judges = getSummarizationJudges(results);
+          } else if (currentTask === 'code review') {
+            judges = getReviewJudges(results);
           }
-          
-          setAvailableLLMJudges(judges);
-          
-          // Update available judges for the task
-          if (judges.length > 0) {
-            taskAbilities['code summarization'].llmJudges = judges;
-            taskAbilities['code review'].llmJudges = judges;
-            taskAbilities['overall'].llmJudges = judges;
-          }
-        } catch (error) {
-          console.error('Error loading LLM Judges:', error);
         }
+        setAvailableLLMJudges(judges);
+        } catch (error) {
+        console.error('Error loading LLM judges:', error);
+        setAvailableLLMJudges([]);
       }
     };
     
     loadLLMJudges();
-  }, [currentTask, taskAbilities]);
+  }, [currentTask, results]);
 
-  // Sorting function
-  const sortResults = useCallback((data: any[]) => {
-    if (!sortConfig) return data;
-
-    const sortableData = [...data];
-    
-    sortableData.sort((a, b) => {
-      // Special handling for model names (string sorting)
-      if (sortConfig.key === 'model') {
-        const aModel = String(a[sortConfig.key] || '').toLowerCase();
-        const bModel = String(b[sortConfig.key] || '').toLowerCase();
-        
-        if (sortConfig.direction === 'asc') {
-          return aModel.localeCompare(bModel);
-        } else {
-          return bModel.localeCompare(aModel);
-        }
-      }
-
-      // Parsing function to convert metric values to numbers for comparison
-      const parseValue = (value: string | number | undefined) => {
-        if (value === undefined) return -Infinity;
-        if (typeof value === 'number') return value;
-        
-        // Try to extract numeric value from percentage strings
-        if (typeof value === 'string' && value.endsWith('%')) {
-          const numValue = parseFloat(value.replace('%', ''));
-          return isNaN(numValue) ? -Infinity : numValue;
-        }
-        
-        // Try to convert string to number
-        const numValue = parseFloat(value);
-        return isNaN(numValue) ? -Infinity : numValue;
-      };
-
-      // Get values for comparison, handling all metrics including difficulty-based ones
-      const aValue = parseValue(a[sortConfig.key]);
-      const bValue = parseValue(b[sortConfig.key]);
-      
-      // Sort direction
-      if (sortConfig.direction === 'asc') {
-        return aValue - bValue;
-      } else {
-        return bValue - aValue;
-      }
-    });
-
-    // Update ranks after sorting
-    return sortableData.map((item, index) => ({
-      ...item,
-      rank: index + 1
-    }));
-  }, [sortConfig]);
-
-  // Memoize sorted results
+  // Memoize sorted results using new sorting function
   const sortedResults = useMemo(() => {
     if (!results.length) return [];
-    return sortResults(results);
-  }, [results, sortConfig, sortResults]);
+    return sortResults(results, sortConfig);
+  }, [results, sortConfig]);
 
-  // Handle sorting
+  // Handle sorting using new helper
   const handleSort = useCallback((key: string) => {
-    // If this column is already being sorted, reverse the direction
-    if (sortConfig && sortConfig.key === key) {
-      const newDirection = sortConfig.direction === 'asc' ? 'desc' : 'asc';
-      setSortConfig({ key, direction: newDirection });
-      return;
-    }
+    setSortConfig(prev => handleSortChange(prev, key));
+  }, []);
 
-    // Default sort direction for different columns
-    let initialDirection: 'asc' | 'desc' = 'desc';
-    
-    // Metrics that sort high-to-low by default (desc)
-    const highToLowMetrics = [
-      'pass@1', 'pass@3', 'pass@5', 
-      'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-      'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-      'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-      'CodeBLEU', 'LLMJudge', 'llmjudge', 'LLM Judge', 'Execution',
-      // Vulnerability detection metrics
-      'Accuracy', 'Precision', 'Recall', 'F1 Score',
-      'P-C', 'P-V', 'P-B', 'P-R',
-      // Code-web metrics
-      'CLIP', 'Compilation',
-      // Interaction-2-code metrics
-      'SSIM', 'Text', 'Position', 'Implement Rate',
-      // Code-robustness metrics
-      'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
-      // MR-Web metrics
-      'MAE', 'NEMD', 'RER'
-    ];
-    
-    // For rank and model, we sort low-to-high (asc) alphabetically
-    if (key === 'rank' || key === 'model') {
-      initialDirection = 'asc';
-    } else if (highToLowMetrics.includes(key)) {
-      initialDirection = 'desc'; // Higher values are better
-    }
-
-    setSortConfig({ key, direction: initialDirection });
-  }, [sortConfig]);
-
-  // Reset showByDifficulty when task changes to overall
+  // Reset showByDifficulty when task changes to one that doesn't support it
   useEffect(() => {
-    if (currentTask === 'overall') {
+    if (!supportsShowByDifficulty(currentTask)) {
       setShowByDifficulty(false);
     }
   }, [currentTask]);
 
-  // Handle showByDifficulty changes - ensure HackerRank is selected when enabled
+  // Load and process data using precomputed results or overall aggregation
   useEffect(() => {
-    if (showByDifficulty && currentTask === 'code translation') {
-      // Automatically select HackerRank dataset when showing by difficulty
-      setSelectedAbilities(prev => {
-        // Check if HackerRank is already in the dataset
-        const hasHackerRank = prev.dataset?.includes('HackerRank');
-        
-        if (!hasHackerRank) {
-          // Add HackerRank to the dataset selection
-          return {
-            ...prev,
-            dataset: [...(prev.dataset || []), 'HackerRank']
-          };
-        }
-        
-        return prev;
-      });
-    }
-  }, [showByDifficulty, currentTask]);
-
-  // Load and process data when filters change
-  useEffect(() => {
-    let isMounted = true;
-    
     const loadAndProcessData = async () => {
-      if (!isMounted) return;
-      
-      console.log('📊 loadAndProcessData called with:', {
-        currentTask,
-        selectedAbilities,
-        showByDifficulty
-      });
-      
-      // Add a small delay before starting loading to allow header animation to complete
-      setTimeout(() => {
-        if (!isMounted) return;
         setIsLoading(true);
-        setIsDataComplete(false);
-      }, 400); // Allow time for the header animation to complete
-      
       try {
+        // Create filter options for precomputed results
         const filterOptions: FilterOptions = {
           tasks: [currentTask],
           datasets: selectedAbilities.dataset || [],
-          langs: selectedAbilities.modality || [],
+          langs: [],
           modalities: selectedAbilities.modality || [],
           knowledge: selectedAbilities.knowledge || [],
           reasoning: selectedAbilities.reasoning || [],
@@ -341,481 +170,163 @@ interface LeaderboardProps {
           security: selectedAbilities.privacy || [],
           llmJudges: selectedAbilities.llmJudges || [],
           framework: selectedAbilities.framework || [],
-          showByDifficulty: currentTask === 'overall' ? false : showByDifficulty
+          showByDifficulty
         };
-        
-        console.log('🔧 Initial filterOptions:', filterOptions);
-        
-        // Special handling for code review task - don't clear llmJudges anymore
-        if (currentTask === 'code review') {
-          // Remove the clearing of filters to allow proper filtering
-          // filterOptions.llmJudges = [];
-          // filterOptions.langs = [];
-          // filterOptions.modalities = [];
-          // filterOptions.datasets = [];
-        }
-        
-        // Special handling for overall task
+
+        console.log(`Loading data for task: ${currentTask}`, filterOptions);
+
         if (currentTask === 'overall') {
-          filterOptions.llmJudges = [];
-          filterOptions.langs = [];
-          // Don't clear datasets - allow dataset filtering for overall task
-          // filterOptions.datasets = [];
-          filterOptions.modalities = [];
-          filterOptions.knowledge = [];
-          filterOptions.reasoning = [];
-          filterOptions.robustness = [];
-          filterOptions.security = [];
-          filterOptions.showByDifficulty = false;
-        }
-        
-        // Special handling for new tasks
-        if (currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web' || currentTask === 'vulnerability detection') {
-          filterOptions.llmJudges = [];
-          filterOptions.showByDifficulty = false;
+          // Special handling for overall leaderboard - aggregate from other tasks
+          const { getPrecomputedResults } = await import('@/lib/dataLoader');
           
-          // For interaction-2-code, disable most filters except datasets if needed
-          if (currentTask === 'interaction-2-code') {
-            filterOptions.langs = [];
-            filterOptions.modalities = [];
-            filterOptions.knowledge = [];
-            filterOptions.reasoning = [];
-            filterOptions.robustness = [];
-            filterOptions.security = [];
-            filterOptions.datasets = [];  // No filtering for interaction-2-code
-            filterOptions.framework = [];
-          }
+          // Get the list of tasks to aggregate (excluding overall itself)
+          const tasksToAggregate: TaskType[] = [
+            'code generation', 'code translation', 'code summarization', 'code review',
+            'input prediction', 'output prediction', 'vulnerability detection',
+            'code-web', 'interaction-2-code', 'code-robustness', 'mr-web'
+          ];
           
-          // For code-robustness, disable filters except datasets
-          if (currentTask === 'code-robustness') {
-            filterOptions.langs = [];
-            filterOptions.modalities = [];
-            filterOptions.knowledge = [];
-            filterOptions.reasoning = [];
-            filterOptions.robustness = [];
-            filterOptions.security = [];
-            filterOptions.framework = [];
-          }
+          // Load results from all tasks
+          const allTaskResults = await Promise.all(
+            tasksToAggregate.map(async (task) => {
+              try {
+                const taskFilterOptions = { ...filterOptions, tasks: [task] };
+                const results = await getPrecomputedResults(task, taskFilterOptions);
+                return { task, results: results || [] };
+              } catch (error) {
+                console.warn(`Failed to load data for task ${task}:`, error);
+                return { task, results: [] };
+              }
+            })
+          );
           
-          // For code-web, disable unnecessary filters
-          if (currentTask === 'code-web') {
-            filterOptions.langs = [];
-            filterOptions.modalities = [];
-            filterOptions.knowledge = [];
-            filterOptions.reasoning = [];
-            filterOptions.robustness = [];
-            filterOptions.security = [];
-            // Keep framework and datasets for code-web
-          }
+          // Aggregate results by model
+          const modelAggregates = new Map<string, { 
+            model: string, 
+            taskCount: number, 
+            totalScore: number, 
+            taskScores: Record<string, number> 
+          }>();
           
-          // For mr-web, disable unnecessary filters except Task and Method
-          if (currentTask === 'mr-web') {
-            filterOptions.langs = [];
-            filterOptions.modalities = [];
-            filterOptions.robustness = [];
-            filterOptions.security = [];
-            filterOptions.framework = [];
-            filterOptions.datasets = [];
-            // Keep only knowledge (Task) and reasoning (Method) filtering for mr-web
-          }
-          
-          // For vulnerability detection, disable unnecessary filters except datasets
-          if (currentTask === 'vulnerability detection') {
-            filterOptions.langs = [];
-            filterOptions.modalities = [];
-            filterOptions.knowledge = [];
-            filterOptions.reasoning = [];
-            filterOptions.robustness = [];
-            filterOptions.security = [];
-            filterOptions.framework = [];
-            // Keep only datasets for vulnerability detection
-          }
-        }
-        
-        console.log('🎯 Final filterOptions after overrides:', filterOptions);
-        
-        // Use setTimeout to allow the UI to update the loading state and process data
-        setTimeout(async () => {
-          if (!isMounted) return;
-          
-          try {
-            // Process data (this will handle data loading internally)
-            const processedResults = await processResults(currentTask, filterOptions);
-            
-            if (processedResults.length > 0 && isMounted) {
-              // Format results
-              const formattedResults = formatResults(processedResults, filterOptions);
+          allTaskResults.forEach(({ task, results }) => {
+            results.forEach((result: any) => {
+              const modelName = result.model;
+              if (!modelName) return;
               
-              if (formattedResults.length > 0 && isMounted) {
-                setResults(formattedResults as any[]);
-                
-                // Check if data is complete by verifying headers have data
-                const expectedHeaders = tableHeadersHelper(currentTask);
-                const hasCompleteData = expectedHeaders.every(header => {
-                  if (header.key === 'rank' || header.key === 'model') return true;
-                  return formattedResults.some(result => {
-                    const value = result[header.key];
-                    return value !== null && value !== undefined && value !== '-' && value !== '';
+              if (!modelAggregates.has(modelName)) {
+                modelAggregates.set(modelName, {
+                  model: modelName,
+                  taskCount: 0,
+                  totalScore: 0,
+                  taskScores: {}
+                });
+              }
+              
+              const aggregate = modelAggregates.get(modelName)!;
+              
+              // Get primary metric for each task type
+              let primaryScore = 0;
+              if (task === 'code summarization' || task === 'code review') {
+                primaryScore = parseFloat(result['LLM Judge']) || 0;
+              } else if (task === 'vulnerability detection') {
+                primaryScore = parseFloat(result['F1 Score']) || 0;
+              } else if (task === 'code-web' || task === 'interaction-2-code') {
+                primaryScore = parseFloat(result['CLIP']) || 0;
+              } else if (task === 'code-robustness') {
+                primaryScore = parseFloat(result['ALL']) || 0;
+              } else if (task === 'mr-web') {
+                primaryScore = parseFloat(result['CLIP']) || 0;
+              } else {
+                // For other tasks, use pass@1
+                primaryScore = parseFloat(result['pass@1']) || 0;
+              }
+              
+              if (primaryScore > 0) {
+                aggregate.taskScores[task] = primaryScore;
+                aggregate.taskCount++;
+                aggregate.totalScore += primaryScore;
+              }
                   });
                 });
-                setIsDataComplete(hasCompleteData);
+          
+          // Calculate final rankings
+          const overallResults = Array.from(modelAggregates.values())
+            .filter(aggregate => aggregate.taskCount > 0)
+            .map(aggregate => ({
+              model: aggregate.model,
+              averageScore: aggregate.totalScore / aggregate.taskCount,
+              taskCount: aggregate.taskCount
+            }))
+            .sort((a, b) => b.averageScore - a.averageScore)
+            .map((result, index) => ({
+              rank: index + 1,
+              model: result.model,
+              score: result.averageScore.toFixed(1),
+              tasks: result.taskCount
+            }));
+          
+          console.log(`Generated overall leaderboard with ${overallResults.length} models`);
+          setResults(overallResults);
+          setIsDataComplete(true);
+          setIsLoading(false);
               } else {
-                console.warn('No results after formatting');
+          // Use precomputed results for specific tasks
+          const { getPrecomputedResults } = await import('@/lib/dataLoader');
+          const results = await getPrecomputedResults(currentTask, filterOptions);
+          
+          if (!results || results.length === 0) {
+            console.warn(`No precomputed results available for task: ${currentTask}`);
                 setResults([]);
-                setIsDataComplete(true); // Consider empty results as complete
-              }
-            } else {
-              console.warn('No results after processing');
-              setResults([]);
-              setIsDataComplete(true); // Consider empty results as complete
-            }
-          } catch (error) {
-            console.error('Error processing data:', error);
-            setResults([]);
-          } finally {
-            if (isMounted) {
-              // Only set loading to false when data is complete
-              setTimeout(() => {
-                if (isMounted) {
+            setIsDataComplete(false);
+            setIsLoading(false);
+            return;
+          }
+
+          console.log(`Loaded ${results.length} results for ${currentTask}`);
+          setResults(results);
+          setIsDataComplete(true);
                   setIsLoading(false);
                 }
-              }, 200); // Small delay to ensure UI is stable
-            }
-          }
-        }, 500); // Delayed start for data processing to allow header animation
       } catch (error) {
         console.error('Error loading data:', error);
-        if (isMounted) {
           setResults([]);
+        setIsDataComplete(false);
           setIsLoading(false);
-        }
       }
     };
     
     loadAndProcessData();
-    
-    return () => {
-      isMounted = false;
-    };
   }, [currentTask, selectedAbilities, showByDifficulty]);
 
-  // Handle sorting separately to avoid reloading data
+  // Get filtered table headers using new helper
+  const getFilteredTableHeadersMemo = useCallback((task: TaskType) => {
+    return getFilteredTableHeaders(task, showByDifficulty, sortedResults);
+  }, [showByDifficulty, sortedResults]);
+
+  // Initialize column widths when task changes
   useEffect(() => {
-    if (results.length === 0) return;
-    // Don't set loading state for sorting - let the main data loading control it
-  }, [sortConfig]);
-
-  // Define table headers helper function
-  const tableHeadersHelper = (task: TaskType) => {
-    // Task-specific header configurations
-    const tableHeaders = {
-      'overall': [
-        { key: 'rank', label: 'Rank', width: 'w-32', description: '' },
-        { key: 'model', label: 'Model Name', width: 'w-192', description: '' }
-      ],
-      'code generation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
-      ],
-      'code translation': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-36', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-36', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-36', description: 'Pass@5 is the probability of passing a given problem in five attempts.' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-32', description: '' }
-      ],
-      'code summarization': [
-        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
-      ],
-      'code review': [
-        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
-      ],
-      'input prediction': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
-      ],
-      'output prediction': [
-        { key: 'pass@1', label: 'Pass@1', width: 'w-24', description: 'Pass@1 is the probability of passing a given problem in one attempt.' },
-        { key: 'pass@3', label: 'Pass@3', width: 'w-24', description: 'Pass@3 is the probability of passing a given problem in three attempts.' },
-        { key: 'pass@5', label: 'Pass@5', width: 'w-24', description: 'Pass@5 is the probability of passing a given problem in five attempts.' }
-      ],
-      'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24', description: '' },
-        { key: 'Precision', label: 'Precision', width: 'w-24', description: '' },
-        { key: 'Recall', label: 'Recall', width: 'w-24', description: '' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24', description: '' },
-        { key: 'P-C', label: 'P-C', width: 'w-16', description: 'Correctly predicts both elements' },
-        { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
-        { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
-        { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
-      ],
-      'code-web': [
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'Compilation', label: 'Compilation', width: 'w-28', description: 'Code compilation success rate' }
-      ],
-      'interaction-2-code': [
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'SSIM', label: 'SSIM', width: 'w-24', description: 'Structural similarity index' },
-        { key: 'Text', label: 'Text', width: 'w-24', description: 'Text accuracy score' },
-        { key: 'Position', label: 'Position', width: 'w-24', description: 'Position accuracy score' },
-        { key: 'Implement Rate', label: 'Implement Rate', width: 'w-36', description: 'Implementation success rate' }
-      ],
-      'code-robustness': [
-        { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
-        { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
-        { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
-        { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
-        { key: 'MHC', label: 'MHC', width: 'w-26', description: 'Missing Header Comment robustness score' },
-        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
-        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
-        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' }
-      ],
-      'mr-web': [
-        { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },
-        { key: 'NEMD', label: 'NEMD', width: 'w-24', description: 'Normalized Edit Distance' },
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'RER', label: 'RER', width: 'w-24', description: 'Request Element Recognition' }
-      ],
-    };
-
-    // Difficulty-specific header configurations
-    const difficultyHeaders: Record<TaskType, any> = {
-      'overall': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
-        // ...more headers
-      ],
-      'code generation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
-      ],
-      'code translation': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' },
-        { key: 'CodeBLEU', label: 'CodeBLEU', width: 'w-28', description: '' }
-      ],
-      'code summarization': [
-        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
-      ],
-      'code review': [
-        { key: 'LLM Judge', label: 'LLM Judge', width: 'w-28', description: '' }
-      ],
-      'input prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
-      ],
-      'output prediction': [
-        { key: 'easy_pass@1', label: 'Easy Pass@1', width: 'w-32', description: 'Easy Pass@1 on problems with easy difficulty.' },
-        { key: 'medium_pass@1', label: 'Medium Pass@1', width: 'w-32', description: 'Medium Pass@1 on problems with medium difficulty.' },
-        { key: 'hard_pass@1', label: 'Hard Pass@1', width: 'w-32', description: 'Hard Pass@1 on problems with hard difficulty.' },
-        { key: 'easy_pass@3', label: 'Easy Pass@3', width: 'w-32', description: 'Easy Pass@3 on problems with easy difficulty.' },
-        { key: 'medium_pass@3', label: 'Medium Pass@3', width: 'w-32', description: 'Medium Pass@3 on problems with medium difficulty.' },
-        { key: 'hard_pass@3', label: 'Hard Pass@3', width: 'w-32', description: 'Hard Pass@3 on problems with hard difficulty.' },
-        { key: 'easy_pass@5', label: 'Easy Pass@5', width: 'w-32', description: 'Easy Pass@5 on problems with easy difficulty.' },
-        { key: 'medium_pass@5', label: 'Medium Pass@5', width: 'w-32', description: 'Medium Pass@5 on problems with medium difficulty.' },
-        { key: 'hard_pass@5', label: 'Hard Pass@5', width: 'w-32', description: 'Hard Pass@5 on problems with hard difficulty.' }
-      ],
-      'vulnerability detection': [
-        { key: 'Accuracy', label: 'Accuracy', width: 'w-24', description: '' },
-        { key: 'Precision', label: 'Precision', width: 'w-24', description: '' },
-        { key: 'Recall', label: 'Recall', width: 'w-24', description: '' },
-        { key: 'F1 Score', label: 'F1 Score', width: 'w-24', description: '' },
-        { key: 'P-C', label: 'P-C', width: 'w-16', description: 'Correctly predicts both elements' },
-        { key: 'P-V', label: 'P-V', width: 'w-16', description: 'Both predicted as vulnerable' },
-        { key: 'P-B', label: 'P-B', width: 'w-16', description: 'Both predicted as benign' },
-        { key: 'P-R', label: 'P-R', width: 'w-16', description: 'Inversely predicted labels' }
-      ],
-      'code-web': [
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'Compilation', label: 'Compilation', width: 'w-28', description: 'Code compilation success rate' }
-      ],
-      'interaction-2-code': [
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'SSIM', label: 'SSIM', width: 'w-24', description: 'Structural similarity index' },
-        { key: 'Text', label: 'Text', width: 'w-24', description: 'Text accuracy score' },
-        { key: 'Position', label: 'Position', width: 'w-24', description: 'Position accuracy score' },
-        { key: 'Implement Rate', label: 'Implement Rate', width: 'w-36', description: 'Implementation success rate' }
-      ],
-      'code-robustness': [
-        { key: 'VAN', label: 'VAN', width: 'w-24', description: 'Variable Name robustness score' },
-        { key: 'ALL', label: 'ALL', width: 'w-24', description: 'All transformations robustness score' },
-        { key: 'MDC', label: 'MDC', width: 'w-24', description: 'Missing Docstring Comment robustness score' },
-        { key: 'MPS', label: 'MPS', width: 'w-24', description: 'Missing Parameter Specification robustness score' },
-        { key: 'MHC', label: 'MHC', width: 'w-24', description: 'Missing Header Comment robustness score' },
-        { key: 'REN', label: 'REN', width: 'w-24', description: 'Renaming robustness score' },
-        { key: 'RTF', label: 'RTF', width: 'w-24', description: 'Runtime Function robustness score' },
-        { key: 'GBC', label: 'GBC', width: 'w-24', description: 'Global Block Comment robustness score' }
-      ],
-      'mr-web': [
-        { key: 'MAE', label: 'MAE', width: 'w-24', description: 'Mean Absolute Error' },
-        { key: 'NEMD', label: 'NEMD', width: 'w-24', description: 'Normalized Edit Distance' },
-        { key: 'CLIP', label: 'CLIP', width: 'w-24', description: 'CLIP score for image similarity' },
-        { key: 'RER', label: 'RER', width: 'w-24', description: 'Request Element Recognition' }
-      ]
-    };
-
-    const commonHeaders = [
-      { key: 'rank', label: 'Rank', width: 'w-28', description: '' },
-      { key: 'model', label: 'Model Name', width: 'w-48', description: '' },
-    ];
-
-    // If showing by difficulty, use difficulty-specific headers
-    if (showByDifficulty) {
-      return [...commonHeaders, ...(difficultyHeaders[task] || [])];
-    }
-
-    // For overall task, return only the overall headers without adding common headers
-    if (task === 'overall') {
-      return tableHeaders[task];
-    }
-
-    // Otherwise, use standard headers
-    return [...commonHeaders, ...(tableHeaders[task] || [])];
-  };
-
-  // Memoize the getTableHeaders function
-  const getTableHeaders = useCallback((task: TaskType) => tableHeadersHelper(task), [showByDifficulty]);
-
-  // Function to filter out headers that have no data in their columns
-  const getFilteredTableHeaders = useCallback((task: TaskType) => {
-    const allHeaders = tableHeadersHelper(task);
-    
-    // Keep rank and model headers
-    const fixedHeaders = allHeaders.filter(header => header.key === 'rank' || header.key === 'model');
-    
-    // Filter metric headers based on data availability
-    const metricHeaders = allHeaders.filter(header => header.key !== 'rank' && header.key !== 'model');
-    
-    // For code summarization and code review, always show LLM Judge if it's defined in headers
-    // This ensures the column appears even if there are data processing issues
-    if (task === 'code summarization' || task === 'code review') {
-      const llmJudgeHeader = metricHeaders.find(h => h.key === 'LLM Judge');
-      if (llmJudgeHeader) {
-        // Always include LLM Judge header for these tasks
-        const otherHeaders = metricHeaders.filter(h => h.key !== 'LLM Judge');
-        const finalHeaders = [...fixedHeaders, llmJudgeHeader, ...otherHeaders];
-        return finalHeaders;
-      }
-    }
-    
-    // Only keep headers where at least one result has a non-empty value
-    const filteredMetricHeaders = metricHeaders.filter(header => {
-      const hasData = sortedResults.some(result => {
-        const value = result[header.key];
-        const isValid = value !== null && value !== undefined && value !== '-' && value !== '';
-        return isValid;
-      });
-      
-      return hasData;
-    });
-    
-    const finalHeaders = [...fixedHeaders, ...filteredMetricHeaders];
-    
-    return finalHeaders;
-  }, [tableHeadersHelper, sortedResults]);
-
-  // Function to initialize column widths with all headers (first pass)
-  const initializeColumnWidths = useCallback(() => {
-    const newWidths: Record<string, number> = {};
-    const headers = getTableHeaders(currentTask);
-    
-    headers.forEach(header => {
-      if (header.key === 'rank') {
-        newWidths[header.key] = 100;
-      } 
-      else if (header.key === 'model') {
-        if (currentTask === 'code summarization' || currentTask === 'code review') {
-          newWidths[header.key] = 250;
-        } else if (currentTask === 'code generation') {
-          newWidths[header.key] = 320;
-        } else if (currentTask === 'vulnerability detection') {
-          newWidths[header.key] = 350; // Wider width for vulnerability detection
-        } else if (currentTask === 'code-web') {
-          newWidths[header.key] = 360;
-        } else if (currentTask === 'interaction-2-code') {
-          newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
-        } else if (currentTask === 'code-robustness') {
-          newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
-        } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
-          newWidths[header.key] = 380; // Wider width for prediction tasks
-        } else {
-          newWidths[header.key] = 300;
-        }
-      }
-      else if (header.key === 'LLM Judge') {
-        if (currentTask === 'code summarization' || currentTask === 'code review') {
-          newWidths[header.key] = 370;
-        } else {
-          newWidths[header.key] = 160;
-        }
-      }
-      else if (header.key.indexOf('easy_') === 0 || header.key.indexOf('medium_') === 0 || header.key.indexOf('hard_') === 0) {
-        newWidths[header.key] = 140;
-      }
-      else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
-        newWidths[header.key] = 110;
-      }
-      else if (['CodeBLEU'].includes(header.key)) {
-        newWidths[header.key] = 140;
-      }
-      else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
-        newWidths[header.key] = 145;
-      }
-      else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-        newWidths[header.key] = 90;
-      }
-      else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'].includes(header.key)) {
-        newWidths[header.key] = 110;
-      }
-      else if (header.key === 'Compilation') {
-        newWidths[header.key] = 200; // Wider for code-web compilation column to avoid truncation
-      }
-      else if (header.key === 'Implement Rate') {
-        newWidths[header.key] = 230;
-      }
-      else if (['Position'].includes(header.key)) {
-        newWidths[header.key] = 150; // Wider for interaction-2-code position and implement rate columns
-      }
-      else {
-        newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
-      }
-    });
-    
+    const newWidths = initializeColumnWidths(currentTask, showByDifficulty);
     setColumnWidths(newWidths);
-  }, [currentTask, getTableHeaders]);
+  }, [currentTask, showByDifficulty]);
 
-  // Initialize column widths when task changes (first pass with all headers)
+  // Update column widths when filtered headers change
   useEffect(() => {
-    initializeColumnWidths();
-  }, [currentTask, initializeColumnWidths]);
-
-  // Reinitialize column widths when difficulty view is toggled
-  useEffect(() => {
-    initializeColumnWidths();
-  }, [showByDifficulty, initializeColumnWidths]);
+    if (sortedResults.length === 0) return;
+    
+    const filteredHeaders = getFilteredTableHeadersMemo(currentTask);
+    const newWidths = updateColumnWidthsForFilteredHeaders(
+      currentTask,
+      filteredHeaders,
+      columnWidths
+    );
+    
+    // Only update if widths actually change
+    const filteredHeaderKeys = new Set(filteredHeaders.map(h => h.key));
+    if (Object.keys(newWidths).length !== Object.keys(columnWidths).length || 
+        Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
+      setColumnWidths(newWidths);
+    }
+  }, [currentTask, sortedResults, getFilteredTableHeadersMemo, showByDifficulty]);
 
   // Listen for task change events from PaperCitationModal
   useEffect(() => {
@@ -843,183 +354,32 @@ interface LeaderboardProps {
     };
   }, [taskAbilities, currentTaskPage, handleTaskChange]);
   
-  // Update column widths when filtered headers are available
-  useEffect(() => {
-    if (sortedResults.length === 0) return;
-    
-    const newWidths: Record<string, number> = {};
-    const filteredHeaders = getFilteredTableHeaders(currentTask);
-    const filteredHeaderKeys = new Set(filteredHeaders.map(h => h.key));
-    
-    // Only initialize widths for filtered headers
-    filteredHeaders.forEach(header => {
-      // If we already have a width for this header, use it
-      if (columnWidths[header.key]) {
-        newWidths[header.key] = columnWidths[header.key];
-      } 
-      // Otherwise calculate a new width
-      else {
-        if (header.key === 'rank') {
-          newWidths[header.key] = 100;
-        } 
-        else if (header.key === 'model') {
-          if (currentTask === 'code summarization' || currentTask === 'code review') {
-            newWidths[header.key] = 250;
-          } else if (currentTask === 'code generation') {
-            newWidths[header.key] = 320;
-          } else if (currentTask === 'vulnerability detection') {
-            newWidths[header.key] = 350; // Wider width for vulnerability detection
-          } else if (currentTask === 'code-web') {
-            newWidths[header.key] = 360;
-          } else if (currentTask === 'interaction-2-code') {
-            newWidths[header.key] = 220; // Reduced width for interaction-2-code to make room for other columns
-          } else if (currentTask === 'code-robustness') {
-            newWidths[header.key] = 400; // Larger width for code-robustness since there's extra space
-          } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
-            newWidths[header.key] = 380; // Wider width for prediction tasks
-          } else if (currentTask === 'mr-web') {
-            newWidths[header.key] = 300; // Standard width for mr-web
-          } else {
-            newWidths[header.key] = 300;
-          }
-        }
-        else if (header.key === 'LLM Judge') {
-          if (currentTask === 'code summarization' || currentTask === 'code review') {
-            newWidths[header.key] = 370;
-          } else {
-            newWidths[header.key] = 160;
-          }
-        }
-        else if (header.key.indexOf('easy_') === 0 || header.key.indexOf('medium_') === 0 || header.key.indexOf('hard_') === 0) {
-          newWidths[header.key] = 140;
-        }
-        else if (['pass@1', 'pass@3', 'pass@5'].includes(header.key)) {
-          newWidths[header.key] = 110;
-        }
-        else if (['CodeBLEU'].includes(header.key)) {
-          newWidths[header.key] = 140;
-        }
-        else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(header.key)) {
-          newWidths[header.key] = 145;
-        }
-        else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
-          newWidths[header.key] = 90;
-        }
-        else if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'MAE', 'NEMD', 'RER'].includes(header.key)) {
-          newWidths[header.key] = 110;
-        }
-        else if (header.key === 'Compilation') {
-          newWidths[header.key] = 180; // Wider for code-web compilation column to avoid truncation
-        }
-        else if (header.key === 'Implement Rate') {
-          newWidths[header.key] = 230;
-        }
-        else if (['Position'].includes(header.key)) {
-          newWidths[header.key] = 150; // Wider for interaction-2-code position and implement rate columns
-        }
-        else {
-          newWidths[header.key] = Math.max(100, header.label.length * 12 + 40);
-        }
-      }
-    });
-    
-    // Only update if widths actually change (removed columnWidths from comparison to prevent resize reset)
-    if (Object.keys(newWidths).length !== Object.keys(columnWidths).length || 
-        Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
-      setColumnWidths(newWidths);
-    }
-  }, [currentTask, sortedResults, getFilteredTableHeaders, showByDifficulty]); // Added showByDifficulty dependency
+  // Helper function to get minimum column width using new config system
+  const getMinColumnWidthHelper = useCallback((key: string): number => {
+    return getMinColumnWidth(currentTask, key) || 80;
+  }, [currentTask]);
 
-  // Helper function to get minimum column width
-  const getMinColumnWidth = useCallback((key: string): number => {
-    let minWidth = 40;
-    
-    if (key === 'model') {
-      if (currentTask === 'overall') {
-        minWidth = 800;
-      } else if (currentTask === 'code-web') {
-        minWidth = 320; // Set higher minimum width for code-web to prevent truncation issues
-      } else if (currentTask === 'output prediction' || currentTask === 'input prediction') {
-        minWidth = 350; // Higher minimum width for prediction tasks
-      } else {
-        minWidth = 300;
-      }
-    } else if (key === 'rank') {
-      minWidth = 60;
-    } else if (key.includes('pass') || key.includes('Pass')) {
-      if (key.indexOf('easy_') === 0 || key.indexOf('medium_') === 0 || key.indexOf('hard_') === 0) {
-        minWidth = 130;
-      } else {
-        minWidth = 80;
-      }
-    } else if (key === 'llmjudge' || key === 'LLMJudge' || key === 'LLM Judge') {
-      minWidth = 100;
-    } else if (key === 'CodeBLEU') {
-      minWidth = 90;
-    } else if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(key)) {
-      minWidth = 80;
-    } else if (['P-C', 'P-V', 'P-B', 'P-R'].includes(key)) {
-      minWidth = 60;
-    } else {
-      const header = getTableHeaders(currentTask).find(h => h.key === key);
-      minWidth = header?.label.length ? header.label.length * 8 + 24 : 80;
-    }
-    
-    return minWidth;
-  }, [currentTask, getTableHeaders]);
-
-  // Handle column resize start
+  // Column resizing functionality
   const handleResizeStart = (e: React.MouseEvent, key: string) => {
     e.preventDefault();
     setResizingColumn(key);
     
-    document.body.style.cursor = 'col-resize';
-    document.body.classList.add('select-none');
-
-    // Create resize indicator
-    const resizeIndicator = document.createElement('div');
-    resizeIndicator.id = 'column-resize-indicator';
-    resizeIndicator.style.position = 'absolute';
-    resizeIndicator.style.top = '0';
-    resizeIndicator.style.bottom = '0';
-    resizeIndicator.style.width = '2px';
-    resizeIndicator.style.backgroundColor = isDarkMode ? 'rgba(200, 200, 200, 0.7)' : 'rgba(20, 20, 20, 0.7)';
-    resizeIndicator.style.left = `${e.currentTarget.getBoundingClientRect().right}px`;
-    resizeIndicator.style.zIndex = '50';
-    document.body.appendChild(resizeIndicator);
+    const startX = e.clientX;
+    const startWidth = columnWidths[key] || 100;
+    const minWidth = getMinColumnWidthHelper(key);
 
     const handleMouseMove = (moveEvent: MouseEvent) => {
-      moveEvent.preventDefault();
+      const deltaX = moveEvent.clientX - startX;
+      const newWidth = Math.max(minWidth, startWidth + deltaX);
       
-      if (resizeIndicator) {
-        resizeIndicator.style.left = `${moveEvent.clientX}px`;
-      }
-      
-      setColumnWidths(prev => {
-        // Calculate new width
-        const newWidth = prev[key] + moveEvent.movementX;
-        
-        // Get minimum width
-        const minWidth = getMinColumnWidth(key);
-        
-        return {
+      setColumnWidths(prev => ({
           ...prev,
-          [key]: Math.max(minWidth, newWidth)
-        };
-      });
+        [key]: newWidth
+      }));
     };
 
     const handleMouseUp = () => {
       setResizingColumn(null);
-      document.body.style.cursor = '';
-      document.body.classList.remove('select-none');
-      
-      // Remove indicator
-      const indicator = document.getElementById('column-resize-indicator');
-      if (indicator) {
-        indicator.remove();
-      }
-      
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
@@ -1028,341 +388,72 @@ interface LeaderboardProps {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  // Define column alignment and styling helpers
-  const isColumnCentered = useCallback((key: string) => {
-    return key !== 'model';
-  }, []);
-
-  const getColumnAlignment = useCallback((key: string) => {
-    if (key === 'model') {
-      return 'text-left';
-    } else {
-      return 'text-center';
-    }
-  }, []);
-
-  const getNumericStyles = useCallback((key: string) => {
-    if (isColumnCentered(key)) {
-      return 'tabular-nums lining-nums';
-    }
-    return '';
-  }, [isColumnCentered]);
-
-  // Compute available content width for a column
-  const getContentWidth = useCallback((columnWidth: number) => {
-    // Be less aggressive - only subtract minimal padding
-    return Math.max(columnWidth - 24, 20);
-  }, []);
-
-  // Helper for sticky columns
-  const getStickyStyles = useCallback((key: string) => {
-    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
-      return '';
-    }
-    
-    if (key === 'rank' || key === 'model') {
-      return 'sticky left-0 z-10';
-    }
-    return '';
-  }, [currentTask]);
-
-  // Calculate left position for sticky columns
-  const getStickyLeftPosition = useCallback((key: string) => {
-    if (currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-        currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web') {
-      return 'auto';
-    }
-    
-    if (key === 'rank') {
-      return '0px';
-    } else if (key === 'model') {
-      // Use fixed width for vulnerability detection to ensure correct initial position
-      if (currentTask === 'vulnerability detection') {
-        return '100px'; // Fixed position for rank width in vulnerability detection
-      }
-      return `var(--rank-width, ${columnWidths['rank'] || 80}px)`;
-    }
-    return 'auto';
-  }, [currentTask, columnWidths]);
-
-  // Update CSS variable for rank width
-  useEffect(() => {
-    const updateRankWidth = () => {
-      const rankHeader = document.querySelector('th[data-key="rank"]');
-      if (rankHeader) {
-        document.documentElement.style.setProperty('--rank-width', `${rankHeader.clientWidth}px`);
-      }
-    };
-
-    updateRankWidth();
-    window.addEventListener('resize', updateRankWidth);
-    
-    return () => {
-      window.removeEventListener('resize', updateRankWidth);
-    };
-  }, [columnWidths]);
-
-  // Helper for background colors
-  const getBackgroundColor = useCallback((key: string, isHeaderCell: boolean = false) => {
-    if ((key === 'rank' || key === 'model') && 
-        !(currentTask === 'overall' || currentTask === 'code summarization' || currentTask === 'code review' ||
-          currentTask === 'code-web' || currentTask === 'interaction-2-code' || currentTask === 'code-robustness' || currentTask === 'mr-web')) {
-      if (isHeaderCell) {
-        return isDarkMode ? 'bg-[#151d2a]' : 'bg-slate-50';
-      } else {
-        return isDarkMode ? 'bg-[#0f1729]' : 'bg-white';
-      }
-    }
-    return '';
-  }, [currentTask, isDarkMode]);
-
-  // Helper for text truncation
-  const truncateText = useCallback((text: string, maxWidth: number) => {
-    if (!text) return '';
-    
-    // Use more accurate character width for JetBrains Mono font at text-xl size
-    const charWidth = 8; // Slightly more conservative estimate
-    const maxChars = Math.floor(maxWidth / charWidth);
-    
-    // Only truncate if the text is significantly longer than available space
-    if (text.length <= maxChars || maxChars <= 5) return text;
-    
-    // Reserve space for ellipsis, but be generous
-    return text.substring(0, maxChars - 3) + '...';
-  }, []);
-
-  // Generate CSV data for export
+  // Generate CSV data
   const csvData = useMemo(() => {
-    if (!sortedResults.length) return {
-      headers: [],
-      data: []
-    };
-    
-    const headers = getFilteredTableHeaders(currentTask).map(header => ({
+    const headers = getFilteredTableHeadersMemo(currentTask);
+    const csvHeaders = headers.map(header => ({
       label: header.label,
       key: header.key
     }));
     
-    const formattedData = sortedResults.map(result => {
-      const csvRow: Record<string, string | number> = {};
-      
-      Object.entries(result).forEach(([key, value]) => {
-        // Only include keys that are in the filtered headers
-        if (headers.some(header => header.key === key)) {
-          if (typeof value === 'number') {
-            if (key === 'rank') {
-              csvRow[key] = value;
-            } else if ([
-              'pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution',
-              'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-              'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-              'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
-              'Accuracy', 'Precision', 'Recall', 'F1 Score',
-              'P-C', 'P-V', 'P-B', 'P-R'
-            ].includes(key)) {
-              csvRow[key] = (value * 100).toFixed(1);
-            } else if (key === 'llmjudge' || key === 'LLMJudge' || key === 'LLM Judge') {
-              csvRow[key] = ((value / 5) * 100).toFixed(1);
-            } else {
-              csvRow[key] = value;
-            }
-          } else if (value === '-' || value === undefined) {
-            csvRow[key] = 'N/A';
-          } else {
-            csvRow[key] = value as string;
-          }
-        }
+    const csvDataRows = sortedResults.map(result => {
+      const row: any = {};
+      headers.forEach(header => {
+        row[header.key] = result[header.key] || '';
       });
-      
-      return csvRow;
+      return row;
     });
     
     return {
-      headers,
-      data: formattedData
+      headers: csvHeaders,
+      data: csvDataRows
     };
-  }, [sortedResults, currentTask, getFilteredTableHeaders]);
+  }, [currentTask, sortedResults, getFilteredTableHeadersMemo]);
 
-  // CSV filename based on current task and filters
+  // Generate CSV filename
   const csvFilename = useMemo(() => {
-    const date = new Date().toISOString().split('T')[0];
-    let filename = currentTask.replace(/\s+/g, '-');
-    
-    // Add difficulty suffix if enabled
-    if (showByDifficulty) {
-      filename += '_difficulty';
-    }
-    
-    // Add filter information to filename
-    const filterParts: string[] = [];
-    
-    // Add dataset filters
-    if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
-      filterParts.push(`dataset-${selectedAbilities.dataset.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add modality filters  
-    if (selectedAbilities.modality && selectedAbilities.modality.length > 0) {
-      filterParts.push(`modality-${selectedAbilities.modality.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add knowledge filters
-    if (selectedAbilities.knowledge && selectedAbilities.knowledge.length > 0) {
-      filterParts.push(`knowledge-${selectedAbilities.knowledge.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add reasoning filters
-    if (selectedAbilities.reasoning && selectedAbilities.reasoning.length > 0) {
-      filterParts.push(`reasoning-${selectedAbilities.reasoning.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add robustness filters
-    if (selectedAbilities.robustness && selectedAbilities.robustness.length > 0) {
-      filterParts.push(`robustness-${selectedAbilities.robustness.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add privacy filters
-    if (selectedAbilities.privacy && selectedAbilities.privacy.length > 0) {
-      filterParts.push(`privacy-${selectedAbilities.privacy.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add LLM judge filters
-    if (selectedAbilities.llmJudges && selectedAbilities.llmJudges.length > 0) {
-      filterParts.push(`llmjudge-${selectedAbilities.llmJudges.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // Add framework filters
-    if (selectedAbilities.framework && selectedAbilities.framework.length > 0) {
-      filterParts.push(`framework-${selectedAbilities.framework.join('-').replace(/\s+/g, '')}`);
-    }
-    
-    // If no filters are applied, add "overall" to the filename
-    if (filterParts.length === 0) {
-      filterParts.push('overall');
-    }
-    
-    // Combine all parts
-    if (filterParts.length > 0) {
-      filename += '_' + filterParts.join('_');
-    }
-    
-    return `${filename}_${date}.csv`;
-  }, [currentTask, selectedAbilities, showByDifficulty]);
-  
-  // Column width helper
-  const getTaskSpecificColumnWidth = useCallback((task: TaskType, key: string): string => {
-    if (columnWidths[key]) {
-      return `${columnWidths[key]}px`;
-    }
-    
-    // Fallback values that match initializeColumnWidths exactly
-    if (key === 'rank') {
-      return '100px';
-    }
-    
-    if (key === 'model') {
-      if (task === 'code summarization' || task === 'code review') {
-        return '250px';
-      } else if (task === 'code generation') {
-        return '320px';
-      } else if (task === 'vulnerability detection') {
-        return '350px';
-      } else if (task === 'code-web') {
-        return '360px';
-      } else if (task === 'interaction-2-code') {
-        return '220px';
-      } else if (task === 'code-robustness') {
-        return '400px';
-      } else if (task === 'output prediction' || task === 'input prediction') {
-        return '380px';
-      } else if (task === 'mr-web') {
-        return '300px';
-      } else {
-        return '300px';
-      }
-    }
-    
-    if (key === 'llmjudge' || key === 'LLM Judge') {
-      if (task === 'code summarization' || task === 'code review') {
-        return '370px';
-      }
-      return '160px';
-    }
-    
-    if (key.indexOf('easy_') === 0 || key.indexOf('medium_') === 0 || key.indexOf('hard_') === 0) {
-      return '140px';
-    }
-    
-    if (['pass@1', 'pass@3', 'pass@5'].includes(key)) {
-      return '110px';
-    }
-    
-    if (['CodeBLEU'].includes(key)) {
-      return '140px';
-    }
-    
-    if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(key)) {
-      return '145px';
-    }
-    
-    if (['P-C', 'P-V', 'P-B', 'P-R'].includes(key)) {
-      return '90px';
-    }
-    
-    if (['CLIP', 'SSIM', 'Text', 'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'MAE', 'NEMD', 'RER'].includes(key)) {
-      return '110px';
-    }
-    
-    if (key === 'Compilation') {
-      return '180px';
-    }
-    
-    if (key === 'Implement Rate') {
-      return '230px';
-    }
-    
-    if (['Position'].includes(key)) {
-      return '150px';
-    }
-    
-    // Default fallback
-    return '100px';
-  }, [columnWidths]);
+    const timestamp = new Date().toISOString().split('T')[0];
+    const taskName = currentTask.replace(/\s+/g, '_').toLowerCase();
+    const difficultyStr = showByDifficulty ? '_by_difficulty' : '';
+    return `${taskName}_leaderboard${difficultyStr}_${timestamp}.csv`;
+  }, [currentTask, showByDifficulty]);
 
   return (
-    <section id="evaluation" className="relative flex items-center pt-0">
-      <div className="relative w-full max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-24 font-jetbrains-mono">
-          Leaderboard
+    <section className="py-20">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+            CODE-TREAT Leaderboard
         </h1>
+          <p className={`text-xl ${isDarkMode ? 'text-slate-300' : 'text-slate-600'} max-w-3xl mx-auto leading-relaxed`}>
+            Compare the performance of different language models across various code-related tasks. 
+            Our comprehensive evaluation covers code generation, translation, summarization, and more.
+          </p>
+        </div>
 
-        {/* Task Selector */}
         <TaskSelector 
           currentTask={currentTask}
           currentTaskPage={currentTaskPage}
           handleTaskChange={handleTaskChange}
           handlePreviousPage={handlePreviousPage}
           handleNextPage={handleNextPage}
-          hasPreviousPage={hasPreviousPage}
-          hasNextPage={hasNextPage}
+          hasPreviousPage={() => currentTaskPage > 0}
+          hasNextPage={() => hasNextPage()}
           getCurrentPageTasks={getCurrentPageTasks}
           isDarkMode={isDarkMode}
         />
 
-        {/* Filter Panel */}
         <FilterPanel 
           currentTask={currentTask}
           taskAbilities={taskAbilities}
           selectedAbilities={selectedAbilities}
           handleAbilityChange={handleAbilityChange}
+          availableLLMJudges={availableLLMJudges}
           showByDifficulty={showByDifficulty}
           setShowByDifficulty={setShowByDifficulty}
-          availableLLMJudges={availableLLMJudges}
           isDarkMode={isDarkMode}
         />
 
-        {/* Results Table */}
         <ResultsTable 
           currentTask={currentTask}
           results={results}
@@ -1370,7 +461,7 @@ interface LeaderboardProps {
           isLoading={isLoading}
           sortConfig={sortConfig}
           setIsComparisonModalOpen={setIsComparisonModalOpen}
-          getTableHeaders={getFilteredTableHeaders}
+          getTableHeaders={getFilteredTableHeadersMemo}
           columnWidths={columnWidths}
           resizingColumn={resizingColumn}
           csvData={csvData}
@@ -1379,13 +470,17 @@ interface LeaderboardProps {
           handleResizeStart={handleResizeStart}
           getContentWidth={getContentWidth}
           isColumnCentered={isColumnCentered}
-          getStickyStyles={getStickyStyles}
-          getStickyLeftPosition={getStickyLeftPosition}
-          getBackgroundColor={getBackgroundColor}
+          getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}
+          getStickyLeftPosition={(key: string) => getStickyLeftPosition(currentTask, key, columnWidths)}
+          getBackgroundColor={(key: string, isHeaderCell?: boolean) => 
+            getBackgroundColor(currentTask, key, isDarkMode, isHeaderCell)
+          }
           getColumnAlignment={getColumnAlignment}
           getNumericStyles={getNumericStyles}
           truncateText={truncateText}
-          getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
+          getTaskSpecificColumnWidth={(task: TaskType, key: string) => 
+            getTaskSpecificColumnWidth(task, key)
+          }
           isDarkMode={isDarkMode}
         />
 

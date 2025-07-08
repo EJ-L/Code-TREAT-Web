@@ -276,6 +276,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
   }
 
   private findMatchingCombination(userFilters: FilterOptions, filterMappings: Record<string, any>): string | null {
+    const { debug } = require('../../debug');
+    
     // Create effective user filters by normalizing modalities/langs
     const effectiveUserFilters: Record<string, string[]> = {
       modality: [...(userFilters.modalities || []), ...(userFilters.langs || [])],
@@ -284,12 +286,73 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       dataset: userFilters.datasets || []
     };
 
+    debug.dataSource('Finding matching combination:', {
+      original: userFilters,
+      effective: effectiveUserFilters
+    });
+
     // Remove empty arrays and check if user has any effective filters
     const hasAnyEffectiveFilters = Object.values(effectiveUserFilters).some(filterArray => 
       Array.isArray(filterArray) && filterArray.length > 0
     );
     
     if (!hasAnyEffectiveFilters) {
+      debug.dataSource('No effective filters, returning overall');
+      return 'overall';
+    }
+
+    // Get all available options for each filter category from the filterMappings
+    const availableOptions: { [key: string]: Set<string> } = {};
+    
+    for (const mapping of Object.values(filterMappings)) {
+      for (const [category, values] of Object.entries(mapping as any)) {
+        if (!availableOptions[category]) {
+          availableOptions[category] = new Set();
+        }
+        if (Array.isArray(values)) {
+          values.forEach(value => availableOptions[category].add(value));
+        }
+      }
+    }
+
+    debug.dataSource('Available options per category:', 
+      Object.fromEntries(Object.entries(availableOptions).map(([k, v]) => [k, Array.from(v)]))
+    );
+
+    // Check if user has selected ALL available options for any category
+    // If so, treat it as if no filter was selected for that category
+    for (const [category, userValues] of Object.entries(effectiveUserFilters)) {
+      if (Array.isArray(userValues) && userValues.length > 0) {
+        const availableForCategory = availableOptions[category];
+        if (availableForCategory && userValues.length === availableForCategory.size) {
+          // Only treat as "all selected" if there are multiple options available
+          // If there's only 1 option and user selected it, that's still meaningful filtering
+          if (availableForCategory.size > 1) {
+            // Check if user selected all available options (case insensitive)
+            const allSelected = userValues.every(value => 
+              Array.from(availableForCategory).some(available => 
+                String(available).localeCompare(String(value), undefined, { sensitivity: 'base' }) === 0
+              )
+            );
+            if (allSelected) {
+              debug.dataSource(`User selected ALL ${category} options (${userValues.length}), treating as no filter`);
+              // User selected ALL options for this category, treat as no filter
+              effectiveUserFilters[category] = [];
+            }
+          }
+        }
+      }
+    }
+
+    debug.dataSource('Effective filters after "all selected" processing:', effectiveUserFilters);
+
+    // Check again if all effective filters are empty after the "all selected" logic
+    const hasAnyEffectiveFiltersAfterProcessing = Object.values(effectiveUserFilters).some(filterArray => 
+      Array.isArray(filterArray) && filterArray.length > 0
+    );
+    
+    if (!hasAnyEffectiveFiltersAfterProcessing) {
+      debug.dataSource('All filters are empty after processing, returning overall');
       return 'overall';
     }
 
@@ -325,10 +388,12 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       }
       
       if (matches) {
+        debug.dataSource(`Found matching combination: ${combinationKey}`);
         return combinationKey;
       }
     }
     
+    debug.dataSource('No matching combination found');
     return null;
   }
 

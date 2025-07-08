@@ -90,7 +90,7 @@ const TableCell: FC<TableCellProps> = ({
           ? 'py-4' : ''
       }`}
       style={{ 
-        width: getTaskSpecificColumnWidth(currentTask, header.key),
+        width: `${columnWidths[header.key] || 100}px`,
         transition: resizingColumn ? 'none' : 'width 0.1s ease',
         left: getStickyLeftPosition(header.key),
         verticalAlign: 'middle'
@@ -120,15 +120,6 @@ const TableCell: FC<TableCellProps> = ({
             const logoSize = isSimplifiedLeaderboard ? 20 : 16;
             const logoSpace = (organization && organization !== 'unknown') ? (logoSize + 8) : 0;
             
-            // Calculate available space for text
-            // Use the EXACT same width value that the header uses
-            const actualColumnWidth = columnWidths[header.key] || 300; // Simple fallback, should never be used
-            
-            // For cells: only subtract padding (48px) + logo space  
-            // Headers need more space subtracted for sort indicators, but cells don't
-            const paddingSpace = 0; // px-6 padding
-            const availableTextWidth = Math.max(actualColumnWidth, 80);
-            
             const modelContent = (
               <div className="flex items-center gap-2 w-full">
                 {organization && organization !== 'unknown' && (
@@ -136,10 +127,7 @@ const TableCell: FC<TableCellProps> = ({
                 )}
                 <span 
                   title={modelName}
-                  className="text-ellipsis overflow-hidden whitespace-nowrap block"
-                  style={{
-                    maxWidth: hasFixedModelWidth ? 'none' : `${availableTextWidth}px`
-                  }}
+                  className="text-ellipsis overflow-hidden whitespace-nowrap flex-1 min-w-0"
                 >
                   {modelName}
                 </span>
@@ -190,14 +178,11 @@ const TableCell: FC<TableCellProps> = ({
           // For other string values, truncate if needed
           if (typeof value === 'string') {
             const style = isColumnCentered(header.key) ? 'text-center' : 'text-left';
+            
             return (
               <span 
                 title={value} 
-                className={`text-ellipsis overflow-hidden whitespace-nowrap inline-block ${style}`}
-                style={{ 
-                  maxWidth: `${contentWidth}px`,
-                  width: isColumnCentered(header.key) ? '100%' : 'auto'
-                }}
+                className={`text-ellipsis overflow-hidden whitespace-nowrap ${style} w-full block`}
               >
                 {value}
               </span>

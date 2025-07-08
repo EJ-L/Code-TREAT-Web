@@ -156,7 +156,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'Accuracy',
     width: 'w-24',
     description: '',
-    defaultWidth: 180,
+    defaultWidth: 200,
     minWidth: 80
   },
   'Precision': {
@@ -164,7 +164,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'Precision',
     width: 'w-24',
     description: '',
-    defaultWidth: 190,
+    defaultWidth: 210,
     minWidth: 80
   },
   'Recall': {
@@ -172,7 +172,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'Recall',
     width: 'w-24',
     description: '',
-    defaultWidth: 160,
+    defaultWidth: 180,
     minWidth: 80
   },
   'F1 Score': {
@@ -180,7 +180,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'F1 Score',
     width: 'w-24',
     description: '',
-    defaultWidth: 180,
+    defaultWidth: 200,
     minWidth: 80
   },
   'P-C': {
@@ -188,7 +188,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-C',
     width: 'w-16',
     description: 'Correctly predicts both elements',
-    defaultWidth: 115,
+    defaultWidth: 135,
     minWidth: 60
   },
   'P-V': {
@@ -196,7 +196,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-V',
     width: 'w-16',
     description: 'Both predicted as vulnerable',
-    defaultWidth: 115,
+    defaultWidth: 135,
     minWidth: 60
   },
   'P-B': {
@@ -204,7 +204,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-B',
     width: 'w-16',
     description: 'Both predicted as benign',
-    defaultWidth: 115,
+    defaultWidth: 135,
     minWidth: 60
   },
   'P-R': {
@@ -212,7 +212,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-R',
     width: 'w-16',
     description: 'Inversely predicted labels',
-    defaultWidth: 115,
+    defaultWidth: 135,
     minWidth: 60
   },
   // Code-web metrics
@@ -221,7 +221,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'CLIP',
     width: 'w-24',
     description: 'CLIP score for image similarity',
-    defaultWidth: 110,
+    defaultWidth: 130,
     minWidth: 80
   },
   'Compilation': {
@@ -229,7 +229,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'Compilation',
     width: 'w-28',
     description: 'Code compilation success rate',
-    defaultWidth: 200,
+    defaultWidth: 220,
     minWidth: 100
   },
   // Interaction-2-code metrics
@@ -271,7 +271,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'VAN',
     width: 'w-24',
     description: 'Variable Name robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'ALL': {
@@ -279,7 +279,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'ALL',
     width: 'w-24',
     description: 'All transformations robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'MDC': {
@@ -287,7 +287,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'MDC',
     width: 'w-24',
     description: 'Missing Docstring Comment robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'MPS': {
@@ -295,7 +295,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'MPS',
     width: 'w-24',
     description: 'Missing Parameter Specification robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'MHC': {
@@ -303,7 +303,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'MHC',
     width: 'w-26',
     description: 'Missing Header Comment robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'REN': {
@@ -311,7 +311,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'REN',
     width: 'w-24',
     description: 'Renaming robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'RTF': {
@@ -319,7 +319,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'RTF',
     width: 'w-24',
     description: 'Runtime Function robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   'GBC': {
@@ -327,7 +327,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'GBC',
     width: 'w-24',
     description: 'Global Block Comment robustness score',
-    defaultWidth: 120,
+    defaultWidth: 145,
     minWidth: 80
   },
   // MR-Web metrics
@@ -415,35 +415,35 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   'CLIP': {
     default: 110,
     taskSpecific: {
-      'interaction-2-code': 120
+      'interaction-2-code': 150
     },
     minWidth: 80
   },
   'SSIM': {
     default: 110,
     taskSpecific: {
-      'interaction-2-code': 120
+      'interaction-2-code': 150
     },
     minWidth: 80
   },
   'Text': {
     default: 110,
     taskSpecific: {
-      'interaction-2-code': 120
+      'interaction-2-code': 150
     },
     minWidth: 80
   },
   'Position': {
     default: 150,
     taskSpecific: {
-      'interaction-2-code': 190
+      'interaction-2-code': 210
     },
     minWidth: 100
   },
   'Implement Rate': {
     default: 230,
     taskSpecific: {
-      'interaction-2-code': 250
+      'interaction-2-code': 270
     },
     minWidth: 150
   }
@@ -560,7 +560,8 @@ export function getMinColumnWidth(task: TaskType, headerKey: string): number {
 export function getStickyColumnTasks(): TaskType[] {
   return [
     'code generation', 'code translation', 'input prediction', 
-    'output prediction', 'vulnerability detection', 'code-robustness'
+    'output prediction', 'vulnerability detection', 'code-robustness',
+    'interaction-2-code'
   ];
 }
 

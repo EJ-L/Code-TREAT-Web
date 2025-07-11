@@ -76,7 +76,7 @@
         "LLM Judge": "31.3"
       }
     },
-    "DeepSeek-R1 (0528)": {
+    "Qwen2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 5,
         "LLM Judge": "31.1"
@@ -90,7 +90,7 @@
         "LLM Judge": "31.1"
       }
     },
-    "Qwen2.5-Coder-32B-Instruct": {
+    "DeepSeek-R1 (0528)": {
       "overall": {
         "rank": 6,
         "LLM Judge": "31.1"
@@ -118,7 +118,7 @@
         "LLM Judge": "31.0"
       }
     },
-    "Claude-Sonnet-4": {
+    "Qwen3-235B-A22B": {
       "overall": {
         "rank": 8,
         "LLM Judge": "30.9"
@@ -129,24 +129,24 @@
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 8,
+        "LLM Judge": "30.9"
+      }
+    },
+    "Claude-Sonnet-4": {
+      "overall": {
+        "rank": 9,
+        "LLM Judge": "30.9"
+      },
+      "reasoning-Direct": {
+        "rank": 9,
+        "LLM Judge": "30.9"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 9,
         "LLM Judge": "30.9"
       }
     },
     "DeepSeek-V3": {
-      "overall": {
-        "rank": 9,
-        "LLM Judge": "30.9"
-      },
-      "reasoning-Direct": {
-        "rank": 9,
-        "LLM Judge": "30.9"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "LLM Judge": "30.9"
-      }
-    },
-    "Qwen3-235B-A22B": {
       "overall": {
         "rank": 10,
         "LLM Judge": "30.9"
@@ -188,7 +188,7 @@
         "LLM Judge": "30.6"
       }
     },
-    "Claude-3.7-Sonnet": {
+    "Qwen3-32B": {
       "overall": {
         "rank": 13,
         "LLM Judge": "30.4"
@@ -199,24 +199,24 @@
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 13,
+        "LLM Judge": "30.4"
+      }
+    },
+    "Claude-3.7-Sonnet": {
+      "overall": {
+        "rank": 14,
+        "LLM Judge": "30.4"
+      },
+      "reasoning-Direct": {
+        "rank": 14,
+        "LLM Judge": "30.4"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 14,
         "LLM Judge": "30.4"
       }
     },
     "GPT-3.5-turbo-0125": {
-      "overall": {
-        "rank": 14,
-        "LLM Judge": "30.4"
-      },
-      "reasoning-Direct": {
-        "rank": 14,
-        "LLM Judge": "30.4"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 14,
-        "LLM Judge": "30.4"
-      }
-    },
-    "Qwen3-32B": {
       "overall": {
         "rank": 15,
         "LLM Judge": "30.4"

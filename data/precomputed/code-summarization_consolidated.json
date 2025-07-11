@@ -636,7 +636,7 @@
         "LLM Judge": "95.1"
       },
       "modality-Java-C": {
-        "rank": 2,
+        "rank": 3,
         "LLM Judge": "95.6"
       },
       "reasoning-Direct": {
@@ -760,11 +760,11 @@
         "LLM Judge": "95.1"
       },
       "modality-Java-C_reasoning-Direct": {
-        "rank": 2,
+        "rank": 3,
         "LLM Judge": "95.6"
       },
       "modality-Java-C_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
+        "rank": 3,
         "LLM Judge": "95.6"
       }
     },
@@ -794,7 +794,7 @@
         "LLM Judge": "95.1"
       },
       "modality-Ruby": {
-        "rank": 4,
+        "rank": 3,
         "LLM Judge": "94.3"
       },
       "modality-JavaScript": {
@@ -830,7 +830,7 @@
         "LLM Judge": "95.9"
       },
       "modality-Java-C": {
-        "rank": 3,
+        "rank": 2,
         "LLM Judge": "95.6"
       },
       "reasoning-Direct": {
@@ -882,11 +882,11 @@
         "LLM Judge": "95.1"
       },
       "modality-Ruby_reasoning-Direct": {
-        "rank": 4,
+        "rank": 3,
         "LLM Judge": "94.3"
       },
       "modality-Ruby_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "LLM Judge": "94.3"
       },
       "modality-JavaScript_reasoning-Direct": {
@@ -954,11 +954,11 @@
         "LLM Judge": "95.9"
       },
       "modality-Java-C_reasoning-Direct": {
-        "rank": 3,
+        "rank": 2,
         "LLM Judge": "95.6"
       },
       "modality-Java-C_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
+        "rank": 2,
         "LLM Judge": "95.6"
       }
     },
@@ -988,7 +988,7 @@
         "LLM Judge": "94.1"
       },
       "modality-Ruby": {
-        "rank": 3,
+        "rank": 4,
         "LLM Judge": "94.3"
       },
       "modality-JavaScript": {
@@ -1076,11 +1076,11 @@
         "LLM Judge": "94.1"
       },
       "modality-Ruby_reasoning-Direct": {
-        "rank": 3,
+        "rank": 4,
         "LLM Judge": "94.3"
       },
       "modality-Ruby_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
+        "rank": 4,
         "LLM Judge": "94.3"
       },
       "modality-JavaScript_reasoning-Direct": {
@@ -1562,11 +1562,11 @@
         "LLM Judge": "92.6"
       },
       "modality-CPP": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.3"
       },
       "modality-C#": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.0"
       },
       "modality-Ruby": {
@@ -1642,19 +1642,19 @@
         "LLM Judge": "92.6"
       },
       "modality-CPP_reasoning-Direct": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.3"
       },
       "modality-CPP_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.3"
       },
       "modality-C#_reasoning-Direct": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.0"
       },
       "modality-C#_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 7,
         "LLM Judge": "90.0"
       },
       "modality-Ruby_reasoning-Direct": {
@@ -1756,7 +1756,7 @@
         "LLM Judge": "91.4"
       },
       "modality-CPP": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.3"
       },
       "modality-C#": {
@@ -1836,11 +1836,11 @@
         "LLM Judge": "91.4"
       },
       "modality-CPP_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.3"
       },
       "modality-CPP_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.3"
       },
       "modality-C#_reasoning-Direct": {
@@ -1946,7 +1946,7 @@
         "LLM Judge": "83.6"
       },
       "modality-C": {
-        "rank": 9,
+        "rank": 10,
         "LLM Judge": "87.4"
       },
       "modality-CPP": {
@@ -2022,11 +2022,11 @@
         "LLM Judge": "83.6"
       },
       "modality-C_reasoning-Direct": {
-        "rank": 9,
+        "rank": 10,
         "LLM Judge": "87.4"
       },
       "modality-C_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
+        "rank": 10,
         "LLM Judge": "87.4"
       },
       "modality-CPP_reasoning-Direct": {
@@ -2148,7 +2148,7 @@
         "LLM Judge": "86.9"
       },
       "modality-C#": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.0"
       },
       "modality-Ruby": {
@@ -2232,11 +2232,11 @@
         "LLM Judge": "86.9"
       },
       "modality-C#_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.0"
       },
       "modality-C#_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "LLM Judge": "90.0"
       },
       "modality-Ruby_reasoning-Direct": {
@@ -2334,7 +2334,7 @@
         "LLM Judge": "85.2"
       },
       "modality-C": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.0"
       },
       "modality-CPP": {
@@ -2410,11 +2410,11 @@
         "LLM Judge": "85.2"
       },
       "modality-C_reasoning-Direct": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.0"
       },
       "modality-C_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.0"
       },
       "modality-CPP_reasoning-Direct": {
@@ -2528,7 +2528,7 @@
         "LLM Judge": "84.4"
       },
       "modality-C": {
-        "rank": 10,
+        "rank": 9,
         "LLM Judge": "87.4"
       },
       "modality-CPP": {
@@ -2552,7 +2552,7 @@
         "LLM Judge": "86.8"
       },
       "modality-PHP": {
-        "rank": 15,
+        "rank": 14,
         "LLM Judge": "84.7"
       },
       "modality-Go": {
@@ -2564,11 +2564,11 @@
         "LLM Judge": "86.1"
       },
       "modality-Python-JavaScript": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.2"
       },
       "modality-Java-JavaScript": {
-        "rank": 14,
+        "rank": 13,
         "LLM Judge": "85.5"
       },
       "modality-Python-C": {
@@ -2604,11 +2604,11 @@
         "LLM Judge": "84.4"
       },
       "modality-C_reasoning-Direct": {
-        "rank": 10,
+        "rank": 9,
         "LLM Judge": "87.4"
       },
       "modality-C_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 9,
         "LLM Judge": "87.4"
       },
       "modality-CPP_reasoning-Direct": {
@@ -2652,11 +2652,11 @@
         "LLM Judge": "86.8"
       },
       "modality-PHP_reasoning-Direct": {
-        "rank": 15,
+        "rank": 14,
         "LLM Judge": "84.7"
       },
       "modality-PHP_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
+        "rank": 14,
         "LLM Judge": "84.7"
       },
       "modality-Go_reasoning-Direct": {
@@ -2676,19 +2676,19 @@
         "LLM Judge": "86.1"
       },
       "modality-Python-JavaScript_reasoning-Direct": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.2"
       },
       "modality-Python-JavaScript_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 12,
         "LLM Judge": "87.2"
       },
       "modality-Java-JavaScript_reasoning-Direct": {
-        "rank": 14,
+        "rank": 13,
         "LLM Judge": "85.5"
       },
       "modality-Java-JavaScript_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 13,
         "LLM Judge": "85.5"
       },
       "modality-Python-C_reasoning-Direct": {
@@ -2762,7 +2762,7 @@
         "LLM Judge": "85.7"
       },
       "modality-Java-JavaScript": {
-        "rank": 13,
+        "rank": 14,
         "LLM Judge": "85.5"
       },
       "modality-Python-C": {
@@ -2878,11 +2878,11 @@
         "LLM Judge": "85.7"
       },
       "modality-Java-JavaScript_reasoning-Direct": {
-        "rank": 13,
+        "rank": 14,
         "LLM Judge": "85.5"
       },
       "modality-Java-JavaScript_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 14,
         "LLM Judge": "85.5"
       },
       "modality-Python-C_reasoning-Direct": {
@@ -2916,7 +2916,7 @@
         "LLM Judge": "86.8"
       },
       "modality-C": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.0"
       },
       "modality-CPP": {
@@ -2952,7 +2952,7 @@
         "LLM Judge": "87.1"
       },
       "modality-Python-JavaScript": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.2"
       },
       "modality-Java-JavaScript": {
@@ -2992,11 +2992,11 @@
         "LLM Judge": "86.8"
       },
       "modality-C_reasoning-Direct": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.0"
       },
       "modality-C_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.0"
       },
       "modality-CPP_reasoning-Direct": {
@@ -3064,11 +3064,11 @@
         "LLM Judge": "87.1"
       },
       "modality-Python-JavaScript_reasoning-Direct": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.2"
       },
       "modality-Python-JavaScript_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 13,
         "LLM Judge": "87.2"
       },
       "modality-Java-JavaScript_reasoning-Direct": {
@@ -3134,7 +3134,7 @@
         "LLM Judge": "86.6"
       },
       "modality-PHP": {
-        "rank": 14,
+        "rank": 15,
         "LLM Judge": "84.7"
       },
       "modality-Go": {
@@ -3234,11 +3234,11 @@
         "LLM Judge": "86.6"
       },
       "modality-PHP_reasoning-Direct": {
-        "rank": 14,
+        "rank": 15,
         "LLM Judge": "84.7"
       },
       "modality-PHP_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 15,
         "LLM Judge": "84.7"
       },
       "modality-Go_reasoning-Direct": {
@@ -3716,7 +3716,7 @@
         "LLM Judge": "82.0"
       },
       "modality-PHP": {
-        "rank": 21,
+        "rank": 20,
         "LLM Judge": "80.3"
       },
       "modality-Go": {
@@ -3816,11 +3816,11 @@
         "LLM Judge": "82.0"
       },
       "modality-PHP_reasoning-Direct": {
-        "rank": 21,
+        "rank": 20,
         "LLM Judge": "80.3"
       },
       "modality-PHP_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 20,
         "LLM Judge": "80.3"
       },
       "modality-Go_reasoning-Direct": {
@@ -4298,7 +4298,7 @@
         "LLM Judge": "80.2"
       },
       "modality-PHP": {
-        "rank": 20,
+        "rank": 21,
         "LLM Judge": "80.3"
       },
       "modality-Go": {
@@ -4398,11 +4398,11 @@
         "LLM Judge": "80.2"
       },
       "modality-PHP_reasoning-Direct": {
-        "rank": 20,
+        "rank": 21,
         "LLM Judge": "80.3"
       },
       "modality-PHP_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 21,
         "LLM Judge": "80.3"
       },
       "modality-Go_reasoning-Direct": {

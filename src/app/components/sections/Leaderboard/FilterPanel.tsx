@@ -2,6 +2,15 @@ import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/app/components/ui/card";
 import { TaskType, Ability } from '@/lib/types';
+import { getAvailableFilters, filterConditions, getDataNoteText } from '@/lib/filterConfig';
+import {
+  FilterGroup,
+  DifficultyToggle,
+  DataNote,
+  VulnerabilityMetrics,
+  OverallInfo,
+  AdvancedFiltersToggle
+} from './FilterComponents';
 
 interface FilterPanelProps {
   currentTask: TaskType;
@@ -24,396 +33,115 @@ const FilterPanel: FC<FilterPanelProps> = ({
   availableLLMJudges,
   isDarkMode
 }) => {
-  // Define tasks that have difficulty-based results
-  const tasksWithDifficulty = ['overall', 'code generation', 'code translation', 'input prediction', 'output prediction'];
-  
-  // State for toggling advanced filters visibility
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(true);
 
-  // Check if there are any filters available (with more than one option)
-  const hasFilters = (String(currentTask) !== 'overall') && (String(currentTask) !== 'interaction-2-code') && (
-    taskAbilities[currentTask].dataset.length > 1 ||
-    (taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 1) ||
-    ((currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 1) ||
-    (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][])
-      .some(([key, values]) => !['dataset', 'llmJudges', 'framework'].includes(key) && values.length > 1)
-  );
+  // Get available filters for current task
+  const availableFilters = getAvailableFilters(currentTask, taskAbilities, availableLLMJudges);
+  const hasFilters = filterConditions.hasAvailableFilters(currentTask, taskAbilities, availableLLMJudges);
 
-  // All filters section (now under Advanced Filters)
-  const renderAllFilters = () => (
+  // Early return for interaction-2-code task
+  if (currentTask === 'interaction-2-code') {
+    return <div className="mt-8 mb-8" />;
+  }
+
+  // Filter section renderer
+  const FiltersSection = () => (
     <motion.div
       initial={{ height: 'auto', opacity: 1 }}
-      animate={{ height: showAdvancedFilters ? 'auto' : 0, opacity: showAdvancedFilters ? 1 : 0 }}
+      animate={{ 
+        height: showAdvancedFilters ? 'auto' : 0, 
+        opacity: showAdvancedFilters ? 1 : 0 
+      }}
       transition={{ duration: 0.3 }}
       className="overflow-hidden"
     >
-      <div className={`${showAdvancedFilters ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` : ''} pt-6 mt-2`}>
+      <div className={`${
+        showAdvancedFilters 
+          ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` 
+          : ''
+      } pt-6 mt-2`}>
         <div className="flex flex-row flex-wrap gap-8 pb-4">
-          {/* Dataset Filter */}
-          {(String(currentTask) !== 'overall') && (String(currentTask) !== 'mr-web') && taskAbilities[currentTask].dataset.length > 1 && (
-            <div className="flex flex-col space-y-3 mb-2">
-              <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Dataset</p>
-              <div className="inline-flex flex-wrap gap-2">
-                {taskAbilities[currentTask].dataset.map((value: string) => {
-                  // Determine if the button should be disabled
-                  // Only disable non-HackerRank datasets for code translation when showing by difficulty
-                  const isDisabled = showByDifficulty && currentTask === 'code translation' && value !== 'HackerRank';
-                  // If showing by difficulty for code translation, auto-select HackerRank
-                  const isSelected = selectedAbilities.dataset?.includes(value) || 
-                                    (showByDifficulty && currentTask === 'code translation' && value === 'HackerRank');
-                  
-                  return (
-                  <motion.button
-                    key={value}
-                      whileHover={!isDisabled ? { scale: 1.02 } : {}}
-                      whileTap={!isDisabled ? { scale: 0.98 } : {}}
-                      onClick={() => !isDisabled && handleAbilityChange('dataset', value)}
-                      disabled={isDisabled}
-                    className={`
-                      px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                        ${isSelected
-                        ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                          : isDarkMode 
-                              ? `bg-[#151d2a] ${isDisabled ? 'text-slate-500 cursor-not-allowed opacity-60' : 'text-slate-300 hover:bg-blue-900/20'} border border-slate-700/50` 
-                              : `bg-slate-50 ${isDisabled ? 'text-slate-400 cursor-not-allowed opacity-60' : 'text-slate-600 hover:bg-slate-100'} border border-slate-200`
-                      }
-                    `}
-                  >
-                    {value}
-                  </motion.button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Framework Filter - for code-web task */}
-          {(String(currentTask) !== 'overall') && taskAbilities[currentTask].framework && taskAbilities[currentTask].framework.length > 1 && (
-            <div className="flex flex-col space-y-3 mb-2">
-              <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>Framework</p>
-              <div className="inline-flex flex-wrap gap-2">
-                {taskAbilities[currentTask].framework.map((value: string) => (
-                  <motion.button
-                    key={value}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleAbilityChange('framework', value)}
-                    className={`
-                      px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                      ${selectedAbilities.framework?.includes(value)
-                        ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                        : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                      }
-                    `}
-                  >
-                    {value}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* LLM Judge Filter */}
-          {(String(currentTask) !== 'overall') && (currentTask === 'code summarization' || currentTask === 'code review') && availableLLMJudges.length > 1 && (
-            <div className="flex flex-col space-y-3 mb-2">
-              <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>LLM Judge</p>
-              <div className="inline-flex flex-wrap gap-2">
-                {availableLLMJudges.map((judge: string) => (
-                  <motion.button
-                    key={judge}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleAbilityChange('llmJudges', judge)}
-                    className={`
-                      px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                      ${selectedAbilities.llmJudges?.includes(judge)
-                        ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                        : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                      }
-                    `}
-                  >
-                    {judge}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {/* Other Filters */}
-          {(String(currentTask) !== 'overall') && (Object.entries(taskAbilities[currentTask]) as [keyof Ability, string[]][]).
-            filter(([key]) => !['dataset', 'llmJudges', 'framework'].includes(key)).
-            map(([key, values]) => (
-              values.length > 1 && (
-                <div key={key} className="flex flex-col space-y-3 mb-2">
-                  <div className="flex flex-col space-y-1">
-                    <p className={`text-2xl font-semibold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
-                      {currentTask === 'mr-web' && key === 'knowledge' ? 'Task' : 
-                       currentTask === 'mr-web' && key === 'reasoning' ? 'Method' :
-                       key.charAt(0).toUpperCase() + key.slice(1)}
-                    </p>
-                    {/* Show restriction notice for modality in code summarization/review */}
-                    {(currentTask === 'code summarization' || currentTask === 'code review') && key === 'modality' && (
-                      <p className={`text-sm ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
-                        ⚠️ Maximum 2 modalities can be selected for optimal precomputed results
-                      </p>
-                    )}
-                  </div>
-                  <div className="inline-flex flex-wrap gap-2">
-                    {values.map((value: string) => {
-                      // Helper function to get display text for mr-web method values
-                      const getDisplayText = (val: string): string => {
-                        if (currentTask === 'mr-web' && key === 'reasoning') {
-                          switch (val) {
-                            case 'CoT':
-                              return 'Chain-of-Thought (CoT)';
-                            case 'ZS':
-                              return 'Zero-Shot (ZS)';
-                            case 'SR':
-                              return 'Self-Refine (SR)';
-                            default:
-                              return val;
-                          }
-                        }
-                        return val;
-                      };
-
-                      // Check if this is a modality filter for restricted tasks
-                      const isModalityForRestrictedTask = (currentTask === 'code summarization' || currentTask === 'code review') && 
-                                                           (key === 'modality');
-                      const currentlySelected = selectedAbilities[key] || [];
-                      const isCurrentlySelected = currentlySelected.includes(value);
-                      
-                      // For modality in code summarization/review: restrict to max 2 selections
-                      const isModalityRestricted = isModalityForRestrictedTask && 
-                                                   !isCurrentlySelected && 
-                                                   currentlySelected.length >= 2;
-
-                      const handleClick = () => {
-                        if (isModalityRestricted) {
-                          // Show a brief visual feedback that the limit is reached
-                          return;
-                        }
-                        handleAbilityChange(key, value);
-                      };
-
-                      return (
-                      <motion.button
-                        key={value}
-                        whileHover={!isModalityRestricted ? { scale: 1.02 } : {}}
-                        whileTap={!isModalityRestricted ? { scale: 0.98 } : {}}
-                        onClick={handleClick}
-                        disabled={isModalityRestricted}
-                        title={isModalityRestricted ? 'Maximum 2 modalities can be selected for this task' : undefined}
-                        className={`
-                          px-6 py-3 text-center transition-all text-lg font-medium rounded-lg
-                          ${isCurrentlySelected
-                            ? isDarkMode ? 'bg-blue-900 text-blue-100 border border-blue-700' : 'bg-blue-500 text-white border border-blue-400'
-                            : isModalityRestricted
-                              ? isDarkMode ? 'bg-[#151d2a] text-slate-500 border border-slate-700/30 cursor-not-allowed opacity-50' : 'bg-slate-50 text-slate-400 border border-slate-200 cursor-not-allowed opacity-50'
-                              : isDarkMode ? 'bg-[#151d2a] text-slate-300 hover:bg-blue-900/20 border border-slate-700/50' : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
-                          }
-                        `}
-                      >
-                          {getDisplayText(value)}
-                      </motion.button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )
-            ))}
+          {availableFilters.map((filter) => (
+            <FilterGroup
+              key={filter.key}
+              filter={filter}
+              currentTask={currentTask}
+              showByDifficulty={showByDifficulty}
+              selectedAbilities={selectedAbilities}
+              taskAbilities={taskAbilities}
+              availableLLMJudges={availableLLMJudges}
+              handleAbilityChange={handleAbilityChange}
+              isDarkMode={isDarkMode}
+            />
+          ))}
         </div>
       </div>
     </motion.div>
   );
 
-  const renderInfoSection = () => (
-    <div>
-      {/* Notes for overall view */}
-      {currentTask === 'overall' && (
-        <div className="text-xl text-center mb-4">
-          <p className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-            Showing overall results based on the average of all available metrics across tasks.
-          </p>
-        </div>
-      )}
-    </div>
-  );
-
-  // For interaction-2-code, return just the spacing without any content
-  if (currentTask === 'interaction-2-code') {
-    return <div className="mt-8 mb-8" />;
-  }
-
-  return (
-    <Card className={`w-full max-w-7xl mx-auto mt-8 mb-8 ${isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'} backdrop-blur-sm border ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'} rounded-xl shadow-sm`}>
-      <CardContent className="p-6">
-        {hasFilters ? (
-          <>
-            {/* Render info section (difficulty toggle, etc.) */}
-            {renderInfoSection()}
-            
-            {/* Advanced filters toggle */}
-            {hasFilters && (
-              <div className="flex justify-between items-center mb-4">
-                <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
-                  Advanced Filters
-                </h2>
-                <button
-                  onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className={`p-2 rounded-lg transition-colors ${
-                    isDarkMode 
-                      ? 'bg-slate-800 hover:bg-slate-700 text-slate-300' 
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
-                  }`}
-                  aria-expanded={showAdvancedFilters}
-                  aria-label={showAdvancedFilters ? 'Collapse advanced filters' : 'Expand advanced filters'}
-                >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className={`h-6 w-6 transition-transform ${showAdvancedFilters ? 'rotate-180' : 'rotate-0'}`} 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </div>
-            )}
-            
-            {/* Render filters */}
-            {renderAllFilters()}
-            
-            {/* Information section - moved to bottom */}
-            <div className={`${hasFilters ? 'mt-6' : 'mt-0'} pt-4 ${hasFilters ? (isDarkMode ? 'border-t border-slate-700/50' : 'border-t border-slate-200') : ''}`}>
-      {/* Flex container with note and difficulty toggle, aligned to the right */}
+  // Information section renderer
+  const InfoSection = () => (
+    <div className={`${hasFilters ? 'mt-6' : 'mt-0'} pt-4 ${
+      hasFilters 
+        ? (isDarkMode ? 'border-t border-slate-700/50' : 'border-t border-slate-200') 
+        : ''
+    }`}>
       <div className="flex justify-end mb-4">
         <div className="flex flex-col items-end space-y-2">
-          {/* Note about "-" symbol - show for most tasks except specified ones */}
-          {!['code-web', 'mr-web', 'interaction-2-code', 'overall'].includes(currentTask) && (
-            <div className={`flex items-center gap-2 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-500'
-            }`}>
-              <span className="font-mono">—</span>
-              <span className="text-lg">
-                {currentTask === 'code-robustness' 
-                  ? 'Denotes data is not tested since it is already tested in other fields.'
-                  : 'Denotes data is not yet available.'
-                }
-              </span>
-            </div>
+          {/* Data availability note */}
+          {filterConditions.shouldShowDataNote(currentTask) && (
+            <DataNote currentTask={currentTask} isDarkMode={isDarkMode} />
           )}
 
-          {/* Difficulty toggle - show for tasks that support it */}
-          {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
-            <div className="flex items-center">
-              <input 
-                type="checkbox" 
-                id="show-difficulty"
-                checked={showByDifficulty}
-                onChange={() => setShowByDifficulty(!showByDifficulty)}
-                className={`form-checkbox h-5 w-5 ${
-                  isDarkMode 
-                    ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
-                    : 'text-blue-600 bg-slate-100 border-slate-300'
-                } rounded focus:ring-blue-500`} 
-              />
-              <label 
-                htmlFor="show-difficulty"
-                className={`ml-2 text-l cursor-pointer ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                }`}
-              >
-                Show results by difficulty
-              </label>
-            </div>
+          {/* Difficulty toggle */}
+          {filterConditions.shouldShowDifficultyToggle(currentTask) && (
+            <DifficultyToggle
+              currentTask={currentTask}
+              showByDifficulty={showByDifficulty}
+              setShowByDifficulty={setShowByDifficulty}
+              isDarkMode={isDarkMode}
+            />
           )}
         </div>
       </div>
 
-      {/* Vulnerability Detection Metrics Explanation */}
-      {currentTask === 'vulnerability detection' && (
-        <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-C:</span>
-                <span>Correctly predicts both elements</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-V:</span>
-                <span>Both predicted as vulnerable</span>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-B:</span>
-                <span>Both predicted as benign</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-R:</span>
-                <span>Inversely predicted labels</span>
-              </div>
-            </div>
-          </div>
-          <div className="text-xs italic text-right">
-            Note: P-C + P-V + P-B + P-R = 100%
-          </div>
-        </div>
+      {/* Vulnerability detection metrics */}
+      {filterConditions.shouldShowVulnerabilityMetrics(currentTask) && (
+        <VulnerabilityMetrics isDarkMode={isDarkMode} />
       )}
     </div>
+  );
+
+  return (
+    <Card className={`w-full max-w-7xl mx-auto mt-8 mb-8 ${
+      isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'
+    } backdrop-blur-sm border ${
+      isDarkMode ? 'border-slate-700/50' : 'border-slate-200'
+    } rounded-xl shadow-sm`}>
+      <CardContent className="p-6">
+        {/* Overall info section */}
+        {filterConditions.shouldShowOverallInfo(currentTask) && (
+          <OverallInfo isDarkMode={isDarkMode} />
+        )}
+
+        {hasFilters ? (
+          <>
+            {/* Advanced filters toggle */}
+            <AdvancedFiltersToggle
+              showAdvancedFilters={showAdvancedFilters}
+              setShowAdvancedFilters={setShowAdvancedFilters}
+              isDarkMode={isDarkMode}
+            />
+            
+            {/* Render all filters */}
+            <FiltersSection />
+            
+            {/* Information section */}
+            <InfoSection />
           </>
         ) : (
-          // Render just the info section for tasks without filters
-          <>
-            {renderInfoSection()}
-            
-            {/* Flex container with note and difficulty toggle, aligned to the right */}
-            <div className="flex justify-end mb-4">
-              <div className="flex flex-col items-end space-y-2">
-                {/* Note about "-" symbol - show for most tasks except specified ones */}
-                {!['code-web', 'mr-web', 'interaction-2-code', 'overall'].includes(currentTask) && (
-                  <div className={`flex items-center gap-2 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                  }`}>
-                    <span className="font-mono">—</span>
-                    <span className="text-lg">
-                      {currentTask === 'code-robustness' 
-                        ? 'Denotes data is not tested since it is already tested in other fields.'
-                        : 'Denotes data is not yet available.'
-                      }
-                    </span>
-                  </div>
-                )}
-
-                {/* Difficulty toggle - show for tasks that support it */}
-                {tasksWithDifficulty.includes(currentTask) && currentTask !== 'overall' && (
-                  <div className="flex items-center">
-                    <input 
-                      type="checkbox" 
-                      id="show-difficulty"
-                      checked={showByDifficulty}
-                      onChange={() => setShowByDifficulty(!showByDifficulty)}
-                      className={`form-checkbox h-5 w-5 ${
-                        isDarkMode 
-                          ? 'text-blue-600 bg-[#151d2a] border-slate-700' 
-                          : 'text-blue-600 bg-slate-100 border-slate-300'
-                      } rounded focus:ring-blue-500`} 
-                    />
-                    <label 
-                      htmlFor="show-difficulty"
-                      className={`ml-2 text-l cursor-pointer ${
-                        isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                      }`}
-                    >
-                      Show results by difficulty
-                    </label>
-                  </div>
-                )}
-              </div>
-            </div>
-          </>
+          /* Render just the info section for tasks without filters */
+          <InfoSection />
         )}
       </CardContent>
     </Card>

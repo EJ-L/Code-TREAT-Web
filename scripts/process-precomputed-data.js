@@ -647,6 +647,12 @@ async function processCombination(task, combination) {
     
     // Save to file
     const taskDir = path.join(__dirname, '..', 'data', 'precomputed', task.replace(/\s+/g, '-'));
+    
+    // Ensure the task directory exists
+    if (!fs.existsSync(taskDir)) {
+      fs.mkdirSync(taskDir, { recursive: true });
+    }
+    
     const filePath = path.join(taskDir, combination.filename);
     
     fs.writeFileSync(filePath, JSON.stringify(output, null, 2));

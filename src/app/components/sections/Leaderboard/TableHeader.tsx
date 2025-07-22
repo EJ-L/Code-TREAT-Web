@@ -76,7 +76,7 @@ const TableHeader: FC<TableHeaderProps> = ({
       } ${stickyStyles} ${bgColor} ${
         (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
           ? 'py-4' : ''
-      }`}
+      } ${isDarkMode ? 'border-b border-white/20' : 'border-b border-black/20'}`}
       style={{ 
         width: columnWidth,
         transition: resizingColumn ? 'none' : 'width 0.1s ease',

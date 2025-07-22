@@ -55,17 +55,18 @@ const TableCell: FC<TableCellProps> = ({
   const stickyStyles = getStickyStyles(header.key);
   // Get the background color based on whether the cell is in a sticky column and row index
   const getRowBackgroundColor = () => {
-    // Only apply pink background to the model column itself
+    // Only apply pink background to the model column itself for data leakage
     if (header.key === 'model' && value) {
       const modelNameToCheck = String(value);
       if (hasDataLeakage(modelNameToCheck, currentTask)) {
-        // Pink background for potentially leaked models - only for model column
-        return isDarkMode ? 'bg-pink-900/40' : 'bg-pink-200';
+        // Pink background for potentially leaked models - use high opacity in dark mode for better visibility
+        return isDarkMode ? 'bg-pink-900' : 'bg-pink-200';
       }
     }
     
-    // For sticky columns, we need to explicitly manage the background color
+    // For sticky columns, we need to explicitly manage the background color to match the row
     if (header.key === 'rank' || header.key === 'model') {
+      // Normal alternating row colors
       return isDarkMode 
         ? rowIndex % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]'
         : rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-100';
@@ -88,7 +89,7 @@ const TableCell: FC<TableCellProps> = ({
       } ${stickyStyles} ${rowBgColor} ${
         (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
           ? 'py-4' : ''
-      }`}
+      } ${isDarkMode ? 'border-b border-white/10' : 'border-b border-black/10'}`}
       style={{ 
         width: `${columnWidths[header.key] || 100}px`,
         transition: resizingColumn ? 'none' : 'width 0.1s ease',

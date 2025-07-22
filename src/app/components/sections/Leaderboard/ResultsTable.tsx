@@ -70,6 +70,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
         }
         ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
         transition-colors
+        ${isDarkMode ? 'border-b border-white/10' : 'border-b border-black/10'}
       `}>
         {getTableHeaders(currentTask).map(header => {
           const value = result[header.key];
@@ -234,7 +235,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
             <table style={{ 
               width: '100%', 
               tableLayout: 'fixed',
-              borderCollapse: 'collapse'
+              borderCollapse: 'separate',
+              borderSpacing: '0'
             }}>
               <thead style={{ backgroundColor: isDarkMode ? '#1e293b' : '#f1f5f9' }}>
                 <tr>

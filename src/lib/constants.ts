@@ -106,11 +106,19 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'GPT-4-turbo-2024-04-09': '2024-04-09',
   'GPT-4o-2024-11-20': '2024-11-20',
   'GPT-4.1-2025-04-14': '2025-04-14', // Future model for testing
+  'GPT-4o-20240806': '2024-08-06',
   'o3-mini (Med)': '2025-04-16',
+  'o3-mini (High)': '2025-04-16',
+  'o3-mini (Low)': '2025-04-16',
   'o4-mini (Med)': '2025-04-16',
+  'o4-mini (High)': '2025-04-16',
+  'o4-mini (Low)': '2025-04-16',
+  'GPT-4o': '2023-04-11',
+  'Gpt-4o-mini': '2024-07-18',
 
   // Claude Models
   'Claude-3.5-Sonnet-20241022': '2024-10-22',
+  'Claude-3.5-Sonnet-20240620': '2024-06-20',
   'Claude-Sonnet-4': '2025-05-22',
   'Claude-3.7-Sonnet': '2025-02-24',
   'Claude-3.5-Haiku-20241022': '2024-10-22',
@@ -118,15 +126,27 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // Llama Models
   'Llama-3.3-70B-Instruct': '2024-12-06',
   'Llama-3.1-70B-Instruct': '2024-07-23',
+  'Llama-3.1-405B-Instruct': '2024-07-23',
   'Llama-3.1-8B-Instruct': '2024-07-23',
   'Llama-4-Scout-17B-16E-Instruct': '2025-04-05',
+  'Llama-3.2-90B-Vision': '2025-09-25',
+  'Llama-3.2-11B-Vision': '2025-09-25',
 
   // Qwen Models
   'Qwen3-235B-A22B': '2025-04-29',
   'Qwen3-30B-A3B': '2025-04-29',
   'Qwen3-32B': '2025-04-29',
   'Qwen2.5-72B-Instruct': '2024-09-19',
+  'Qwen2.5-7B-Instruct': '2024-09-19',
+  'Qwen2.5-32B-Instruct': '2024-09-19',
+  'Qwen2.5-14B-Instruct': '2024-09-19',
   'Qwen2.5-Coder-32B-Instruct': '2024-09-19',
+  'QwQ-32B': '2025-03-10',
+  'Qwen-72B': '2023-11-30',
+  'Qwen-7B': '2023-11-30',
+  'Qwen2.5-VL-72B-Instruct': '2025-01-28',
+  'Qwen2.5-VL-7B-Instruct': '2025-01-28',
+  'Qwen2.5-VL-3B-Instruct': '2025-01-28',
 
   // Grok Models
   'Grok-3-Mini (High)': '2025-02-17',
@@ -139,7 +159,14 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // Gemini Models
   'Gemma-3-27B-Instruct': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
-  
+  'Gemini-2.0-Flash': '2024-11-20',
+  'Gemini-1.5-Pro': '2024-09-24',
+  'Gemini-1.5-Flash': '2024-09-24',
+
+  // Pixtral Models
+  'Pixtral-Large-Instruct-124B': '2024-11-18',
+  'Pixtral-12B-2409': '2024-09-17',
+
 };
 
 // Dataset release dates (YYYY-MM-DD format)

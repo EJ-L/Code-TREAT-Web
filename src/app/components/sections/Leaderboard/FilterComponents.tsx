@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TaskType, Ability } from '@/lib/types';
 import { FilterConfig } from '@/lib/filterConfig';
@@ -164,35 +164,132 @@ interface VulnerabilityMetricsProps {
   isDarkMode: boolean;
 }
 
-export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode }) => (
-  <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-    <div className="grid grid-cols-2 gap-4">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-C:</span>
-          <span>Correctly predicts both elements</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-V:</span>
-          <span>Both predicted as vulnerable</span>
-        </div>
-      </div>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-B:</span>
-          <span>Both predicted as benign</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-R:</span>
-          <span>Inversely predicted labels</span>
-        </div>
+// Reusable Data Leakage Warning Component
+interface DataLeakageWarningProps {
+  taskType: TaskType;
+  isDarkMode: boolean;
+}
+
+export const DataLeakageWarning: FC<DataLeakageWarningProps> = ({ taskType, isDarkMode }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  // Get formatted dataset release date for the task
+  const getFormattedDatasetReleaseDate = (task: TaskType): string => {
+    // Convert YYYY-MM-DD format to readable format
+    const formatDate = (dateStr: string): string => {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    };
+
+    const dates: Record<TaskType, string> = {
+      'vulnerability detection': '2024-03-27',
+      'code generation': '2021-07-07',
+      'code translation': '2021-07-07',
+      'input prediction': '2021-07-07',
+      'output prediction': '2021-07-07',
+      'code summarization': '2023-12-01',
+      'code review': '2023-12-01',
+      'code-robustness': '2023-06-15',
+      'code-web': '2024-09-15',
+      'interaction-2-code': '2024-11-03',
+      'mr-web': '2024-12-13',
+      'overall': '2021-07-07'
+    };
+    
+    const dateStr = dates[task];
+    return dateStr ? formatDate(dateStr) : 'dataset release date';
+  };
+
+  const releaseDate = getFormattedDatasetReleaseDate(taskType);
+
+  return (
+    <div className={`mb-4 p-3 rounded-lg border transition-colors duration-200 ${
+      isDarkMode 
+        ? 'border-pink-800 bg-pink-900/20' 
+        : 'border-pink-200 bg-pink-50'
+    }`}>
+      <div className="flex items-center gap-2 text-sm">
+        <span className={`transition-colors duration-200 ${
+          isDarkMode ? 'text-pink-300' : 'text-pink-700'
+        }`}>
+          Model in <span className="font-semibold text-pink-500">pink</span> means it has{' '}
+          <span 
+            className="relative cursor-help underline decoration-dotted underline-offset-4 hover:decoration-solid transition-all duration-200"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            data leakage
+            {showTooltip && (
+              <div className={`absolute z-50 w-96 p-4 rounded-lg shadow-lg border text-sm leading-relaxed transition-all duration-200
+                ${isDarkMode 
+                  ? 'bg-slate-800 border-slate-600 text-slate-200' 
+                  : 'bg-white border-gray-200 text-gray-700'
+                } 
+                bottom-full left-1/2 transform -translate-x-1/2 mb-2
+                before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2
+                before:border-4 before:border-transparent
+                ${isDarkMode 
+                  ? 'before:border-t-slate-800' 
+                  : 'before:border-t-white'
+                }`}
+              >
+                <div className="font-semibold mb-3 text-base">Data Leakage Definition</div>
+                <div className="space-y-2">
+                  <p>
+                    Data leakage occurs when a <strong>model's release time</strong> is later than the 
+                    leaderboard dataset release time (<strong>{releaseDate}</strong>).
+                  </p>
+                  <p>
+                    This means the model may have used the dataset for training, 
+                    potentially inflating its performance scores and making comparisons unfair.
+                  </p>
+                </div>
+              </div>
+            )}
+          </span>
+          {' '}problem
+        </span>
       </div>
     </div>
-    <div className="text-xs italic text-right">
-      Note: P-C + P-V + P-B + P-R = 100%
+  );
+};
+
+export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode }) => {
+  return (
+    <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+      {/* Metrics explanation */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-C:</span>
+            <span>Correctly predicts both elements</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-V:</span>
+            <span>Both predicted as vulnerable</span>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-B:</span>
+            <span>Both predicted as benign</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>P-R:</span>
+            <span>Inversely predicted labels</span>
+          </div>
+        </div>
+      </div>
+      <div className="text-xs italic text-right">
+        Note: P-C + P-V + P-B + P-R = 100%
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface OverallInfoProps {
   isDarkMode: boolean;

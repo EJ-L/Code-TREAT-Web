@@ -121,12 +121,6 @@ function getDisplayText(value: string, key: keyof Ability, task: TaskType): stri
 }
 
 function getFilterRestrictions(key: keyof Ability, task: TaskType) {
-  if ((task === 'code summarization' || task === 'code review') && key === 'modality') {
-    return {
-      limit: 2,
-      message: '⚠️ Maximum 2 modalities can be selected for optimal precomputed results'
-    };
-  }
   return null;
 }
 
@@ -143,13 +137,16 @@ export const filterConditions = {
     TASKS_WITH_DIFFICULTY.includes(task) && task !== 'overall',
   
   shouldShowDataNote: (task: TaskType) =>
-    !['code-web', 'mr-web', 'interaction-2-code', 'overall'].includes(task),
+    !['code-web', 'mr-web', 'interaction-2-code', 'overall', 'vulnerability detection'].includes(task),
   
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',
   
   shouldShowOverallInfo: (task: TaskType) =>
-    task === 'overall'
+    task === 'overall',
+  
+  shouldShowDataLeakageWarning: (task: TaskType) =>
+    task === 'vulnerability detection'
 };
 
 // Data note text

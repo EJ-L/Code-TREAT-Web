@@ -9,7 +9,8 @@ import {
   DataNote,
   VulnerabilityMetrics,
   OverallInfo,
-  AdvancedFiltersToggle
+  AdvancedFiltersToggle,
+  DataLeakageWarning
 } from './FilterComponents';
 
 interface FilterPanelProps {
@@ -104,6 +105,13 @@ const FilterPanel: FC<FilterPanelProps> = ({
           )}
         </div>
       </div>
+
+      {/* Data leakage warning for applicable tasks */}
+      {filterConditions.shouldShowDataLeakageWarning && filterConditions.shouldShowDataLeakageWarning(currentTask) && (
+        <div className="mb-4">
+          <DataLeakageWarning taskType={currentTask} isDarkMode={isDarkMode} />
+        </div>
+      )}
 
       {/* Vulnerability detection metrics */}
       {filterConditions.shouldShowVulnerabilityMetrics(currentTask) && (

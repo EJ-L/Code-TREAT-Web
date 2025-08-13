@@ -42,7 +42,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     width: 'w-36',
     description: 'Pass@1 is the probability of passing a given problem in one attempt.',
     defaultWidth: 110,
-    minWidth: 80
+    minWidth: 100
   },
   'pass@3': {
     key: 'pass@3',
@@ -50,7 +50,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     width: 'w-36',
     description: 'Pass@3 is the probability of passing a given problem in three attempts.',
     defaultWidth: 110,
-    minWidth: 80
+    minWidth: 100
   },
   'pass@5': {
     key: 'pass@5',
@@ -58,7 +58,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     width: 'w-36',
     description: 'Pass@5 is the probability of passing a given problem in five attempts.',
     defaultWidth: 110,
-    minWidth: 80
+    minWidth: 100
   },
   // Difficulty-based pass metrics
   'easy_pass@1': {
@@ -188,7 +188,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-C',
     width: 'w-16',
     description: 'Correctly predicts both elements',
-    defaultWidth: 135,
+    defaultWidth: 140,
     minWidth: 60
   },
   'P-V': {
@@ -196,7 +196,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-V',
     width: 'w-16',
     description: 'Both predicted as vulnerable',
-    defaultWidth: 135,
+    defaultWidth: 140,
     minWidth: 60
   },
   'P-B': {
@@ -204,7 +204,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-B',
     width: 'w-16',
     description: 'Both predicted as benign',
-    defaultWidth: 135,
+    defaultWidth: 140,
     minWidth: 60
   },
   'P-R': {
@@ -212,7 +212,7 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     label: 'P-R',
     width: 'w-16',
     description: 'Inversely predicted labels',
-    defaultWidth: 135,
+    defaultWidth: 140,
     minWidth: 60
   },
   // Code-web metrics
@@ -386,13 +386,14 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'overall': 800,
       'code summarization': 250,
       'code review': 250,
-      'code generation': 320,
+      'code generation': 250,
+      'code translation': 250,
+      'input prediction': 250,
+      'output prediction': 250,
       'vulnerability detection': 350,
       'code-web': 360,
       'interaction-2-code': 220,
       'code-robustness': 400,
-      'output prediction': 380,
-      'input prediction': 380,
       'mr-web': 300
     },
     minWidth: 300
@@ -402,6 +403,16 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
     taskSpecific: {
       'code summarization': 370,
       'code review': 370
+    },
+    minWidth: 100
+  },
+  'pass@1': {
+    default: 110,
+    taskSpecific: {
+      'code generation': 370,
+      'code translation': 370,
+      'input prediction': 370,
+      'output prediction': 370
     },
     minWidth: 100
   },
@@ -559,8 +570,7 @@ export function getMinColumnWidth(task: TaskType, headerKey: string): number {
 
 export function getStickyColumnTasks(): TaskType[] {
   return [
-    'code generation', 'code translation', 'input prediction', 
-    'output prediction', 'vulnerability detection', 'code-robustness',
+    'vulnerability detection', 'code-robustness',
     'interaction-2-code'
   ];
 }

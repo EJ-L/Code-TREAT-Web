@@ -351,10 +351,12 @@ interface OverallInfoProps {
 }
 
 export const OverallInfo: FC<OverallInfoProps> = ({ isDarkMode }) => (
-  <div className="text-xl text-center mb-4">
-    <p className={`${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-      Showing overall results based on the average of all available metrics across tasks.
-    </p>
+  <div className="w-full mb-3">
+    <div className="flex items-center justify-center h-4">
+      <p className={`${isDarkMode ? 'text-slate-200' : 'text-slate-700'} text-xl md:text-lg text-center leading-relaxed m-0`}>
+        Showing overall results based on the average of all available metrics across tasks.
+      </p>
+    </div>
   </div>
 );
 

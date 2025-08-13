@@ -19,7 +19,7 @@ const STYLE_CONFIG = {
     filterLabel: (isDark: boolean) => `text-2xl font-semibold ${isDark ? 'text-blue-200' : 'text-blue-600'}`,
     restriction: (isDark: boolean) => `text-sm ${isDark ? 'text-amber-400' : 'text-amber-600'}`,
     dataNote: (isDark: boolean) => `flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`,
-    difficultyLabel: (isDark: boolean) => `ml-2 text-l cursor-pointer ${isDark ? 'text-slate-300' : 'text-slate-700'}`
+    difficultyLabel: (isDark: boolean) => `ml-2 text-l cursor-pointer ${isDark ? 'text-slate-400' : 'text-slate-500'}`
   },
   checkbox: (isDark: boolean) => `form-checkbox h-5 w-5 ${
     isDark 

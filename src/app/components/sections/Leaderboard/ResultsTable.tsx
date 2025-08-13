@@ -211,7 +211,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               fontWeight: '500'
             }}>Loading results...</span>
           </div>
-        ) : results.length === 0 ? (
+        ) : sortedResults.length === 0 ? (
           // Show no results message when not loading but no data
           <div style={{
             display: 'flex',

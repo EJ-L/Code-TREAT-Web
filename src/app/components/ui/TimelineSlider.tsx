@@ -47,6 +47,21 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
       month: 'short'
     });
   };
+
+  // Helpers for month-level constraints
+  const isSameYearMonth = (a: Date, b: Date) => (
+    a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()
+  );
+
+  const getPrevMonthDate = (reference: Date) => {
+    // Last day of previous month
+    return new Date(reference.getFullYear(), reference.getMonth(), 0);
+  };
+
+  const getNextMonthDate = (reference: Date) => {
+    // First day of next month
+    return new Date(reference.getFullYear(), reference.getMonth() + 1, 1);
+  };
   
   // Handle mouse down on handles
   const handleMouseDown = useCallback((type: 'start' | 'end') => (e: React.MouseEvent) => {
@@ -66,12 +81,22 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
     if (isDragging === 'start') {
       // Ensure start date doesn't exceed end date
       const maxStartDate = new Date(Math.min(tempEndDate.getTime(), maxDate.getTime()));
-      const clampedDate = new Date(Math.max(minDate.getTime(), Math.min(newDate.getTime(), maxStartDate.getTime())));
+      let clampedDate = new Date(Math.max(minDate.getTime(), Math.min(newDate.getTime(), maxStartDate.getTime())));
+      // Enforce at least 1-month gap (different year-month)
+      if (isSameYearMonth(clampedDate, tempEndDate)) {
+        const prevMonth = getPrevMonthDate(tempEndDate);
+        clampedDate = new Date(Math.max(minDate.getTime(), prevMonth.getTime()));
+      }
       setTempStartDate(clampedDate);
     } else if (isDragging === 'end') {
       // Ensure end date doesn't go below start date
       const minEndDate = new Date(Math.max(tempStartDate.getTime(), minDate.getTime()));
-      const clampedDate = new Date(Math.max(minEndDate.getTime(), Math.min(newDate.getTime(), maxDate.getTime())));
+      let clampedDate = new Date(Math.max(minEndDate.getTime(), Math.min(newDate.getTime(), maxDate.getTime())));
+      // Enforce at least 1-month gap (different year-month)
+      if (isSameYearMonth(tempStartDate, clampedDate)) {
+        const nextMonth = getNextMonthDate(tempStartDate);
+        clampedDate = new Date(Math.min(maxDate.getTime(), nextMonth.getTime()));
+      }
       setTempEndDate(clampedDate);
     }
   }, [isDragging, minDate, maxDate, tempStartDate, tempEndDate, percentageToDate]);

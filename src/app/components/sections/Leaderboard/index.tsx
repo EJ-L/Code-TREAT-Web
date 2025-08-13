@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { FilterOptions, TaskType, Ability } from '@/lib/types';
-import { MODEL_PUBLISH_DATES } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, canonicalizeModelName } from '@/lib/constants';
 import TaskSelector from './TaskSelector';
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
@@ -158,11 +158,11 @@ interface LeaderboardProps {
     
     // Apply timeline filtering first
     let filtered = results;
-    if (timelineRange && currentTask !== 'overall') {
+    if (timelineRange) {
       filtered = results.filter(result => {
         if (!result.model) return true; // Include if no model name
-        
-        const modelReleaseDate = MODEL_PUBLISH_DATES[result.model];
+        const canonicalName = canonicalizeModelName(result.model);
+        const modelReleaseDate = MODEL_PUBLISH_DATES[canonicalName] || MODEL_PUBLISH_DATES[result.model];
         if (!modelReleaseDate) return true; // Include if no release date available
         
         const releaseDate = new Date(modelReleaseDate);
@@ -217,8 +217,7 @@ interface LeaderboardProps {
           // Get the list of tasks to aggregate (excluding overall itself)
           const tasksToAggregate: TaskType[] = [
             'code generation', 'code translation', 'code summarization', 'code review',
-            'input prediction', 'output prediction', 'vulnerability detection',
-            'code-web', 'interaction-2-code', 'code-robustness', 'mr-web'
+            'input prediction', 'output prediction', 'vulnerability detection'
           ];
           
           // Load results from all tasks
@@ -226,8 +225,13 @@ interface LeaderboardProps {
             tasksToAggregate.map(async (task) => {
               try {
                 const taskFilterOptions = { ...filterOptions, tasks: [task] };
-                const results = await getPrecomputedResults(task, taskFilterOptions);
-                return { task, results: results || [] };
+                let results = await getPrecomputedResults(task, taskFilterOptions);
+                results = results || [];
+                // Exclude Code Summarization Human Baseline from overall aggregation
+                if (task === 'code summarization') {
+                  results = results.filter((r: any) => r.model !== 'Code Summarization Human Baseline');
+                }
+                return { task, results };
               } catch (error) {
                 debug.warn(`Failed to load data for task ${task}:`, error);
                 return { task, results: [] };
@@ -245,7 +249,7 @@ interface LeaderboardProps {
           
           allTaskResults.forEach(({ task, results }) => {
             results.forEach((result: any) => {
-              const modelName = result.model;
+              const modelName = canonicalizeModelName(result.model);
               if (!modelName) return;
               
               if (!modelAggregates.has(modelName)) {

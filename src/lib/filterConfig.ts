@@ -149,7 +149,7 @@ export const filterConditions = {
     task === 'vulnerability detection',
     
   shouldShowTimeline: (task: TaskType) =>
-    task !== 'overall'
+    true
 };
 
 // Data note text

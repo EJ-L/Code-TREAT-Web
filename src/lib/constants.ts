@@ -99,6 +99,21 @@ export function getModelUrl(modelName: string): string | undefined {
   return undefined;
 }
 
+// Canonical model name aliases to unify inconsistent naming across data sources
+export const MODEL_NAME_ALIASES: Record<string, string> = {
+  'Llama3.3-70B-Instruct': 'Llama-3.3-70B-Instruct'
+};
+
+/**
+ * Normalize a model name to a canonical key used elsewhere (URLs, publish dates)
+ */
+export function canonicalizeModelName(modelName: string): string {
+  if (!modelName) return modelName;
+  // Only apply explicit alias mapping; do not trim or fuzzy-match to preserve version semantics
+  if (MODEL_NAME_ALIASES[modelName]) return MODEL_NAME_ALIASES[modelName];
+  return modelName;
+}
+
 // Model publish dates (YYYY-MM-DD format)
 export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // OpenAI Models

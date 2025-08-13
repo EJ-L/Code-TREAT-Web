@@ -4,6 +4,7 @@ import { TaskType } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl, hasDataLeakage } from '@/lib/constants';
+import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
 
 interface ResultsTableProps {
   currentTask: TaskType;
@@ -63,15 +64,19 @@ const ResultsTable: FC<ResultsTableProps> = ({
       const modelName = result.model || result.modelName || '';
       
       return (
-      <tr key={index} className={`
-        ${isDarkMode 
-          ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
-          : index % 2 === 0 ? 'bg-white' : 'bg-slate-100'
-        }
-        ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
-        transition-colors
-        ${isDarkMode ? 'border-b border-white/10' : 'border-b border-black/10'}
-      `}>
+      <AnimatedTableRow 
+        key={index} 
+        index={index}
+        className={`
+          ${isDarkMode 
+            ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
+            : index % 2 === 0 ? 'bg-white' : 'bg-slate-100'
+          }
+          ${isDarkMode ? 'hover:bg-opacity-90' : 'hover:bg-opacity-80'}
+          transition-colors
+          ${isDarkMode ? 'border-b border-white/10' : 'border-b border-black/10'}
+        `}
+      >
         {getTableHeaders(currentTask).map(header => {
           const value = result[header.key];
           const modelUrl = header.key === 'model' ? getModelUrl(String(value)) : undefined;
@@ -100,7 +105,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             />
           );
         })}
-      </tr>
+      </AnimatedTableRow>
       );
     });
   };

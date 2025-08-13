@@ -1,9 +1,12 @@
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { FilterOptions, TaskType, Ability } from '@/lib/types';
+import { MODEL_PUBLISH_DATES } from '@/lib/constants';
 import TaskSelector from './TaskSelector';
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
+import { TimelineFilter } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
+import { AnimatedResultsWrapper } from '@/app/components/ui/AnimatedResultsWrapper';
 import { getAvailableLLMJudges as getSummarizationJudges } from '@/lib/tasks/codeSummarization';
 import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview';
 
@@ -32,6 +35,7 @@ import {
   handleSortChange
 } from '@/lib/leaderboardHelpers';
 import { debug } from '@/lib/debug';
+import { filterConditions } from '@/lib/filterConfig';
 
 interface LeaderboardProps {
   taskAbilities: Record<TaskType, Ability>;
@@ -40,6 +44,7 @@ interface LeaderboardProps {
 
   const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
   const [currentTask, setCurrentTask] = useState<TaskType>('overall');
+  const [timelineRange, setTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -114,6 +119,17 @@ interface LeaderboardProps {
     });
   };
 
+  // Handle timeline range changes
+  const handleTimelineChange = useCallback((startDate: Date, endDate: Date) => {
+    debug.leaderboard('Timeline changed:', { startDate, endDate });
+    setTimelineRange({ start: startDate, end: endDate });
+  }, []);
+
+  // Reset timeline when task or difficulty mode changes
+  useEffect(() => {
+    setTimelineRange(null);
+  }, [currentTask, showByDifficulty]);
+
   // Load LLM judges for tasks that support them
   useEffect(() => {
     const loadLLMJudges = async () => {
@@ -136,13 +152,29 @@ interface LeaderboardProps {
     loadLLMJudges();
   }, [currentTask, results]);
 
-  // Memoize sorted results using new sorting function
+  // Memoize filtered and sorted results
   const sortedResults = useMemo(() => {
     if (!results.length) return [];
-    const sorted = sortResults(results, sortConfig);
+    
+    // Apply timeline filtering first
+    let filtered = results;
+    if (timelineRange && currentTask !== 'overall') {
+      filtered = results.filter(result => {
+        if (!result.model) return true; // Include if no model name
+        
+        const modelReleaseDate = MODEL_PUBLISH_DATES[result.model];
+        if (!modelReleaseDate) return true; // Include if no release date available
+        
+        const releaseDate = new Date(modelReleaseDate);
+        return releaseDate >= timelineRange.start && releaseDate <= timelineRange.end;
+      });
+      debug.leaderboard(`Timeline filtered: ${filtered.length}/${results.length} results`);
+    }
+    
+    const sorted = sortResults(filtered, sortConfig);
     debug.leaderboard(`Sorted ${sorted.length} results. Sample sorted:`, sorted.slice(0, 3));
     return sorted;
-  }, [results, sortConfig]);
+  }, [results, sortConfig, timelineRange, currentTask]);
 
   // Handle sorting using new helper
   const handleSort = useCallback((key: string) => {
@@ -456,37 +488,57 @@ interface LeaderboardProps {
           showByDifficulty={showByDifficulty}
           setShowByDifficulty={setShowByDifficulty}
           isDarkMode={isDarkMode}
+          timelineRange={timelineRange}
+          onTimelineChange={handleTimelineChange}
         />
 
-        <ResultsTable 
+        {/* Timeline Filter */}
+        {filterConditions.shouldShowTimeline(currentTask) && (
+          <div className={`w-full max-w-7xl mx-auto mt-16 mb-12`}>
+            <TimelineFilter 
+              taskType={currentTask}
+              isDarkMode={isDarkMode}
+              timelineRange={timelineRange}
+              onTimelineChange={handleTimelineChange}
+            />
+          </div>
+        )}
+
+        <AnimatedResultsWrapper
+          timelineRange={timelineRange}
           currentTask={currentTask}
-          results={results}
-          sortedResults={sortedResults}
-          isLoading={isLoading}
-          sortConfig={sortConfig}
-          setIsComparisonModalOpen={setIsComparisonModalOpen}
-          getTableHeaders={getFilteredTableHeadersMemo}
-          columnWidths={columnWidths}
-          resizingColumn={resizingColumn}
-          csvData={csvData}
-          csvFilename={csvFilename}
-          handleSort={handleSort}
-          handleResizeStart={handleResizeStart}
-          getContentWidth={getContentWidth}
-          isColumnCentered={isColumnCentered}
-          getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}
-          getStickyLeftPosition={(key: string) => getStickyLeftPosition(currentTask, key, columnWidths)}
-          getBackgroundColor={(key: string, isHeaderCell?: boolean) => 
-            getBackgroundColor(currentTask, key, isDarkMode, isHeaderCell)
-          }
-          getColumnAlignment={getColumnAlignment}
-          getNumericStyles={getNumericStyles}
-          truncateText={truncateText}
-          getTaskSpecificColumnWidth={(task: TaskType, key: string) => 
-            getTaskSpecificColumnWidth(task, key)
-          }
-          isDarkMode={isDarkMode}
-        />
+          resultCount={sortedResults.length}
+        >
+          <ResultsTable 
+            currentTask={currentTask}
+            results={results}
+            sortedResults={sortedResults}
+            isLoading={isLoading}
+            sortConfig={sortConfig}
+            setIsComparisonModalOpen={setIsComparisonModalOpen}
+            getTableHeaders={getFilteredTableHeadersMemo}
+            columnWidths={columnWidths}
+            resizingColumn={resizingColumn}
+            csvData={csvData}
+            csvFilename={csvFilename}
+            handleSort={handleSort}
+            handleResizeStart={handleResizeStart}
+            getContentWidth={getContentWidth}
+            isColumnCentered={isColumnCentered}
+            getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}
+            getStickyLeftPosition={(key: string) => getStickyLeftPosition(currentTask, key, columnWidths)}
+            getBackgroundColor={(key: string, isHeaderCell?: boolean) => 
+              getBackgroundColor(currentTask, key, isDarkMode, isHeaderCell)
+            }
+            getColumnAlignment={getColumnAlignment}
+            getNumericStyles={getNumericStyles}
+            truncateText={truncateText}
+            getTaskSpecificColumnWidth={(task: TaskType, key: string) => 
+              getTaskSpecificColumnWidth(task, key)
+            }
+            isDarkMode={isDarkMode}
+          />
+        </AnimatedResultsWrapper>
 
         {/* Comparison Modal */}
         <ModelComparisonModal 

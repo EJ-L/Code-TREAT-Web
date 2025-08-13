@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/app/components/ui/card";
 import { TaskType, Ability } from '@/lib/types';
@@ -10,7 +10,8 @@ import {
   VulnerabilityMetrics,
   OverallInfo,
   AdvancedFiltersToggle,
-  DataLeakageWarning
+  DataLeakageWarning,
+  TimelineFilter
 } from './FilterComponents';
 
 interface FilterPanelProps {
@@ -22,6 +23,8 @@ interface FilterPanelProps {
   setShowByDifficulty: (value: boolean) => void;
   availableLLMJudges: string[];
   isDarkMode: boolean;
+  timelineRange: { start: Date; end: Date } | null;
+  onTimelineChange: (startDate: Date, endDate: Date) => void;
 }
 
 const FilterPanel: FC<FilterPanelProps> = ({
@@ -32,9 +35,21 @@ const FilterPanel: FC<FilterPanelProps> = ({
   showByDifficulty,
   setShowByDifficulty,
   availableLLMJudges,
-  isDarkMode
+  isDarkMode,
+  timelineRange,
+  onTimelineChange
 }) => {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(true);
+  // Only animate when user explicitly opens the advanced filters via the toggle button
+  const animateOpenRef = useRef(false);
+
+  const handleToggleAdvanced = (value: boolean) => {
+    if (value) {
+      // User is opening; mark to animate this transition
+      animateOpenRef.current = true;
+    }
+    setShowAdvancedFilters(value);
+  };
 
   // Get available filters for current task
   const availableFilters = getAvailableFilters(currentTask, taskAbilities, availableLLMJudges);
@@ -48,34 +63,36 @@ const FilterPanel: FC<FilterPanelProps> = ({
   // Filter section renderer
   const FiltersSection = () => (
     <motion.div
-      initial={{ height: 'auto', opacity: 1 }}
-      animate={{ 
-        height: showAdvancedFilters ? 'auto' : 0, 
-        opacity: showAdvancedFilters ? 1 : 0 
-      }}
-      transition={{ duration: 0.3 }}
+      initial={animateOpenRef.current ? { height: 0, opacity: 0 } : false}
+      animate={showAdvancedFilters ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+      transition={{ duration: 0.25, ease: 'easeInOut' }}
+      onAnimationComplete={() => { animateOpenRef.current = false; }}
       className="overflow-hidden"
     >
-      <div className={`${
-        showAdvancedFilters 
-          ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` 
-          : ''
-      } pt-6 mt-2`}>
-        <div className="flex flex-row flex-wrap gap-8 pb-4">
-          {availableFilters.map((filter) => (
-            <FilterGroup
-              key={filter.key}
-              filter={filter}
-              currentTask={currentTask}
-              showByDifficulty={showByDifficulty}
-              selectedAbilities={selectedAbilities}
-              taskAbilities={taskAbilities}
-              availableLLMJudges={availableLLMJudges}
-              handleAbilityChange={handleAbilityChange}
-              isDarkMode={isDarkMode}
-            />
-          ))}
-        </div>
+      <div className={`${showAdvancedFilters ? `border-t ${isDarkMode ? 'border-slate-700/50' : 'border-slate-200'}` : ''} pt-6 mt-2`}>
+        <motion.div
+          initial={animateOpenRef.current ? { opacity: 0 } : false}
+          animate={{ opacity: showAdvancedFilters ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {showAdvancedFilters && (
+            <div className="flex flex-row flex-wrap gap-8 pb-4">
+              {availableFilters.map((filter) => (
+                <FilterGroup
+                  key={filter.key}
+                  filter={filter}
+                  currentTask={currentTask}
+                  showByDifficulty={showByDifficulty}
+                  selectedAbilities={selectedAbilities}
+                  taskAbilities={taskAbilities}
+                  availableLLMJudges={availableLLMJudges}
+                  handleAbilityChange={handleAbilityChange}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          )}
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -137,7 +154,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
             {/* Advanced filters toggle */}
             <AdvancedFiltersToggle
               showAdvancedFilters={showAdvancedFilters}
-              setShowAdvancedFilters={setShowAdvancedFilters}
+              setShowAdvancedFilters={handleToggleAdvanced}
               isDarkMode={isDarkMode}
             />
             

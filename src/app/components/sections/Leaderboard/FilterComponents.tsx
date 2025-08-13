@@ -1,8 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { TaskType, Ability } from '@/lib/types';
 import { FilterConfig } from '@/lib/filterConfig';
 import { FilterState, getStyles, getButtonAnimation, createFilterClickHandler } from '@/lib/filterHelpers';
+import { MODEL_PUBLISH_DATES } from '@/lib/constants';
+import { TimelineSlider } from '@/app/components/ui/TimelineSlider';
 
 // Simplified Filter Button Component
 interface FilterButtonProps {
@@ -287,6 +289,59 @@ export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode
       <div className="text-xs italic text-right">
         Note: P-C + P-V + P-B + P-R = 100%
       </div>
+    </div>
+  );
+};
+
+// Timeline Filter Component
+interface TimelineFilterProps {
+  taskType: TaskType;
+  isDarkMode: boolean;
+  timelineRange: { start: Date; end: Date } | null;
+  onTimelineChange: (startDate: Date, endDate: Date) => void;
+}
+
+export const TimelineFilter: FC<TimelineFilterProps> = ({ 
+  taskType, 
+  isDarkMode, 
+  timelineRange, 
+  onTimelineChange 
+}) => {
+  // Calculate date bounds once for the task
+  const dateBounds = useMemo(() => {
+    const modelDates = Object.values(MODEL_PUBLISH_DATES)
+      .map(dateStr => new Date(dateStr))
+      .filter(date => !isNaN(date.getTime()))
+      .sort((a, b) => a.getTime() - b.getTime());
+    
+    if (modelDates.length === 0) {
+      // Fallback dates if no model dates available
+      return {
+        min: new Date('2021-01-01'),
+        max: new Date()
+      };
+    }
+    
+    return {
+      min: modelDates[0],
+      max: modelDates[modelDates.length - 1]
+    };
+  }, []); // Only calculate once
+  
+  // Use the provided range or default to full range
+  const currentStart = timelineRange?.start || dateBounds.min;
+  const currentEnd = timelineRange?.end || dateBounds.max;
+  
+  return (
+    <div className="mb-6">
+      <TimelineSlider
+        minDate={dateBounds.min}
+        maxDate={dateBounds.max}
+        startDate={currentStart}
+        endDate={currentEnd}
+        onDateRangeChange={onTimelineChange}
+        isDarkMode={isDarkMode}
+      />
     </div>
   );
 };

@@ -146,7 +146,10 @@ export const filterConditions = {
     task === 'overall',
   
   shouldShowDataLeakageWarning: (task: TaskType) =>
-    task === 'vulnerability detection'
+    task === 'vulnerability detection',
+    
+  shouldShowTimeline: (task: TaskType) =>
+    task !== 'overall'
 };
 
 // Data note text

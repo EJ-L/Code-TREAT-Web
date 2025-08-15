@@ -350,15 +350,58 @@ interface OverallInfoProps {
   isDarkMode: boolean;
 }
 
-export const OverallInfo: FC<OverallInfoProps> = ({ isDarkMode }) => (
-  <div className="w-full mb-3">
-    <div className="flex items-center justify-center h-4">
-      <p className={`${isDarkMode ? 'text-slate-200' : 'text-slate-700'} text-xl md:text-lg text-center leading-relaxed m-0`}>
-        Showing overall results based on the average of all available metrics across tasks.
-      </p>
+export const OverallInfo: FC<OverallInfoProps> = ({ isDarkMode }) => {
+  const [showAverageDetails, setShowAverageDetails] = useState(false);
+  const [showTasksDetails, setShowTasksDetails] = useState(false);
+
+  return (
+    <div className="w-full mb-3">
+      <div className="flex items-center justify-center h-4">
+        <p className={`${isDarkMode ? 'text-slate-200' : 'text-slate-700'} text-xl md:text-lg text-center leading-relaxed m-0`}>
+          Showing overall results based on the{' '}
+          <span 
+            className="relative cursor-help underline decoration-dotted underline-offset-4 hover:decoration-solid transition-all duration-200 font-semibold"
+            onMouseEnter={() => setShowAverageDetails(true)}
+            onMouseLeave={() => setShowAverageDetails(false)}
+          >
+            average
+            {showAverageDetails && (
+              <span className={`absolute z-[9999] w-80 p-3 rounded-lg shadow-lg border text-sm leading-relaxed transition-all duration-200 left-1/2 transform -translate-x-1/2 top-full mt-2
+                ${isDarkMode 
+                  ? 'bg-slate-800 border-slate-600 text-slate-200' 
+                  : 'bg-white border-gray-300 text-gray-700'
+                }`}
+                style={{ left: '50%', transform: 'translateX(-50%)' }}
+              >
+                <span className="font-semibold">Average calculation:</span> For each model, we compute the arithmetic mean of all their metric scores across the included tasks.
+              </span>
+            )}
+          </span>
+          {' '}of all available metrics across{' '}
+          <span 
+            className="relative cursor-help underline decoration-dotted underline-offset-4 hover:decoration-solid transition-all duration-200 font-semibold"
+            onMouseEnter={() => setShowTasksDetails(true)}
+            onMouseLeave={() => setShowTasksDetails(false)}
+          >
+            tasks
+            {showTasksDetails && (
+              <span className={`absolute z-[9999] w-80 p-3 rounded-lg shadow-lg border text-sm leading-relaxed transition-all duration-200 left-1/2 transform -translate-x-1/2 top-full mt-2
+                ${isDarkMode 
+                  ? 'bg-slate-800 border-slate-600 text-slate-200' 
+                  : 'bg-white border-gray-300 text-gray-700'
+                }`}
+                style={{ left: '50%', transform: 'translateX(-50%)' }}
+              >
+                <span className="font-semibold">Included:</span> Code Generation, Code Translation, Code Summarization, Code Review, Input Prediction, Output Prediction, Vulnerability Detection.
+              </span>
+            )}
+          </span>
+          .
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface AdvancedFiltersToggleProps {
   showAdvancedFilters: boolean;

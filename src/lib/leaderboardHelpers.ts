@@ -2,7 +2,8 @@ import { TaskType } from './types';
 import { 
   getTaskHeaders, 
   getColumnWidth, 
-  getMinColumnWidth, 
+  getMinColumnWidth,
+  getMaxColumnWidth,
   shouldUseSticky,
   getDefaultSortDirection,
   HeaderConfig,
@@ -282,4 +283,7 @@ export function handleSortChange(
     key,
     direction: getDefaultSortDirection(key)
   };
-} 
+}
+
+// Export max column width helper
+export { getMaxColumnWidth } from './leaderboardConfig'; 

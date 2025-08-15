@@ -32,7 +32,8 @@ import {
   getDefaultSortConfig,
   supportsShowByDifficulty,
   sortResults,
-  handleSortChange
+  handleSortChange,
+  getMaxColumnWidth
 } from '@/lib/leaderboardHelpers';
 import { debug } from '@/lib/debug';
 import { filterConditions } from '@/lib/filterConfig';
@@ -61,6 +62,11 @@ interface LeaderboardProps {
   });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
+  
+  // Callback for when column widths change to trigger scroll check
+  const handleColumnWidthChange = useCallback(() => {
+    // This will be handled by ResultsTable's internal effects
+  }, []);
   
   const TASKS_PER_PAGE = 4;
 
@@ -399,6 +405,11 @@ interface LeaderboardProps {
     return getMinColumnWidth(currentTask, key) || 80;
   }, [currentTask]);
 
+  // Helper function to get maximum column width
+  const getMaxColumnWidthHelper = useCallback((key: string): number => {
+    return getMaxColumnWidth(currentTask, key) || 800;
+  }, [currentTask]);
+
   // Column resizing functionality
   const handleResizeStart = (e: React.MouseEvent, key: string) => {
     e.preventDefault();
@@ -407,10 +418,11 @@ interface LeaderboardProps {
     const startX = e.clientX;
     const startWidth = columnWidths[key] || 100;
     const minWidth = getMinColumnWidthHelper(key);
+    const maxWidth = getMaxColumnWidthHelper(key);
 
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const deltaX = moveEvent.clientX - startX;
-      const newWidth = Math.max(minWidth, startWidth + deltaX);
+      const newWidth = Math.min(maxWidth, Math.max(minWidth, startWidth + deltaX));
       
       setColumnWidths(prev => ({
           ...prev,
@@ -541,6 +553,7 @@ interface LeaderboardProps {
               getTaskSpecificColumnWidth(task, key)
             }
             isDarkMode={isDarkMode}
+            onColumnWidthChange={handleColumnWidthChange}
           />
         </AnimatedResultsWrapper>
 

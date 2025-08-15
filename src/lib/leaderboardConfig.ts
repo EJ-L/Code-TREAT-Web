@@ -15,6 +15,7 @@ export interface ColumnWidthConfig {
   default: number;
   taskSpecific?: Partial<Record<TaskType, number>>;
   minWidth?: number;
+  maxWidth?: number;
 }
 
 // Base header definitions (reusable across tasks)
@@ -378,7 +379,8 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
 export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   rank: {
     default: 150,
-    minWidth: 100
+    minWidth: 100,
+    maxWidth: 200
   },
   model: {
     default: 300,
@@ -396,7 +398,8 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'code-robustness': 400,
       'mr-web': 300
     },
-    minWidth: 300
+    minWidth: 300,
+    maxWidth: 600
   },
   'LLM Judge': {
     default: 160,
@@ -404,7 +407,8 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'code summarization': 370,
       'code review': 370
     },
-    minWidth: 100
+    minWidth: 100,
+    maxWidth: 500
   },
   'pass@1': {
     default: 110,
@@ -414,49 +418,56 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'input prediction': 370,
       'output prediction': 370
     },
-    minWidth: 100
+    minWidth: 100,
+    maxWidth: 500
   },
   'Compilation': {
     default: 200,
     taskSpecific: {
       'code-web': 180
     },
-    minWidth: 100
+    minWidth: 100,
+    maxWidth: 300
   },
   'CLIP': {
     default: 130,
     taskSpecific: {
       'interaction-2-code': 150
     },
-    minWidth: 80
+    minWidth: 80,
+    maxWidth: 250
   },
   'SSIM': {
     default: 110,
     taskSpecific: {
       'interaction-2-code': 150
     },
-    minWidth: 80
+    minWidth: 80,
+    maxWidth: 250
   },
   'Text': {
     default: 110,
     taskSpecific: {
       'interaction-2-code': 150
     },
-    minWidth: 80
+    minWidth: 80,
+    maxWidth: 250
   },
   'Position': {
     default: 150,
     taskSpecific: {
       'interaction-2-code': 210
     },
-    minWidth: 100
+    minWidth: 100,
+    maxWidth: 300
   },
   'Implement Rate': {
     default: 230,
     taskSpecific: {
       'interaction-2-code': 270
     },
-    minWidth: 150
+    minWidth: 150,
+    maxWidth: 400
   }
 };
 
@@ -566,6 +577,36 @@ export function getMinColumnWidth(task: TaskType, headerKey: string): number {
   
   // Fallback calculation
   return Math.max(40, (baseHeader?.label.length || 4) * 8 + 24);
+}
+
+export function getMaxColumnWidth(task: TaskType, headerKey: string): number {
+  const config = COLUMN_WIDTH_CONFIG[headerKey];
+  if (config?.maxWidth) {
+    return config.maxWidth;
+  }
+  
+  const baseHeader = BASE_HEADERS[headerKey];
+  if (baseHeader?.maxWidth) {
+    return baseHeader.maxWidth;
+  }
+  
+  // Special cases for model column
+  if (headerKey === 'model') {
+    if (task === 'overall') return 1200; // Allow larger width for overall
+    return 600; // Default max for model column
+  }
+  
+  // Default maximum widths based on column types
+  if (['pass@1', 'pass@3', 'pass@5', 'LLM Judge', 'CodeBLEU', 'Execution'].includes(headerKey)) {
+    return 500;
+  }
+  
+  if (['Accuracy', 'Precision', 'Recall', 'F1 Score'].includes(headerKey)) {
+    return 300;
+  }
+  
+  // Fallback: generous max width
+  return 400;
 }
 
 export function getStickyColumnTasks(): TaskType[] {

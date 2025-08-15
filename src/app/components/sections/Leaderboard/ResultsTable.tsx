@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect, useState, useCallback } from 'react';
 import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
 import { TaskType } from '@/lib/types';
 import TableHeader from './TableHeader';
@@ -30,6 +30,7 @@ interface ResultsTableProps {
   truncateText: (text: string, maxWidth: number) => string;
   getTaskSpecificColumnWidth: (task: TaskType, key: string) => string;
   isDarkMode: boolean;
+  onColumnWidthChange?: () => void;
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -55,8 +56,65 @@ const ResultsTable: FC<ResultsTableProps> = ({
   getNumericStyles,
   truncateText,
   getTaskSpecificColumnWidth,
-  isDarkMode
+  isDarkMode,
+  onColumnWidthChange
 }) => {
+  // Refs for measuring table dimensions
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
+  
+  // State for scrollbar visibility
+  const [needsHorizontalScroll, setNeedsHorizontalScroll] = useState(false);
+  
+  // Calculate total table width based on column widths
+  const calculateTableWidth = useCallback(() => {
+    const headers = getTableHeaders(currentTask);
+    return headers.reduce((total, header) => {
+      return total + (columnWidths[header.key] || 100);
+    }, 0);
+  }, [currentTask, columnWidths, getTableHeaders]);
+  
+  // Check if horizontal scrolling is needed
+  const checkScrollNeed = useCallback(() => {
+    if (!tableContainerRef.current) return;
+    
+    const containerWidth = tableContainerRef.current.clientWidth;
+    const tableWidth = calculateTableWidth();
+    
+    // Add some buffer for padding and borders (48px for padding, potential scrollbar, etc.)
+    const needsScroll = tableWidth > containerWidth - 48;
+    
+    // Only update state if the value has changed to avoid unnecessary re-renders
+    setNeedsHorizontalScroll(prev => prev !== needsScroll ? needsScroll : prev);
+  }, [calculateTableWidth]);
+  
+  // Effect to check scroll need when dimensions change
+  useEffect(() => {
+    checkScrollNeed();
+    // Notify parent component about column width changes
+    if (onColumnWidthChange) {
+      onColumnWidthChange();
+    }
+  }, [checkScrollNeed, columnWidths, currentTask, sortedResults.length, onColumnWidthChange]);
+  
+  // Effect to handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      checkScrollNeed();
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [checkScrollNeed]);
+  
+  // Effect to check scroll need after initial render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkScrollNeed();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [checkScrollNeed]);
   const renderResultsTable = () => {
     // Show results (this function is only called when we have data)
     return sortedResults.map((result, index) => {
@@ -182,11 +240,14 @@ const ResultsTable: FC<ResultsTableProps> = ({
       </div>
       
       {/* Table section */}
-      <div style={{ 
-        overflowX: 'auto', 
-        position: 'relative',
-        width: '100%'
-      }}>
+      <div 
+        ref={tableContainerRef}
+        style={{ 
+          overflowX: needsHorizontalScroll ? 'auto' : 'hidden',
+          position: 'relative',
+          width: '100%'
+        }}
+      >
         {isLoading ? (
           // Show loading state only when actually loading
           <div style={{
@@ -237,12 +298,16 @@ const ResultsTable: FC<ResultsTableProps> = ({
         ) : (
           // Show complete table when loaded and has data
           <div style={{ width: '100%' }}>
-            <table style={{ 
-              width: '100%', 
-              tableLayout: 'fixed',
-              borderCollapse: 'separate',
-              borderSpacing: '0'
-            }}>
+            <table 
+              ref={tableRef}
+              style={{ 
+                width: '100%', 
+                tableLayout: 'fixed',
+                borderCollapse: 'separate',
+                borderSpacing: '0',
+                minWidth: needsHorizontalScroll ? `${calculateTableWidth()}px` : '100%'
+              }}
+            >
               <thead style={{ backgroundColor: isDarkMode ? '#1e293b' : '#f1f5f9' }}>
                 <tr>
                   {getTableHeaders(currentTask).map((header) => (

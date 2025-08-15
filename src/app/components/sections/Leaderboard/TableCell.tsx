@@ -53,20 +53,27 @@ const TableCell: FC<TableCellProps> = ({
   const alignment = getColumnAlignment(header.key);
   const numericStyles = getNumericStyles(header.key);
   const stickyStyles = getStickyStyles(header.key);
+  // Check if current row has data leakage
+  const hasDataLeakageForRow = () => {
+    if (!value) return false;
+    // For model column, check the model name directly
+    if (header.key === 'model') {
+      const modelNameToCheck = String(value);
+      return hasDataLeakage(modelNameToCheck, currentTask);
+    }
+    // For rank column, we need to get the model name from the row data
+    // We'll pass this information via modelName prop
+    if (header.key === 'rank' && modelName) {
+      return hasDataLeakage(modelName, currentTask);
+    }
+    return false;
+  };
+
   // Get the background color based on whether the cell is in a sticky column and row index
   const getRowBackgroundColor = () => {
-    // Only apply pink background to the model column itself for data leakage
-    if (header.key === 'model' && value) {
-      const modelNameToCheck = String(value);
-      if (hasDataLeakage(modelNameToCheck, currentTask)) {
-        // Pink background for potentially leaked models - use high opacity in dark mode for better visibility
-        return isDarkMode ? 'bg-pink-900' : 'bg-pink-200';
-      }
-    }
-    
     // For sticky columns, we need to explicitly manage the background color to match the row
     if (header.key === 'rank' || header.key === 'model') {
-      // Normal alternating row colors
+      // Normal alternating row colors (no pink background here anymore)
       return isDarkMode 
         ? rowIndex % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]'
         : rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-100';
@@ -101,6 +108,8 @@ const TableCell: FC<TableCellProps> = ({
         isColumnCentered(header.key) ? 'justify-center' : 'justify-start'
       }`}>
         {(() => {
+          const shouldShowDataLeakageHighlight = hasDataLeakageForRow();
+          const content = (() => {
           if (value === null || value === undefined || value === '') {
             return '-';
           }
@@ -128,7 +137,11 @@ const TableCell: FC<TableCellProps> = ({
                 )}
                 <span 
                   title={modelName}
-                  className="text-ellipsis overflow-hidden whitespace-nowrap flex-1 min-w-0"
+                  className={`text-ellipsis overflow-hidden whitespace-nowrap flex-1 min-w-0 ${
+                    hasDataLeakageForRow() 
+                      ? isDarkMode ? 'text-pink-200' : 'text-pink-600'
+                      : ''
+                  }`}
                 >
                   {modelName}
                 </span>
@@ -191,6 +204,18 @@ const TableCell: FC<TableCellProps> = ({
           }
           
           return value;
+          })();
+
+          // For rank column, wrap content with pink text if data leakage detected
+          if (header.key === 'rank' && hasDataLeakageForRow()) {
+            return (
+              <span className={isDarkMode ? 'text-pink-200' : 'text-pink-600'}>
+                {content}
+              </span>
+            );
+          }
+
+          return content;
         })()}
       </div>
     </td>

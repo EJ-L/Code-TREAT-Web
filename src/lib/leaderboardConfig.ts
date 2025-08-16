@@ -585,11 +585,6 @@ export function getMaxColumnWidth(task: TaskType, headerKey: string): number {
     return config.maxWidth;
   }
   
-  const baseHeader = BASE_HEADERS[headerKey];
-  if (baseHeader?.maxWidth) {
-    return baseHeader.maxWidth;
-  }
-  
   // Special cases for model column
   if (headerKey === 'model') {
     if (task === 'overall') return 1200; // Allow larger width for overall

@@ -1,10 +1,11 @@
-import { FC, useRef, useEffect, useState, useCallback } from 'react';
+import { FC, useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
 import { TaskType } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl, hasDataLeakage } from '@/lib/constants';
 import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
+import ModelScatterChart from '@/app/components/ui/ModelScatterChart';
 
 interface ResultsTableProps {
   currentTask: TaskType;
@@ -65,6 +66,42 @@ const ResultsTable: FC<ResultsTableProps> = ({
   
   // State for scrollbar visibility
   const [needsHorizontalScroll, setNeedsHorizontalScroll] = useState(false);
+  
+  // State for view mode (table or scatter chart)
+  const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
+  
+  // State for current metric in scatter chart
+  const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
+  
+  // Get available numeric metrics for scatter chart
+  const availableMetrics = useMemo(() => {
+    if (!results || !results.length) return [];
+    
+    const headers = getTableHeaders(currentTask);
+    return headers
+      .filter(header => {
+        // Skip non-numeric columns
+        if (['rank', 'model', 'model_url', 'ability', 'task'].includes(header.key)) {
+          return false;
+        }
+        
+        // Check if this metric has numeric data in the results
+        const hasNumericData = results.some(result => {
+          const value = result[header.key];
+          return value !== '-' && value !== undefined && !isNaN(Number(value));
+        });
+        
+        return hasNumericData;
+      })
+      .map(header => header.key);
+  }, [results, currentTask, getTableHeaders]);
+  
+  // Set default metric when available metrics change
+  useEffect(() => {
+    if (availableMetrics.length > 0 && !currentScatterMetric) {
+      setCurrentScatterMetric(availableMetrics[0]);
+    }
+  }, [availableMetrics, currentScatterMetric]);
   
   // Calculate total table width based on column widths
   const calculateTableWidth = useCallback(() => {
@@ -212,6 +249,43 @@ const ResultsTable: FC<ResultsTableProps> = ({
             </button>
           )}
           
+          {/* Switch button - only show if there are metrics and it's not the overall task */}
+          {currentTask !== 'overall' && availableMetrics.length > 0 && (
+            <button
+              onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '8px',
+                color: 'white',
+                background: 'linear-gradient(to right, #f59e0b, #d97706)',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '16px',
+                fontWeight: '500'
+              }}
+            >
+              {viewMode === 'table' ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                  </svg>
+                  Chart View
+                </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clipRule="evenodd" />
+                  </svg>
+                  Table View
+                </>
+              )}
+            </button>
+          )}
+          
           <div style={{
             padding: '8px 16px',
             borderRadius: '8px',
@@ -295,7 +369,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               marginTop: '8px'
             }}>Try adjusting your filters</span>
           </div>
-        ) : (
+        ) : viewMode === 'table' ? (
           // Show complete table when loaded and has data
           <div style={{ width: '100%' }}>
             <table 
@@ -334,6 +408,18 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 {renderResultsTable()}
               </tbody>
             </table>
+          </div>
+        ) : (
+          // Show scatter chart view
+          <div style={{ width: '100%', padding: '20px' }}>
+            <ModelScatterChart
+              data={sortedResults}
+              currentMetric={currentScatterMetric}
+              availableMetrics={availableMetrics}
+              onMetricChange={setCurrentScatterMetric}
+              isDarkMode={isDarkMode}
+              currentTask={currentTask}
+            />
           </div>
         )}
       </div>

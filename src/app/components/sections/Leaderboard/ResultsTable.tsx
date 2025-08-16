@@ -6,6 +6,8 @@ import TableCell from './TableCell';
 import { getModelUrl, hasDataLeakage } from '@/lib/constants';
 import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
 import ModelScatterChart from '@/app/components/ui/ModelScatterChart';
+import { TimelineFilter } from './FilterComponents';
+import { filterConditions } from '@/lib/filterConfig';
 
 interface ResultsTableProps {
   currentTask: TaskType;
@@ -32,6 +34,8 @@ interface ResultsTableProps {
   getTaskSpecificColumnWidth: (task: TaskType, key: string) => string;
   isDarkMode: boolean;
   onColumnWidthChange?: () => void;
+  timelineRange: { start: Date; end: Date } | null;
+  onTimelineChange: (startDate: Date, endDate: Date) => void;
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -58,7 +62,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
   truncateText,
   getTaskSpecificColumnWidth,
   isDarkMode,
-  onColumnWidthChange
+  onColumnWidthChange,
+  timelineRange,
+  onTimelineChange
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -313,6 +319,18 @@ const ResultsTable: FC<ResultsTableProps> = ({
         </div>
       </div>
       
+      {/* Timeline Filter - positioned between title and table, only show in table view */}
+      {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
+        <div className="w-full max-w-7xl mx-auto mt-6 mb-6">
+          <TimelineFilter 
+            taskType={currentTask}
+            isDarkMode={isDarkMode}
+            timelineRange={timelineRange}
+            onTimelineChange={onTimelineChange}
+          />
+        </div>
+      )}
+      
       {/* Table section */}
       <div 
         ref={tableContainerRef}
@@ -419,6 +437,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               onMetricChange={setCurrentScatterMetric}
               isDarkMode={isDarkMode}
               currentTask={currentTask}
+              leaderboardTimelineRange={timelineRange}
             />
           </div>
         )}

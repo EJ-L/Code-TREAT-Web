@@ -508,17 +508,7 @@ interface LeaderboardProps {
           onTimelineChange={handleTimelineChange}
         />
 
-        {/* Timeline Filter */}
-        {filterConditions.shouldShowTimeline(currentTask) && (
-          <div className={`w-full max-w-7xl mx-auto mt-16 mb-12`}>
-            <TimelineFilter 
-              taskType={currentTask}
-              isDarkMode={isDarkMode}
-              timelineRange={timelineRange}
-              onTimelineChange={handleTimelineChange}
-            />
-          </div>
-        )}
+
 
         <AnimatedResultsWrapper
           timelineRange={timelineRange}
@@ -554,6 +544,8 @@ interface LeaderboardProps {
             }
             isDarkMode={isDarkMode}
             onColumnWidthChange={handleColumnWidthChange}
+            timelineRange={timelineRange}
+            onTimelineChange={handleTimelineChange}
           />
         </AnimatedResultsWrapper>
 

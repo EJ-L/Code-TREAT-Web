@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { 
   ScatterChart, 
   Scatter, 
@@ -35,6 +35,30 @@ interface ScatterDataPoint {
   isCoTModel: boolean;
 }
 
+interface ZoomState {
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+  isZoomed: boolean;
+}
+
+interface PanState {
+  isDragging: boolean;
+  startX: number;
+  startY: number;
+  lastX: number;
+  lastY: number;
+}
+
+interface AreaSelectState {
+  isSelecting: boolean;
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+}
+
 // Helper function to check if a model is using Chain-of-Thought
 const isCoTModel = (modelName: string): boolean => {
   return modelName.includes('(CoT)');
@@ -56,6 +80,28 @@ const ModelScatterChart = ({
   // Filter states for model types
   const [showCoTModels, setShowCoTModels] = useState(true);
   const [showRegularModels, setShowRegularModels] = useState(true);
+  
+  // Zoom and pan state
+  const [zoomState, setZoomState] = useState<ZoomState | null>(null);
+  const [panState, setPanState] = useState<PanState>({
+    isDragging: false,
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0
+  });
+  const [areaSelectState, setAreaSelectState] = useState<AreaSelectState>({
+    isSelecting: false,
+    startX: 0,
+    startY: 0,
+    endX: 0,
+    endY: 0
+  });
+  
+  // Refs for chart interaction
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<any>(null);
+  const [isCtrlPressed, setIsCtrlPressed] = useState(false);
 
   // Transform data for scatter plot
   const scatterData = useMemo(() => {
@@ -153,14 +199,26 @@ const ModelScatterChart = ({
     );
   }, [scatterData, graphTimelineRange]);
 
-  // Apply model type filtering on top of timeline filtering
+  // Apply model type filtering and zoom filtering on top of timeline filtering
   const filteredData = useMemo(() => {
-    return timelineFilteredData.filter(point => {
+    let data = timelineFilteredData.filter(point => {
       if (point.isCoTModel && !showCoTModels) return false;
       if (!point.isCoTModel && !showRegularModels) return false;
       return true;
     });
-  }, [timelineFilteredData, showCoTModels, showRegularModels]);
+
+    // Apply zoom filtering - only show points within the current zoom bounds
+    if (zoomState) {
+      data = data.filter(point => {
+        return point.x >= zoomState.xMin && 
+               point.x <= zoomState.xMax && 
+               point.y >= zoomState.yMin && 
+               point.y <= zoomState.yMax;
+      });
+    }
+
+    return data;
+  }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
 
   // Calculate date bounds for timeline slider
   const dateBounds = useMemo(() => {
@@ -182,33 +240,49 @@ const ModelScatterChart = ({
     };
   }, []);
 
-  // Calculate domain ranges based on filtered data
-  const { xDomain, yDomain } = useMemo(() => {
-    if (!filteredData.length) {
+  // Calculate domain ranges based on timeline filtered data (before zoom filtering) and zoom state
+  const { xDomain, yDomain, originalXDomain, originalYDomain } = useMemo(() => {
+    if (!timelineFilteredData.length) {
       return {
         xDomain: ['auto', 'auto'] as ['auto', 'auto'],
-        yDomain: [0, 100] as [number, number]
+        yDomain: [0, 100] as [number, number],
+        originalXDomain: ['auto', 'auto'] as ['auto', 'auto'],
+        originalYDomain: [0, 100] as [number, number]
       };
     }
     
-    // Show all filtered data with padding
-    const dates = filteredData.map(d => d.x);
-    const values = filteredData.map(d => d.y);
+    // Calculate original domain based on timeline filtered data (before zoom filtering)
+    // This ensures we have stable bounds regardless of zoom level
+    const allDataInTimeline = timelineFilteredData.filter(point => {
+      if (point.isCoTModel && !showCoTModels) return false;
+      if (!point.isCoTModel && !showRegularModels) return false;
+      return true;
+    });
+    
+    const dates = allDataInTimeline.map(d => d.x);
+    const values = allDataInTimeline.map(d => d.y);
     
     const padding = 90 * 24 * 60 * 60 * 1000; // 90 days padding
     const valuePadding = 5; // 5% padding for y values
     
+    const originalX = [
+      Math.min(...dates) - padding,
+      Math.max(...dates) + padding
+    ] as [number, number];
+    
+    const originalY = [
+      Math.max(0, Math.min(...values) - valuePadding),
+      Math.min(100, Math.max(...values) + valuePadding)
+    ] as [number, number];
+    
+    // Use zoom state if available, otherwise use original domain
     return {
-      xDomain: [
-        Math.min(...dates) - padding,
-        Math.max(...dates) + padding
-      ] as [number, number],
-      yDomain: [
-        Math.max(0, Math.min(...values) - valuePadding),
-        Math.min(100, Math.max(...values) + valuePadding)
-      ] as [number, number]
+      xDomain: zoomState ? [zoomState.xMin, zoomState.xMax] : originalX,
+      yDomain: zoomState ? [zoomState.yMin, zoomState.yMax] : originalY,
+      originalXDomain: originalX,
+      originalYDomain: originalY
     };
-  }, [filteredData]);
+  }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
 
   // Custom tooltip
   const CustomTooltip = ({ active, payload }: any) => {
@@ -275,6 +349,275 @@ const ModelScatterChart = ({
     return rounded.toString();
   };
 
+  // Keyboard event handlers for zoom
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Control') {
+        setIsCtrlPressed(true);
+      }
+      
+      // Check if chart container is focused or if we should respond to global keys
+      const isChartFocused = chartContainerRef.current?.contains(document.activeElement);
+      if (!isChartFocused) return;
+      
+      if (event.key === '+' || event.key === '=') {
+        event.preventDefault();
+        handleZoomIn();
+      } else if (event.key === '-') {
+        event.preventDefault();
+        handleZoomOut();
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === 'Control') {
+        setIsCtrlPressed(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  // Utility functions for zoom calculations
+  const handleZoomIn = useCallback((centerX?: number, centerY?: number) => {
+    const zoomFactor = 0.8; // Zoom in by 20%
+    
+    const currentXDomain = zoomState ? [zoomState.xMin, zoomState.xMax] : (originalXDomain as [number, number]);
+    const currentYDomain = zoomState ? [zoomState.yMin, zoomState.yMax] : (originalYDomain as [number, number]);
+    
+    const xRange = currentXDomain[1] - currentXDomain[0];
+    const yRange = currentYDomain[1] - currentYDomain[0];
+    
+    const newXRange = xRange * zoomFactor;
+    const newYRange = yRange * zoomFactor;
+    
+    // Use provided center or default to middle of current view
+    const xCenter = centerX || (currentXDomain[0] + currentXDomain[1]) / 2;
+    const yCenter = centerY || (currentYDomain[0] + currentYDomain[1]) / 2;
+    
+    setZoomState({
+      xMin: xCenter - newXRange / 2,
+      xMax: xCenter + newXRange / 2,
+      yMin: yCenter - newYRange / 2,
+      yMax: yCenter + newYRange / 2,
+      isZoomed: true
+    });
+  }, [zoomState, originalXDomain, originalYDomain]);
+
+  const handleZoomOut = useCallback((centerX?: number, centerY?: number) => {
+    const zoomFactor = 1.25; // Zoom out by 25%
+    
+    const currentXDomain = zoomState ? [zoomState.xMin, zoomState.xMax] : (originalXDomain as [number, number]);
+    const currentYDomain = zoomState ? [zoomState.yMin, zoomState.yMax] : (originalYDomain as [number, number]);
+    
+    const xRange = currentXDomain[1] - currentXDomain[0];
+    const yRange = currentYDomain[1] - currentYDomain[0];
+    
+    const newXRange = xRange * zoomFactor;
+    const newYRange = yRange * zoomFactor;
+    
+    // Use provided center or default to middle of current view
+    const xCenter = centerX || (currentXDomain[0] + currentXDomain[1]) / 2;
+    const yCenter = centerY || (currentYDomain[0] + currentYDomain[1]) / 2;
+    
+    const newXMin = xCenter - newXRange / 2;
+    const newXMax = xCenter + newXRange / 2;
+    const newYMin = yCenter - newYRange / 2;
+    const newYMax = yCenter + newYRange / 2;
+    
+    // Check if we're zooming out beyond original bounds
+    const originalXDomainNum = originalXDomain as [number, number];
+    const originalYDomainNum = originalYDomain as [number, number];
+    const isAtOriginalBounds = (
+      newXMin <= originalXDomainNum[0] && 
+      newXMax >= originalXDomainNum[1] &&
+      newYMin <= originalYDomainNum[0] && 
+      newYMax >= originalYDomainNum[1]
+    );
+    
+    if (isAtOriginalBounds) {
+      // Reset to original view
+      setZoomState(null);
+    } else {
+      setZoomState({
+        xMin: newXMin,
+        xMax: newXMax,
+        yMin: newYMin,
+        yMax: newYMax,
+        isZoomed: true
+      });
+    }
+  }, [zoomState, originalXDomain, originalYDomain]);
+
+  const handleResetZoom = useCallback(() => {
+    setZoomState(null);
+  }, []);
+
+  // Convert screen coordinates to chart coordinates
+  const screenToChartCoords = useCallback((screenX: number, screenY: number, chartElement: any) => {
+    if (!chartElement) return { x: 0, y: 0 };
+    
+    const rect = chartElement.getBoundingClientRect();
+    const containerRect = chartContainerRef.current?.getBoundingClientRect();
+    if (!containerRect) return { x: 0, y: 0 };
+    
+    // Calculate relative position within the chart area
+    const relativeX = (screenX - rect.left) / rect.width;
+    const relativeY = (screenY - rect.top) / rect.height;
+    
+    // Convert to chart coordinates
+    const currentXDomain = zoomState ? [zoomState.xMin, zoomState.xMax] : (originalXDomain as [number, number]);
+    const currentYDomain = zoomState ? [zoomState.yMin, zoomState.yMax] : (originalYDomain as [number, number]);
+    
+    const chartX = currentXDomain[0] + relativeX * (currentXDomain[1] - currentXDomain[0]);
+    const chartY = currentYDomain[1] - relativeY * (currentYDomain[1] - currentYDomain[0]); // Y is flipped
+    
+    return { x: chartX, y: chartY };
+  }, [zoomState, originalXDomain, originalYDomain]);
+
+  // Mouse wheel handler removed - no longer supporting scroll zoom
+
+  // Mouse down handler for area selection and drag pan
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    if (event.button !== 0) return; // Only left mouse button
+    
+    const chartElement = chartContainerRef.current?.querySelector('.recharts-wrapper');
+    if (!chartElement) return;
+    
+    if (isCtrlPressed) {
+      // Start area selection
+      setAreaSelectState({
+        isSelecting: true,
+        startX: event.clientX,
+        startY: event.clientY,
+        endX: event.clientX,
+        endY: event.clientY
+      });
+    } else {
+      // Start pan drag
+      setPanState({
+        isDragging: true,
+        startX: event.clientX,
+        startY: event.clientY,
+        lastX: event.clientX,
+        lastY: event.clientY
+      });
+    }
+    
+    event.preventDefault();
+  }, [isCtrlPressed]);
+
+  // Mouse move handler for area selection and drag pan
+  const handleMouseMoveCapture = useCallback((event: React.MouseEvent) => {
+    if (areaSelectState.isSelecting) {
+      // Update area selection
+      setAreaSelectState(prev => ({
+        ...prev,
+        endX: event.clientX,
+        endY: event.clientY
+      }));
+    } else if (panState.isDragging && zoomState) {
+      // Handle pan drag
+      const deltaX = event.clientX - panState.lastX;
+      const deltaY = event.clientY - panState.lastY;
+      
+      const chartElement = chartContainerRef.current?.querySelector('.recharts-wrapper');
+      if (!chartElement) return;
+      
+      const rect = chartElement.getBoundingClientRect();
+      
+      // Convert pixel delta to chart coordinate delta
+      const xRange = zoomState.xMax - zoomState.xMin;
+      const yRange = zoomState.yMax - zoomState.yMin;
+      
+      const deltaChartX = (deltaX / rect.width) * xRange;
+      const deltaChartY = -(deltaY / rect.height) * yRange; // Y is flipped
+      
+      setZoomState(prev => prev ? {
+        ...prev,
+        xMin: prev.xMin - deltaChartX,
+        xMax: prev.xMax - deltaChartX,
+        yMin: prev.yMin - deltaChartY,
+        yMax: prev.yMax - deltaChartY
+      } : null);
+      
+      setPanState(prev => ({
+        ...prev,
+        lastX: event.clientX,
+        lastY: event.clientY
+      }));
+    }
+  }, [areaSelectState.isSelecting, panState.isDragging, panState.lastX, panState.lastY, zoomState]);
+
+  // Mouse up handler for area selection and drag pan
+  const handleMouseUp = useCallback((event: React.MouseEvent) => {
+    if (areaSelectState.isSelecting) {
+      // Complete area selection zoom
+      const chartElement = chartContainerRef.current?.querySelector('.recharts-wrapper');
+      if (!chartElement) return;
+      
+      const rect = chartElement.getBoundingClientRect();
+      const containerRect = chartContainerRef.current?.getBoundingClientRect();
+      if (!containerRect) return;
+      
+      // Calculate selection area in chart coordinates
+      const startRelX = (areaSelectState.startX - rect.left) / rect.width;
+      const startRelY = (areaSelectState.startY - rect.top) / rect.height;
+      const endRelX = (areaSelectState.endX - rect.left) / rect.width;
+      const endRelY = (areaSelectState.endY - rect.top) / rect.height;
+      
+      const currentXDomain = zoomState ? [zoomState.xMin, zoomState.xMax] : (originalXDomain as [number, number]);
+      const currentYDomain = zoomState ? [zoomState.yMin, zoomState.yMax] : (originalYDomain as [number, number]);
+      
+      const x1 = currentXDomain[0] + Math.min(startRelX, endRelX) * (currentXDomain[1] - currentXDomain[0]);
+      const x2 = currentXDomain[0] + Math.max(startRelX, endRelX) * (currentXDomain[1] - currentXDomain[0]);
+      const y1 = currentYDomain[1] - Math.max(startRelY, endRelY) * (currentYDomain[1] - currentYDomain[0]);
+      const y2 = currentYDomain[1] - Math.min(startRelY, endRelY) * (currentYDomain[1] - currentYDomain[0]);
+      
+      // Only zoom if the selected area is significant
+      const minSelectionSize = 0.05; // 5% of current view
+      const xRange = currentXDomain[1] - currentXDomain[0];
+      const yRange = currentYDomain[1] - currentYDomain[0];
+      
+      if ((x2 - x1) > xRange * minSelectionSize && (y2 - y1) > yRange * minSelectionSize) {
+        setZoomState({
+          xMin: x1,
+          xMax: x2,
+          yMin: y1,
+          yMax: y2,
+          isZoomed: true
+        });
+      }
+      
+      setAreaSelectState({
+        isSelecting: false,
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0
+      });
+    } else if (panState.isDragging) {
+      setPanState(prev => ({
+        ...prev,
+        isDragging: false
+      }));
+    }
+  }, [areaSelectState, panState.isDragging, zoomState, originalXDomain, originalYDomain]);
+
+  // Double click handler for reset zoom
+  const handleDoubleClick = useCallback((event: React.MouseEvent) => {
+    event.preventDefault();
+    handleResetZoom();
+  }, [handleResetZoom]);
+
+  // Wheel event listener removed - no longer supporting scroll zoom
+
   if (!availableMetrics.length) {
     return (
       <div className={`flex items-center justify-center h-96 ${
@@ -308,44 +651,46 @@ const ModelScatterChart = ({
         ))}
       </div>
 
-      {/* Model Type Filter Buttons */}
-      <div className="mb-6 flex flex-wrap gap-3 justify-center">
-        <button
-          onClick={() => setShowCoTModels(!showCoTModels)}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
-            showCoTModels
-              ? isDarkMode
-                ? 'bg-green-600 text-white'
-                : 'bg-green-500 text-white'
-              : isDarkMode
-              ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
-              : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
-          }`}
-        >
-          <div className={`w-3 h-3 rounded-full ${
-            isDarkMode ? 'bg-green-400' : 'bg-green-500'
-          }`}></div>
-          CoT Models
-        </button>
-        
-        <button
-          onClick={() => setShowRegularModels(!showRegularModels)}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
-            showRegularModels
-              ? isDarkMode
-                ? 'bg-blue-600 text-white'
-                : 'bg-blue-500 text-white'
-              : isDarkMode
-              ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
-              : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
-          }`}
-        >
-          <div className={`w-3 h-3 rounded-full ${
-            isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
-          }`}></div>
-          Regular Models
-        </button>
-      </div>
+      {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard */}
+      {currentTask === 'code-robustness' && (
+        <div className="mb-6 flex flex-wrap gap-3 justify-center">
+          <button
+            onClick={() => setShowCoTModels(!showCoTModels)}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+              showCoTModels
+                ? isDarkMode
+                  ? 'bg-green-600 text-white'
+                  : 'bg-green-500 text-white'
+                : isDarkMode
+                ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
+                : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+            }`}
+          >
+            <div className={`w-3 h-3 rounded-full ${
+              isDarkMode ? 'bg-green-400' : 'bg-green-500'
+            }`}></div>
+            CoT Models
+          </button>
+          
+          <button
+            onClick={() => setShowRegularModels(!showRegularModels)}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+              showRegularModels
+                ? isDarkMode
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-blue-500 text-white'
+                : isDarkMode
+                ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
+                : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+            }`}
+          >
+            <div className={`w-3 h-3 rounded-full ${
+              isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
+            }`}></div>
+            Regular Models
+          </button>
+        </div>
+      )}
 
       {/* Graph's Independent Timeline Filter */}
       <div className="mb-6">
@@ -387,11 +732,50 @@ const ModelScatterChart = ({
           >
             🗓️ Reset Timeline
           </button>
+          <button
+            onClick={() => handleZoomIn()}
+            className={`px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+              isDarkMode
+                ? 'bg-slate-600 text-white hover:bg-slate-500'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+            }`}
+            title="Zoom In (+)"
+          >
+            🔍+
+          </button>
+          <button
+            onClick={() => handleZoomOut()}
+            className={`px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+              isDarkMode
+                ? 'bg-slate-600 text-white hover:bg-slate-500'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+            }`}
+            title="Zoom Out (-)"
+          >
+            🔍-
+          </button>
+          <button
+            onClick={handleResetZoom}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              zoomState
+                ? isDarkMode
+                  ? 'bg-slate-600 text-white hover:bg-slate-500'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                : isDarkMode
+                ? 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-50'
+                : 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-50 border border-slate-200'
+            }`}
+            title="Reset Zoom (Double Click)"
+            disabled={!zoomState}
+          >
+            🔄 Reset Zoom
+          </button>
           <span className={`text-sm ${
             isDarkMode ? 'text-slate-400' : 'text-slate-500'
           }`}>
             {filteredData.length} models
             {graphTimelineRange && ' (filtered)'}
+            {zoomState && ' (zoomed)'}
           </span>
         </div>
       </div>
@@ -422,7 +806,52 @@ const ModelScatterChart = ({
         </div>
       ) : (
         // Show chart when there are results
-        <div className="h-[700px] relative">
+        <div 
+          ref={chartContainerRef}
+          className="h-[700px] relative"
+          tabIndex={0}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMoveCapture}
+          onMouseUp={handleMouseUp}
+          onDoubleClick={handleDoubleClick}
+          style={{ 
+            cursor: isCtrlPressed ? 'crosshair' : (panState.isDragging ? 'grabbing' : (zoomState ? 'grab' : 'default'))
+          }}
+        >
+          {/* Area selection overlay */}
+          {areaSelectState.isSelecting && (
+            <div
+              className="absolute border-2 border-blue-500 bg-blue-200 bg-opacity-20 pointer-events-none z-10"
+              style={{
+                left: Math.min(areaSelectState.startX, areaSelectState.endX) - (chartContainerRef.current?.getBoundingClientRect().left || 0),
+                top: Math.min(areaSelectState.startY, areaSelectState.endY) - (chartContainerRef.current?.getBoundingClientRect().top || 0),
+                width: Math.abs(areaSelectState.endX - areaSelectState.startX),
+                height: Math.abs(areaSelectState.endY - areaSelectState.startY),
+              }}
+            />
+          )}
+          
+          {/* Info icon with hover tooltip */}
+          <div className="absolute top-2 left-2 z-20 group">
+            <div className={`w-6 h-6 rounded-full flex items-center justify-center cursor-help ${
+              isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-200 text-slate-600'
+            } hover:${isDarkMode ? 'bg-slate-600' : 'bg-slate-300'} transition-colors`}>
+              <span className="text-sm font-bold">i</span>
+            </div>
+            {/* Tooltip */}
+            <div className={`absolute left-8 top-0 hidden group-hover:block text-xs p-2 rounded-lg ${
+              isDarkMode ? 'bg-slate-800 text-slate-300' : 'bg-white text-slate-600'
+            } bg-opacity-95 shadow-lg border whitespace-nowrap z-30`}>
+              <div>🖱️ Drag: Pan around</div>
+              <div>Ctrl + Drag: Select area to zoom</div>
+              <div>Double click: Reset zoom</div>
+              <div>+/- keys: Zoom in/out</div>
+              <div className="text-xs opacity-75 mt-1">
+                {zoomState ? 'Showing only points in zoomed area' : 'Showing all points'}
+              </div>
+            </div>
+          </div>
+          
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart
               data={filteredData}
@@ -587,7 +1016,6 @@ const ModelScatterChart = ({
               </Scatter>
             </ScatterChart>
           </ResponsiveContainer>
-
         </div>
       )}
     </div>

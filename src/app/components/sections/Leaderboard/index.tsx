@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { FilterOptions, TaskType, Ability } from '@/lib/types';
-import { MODEL_PUBLISH_DATES, canonicalizeModelName } from '@/lib/constants';
-import TaskSelector from './TaskSelector';
+import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/lib/constants';
+
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
 import { TimelineFilter } from './FilterComponents';
@@ -41,11 +41,19 @@ import { filterConditions } from '@/lib/filterConfig';
 interface LeaderboardProps {
   taskAbilities: Record<TaskType, Ability>;
   isDarkMode: boolean;
+  initialTask?: TaskType;
 }
 
-  const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode }) => {
-  const [currentTask, setCurrentTask] = useState<TaskType>('overall');
+  const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode, initialTask }) => {
+  const [currentTask, setCurrentTask] = useState<TaskType>(initialTask || 'overall');
   const [timelineRange, setTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
+
+  // Update currentTask when initialTask changes
+  useEffect(() => {
+    if (initialTask && initialTask !== currentTask) {
+      setCurrentTask(initialTask);
+    }
+  }, [initialTask, currentTask]);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +62,6 @@ interface LeaderboardProps {
     getDefaultSortConfig('overall')
   );
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
-  const [currentTaskPage, setCurrentTaskPage] = useState(0);
   const [showByDifficulty, setShowByDifficulty] = useState(false);
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() => {
     // Initialize with default values immediately to prevent layout shift
@@ -68,32 +75,7 @@ interface LeaderboardProps {
     // This will be handled by ResultsTable's internal effects
   }, []);
   
-  const TASKS_PER_PAGE = 4;
 
-  // Helper function to get tasks for current page
-  const getCurrentPageTasks = useCallback(() => {
-    const allTasks = Object.keys(taskAbilities);
-    const startIndex = currentTaskPage * TASKS_PER_PAGE;
-    return allTasks.slice(startIndex, startIndex + TASKS_PER_PAGE);
-  }, [currentTaskPage, taskAbilities]);
-
-  // Helper function to check if there are more tasks
-  const hasNextPage = useCallback(() => {
-    const allTasks = Object.keys(taskAbilities);
-    return (currentTaskPage + 1) * TASKS_PER_PAGE < allTasks.length;
-  }, [currentTaskPage, taskAbilities]);
-
-  const handleNextPage = () => {
-    if (hasNextPage()) {
-      setCurrentTaskPage(currentTaskPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentTaskPage > 0) {
-      setCurrentTaskPage(currentTaskPage - 1);
-    }
-  };
 
   const handleTaskChange = (task: TaskType) => {
     setCurrentTask(task);
@@ -168,7 +150,15 @@ interface LeaderboardProps {
       filtered = results.filter(result => {
         if (!result.model) return true; // Include if no model name
         const canonicalName = canonicalizeModelName(result.model);
-        const modelReleaseDate = MODEL_PUBLISH_DATES[canonicalName] || MODEL_PUBLISH_DATES[result.model];
+        let modelReleaseDate = MODEL_PUBLISH_DATES[canonicalName] || MODEL_PUBLISH_DATES[result.model];
+        
+        // If no date found and model is CoT variant, try base model name
+        if (!modelReleaseDate && result.model.includes('(CoT)')) {
+          const baseName = getBaseModelName(result.model);
+          const canonicalBaseName = canonicalizeModelName(baseName);
+          modelReleaseDate = MODEL_PUBLISH_DATES[canonicalBaseName] || MODEL_PUBLISH_DATES[baseName];
+        }
+        
         if (!modelReleaseDate) return true; // Include if no release date available
         
         const releaseDate = new Date(modelReleaseDate);
@@ -379,15 +369,6 @@ interface LeaderboardProps {
     const handleTaskChangeEvent = (event: CustomEvent) => {
       const { task } = event.detail;
       if (task && Object.keys(taskAbilities).includes(task)) {
-        const allTasks = Object.keys(taskAbilities);
-        const taskIndex = allTasks.indexOf(task);
-        const newPage = Math.floor(taskIndex / TASKS_PER_PAGE);
-        
-        // Update task page if necessary
-        if (newPage !== currentTaskPage) {
-          setCurrentTaskPage(newPage);
-        }
-        
         // Change to the specified task
         handleTaskChange(task as TaskType);
       }
@@ -398,7 +379,7 @@ interface LeaderboardProps {
     return () => {
       window.removeEventListener('changeLeaderboardTask', handleTaskChangeEvent as EventListener);
     };
-  }, [taskAbilities, currentTaskPage, handleTaskChange]);
+  }, [taskAbilities, handleTaskChange]);
   
   // Helper function to get minimum column width using new config system
   const getMinColumnWidthHelper = useCallback((key: string): number => {
@@ -483,17 +464,7 @@ interface LeaderboardProps {
           </p>
         </div>
 
-        <TaskSelector 
-          currentTask={currentTask}
-          currentTaskPage={currentTaskPage}
-          handleTaskChange={handleTaskChange}
-          handlePreviousPage={handlePreviousPage}
-          handleNextPage={handleNextPage}
-          hasPreviousPage={() => currentTaskPage > 0}
-          hasNextPage={() => hasNextPage()}
-          getCurrentPageTasks={getCurrentPageTasks}
-          isDarkMode={isDarkMode}
-        />
+
 
         <FilterPanel 
           currentTask={currentTask}

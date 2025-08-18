@@ -114,6 +114,16 @@ export function canonicalizeModelName(modelName: string): string {
   return modelName;
 }
 
+/**
+ * Get the base model name by stripping (CoT) suffix if present
+ * Used for looking up publish dates when CoT variant dates aren't available
+ */
+export function getBaseModelName(modelName: string): string {
+  if (!modelName) return modelName;
+  // Remove (CoT) suffix if present
+  return modelName.replace(/\s*\(CoT\)$/, '');
+}
+
 // Model publish dates (YYYY-MM-DD format)
 export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // OpenAI Models
@@ -133,6 +143,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
 
   // Claude Models
   'Claude-3.5-Sonnet-20241022': '2024-10-22',
+  'Claude-3.5-Sonnet': '2024-10-22',
   'Claude-3.5-Sonnet-20240620': '2024-06-20',
   'Claude-Sonnet-4': '2025-05-22',
   'Claude-3.7-Sonnet': '2025-02-24',
@@ -140,6 +151,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
 
   // Llama Models
   'Llama-3.3-70B-Instruct': '2024-12-06',
+  'Llama3.3-70B-Instruct': '2024-12-06',
   'Llama-3.1-70B-Instruct': '2024-07-23',
   'Llama-3.1-405B-Instruct': '2024-07-23',
   'Llama-3.1-8B-Instruct': '2024-07-23',
@@ -175,12 +187,32 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Gemma-3-27B-Instruct': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.0-Flash': '2024-11-20',
+  'Gemini-2.0-Pro': '2025-02-25',
   'Gemini-1.5-Pro': '2024-09-24',
   'Gemini-1.5-Flash': '2024-09-24',
 
   // Pixtral Models
   'Pixtral-Large-Instruct-124B': '2024-11-18',
   'Pixtral-12B-2409': '2024-09-17',
+
+  // CoT (Chain-of-Thought) model variants - same dates as base models
+  'GPT-4o (CoT)': '2023-04-11',
+  'GPT-4o-mini (CoT)': '2024-07-18',
+  'Claude-3.5-Sonnet-20241022 (CoT)': '2024-10-22',
+  'Claude-3.5-Haiku-20241022 (CoT)': '2024-10-22',
+  'Llama-3.3-70B-Instruct (CoT)': '2024-12-06',
+  'Llama-3.1-70B-Instruct (CoT)': '2024-07-23',
+  'Llama-3.1-405B-Instruct (CoT)': '2024-07-23',
+  'Llama-3.1-8B-Instruct (CoT)': '2024-07-23',
+  'Qwen2.5-72B-Instruct (CoT)': '2024-09-19',
+  'Qwen2.5-7B-Instruct (CoT)': '2024-09-19',
+  'Qwen2.5-32B-Instruct (CoT)': '2024-09-19',
+  'Qwen2.5-14B-Instruct (CoT)': '2024-09-19',
+  'Qwen2.5-Coder-32B-Instruct (CoT)': '2024-09-19',
+  'DeepSeek-V3 (CoT)': '2024-12-26',
+  'Gemini-2.0-Flash (CoT)': '2024-11-20',
+  'Gemini-1.5-Pro-002 (CoT)': '2024-09-24',
+  'Gemini-1.5-Flash (CoT)': '2024-09-24',
 
 };
 

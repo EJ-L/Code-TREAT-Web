@@ -11,7 +11,7 @@ import {
   LabelList,
   ReferenceLine
 } from 'recharts';
-import { MODEL_PUBLISH_DATES, hasDataLeakage } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
 type ScatterChartProps = {
@@ -32,7 +32,13 @@ interface ScatterDataPoint {
   displayDate: string;
   metricValue: string;
   hasDataLeakage: boolean;
+  isCoTModel: boolean;
 }
+
+// Helper function to check if a model is using Chain-of-Thought
+const isCoTModel = (modelName: string): boolean => {
+  return modelName.includes('(CoT)');
+};
 
 const ModelScatterChart = ({ 
   data, 
@@ -47,6 +53,9 @@ const ModelScatterChart = ({
   const [showCrosshair, setShowCrosshair] = useState(false);
   // Graph's own timeline state, independent from leaderboard
   const [graphTimelineRange, setGraphTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
+  // Filter states for model types
+  const [showCoTModels, setShowCoTModels] = useState(true);
+  const [showRegularModels, setShowRegularModels] = useState(true);
 
   // Transform data for scatter plot
   const scatterData = useMemo(() => {
@@ -56,7 +65,15 @@ const ModelScatterChart = ({
     
     data.forEach(result => {
       const modelName = result.model || result.modelName;
-      const publishDate = MODEL_PUBLISH_DATES[modelName];
+      let publishDate = MODEL_PUBLISH_DATES[modelName];
+      
+      // If no date found and model is CoT variant, try base model name
+      if (!publishDate && modelName.includes('(CoT)')) {
+        const baseName = getBaseModelName(modelName);
+        const canonicalBaseName = canonicalizeModelName(baseName);
+        publishDate = MODEL_PUBLISH_DATES[canonicalBaseName] || MODEL_PUBLISH_DATES[baseName];
+      }
+      
       const metricValue = result[currentMetric];
 
       // Only include points that have both date and metric data
@@ -115,7 +132,8 @@ const ModelScatterChart = ({
           model: modelName,
           displayDate: publishDate,
           metricValue: `${displayValue.toFixed(1)}%`,
-          hasDataLeakage: hasDataLeakage(modelName, currentTask)
+          hasDataLeakage: hasDataLeakage(modelName, currentTask),
+          isCoTModel: isCoTModel(modelName)
         });
       }
     });
@@ -134,6 +152,15 @@ const ModelScatterChart = ({
       point.x >= startTimestamp && point.x <= endTimestamp
     );
   }, [scatterData, graphTimelineRange]);
+
+  // Apply model type filtering on top of timeline filtering
+  const filteredData = useMemo(() => {
+    return timelineFilteredData.filter(point => {
+      if (point.isCoTModel && !showCoTModels) return false;
+      if (!point.isCoTModel && !showRegularModels) return false;
+      return true;
+    });
+  }, [timelineFilteredData, showCoTModels, showRegularModels]);
 
   // Calculate date bounds for timeline slider
   const dateBounds = useMemo(() => {
@@ -157,7 +184,7 @@ const ModelScatterChart = ({
 
   // Calculate domain ranges based on filtered data
   const { xDomain, yDomain } = useMemo(() => {
-    if (!timelineFilteredData.length) {
+    if (!filteredData.length) {
       return {
         xDomain: ['auto', 'auto'] as ['auto', 'auto'],
         yDomain: [0, 100] as [number, number]
@@ -165,8 +192,8 @@ const ModelScatterChart = ({
     }
     
     // Show all filtered data with padding
-    const dates = timelineFilteredData.map(d => d.x);
-    const values = timelineFilteredData.map(d => d.y);
+    const dates = filteredData.map(d => d.x);
+    const values = filteredData.map(d => d.y);
     
     const padding = 90 * 24 * 60 * 60 * 1000; // 90 days padding
     const valuePadding = 5; // 5% padding for y values
@@ -181,7 +208,7 @@ const ModelScatterChart = ({
         Math.min(100, Math.max(...values) + valuePadding)
       ] as [number, number]
     };
-  }, [timelineFilteredData]);
+  }, [filteredData]);
 
   // Custom tooltip
   const CustomTooltip = ({ active, payload }: any) => {
@@ -281,6 +308,45 @@ const ModelScatterChart = ({
         ))}
       </div>
 
+      {/* Model Type Filter Buttons */}
+      <div className="mb-6 flex flex-wrap gap-3 justify-center">
+        <button
+          onClick={() => setShowCoTModels(!showCoTModels)}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+            showCoTModels
+              ? isDarkMode
+                ? 'bg-green-600 text-white'
+                : 'bg-green-500 text-white'
+              : isDarkMode
+              ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
+              : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+          }`}
+        >
+          <div className={`w-3 h-3 rounded-full ${
+            isDarkMode ? 'bg-green-400' : 'bg-green-500'
+          }`}></div>
+          CoT Models
+        </button>
+        
+        <button
+          onClick={() => setShowRegularModels(!showRegularModels)}
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+            showRegularModels
+              ? isDarkMode
+                ? 'bg-blue-600 text-white'
+                : 'bg-blue-500 text-white'
+              : isDarkMode
+              ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
+              : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+          }`}
+        >
+          <div className={`w-3 h-3 rounded-full ${
+            isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
+          }`}></div>
+          Regular Models
+        </button>
+      </div>
+
       {/* Graph's Independent Timeline Filter */}
       <div className="mb-6">
         <TimelineSlider
@@ -307,11 +373,15 @@ const ModelScatterChart = ({
         <div className="flex items-center gap-2 pr-8">
           <button
             onClick={handleResetGraphTimeline}
-            className={`px-3 py-2 rounded-md font-medium transition-all ${
-              isDarkMode
-                ? 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-                : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
-            } ${!graphTimelineRange ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              graphTimelineRange
+                ? isDarkMode
+                  ? 'bg-slate-600 text-white hover:bg-slate-500'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                : isDarkMode
+                ? 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-50'
+                : 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-50 border border-slate-200'
+            }`}
             title="Reset Chart Timeline Filter"
             disabled={!graphTimelineRange}
           >
@@ -320,14 +390,14 @@ const ModelScatterChart = ({
           <span className={`text-sm ${
             isDarkMode ? 'text-slate-400' : 'text-slate-500'
           }`}>
-            {timelineFilteredData.length} models
+            {filteredData.length} models
             {graphTimelineRange && ' (filtered)'}
           </span>
         </div>
       </div>
 
       {/* Chart or No Results Message */}
-      {timelineFilteredData.length === 0 ? (
+      {filteredData.length === 0 ? (
         // Show no results message when chart timeline filter returns 0 results - consistent with table view
         <div style={{
           display: 'flex',
@@ -355,7 +425,7 @@ const ModelScatterChart = ({
         <div className="h-[700px] relative">
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart
-              data={timelineFilteredData}
+              data={filteredData}
               margin={{
                 top: 20,
                 right: 30,
@@ -433,12 +503,14 @@ const ModelScatterChart = ({
               
                              {/* Scatter points with conditional coloring */}
                <Scatter 
-                 data={timelineFilteredData} 
+                 data={filteredData} 
                  shape={(props: any) => {
-                   const { payload, cx, cy } = props;
-                   const color = payload?.hasDataLeakage 
-                     ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
-                     : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
+                                     const { payload, cx, cy } = props;
+                  const color = payload?.hasDataLeakage 
+                    ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
+                    : payload?.isCoTModel 
+                      ? (isDarkMode ? "#22c55e" : "#16a34a") // Green for CoT models
+                      : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
                    
                    // Check if this point is being hovered
                    const isHovered = hoveredPoint && hoveredPoint.model === payload.model;
@@ -451,7 +523,9 @@ const ModelScatterChart = ({
                        fill={color}
                        stroke={payload?.hasDataLeakage 
                          ? (isDarkMode ? "#f9a8d4" : "#be185d")
-                         : (isDarkMode ? "#93c5fd" : "#1d4ed8")
+                         : payload?.isCoTModel 
+                           ? (isDarkMode ? "#4ade80" : "#15803d") // Green stroke for CoT models
+                           : (isDarkMode ? "#93c5fd" : "#1d4ed8") // Blue stroke for normal
                        }
                        fillOpacity={isHovered ? 0.9 : (hoveredPoint ? 0.3 : 0.7)}
                        strokeWidth={isHovered ? 2 : 1}
@@ -473,9 +547,10 @@ const ModelScatterChart = ({
                      const { x, y, value } = props;
                      if (!value || !x || !y) return null;
                      
-                     // Get the data point from timelineFilteredData to check for data leakage
-                     const dataPoint = timelineFilteredData.find(d => d.model === value);
-                     const hasLeakage = dataPoint?.hasDataLeakage;
+                                         // Get the data point from timelineFilteredData to check for data leakage and CoT status
+                    const dataPoint = filteredData.find(d => d.model === value);
+                    const hasLeakage = dataPoint?.hasDataLeakage;
+                    const isCotModel = dataPoint?.isCoTModel;
                      
                      // Check if this label is for the hovered point
                      const isHovered = hoveredPoint && hoveredPoint.model === value;
@@ -494,7 +569,9 @@ const ModelScatterChart = ({
                          fill={
                            hasLeakage 
                              ? (isDarkMode ? '#f472b6' : '#ec4899') // Pink for data leakage
-                             : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
+                             : isCotModel 
+                               ? (isDarkMode ? '#22c55e' : '#16a34a') // Green for CoT models
+                               : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
                          }
                          opacity={hoveredPoint && !isHovered ? 0.3 : 1}
                          style={{

@@ -2,11 +2,11 @@
 import { useState } from 'react';
 import { Ability, TaskType } from '@/lib/types';
 import { DataLoader } from '@/app/components/DataLoader';
-import Header from '@/app/components/layout/Header';
 import Background from '@/app/components/layout/Background';
-import Hero from '@/app/components/sections/Hero';
-import About from '@/app/components/sections/About';
-import Leaderboard from '@/app/components/sections/Leaderboard';
+import Sidebar from '@/app/components/layout/Sidebar';
+import OverviewPage from '@/app/components/pages/OverviewPage';
+import TasksPage from '@/app/components/pages/TasksPage';
+import AboutPage from '@/app/components/pages/AboutPage';
 
 // Define task abilities - mapping each task type to its associated capabilities
 const taskAbilities: Record<TaskType, Ability> = {
@@ -115,29 +115,60 @@ const taskAbilities: Record<TaskType, Ability> = {
 export default function Home() {
   // Main app state
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentSection, setCurrentSection] = useState<'overview' | 'tasks' | 'about'>('overview');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentTask, setCurrentTask] = useState<TaskType>('overall');
 
-  // Add height padding for the fixed header
-  const headerPadding = "h-16";
+  const handleSectionChange = (section: 'overview' | 'tasks' | 'about') => {
+    setCurrentSection(section);
+    setIsSidebarOpen(false); // Close sidebar on mobile after selection
+  };
+
+  const handleSidebarToggle = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleTaskChange = (task: TaskType) => {
+    setCurrentTask(task);
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentSection) {
+      case 'overview':
+        return <OverviewPage isDarkMode={isDarkMode} />;
+      case 'tasks':
+        return <TasksPage taskAbilities={taskAbilities} isDarkMode={isDarkMode} currentTask={currentTask} />;
+      case 'about':
+        return <AboutPage isDarkMode={isDarkMode} />;
+      default:
+        return <OverviewPage isDarkMode={isDarkMode} />;
+    }
+  };
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-[#09101f] text-white' : 'bg-slate-50 text-black'}`}>
       {/* Background */}
       <Background isDarkMode={isDarkMode} />
 
-      {/* Header */}
-      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <div className="flex min-h-screen">
+        {/* Sidebar */}
+        <Sidebar 
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          currentSection={currentSection}
+          onSectionChange={handleSectionChange}
+          isOpen={isSidebarOpen}
+          onToggle={handleSidebarToggle}
+          taskAbilities={taskAbilities}
+          currentTask={currentTask}
+          onTaskChange={handleTaskChange}
+        />
 
-      {/* Add padding for fixed header */}
-      <div className={headerPadding}></div>
-
-      {/* Hero Section */}
-      <Hero isDarkMode={isDarkMode} />
-
-      {/* About Section */}
-      <About isDarkMode={isDarkMode} />
-
-      {/* Leaderboard Section */}
-      <Leaderboard taskAbilities={taskAbilities} isDarkMode={isDarkMode} />
+        {/* Main Content */}
+        <div className="flex-1 xl:ml-80 min-h-screen w-full xl:w-auto">
+          {renderCurrentPage()}
+        </div>
+      </div>
 
       {/* Preload data in the background */}
       <DataLoader />

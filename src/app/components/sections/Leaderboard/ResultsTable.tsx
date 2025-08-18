@@ -101,6 +101,13 @@ const ResultsTable: FC<ResultsTableProps> = ({
       })
       .map(header => header.key);
   }, [results, currentTask, getTableHeaders]);
+
+  // Check if chart view button should be shown - based on original results having data and metrics
+  // The button should remain visible even when timeline filtering shows 0 results, 
+  // so users can switch to chart view to adjust the timeline filter
+  const shouldShowChartButton = useMemo(() => {
+    return currentTask !== 'overall' && availableMetrics.length > 0 && results.length > 0;
+  }, [currentTask, availableMetrics.length, results.length]);
   
   // Set default metric when available metrics change
   useEffect(() => {
@@ -108,6 +115,14 @@ const ResultsTable: FC<ResultsTableProps> = ({
       setCurrentScatterMetric(availableMetrics[0]);
     }
   }, [availableMetrics, currentScatterMetric]);
+
+  // Reset to table view only when the original results are empty (not just timeline filtered)
+  // This ensures users can stay in chart view to adjust timeline filters
+  useEffect(() => {
+    if (results.length === 0 && viewMode === 'scatter') {
+      setViewMode('table');
+    }
+  }, [results.length, viewMode]);
   
   // Calculate total table width based on column widths
   const calculateTableWidth = useCallback(() => {
@@ -256,7 +271,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           )}
           
           {/* Switch button - only show if there are metrics and it's not the overall task */}
-          {currentTask !== 'overall' && availableMetrics.length > 0 && (
+          {shouldShowChartButton && (
             <button
               onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
               style={{

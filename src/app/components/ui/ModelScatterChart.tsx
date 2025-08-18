@@ -328,15 +328,27 @@ const ModelScatterChart = ({
 
       {/* Chart or No Results Message */}
       {timelineFilteredData.length === 0 ? (
-        // Show no results message when chart timeline filter returns 0 results
-        <div className={`flex items-center justify-center h-96 ${
-          isDarkMode ? 'text-slate-400' : 'text-slate-500'
-        }`}>
-          <div className="text-center">
-            <div className="text-6xl mb-4">📊</div>
-            <p className="text-xl font-medium mb-2">No models found in selected date range</p>
-            <p className="text-sm">Try adjusting the timeline filter to include more models</p>
-          </div>
+        // Show no results message when chart timeline filter returns 0 results - consistent with table view
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '80px 20px'
+        }}>
+          <svg style={{ width: '48px', height: '48px', marginBottom: '16px', color: '#94a3b8' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span style={{
+            color: isDarkMode ? '#cbd5e1' : '#475569',
+            fontSize: '18px',
+            fontWeight: '500'
+          }}>No results found</span>
+          <span style={{
+            color: isDarkMode ? '#94a3b8' : '#64748b',
+            fontSize: '14px',
+            marginTop: '8px'
+          }}>Try adjusting your filters</span>
         </div>
       ) : (
         // Show chart when there are results

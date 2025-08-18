@@ -217,8 +217,9 @@ const ModelScatterChart = ({
     
     setShowCrosshair(true);
     
-    // Set hovered point only when mouse is directly over a data point
-    if (event.activePayload && event.activePayload[0]) {
+    // More precise hover detection - only set hovered point when activeTooltipIndex is valid
+    // This ensures we're actually hovering over a data point, not just near it
+    if (event.activePayload && event.activePayload[0] && event.activeTooltipIndex !== undefined) {
       setHoveredPoint(event.activePayload[0].payload);
     } else {
       setHoveredPoint(null);
@@ -418,66 +419,82 @@ const ModelScatterChart = ({
                 </>
               )}
               
-              {/* Scatter points with conditional coloring */}
-              <Scatter 
-                data={timelineFilteredData} 
-                shape={(props: any) => {
-                  const { payload, cx, cy } = props;
-                  const color = payload?.hasDataLeakage 
-                    ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
-                    : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
-                  
-                  // Only pass valid DOM attributes to the circle element
-                  return (
-                    <circle 
-                      cx={cx}
-                      cy={cy}
-                      fill={color}
-                      stroke={payload?.hasDataLeakage 
-                        ? (isDarkMode ? "#f9a8d4" : "#be185d")
-                        : (isDarkMode ? "#93c5fd" : "#1d4ed8")
-                      }
-                      fillOpacity={0.7}
-                      strokeWidth={1}
-                      r={6}
-                    />
-                  );
-                }}
-              >
-                {/* Add model name labels with conditional coloring */}
-                <LabelList 
-                  dataKey="model" 
-                  position="top"
-                  offset={8}
-                  content={(props: any) => {
-                    const { x, y, value } = props;
-                    if (!value || !x || !y) return null;
-                    
-                    // Get the data point from timelineFilteredData to check for data leakage
-                    const dataPoint = timelineFilteredData.find(d => d.model === value);
-                    const hasLeakage = dataPoint?.hasDataLeakage;
-                    
-                    const valueStr = String(value);
-                    const shortName = valueStr.length > 15 ? valueStr.substring(0, 15) + '...' : valueStr;
-                    
-                    return (
-                      <text
-                        x={Number(x)}
-                        y={Number(y) - 8}
-                        textAnchor="middle"
-                        fontSize="10px"
-                        fontWeight="bold"
-                        fill={
-                          hasLeakage 
-                            ? (isDarkMode ? '#f472b6' : '#ec4899') // Pink for data leakage
-                            : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
-                        }
-                      >
-                        {shortName}
-                      </text>
-                    );
-                  }}
-                />
+                             {/* Scatter points with conditional coloring */}
+               <Scatter 
+                 data={timelineFilteredData} 
+                 shape={(props: any) => {
+                   const { payload, cx, cy } = props;
+                   const color = payload?.hasDataLeakage 
+                     ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
+                     : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
+                   
+                   // Check if this point is being hovered
+                   const isHovered = hoveredPoint && hoveredPoint.model === payload.model;
+                   
+                   // Only pass valid DOM attributes to the circle element
+                   return (
+                     <circle 
+                       cx={cx}
+                       cy={cy}
+                       fill={color}
+                       stroke={payload?.hasDataLeakage 
+                         ? (isDarkMode ? "#f9a8d4" : "#be185d")
+                         : (isDarkMode ? "#93c5fd" : "#1d4ed8")
+                       }
+                       fillOpacity={isHovered ? 0.9 : (hoveredPoint ? 0.3 : 0.7)}
+                       strokeWidth={isHovered ? 2 : 1}
+                       r={isHovered ? 8 : 6}
+                       style={{
+                         filter: hoveredPoint && !isHovered ? 'blur(1px)' : 'none',
+                         transition: 'all 0.2s ease'
+                       }}
+                     />
+                   );
+                 }}
+               >
+                                 {/* Add model name labels with conditional coloring */}
+                 <LabelList 
+                   dataKey="model" 
+                   position="top"
+                   offset={8}
+                   content={(props: any) => {
+                     const { x, y, value } = props;
+                     if (!value || !x || !y) return null;
+                     
+                     // Get the data point from timelineFilteredData to check for data leakage
+                     const dataPoint = timelineFilteredData.find(d => d.model === value);
+                     const hasLeakage = dataPoint?.hasDataLeakage;
+                     
+                     // Check if this label is for the hovered point
+                     const isHovered = hoveredPoint && hoveredPoint.model === value;
+                     
+                     const valueStr = String(value);
+                     // Show full name if hovered, otherwise truncate
+                     const displayName = isHovered ? valueStr : (valueStr.length > 15 ? valueStr.substring(0, 15) + '...' : valueStr);
+                     
+                     return (
+                       <text
+                         x={Number(x)}
+                         y={Number(y) - (isHovered ? 12 : 8)} // Move hovered labels slightly higher
+                         textAnchor="middle"
+                         fontSize={isHovered ? "14px" : "12px"} // Larger font for hovered
+                         fontWeight="bold"
+                         fill={
+                           hasLeakage 
+                             ? (isDarkMode ? '#f472b6' : '#ec4899') // Pink for data leakage
+                             : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
+                         }
+                         opacity={hoveredPoint && !isHovered ? 0.3 : 1}
+                         style={{
+                           filter: hoveredPoint && !isHovered ? 'blur(0.5px)' : 'none',
+                           transition: 'all 0.2s ease'
+                         }}
+                       >
+                         {displayName}
+                       </text>
+                     );
+                   }}
+                 />
               </Scatter>
             </ScatterChart>
           </ResponsiveContainer>

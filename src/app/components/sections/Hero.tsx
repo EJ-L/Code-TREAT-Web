@@ -13,29 +13,13 @@ const Hero: FC<HeroProps> = ({ isDarkMode }) => {
     <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16" id="home">
       <div className="relative mt-[180px]">
         <motion.h1 
-          className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-12"
+          className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           Code TREAT
         </motion.h1>
-        <motion.h2 
-          className={`text-4xl ${isDarkMode ? 'text-blue-200' : 'text-slate-800'} mb-8 max-w-3xl mx-auto leading-relaxed`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Code LLM Trustworthiness/Reliability Evaluation and Testing
-        </motion.h2>
-        <motion.p 
-          className={`text-2xl ${isDarkMode ? 'text-blue-200/80' : 'text-slate-600'} mb-8 max-w-2xl mx-auto`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Ensuring the quality and reliability of AI-generated code through comprehensive testing and evaluation.
-        </motion.p>
         <div className="flex flex-wrap justify-center gap-4">
           <motion.button
             onClick={() => setIsPaperModalOpen(true)}

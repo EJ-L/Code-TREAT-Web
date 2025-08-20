@@ -446,7 +446,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           // Show scatter chart view
           <div style={{ width: '100%', padding: '20px' }}>
             <ModelScatterChart
-              data={sortedResults}
+              data={results}
               currentMetric={currentScatterMetric}
               availableMetrics={availableMetrics}
               onMetricChange={setCurrentScatterMetric}

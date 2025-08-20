@@ -146,6 +146,68 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
     return dates;
   }, [minDate, maxDate, dateToPercentage]);
 
+  // Create complete list of all date markers for interval detection
+  const allDateMarkers = useMemo(() => {
+    const markers = [
+      { date: minDate, position: 0, isMin: true, isMax: false },
+      ...getMiddleDates.map(d => ({ ...d, isMin: false, isMax: false })),
+      { date: maxDate, position: 100, isMin: false, isMax: true }
+    ];
+    return markers.sort((a, b) => a.position - b.position);
+  }, [minDate, maxDate, getMiddleDates]);
+
+  // Function to find which interval start date should be bolded for LEFT ball
+  const findIntervalStartForPosition = useCallback((position: number) => {
+    // Find the interval that contains this position
+    for (let i = 0; i < allDateMarkers.length - 1; i++) {
+      const currentMarker = allDateMarkers[i];
+      const nextMarker = allDateMarkers[i + 1];
+      
+      // If position is between current and next marker (excluding the next marker itself)
+      if (position >= currentMarker.position && position < nextMarker.position) {
+        return currentMarker.date.getTime();
+      }
+    }
+    
+    // If position is at the last marker, return the last marker
+    if (position >= allDateMarkers[allDateMarkers.length - 1].position) {
+      return allDateMarkers[allDateMarkers.length - 1].date.getTime();
+    }
+    
+    // Fallback to first marker
+    return allDateMarkers[0].date.getTime();
+  }, [allDateMarkers]);
+
+  // Function to find which interval end date should be bolded for RIGHT ball
+  const findIntervalEndForPosition = useCallback((position: number) => {
+    // Find the interval that contains this position
+    for (let i = 0; i < allDateMarkers.length - 1; i++) {
+      const currentMarker = allDateMarkers[i];
+      const nextMarker = allDateMarkers[i + 1];
+      
+      // If position is between current and next marker (excluding the next marker itself)
+      if (position >= currentMarker.position && position < nextMarker.position) {
+        return nextMarker.date.getTime(); // Return the END of the interval
+      }
+    }
+    
+    // If position is at the last marker, return the last marker
+    if (position >= allDateMarkers[allDateMarkers.length - 1].position) {
+      return allDateMarkers[allDateMarkers.length - 1].date.getTime();
+    }
+    
+    // Fallback to first marker's next marker (or first marker if only one)
+    return allDateMarkers.length > 1 ? allDateMarkers[1].date.getTime() : allDateMarkers[0].date.getTime();
+  }, [allDateMarkers]);
+
+  // Determine which dates should be bolded based on current ball positions
+  const boldedDates = useMemo(() => {
+    const leftIntervalStart = findIntervalStartForPosition(startPosition);
+    const rightIntervalEnd = findIntervalEndForPosition(endPosition);
+    
+    return new Set([leftIntervalStart, rightIntervalEnd]);
+  }, [startPosition, endPosition, findIntervalStartForPosition, findIntervalEndForPosition]);
+
   return (
     <div className="w-[92%] mx-auto py-4">
       {/* Slider Container */}
@@ -229,7 +291,11 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
         {/* Date Labels with Middle Dates */}
         <div className="relative mt-4">
           {/* Min date */}
-          <span className={`absolute left-0 text-base font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+          <span className={`absolute left-0 text-base ${
+            boldedDates.has(minDate.getTime()) 
+              ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}` 
+              : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`
+          }`}>
             {formatDate(minDate)}
           </span>
           
@@ -237,7 +303,11 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           {getMiddleDates.map((middleDateInfo, index) => (
             <span
               key={index}
-              className={`absolute text-sm font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}
+              className={`absolute text-sm ${
+                boldedDates.has(middleDateInfo.date.getTime())
+                  ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`
+                  : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`
+              }`}
               style={{ 
                 left: `${middleDateInfo.position}%`, 
                 transform: 'translateX(-50%)' 
@@ -248,7 +318,11 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           ))}
           
           {/* Max date */}
-          <span className={`absolute right-0 text-base font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+          <span className={`absolute right-0 text-base ${
+            boldedDates.has(maxDate.getTime()) 
+              ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}` 
+              : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`
+          }`}>
             {formatDate(maxDate)}
           </span>
         </div>

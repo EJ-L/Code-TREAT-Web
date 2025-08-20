@@ -1,9 +1,10 @@
-import { FC, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { FilterOptions, TaskType, Ability } from '@/lib/types';
 import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/lib/constants';
 
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
+import LeaderboardHeader from './LeaderboardHeader';
 import { TimelineFilter } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
 import { AnimatedResultsWrapper } from '@/app/components/ui/AnimatedResultsWrapper';
@@ -77,6 +78,7 @@ interface LeaderboardProps {
   });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
   
   // Callback for when column widths change to trigger scroll check
   const handleColumnWidthChange = useCallback(() => {
@@ -459,93 +461,139 @@ interface LeaderboardProps {
     return `${taskName}_leaderboard${difficultyStr}_${timestamp}.csv`;
   }, [currentTask, showByDifficulty]);
 
+  // Get available numeric metrics for scatter chart
+  const availableMetrics = useMemo(() => {
+    if (!results || !results.length) return [];
+    
+    const headers = getFilteredTableHeadersMemo(currentTask);
+    return headers
+      .filter(header => {
+        // Skip non-numeric columns
+        if (['rank', 'model', 'model_url', 'ability', 'task'].includes(header.key)) {
+          return false;
+        }
+        
+        // Check if this metric has numeric data in the results
+        const hasNumericData = results.some(result => {
+          const value = result[header.key];
+          return value !== '-' && value !== undefined && !isNaN(Number(value));
+        });
+        
+        return hasNumericData;
+      })
+      .map(header => header.key);
+  }, [results, currentTask, getFilteredTableHeadersMemo]);
+
+  // Check if chart view button should be shown
+  const shouldShowChartButton = useMemo(() => {
+    return currentTask !== 'overall' && availableMetrics.length > 0 && results.length > 0;
+  }, [currentTask, availableMetrics.length, results.length]);
+
   return (
-    <section id="evaluation" className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-            CODE-TREAT Leaderboard
-        </h1>
-          <p className={`text-xl ${isDarkMode ? 'text-slate-300' : 'text-slate-600'} max-w-3xl mx-auto leading-relaxed`}>
-            Compare the performance of different language models across various code-related tasks. 
-            Our comprehensive evaluation covers code generation, translation, summarization, and more.
-          </p>
-        </div>
-
-
-
-        <FilterPanel 
+    <div style={{ minHeight: '100vh', backgroundColor: isDarkMode ? '#0f1729' : 'white', position: 'relative', zIndex: 1 }}>
+        {/* Main Leaderboard Header - Always at top */}
+        <LeaderboardHeader
           currentTask={currentTask}
-          taskAbilities={taskAbilities}
-          selectedAbilities={selectedAbilities}
-          handleAbilityChange={handleAbilityChange}
-          availableLLMJudges={availableLLMJudges}
-          showByDifficulty={showByDifficulty}
-          setShowByDifficulty={setShowByDifficulty}
           isDarkMode={isDarkMode}
-          timelineRange={timelineRange}
-          onTimelineChange={handleTimelineChange}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          setIsComparisonModalOpen={setIsComparisonModalOpen}
+          shouldShowChartButton={shouldShowChartButton}
+          csvData={csvData}
+          csvFilename={csvFilename}
         />
 
+      <section className="py-4">
+        <div className="container mx-auto px-4">
+          {/* Main description - smaller and less prominent */}
+          <div className="text-center mb-6">
+            <p className={`text-base ${isDarkMode ? 'text-slate-400' : 'text-slate-600'} max-w-2xl mx-auto`}>
+              Compare performance across various code-related tasks.
+            </p>
+          </div>
 
-
-        <AnimatedResultsWrapper
-          timelineRange={timelineRange}
-          currentTask={currentTask}
-          resultCount={sortedResults.length}
-        >
-          <ResultsTable 
+          <FilterPanel 
             currentTask={currentTask}
-            results={results}
-            sortedResults={sortedResults}
-            isLoading={isLoading}
-            sortConfig={sortConfig}
-            setIsComparisonModalOpen={setIsComparisonModalOpen}
-            getTableHeaders={getFilteredTableHeadersMemo}
-            columnWidths={columnWidths}
-            resizingColumn={resizingColumn}
-            csvData={csvData}
-            csvFilename={csvFilename}
-            handleSort={handleSort}
-            handleResizeStart={handleResizeStart}
-            getContentWidth={getContentWidth}
-            isColumnCentered={isColumnCentered}
-            getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}
-            getStickyLeftPosition={(key: string) => getStickyLeftPosition(currentTask, key, columnWidths)}
-            getBackgroundColor={(key: string, isHeaderCell?: boolean) => 
-              getBackgroundColor(currentTask, key, isDarkMode, isHeaderCell)
-            }
-            getColumnAlignment={getColumnAlignment}
-            getNumericStyles={getNumericStyles}
-            truncateText={truncateText}
-            getTaskSpecificColumnWidth={(task: TaskType, key: string) => 
-              getTaskSpecificColumnWidth(task, key)
-            }
-            isDarkMode={isDarkMode}
-            onColumnWidthChange={handleColumnWidthChange}
-            timelineRange={timelineRange}
-            onTimelineChange={handleTimelineChange}
             taskAbilities={taskAbilities}
             selectedAbilities={selectedAbilities}
             handleAbilityChange={handleAbilityChange}
+            availableLLMJudges={availableLLMJudges}
             showByDifficulty={showByDifficulty}
             setShowByDifficulty={setShowByDifficulty}
-            availableLLMJudges={availableLLMJudges}
+            isDarkMode={isDarkMode}
+            timelineRange={timelineRange}
+            onTimelineChange={handleTimelineChange}
           />
-        </AnimatedResultsWrapper>
 
-        {/* Comparison Modal */}
-        <ModelComparisonModal 
-          isOpen={isComparisonModalOpen}
-          onClose={() => setIsComparisonModalOpen(false)}
-          results={sortedResults}
-          isDarkMode={isDarkMode}
-          currentTask={currentTask}
-          selectedAbilities={selectedAbilities}
-          showByDifficulty={showByDifficulty}
-        />
-      </div>
-    </section>
+          {/* Timeline Filter - positioned between filter panel and table */}
+          {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
+            <div className="w-full max-w-7xl mx-auto mt-4 mb-4">
+              <TimelineFilter 
+                taskType={currentTask}
+                isDarkMode={isDarkMode}
+                timelineRange={timelineRange}
+                onTimelineChange={handleTimelineChange}
+              />
+            </div>
+          )}
+
+          <AnimatedResultsWrapper
+            timelineRange={timelineRange}
+            currentTask={currentTask}
+            resultCount={sortedResults.length}
+          >
+            <ResultsTable 
+              currentTask={currentTask}
+              results={results}
+              sortedResults={sortedResults}
+              isLoading={isLoading}
+              sortConfig={sortConfig}
+              getTableHeaders={getFilteredTableHeadersMemo}
+              columnWidths={columnWidths}
+              resizingColumn={resizingColumn}
+              handleSort={handleSort}
+              handleResizeStart={handleResizeStart}
+              getContentWidth={getContentWidth}
+              isColumnCentered={isColumnCentered}
+              getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}
+              getStickyLeftPosition={(key: string) => getStickyLeftPosition(currentTask, key, columnWidths)}
+              getBackgroundColor={(key: string, isHeaderCell?: boolean) => 
+                getBackgroundColor(currentTask, key, isDarkMode, isHeaderCell)
+              }
+              getColumnAlignment={getColumnAlignment}
+              getNumericStyles={getNumericStyles}
+              truncateText={truncateText}
+              getTaskSpecificColumnWidth={(task: TaskType, key: string) => 
+                getTaskSpecificColumnWidth(task, key)
+              }
+              isDarkMode={isDarkMode}
+              onColumnWidthChange={handleColumnWidthChange}
+              timelineRange={timelineRange}
+              onTimelineChange={handleTimelineChange}
+              taskAbilities={taskAbilities}
+              selectedAbilities={selectedAbilities}
+              handleAbilityChange={handleAbilityChange}
+              showByDifficulty={showByDifficulty}
+              setShowByDifficulty={setShowByDifficulty}
+              availableLLMJudges={availableLLMJudges}
+              viewMode={viewMode}
+              setViewMode={setViewMode}
+            />
+          </AnimatedResultsWrapper>
+
+          {/* Comparison Modal */}
+          <ModelComparisonModal 
+            isOpen={isComparisonModalOpen}
+            onClose={() => setIsComparisonModalOpen(false)}
+            results={sortedResults}
+            isDarkMode={isDarkMode}
+            currentTask={currentTask}
+            selectedAbilities={selectedAbilities}
+            showByDifficulty={showByDifficulty}
+          />
+        </div>
+      </section>
+    </div>
   );
 };
 

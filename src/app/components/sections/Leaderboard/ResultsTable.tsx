@@ -17,12 +17,9 @@ interface ResultsTableProps {
   sortedResults: any[];
   isLoading: boolean;
   sortConfig: { key: string; direction: 'asc' | 'desc' } | null;
-  setIsComparisonModalOpen: (isOpen: boolean) => void;
   getTableHeaders: (task: TaskType) => { key: string; label: string; width: string; description: string }[];
   columnWidths: Record<string, number>;
   resizingColumn: string | null;
-  csvData: { headers: any[]; data: any[] };
-  csvFilename: string;
   handleSort: (key: string) => void;
   handleResizeStart: (e: React.MouseEvent, key: string) => void;
   getContentWidth: (columnWidth: number) => number;
@@ -45,6 +42,9 @@ interface ResultsTableProps {
   showByDifficulty?: boolean;
   setShowByDifficulty?: (value: boolean) => void;
   availableLLMJudges?: string[];
+  // View mode props
+  viewMode: 'table' | 'scatter';
+  setViewMode: (mode: 'table' | 'scatter') => void;
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -53,12 +53,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
   sortedResults,
   isLoading,
   sortConfig,
-  setIsComparisonModalOpen,
   getTableHeaders,
   columnWidths,
   resizingColumn,
-  csvData,
-  csvFilename,
   handleSort,
   handleResizeStart,
   getContentWidth,
@@ -79,7 +76,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
   handleAbilityChange,
   showByDifficulty = false,
   setShowByDifficulty,
-  availableLLMJudges = []
+  availableLLMJudges = [],
+  viewMode,
+  setViewMode
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -88,8 +87,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // State for scrollbar visibility
   const [needsHorizontalScroll, setNeedsHorizontalScroll] = useState(false);
   
-  // State for view mode (table or scatter chart)
-  const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
+  // View mode is now controlled from parent
   
   // State for current metric in scatter chart
   const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
@@ -246,122 +244,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
     <div 
       className={`RESULTS-TABLE-COMPONENT w-full max-w-7xl mx-auto ${isDarkMode ? 'dark' : ''}`}
     >
-      {/* Header section with title and buttons */}
-      <div className={`RESULTS-TABLE-HEADER ${isDarkMode ? 'dark' : ''}`}>
-        <h2 style={{
-          fontSize: '32px',
-          fontWeight: 'bold',
-          background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          margin: '0'
-        }}>
-          {currentTask.charAt(0).toUpperCase() + currentTask.slice(1)} Results
-        </h2>
-        
-        <div style={{ display: 'flex', gap: '8px' }}>
-          {/* Hide compare button for overall task since there are no metrics to compare */}
-          {currentTask !== 'overall' && (
-            <button
-              onClick={() => setIsComparisonModalOpen(true)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                color: 'white',
-                background: 'linear-gradient(to right, #6366f1, #8b5cf6)',
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '16px',
-                fontWeight: '500',
-                cursor: 'pointer'
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
-              </svg>
-              Compare
-            </button>
-          )}
-          
-          {/* Show chart view button only when we have metrics and data */}
-          {shouldShowChartButton && (
-            <button
-              onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                color: 'white',
-                background: viewMode === 'table' 
-                  ? 'linear-gradient(to right, #f59e0b, #d97706)' 
-                  : 'linear-gradient(to right, #10b981, #14b8a6)',
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '16px',
-                fontWeight: '500',
-                cursor: 'pointer'
-              }}
-            >
-              {viewMode === 'table' ? (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
-                  </svg>
-                  Chart View
-                </>
-              ) : (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V3zM3 9a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V9zM4 14a1 1 0 00-1 1v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-1-1H4z"/>
-                  </svg>
-                  Table View
-                </>
-              )}
-            </button>
-          )}
-
-          <div style={{
-            padding: '8px 16px',
-            borderRadius: '8px',
-            color: 'white',
-            background: 'linear-gradient(to right, #10b981, #14b8a6)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontSize: '16px',
-            fontWeight: '500',
-            cursor: 'pointer'
-          }}>
-            <ClientOnlyCSVLink
-              data={csvData.data}
-              headers={csvData.headers}
-              filename={csvFilename}
-              className="flex items-center gap-2 text-white"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-              Export
-            </ClientOnlyCSVLink>
-          </div>
-        </div>
-      </div>
+      {/* Header section moved to parent component */}
       
-      {/* Timeline Filter - positioned between title and table, only show in table view */}
-      {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
-        <div className="w-full max-w-7xl mx-auto mt-6 mb-6">
-          <TimelineFilter 
-            taskType={currentTask}
-            isDarkMode={isDarkMode}
-            timelineRange={timelineRange}
-            onTimelineChange={onTimelineChange}
-          />
-        </div>
-      )}
+      {/* Timeline Filter moved to parent component */}
       
       {/* Enhanced Filter Bar - right under timeline */}
       {viewMode === 'table' && (
@@ -516,16 +401,22 @@ const ResultsTable: FC<ResultsTableProps> = ({
             padding: '80px 20px'
           }}>
             <div style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: isDarkMode ? '#e2e8f0' : '#334155',
+              width: '40px',
+              height: '40px',
+              border: '4px solid #3b82f6',
+              borderTop: '4px solid transparent',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
               marginBottom: '16px'
-            }}>
-              Loading...
-            </div>
+            }}></div>
+            <span style={{
+              color: isDarkMode ? '#cbd5e1' : '#475569',
+              fontSize: '18px',
+              fontWeight: '500'
+            }}>Loading results...</span>
           </div>
         ) : sortedResults.length === 0 ? (
-          // Show "no results" message only when there's genuinely no data to show
+          // Show no results message when not loading but no data
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -533,14 +424,19 @@ const ResultsTable: FC<ResultsTableProps> = ({
             justifyContent: 'center',
             padding: '80px 20px'
           }}>
+            <svg style={{ width: '48px', height: '48px', marginBottom: '16px', color: '#94a3b8' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             <span style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: isDarkMode ? '#e2e8f0' : '#334155',
-              marginBottom: '8px'
+              color: isDarkMode ? '#cbd5e1' : '#475569',
+              fontSize: '18px',
+              fontWeight: '500'
             }}>No results found</span>
-            <span style={{ color: isDarkMode ? '#94a3b8' : '#64748b', fontSize: '16px' }}>
-Try adjusting your filters</span>
+            <span style={{
+              color: isDarkMode ? '#94a3b8' : '#64748b',
+              fontSize: '14px',
+              marginTop: '8px'
+            }}>Try adjusting your filters</span>
           </div>
         ) : viewMode === 'table' ? (
           // Show complete table when loaded and has data

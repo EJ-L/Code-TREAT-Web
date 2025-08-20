@@ -209,9 +209,9 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
   }, [startPosition, endPosition, findIntervalStartForPosition, findIntervalEndForPosition]);
 
   return (
-    <div className="w-[92%] mx-auto py-4">
+    <div className="w-[95%] sm:w-[92%] mx-auto py-2 sm:py-4">
       {/* Slider Container */}
-      <div className="relative mb-6 px-6 md:px-8">
+      <div className="relative mb-4 sm:mb-6 px-3 sm:px-6 md:px-8">
         {/* Slider Track */}
         <div
           ref={sliderRef}
@@ -242,7 +242,7 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           {/* Start Handle with Always-Visible Label */}
           <div className="absolute" style={{ left: `${startPosition}%`, transform: 'translateX(-50%)' }}>
             {/* Always visible date label */}
-            <div className={`absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg text-base font-semibold whitespace-nowrap ${
+            <div className={`absolute bottom-full mb-2 sm:mb-3 left-1/2 transform -translate-x-1/2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base font-semibold whitespace-nowrap ${
               isDarkMode 
                 ? 'bg-slate-800 text-slate-200 border border-slate-600' 
                 : 'bg-gray-800 text-white'
@@ -266,7 +266,7 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           {/* End Handle with Always-Visible Label */}
           <div className="absolute" style={{ left: `${endPosition}%`, transform: 'translateX(-50%)' }}>
             {/* Always visible date label */}
-            <div className={`absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg text-base font-semibold whitespace-nowrap ${
+            <div className={`absolute bottom-full mb-2 sm:mb-3 left-1/2 transform -translate-x-1/2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-base font-semibold whitespace-nowrap ${
               isDarkMode 
                 ? 'bg-slate-800 text-slate-200 border border-slate-600' 
                 : 'bg-gray-800 text-white'
@@ -288,10 +288,10 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           </div>
         </div>
         
-        {/* Date Labels with Middle Dates */}
-        <div className="relative mt-4">
+        {/* Date Labels with Middle Dates - Responsive */}
+        <div className="relative mt-3 sm:mt-4">
           {/* Min date */}
-          <span className={`absolute left-0 text-base ${
+          <span className={`absolute left-0 text-xs sm:text-base ${
             boldedDates.has(minDate.getTime()) 
               ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}` 
               : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`
@@ -299,11 +299,13 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
             {formatDate(minDate)}
           </span>
           
-          {/* Middle dates */}
+          {/* Middle dates - Hide some on mobile */}
           {getMiddleDates.map((middleDateInfo, index) => (
             <span
               key={index}
-              className={`absolute text-sm ${
+              className={`absolute text-xs sm:text-sm ${
+                index % 2 === 1 ? 'hidden sm:inline' : '' // Hide every other middle date on mobile
+              } ${
                 boldedDates.has(middleDateInfo.date.getTime())
                   ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`
                   : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`
@@ -318,7 +320,7 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
           ))}
           
           {/* Max date */}
-          <span className={`absolute right-0 text-base ${
+          <span className={`absolute right-0 text-xs sm:text-base ${
             boldedDates.has(maxDate.getTime()) 
               ? `font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}` 
               : `font-medium ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`

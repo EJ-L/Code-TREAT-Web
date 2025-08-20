@@ -245,7 +245,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
       
       {/* Timeline Filter moved to parent component */}
       
-      {/* Enhanced Filter Bar - right under timeline, hidden in chart view */}
+      {/* Enhanced Filter Bar - right under timeline, hidden in chart view - Responsive */}
       {viewMode === 'table' && (() => {
         // Check if we should show filter section at all
         const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
@@ -308,8 +308,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
         const shouldUseInlineLayout = renderableFilters.length >= 2 && renderableFilters.length <= 3 && availableFilters.length > 0;
 
         return (
-        <div className="w-full max-w-7xl mx-auto mb-6">
-          <div className={`w-full p-6 rounded-lg border ${
+        <div className="w-full max-w-7xl mx-auto mb-4 sm:mb-6">
+          <div className={`w-full p-3 sm:p-6 rounded-lg border ${
             isDarkMode 
               ? 'bg-slate-800/50 border-slate-700/50' 
               : 'bg-slate-50 border-slate-200'
@@ -317,9 +317,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
             {/* Conditional Layout Based on Number of Filters */}
             {shouldUseInlineLayout ? (
               /* Inline layout for 2-3 filters */
-              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 lg:gap-4 flex-shrink-0">
-                  <h3 className={`text-xl font-bold ${
+              <div className="flex flex-col lg:flex-row lg:items-center gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 lg:gap-4 flex-shrink-0">
+                  <h3 className={`text-lg sm:text-xl font-bold ${
                     isDarkMode ? 'text-slate-100' : 'text-slate-800'
                   }`}>
                     Filters:
@@ -327,7 +327,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 </div>
                 
                 {/* Filter Dropdowns in same line */}
-                <div className="flex flex-col sm:flex-row gap-4 flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1 min-w-0">
                   {renderableFilters.map((filter) => {
                     const options = getDropdownOptions(filter);
                     const currentSelections = getCurrentSelections(filter.key);
@@ -340,7 +340,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                         selectedValues={currentSelections}
                         onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
                         isDarkMode={isDarkMode}
-                        maxDisplayedTags={2}
+                        maxDisplayedTags={1} // Reduce tags on mobile
                         className="min-w-0 flex-1"
                       />
                     );
@@ -351,8 +351,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
               /* Original layout for 1 or 4+ filters */
               <>
                 {/* Header with Filters title */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                  <h3 className={`text-xl font-bold ${
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+                  <h3 className={`text-lg sm:text-xl font-bold ${
                     isDarkMode ? 'text-slate-100' : 'text-slate-800'
                   }`}>
                     Filters:
@@ -361,8 +361,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
 
                 {/* Functional Filter Dropdowns Section */}
                 {renderableFilters.length > 0 && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                       {renderableFilters.map((filter) => {
                         const options = getDropdownOptions(filter);
                         const currentSelections = getCurrentSelections(filter.key);
@@ -375,7 +375,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                             selectedValues={currentSelections}
                             onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
                             isDarkMode={isDarkMode}
-                            maxDisplayedTags={2}
+                            maxDisplayedTags={1} // Reduce tags on mobile
                             className="min-w-0"
                           />
                         );

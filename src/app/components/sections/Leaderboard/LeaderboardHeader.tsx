@@ -48,18 +48,18 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
         }}
       />
       <div className="container mx-auto px-4" style={{ position: 'relative', zIndex: 1 }}>
-        {/* Main Title - Very Large and Centered */}
-        <div className="text-center mb-6">
+        {/* Main Title - Responsive */}
+        <div className="text-center mb-4 md:mb-6">
           <h1 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)', // Smaller, more reasonable size
+            fontSize: 'clamp(1.5rem, 4vw, 3.5rem)', // More responsive size range
             fontWeight: 'bold',
             background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             margin: '0',
-            lineHeight: '1.2', // Better line height for multi-line
-            maxWidth: '800px', // Constrain width to encourage line breaks
+            lineHeight: '1.2',
+            maxWidth: '100%', // Allow full width on mobile
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
@@ -67,23 +67,24 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
           </h1>
         </div>
         
-        {/* Buttons Section - Centered Under Title */}
-        <div className="flex flex-wrap justify-center items-center gap-4">
+        {/* Buttons Section - Responsive Layout */}
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-2 sm:gap-4">
           {/* Hide compare button for overall task since there are no metrics to compare */}
           {currentTask !== 'overall' && (
             <button
               onClick={() => setIsComparisonModalOpen(true)}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg text-white font-medium text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg min-w-0"
               style={{
                 background: 'linear-gradient(to right, #6366f1, #8b5cf6)',
                 border: 'none',
                 cursor: 'pointer'
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '24px', width: '24px' }} viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
               </svg>
-              Compare
+              <span className="hidden xs:inline sm:inline">Compare</span>
+              <span className="xs:hidden sm:hidden">Compare</span>
             </button>
           )}
           
@@ -91,7 +92,7 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
           {shouldShowChartButton && (
             <button
               onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg text-white font-medium text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg min-w-0"
               style={{
                 background: viewMode === 'table' 
                   ? 'linear-gradient(to right, #f59e0b, #d97706)' 
@@ -102,23 +103,25 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
             >
               {viewMode === 'table' ? (
                 <>
-                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '24px', width: '24px' }} viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
                   </svg>
-                  Chart View
+                  <span className="hidden sm:inline">{viewMode === 'table' ? 'Chart View' : 'Table View'}</span>
+                  <span className="sm:hidden">Chart</span>
                 </>
               ) : (
                 <>
-                  <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '24px', width: '24px' }} viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V3zM3 9a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V9zM4 14a1 1 0 00-1 1v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-1-1H4z"/>
                   </svg>
-                  Table View
+                  <span className="hidden sm:inline">Table View</span>
+                  <span className="sm:hidden">Table</span>
                 </>
               )}
             </button>
           )}
 
-          <div className="flex items-center gap-2 px-6 py-3 rounded-lg text-white font-medium text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer"
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer min-w-0"
                style={{
                  background: 'linear-gradient(to right, #10b981, #14b8a6)'
                }}>
@@ -126,12 +129,13 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
               data={csvData.data}
               headers={csvData.headers}
               filename={csvFilename}
-              className="flex items-center gap-2 text-white"
+              className="flex items-center gap-1 sm:gap-2 text-white"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '24px', width: '24px' }} viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
-              Export
+              <span className="hidden sm:inline">Export</span>
+              <span className="sm:hidden">Export</span>
             </ClientOnlyCSVLink>
           </div>
         </div>

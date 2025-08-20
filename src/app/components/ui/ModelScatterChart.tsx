@@ -630,13 +630,13 @@ const ModelScatterChart = ({
 
   return (
     <div className="w-full">
-      {/* Metric selector buttons */}
-      <div className="mb-6 flex flex-wrap gap-3 justify-center">
+      {/* Metric selector buttons - Responsive */}
+      <div className="mb-4 sm:mb-6 flex flex-wrap gap-2 sm:gap-3 justify-center">
         {availableMetrics.map((metric) => (
           <button
             key={metric}
             onClick={() => onMetricChange(metric)}
-            className={`px-6 py-4 text-l font-medium rounded-lg transition-all ${
+            className={`px-3 sm:px-6 py-2 sm:py-4 text-sm sm:text-lg font-medium rounded-lg transition-all ${
               currentMetric === metric
                 ? isDarkMode
                   ? 'bg-blue-600 text-white'
@@ -646,17 +646,18 @@ const ModelScatterChart = ({
                 : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
             }`}
           >
-            {metric}
+            <span className="hidden sm:inline">{metric}</span>
+            <span className="sm:hidden text-xs">{metric.length > 10 ? metric.substring(0, 8) + '...' : metric}</span>
           </button>
         ))}
       </div>
 
-      {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard */}
+      {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard - Responsive */}
       {currentTask === 'code-robustness' && (
-        <div className="mb-6 flex flex-wrap gap-3 justify-center">
+        <div className="mb-4 sm:mb-6 flex flex-wrap gap-2 sm:gap-3 justify-center">
           <button
             onClick={() => setShowCoTModels(!showCoTModels)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all flex items-center gap-1 sm:gap-2 ${
               showCoTModels
                 ? isDarkMode
                   ? 'bg-green-600 text-white'
@@ -666,15 +667,16 @@ const ModelScatterChart = ({
                 : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
             }`}
           >
-            <div className={`w-3 h-3 rounded-full ${
+            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
               isDarkMode ? 'bg-green-400' : 'bg-green-500'
             }`}></div>
-            CoT Models
+            <span className="hidden sm:inline">CoT Models</span>
+            <span className="sm:hidden">CoT</span>
           </button>
           
           <button
             onClick={() => setShowRegularModels(!showRegularModels)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-2 ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all flex items-center gap-1 sm:gap-2 ${
               showRegularModels
                 ? isDarkMode
                   ? 'bg-blue-600 text-white'
@@ -684,16 +686,17 @@ const ModelScatterChart = ({
                 : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
             }`}
           >
-            <div className={`w-3 h-3 rounded-full ${
+            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
               isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
             }`}></div>
-            Regular Models
+            <span className="hidden sm:inline">Regular Models</span>
+            <span className="sm:hidden">Regular</span>
           </button>
         </div>
       )}
 
-      {/* Graph's Independent Timeline Filter */}
-      <div className="mb-6">
+      {/* Graph's Independent Timeline Filter - Responsive */}
+      <div className="mb-4 sm:mb-6">
         <TimelineSlider
           minDate={dateBounds.min}
           maxDate={dateBounds.max}
@@ -704,21 +707,21 @@ const ModelScatterChart = ({
         />
       </div>
 
-      {/* Y-axis label and chart controls */}
-      <div className="mb-4 flex items-center justify-between">
-        <div className="text-left pl-16">
-          <span className={`text-lg font-semibold ${
+      {/* Y-axis label and chart controls - Responsive */}
+      <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
+        <div className="text-left pl-4 sm:pl-16 order-2 sm:order-1">
+          <span className={`text-sm sm:text-lg font-semibold ${
             isDarkMode ? 'text-slate-300' : 'text-slate-700'
           }`}>
             {currentMetric}
           </span>
         </div>
         
-        {/* Chart Controls */}
-        <div className="flex items-center gap-2 pr-8">
+        {/* Chart Controls - Responsive */}
+        <div className="flex flex-wrap items-center gap-1 sm:gap-2 pr-2 sm:pr-8 order-1 sm:order-2">
           <button
             onClick={handleResetGraphTimeline}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+            className={`px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
               graphTimelineRange
                 ? isDarkMode
                   ? 'bg-slate-600 text-white hover:bg-slate-500'
@@ -730,11 +733,12 @@ const ModelScatterChart = ({
             title="Reset Chart Timeline Filter"
             disabled={!graphTimelineRange}
           >
-            🗓️ Reset Timeline
+            <span className="hidden sm:inline">🗓️ Reset Timeline</span>
+            <span className="sm:hidden">🗓️</span>
           </button>
           <button
             onClick={() => handleZoomIn()}
-            className={`px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+            className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
               isDarkMode
                 ? 'bg-slate-600 text-white hover:bg-slate-500'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
@@ -745,7 +749,7 @@ const ModelScatterChart = ({
           </button>
           <button
             onClick={() => handleZoomOut()}
-            className={`px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+            className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
               isDarkMode
                 ? 'bg-slate-600 text-white hover:bg-slate-500'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
@@ -756,7 +760,7 @@ const ModelScatterChart = ({
           </button>
           <button
             onClick={handleResetZoom}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+            className={`px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
               zoomState
                 ? isDarkMode
                   ? 'bg-slate-600 text-white hover:bg-slate-500'
@@ -768,14 +772,16 @@ const ModelScatterChart = ({
             title="Reset Zoom (Double Click)"
             disabled={!zoomState}
           >
-            🔄 Reset Zoom
+            <span className="hidden sm:inline">🔄 Reset Zoom</span>
+            <span className="sm:hidden">🔄</span>
           </button>
-          <span className={`text-sm ${
+          <span className={`text-xs sm:text-sm whitespace-nowrap ${
             isDarkMode ? 'text-slate-400' : 'text-slate-500'
           }`}>
-            {filteredData.length} models
-            {graphTimelineRange && ' (filtered)'}
-            {zoomState && ' (zoomed)'}
+            <span className="hidden sm:inline">{filteredData.length} models</span>
+            <span className="sm:hidden">{filteredData.length}</span>
+            {graphTimelineRange && <span className="hidden sm:inline"> (filtered)</span>}
+            {zoomState && <span className="hidden sm:inline"> (zoomed)</span>}
           </span>
         </div>
       </div>
@@ -808,7 +814,7 @@ const ModelScatterChart = ({
         // Show chart when there are results
         <div 
           ref={chartContainerRef}
-          className="h-[700px] relative"
+          className="h-[400px] sm:h-[500px] lg:h-[700px] relative"
           tabIndex={0}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMoveCapture}
@@ -856,10 +862,10 @@ const ModelScatterChart = ({
             <ScatterChart
               data={filteredData}
               margin={{
-                top: 20,
-                right: 30,
-                left: 60,
-                bottom: 80
+                top: window.innerWidth < 640 ? 15 : 20,
+                right: window.innerWidth < 640 ? 20 : 30,
+                left: window.innerWidth < 640 ? 50 : 60,
+                bottom: window.innerWidth < 640 ? 60 : 80
               }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -872,27 +878,27 @@ const ModelScatterChart = ({
                 type="number"
                 dataKey="x"
                 domain={xDomain}
-                tick={{ fill: isDarkMode ? "#cbd5e0" : "#4a5568", fontSize: 12 }}
+                tick={{ fill: isDarkMode ? "#cbd5e0" : "#4a5568", fontSize: window.innerWidth < 640 ? 10 : 12 }}
                 tickFormatter={formatXAxisDate}
-                angle={-45}
+                angle={window.innerWidth < 640 ? -60 : -45}
                 textAnchor="end"
-                height={80}
+                height={window.innerWidth < 640 ? 60 : 80}
               >
                 <Label 
                   value="Model Release Date" 
                   position="bottom" 
-                  offset={-20}
+                  offset={window.innerWidth < 640 ? -10 : -20}
                   fill={isDarkMode ? "#cbd5e0" : "#4a5568"}
-                  style={{ fontWeight: 'bold' }}
+                  style={{ fontWeight: 'bold', fontSize: window.innerWidth < 640 ? '12px' : '14px' }}
                 />
               </XAxis>
               <YAxis 
                 type="number"
                 dataKey="y"
                 domain={yDomain}
-                tick={{ fill: isDarkMode ? "#cbd5e0" : "#4a5568" }}
+                tick={{ fill: isDarkMode ? "#cbd5e0" : "#4a5568", fontSize: window.innerWidth < 640 ? 10 : 12 }}
                 tickFormatter={formatYAxisValue}
-                width={60}
+                width={window.innerWidth < 640 ? 50 : 60}
               />
               <Tooltip 
                 content={<CustomTooltip />}

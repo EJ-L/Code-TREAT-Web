@@ -29,7 +29,7 @@ const formatDifficultyHeader = (label: string): JSX.Element => {
     const [difficulty, metric] = label.split(' ');
     return (
       <div className="flex flex-col items-center justify-center">
-        <span className="text-sm font-bold">{difficulty}</span>
+        <span className="text-xs sm:text-sm font-bold">{difficulty}</span>
         <span>{metric}</span>
       </div>
     );
@@ -65,7 +65,7 @@ const TableHeader: FC<TableHeaderProps> = ({
     <th 
       key={header.key} 
       data-key={header.key}
-      className={`relative px-6 py-3 text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
+      className={`relative px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
         // Only apply base background colors if getBackgroundColor doesn't return a custom color
         bgColor ? '' : (isDarkMode 
           ? 'text-slate-300 bg-[#121c2b]' 
@@ -75,7 +75,7 @@ const TableHeader: FC<TableHeaderProps> = ({
         isDarkMode ? 'text-slate-300' : 'text-slate-600'
       } ${stickyStyles} ${bgColor} ${
         (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
-          ? 'py-4' : ''
+          ? 'py-3 sm:py-4' : ''
       } ${isDarkMode ? 'border-b border-white/20' : 'border-b border-black/20'}`}
       style={{ 
         width: columnWidth,

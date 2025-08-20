@@ -1,9 +1,10 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Ability, TaskType } from '@/lib/types';
 import { DataLoader } from '@/app/components/DataLoader';
 import Background from '@/app/components/layout/Background';
 import Sidebar from '@/app/components/layout/Sidebar';
+
 import OverviewPage from '@/app/components/pages/OverviewPage';
 import TasksPage from '@/app/components/pages/TasksPage';
 import AboutPage from '@/app/components/pages/AboutPage';
@@ -118,6 +119,49 @@ export default function Home() {
   const [currentSection, setCurrentSection] = useState<'overview' | 'tasks' | 'about'>('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState<TaskType>('overall');
+
+  // URL synchronization - update hash when section changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const sectionToHash = {
+        'overview': '#home',
+        'tasks': '#evaluation', 
+        'about': '#about'
+      };
+      window.location.hash = sectionToHash[currentSection];
+    }
+  }, [currentSection]);
+
+  // Read URL hash on page load to restore section state
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hashToSection = {
+        '#home': 'overview' as const,
+        '#evaluation': 'tasks' as const,
+        '#about': 'about' as const,
+        '': 'overview' as const // Default case
+      };
+      
+      const currentHash = window.location.hash || '';
+      const sectionFromHash = hashToSection[currentHash as keyof typeof hashToSection];
+      
+      if (sectionFromHash && sectionFromHash !== currentSection) {
+        setCurrentSection(sectionFromHash);
+      }
+
+      // Listen for hash changes (back/forward navigation)
+      const handleHashChange = () => {
+        const newHash = window.location.hash || '';
+        const newSection = hashToSection[newHash as keyof typeof hashToSection];
+        if (newSection && newSection !== currentSection) {
+          setCurrentSection(newSection);
+        }
+      };
+
+      window.addEventListener('hashchange', handleHashChange);
+      return () => window.removeEventListener('hashchange', handleHashChange);
+    }
+  }, [currentSection]);
 
   const handleSectionChange = (section: 'overview' | 'tasks' | 'about') => {
     setCurrentSection(section);

@@ -31,7 +31,6 @@ import {
   truncateText,
   getTaskSpecificColumnWidth,
   getDefaultSortConfig,
-  supportsShowByDifficulty,
   sortResults,
   handleSortChange,
   getMaxColumnWidth
@@ -48,24 +47,6 @@ interface LeaderboardProps {
   const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode, initialTask }) => {
   const [currentTask, setCurrentTask] = useState<TaskType>(initialTask || 'overall');
   const [timelineRange, setTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
-
-  // Update currentTask when initialTask changes
-  useEffect(() => {
-    if (initialTask && initialTask !== currentTask) {
-      setCurrentTask(initialTask);
-      // Reset filters and settings when task changes
-      setSelectedAbilities({});
-      setSortConfig(getDefaultSortConfig(initialTask));
-      
-      // Reset showByDifficulty if task doesn't support it
-      if (!supportsShowByDifficulty(initialTask)) {
-        setShowByDifficulty(false);
-      }
-      
-      // Close comparison modal when task changes
-      setIsComparisonModalOpen(false);
-    }
-  }, [initialTask, currentTask]);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +64,34 @@ interface LeaderboardProps {
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
   
+  // Helper function to check if a task supports chart view
+  const supportsChartView = useCallback((task: TaskType) => {
+    return task !== 'overall';
+  }, []);
+  
+  // Update currentTask when initialTask changes
+  useEffect(() => {
+    if (initialTask && initialTask !== currentTask) {
+      setCurrentTask(initialTask);
+      // Reset filters and settings when task changes
+      setSelectedAbilities({});
+      setSortConfig(getDefaultSortConfig(initialTask));
+      
+      // Reset showByDifficulty if task doesn't support it
+      if (!filterConditions.shouldShowDifficultyToggle(initialTask)) {
+        setShowByDifficulty(false);
+      }
+      
+      // Reset viewMode to table if switching to a task that doesn't support chart view
+      if (!supportsChartView(initialTask)) {
+        setViewMode('table');
+      }
+      
+      // Close comparison modal when task changes
+      setIsComparisonModalOpen(false);
+    }
+  }, [initialTask, currentTask, supportsChartView]);
+  
   // Callback for when column widths change to trigger scroll check
   const handleColumnWidthChange = useCallback(() => {
     // This will be handled by ResultsTable's internal effects
@@ -96,8 +105,13 @@ interface LeaderboardProps {
     setSelectedAbilities({});
     
     // Reset showByDifficulty if task doesn't support it
-    if (!supportsShowByDifficulty(task)) {
+    if (!filterConditions.shouldShowDifficultyToggle(task)) {
       setShowByDifficulty(false);
+    }
+    
+    // Reset viewMode to table if switching to a task that doesn't support chart view
+    if (!supportsChartView(task)) {
+      setViewMode('table');
     }
     
     // Close comparison modal when task changes
@@ -200,7 +214,7 @@ interface LeaderboardProps {
 
   // Reset showByDifficulty when task changes to one that doesn't support it
   useEffect(() => {
-    if (!supportsShowByDifficulty(currentTask)) {
+    if (!filterConditions.shouldShowDifficultyToggle(currentTask)) {
       setShowByDifficulty(false);
     }
   }, [currentTask]);
@@ -497,8 +511,8 @@ interface LeaderboardProps {
 
   // Check if chart view button should be shown
   const shouldShowChartButton = useMemo(() => {
-    return currentTask !== 'overall' && availableMetrics.length > 0 && results.length > 0;
-  }, [currentTask, availableMetrics.length, results.length]);
+    return supportsChartView(currentTask) && availableMetrics.length > 0 && results.length > 0;
+  }, [currentTask, availableMetrics.length, results.length, supportsChartView]);
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: isDarkMode ? '#0f1729' : 'white', position: 'relative', zIndex: 1 }}>
@@ -531,7 +545,7 @@ interface LeaderboardProps {
           />
 
           {/* Timeline Filter - positioned between filter panel and table */}
-          {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
+          {filterConditions.shouldShowTimeline(currentTask) && (
             <div className="w-full max-w-7xl mx-auto mt-4 mb-4">
               <TimelineFilter 
                 taskType={currentTask}

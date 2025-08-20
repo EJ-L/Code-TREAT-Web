@@ -249,16 +249,68 @@ const ResultsTable: FC<ResultsTableProps> = ({
       {/* Timeline Filter moved to parent component */}
       
       {/* Enhanced Filter Bar - right under timeline */}
-      {viewMode === 'table' && (() => {
+      {(() => {
         // Check if we should show filter section at all
         const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
-        const hasDifficultyToggle = (currentTask === 'output prediction' || currentTask === 'input prediction' || currentTask === 'code generation' || currentTask === 'code translation');
+        const hasDifficultyToggle = filterConditions.shouldShowDifficultyToggle(currentTask);
         
         // Hide entire filter section if no filters and no difficulty toggle
         if (availableFilters.length === 0 && !hasDifficultyToggle) {
           return null;
         }
         
+        // Transform filter data into dropdown options
+        const getDropdownOptions = (filter: any) => {
+          const values = filter.getValues(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
+          const filterState = new FilterState(filter, selectedAbilities, currentTask, showByDifficulty, taskAbilities as Record<TaskType, Ability>);
+          
+          return values.map((value: string) => ({
+            value,
+            label: filterState.getDisplayText(value),
+            disabled: filterState.isDisabled(value) || filterState.isRestricted(value)
+          }));
+        };
+
+        // Handle multi-select changes
+        const handleMultiSelectChange = (filterKey: keyof Ability | 'llmJudges', selectedValues: string[]) => {
+          if (!handleAbilityChange) return;
+          
+          const currentSelections = selectedAbilities[filterKey as keyof Ability] || [];
+          
+          // Find values to remove (in current but not in new selection)
+          const valuesToRemove = currentSelections.filter(value => !selectedValues.includes(value));
+          
+          // Find values to add (in new selection but not in current)
+          const valuesToAdd = selectedValues.filter(value => !currentSelections.includes(value));
+          
+          // Remove deselected values
+          valuesToRemove.forEach(value => {
+            handleAbilityChange(filterKey as keyof Ability, value);
+          });
+          
+          // Add newly selected values
+          valuesToAdd.forEach(value => {
+            handleAbilityChange(filterKey as keyof Ability, value);
+          });
+        };
+
+        // Get current selections for a filter
+        const getCurrentSelections = (filterKey: keyof Ability | 'llmJudges'): string[] => {
+          if (filterKey === 'llmJudges') {
+            return selectedAbilities.llmJudges || [];
+          }
+          return selectedAbilities[filterKey as keyof Ability] || [];
+        };
+
+        // Count the number of filters that will actually be rendered
+        const renderableFilters = availableFilters.filter(filter => {
+          const options = getDropdownOptions(filter);
+          return options.length > 0;
+        });
+        
+        // Determine if we should use inline layout (2-3 filters)
+        const shouldUseInlineLayout = renderableFilters.length >= 2 && renderableFilters.length <= 3 && availableFilters.length > 0;
+
         return (
         <div className="w-full max-w-7xl mx-auto mb-6">
           <div className={`w-full p-6 rounded-lg border ${
@@ -266,122 +318,131 @@ const ResultsTable: FC<ResultsTableProps> = ({
               ? 'bg-slate-800/50 border-slate-700/50' 
               : 'bg-slate-50 border-slate-200'
           }`}>
-            {/* Header with Filters title and difficulty toggle */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <h3 className={`text-xl font-bold ${
-                isDarkMode ? 'text-slate-100' : 'text-slate-800'
-              }`}>
-                Filters:
-              </h3>
-              
-              {/* Functional difficulty toggle - using exact CompactFilterBar styling */}
-                {hasDifficultyToggle && (
-                <div className="flex items-center gap-2 text-nowrap">
-                  <input 
-                    type="checkbox" 
-                    id="functional-difficulty-toggle"
-                    checked={showByDifficulty}
-                    onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
-                    className={`
-                      w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
-                      ${isDarkMode
-                        ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
-                        : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
-                      }
-                    `}
-                  />
-                  <label 
-                    htmlFor="functional-difficulty-toggle"
-                    className={`text-sm font-medium cursor-pointer select-none ${
-                      isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                    }`}
-                  >
-                    Show results by difficulty
-                  </label>
+            {/* Conditional Layout Based on Number of Filters */}
+            {shouldUseInlineLayout ? (
+              /* Inline layout for 2-3 filters */
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 lg:gap-4 flex-shrink-0">
+                  <h3 className={`text-xl font-bold ${
+                    isDarkMode ? 'text-slate-100' : 'text-slate-800'
+                  }`}>
+                    Filters:
+                  </h3>
+                  
+                  {/* Functional difficulty toggle */}
+                  {hasDifficultyToggle && (
+                    <div className="flex items-center gap-2 text-nowrap">
+                      <input 
+                        type="checkbox" 
+                        id="functional-difficulty-toggle"
+                        checked={showByDifficulty}
+                        onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
+                        className={`
+                          w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
+                          ${isDarkMode
+                            ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
+                            : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
+                          }
+                        `}
+                      />
+                      <label 
+                        htmlFor="functional-difficulty-toggle"
+                        className={`text-sm font-medium cursor-pointer select-none ${
+                          isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                        }`}
+                      >
+                        Show results by difficulty
+                      </label>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            {/* Functional Filter Dropdowns Section */}
-            <div className="space-y-4">
-              {(() => {
-                  // We already have availableFilters from above
                 
-                // Transform filter data into dropdown options
-                const getDropdownOptions = (filter: any) => {
-                  const values = filter.getValues(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
-                  const filterState = new FilterState(filter, selectedAbilities, currentTask, showByDifficulty, taskAbilities as Record<TaskType, Ability>);
+                {/* Filter Dropdowns in same line */}
+                <div className="flex flex-col sm:flex-row gap-4 flex-1 min-w-0">
+                  {renderableFilters.map((filter) => {
+                    const options = getDropdownOptions(filter);
+                    const currentSelections = getCurrentSelections(filter.key);
+                    
+                    return (
+                      <MultiSelectDropdown
+                        key={filter.key}
+                        label={filter.label}
+                        options={options}
+                        selectedValues={currentSelections}
+                        onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
+                        isDarkMode={isDarkMode}
+                        maxDisplayedTags={2}
+                        className="min-w-0 flex-1"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              /* Original layout for 1 or 4+ filters */
+              <>
+                {/* Header with Filters title and difficulty toggle */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                  <h3 className={`text-xl font-bold ${
+                    isDarkMode ? 'text-slate-100' : 'text-slate-800'
+                  }`}>
+                    Filters:
+                  </h3>
                   
-                  return values.map((value: string) => ({
-                    value,
-                    label: filterState.getDisplayText(value),
-                    disabled: filterState.isDisabled(value) || filterState.isRestricted(value)
-                  }));
-                };
+                  {/* Functional difficulty toggle - using exact CompactFilterBar styling */}
+                    {hasDifficultyToggle && (
+                    <div className="flex items-center gap-2 text-nowrap">
+                      <input 
+                        type="checkbox" 
+                        id="functional-difficulty-toggle"
+                        checked={showByDifficulty}
+                        onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
+                        className={`
+                          w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
+                          ${isDarkMode
+                            ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
+                            : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
+                          }
+                        `}
+                      />
+                      <label 
+                        htmlFor="functional-difficulty-toggle"
+                        className={`text-sm font-medium cursor-pointer select-none ${
+                          isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                        }`}
+                      >
+                        Show results by difficulty
+                      </label>
+                    </div>
+                  )}
+                </div>
 
-                // Handle multi-select changes
-                const handleMultiSelectChange = (filterKey: keyof Ability | 'llmJudges', selectedValues: string[]) => {
-                  if (!handleAbilityChange) return;
-                  
-                  const currentSelections = selectedAbilities[filterKey as keyof Ability] || [];
-                  
-                  // Find values to remove (in current but not in new selection)
-                  const valuesToRemove = currentSelections.filter(value => !selectedValues.includes(value));
-                  
-                  // Find values to add (in new selection but not in current)
-                  const valuesToAdd = selectedValues.filter(value => !currentSelections.includes(value));
-                  
-                  // Remove deselected values
-                  valuesToRemove.forEach(value => {
-                    handleAbilityChange(filterKey as keyof Ability, value);
-                  });
-                  
-                  // Add newly selected values
-                  valuesToAdd.forEach(value => {
-                    handleAbilityChange(filterKey as keyof Ability, value);
-                  });
-                };
-
-                // Get current selections for a filter
-                const getCurrentSelections = (filterKey: keyof Ability | 'llmJudges'): string[] => {
-                  if (filterKey === 'llmJudges') {
-                    return selectedAbilities.llmJudges || [];
-                  }
-                  return selectedAbilities[filterKey as keyof Ability] || [];
-                };
-
-                // If we reach here, we have at least some filters or difficulty toggle
-                if (availableFilters.length === 0) {
-                  return null; // No filter dropdowns to show, but difficulty toggle might be visible
-                }
-
-                return (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {availableFilters.map((filter) => {
-                      const options = getDropdownOptions(filter);
-                      const currentSelections = getCurrentSelections(filter.key);
-                      
-                      // Skip filters with no available options
-                      if (options.length === 0) return null;
-                      
-                      return (
-                        <MultiSelectDropdown
-                          key={filter.key}
-                          label={filter.label}
-                          options={options}
-                          selectedValues={currentSelections}
-                          onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
-                          isDarkMode={isDarkMode}
-                          placeholder="Select options..."
-                          maxDisplayedTags={2}
-                          className="min-w-0"
-                        />
-                      );
-                    })}
+                {/* Functional Filter Dropdowns Section */}
+                {renderableFilters.length > 0 && (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      {renderableFilters.map((filter) => {
+                        const options = getDropdownOptions(filter);
+                        const currentSelections = getCurrentSelections(filter.key);
+                        
+                        return (
+                          <MultiSelectDropdown
+                            key={filter.key}
+                            label={filter.label}
+                            options={options}
+                            selectedValues={currentSelections}
+                            onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
+                            isDarkMode={isDarkMode}
+                            maxDisplayedTags={2}
+                            className="min-w-0"
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
-                );
-              })()}
-            </div>
+                )}
+              </>
+            )}
           </div>
         </div>
         );
@@ -487,7 +548,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           // Show scatter chart view
           <div style={{ width: '100%', padding: '20px' }}>
             <ModelScatterChart
-              data={results}
+              data={sortedResults}
               currentMetric={currentScatterMetric}
               availableMetrics={availableMetrics}
               onMetricChange={setCurrentScatterMetric}

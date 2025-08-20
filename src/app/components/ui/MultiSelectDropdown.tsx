@@ -14,7 +14,6 @@ interface MultiSelectDropdownProps {
   selectedValues: string[];
   onSelectionChange: (values: string[]) => void;
   isDarkMode: boolean;
-  placeholder?: string;
   maxDisplayedTags?: number;
   className?: string;
   disabled?: boolean;
@@ -26,7 +25,6 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   selectedValues,
   onSelectionChange,
   isDarkMode,
-  placeholder = "Select options...",
   maxDisplayedTags = 3,
   className = "",
   disabled = false
@@ -110,7 +108,7 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
             <span className={`${
               isDarkMode ? 'text-slate-400' : 'text-slate-500'
             }`}>
-              <span className="font-bold">{label}</span> - {placeholder}
+              <span className="font-bold">{label}</span>
             </span>
           ) : (
             <div className="flex items-center">

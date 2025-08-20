@@ -219,25 +219,7 @@ function applyFilters(data, task, filters) {
     });
   }
   
-  // Apply reasoning filter (for mr-web: method field, for others: prompt_category)
-  if (filters.reasoning && filters.reasoning.length > 0) {
-    filteredData = filteredData.filter(entry => {
-      if (task === 'mr-web') {
-        // For mr-web, reasoning maps to the method field (CoT/ZS/SR)
-        return filters.reasoning.includes(entry.method);
-      } else {
-        // For other tasks, check prompt_category
-        if (entry.prompt_category && Array.isArray(entry.prompt_category)) {
-          return filters.reasoning.some(filter => 
-            entry.prompt_category.some(category => 
-              category.toLowerCase().includes(filter.toLowerCase())
-            )
-          );
-        }
-        return false;
-      }
-    });
-  }
+
   
   // Apply framework filter (for code-web)
   if (filters.framework && filters.framework.length > 0) {

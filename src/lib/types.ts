@@ -111,7 +111,6 @@ export type FilterOptions = {
   langs: string[];
   modalities: string[];
   knowledge: string[];
-  reasoning: string[];
   robustness: string[];
   security: string[];
   llmJudges?: string[];

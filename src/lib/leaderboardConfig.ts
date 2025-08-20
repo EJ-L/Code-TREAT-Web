@@ -40,99 +40,99 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
   'pass@1': {
     key: 'pass@1',
     label: 'Pass@1',
-    width: 'w-36',
+    width: 'w-24',
     description: 'Pass@1 is the probability of passing a given problem in one attempt.',
-    defaultWidth: 110,
-    minWidth: 100
+    defaultWidth: 100,
+    minWidth: 90
   },
   'pass@3': {
     key: 'pass@3',
     label: 'Pass@3',
-    width: 'w-36',
+    width: 'w-24',
     description: 'Pass@3 is the probability of passing a given problem in three attempts.',
-    defaultWidth: 110,
-    minWidth: 100
+    defaultWidth: 100,
+    minWidth: 90
   },
   'pass@5': {
     key: 'pass@5',
     label: 'Pass@5',
-    width: 'w-36',
+    width: 'w-24',
     description: 'Pass@5 is the probability of passing a given problem in five attempts.',
-    defaultWidth: 110,
-    minWidth: 100
+    defaultWidth: 100,
+    minWidth: 90
   },
-  // Difficulty-based pass metrics
+  // Difficulty-based pass metrics (more compact for main leaderboard)
   'easy_pass@1': {
     key: 'easy_pass@1',
     label: 'Easy Pass@1',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Easy Pass@1 on problems with easy difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'medium_pass@1': {
     key: 'medium_pass@1',
     label: 'Medium Pass@1',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Medium Pass@1 on problems with medium difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'hard_pass@1': {
     key: 'hard_pass@1',
     label: 'Hard Pass@1',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Hard Pass@1 on problems with hard difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'easy_pass@3': {
     key: 'easy_pass@3',
     label: 'Easy Pass@3',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Easy Pass@3 on problems with easy difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'medium_pass@3': {
     key: 'medium_pass@3',
     label: 'Medium Pass@3',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Medium Pass@3 on problems with medium difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'hard_pass@3': {
     key: 'hard_pass@3',
     label: 'Hard Pass@3',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Hard Pass@3 on problems with hard difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'easy_pass@5': {
     key: 'easy_pass@5',
     label: 'Easy Pass@5',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Easy Pass@5 on problems with easy difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'medium_pass@5': {
     key: 'medium_pass@5',
     label: 'Medium Pass@5',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Medium Pass@5 on problems with medium difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   'hard_pass@5': {
     key: 'hard_pass@5',
     label: 'Hard Pass@5',
-    width: 'w-32',
+    width: 'w-28',
     description: 'Hard Pass@5 on problems with hard difficulty.',
-    defaultWidth: 140,
-    minWidth: 130
+    defaultWidth: 120,
+    minWidth: 110
   },
   // Other metrics
   'CodeBLEU': {
@@ -385,13 +385,13 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   model: {
     default: 300,
     taskSpecific: {
-      'overall': 800,
-      'code summarization': 250,
-      'code review': 250,
-      'code generation': 250,
-      'code translation': 250,
-      'input prediction': 250,
-      'output prediction': 250,
+      'overall': 600,
+      'code summarization': 300,
+      'code review': 300,
+      'code generation': 300,
+      'code translation': 300,
+      'input prediction': 300,
+      'output prediction': 300,
       'vulnerability detection': 350,
       'code-web': 360,
       'interaction-2-code': 220,
@@ -411,15 +411,37 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
     maxWidth: 500
   },
   'pass@1': {
-    default: 110,
+    default: 130,
     taskSpecific: {
-      'code generation': 370,
-      'code translation': 370,
-      'input prediction': 370,
-      'output prediction': 370
+      'code generation': 130,
+      'code translation': 130,
+      'input prediction': 130,
+      'output prediction': 130
     },
-    minWidth: 100,
-    maxWidth: 500
+    minWidth: 90,
+    maxWidth: 150
+  },
+  'pass@3': {
+    default: 100,
+    taskSpecific: {
+      'code generation': 100,
+      'code translation': 100,
+      'input prediction': 100,
+      'output prediction': 100
+    },
+    minWidth: 90,
+    maxWidth: 150
+  },
+  'pass@5': {
+    default: 100,
+    taskSpecific: {
+      'code generation': 100,
+      'code translation': 100,
+      'input prediction': 100,
+      'output prediction': 100
+    },
+    minWidth: 90,
+    maxWidth: 150
   },
   'Compilation': {
     default: 200,
@@ -468,18 +490,48 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
     },
     minWidth: 150,
     maxWidth: 400
-  }
+  },
+  // Difficulty metric configurations (more compact)
+  'easy_pass@1': { default: 120, minWidth: 110, maxWidth: 180 },
+  'medium_pass@1': { default: 120, minWidth: 110, maxWidth: 180 },
+  'hard_pass@1': { default: 120, minWidth: 110, maxWidth: 180 },
+  'easy_pass@3': { default: 120, minWidth: 110, maxWidth: 180 },
+  'medium_pass@3': { default: 120, minWidth: 110, maxWidth: 180 },
+  'hard_pass@3': { default: 120, minWidth: 110, maxWidth: 180 },
+  'easy_pass@5': { default: 120, minWidth: 110, maxWidth: 180 },
+  'medium_pass@5': { default: 120, minWidth: 110, maxWidth: 180 },
+  'hard_pass@5': { default: 120, minWidth: 110, maxWidth: 180 }
 };
 
 // Task-specific header configurations
 export const TASK_HEADERS: Record<TaskType, string[]> = {
   'overall': ['score', 'tasks'],
-  'code generation': ['pass@1', 'pass@3', 'pass@5'],
-  'code translation': ['pass@1', 'pass@3', 'pass@5', 'CodeBLEU'],
+  'code generation': [
+    'pass@1', 'pass@3', 'pass@5',
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
+  'code translation': [
+    'pass@1', 'pass@3', 'pass@5', 'CodeBLEU',
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
   'code summarization': ['LLM Judge'],
   'code review': ['LLM Judge'],
-  'input prediction': ['pass@1', 'pass@3', 'pass@5'],
-  'output prediction': ['pass@1', 'pass@3', 'pass@5'],
+  'input prediction': [
+    'pass@1', 'pass@3', 'pass@5',
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
+  'output prediction': [
+    'pass@1', 'pass@3', 'pass@5',
+    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
+    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
+    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+  ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
@@ -529,14 +581,8 @@ export const TASKS_WITH_DIFFICULTY = [
 export function getTaskHeaders(task: TaskType, showByDifficulty: boolean = false): HeaderConfig[] {
   const commonHeaders = ['rank', 'model'];
   
-  // For overall task, only return rank and model in normal mode
-  if (task === 'overall' && !showByDifficulty) {
-    return commonHeaders.map(key => BASE_HEADERS[key]);
-  }
-  
-  const headerKeys = showByDifficulty 
-    ? [...commonHeaders, ...(DIFFICULTY_HEADERS[task] || [])]
-    : [...commonHeaders, ...(TASK_HEADERS[task] || [])];
+  // Always use the standard task headers (which now include difficulty metrics for relevant tasks)
+  const headerKeys = [...commonHeaders, ...(TASK_HEADERS[task] || [])];
   
   return headerKeys.map(key => BASE_HEADERS[key]).filter(Boolean);
 }

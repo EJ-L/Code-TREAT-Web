@@ -63,7 +63,7 @@ const MAIN_FILTERS: FilterConfig[] = [
 function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Ability>): FilterConfig[] {
   if (task === 'overall' || !abilities[task]) return [];
   
-  const excludedKeys = ['dataset', 'framework'];
+  const excludedKeys = ['dataset', 'framework', 'reasoning'];
   const dynamicFilters: FilterConfig[] = [];
   
   Object.entries(abilities[task]).forEach(([key, values]) => {
@@ -134,7 +134,7 @@ export const filterConditions = {
     task !== 'interaction-2-code' && getAvailableFilters(task, abilities, judges).length > 0,
   
   shouldShowDifficultyToggle: (task: TaskType) =>
-    TASKS_WITH_DIFFICULTY.includes(task) && task !== 'overall',
+    false,
   
   shouldShowDataNote: (task: TaskType) =>
     !['code-web', 'mr-web', 'interaction-2-code', 'overall', 'vulnerability detection'].includes(task),

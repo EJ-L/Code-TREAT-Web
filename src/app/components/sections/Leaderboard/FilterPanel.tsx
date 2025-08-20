@@ -14,8 +14,6 @@ interface FilterPanelProps {
   taskAbilities: Record<TaskType, Ability>;
   selectedAbilities: Partial<Ability>;
   handleAbilityChange: (key: keyof Ability, value: string) => void;
-  showByDifficulty: boolean;
-  setShowByDifficulty: (value: boolean) => void;
   availableLLMJudges: string[];
   isDarkMode: boolean;
   timelineRange: { start: Date; end: Date } | null;
@@ -27,8 +25,6 @@ const FilterPanel: FC<FilterPanelProps> = ({
   taskAbilities,
   selectedAbilities,
   handleAbilityChange,
-  showByDifficulty,
-  setShowByDifficulty,
   availableLLMJudges,
   isDarkMode,
   timelineRange,

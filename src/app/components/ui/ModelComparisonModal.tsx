@@ -12,7 +12,6 @@ type ModelComparisonModalProps = {
   isDarkMode: boolean;
   currentTask: string;
   selectedAbilities: Partial<Ability>;
-  showByDifficulty: boolean;
 };
 
 const MAX_MODELS = 5;
@@ -23,8 +22,7 @@ const ModelComparisonModal = ({
   results, 
   isDarkMode,
   currentTask,
-  selectedAbilities,
-  showByDifficulty
+  selectedAbilities
 }: ModelComparisonModalProps) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   
@@ -65,11 +63,6 @@ const ModelComparisonModal = ({
   const getActiveFilters = useMemo(() => {
     const filters: Array<{ type: string; value: string }> = [];
     
-    // Add difficulty filter if enabled
-    if (showByDifficulty) {
-      filters.push({ type: 'View', value: 'By Difficulty' });
-    }
-    
     // Add each type of filter that has selections
     Object.entries(selectedAbilities).forEach(([key, values]) => {
       if (values && Array.isArray(values) && values.length > 0) {
@@ -81,7 +74,7 @@ const ModelComparisonModal = ({
     });
     
     return filters;
-  }, [selectedAbilities, showByDifficulty]);
+  }, [selectedAbilities]);
 
   const radarData = useMemo(() => {
     if (!selectedModels.length) return [];

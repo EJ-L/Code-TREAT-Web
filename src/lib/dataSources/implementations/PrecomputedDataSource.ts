@@ -173,11 +173,21 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       const { debug } = await import('../../debug');
       debug.dataSource(`Loading precomputed results for task: ${task}`, filters);
       
-      const precomputedData = await this.loadPrecomputedData(task, filters.showByDifficulty || false);
+      // Load both regular and difficulty data, then merge them
+      const regularData = await this.loadPrecomputedData(task, false);
+      const difficultyData = await this.loadPrecomputedData(task, true);
       
-      if (!precomputedData) {
+      if (!regularData && !difficultyData) {
         debug.dataSource(`No precomputed data available for task: ${task}`);
         return this.createResult([], this.metadata.name, Date.now() - startTime, false, [`No precomputed data available for task: ${task}`]);
+      }
+      
+      // Merge the data - start with regular data and add difficulty metrics where available
+      const precomputedData = this.mergeRegularAndDifficultyData(regularData, difficultyData, task);
+      
+      if (!precomputedData) {
+        debug.dataSource(`Failed to merge data for task: ${task}`);
+        return this.createResult([], this.metadata.name, Date.now() - startTime, false, [`Failed to merge data for task: ${task}`]);
       }
 
       debug.dataSource(`Available filterMappings:`, Object.keys(precomputedData.filterMappings));
@@ -236,6 +246,54 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return this.createResult([], this.metadata.name, loadTime, false, [errorMessage]);
     }
+  }
+
+  private mergeRegularAndDifficultyData(regularData: PrecomputedData | null, difficultyData: PrecomputedData | null, task: TaskType): PrecomputedData | null {
+    // If we only have one type of data, use it as is
+    if (!regularData && difficultyData) return difficultyData;
+    if (regularData && !difficultyData) return regularData;
+    if (!regularData && !difficultyData) return null;
+
+    // Tasks that don't have difficulty data - just return regular data
+    const difficultyTasks = ['code generation', 'code translation', 'input prediction', 'output prediction'];
+    if (!difficultyTasks.includes(task)) {
+      return regularData;
+    }
+
+    // Merge the data by combining regular and difficulty metrics for each model
+    const mergedData: PrecomputedData = {
+      task: regularData!.task,
+      filterMappings: { ...regularData!.filterMappings },
+      data: {}
+    };
+
+    // Start with all models from regular data
+    for (const [modelName, modelData] of Object.entries(regularData!.data)) {
+      mergedData.data[modelName] = { ...modelData };
+    }
+
+    // Add difficulty metrics to existing models
+    if (difficultyData) {
+      for (const [modelName, modelData] of Object.entries(difficultyData.data)) {
+        if (mergedData.data[modelName]) {
+          // Merge difficulty metrics into existing model data
+          for (const [combination, combinationData] of Object.entries(modelData)) {
+            if (mergedData.data[modelName][combination]) {
+              // Add difficulty-specific metrics to the existing combination
+              Object.assign(mergedData.data[modelName][combination], combinationData);
+            } else {
+              // If combination doesn't exist in regular data, add it
+              mergedData.data[modelName][combination] = { ...combinationData };
+            }
+          }
+        } else {
+          // If model doesn't exist in regular data, add it with difficulty data
+          mergedData.data[modelName] = { ...modelData };
+        }
+      }
+    }
+
+    return mergedData;
   }
 
   private async loadPrecomputedData(task: string, showByDifficulty: boolean): Promise<PrecomputedData | null> {

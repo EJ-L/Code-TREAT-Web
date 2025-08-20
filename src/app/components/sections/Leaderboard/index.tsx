@@ -55,7 +55,7 @@ interface LeaderboardProps {
     getDefaultSortConfig(initialTask || 'overall')
   );
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
-  const [showByDifficulty, setShowByDifficulty] = useState(false);
+
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() => {
     // Initialize with default values immediately to prevent layout shift
     return initializeColumnWidths(initialTask || 'overall');
@@ -77,10 +77,7 @@ interface LeaderboardProps {
       setSelectedAbilities({});
       setSortConfig(getDefaultSortConfig(initialTask));
       
-      // Reset showByDifficulty if task doesn't support it
-      if (!filterConditions.shouldShowDifficultyToggle(initialTask)) {
-        setShowByDifficulty(false);
-      }
+
       
       // Reset viewMode to table if switching to a task that doesn't support chart view
       if (!supportsChartView(initialTask)) {
@@ -103,11 +100,7 @@ interface LeaderboardProps {
     setCurrentTask(task);
     setSortConfig(getDefaultSortConfig(task));
     setSelectedAbilities({});
-    
-    // Reset showByDifficulty if task doesn't support it
-    if (!filterConditions.shouldShowDifficultyToggle(task)) {
-      setShowByDifficulty(false);
-    }
+
     
     // Reset viewMode to table if switching to a task that doesn't support chart view
     if (!supportsChartView(task)) {
@@ -143,10 +136,10 @@ interface LeaderboardProps {
     setTimelineRange({ start: startDate, end: endDate });
   }, []);
 
-  // Reset timeline when task or difficulty mode changes
+  // Reset timeline when task changes
   useEffect(() => {
     setTimelineRange(null);
-  }, [currentTask, showByDifficulty]);
+  }, [currentTask]);
 
   // Close comparison modal when task changes (additional safety net)
   useEffect(() => {
@@ -212,12 +205,7 @@ interface LeaderboardProps {
     setSortConfig(prev => handleSortChange(prev, key));
   }, []);
 
-  // Reset showByDifficulty when task changes to one that doesn't support it
-  useEffect(() => {
-    if (!filterConditions.shouldShowDifficultyToggle(currentTask)) {
-      setShowByDifficulty(false);
-    }
-  }, [currentTask]);
+
 
   // Load and process data using precomputed results or overall aggregation
   useEffect(() => {
@@ -231,12 +219,11 @@ interface LeaderboardProps {
           langs: [],
           modalities: (selectedAbilities.modality && selectedAbilities.modality.length > 0) ? selectedAbilities.modality : [],
           knowledge: (selectedAbilities.knowledge && selectedAbilities.knowledge.length > 0) ? selectedAbilities.knowledge : [],
-          reasoning: (selectedAbilities.reasoning && selectedAbilities.reasoning.length > 0) ? selectedAbilities.reasoning : [],
           robustness: (selectedAbilities.robustness && selectedAbilities.robustness.length > 0) ? selectedAbilities.robustness : [],
           security: (selectedAbilities.privacy && selectedAbilities.privacy.length > 0) ? selectedAbilities.privacy : [],
           llmJudges: (selectedAbilities.llmJudges && selectedAbilities.llmJudges.length > 0) ? selectedAbilities.llmJudges : undefined,
           framework: (selectedAbilities.framework && selectedAbilities.framework.length > 0) ? selectedAbilities.framework : [],
-          showByDifficulty
+          showByDifficulty: false
         };
 
         debug.leaderboard(`Loading data for task: ${currentTask}`, filterOptions);
@@ -367,18 +354,18 @@ interface LeaderboardProps {
     };
     
     loadAndProcessData();
-  }, [currentTask, selectedAbilities, showByDifficulty]);
+  }, [currentTask, selectedAbilities]);
 
   // Get filtered table headers using new helper
   const getFilteredTableHeadersMemo = useCallback((task: TaskType) => {
-    return getFilteredTableHeaders(task, showByDifficulty, sortedResults);
-  }, [showByDifficulty, sortedResults]);
+    return getFilteredTableHeaders(task, false, sortedResults);
+  }, [sortedResults]);
 
   // Initialize column widths when task changes
   useEffect(() => {
-    const newWidths = initializeColumnWidths(currentTask, showByDifficulty);
+    const newWidths = initializeColumnWidths(currentTask, false);
     setColumnWidths(newWidths);
-  }, [currentTask, showByDifficulty]);
+  }, [currentTask]);
 
   // Update column widths when filtered headers change
   useEffect(() => {
@@ -397,7 +384,7 @@ interface LeaderboardProps {
         Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
       setColumnWidths(newWidths);
     }
-  }, [currentTask, sortedResults, getFilteredTableHeadersMemo, showByDifficulty]);
+  }, [currentTask, sortedResults, getFilteredTableHeadersMemo]);
 
   // Listen for task change events from PaperCitationModal
   useEffect(() => {
@@ -482,9 +469,8 @@ interface LeaderboardProps {
   const csvFilename = useMemo(() => {
     const timestamp = new Date().toISOString().split('T')[0];
     const taskName = currentTask.replace(/\s+/g, '_').toLowerCase();
-    const difficultyStr = showByDifficulty ? '_by_difficulty' : '';
-    return `${taskName}_leaderboard${difficultyStr}_${timestamp}.csv`;
-  }, [currentTask, showByDifficulty]);
+    return `${taskName}_leaderboard_${timestamp}.csv`;
+  }, [currentTask]);
 
   // Get available numeric metrics for scatter chart
   const availableMetrics = useMemo(() => {
@@ -537,15 +523,13 @@ interface LeaderboardProps {
             selectedAbilities={selectedAbilities}
             handleAbilityChange={handleAbilityChange}
             availableLLMJudges={availableLLMJudges}
-            showByDifficulty={showByDifficulty}
-            setShowByDifficulty={setShowByDifficulty}
             isDarkMode={isDarkMode}
             timelineRange={timelineRange}
             onTimelineChange={handleTimelineChange}
           />
 
-          {/* Timeline Filter - positioned between filter panel and table */}
-          {filterConditions.shouldShowTimeline(currentTask) && (
+          {/* Timeline Filter - positioned between filter panel and table, hidden in chart view */}
+          {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
             <div className="w-full max-w-7xl mx-auto mt-4 mb-4">
               <TimelineFilter 
                 taskType={currentTask}
@@ -592,8 +576,6 @@ interface LeaderboardProps {
               taskAbilities={taskAbilities}
               selectedAbilities={selectedAbilities}
               handleAbilityChange={handleAbilityChange}
-              showByDifficulty={showByDifficulty}
-              setShowByDifficulty={setShowByDifficulty}
               availableLLMJudges={availableLLMJudges}
               viewMode={viewMode}
               setViewMode={setViewMode}
@@ -608,7 +590,6 @@ interface LeaderboardProps {
             isDarkMode={isDarkMode}
             currentTask={currentTask}
             selectedAbilities={selectedAbilities}
-            showByDifficulty={showByDifficulty}
           />
         </div>
       </section>

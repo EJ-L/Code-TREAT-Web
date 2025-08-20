@@ -352,47 +352,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`知识领域过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 4. 推理类型过滤 (同级 OR 关系，跨级 AND 关系)
-  if (filters.reasoning && filters.reasoning.length > 0) {
-    console.log(`应用推理类型过滤: ${filters.reasoning.length} 种类型, ${filteredResults.length} 条结果`);
-    
-    // 预处理推理类型关键词
-    const reasoningPatterns = filters.reasoning.map(r => r.toLowerCase());
-    
-    filteredResults = filteredResults.filter(result => {
-      // 对于mr-web任务，reasoning filtering已在raw data processing阶段完成，跳过
-      if (task === 'mr-web') {
-        return true;
-      }
-      
-      // 首先检查原始数据的prompt_category字段
-      const rawEntry = data.find((raw: any) => 
-        raw.model_name === result.modelName && 
-        raw.dataset?.toLowerCase() === result.dataset.toLowerCase() &&
-        raw.task === task
-      );
-      
-      if (rawEntry?.prompt_category && Array.isArray(rawEntry.prompt_category)) {
-        // 检查prompt_category数组中是否包含任何推理类型
-        return reasoningPatterns.some(pattern => 
-          rawEntry.prompt_category!.some((category: string) => 
-            category.toLowerCase() === pattern
-          )
-        );
-      }
-      
-      // 兜底：检查模型名和数据集名（保持向后兼容）
-      const stringsToCheck: string[] = [];
-      if (result.modelName) stringsToCheck.push(result.modelName.toLowerCase());
-      if (result.dataset) stringsToCheck.push(result.dataset.toLowerCase());
-      
-      return reasoningPatterns.some(pattern => 
-        stringsToCheck.some(str => str.includes(pattern))
-      );
-    });
-    
-    console.log(`推理类型过滤后: 剩余 ${filteredResults.length} 条结果`);
-  }
+
 
   // 5. 鲁棒性过滤 (同级 OR 关系，跨级 AND 关系)
   if (filters.robustness && filters.robustness.length > 0) {

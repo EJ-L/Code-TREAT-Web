@@ -39,8 +39,7 @@ interface ResultsTableProps {
   taskAbilities?: Record<TaskType, Ability>;
   selectedAbilities?: Partial<Ability>;
   handleAbilityChange?: (key: keyof Ability, value: string) => void;
-  showByDifficulty?: boolean;
-  setShowByDifficulty?: (value: boolean) => void;
+
   availableLLMJudges?: string[];
   // View mode props
   viewMode: 'table' | 'scatter';
@@ -74,8 +73,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
   taskAbilities = {},
   selectedAbilities = {},
   handleAbilityChange,
-  showByDifficulty = false,
-  setShowByDifficulty,
   availableLLMJudges = [],
   viewMode,
   setViewMode
@@ -248,21 +245,20 @@ const ResultsTable: FC<ResultsTableProps> = ({
       
       {/* Timeline Filter moved to parent component */}
       
-      {/* Enhanced Filter Bar - right under timeline */}
-      {(() => {
+      {/* Enhanced Filter Bar - right under timeline, hidden in chart view */}
+      {viewMode === 'table' && (() => {
         // Check if we should show filter section at all
         const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
-        const hasDifficultyToggle = filterConditions.shouldShowDifficultyToggle(currentTask);
         
-        // Hide entire filter section if no filters and no difficulty toggle
-        if (availableFilters.length === 0 && !hasDifficultyToggle) {
+        // Hide entire filter section if no filters
+        if (availableFilters.length === 0) {
           return null;
         }
         
         // Transform filter data into dropdown options
         const getDropdownOptions = (filter: any) => {
           const values = filter.getValues(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
-          const filterState = new FilterState(filter, selectedAbilities, currentTask, showByDifficulty, taskAbilities as Record<TaskType, Ability>);
+          const filterState = new FilterState(filter, selectedAbilities, currentTask, false, taskAbilities as Record<TaskType, Ability>);
           
           return values.map((value: string) => ({
             value,
@@ -328,33 +324,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
                   }`}>
                     Filters:
                   </h3>
-                  
-                  {/* Functional difficulty toggle */}
-                  {hasDifficultyToggle && (
-                    <div className="flex items-center gap-2 text-nowrap">
-                      <input 
-                        type="checkbox" 
-                        id="functional-difficulty-toggle"
-                        checked={showByDifficulty}
-                        onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
-                        className={`
-                          w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
-                          ${isDarkMode
-                            ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
-                            : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
-                          }
-                        `}
-                      />
-                      <label 
-                        htmlFor="functional-difficulty-toggle"
-                        className={`text-sm font-medium cursor-pointer select-none ${
-                          isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                        }`}
-                      >
-                        Show results by difficulty
-                      </label>
-                    </div>
-                  )}
                 </div>
                 
                 {/* Filter Dropdowns in same line */}
@@ -381,40 +350,13 @@ const ResultsTable: FC<ResultsTableProps> = ({
             ) : (
               /* Original layout for 1 or 4+ filters */
               <>
-                {/* Header with Filters title and difficulty toggle */}
+                {/* Header with Filters title */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                   <h3 className={`text-xl font-bold ${
                     isDarkMode ? 'text-slate-100' : 'text-slate-800'
                   }`}>
                     Filters:
                   </h3>
-                  
-                  {/* Functional difficulty toggle - using exact CompactFilterBar styling */}
-                    {hasDifficultyToggle && (
-                    <div className="flex items-center gap-2 text-nowrap">
-                      <input 
-                        type="checkbox" 
-                        id="functional-difficulty-toggle"
-                        checked={showByDifficulty}
-                        onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
-                        className={`
-                          w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
-                          ${isDarkMode
-                            ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
-                            : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
-                          }
-                        `}
-                      />
-                      <label 
-                        htmlFor="functional-difficulty-toggle"
-                        className={`text-sm font-medium cursor-pointer select-none ${
-                          isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                        }`}
-                      >
-                        Show results by difficulty
-                      </label>
-                    </div>
-                  )}
                 </div>
 
                 {/* Functional Filter Dropdowns Section */}
@@ -546,7 +488,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           </div>
         ) : (
           // Show scatter chart view
-          <div style={{ width: '100%', padding: '20px' }}>
+          <div style={{ width: '100%', paddingTop: '0px', paddingLeft: '20px', paddingRight: '20px' }}>
             <ModelScatterChart
               data={sortedResults}
               currentMetric={currentScatterMetric}

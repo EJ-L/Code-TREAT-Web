@@ -59,13 +59,13 @@ interface LeaderboardProps {
   const [isLoading, setIsLoading] = useState(true);
   const [isDataComplete, setIsDataComplete] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(
-    getDefaultSortConfig('overall')
+    getDefaultSortConfig(initialTask || 'overall')
   );
   const [availableLLMJudges, setAvailableLLMJudges] = useState<string[]>([]);
   const [showByDifficulty, setShowByDifficulty] = useState(false);
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() => {
     // Initialize with default values immediately to prevent layout shift
-    return initializeColumnWidths('overall');
+    return initializeColumnWidths(initialTask || 'overall');
   });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);

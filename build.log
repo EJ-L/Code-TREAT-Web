@@ -1,0 +1,35 @@
+
+> code-treat@0.1.0 build
+> next build
+
+   ??Next.js 15.3.3
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ??Compiled successfully in 50s
+   Linting and checking validity of types ...
+ 漼?ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+   Collecting page data ...
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ??Generating static pages (7/7)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+????/                                     214 kB         322 kB
+????/_not-found                            986 B         103 kB
+??? /api/direct-files                      143 B         102 kB
+??? /api/download-github-data              143 B         102 kB
+??? /api/files                             143 B         102 kB
++ First Load JS shared by all             102 kB
+  ??chunks/4bd1b696-92804352dce15e68.js  53.2 kB
+  ??chunks/684-81390b719a7b1f1a.js       46.4 kB
+  ??other shared chunks (total)          2.04 kB
+
+
+?? (Static)   prerendered as static content
+?  (Dynamic)  server-rendered on demand
+

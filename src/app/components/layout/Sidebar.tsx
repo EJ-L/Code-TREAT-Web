@@ -44,7 +44,7 @@ const Sidebar: FC<SidebarProps> = ({
               className="w-12 h-12 mr-4"
               isDarkMode={isDarkMode}
             />
-            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+            <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
               Code TREAT
             </span>
           </div>
@@ -54,7 +54,7 @@ const Sidebar: FC<SidebarProps> = ({
             className={`xl:hidden p-3 rounded-lg ${isDarkMode ? 'text-blue-200 hover:bg-blue-900/30' : 'text-slate-600 hover:bg-slate-100'} transition-colors`}
             aria-label="Close sidebar"
           >
-            <XMarkIcon className="w-6 h-6" />
+            <XMarkIcon className="w-10 h-10" />
           </button>
         </div>
       </div>
@@ -66,7 +66,7 @@ const Sidebar: FC<SidebarProps> = ({
           <li>
             <button
               onClick={() => onSectionChange('overview')}
-              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-xl transition-colors ${
+              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors ${
                 currentSection === 'overview'
                   ? isDarkMode 
                     ? 'bg-blue-900/30 text-blue-200' 
@@ -85,7 +85,7 @@ const Sidebar: FC<SidebarProps> = ({
             <div className="flex items-center">
               <button
                 onClick={() => onSectionChange('tasks')}
-                className={`flex-1 text-left px-6 py-4 rounded-lg font-bold text-xl transition-colors ${
+                className={`flex-1 text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors ${
                   currentSection === 'tasks'
                     ? isDarkMode 
                       ? 'bg-blue-900/30 text-blue-200' 
@@ -125,7 +125,7 @@ const Sidebar: FC<SidebarProps> = ({
                       onSectionChange('tasks');
                       onTaskChange?.(task as TaskType);
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-base transition-colors ${
+                    className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors ${
                       currentTask === task
                         ? isDarkMode 
                           ? 'bg-blue-900/50 text-blue-100 font-semibold' 
@@ -145,7 +145,7 @@ const Sidebar: FC<SidebarProps> = ({
             )}
             
             {!isTasksExpanded && (
-              <div className="ml-4 mt-1 text-base">
+              <div className="ml-4 mt-1 text-xl">
                 <div className={`px-4 py-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                   Code Generation, Translation, Review, and more
                 </div>
@@ -155,14 +155,14 @@ const Sidebar: FC<SidebarProps> = ({
 
           {/* About */}
           <li>
-            <div className={`px-6 py-4 font-bold text-xl ${isDarkMode ? 'text-blue-200' : 'text-slate-700'}`}>
+            <div className={`px-6 py-4 font-bold text-2xl ${isDarkMode ? 'text-blue-200' : 'text-slate-700'}`}>
               About
             </div>
             <ul className="ml-4 space-y-1">
               <li>
                 <button
                   onClick={() => onSectionChange('about')}
-                  className={`w-full text-left px-4 py-3 rounded-lg font-semibold text-base transition-colors ${
+                  className={`w-full text-left px-4 py-3 rounded-lg font-semibold text-xl transition-colors ${
                     currentSection === 'about'
                       ? isDarkMode 
                         ? 'bg-blue-900/30 text-blue-200' 
@@ -178,7 +178,7 @@ const Sidebar: FC<SidebarProps> = ({
               <li>
                 <a
                   href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                  className={`block w-full text-left px-4 py-3 rounded-lg font-semibold text-base transition-colors ${
+                  className={`block w-full text-left px-4 py-3 rounded-lg font-semibold text-xl transition-colors ${
                     isDarkMode 
                       ? 'text-slate-400 hover:bg-blue-900/20 hover:text-blue-200' 
                       : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
@@ -221,18 +221,35 @@ const Sidebar: FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Mobile Toggle Button */}
-      <button
-        onClick={onToggle}
-        className={`xl:hidden fixed top-4 right-4 z-50 p-3 rounded-lg shadow-lg ${
-          isDarkMode 
-            ? 'bg-[#1a2234]/90 text-blue-200 hover:bg-blue-900/30' 
-            : 'bg-white/95 text-slate-600 hover:bg-slate-100'
-        } backdrop-blur-sm border ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} transition-colors`}
-        aria-label="Toggle sidebar"
-      >
-        <Bars3Icon className="w-6 h-6" />
-      </button>
+      {/* Mobile Header with Toggle Button */}
+      <div className={`xl:hidden fixed top-0 left-0 right-0 z-50 ${
+        isDarkMode 
+          ? 'bg-[#1a2234]/90' 
+          : 'bg-white/95'
+      } backdrop-blur-sm border-b ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} transition-colors`}>
+        <div className="flex items-center justify-between px-8 py-4">
+          <div className="flex items-center">
+            <WebpageIcon 
+              className="w-16 h-16 mr-4"
+              isDarkMode={isDarkMode}
+            />
+            <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              Code TREAT
+            </span>
+          </div>
+          <button
+            onClick={onToggle}
+            className={`p-2 rounded-lg ${
+              isDarkMode 
+                ? 'text-blue-200 hover:bg-blue-900/30' 
+                : 'text-slate-600 hover:bg-slate-100'
+            } transition-colors`}
+            aria-label="Toggle sidebar"
+          >
+            <Bars3Icon className="w-10 h-10" />
+          </button>
+        </div>
+      </div>
 
       {/* Desktop Sidebar */}
       <div className="hidden xl:block w-80 min-h-screen fixed left-0 top-0 z-40">

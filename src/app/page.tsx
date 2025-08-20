@@ -165,7 +165,7 @@ export default function Home() {
         />
 
         {/* Main Content */}
-        <div className="flex-1 xl:ml-80 min-h-screen w-full xl:w-auto">
+        <div className="flex-1 xl:ml-80 min-h-screen w-full xl:w-auto pt-20 xl:pt-0">
           {renderCurrentPage()}
         </div>
       </div>

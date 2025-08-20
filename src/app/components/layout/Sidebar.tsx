@@ -1,7 +1,7 @@
 "use client";
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon, ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import WebpageIcon from '../ui/WebpageIcon';
 import { TaskType, Ability } from '@/lib/types';
 
@@ -28,14 +28,9 @@ const Sidebar: FC<SidebarProps> = ({
   currentTask,
   onTaskChange
 }) => {
-  const [isTasksExpanded, setIsTasksExpanded] = useState(true);
 
-  // Auto-expand tasks when on tasks section (always keep expanded)
-  useEffect(() => {
-    setIsTasksExpanded(true);
-  }, [currentSection]);
   const sidebarContent = (
-    <div className={`h-full flex flex-col ${isDarkMode ? 'bg-[#0f1729]' : 'bg-white'} border-r ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'}`}>
+    <div className={`h-screen flex flex-col ${isDarkMode ? 'bg-[#0f1729]' : 'bg-white'} border-r ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'}`}>
       {/* Header */}
       <div className="flex-shrink-0 p-6 border-b border-slate-200 dark:border-blue-500/20">
         <div className="flex items-center justify-between">
@@ -60,7 +55,7 @@ const Sidebar: FC<SidebarProps> = ({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto p-6">
+      <nav className="flex-1 overflow-y-auto p-6 pb-2 custom-scrollbar min-h-0">
         <ul className="space-y-2">
           {/* Overview */}
           <li>
@@ -82,41 +77,23 @@ const Sidebar: FC<SidebarProps> = ({
 
           {/* Tasks */}
           <li>
-            <div className="flex items-center">
-              <button
-                onClick={() => onSectionChange('tasks')}
-                className={`flex-1 text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors ${
-                  currentSection === 'tasks'
-                    ? isDarkMode 
-                      ? 'bg-blue-900/30 text-blue-200' 
-                      : 'bg-blue-50 text-blue-700'
-                    : isDarkMode 
-                      ? 'text-blue-200 hover:bg-blue-900/20' 
-                      : 'text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                Tasks
-              </button>
-              {taskAbilities && (
-                <button
-                  onClick={() => setIsTasksExpanded(!isTasksExpanded)}
-                  className={`p-3 ml-2 rounded transition-colors ${
-                    isDarkMode 
-                      ? 'text-blue-200 hover:bg-blue-900/20' 
-                      : 'text-slate-700 hover:bg-slate-100'
-                  }`}
-                >
-                  {isTasksExpanded ? (
-                    <ChevronDownIcon className="w-5 h-5" />
-                  ) : (
-                    <ChevronRightIcon className="w-5 h-5" />
-                  )}
-                </button>
-              )}
-            </div>
+            <button
+              onClick={() => onSectionChange('tasks')}
+              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors ${
+                currentSection === 'tasks'
+                  ? isDarkMode 
+                    ? 'bg-blue-900/30 text-blue-200' 
+                    : 'bg-blue-50 text-blue-700'
+                  : isDarkMode 
+                    ? 'text-blue-200 hover:bg-blue-900/20' 
+                    : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              Tasks
+            </button>
             
-            {/* Task List */}
-            {isTasksExpanded && taskAbilities && (
+            {/* Task List - Always shown */}
+            {taskAbilities && (
               <div className="ml-4 mt-1 space-y-1">
                 {Object.keys(taskAbilities).map((task) => (
                   <button
@@ -143,14 +120,6 @@ const Sidebar: FC<SidebarProps> = ({
                 ))}
               </div>
             )}
-            
-            {!isTasksExpanded && (
-              <div className="ml-4 mt-1 text-xl">
-                <div className={`px-4 py-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                  Code Generation, Translation, Review, and more
-                </div>
-              </div>
-            )}
           </li>
 
           {/* About */}
@@ -162,7 +131,7 @@ const Sidebar: FC<SidebarProps> = ({
               <li>
                 <button
                   onClick={() => onSectionChange('about')}
-                  className={`w-full text-left px-4 py-3 rounded-lg font-semibold text-xl transition-colors ${
+                  className={`w-full text-left px-4 py-2 rounded-lg font-semibold text-xl transition-colors ${
                     currentSection === 'about'
                       ? isDarkMode 
                         ? 'bg-blue-900/30 text-blue-200' 
@@ -178,7 +147,7 @@ const Sidebar: FC<SidebarProps> = ({
               <li>
                 <a
                   href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                  className={`block w-full text-left px-4 py-3 rounded-lg font-semibold text-xl transition-colors ${
+                  className={`block w-full text-left px-4 py-2 rounded-lg font-semibold text-xl transition-colors ${
                     isDarkMode 
                       ? 'text-slate-400 hover:bg-blue-900/20 hover:text-blue-200' 
                       : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
@@ -193,7 +162,7 @@ const Sidebar: FC<SidebarProps> = ({
       </nav>
 
       {/* Dark/Light Mode Toggle */}
-      <div className="flex-shrink-0 p-6 border-t border-slate-200 dark:border-blue-500/20">
+      <div className="flex-shrink-0 p-1 px-6 border-t border-slate-200 dark:border-blue-500/20">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className={`w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg ${
@@ -252,7 +221,7 @@ const Sidebar: FC<SidebarProps> = ({
       </div>
 
       {/* Desktop Sidebar */}
-      <div className="hidden xl:block w-80 min-h-screen fixed left-0 top-0 z-40">
+      <div className="hidden xl:block w-80 h-screen fixed left-0 top-0 z-40">
         {sidebarContent}
       </div>
 
@@ -275,7 +244,7 @@ const Sidebar: FC<SidebarProps> = ({
               animate={{ x: 0 }}
               exit={{ x: -320 }}
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
-              className="xl:hidden fixed left-0 top-0 w-80 min-h-screen z-50 shadow-2xl"
+              className="xl:hidden fixed left-0 top-0 w-80 h-screen z-50 shadow-2xl"
             >
               {sidebarContent}
             </motion.div>

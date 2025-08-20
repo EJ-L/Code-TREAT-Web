@@ -70,9 +70,14 @@
     scrollbar-width: none;
   }
 
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -82,6 +87,8 @@
   .custom-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 9999px;
     background-color: hsl(var(--muted));
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {

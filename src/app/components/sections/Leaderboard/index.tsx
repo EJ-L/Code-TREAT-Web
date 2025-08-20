@@ -52,6 +52,14 @@ interface LeaderboardProps {
   useEffect(() => {
     if (initialTask && initialTask !== currentTask) {
       setCurrentTask(initialTask);
+      // Reset filters and settings when task changes
+      setSelectedAbilities({});
+      setSortConfig(getDefaultSortConfig(initialTask));
+      
+      // Reset showByDifficulty if task doesn't support it
+      if (!supportsShowByDifficulty(initialTask)) {
+        setShowByDifficulty(false);
+      }
     }
   }, [initialTask, currentTask]);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
@@ -189,18 +197,18 @@ interface LeaderboardProps {
     const loadAndProcessData = async () => {
         setIsLoading(true);
       try {
-        // Create filter options for precomputed results
+        // Create filter options for precomputed results  
         const filterOptions: FilterOptions = {
           tasks: [currentTask],
-          datasets: selectedAbilities.dataset || [],
+          datasets: (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) ? selectedAbilities.dataset : [],
           langs: [],
-          modalities: selectedAbilities.modality || [],
-          knowledge: selectedAbilities.knowledge || [],
-          reasoning: selectedAbilities.reasoning || [],
-          robustness: selectedAbilities.robustness || [],
-          security: selectedAbilities.privacy || [],
-          llmJudges: selectedAbilities.llmJudges || [],
-          framework: selectedAbilities.framework || [],
+          modalities: (selectedAbilities.modality && selectedAbilities.modality.length > 0) ? selectedAbilities.modality : [],
+          knowledge: (selectedAbilities.knowledge && selectedAbilities.knowledge.length > 0) ? selectedAbilities.knowledge : [],
+          reasoning: (selectedAbilities.reasoning && selectedAbilities.reasoning.length > 0) ? selectedAbilities.reasoning : [],
+          robustness: (selectedAbilities.robustness && selectedAbilities.robustness.length > 0) ? selectedAbilities.robustness : [],
+          security: (selectedAbilities.privacy && selectedAbilities.privacy.length > 0) ? selectedAbilities.privacy : [],
+          llmJudges: (selectedAbilities.llmJudges && selectedAbilities.llmJudges.length > 0) ? selectedAbilities.llmJudges : undefined,
+          framework: (selectedAbilities.framework && selectedAbilities.framework.length > 0) ? selectedAbilities.framework : [],
           showByDifficulty
         };
 
@@ -517,6 +525,12 @@ interface LeaderboardProps {
             onColumnWidthChange={handleColumnWidthChange}
             timelineRange={timelineRange}
             onTimelineChange={handleTimelineChange}
+            taskAbilities={taskAbilities}
+            selectedAbilities={selectedAbilities}
+            handleAbilityChange={handleAbilityChange}
+            showByDifficulty={showByDifficulty}
+            setShowByDifficulty={setShowByDifficulty}
+            availableLLMJudges={availableLLMJudges}
           />
         </AnimatedResultsWrapper>
 

@@ -1,13 +1,15 @@
 import { FC, useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
-import { TaskType } from '@/lib/types';
+import { TaskType, Ability } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl, hasDataLeakage } from '@/lib/constants';
 import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
 import ModelScatterChart from '@/app/components/ui/ModelScatterChart';
 import { TimelineFilter } from './FilterComponents';
-import { filterConditions } from '@/lib/filterConfig';
+import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
+import MultiSelectDropdown from '@/app/components/ui/MultiSelectDropdown';
+import { FilterState } from '@/lib/filterHelpers';
 
 interface ResultsTableProps {
   currentTask: TaskType;
@@ -36,6 +38,13 @@ interface ResultsTableProps {
   onColumnWidthChange?: () => void;
   timelineRange: { start: Date; end: Date } | null;
   onTimelineChange: (startDate: Date, endDate: Date) => void;
+  // Filter-related props
+  taskAbilities?: Record<TaskType, Ability>;
+  selectedAbilities?: Partial<Ability>;
+  handleAbilityChange?: (key: keyof Ability, value: string) => void;
+  showByDifficulty?: boolean;
+  setShowByDifficulty?: (value: boolean) => void;
+  availableLLMJudges?: string[];
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -64,7 +73,13 @@ const ResultsTable: FC<ResultsTableProps> = ({
   isDarkMode,
   onColumnWidthChange,
   timelineRange,
-  onTimelineChange
+  onTimelineChange,
+  taskAbilities = {},
+  selectedAbilities = {},
+  handleAbilityChange,
+  showByDifficulty = false,
+  setShowByDifficulty,
+  availableLLMJudges = []
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -173,6 +188,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
     
     return () => clearTimeout(timer);
   }, [checkScrollNeed]);
+
   const renderResultsTable = () => {
     // Show results (this function is only called when we have data)
     return sortedResults.map((result, index) => {
@@ -215,9 +231,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
               getNumericStyles={getNumericStyles}
               truncateText={truncateText}
               getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
-              isDarkMode={isDarkMode}
-              modelUrl={modelUrl}
               modelName={modelName}
+              modelUrl={modelUrl}
+              isDarkMode={isDarkMode}
             />
           );
         })}
@@ -253,14 +269,14 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 padding: '8px 16px',
                 borderRadius: '8px',
                 color: 'white',
-                background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+                background: 'linear-gradient(to right, #6366f1, #8b5cf6)',
                 border: 'none',
-                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
                 fontSize: '16px',
-                fontWeight: '500'
+                fontWeight: '500',
+                cursor: 'pointer'
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
@@ -270,7 +286,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             </button>
           )}
           
-          {/* Switch button - only show if there are metrics and it's not the overall task */}
+          {/* Show chart view button only when we have metrics and data */}
           {shouldShowChartButton && (
             <button
               onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
@@ -278,35 +294,36 @@ const ResultsTable: FC<ResultsTableProps> = ({
                 padding: '8px 16px',
                 borderRadius: '8px',
                 color: 'white',
-                background: 'linear-gradient(to right, #f59e0b, #d97706)',
+                background: viewMode === 'table' 
+                  ? 'linear-gradient(to right, #f59e0b, #d97706)' 
+                  : 'linear-gradient(to right, #10b981, #14b8a6)',
                 border: 'none',
-                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
                 fontSize: '16px',
-                fontWeight: '500'
+                fontWeight: '500',
+                cursor: 'pointer'
               }}
             >
               {viewMode === 'table' ? (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                    <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
                   </svg>
                   Chart View
                 </>
               ) : (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" style={{ height: '20px', width: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clipRule="evenodd" />
+                    <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V3zM3 9a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V9zM4 14a1 1 0 00-1 1v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-1-1H4z"/>
                   </svg>
                   Table View
                 </>
               )}
             </button>
           )}
-          
+
           <div style={{
             padding: '8px 16px',
             borderRadius: '8px',
@@ -346,6 +363,140 @@ const ResultsTable: FC<ResultsTableProps> = ({
         </div>
       )}
       
+      {/* Enhanced Filter Bar - right under timeline */}
+      {viewMode === 'table' && (
+        <div className="w-full max-w-7xl mx-auto mb-6">
+          <div className={`w-full p-6 rounded-lg border ${
+            isDarkMode 
+              ? 'bg-slate-800/50 border-slate-700/50' 
+              : 'bg-slate-50 border-slate-200'
+          }`}>
+            {/* Header with Filters title and difficulty toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+              <h3 className={`text-xl font-bold ${
+                isDarkMode ? 'text-slate-100' : 'text-slate-800'
+              }`}>
+                Filters:
+              </h3>
+              
+              {/* Functional difficulty toggle - using exact CompactFilterBar styling */}
+              {(currentTask === 'output prediction' || currentTask === 'input prediction' || currentTask === 'code generation' || currentTask === 'code translation') && (
+                <div className="flex items-center gap-2 text-nowrap">
+                  <input 
+                    type="checkbox" 
+                    id="functional-difficulty-toggle"
+                    checked={showByDifficulty}
+                    onChange={() => setShowByDifficulty && setShowByDifficulty(!showByDifficulty)}
+                    className={`
+                      w-4 h-4 rounded border transition-colors focus:ring-2 focus:ring-offset-2
+                      ${isDarkMode
+                        ? 'bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-slate-800'
+                        : 'bg-white border-slate-300 text-blue-500 focus:ring-blue-500/20 focus:ring-offset-white'
+                      }
+                    `}
+                  />
+                  <label 
+                    htmlFor="functional-difficulty-toggle"
+                    className={`text-sm font-medium cursor-pointer select-none ${
+                      isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                    }`}
+                  >
+                    Show results by difficulty
+                  </label>
+                </div>
+              )}
+            </div>
+
+            {/* Functional Filter Dropdowns Section */}
+            <div className="space-y-4">
+              {(() => {
+                // Get available filters for current task (same logic as CompactFilterBar)
+                const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
+                
+                // Transform filter data into dropdown options
+                const getDropdownOptions = (filter: any) => {
+                  const values = filter.getValues(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
+                  const filterState = new FilterState(filter, selectedAbilities, currentTask, showByDifficulty, taskAbilities as Record<TaskType, Ability>);
+                  
+                  return values.map((value: string) => ({
+                    value,
+                    label: filterState.getDisplayText(value),
+                    disabled: filterState.isDisabled(value) || filterState.isRestricted(value)
+                  }));
+                };
+
+                // Handle multi-select changes
+                const handleMultiSelectChange = (filterKey: keyof Ability | 'llmJudges', selectedValues: string[]) => {
+                  if (!handleAbilityChange) return;
+                  
+                  const currentSelections = selectedAbilities[filterKey as keyof Ability] || [];
+                  
+                  // Find values to remove (in current but not in new selection)
+                  const valuesToRemove = currentSelections.filter(value => !selectedValues.includes(value));
+                  
+                  // Find values to add (in new selection but not in current)
+                  const valuesToAdd = selectedValues.filter(value => !currentSelections.includes(value));
+                  
+                  // Remove deselected values
+                  valuesToRemove.forEach(value => {
+                    handleAbilityChange(filterKey as keyof Ability, value);
+                  });
+                  
+                  // Add newly selected values
+                  valuesToAdd.forEach(value => {
+                    handleAbilityChange(filterKey as keyof Ability, value);
+                  });
+                };
+
+                // Get current selections for a filter
+                const getCurrentSelections = (filterKey: keyof Ability | 'llmJudges'): string[] => {
+                  if (filterKey === 'llmJudges') {
+                    return selectedAbilities.llmJudges || [];
+                  }
+                  return selectedAbilities[filterKey as keyof Ability] || [];
+                };
+
+                if (availableFilters.length === 0) {
+                  return (
+                    <div className={`text-center p-4 rounded-lg ${
+                      isDarkMode ? 'bg-slate-700/30 text-slate-400' : 'bg-slate-100 text-slate-500'
+                    }`}>
+                      No filters available for this task
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {availableFilters.map((filter) => {
+                      const options = getDropdownOptions(filter);
+                      const currentSelections = getCurrentSelections(filter.key);
+                      
+                      // Skip filters with no available options
+                      if (options.length === 0) return null;
+                      
+                      return (
+                        <MultiSelectDropdown
+                          key={filter.key}
+                          label={filter.label}
+                          options={options}
+                          selectedValues={currentSelections}
+                          onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
+                          isDarkMode={isDarkMode}
+                          placeholder="Select options..."
+                          maxDisplayedTags={2}
+                          className="min-w-0"
+                        />
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Table section */}
       <div 
         ref={tableContainerRef}
@@ -365,22 +516,16 @@ const ResultsTable: FC<ResultsTableProps> = ({
             padding: '80px 20px'
           }}>
             <div style={{
-              width: '40px',
-              height: '40px',
-              border: '4px solid #3b82f6',
-              borderTop: '4px solid transparent',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
+              fontSize: '24px',
+              fontWeight: 'bold',
+              color: isDarkMode ? '#e2e8f0' : '#334155',
               marginBottom: '16px'
-            }}></div>
-            <span style={{
-              color: isDarkMode ? '#cbd5e1' : '#475569',
-              fontSize: '18px',
-              fontWeight: '500'
-            }}>Loading results...</span>
+            }}>
+              Loading...
+            </div>
           </div>
         ) : sortedResults.length === 0 ? (
-          // Show no results message when not loading but no data
+          // Show "no results" message only when there's genuinely no data to show
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -388,19 +533,14 @@ const ResultsTable: FC<ResultsTableProps> = ({
             justifyContent: 'center',
             padding: '80px 20px'
           }}>
-            <svg style={{ width: '48px', height: '48px', marginBottom: '16px', color: '#94a3b8' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
             <span style={{
-              color: isDarkMode ? '#cbd5e1' : '#475569',
-              fontSize: '18px',
-              fontWeight: '500'
+              fontSize: '24px',
+              fontWeight: 'bold',
+              color: isDarkMode ? '#e2e8f0' : '#334155',
+              marginBottom: '8px'
             }}>No results found</span>
-            <span style={{
-              color: isDarkMode ? '#94a3b8' : '#64748b',
-              fontSize: '14px',
-              marginTop: '8px'
-            }}>Try adjusting your filters</span>
+            <span style={{ color: isDarkMode ? '#94a3b8' : '#64748b', fontSize: '16px' }}>
+Try adjusting your filters</span>
           </div>
         ) : viewMode === 'table' ? (
           // Show complete table when loaded and has data
@@ -417,7 +557,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             >
               <thead style={{ backgroundColor: isDarkMode ? '#1e293b' : '#f1f5f9' }}>
                 <tr>
-                  {getTableHeaders(currentTask).map((header) => (
+                  {getTableHeaders(currentTask).map((header: any) => (
                     <TableHeader 
                       key={header.key}
                       header={header}
@@ -461,4 +601,4 @@ const ResultsTable: FC<ResultsTableProps> = ({
   );
 };
 
-export default ResultsTable; 
+export default ResultsTable;

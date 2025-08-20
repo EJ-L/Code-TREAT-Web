@@ -94,14 +94,14 @@ export function processCodeReview(results: ResultEntry[], filters: FilterOptions
         });
       }
       
-      // if (!hasSelectedJudge) {
-      //   // console.log('Filtered out due to no matching judges:', {
-      //   //   availableMetricsKeys: result.metrics ? Object.keys(result.metrics) : 'none',
-      //   //   selectedJudges: filters.llmJudges,
-      //   //   modelName: result.model_name
-      //   // });
-      //   return false;
-      // }
+      if (!hasSelectedJudge) {
+        console.log('Filtered out due to no matching judges:', {
+          availableMetricsKeys: result.metrics ? Object.keys(result.metrics) : 'none',
+          selectedJudges: filters.llmJudges,
+          modelName: result.model_name
+        });
+        return false;
+      }
     }
     
     return true;

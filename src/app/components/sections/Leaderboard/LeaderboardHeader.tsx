@@ -24,19 +24,44 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
   csvFilename
 }) => {
   return (
-    <div className={`w-full py-6 ${isDarkMode ? 'bg-[#0f1729]' : 'bg-white'} border-b ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}>
-      <div className="container mx-auto px-4">
+    <div 
+      className={`w-full py-8 border-b ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}
+      style={{
+        background: isDarkMode 
+          ? 'linear-gradient(135deg, #0f1729 0%, #1e293b 50%, #334155 100%)'
+          : 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%)',
+        position: 'relative'
+      }}
+    >
+      {/* Subtle overlay pattern */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: isDarkMode
+            ? 'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)'
+            : 'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
+          pointerEvents: 'none'
+        }}
+      />
+      <div className="container mx-auto px-4" style={{ position: 'relative', zIndex: 1 }}>
         {/* Main Title - Very Large and Centered */}
         <div className="text-center mb-6">
           <h1 style={{
-            fontSize: 'clamp(3rem, 8vw, 6rem)', // Responsive very large text
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)', // Smaller, more reasonable size
             fontWeight: 'bold',
             background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             margin: '0',
-            lineHeight: '1.1'
+            lineHeight: '1.2', // Better line height for multi-line
+            maxWidth: '800px', // Constrain width to encourage line breaks
+            marginLeft: 'auto',
+            marginRight: 'auto'
           }}>
             {currentTask.charAt(0).toUpperCase() + currentTask.slice(1)} Results
           </h1>

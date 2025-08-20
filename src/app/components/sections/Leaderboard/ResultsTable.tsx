@@ -249,7 +249,17 @@ const ResultsTable: FC<ResultsTableProps> = ({
       {/* Timeline Filter moved to parent component */}
       
       {/* Enhanced Filter Bar - right under timeline */}
-      {viewMode === 'table' && (
+      {viewMode === 'table' && (() => {
+        // Check if we should show filter section at all
+        const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
+        const hasDifficultyToggle = (currentTask === 'output prediction' || currentTask === 'input prediction' || currentTask === 'code generation' || currentTask === 'code translation');
+        
+        // Hide entire filter section if no filters and no difficulty toggle
+        if (availableFilters.length === 0 && !hasDifficultyToggle) {
+          return null;
+        }
+        
+        return (
         <div className="w-full max-w-7xl mx-auto mb-6">
           <div className={`w-full p-6 rounded-lg border ${
             isDarkMode 
@@ -265,7 +275,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               </h3>
               
               {/* Functional difficulty toggle - using exact CompactFilterBar styling */}
-              {(currentTask === 'output prediction' || currentTask === 'input prediction' || currentTask === 'code generation' || currentTask === 'code translation') && (
+                {hasDifficultyToggle && (
                 <div className="flex items-center gap-2 text-nowrap">
                   <input 
                     type="checkbox" 
@@ -295,8 +305,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             {/* Functional Filter Dropdowns Section */}
             <div className="space-y-4">
               {(() => {
-                // Get available filters for current task (same logic as CompactFilterBar)
-                const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
+                  // We already have availableFilters from above
                 
                 // Transform filter data into dropdown options
                 const getDropdownOptions = (filter: any) => {
@@ -341,14 +350,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
                   return selectedAbilities[filterKey as keyof Ability] || [];
                 };
 
+                // If we reach here, we have at least some filters or difficulty toggle
                 if (availableFilters.length === 0) {
-                  return (
-                    <div className={`text-center p-4 rounded-lg ${
-                      isDarkMode ? 'bg-slate-700/30 text-slate-400' : 'bg-slate-100 text-slate-500'
-                    }`}>
-                      No filters available for this task
-                    </div>
-                  );
+                  return null; // No filter dropdowns to show, but difficulty toggle might be visible
                 }
 
                 return (
@@ -380,7 +384,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
       
       {/* Table section */}
       <div 

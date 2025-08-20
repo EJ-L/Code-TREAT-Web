@@ -61,6 +61,9 @@ interface LeaderboardProps {
       if (!supportsShowByDifficulty(initialTask)) {
         setShowByDifficulty(false);
       }
+      
+      // Close comparison modal when task changes
+      setIsComparisonModalOpen(false);
     }
   }, [initialTask, currentTask]);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
@@ -89,13 +92,16 @@ interface LeaderboardProps {
 
   const handleTaskChange = (task: TaskType) => {
     setCurrentTask(task);
-      setSortConfig(getDefaultSortConfig(task));
+    setSortConfig(getDefaultSortConfig(task));
     setSelectedAbilities({});
     
     // Reset showByDifficulty if task doesn't support it
     if (!supportsShowByDifficulty(task)) {
       setShowByDifficulty(false);
     }
+    
+    // Close comparison modal when task changes
+    setIsComparisonModalOpen(false);
   };
 
   const handleAbilityChange = (key: keyof Ability, value: string) => {
@@ -127,6 +133,11 @@ interface LeaderboardProps {
   useEffect(() => {
     setTimelineRange(null);
   }, [currentTask, showByDifficulty]);
+
+  // Close comparison modal when task changes (additional safety net)
+  useEffect(() => {
+    setIsComparisonModalOpen(false);
+  }, [currentTask]);
 
   // Load LLM judges for tasks that support them
   useEffect(() => {
@@ -505,12 +516,6 @@ interface LeaderboardProps {
 
       <section className="py-4">
         <div className="container mx-auto px-4">
-          {/* Main description - smaller and less prominent */}
-          <div className="text-center mb-6">
-            <p className={`text-base ${isDarkMode ? 'text-slate-400' : 'text-slate-600'} max-w-2xl mx-auto`}>
-              Compare performance across various code-related tasks.
-            </p>
-          </div>
 
           <FilterPanel 
             currentTask={currentTask}

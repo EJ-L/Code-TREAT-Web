@@ -44,6 +44,9 @@ interface ResultsTableProps {
   // View mode props
   viewMode: 'table' | 'scatter';
   setViewMode: (mode: 'table' | 'scatter') => void;
+  // Multi-leaderboard props
+  isMultiLeaderboard?: boolean;
+  selectedMultiTab?: string;
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -75,7 +78,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
   handleAbilityChange,
   availableLLMJudges = [],
   viewMode,
-  setViewMode
+  setViewMode,
+  isMultiLeaderboard = false,
+  selectedMultiTab = 'Overall'
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -88,6 +93,17 @@ const ResultsTable: FC<ResultsTableProps> = ({
   
   // State for current metric in scatter chart
   const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
+  
+  // Calculate available filters at component level
+  const getExcludedFilter = () => {
+    if (!isMultiLeaderboard || viewMode !== 'table') return undefined;
+    
+    const { getMultiLeaderboardConfig } = require('@/lib/leaderboardConfig');
+    const config = getMultiLeaderboardConfig(currentTask);
+    return config?.extractedFilter;
+  };
+  
+  const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges, getExcludedFilter());
   
   // Get available numeric metrics for scatter chart
   const availableMetrics = useMemo(() => {
@@ -245,10 +261,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
       
       {/* Timeline Filter moved to parent component */}
       
-      {/* Enhanced Filter Bar - right under timeline, hidden in chart view - Responsive */}
-      {viewMode === 'table' && (() => {
+      {/* Enhanced Filter Bar - right under timeline, shown in both table and chart view - Responsive */}
+      {(() => {
         // Check if we should show filter section at all
-        const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
         
         // Hide entire filter section if no filters
         if (availableFilters.length === 0) {
@@ -304,15 +319,23 @@ const ResultsTable: FC<ResultsTableProps> = ({
           return options.length > 0;
         });
         
-        // Determine if we should use inline layout (2-3 filters)
-        const shouldUseInlineLayout = renderableFilters.length >= 2 && renderableFilters.length <= 3 && availableFilters.length > 0;
+        // Determine if we should use inline layout
+        // Use inline layout for:
+        // 1. 1-3 filters in any view mode (including chart view)
+        // 2. Multi-leaderboard mode in table view (any number of filters)
+        const shouldUseInlineLayout = (renderableFilters.length >= 1 && renderableFilters.length <= 3 && availableFilters.length > 0) ||
+                                     (isMultiLeaderboard && viewMode === 'table' && renderableFilters.length > 0);
 
         return (
-        <div className="w-full max-w-7xl mx-auto mb-4 sm:mb-6">
-          <div className={`w-full p-3 sm:p-6 rounded-lg border ${
-            isDarkMode 
-              ? 'bg-slate-800/50 border-slate-700/50' 
-              : 'bg-slate-50 border-slate-200'
+        <div className="w-full max-w-7xl mx-auto">
+          <div className={`w-full p-3 sm:p-6 border ${
+            isMultiLeaderboard && viewMode === 'table'
+              ? isDarkMode 
+                ? 'bg-slate-800/50 border-slate-700/50 border-t-0'
+                : 'bg-slate-50 border-slate-200 border-t-0'
+              : isDarkMode 
+                ? 'bg-slate-800/50 border-slate-700/50 rounded-lg'
+                : 'bg-slate-50 border-slate-200 rounded-lg'
           }`}>
             {/* Conditional Layout Based on Number of Filters */}
             {shouldUseInlineLayout ? (
@@ -393,6 +416,11 @@ const ResultsTable: FC<ResultsTableProps> = ({
       {/* Table section */}
       <div 
         ref={tableContainerRef}
+        className={
+          availableFilters.length === 0 && isMultiLeaderboard && viewMode === 'table'
+            ? `w-full max-w-7xl mx-auto border ${isDarkMode ? 'border-slate-700 bg-slate-800/30' : 'border-slate-200 bg-slate-50'} rounded-b-lg border-t-0`
+            : ''
+        }
         style={{ 
           overflowX: needsHorizontalScroll ? 'auto' : 'hidden',
           position: 'relative',

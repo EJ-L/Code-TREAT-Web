@@ -88,12 +88,20 @@ function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Abilit
 export function getAvailableFilters(
   task: TaskType, 
   abilities: Record<TaskType, Ability>, 
-  judges: string[] = []
+  judges: string[] = [],
+  excludeFilter?: string
 ): FilterConfig[] {
-  return [
+  const allFilters = [
     ...MAIN_FILTERS.filter(filter => filter.isVisible(task, abilities, judges)),
     ...createDynamicFilters(task, abilities)
   ];
+  
+  // Filter out the excluded filter if specified
+  if (excludeFilter) {
+    return allFilters.filter(filter => filter.key !== excludeFilter);
+  }
+  
+  return allFilters;
 }
 
 // Utility functions (simplified)
@@ -130,8 +138,8 @@ function capitalizeFirst(str: string): string {
 
 // Simplified condition checks
 export const filterConditions = {
-  hasAvailableFilters: (task: TaskType, abilities: Record<TaskType, Ability>, judges: string[]) =>
-    task !== 'interaction-2-code' && getAvailableFilters(task, abilities, judges).length > 0,
+  hasAvailableFilters: (task: TaskType, abilities: Record<TaskType, Ability>, judges: string[], excludeFilter?: string) =>
+    task !== 'interaction-2-code' && getAvailableFilters(task, abilities, judges, excludeFilter).length > 0,
   
   shouldShowDifficultyToggle: (task: TaskType) =>
     false,

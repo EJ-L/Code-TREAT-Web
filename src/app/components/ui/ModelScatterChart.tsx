@@ -631,12 +631,12 @@ const ModelScatterChart = ({
   return (
     <div className="w-full">
       {/* Metric selector buttons - Responsive */}
-      <div className="mb-4 sm:mb-6 flex flex-wrap gap-2 sm:gap-3 justify-center">
+      <div className="mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
         {availableMetrics.map((metric) => (
           <button
             key={metric}
             onClick={() => onMetricChange(metric)}
-            className={`px-3 sm:px-6 py-2 sm:py-4 text-sm sm:text-lg font-medium rounded-lg transition-all ${
+            className={`px-3 sm:px-4 py-1 sm:py-2 text-sm sm:text-base font-medium rounded-lg transition-all ${
               currentMetric === metric
                 ? isDarkMode
                   ? 'bg-blue-600 text-white'
@@ -654,7 +654,7 @@ const ModelScatterChart = ({
 
       {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard - Responsive */}
       {currentTask === 'code-robustness' && (
-        <div className="mb-4 sm:mb-6 flex flex-wrap gap-2 sm:gap-3 justify-center">
+        <div className="mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
           <button
             onClick={() => setShowCoTModels(!showCoTModels)}
             className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all flex items-center gap-1 sm:gap-2 ${

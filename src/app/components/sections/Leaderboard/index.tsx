@@ -5,6 +5,7 @@ import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
 import LeaderboardHeader from './LeaderboardHeader';
+import MultiLeaderboardHeader from './MultiLeaderboardHeader';
 import { TimelineFilter } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
 import { AnimatedResultsWrapper } from '@/app/components/ui/AnimatedResultsWrapper';
@@ -15,7 +16,9 @@ import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview
 import { 
   getTaskHeaders, 
   getMinColumnWidth, 
-  TASKS_WITH_DIFFICULTY 
+  TASKS_WITH_DIFFICULTY,
+  isMultiLeaderboardTask,
+  getMultiLeaderboardConfig
 } from '@/lib/leaderboardConfig';
 import {
   initializeColumnWidths,
@@ -64,6 +67,9 @@ interface LeaderboardProps {
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
   
+  // Multi-leaderboard state
+  const [selectedMultiTab, setSelectedMultiTab] = useState<string>('Overall');
+  
   // Helper function to check if a task supports chart view
   const supportsChartView = useCallback((task: TaskType) => {
     return task !== 'overall';
@@ -77,7 +83,11 @@ interface LeaderboardProps {
       setSelectedAbilities({});
       setSortConfig(getDefaultSortConfig(initialTask));
       
-
+      // Reset multi-leaderboard tab when task changes
+      const config = getMultiLeaderboardConfig(initialTask);
+      if (config) {
+        setSelectedMultiTab(config.overallTab);
+      }
       
       // Reset viewMode to table if switching to a task that doesn't support chart view
       if (!supportsChartView(initialTask)) {
@@ -204,6 +214,29 @@ interface LeaderboardProps {
   const handleSort = useCallback((key: string) => {
     setSortConfig(prev => handleSortChange(prev, key));
   }, []);
+
+  // Handle multi-leaderboard tab change
+  const handleMultiTabChange = useCallback((tab: string) => {
+    setSelectedMultiTab(tab);
+    
+    // Clear existing filters when switching tabs
+    setSelectedAbilities({});
+    
+    // Apply tab-specific filtering
+    if (tab !== 'Overall') {
+      const config = getMultiLeaderboardConfig(currentTask);
+      if (config) {
+        const filterKey = config.extractedFilter;
+        
+        // Map the filter key to the correct ability field
+        const abilityKey = filterKey as keyof Ability;
+        
+        setSelectedAbilities({
+          [abilityKey]: [tab]
+        });
+      }
+    }
+  }, [currentTask]);
 
 
 
@@ -514,23 +547,29 @@ interface LeaderboardProps {
           csvFilename={csvFilename}
         />
 
-      <section className="py-4">
+      <section>
         <div className="container mx-auto px-4">
-
-          <FilterPanel 
-            currentTask={currentTask}
-            taskAbilities={taskAbilities}
-            selectedAbilities={selectedAbilities}
-            handleAbilityChange={handleAbilityChange}
-            availableLLMJudges={availableLLMJudges}
-            isDarkMode={isDarkMode}
-            timelineRange={timelineRange}
-            onTimelineChange={handleTimelineChange}
-          />
+          {/* Filter Panel with conditional spacing */}
+          <div className={isMultiLeaderboardTask(currentTask) && viewMode === 'table' ? '' : 'mb-6'}>
+            <FilterPanel 
+              currentTask={currentTask}
+              taskAbilities={taskAbilities}
+              selectedAbilities={selectedAbilities}
+              handleAbilityChange={handleAbilityChange}
+              availableLLMJudges={availableLLMJudges}
+              isDarkMode={isDarkMode}
+              timelineRange={timelineRange}
+              onTimelineChange={handleTimelineChange}
+              isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
+              selectedMultiTab={selectedMultiTab}
+            />
+          </div>
 
           {/* Timeline Filter - positioned between filter panel and table, hidden in chart view */}
           {filterConditions.shouldShowTimeline(currentTask) && viewMode === 'table' && (
-            <div className="w-full max-w-7xl mx-auto mt-4 mb-4">
+            <div className={`w-full max-w-7xl mx-auto mt-6 ${
+              isMultiLeaderboardTask(currentTask) ? 'mb-0' : 'mb-4'
+            }`}>
               <TimelineFilter 
                 taskType={currentTask}
                 isDarkMode={isDarkMode}
@@ -539,12 +578,23 @@ interface LeaderboardProps {
               />
             </div>
           )}
-
+          
           <AnimatedResultsWrapper
             timelineRange={timelineRange}
             currentTask={currentTask}
             resultCount={sortedResults.length}
           >
+            {/* Multi-leaderboard header - moved inside wrapper to eliminate spacing */}
+            {isMultiLeaderboardTask(currentTask) && viewMode === 'table' && (
+              <div className="w-full max-w-7xl mx-auto">
+                <MultiLeaderboardHeader
+                  currentTask={currentTask}
+                  selectedTab={selectedMultiTab}
+                  onTabChange={handleMultiTabChange}
+                  isDarkMode={isDarkMode}
+                />
+              </div>
+            )}
             <ResultsTable 
               currentTask={currentTask}
               results={results}
@@ -579,6 +629,8 @@ interface LeaderboardProps {
               availableLLMJudges={availableLLMJudges}
               viewMode={viewMode}
               setViewMode={setViewMode}
+              isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
+              selectedMultiTab={selectedMultiTab}
             />
           </AnimatedResultsWrapper>
 

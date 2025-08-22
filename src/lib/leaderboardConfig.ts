@@ -1,4 +1,4 @@
-import { TaskType } from './types';
+import { TaskType, Ability } from './types';
 
 // Header definition interface
 export interface HeaderConfig {
@@ -576,6 +576,76 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
 export const TASKS_WITH_DIFFICULTY = [
   'overall', 'code generation', 'code translation', 'input prediction', 'output prediction'
 ];
+
+// Multi-leaderboard configuration
+export interface MultiLeaderboardConfig {
+  extractedFilter: keyof Ability | 'dataset' | 'framework' | 'task';
+  overallTab: string;
+  tabs: string[];
+}
+
+export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboardConfig>> = {
+  'code generation': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java']
+  },
+  'code translation': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java']
+  },
+  'code summarization': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
+  },
+  'code review': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
+  },
+  'input prediction': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java']
+  },
+  'output prediction': {
+    extractedFilter: 'modality',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Python', 'Java']
+  },
+  'vulnerability detection': {
+    extractedFilter: 'dataset',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'PrimeVul', 'PrimeVulPairs']
+  },
+  'code-web': {
+    extractedFilter: 'framework',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'React', 'Vue', 'Angular', 'Vanilla']
+  },
+  'mr-web': {
+    extractedFilter: 'knowledge',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Visual', 'RER']
+  },
+  'code-robustness': {
+    extractedFilter: 'dataset',
+    overallTab: 'Overall',
+    tabs: ['Overall', 'Merge', 'CRUXEval', 'LiveCodeBench (CE)']
+  }
+};
+
+// Helper function to check if a task supports multi-leaderboard
+export function isMultiLeaderboardTask(task: TaskType): boolean {
+  return task in MULTI_LEADERBOARD_CONFIG;
+}
+
+// Helper function to get multi-leaderboard config for a task
+export function getMultiLeaderboardConfig(task: TaskType): MultiLeaderboardConfig | null {
+  return MULTI_LEADERBOARD_CONFIG[task] || null;
+}
 
 // Helper functions
 export function getTaskHeaders(task: TaskType, showByDifficulty: boolean = false): HeaderConfig[] {

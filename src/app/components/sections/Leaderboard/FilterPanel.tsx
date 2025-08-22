@@ -18,6 +18,8 @@ interface FilterPanelProps {
   isDarkMode: boolean;
   timelineRange: { start: Date; end: Date } | null;
   onTimelineChange: (startDate: Date, endDate: Date) => void;
+  isMultiLeaderboard?: boolean;
+  selectedMultiTab?: string;
 }
 
 const FilterPanel: FC<FilterPanelProps> = ({
@@ -28,10 +30,21 @@ const FilterPanel: FC<FilterPanelProps> = ({
   availableLLMJudges,
   isDarkMode,
   timelineRange,
-  onTimelineChange
+  onTimelineChange,
+  isMultiLeaderboard = false,
+  selectedMultiTab = 'Overall'
 }) => {
+  // Get the excluded filter for multi-leaderboard mode
+  const getExcludedFilter = () => {
+    if (!isMultiLeaderboard) return undefined;
+    
+    const { getMultiLeaderboardConfig } = require('@/lib/leaderboardConfig');
+    const config = getMultiLeaderboardConfig(currentTask);
+    return config?.extractedFilter;
+  };
+
   // Check if we have filters available
-  const hasFilters = filterConditions.hasAvailableFilters(currentTask, taskAbilities, availableLLMJudges);
+  const hasFilters = filterConditions.hasAvailableFilters(currentTask, taskAbilities, availableLLMJudges, getExcludedFilter());
   // Check if we should show difficulty toggle
   const shouldShowDifficultyToggle = filterConditions.shouldShowDifficultyToggle(currentTask);
   // Show the filter bar if we have filters OR if we need to show the difficulty toggle
@@ -39,7 +52,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
   // Early return for interaction-2-code task
   if (currentTask === 'interaction-2-code') {
-    return <div className="mt-8 mb-8" />;
+    return null;
   }
 
 
@@ -60,7 +73,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
   );
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-8 mb-8 space-y-6">
+    <div className={`w-full max-w-7xl mx-auto ${isMultiLeaderboard ? 'space-y-1' : 'space-y-1'}`}>
       {/* Overall info section */}
       {filterConditions.shouldShowOverallInfo(currentTask) && (
         <Card className={`${
@@ -73,8 +86,6 @@ const FilterPanel: FC<FilterPanelProps> = ({
           </CardContent>
         </Card>
       )}
-
-
 
       {/* Information section */}
       {(filterConditions.shouldShowDataLeakageWarning?.(currentTask) || 

@@ -89,13 +89,13 @@ const TableCell: FC<TableCellProps> = ({
     <td 
       key={header.key}
       data-key={header.key}
-      className={`px-6 py-3 whitespace-nowrap text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
+      className={`px-2 sm:px-4 lg:px-6 py-2 sm:py-3 whitespace-nowrap text-sm sm:text-lg lg:text-xl font-bold font-jetbrains-mono ${alignment} ${numericStyles} ${
         header.key === 'model' 
           ? isDarkMode ? 'text-slate-200 font-bold' : 'text-slate-900 font-bold'
           : isDarkMode ? 'text-slate-300' : 'text-slate-600'
       } ${stickyStyles} ${rowBgColor} ${
         (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
-          ? 'py-4' : ''
+          ? 'py-3 sm:py-4' : ''
       } ${isDarkMode ? 'border-b border-white/10' : 'border-b border-black/10'}`}
       style={{ 
         width: `${columnWidths[header.key] || 100}px`,
@@ -106,6 +106,10 @@ const TableCell: FC<TableCellProps> = ({
     >
       <div className={`w-full ${alignment} font-bold flex items-center ${
         isColumnCentered(header.key) ? 'justify-center' : 'justify-start'
+      } ${
+        // Special styling for difficulty columns
+        (header.key.startsWith('easy_') || header.key.startsWith('medium_') || header.key.startsWith('hard_')) 
+          ? 'text-sm sm:text-base lg:text-lg' : ''
       }`}>
         {(() => {
           const shouldShowDataLeakageHighlight = hasDataLeakageForRow();

@@ -29,8 +29,8 @@ const formatDifficultyHeader = (label: string): JSX.Element => {
     const [difficulty, metric] = label.split(' ');
     return (
       <div className="flex flex-col items-center justify-center">
-        <span className="text-xs sm:text-sm font-bold">{difficulty}</span>
-        <span>{metric}</span>
+        <span className="text-sm sm:text-base md:text-lg font-extrabold">{difficulty}</span>
+        <span className="text-xs sm:text-sm font-medium">{metric}</span>
       </div>
     );
   }

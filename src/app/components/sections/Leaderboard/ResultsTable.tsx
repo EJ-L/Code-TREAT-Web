@@ -255,7 +255,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   
   return (
     <div 
-      className={`RESULTS-TABLE-COMPONENT w-full max-w-7xl mx-auto ${isDarkMode ? 'dark' : ''}`}
+      className={`RESULTS-TABLE-COMPONENT w-full ${isMultiLeaderboard && viewMode === 'table' ? '' : 'max-w-7xl mx-auto'} ${isDarkMode ? 'dark' : ''}`}
     >
       {/* Header section moved to parent component */}
       
@@ -327,11 +327,11 @@ const ResultsTable: FC<ResultsTableProps> = ({
                                      (isMultiLeaderboard && viewMode === 'table' && renderableFilters.length > 0);
 
         return (
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full">
           <div className={`w-full p-3 sm:p-6 border ${
             isMultiLeaderboard && viewMode === 'table'
               ? isDarkMode 
-                ? 'bg-slate-800/50 border-slate-700/50 border-t-0'
+                ? 'bg-slate-800/30 border-slate-700 border-t-0'
                 : 'bg-slate-50 border-slate-200 border-t-0'
               : isDarkMode 
                 ? 'bg-slate-800/50 border-slate-700/50 rounded-lg'
@@ -417,8 +417,8 @@ const ResultsTable: FC<ResultsTableProps> = ({
       <div 
         ref={tableContainerRef}
         className={
-          availableFilters.length === 0 && isMultiLeaderboard && viewMode === 'table'
-            ? `w-full max-w-7xl mx-auto border ${isDarkMode ? 'border-slate-700 bg-slate-800/30' : 'border-slate-200 bg-slate-50'} rounded-b-lg border-t-0`
+          isMultiLeaderboard && viewMode === 'table'
+            ? `w-full border ${isDarkMode ? 'border-slate-700 bg-slate-800/30' : 'border-slate-200 bg-slate-50'} ${availableFilters.length === 0 ? 'rounded-b-lg' : ''} border-t-0`
             : ''
         }
         style={{ 
@@ -476,7 +476,10 @@ const ResultsTable: FC<ResultsTableProps> = ({
           </div>
         ) : viewMode === 'table' ? (
           // Show complete table when loaded and has data
-          <div style={{ width: '100%' }}>
+          <div 
+            style={{ width: '100%' }}
+            className={isMultiLeaderboard && viewMode === 'table' ? 'rounded-b-lg overflow-hidden' : ''}
+          >
             <table 
               ref={tableRef}
               style={{ 

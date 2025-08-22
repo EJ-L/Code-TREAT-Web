@@ -584,18 +584,17 @@ interface LeaderboardProps {
             currentTask={currentTask}
             resultCount={sortedResults.length}
           >
-            {/* Multi-leaderboard header - moved inside wrapper to eliminate spacing */}
-            {isMultiLeaderboardTask(currentTask) && viewMode === 'table' && (
-              <div className="w-full max-w-7xl mx-auto">
+            <div className={isMultiLeaderboardTask(currentTask) && viewMode === 'table' ? 'w-full max-w-7xl mx-auto' : ''}>
+              {/* Multi-leaderboard header - moved inside wrapper to eliminate spacing */}
+              {isMultiLeaderboardTask(currentTask) && viewMode === 'table' && (
                 <MultiLeaderboardHeader
                   currentTask={currentTask}
                   selectedTab={selectedMultiTab}
                   onTabChange={handleMultiTabChange}
                   isDarkMode={isDarkMode}
                 />
-              </div>
-            )}
-            <ResultsTable 
+              )}
+              <ResultsTable 
               currentTask={currentTask}
               results={results}
               sortedResults={sortedResults}
@@ -632,6 +631,7 @@ interface LeaderboardProps {
               isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
               selectedMultiTab={selectedMultiTab}
             />
+            </div>
           </AnimatedResultsWrapper>
 
           {/* Comparison Modal */}

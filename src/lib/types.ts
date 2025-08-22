@@ -113,6 +113,7 @@ export type FilterOptions = {
   knowledge: string[];
   robustness: string[];
   security: string[];
+  reasoning?: string[];  // Add reasoning for mr-web filtering
   llmJudges?: string[];
   framework?: string[];  // Add framework for code-web filtering
   showByDifficulty?: boolean;

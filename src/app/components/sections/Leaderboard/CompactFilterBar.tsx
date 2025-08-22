@@ -149,7 +149,6 @@ const CompactFilterBar: FC<CompactFilterBarProps> = ({
                   selectedValues={currentSelections}
                   onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
                   isDarkMode={isDarkMode}
-                  placeholder="Select options..."
                   maxDisplayedTags={2}
                   className="min-w-0 flex-1"
                 />
@@ -211,7 +210,6 @@ const CompactFilterBar: FC<CompactFilterBarProps> = ({
                     selectedValues={currentSelections}
                     onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
                     isDarkMode={isDarkMode}
-                    placeholder="Select options..."
                     maxDisplayedTags={2}
                     className="min-w-0"
                   />

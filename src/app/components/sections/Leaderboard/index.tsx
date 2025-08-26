@@ -68,7 +68,7 @@ interface LeaderboardProps {
   const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
   
   // Multi-leaderboard state
-  const [selectedMultiTab, setSelectedMultiTab] = useState<string>('Overall');
+  const [selectedMultiTab, setSelectedMultiTab] = useState<string>('All');
   
   // Helper function to check if a task supports chart view
   const supportsChartView = useCallback((task: TaskType) => {
@@ -223,7 +223,7 @@ interface LeaderboardProps {
     setSelectedAbilities({});
     
     // Apply tab-specific filtering
-    if (tab !== 'Overall') {
+    if (tab !== 'All') {
       const config = getMultiLeaderboardConfig(currentTask);
       if (config) {
         const filterKey = config.extractedFilter;

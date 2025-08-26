@@ -30,8 +30,41 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   disabled = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [availableWidth, setAvailableWidth] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
   
+  // Measure available width for responsive truncation
+  useEffect(() => {
+    const measureWidth = () => {
+      if (dropdownRef.current && labelRef.current) {
+        const containerWidth = dropdownRef.current.offsetWidth;
+        const labelWidth = labelRef.current.offsetWidth;
+        // Account for padding (24px), margins (4px), clear/chevron buttons (40px)
+        const reservedSpace = 70;
+        const available = containerWidth - labelWidth - reservedSpace;
+        setAvailableWidth(Math.max(80, available)); // Minimum 80px
+      }
+    };
+
+    // Use setTimeout to ensure DOM measurements are accurate after layout
+    const timer = setTimeout(measureWidth, 0);
+    
+    // Debounced resize handler for better performance
+    let resizeTimer: NodeJS.Timeout;
+    const debouncedMeasureWidth = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(measureWidth, 100);
+    };
+    
+    window.addEventListener('resize', debouncedMeasureWidth);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', debouncedMeasureWidth);
+    };
+  }, [label, selectedValues.length]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -77,6 +110,49 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
   const availableOptions = options.filter(option => !option.disabled);
   const hasAvailableOptions = availableOptions.length > 0;
 
+  // Helper function to create truncated available options display (when no selection)
+  const getAvailableOptionsDisplay = () => {
+    const availableLabels = availableOptions.map(option => option.label);
+    const optionsText = availableLabels.join(', ');
+    const fullText = `[${optionsText}]`;
+    
+    // If no width measured yet, use fallback logic
+    if (availableWidth === 0) {
+      // Use maxDisplayedTags as fallback - mobile vs desktop
+      const fallbackMaxLength = maxDisplayedTags === 1 ? 25 : 45;
+      if (fullText.length <= fallbackMaxLength) {
+        return fullText;
+      }
+      const availableSpace = fallbackMaxLength - 5;
+      const halfSpace = Math.floor(availableSpace / 2);
+      const firstPart = optionsText.substring(0, halfSpace);
+      const lastPart = optionsText.substring(optionsText.length - halfSpace);
+      return `[${firstPart}...${lastPart}]`;
+    }
+    
+    // Calculate max characters based on available pixel width
+    // More conservative estimation: 7 pixels per character (accounting for spacing)
+    const estimatedCharWidth = 7;
+    const maxChars = Math.floor(availableWidth / estimatedCharWidth);
+    
+    // Responsive bounds based on screen size
+    const minChars = window.innerWidth < 640 ? 15 : 20; // Smaller minimum on mobile
+    const maxChars_capped = Math.min(maxChars, 120); // Cap at 120 chars max
+    const maxLength = Math.max(minChars, maxChars_capped);
+    
+    if (fullText.length <= maxLength) {
+      return fullText;
+    }
+    
+    // Truncate in the middle, preserving start and end
+    const availableSpace = maxLength - 5; // Account for "[...]"
+    const halfSpace = Math.floor(availableSpace / 2);
+    const firstPart = optionsText.substring(0, halfSpace);
+    const lastPart = optionsText.substring(optionsText.length - halfSpace);
+    
+    return `[${firstPart}...${lastPart}]`;
+  };
+
   return (
     <div ref={dropdownRef} className={`relative ${className}`}>
       {/* Dropdown Trigger */}
@@ -105,11 +181,21 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
       >
         <div className="flex-1 min-w-0">
           {selectedValues.length === 0 ? (
-            <span className={`${
-              isDarkMode ? 'text-slate-400' : 'text-slate-500'
-            }`}>
-              <span className="font-bold">{label}</span>
-            </span>
+            <div className="flex items-center min-w-0">
+              <span 
+                ref={labelRef}
+                className={`font-bold flex-shrink-0 ${
+                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                }`}
+              >
+                {label}:
+              </span>
+              <span className={`ml-1 truncate ${
+                isDarkMode ? 'text-slate-500' : 'text-slate-400'
+              }`}>
+                {getAvailableOptionsDisplay()}
+              </span>
+            </div>
           ) : (
             <div className="flex items-center">
               <span className={`font-bold ${

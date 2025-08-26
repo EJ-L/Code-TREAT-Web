@@ -80,7 +80,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   viewMode,
   setViewMode,
   isMultiLeaderboard = false,
-  selectedMultiTab = 'Overall'
+  selectedMultiTab = 'All'
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);

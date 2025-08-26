@@ -32,7 +32,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
   timelineRange,
   onTimelineChange,
   isMultiLeaderboard = false,
-  selectedMultiTab = 'Overall'
+  selectedMultiTab = 'All'
 }) => {
   // Get the excluded filter for multi-leaderboard mode
   const getExcludedFilter = () => {

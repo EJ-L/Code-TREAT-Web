@@ -505,7 +505,7 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
 
 // Task-specific header configurations
 export const TASK_HEADERS: Record<TaskType, string[]> = {
-  'overall': ['score', 'tasks'],
+  'overall': [],
   'code generation': [
     'pass@1', 'pass@3', 'pass@5',
     'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
@@ -541,7 +541,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
 
 // Difficulty-based header configurations
 export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
-  'overall': ['score', 'tasks'],
+  'overall': [],
   'code generation': [
     'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
     'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
@@ -587,53 +587,53 @@ export interface MultiLeaderboardConfig {
 export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboardConfig>> = {
   'code generation': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java']
   },
   'code translation': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java']
   },
   'code summarization': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
   },
   'code review': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java', 'C', 'CPP', 'C#', 'Ruby', 'JavaScript', 'TypeScript', 'PHP', 'Go']
   },
   'input prediction': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java']
   },
   'output prediction': {
     extractedFilter: 'modality',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Python', 'Java']
+    overallTab: 'All',
+    tabs: ['All', 'Python', 'Java']
   },
   'vulnerability detection': {
     extractedFilter: 'dataset',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'PrimeVul', 'PrimeVulPairs']
+    overallTab: 'All',
+    tabs: ['All', 'PrimeVul', 'PrimeVulPairs']
   },
   'code-web': {
     extractedFilter: 'framework',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'React', 'Vue', 'Angular', 'Vanilla']
+    overallTab: 'All',
+    tabs: ['All', 'React', 'Vue', 'Angular', 'Vanilla']
   },
   'mr-web': {
     extractedFilter: 'knowledge',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Visual', 'RER']
+    overallTab: 'All',
+    tabs: ['All', 'Visual', 'RER']
   },
   'code-robustness': {
     extractedFilter: 'dataset',
-    overallTab: 'Overall',
-    tabs: ['Overall', 'Merge', 'CRUXEval', 'LiveCodeBench (CE)']
+    overallTab: 'All',
+    tabs: ['All', 'Merge', 'CRUXEval', 'LiveCodeBench (CE)']
   }
 };
 

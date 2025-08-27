@@ -631,12 +631,12 @@ const ModelScatterChart = ({
   return (
     <div className="w-full">
       {/* Metric selector buttons - Responsive */}
-      <div className="mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
+      <div className="mt-6 sm:mt-8 mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
         {availableMetrics.map((metric) => (
           <button
             key={metric}
             onClick={() => onMetricChange(metric)}
-            className={`px-3 sm:px-4 py-1 sm:py-2 text-sm sm:text-base font-medium rounded-lg transition-all ${
+            className={`px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base font-medium rounded-lg transition-all ${
               currentMetric === metric
                 ? isDarkMode
                   ? 'bg-blue-600 text-white'
@@ -660,15 +660,19 @@ const ModelScatterChart = ({
             className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all flex items-center gap-1 sm:gap-2 ${
               showCoTModels
                 ? isDarkMode
-                  ? 'bg-green-600 text-white'
-                  : 'bg-green-500 text-white'
+                  ? 'text-green-400 border border-green-400/30'
+                  : 'text-green-600 border border-green-600/30'
                 : isDarkMode
-                ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
-                : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+                ? 'text-slate-400 border border-slate-600 opacity-50'
+                : 'text-slate-500 border border-slate-300 opacity-50'
             }`}
           >
-            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-              isDarkMode ? 'bg-green-400' : 'bg-green-500'
+            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
+              showCoTModels
+                ? isDarkMode 
+                  ? 'bg-green-400' 
+                  : 'bg-green-600'
+                : 'bg-transparent border border-current'
             }`}></div>
             <span className="hidden sm:inline">CoT Models</span>
             <span className="sm:hidden">CoT</span>
@@ -679,15 +683,19 @@ const ModelScatterChart = ({
             className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all flex items-center gap-1 sm:gap-2 ${
               showRegularModels
                 ? isDarkMode
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-blue-500 text-white'
+                  ? 'text-blue-400 border border-blue-400/30'
+                  : 'text-blue-600 border border-blue-600/30'
                 : isDarkMode
-                ? 'bg-slate-700 text-slate-300 hover:bg-slate-600 opacity-50'
-                : 'bg-slate-200 text-slate-700 hover:bg-slate-300 opacity-50'
+                ? 'text-slate-400 border border-slate-600 opacity-50'
+                : 'text-slate-500 border border-slate-300 opacity-50'
             }`}
           >
-            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-              isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
+            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
+              showRegularModels
+                ? isDarkMode 
+                  ? 'bg-blue-400' 
+                  : 'bg-blue-600'
+                : 'bg-transparent border border-current'
             }`}></div>
             <span className="hidden sm:inline">Regular Models</span>
             <span className="sm:hidden">Regular</span>

@@ -166,6 +166,11 @@ export default function Home() {
   const handleSectionChange = (section: 'overview' | 'tasks' | 'about') => {
     setCurrentSection(section);
     setIsSidebarOpen(false); // Close sidebar on mobile after selection
+    
+    // Reset currentTask when navigating away from tasks section
+    if (section !== 'tasks') {
+      setCurrentTask('overall');
+    }
   };
 
   const handleSidebarToggle = () => {

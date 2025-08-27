@@ -103,7 +103,7 @@ const Sidebar: FC<SidebarProps> = ({
                       onTaskChange?.(task as TaskType);
                     }}
                     className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors ${
-                      currentTask === task
+                      currentTask === task && currentSection === 'tasks'
                         ? isDarkMode 
                           ? 'bg-blue-900/50 text-blue-100 font-semibold' 
                           : 'bg-blue-100 text-blue-800 font-semibold'

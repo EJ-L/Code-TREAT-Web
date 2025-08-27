@@ -4,9 +4,10 @@ import PaperCitationModal from '../ui/PaperCitationModal';
 
 interface HeroProps {
   isDarkMode: boolean;
+  onNavigateToTask?: (task: string) => void;
 }
 
-const Hero: FC<HeroProps> = ({ isDarkMode }) => {
+const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
   const [isPaperModalOpen, setIsPaperModalOpen] = useState(false);
 
   return (
@@ -168,6 +169,7 @@ const Hero: FC<HeroProps> = ({ isDarkMode }) => {
         isOpen={isPaperModalOpen}
         onClose={() => setIsPaperModalOpen(false)}
         isDarkMode={isDarkMode}
+        onNavigateToTask={onNavigateToTask}
       />
     </main>
   );

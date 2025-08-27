@@ -550,7 +550,7 @@ interface LeaderboardProps {
       <section>
         <div className="container mx-auto px-4">
           {/* Filter Panel with conditional spacing */}
-          <div className={isMultiLeaderboardTask(currentTask) && viewMode === 'table' ? '' : 'mb-6'}>
+          <div className={`${isMultiLeaderboardTask(currentTask) && viewMode === 'table' ? 'mt-8' : 'mt-8 mb-6'}`}>
             <FilterPanel 
               currentTask={currentTask}
               taskAbilities={taskAbilities}

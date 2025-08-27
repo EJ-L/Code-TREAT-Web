@@ -5,16 +5,17 @@ import About from '../sections/About';
 
 interface OverviewPageProps {
   isDarkMode: boolean;
+  onNavigateToTask?: (task: string) => void;
 }
 
-const OverviewPage: FC<OverviewPageProps> = ({ isDarkMode }) => {
+const OverviewPage: FC<OverviewPageProps> = ({ isDarkMode, onNavigateToTask }) => {
   return (
     <div className="flex-1">
       {/* Hero Section */}
-      <Hero isDarkMode={isDarkMode} />
+      <Hero isDarkMode={isDarkMode} onNavigateToTask={onNavigateToTask} />
       
       {/* About Section */}
-      <About isDarkMode={isDarkMode} />
+      <About isDarkMode={isDarkMode} onNavigateToTask={onNavigateToTask} />
     </div>
   );
 };

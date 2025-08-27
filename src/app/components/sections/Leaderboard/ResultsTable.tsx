@@ -519,7 +519,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           </div>
         ) : (
           // Show scatter chart view
-          <div style={{ width: '100%', paddingTop: '0px', paddingLeft: '20px', paddingRight: '20px' }}>
+          <div style={{ width: '100%', paddingTop: '32px', paddingLeft: '20px', paddingRight: '20px' }}>
             <ModelScatterChart
               data={sortedResults}
               currentMetric={currentScatterMetric}

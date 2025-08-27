@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 
 interface AboutProps {
   isDarkMode: boolean;
+  onNavigateToTask?: (task: string) => void;
 }
 
-const About: FC<AboutProps> = ({ isDarkMode }) => {
+const About: FC<AboutProps> = ({ isDarkMode, onNavigateToTask }) => {
   return (
     <section id="about" className="relative flex items-center py-8">
       <motion.div 

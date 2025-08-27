@@ -181,16 +181,22 @@ export default function Home() {
     setCurrentTask(task);
   };
 
+  const handleNavigateToTask = (task: string) => {
+    setCurrentSection('tasks');
+    setCurrentTask(task as TaskType);
+    setIsSidebarOpen(false);
+  };
+
   const renderCurrentPage = () => {
     switch (currentSection) {
       case 'overview':
-        return <OverviewPage isDarkMode={isDarkMode} />;
+        return <OverviewPage isDarkMode={isDarkMode} onNavigateToTask={handleNavigateToTask} />;
       case 'tasks':
         return <TasksPage taskAbilities={taskAbilities} isDarkMode={isDarkMode} currentTask={currentTask} />;
       case 'about':
         return <AboutPage isDarkMode={isDarkMode} />;
       default:
-        return <OverviewPage isDarkMode={isDarkMode} />;
+        return <OverviewPage isDarkMode={isDarkMode} onNavigateToTask={handleNavigateToTask} />;
     }
   };
 

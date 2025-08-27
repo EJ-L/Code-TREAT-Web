@@ -5,6 +5,7 @@ interface PaperCitationModalProps {
   isOpen: boolean;
   onClose: () => void;
   isDarkMode: boolean;
+  onNavigateToTask?: (task: string) => void;
 }
 
 interface PaperInfo {
@@ -75,20 +76,11 @@ const papers: PaperInfo[] = [
   }
 ];
 
-const PaperCitationModal: FC<PaperCitationModalProps> = ({ isOpen, onClose, isDarkMode }) => {
+const PaperCitationModal: FC<PaperCitationModalProps> = ({ isOpen, onClose, isDarkMode, onNavigateToTask }) => {
   const navigateToLeaderboard = (task?: string) => {
-    if (task) {
+    if (task && onNavigateToTask) {
       onClose();
-      
-      const leaderboardElement = document.getElementById('evaluation');
-      if (leaderboardElement) {
-        leaderboardElement.scrollIntoView({ behavior: 'smooth' });
-        
-        const taskChangeEvent = new CustomEvent('changeLeaderboardTask', {
-          detail: { task }
-        });
-        window.dispatchEvent(taskChangeEvent);
-      }
+      onNavigateToTask(task);
     }
   };
 

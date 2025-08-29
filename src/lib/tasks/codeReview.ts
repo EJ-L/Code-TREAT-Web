@@ -1,4 +1,4 @@
-import { ProcessedResult, FilterOptions, LLMJudgeScores, ResultEntry, Metrics } from '../types';
+import { ProcessedResult, FilterOptions, ResultEntry, Metrics } from '../types';
 
 export function processCodeReview(results: ResultEntry[], filters: FilterOptions): ProcessedResult[] {
   // 添加调试日志：输入数据
@@ -270,7 +270,7 @@ function calculateCodeReviewScore(llmJudge: Metrics['LLMJudge'] | undefined): nu
     const scores: number[] = [];
     
     // 处理所有评委
-    Object.entries(llmJudge).forEach(([judge, value]) => {
+    Object.entries(llmJudge).forEach(([_, value]) => {
       if (Array.isArray(value)) {
         // 如果是数组格式（如 [score1, score2, ...]）
         if (value.length > 0) {
@@ -317,7 +317,7 @@ export function aggregateCodeReviewResults(results: ProcessedResult[]): Processe
   // console.log(`Grouped into ${groupedResults.size} model groups`);
   
   // 计算每个模型的平均值
-  const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
+  const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     
     // 计算LLMJudge分数的平均值

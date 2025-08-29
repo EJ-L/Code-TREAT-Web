@@ -17,7 +17,7 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
 }) => {
   const config = getMultiLeaderboardConfig(currentTask);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [_, setIsSmallScreen] = useState(false);
   const [pendingTabChange, setPendingTabChange] = useState<string | null>(null);
   
   if (!config) {

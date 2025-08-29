@@ -15,7 +15,7 @@ const OverviewPage: FC<OverviewPageProps> = ({ isDarkMode, onNavigateToTask }) =
       <Hero isDarkMode={isDarkMode} onNavigateToTask={onNavigateToTask} />
       
       {/* About Section */}
-      <About isDarkMode={isDarkMode} onNavigateToTask={onNavigateToTask} />
+      <About isDarkMode={isDarkMode} />
     </div>
   );
 };

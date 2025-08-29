@@ -128,7 +128,7 @@ export async function GET(request: NextRequest) {
       const lines = fileContent.split('\n').filter(line => line.trim() !== '');
       
       const data: any[] = [];
-      let lineCount = lines.length;
+      const lineCount = lines.length;
       const MAX_LINES = 100000; // Limit lines to prevent memory issues
 
       if (lineCount > MAX_LINES) {

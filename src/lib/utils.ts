@@ -29,12 +29,12 @@ export function formatDate(date: Date | number) {
  * @param ms 延迟时间（毫秒）
  * @returns 防抖后的函数
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   ms: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout>
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => fn.apply(this, args), ms)
   }
@@ -46,14 +46,14 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param ms 延迟时间（毫秒）
  * @returns 节流后的函数
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   fn: T,
   ms: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean
   let lastFn: ReturnType<typeof setTimeout>
   let lastTime: number
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     if (!inThrottle) {
       fn.apply(this, args)
       lastTime = Date.now()
@@ -93,14 +93,14 @@ export function deepClone<T>(obj: T): T {
   }
 
   if (obj instanceof Date) {
-    return new Date(obj.getTime()) as any
+    return new Date(obj.getTime()) as T
   }
 
   if (obj instanceof Array) {
     return obj.reduce((arr, item, i) => {
       arr[i] = deepClone(item)
       return arr
-    }, [] as any[]) as any
+    }, [] as T[]) as T
   }
 
   if (obj instanceof Object) {

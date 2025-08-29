@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 /**
  * Interface for organization logo properties

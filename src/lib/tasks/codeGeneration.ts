@@ -104,7 +104,7 @@ export function aggregateCodeGenerationResults(results: ProcessedResult[]): Proc
   });
   
   // 计算每个模型的平均值
-  const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
+  const aggregatedResults = Array.from(groupedResults.entries()).map(([, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     
     // 计算标准指标的平均值

@@ -122,7 +122,6 @@ interface DifficultyToggleProps {
 }
 
 export const DifficultyToggle: FC<DifficultyToggleProps> = ({
-  currentTask,
   showByDifficulty,
   setShowByDifficulty,
   isDarkMode
@@ -302,7 +301,6 @@ interface TimelineFilterProps {
 }
 
 export const TimelineFilter: FC<TimelineFilterProps> = ({ 
-  taskType, 
   isDarkMode, 
   timelineRange, 
   onTimelineChange 

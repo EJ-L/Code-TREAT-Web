@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 const ONE_DAY = 86_400_000; // 1 day in milliseconds
-const ONE_MONTH = 30 * ONE_DAY; // Approximate one month in milliseconds
 
 type DateRangeSliderProps = {
   min: number; // Min timestamp in ms
@@ -49,7 +48,7 @@ export default function DateRangeSlider({
   isDarkMode = false
 }: DateRangeSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [trackWidth, setTrackWidth] = useState(0);
+  const [_, setTrackWidth] = useState(0);
   const [startPos, setStartPos] = useState(0); // Position as percentage
   const [endPos, setEndPos] = useState(100); // Position as percentage
   const [activeHandle, setActiveHandle] = useState<'start' | 'end' | null>(null);
@@ -106,7 +105,7 @@ export default function DateRangeSlider({
   const posToPercent = (posX: number): number => {
     if (!trackRef.current) return 0;
     const trackRect = trackRef.current.getBoundingClientRect();
-    let percent = ((posX - trackRect.left) / trackRect.width) * 100;
+    const percent = ((posX - trackRect.left) / trackRect.width) * 100;
     return Math.max(0, Math.min(100, percent));
   };
   

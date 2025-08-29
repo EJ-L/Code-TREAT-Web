@@ -5,7 +5,7 @@ import {
   DataSourceMetadata 
 } from '../interfaces';
 import { BaseDataSource } from '../base/BaseDataSource';
-import { ResultEntry, TaskType, FilterOptions } from '../../types';
+import { TaskType, FilterOptions } from '../../types';
 
 /**
  * GitHub data source for downloading data from remote repositories

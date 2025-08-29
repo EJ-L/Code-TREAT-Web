@@ -74,7 +74,7 @@ const ModelScatterChart = ({
   leaderboardTimelineRange
 }: ScatterChartProps) => {
   const [hoveredPoint, setHoveredPoint] = useState<ScatterDataPoint | null>(null);
-  const [showCrosshair, setShowCrosshair] = useState(false);
+  const [_, setShowCrosshair] = useState(false);
   // Graph's own timeline state, independent from leaderboard
   const [graphTimelineRange, setGraphTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
   // Filter states for model types

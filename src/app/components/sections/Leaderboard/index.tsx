@@ -14,9 +14,7 @@ import { getAvailableLLMJudges as getReviewJudges } from '@/lib/tasks/codeReview
 
 // Import new configuration system
 import { 
-  getTaskHeaders, 
   getMinColumnWidth, 
-  TASKS_WITH_DIFFICULTY,
   isMultiLeaderboardTask,
   getMultiLeaderboardConfig
 } from '@/lib/leaderboardConfig';
@@ -53,7 +51,7 @@ interface LeaderboardProps {
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDataComplete, setIsDataComplete] = useState(false);
+  const [_, setIsDataComplete] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(
     getDefaultSortConfig(initialTask || 'overall')
   );
@@ -582,7 +580,6 @@ interface LeaderboardProps {
           <AnimatedResultsWrapper
             timelineRange={timelineRange}
             currentTask={currentTask}
-            resultCount={sortedResults.length}
           >
             <div className={isMultiLeaderboardTask(currentTask) && viewMode === 'table' ? 'w-full max-w-7xl mx-auto' : ''}>
               {/* Multi-leaderboard header - moved inside wrapper to eliminate spacing */}

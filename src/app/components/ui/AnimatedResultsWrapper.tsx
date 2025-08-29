@@ -5,14 +5,12 @@ interface AnimatedResultsWrapperProps {
   children: ReactNode;
   timelineRange: { start: Date; end: Date } | null;
   currentTask: string;
-  resultCount: number;
 }
 
 export const AnimatedResultsWrapper: FC<AnimatedResultsWrapperProps> = ({
   children,
   timelineRange,
-  currentTask,
-  resultCount
+  currentTask
 }) => {
   const [animationKey, setAnimationKey] = useState(0);
   const [previousTimelineRange, setPreviousTimelineRange] = useState(timelineRange);

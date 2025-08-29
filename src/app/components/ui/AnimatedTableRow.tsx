@@ -3,13 +3,11 @@ import { motion } from 'framer-motion';
 
 interface AnimatedTableRowProps {
   children: ReactNode;
-  index: number;
   className?: string;
 }
 
 export const AnimatedTableRow: FC<AnimatedTableRowProps> = ({
   children,
-  index,
   className = ""
 }) => {
   return (

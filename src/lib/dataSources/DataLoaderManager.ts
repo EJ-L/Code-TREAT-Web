@@ -5,7 +5,7 @@ import {
   DataSourceHealth,
   IPrecomputedDataSource
 } from './interfaces';
-import { ResultEntry, TaskType, FilterOptions } from '../types';
+import { TaskType, FilterOptions } from '../types';
 import { DataSourceFactory } from './DataSourceFactory';
 
 export type DataLoadStrategy = 'precomputed-first' | 'filesystem-first' | 'all-sources' | 'precomputed-only' | 'filesystem-only';

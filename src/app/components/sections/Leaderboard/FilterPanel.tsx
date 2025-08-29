@@ -7,7 +7,7 @@ import {
   OverallInfo,
   DataLeakageWarning,
 } from './FilterComponents';
-import CompactFilterBar from './CompactFilterBar';
+
 
 interface FilterPanelProps {
   currentTask: TaskType;
@@ -24,32 +24,9 @@ interface FilterPanelProps {
 
 const FilterPanel: FC<FilterPanelProps> = ({
   currentTask,
-  taskAbilities,
-  selectedAbilities,
-  handleAbilityChange,
-  availableLLMJudges,
   isDarkMode,
-  timelineRange,
-  onTimelineChange,
-  isMultiLeaderboard = false,
-  selectedMultiTab = 'All'
+  isMultiLeaderboard = false
 }) => {
-  // Get the excluded filter for multi-leaderboard mode
-  const getExcludedFilter = () => {
-    if (!isMultiLeaderboard) return undefined;
-    
-    const { getMultiLeaderboardConfig } = require('@/lib/leaderboardConfig');
-    const config = getMultiLeaderboardConfig(currentTask);
-    return config?.extractedFilter;
-  };
-
-  // Check if we have filters available
-  const hasFilters = filterConditions.hasAvailableFilters(currentTask, taskAbilities, availableLLMJudges, getExcludedFilter());
-  // Check if we should show difficulty toggle
-  const shouldShowDifficultyToggle = filterConditions.shouldShowDifficultyToggle(currentTask);
-  // Show the filter bar if we have filters OR if we need to show the difficulty toggle
-  const shouldShowFilterBar = hasFilters || shouldShowDifficultyToggle;
-
   // Early return for interaction-2-code task
   if (currentTask === 'interaction-2-code') {
     return null;

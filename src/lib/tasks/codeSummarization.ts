@@ -149,7 +149,7 @@ function calculateLLMJudgeScore(llmJudge: Metrics['LLMJudge'] | undefined, selec
   return null;
 }
 
-export function aggregateCodeSummarizationResults(results: ProcessedResult[], selectedJudges?: string[]): ProcessedResult[] {
+export function aggregateCodeSummarizationResults(results: ProcessedResult[], _?: string[]): ProcessedResult[] {
   const groupedResults = new Map<string, ProcessedResult[]>();
   
   // 按模型分组
@@ -162,7 +162,7 @@ export function aggregateCodeSummarizationResults(results: ProcessedResult[], se
   });
   
   // 计算每个模型的平均值
-  return Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
+  return Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     
     // 计算LLMJudge分数的平均值

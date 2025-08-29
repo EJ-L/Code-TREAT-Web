@@ -21,7 +21,6 @@ const ModelComparisonModal = ({
   onClose, 
   results, 
   isDarkMode,
-  currentTask,
   selectedAbilities
 }: ModelComparisonModalProps) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);

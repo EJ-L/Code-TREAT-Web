@@ -648,7 +648,7 @@ export function getMultiLeaderboardConfig(task: TaskType): MultiLeaderboardConfi
 }
 
 // Helper functions
-export function getTaskHeaders(task: TaskType, showByDifficulty: boolean = false): HeaderConfig[] {
+export function getTaskHeaders(task: TaskType): HeaderConfig[] {
   const commonHeaders = ['rank', 'model'];
   
   // Always use the standard task headers (which now include difficulty metrics for relevant tasks)

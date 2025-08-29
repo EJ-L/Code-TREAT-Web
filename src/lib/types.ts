@@ -12,7 +12,7 @@ export type Metrics = {
   'LLMJudge'?: LLMJudgeScores | number;
   'gpt-4o'?: number;
   'ExecutionAccuracy'?: number;
-  [key: string]: any; // Allow any additional string indices
+  [key: string]: number | LLMJudgeScores | undefined; // Allow any additional metrics
 };
 
 export type Ability = {
@@ -49,6 +49,7 @@ export type ResultEntry = {
 export type ProcessedResult = {
   modelId: string;
   modelName: string;
+  model?: string; // Add alias for compatibility
   dataset: string;
   task: string;
   sourceLang: string | null;
@@ -103,6 +104,8 @@ export type ProcessedResult = {
   'MAE'?: number | null;
   'NEMD'?: number | null;
   'RER'?: number | null;
+  // Allow any additional string indices for dynamic properties
+  [key: string]: string | number | null | undefined;
 };
 
 export type FilterOptions = {

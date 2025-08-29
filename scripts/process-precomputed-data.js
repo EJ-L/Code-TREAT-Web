@@ -1,6 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const { generateAllCombinations, generateFilename } = require('./generate-precomputed-results');
+import fs from 'fs';
+import path from 'path';
 
 // Simulate the data loading and processing that happens in the React app
 // This will need to be adapted based on your actual data processing logic
@@ -556,21 +555,21 @@ function getModelUrl(modelName) {
 }
 
 // Helper function to convert TypeScript modules to Node.js compatible code
-function createFilterOptions(task, filters, showByDifficulty) {
-  return {
-    tasks: [task],
-    datasets: filters.dataset || [],
-    langs: filters.modality || [],
-    modalities: filters.modality || [],
-    knowledge: filters.knowledge || [],
-    reasoning: filters.reasoning || [],
-    robustness: filters.robustness || [],
-    security: filters.privacy || [],
-    llmJudges: filters.llmJudges || [],
-    framework: filters.framework || [],
-    showByDifficulty: showByDifficulty
-  };
-}
+// function createFilterOptions(task, filters, showByDifficulty) {
+//   return {
+//     tasks: [task],
+//     datasets: filters.dataset || [],
+//     langs: filters.modality || [],
+//     modalities: filters.modality || [],
+//     knowledge: filters.knowledge || [],
+//     reasoning: filters.reasoning || [],
+//     robustness: filters.robustness || [],
+//     security: filters.privacy || [],
+//     llmJudges: filters.llmJudges || [],
+//     framework: filters.framework || [],
+//     showByDifficulty: showByDifficulty
+//   };
+// }
 
 // Main data processing function using real data
 async function processTaskData(task, filters, showByDifficulty) {

@@ -54,11 +54,7 @@ const ResizableHeader: React.FC<ResizableHeaderProps> = ({ header, onResize, wid
   const [initialPos, setInitialPos] = useState(0);
   const [initialWidth, setInitialWidth] = useState(0);
   
-  // Convert width string to number (removing 'px' if present)
-  const getNumericWidth = (widthValue: string | number): number => {
-    if (typeof widthValue === 'number') return widthValue;
-    return parseInt(widthValue.replace('px', ''));
-  };
+
   
   // Calculate minimum width for this header
   const minHeaderWidth = useMemo(() => {
@@ -68,7 +64,7 @@ const ResizableHeader: React.FC<ResizableHeaderProps> = ({ header, onResize, wid
     const iconSpace = 24; // Space for sort icons
     
     // Base minimum width using the field's content
-    let baseMinWidth = textWidth + paddingSpace + iconSpace;
+    const baseMinWidth = textWidth + paddingSpace + iconSpace;
     
     // Task and field specific minimums (matching the cell minimums)
     if (header.key === 'model') {
@@ -242,12 +238,12 @@ const getCellStyle = (
 
 interface LeaderboardTableProps {
   headers: TableHeader[];
-  visibleData: any[];
+  visibleData: Record<string, unknown>[];
   currentTask: TaskType;
   isDarkMode: boolean;
   getColumnWidth: (key: string) => string | number;
   handleColumnResize: (key: string, width: number) => void;
-  renderCell: (item: any, key: string) => React.ReactNode;
+  renderCell: (item: Record<string, unknown>, key: string) => React.ReactNode;
   getRowClass: (index: number) => string;
   needsHorizontalScroll?: boolean;
   calculateTableWidth?: () => number;

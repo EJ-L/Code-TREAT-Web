@@ -1,20 +1,19 @@
 import { FC, useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
-import { TaskType, Ability } from '@/lib/types';
+
+import { TaskType, ProcessedResult, Ability } from '@/lib/types';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
-import { getModelUrl, hasDataLeakage } from '@/lib/constants';
+import { getModelUrl } from '@/lib/constants';
 import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
 import ModelScatterChart from '@/app/components/ui/ModelScatterChart';
-import { TimelineFilter } from './FilterComponents';
-import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
+
 import MultiSelectDropdown from '@/app/components/ui/MultiSelectDropdown';
 import { FilterState } from '@/lib/filterHelpers';
 
 interface ResultsTableProps {
   currentTask: TaskType;
-  results: any[];
-  sortedResults: any[];
+  results: ProcessedResult[];
+  sortedResults: ProcessedResult[];
   isLoading: boolean;
   sortConfig: { key: string; direction: 'asc' | 'desc' } | null;
   getTableHeaders: (task: TaskType) => { key: string; label: string; width: string; description: string }[];
@@ -39,7 +38,6 @@ interface ResultsTableProps {
   taskAbilities?: Record<TaskType, Ability>;
   selectedAbilities?: Partial<Ability>;
   handleAbilityChange?: (key: keyof Ability, value: string) => void;
-
   availableLLMJudges?: string[];
   // View mode props
   viewMode: 'table' | 'scatter';
@@ -72,7 +70,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
   isDarkMode,
   onColumnWidthChange,
   timelineRange,
-  onTimelineChange,
   taskAbilities = {},
   selectedAbilities = {},
   handleAbilityChange,
@@ -80,7 +77,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
   viewMode,
   setViewMode,
   isMultiLeaderboard = false,
-  selectedMultiTab = 'All'
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -89,21 +85,10 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // State for scrollbar visibility
   const [needsHorizontalScroll, setNeedsHorizontalScroll] = useState(false);
   
-  // View mode is now controlled from parent
-  
   // State for current metric in scatter chart
   const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
   
-  // Calculate available filters at component level
-  const getExcludedFilter = () => {
-    if (!isMultiLeaderboard || viewMode !== 'table') return undefined;
-    
-    const { getMultiLeaderboardConfig } = require('@/lib/leaderboardConfig');
-    const config = getMultiLeaderboardConfig(currentTask);
-    return config?.extractedFilter;
-  };
-  
-  const availableFilters = getAvailableFilters(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges, getExcludedFilter());
+  const availableFilters: any[] = [];
   
   // Get available numeric metrics for scatter chart
   const availableMetrics = useMemo(() => {
@@ -127,13 +112,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
       })
       .map(header => header.key);
   }, [results, currentTask, getTableHeaders]);
-
-  // Check if chart view button should be shown - based on original results having data and metrics
-  // The button should remain visible even when timeline filtering shows 0 results, 
-  // so users can switch to chart view to adjust the timeline filter
-  const shouldShowChartButton = useMemo(() => {
-    return currentTask !== 'overall' && availableMetrics.length > 0 && results.length > 0;
-  }, [currentTask, availableMetrics.length, results.length]);
   
   // Set default metric when available metrics change
   useEffect(() => {
@@ -213,7 +191,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
       return (
       <AnimatedTableRow 
         key={index} 
-        index={index}
         className={`
           ${isDarkMode 
             ? index % 2 === 0 ? 'bg-[#0f1729]' : 'bg-[#182338]' 
@@ -232,7 +209,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             <TableCell 
               key={header.key}
               header={header}
-              value={value}
+              value={value ?? undefined}
               rowIndex={index}
               currentTask={currentTask}
               columnWidths={columnWidths}
@@ -244,8 +221,6 @@ const ResultsTable: FC<ResultsTableProps> = ({
               getBackgroundColor={getBackgroundColor}
               getColumnAlignment={getColumnAlignment}
               getNumericStyles={getNumericStyles}
-              truncateText={truncateText}
-              getTaskSpecificColumnWidth={getTaskSpecificColumnWidth}
               modelName={modelName}
               modelUrl={modelUrl}
               isDarkMode={isDarkMode}

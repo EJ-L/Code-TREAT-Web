@@ -1,3 +1,4 @@
+import { constant } from 'lodash';
 import React, { useState, useMemo, useEffect } from 'react';
 import { 
   BarChart, 
@@ -6,7 +7,6 @@ import {
   YAxis, 
   CartesianGrid, 
   Tooltip, 
-  Legend, 
   ResponsiveContainer,
   Label,
   ReferenceLine
@@ -58,7 +58,7 @@ const ModelComparisonBarChart = ({ data, models, activeModels, isDarkMode }: Bar
     if (!data.length || !models.length) return [0, 100];
     
     // Get min and max values across all metrics and models
-    let allValues: number[] = [];
+    const allValues: number[] = [];
     data.forEach(item => {
       models.forEach(model => {
         if (typeof item[model] === 'number' && visibleModels[model]) {

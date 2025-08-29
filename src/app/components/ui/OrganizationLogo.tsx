@@ -2,8 +2,7 @@ import React from 'react';
 import { 
   ORGANIZATION_LOGOS, 
   SVG_LOGOS, 
-  OrganizationLogoProps, 
-  getOrganizationFromModel 
+  OrganizationLogoProps
 } from '@/lib/organization-logos';
 
 const OrganizationLogo: React.FC<OrganizationLogoProps> = ({ organization, size = 16 }) => {

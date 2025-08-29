@@ -70,7 +70,7 @@ class DebugLogger {
   /**
    * Data loader debug logging
    */
-  dataLoader(...args: any[]): void {
+  dataLoader(...args: unknown[]): void {
     if (process.env.NODE_ENV === 'development' && this.config.dataLoader) {
       console.log('🔄 [DataLoader]', ...args);
     }
@@ -79,7 +79,7 @@ class DebugLogger {
   /**
    * Data source debug logging
    */
-  dataSource(...args: any[]): void {
+  dataSource(...args: unknown[]): void {
     if (process.env.NODE_ENV === 'development' && this.config.dataSource) {
       console.log('📦 [DataSource]', ...args);
     }
@@ -88,7 +88,7 @@ class DebugLogger {
   /**
    * Leaderboard debug logging
    */
-  leaderboard(...args: any[]): void {
+  leaderboard(...args: unknown[]): void {
     if (process.env.NODE_ENV === 'development' && this.config.leaderboard) {
       console.log('🏆 [Leaderboard]', ...args);
     }
@@ -97,7 +97,7 @@ class DebugLogger {
   /**
    * API debug logging
    */
-  api(...args: any[]): void {
+  api(...args: unknown[]): void {
     if (process.env.NODE_ENV === 'development' && this.config.api) {
       console.log('🌐 [API]', ...args);
     }
@@ -106,7 +106,7 @@ class DebugLogger {
   /**
    * General debug logging
    */
-  general(...args: any[]): void {
+  general(...args: unknown[]): void {
     if (process.env.NODE_ENV === 'development' && this.config.general) {
       console.log('💡 [Debug]', ...args);
     }
@@ -115,21 +115,21 @@ class DebugLogger {
   /**
    * Error logging (always enabled)
    */
-  error(...args: any[]): void {
+  error(...args: unknown[]): void {
     console.error('❌ [Error]', ...args);
   }
 
   /**
    * Warning logging (always enabled)
    */
-  warn(...args: any[]): void {
+  warn(...args: unknown[]): void {
     console.warn('⚠️ [Warning]', ...args);
   }
 
   /**
    * Info logging (always enabled)
    */
-  info(...args: any[]): void {
+  info(...args: unknown[]): void {
     console.info('ℹ️ [Info]', ...args);
   }
 }
@@ -146,7 +146,7 @@ export type { DebugConfig };
 
 // Development helper - expose debug controls globally in browser
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  (window as any).debug = {
+  (window as unknown as Record<string, unknown>).debug = {
     setConfig: setDebugConfig,
     getConfig: getDebugConfig,
     enable: (category: keyof DebugConfig) => setDebugConfig({ [category]: true }),

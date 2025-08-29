@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Define task abilities - same as in page.tsx
 const taskAbilities = {
@@ -109,25 +109,25 @@ const taskAbilities = {
 const tasksWithDifficulty = ['code generation', 'code translation', 'input prediction', 'output prediction'];
 
 // Generate all possible combinations for a given array
-function generateCombinations(arr) {
-  const combinations = [];
-  
-  // Always include the "all selected" option (empty array means all)
-  combinations.push([]);
-  
-  // Generate all non-empty subsets
-  for (let i = 1; i < (1 << arr.length); i++) {
-    const combination = [];
-    for (let j = 0; j < arr.length; j++) {
-      if (i & (1 << j)) {
-        combination.push(arr[j]);
-      }
-    }
-    combinations.push(combination);
-  }
-  
-  return combinations;
-}
+// function generateCombinations(arr) {
+//   const combinations = [];
+//   
+//   // Always include the "all selected" option (empty array means all)
+//   combinations.push([]);
+//   
+//   // Generate all non-empty subsets
+//   for (let i = 1; i < (1 << arr.length); i++) {
+//     const combination = [];
+//     for (let j = 0; j < arr.length; j++) {
+//       if (i & (1 << j)) {
+//         combination.push(arr[j]);
+//       }
+//     }
+//     combinations.push(combination);
+//   }
+//   
+//   return combinations;
+// }
 
 // Generate filename for a specific filter combination
 function generateFilename(task, filters, showByDifficulty = false) {

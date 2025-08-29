@@ -5,7 +5,6 @@ import {
   PolarAngleAxis, 
   PolarRadiusAxis, 
   Radar, 
-  Legend, 
   ResponsiveContainer, 
   Tooltip
 } from 'recharts';
@@ -43,7 +42,7 @@ const ModelComparisonRadarChart = ({ data, models, activeModels, isDarkMode }: R
     if (!data.length || !models.length) return [0, 100];
     
     // Get min and max values across all metrics and models
-    let allValues: number[] = [];
+    const allValues: number[] = [];
     data.forEach(item => {
       models.forEach(model => {
         if (typeof item[model] === 'number' && visibleModels[model]) {

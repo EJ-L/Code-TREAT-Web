@@ -102,10 +102,6 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
     onSelectionChange([]);
   };
 
-  // Get display tags
-  const displayTags = selectedValues.slice(0, maxDisplayedTags);
-  const hiddenCount = Math.max(0, selectedValues.length - maxDisplayedTags);
-
   // Check if option is available
   const availableOptions = options.filter(option => !option.disabled);
   const hasAvailableOptions = availableOptions.length > 0;

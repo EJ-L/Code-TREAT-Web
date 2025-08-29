@@ -23,8 +23,6 @@ interface TableCellProps {
   getBackgroundColor: (key: string, isHeaderCell?: boolean) => string;
   getColumnAlignment: (key: string) => string;
   getNumericStyles: (key: string) => string;
-  truncateText: (text: string, maxWidth: number) => string;
-  getTaskSpecificColumnWidth: (task: TaskType, key: string) => string;
   isDarkMode: boolean;
   modelUrl?: string;
   modelName?: string; // Add model name prop for data leakage detection
@@ -41,11 +39,8 @@ const TableCell: FC<TableCellProps> = ({
   isColumnCentered,
   getStickyStyles,
   getStickyLeftPosition,
-  getBackgroundColor,
   getColumnAlignment,
   getNumericStyles,
-  truncateText,
-  getTaskSpecificColumnWidth,
   isDarkMode,
   modelUrl,
   modelName
@@ -83,8 +78,7 @@ const TableCell: FC<TableCellProps> = ({
   };
   
   const rowBgColor = getRowBackgroundColor();
-  const contentWidth = getContentWidth(columnWidths[header.key] || 100);
-  
+
   return (
     <td 
       key={header.key}
@@ -112,7 +106,6 @@ const TableCell: FC<TableCellProps> = ({
           ? 'text-sm sm:text-base lg:text-lg' : ''
       }`}>
         {(() => {
-          const shouldShowDataLeakageHighlight = hasDataLeakageForRow();
           const content = (() => {
           if (value === null || value === undefined || value === '') {
             return '-';
@@ -125,14 +118,11 @@ const TableCell: FC<TableCellProps> = ({
             
             // Identify tasks with full model name display but different resize behaviors
             const isSimplifiedLeaderboard = ['overall', 'code summarization', 'code review'].includes(currentTask);
-            // Overall task has no model column resizing
-            const hasFixedModelWidth = currentTask === 'overall';
             
             const organization = getOrganizationFromModel(modelName);
             
             // Use larger logo for all simplified leaderboards
             const logoSize = isSimplifiedLeaderboard ? 20 : 16;
-            const logoSpace = (organization && organization !== 'unknown') ? (logoSize + 8) : 0;
             
             const modelContent = (
               <div className="flex items-center gap-2 w-full">

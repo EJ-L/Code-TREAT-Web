@@ -164,15 +164,15 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     pass5: entry.metrics['pass@5'] || null,
     
     // Difficulty-based metrics (if available)
-    easyPass1: entry.metrics['easy_pass@1'] || null,
-    mediumPass1: entry.metrics['medium_pass@1'] || null,
-    hardPass1: entry.metrics['hard_pass@1'] || null,
-    easyPass3: entry.metrics['easy_pass@3'] || null,
-    mediumPass3: entry.metrics['medium_pass@3'] || null,
-    hardPass3: entry.metrics['hard_pass@3'] || null,
-    easyPass5: entry.metrics['easy_pass@5'] || null,
-    mediumPass5: entry.metrics['medium_pass@5'] || null,
-    hardPass5: entry.metrics['hard_pass@5'] || null,
+    easyPass1: typeof entry.metrics['easy_pass@1'] === 'number' ? entry.metrics['easy_pass@1'] : null,
+    mediumPass1: typeof entry.metrics['medium_pass@1'] === 'number' ? entry.metrics['medium_pass@1'] : null,
+    hardPass1: typeof entry.metrics['hard_pass@1'] === 'number' ? entry.metrics['hard_pass@1'] : null,
+    easyPass3: typeof entry.metrics['easy_pass@3'] === 'number' ? entry.metrics['easy_pass@3'] : null,
+    mediumPass3: typeof entry.metrics['medium_pass@3'] === 'number' ? entry.metrics['medium_pass@3'] : null,
+    hardPass3: typeof entry.metrics['hard_pass@3'] === 'number' ? entry.metrics['hard_pass@3'] : null,
+    easyPass5: typeof entry.metrics['easy_pass@5'] === 'number' ? entry.metrics['easy_pass@5'] : null,
+    mediumPass5: typeof entry.metrics['medium_pass@5'] === 'number' ? entry.metrics['medium_pass@5'] : null,
+    hardPass5: typeof entry.metrics['hard_pass@5'] === 'number' ? entry.metrics['hard_pass@5'] : null,
     
     // Other metrics
     codebleu: entry.metrics['CodeBLEU'] || null,
@@ -181,37 +181,37 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     difficulty: entry.difficulty || null,
     
     // Vulnerability detection metrics
-    'P-C': entry.metrics['P-C'] || null,
-    'P-V': entry.metrics['P-V'] || null,
-    'P-B': entry.metrics['P-B'] || null,
-    'P-R': entry.metrics['P-R'] || null,
-    'Accuracy': entry.metrics['Accuracy'] || null,
-    'Precision': entry.metrics['Precision'] || null,
-    'Recall': entry.metrics['Recall'] || null,
-    'F1 Score': entry.metrics['F1 Score'] || null,
+    'P-C': typeof entry.metrics['P-C'] === 'number' ? entry.metrics['P-C'] : null,
+    'P-V': typeof entry.metrics['P-V'] === 'number' ? entry.metrics['P-V'] : null,
+    'P-B': typeof entry.metrics['P-B'] === 'number' ? entry.metrics['P-B'] : null,
+    'P-R': typeof entry.metrics['P-R'] === 'number' ? entry.metrics['P-R'] : null,
+    'Accuracy': typeof entry.metrics['Accuracy'] === 'number' ? entry.metrics['Accuracy'] : null,
+    'Precision': typeof entry.metrics['Precision'] === 'number' ? entry.metrics['Precision'] : null,
+    'Recall': typeof entry.metrics['Recall'] === 'number' ? entry.metrics['Recall'] : null,
+    'F1 Score': typeof entry.metrics['F1 Score'] === 'number' ? entry.metrics['F1 Score'] : null,
     
     // Code-web and interaction-2-code metrics
-    'CLIP': entry.metrics['CLIP'] || null,
-    'Compilation': entry.metrics['Compilation'] || null,
-    'SSIM': entry.metrics['SSIM'] || null,
-    'Text': entry.metrics['Text'] || null,
-    'Position': entry.metrics['Position'] || null,
-    'Implement Rate': entry.metrics['Implement Rate'] || null,
+    'CLIP': typeof entry.metrics['CLIP'] === 'number' ? entry.metrics['CLIP'] : null,
+    'Compilation': typeof entry.metrics['Compilation'] === 'number' ? entry.metrics['Compilation'] : null,
+    'SSIM': typeof entry.metrics['SSIM'] === 'number' ? entry.metrics['SSIM'] : null,
+    'Text': typeof entry.metrics['Text'] === 'number' ? entry.metrics['Text'] : null,
+    'Position': typeof entry.metrics['Position'] === 'number' ? entry.metrics['Position'] : null,
+    'Implement Rate': typeof entry.metrics['Implement Rate'] === 'number' ? entry.metrics['Implement Rate'] : null,
     
     // Code-robustness metrics
-    'VAN': entry.metrics['VAN'] || null,
-    'REN': entry.metrics['REN'] || null,
-    'RTF': entry.metrics['RTF'] || null,
-    'GBC': entry.metrics['GBC'] || null,
-    'ALL': entry.metrics['ALL'] || null,
-    'MDC': entry.metrics['MDC'] || null,
-    'MPS': entry.metrics['MPS'] || null,
-    'MHC': entry.metrics['MHC'] || null,
+    'VAN': typeof entry.metrics['VAN'] === 'number' ? entry.metrics['VAN'] : null,
+    'REN': typeof entry.metrics['REN'] === 'number' ? entry.metrics['REN'] : null,
+    'RTF': typeof entry.metrics['RTF'] === 'number' ? entry.metrics['RTF'] : null,
+    'GBC': typeof entry.metrics['GBC'] === 'number' ? entry.metrics['GBC'] : null,
+    'ALL': typeof entry.metrics['ALL'] === 'number' ? entry.metrics['ALL'] : null,
+    'MDC': typeof entry.metrics['MDC'] === 'number' ? entry.metrics['MDC'] : null,
+    'MPS': typeof entry.metrics['MPS'] === 'number' ? entry.metrics['MPS'] : null,
+    'MHC': typeof entry.metrics['MHC'] === 'number' ? entry.metrics['MHC'] : null,
     
     // Mr-web metrics
-    'MAE': entry.metrics['MAE'] || null,
-    'NEMD': entry.metrics['NEMD'] || null,
-    'RER': entry.metrics['RER'] || null
+    'MAE': typeof entry.metrics['MAE'] === 'number' ? entry.metrics['MAE'] : null,
+    'NEMD': typeof entry.metrics['NEMD'] === 'number' ? entry.metrics['NEMD'] : null,
+    'RER': typeof entry.metrics['RER'] === 'number' ? entry.metrics['RER'] : null
   };
 
   return processedResult;

@@ -2,8 +2,6 @@ import { TaskType } from './types';
 import { 
   getTaskHeaders, 
   getColumnWidth, 
-  getMinColumnWidth,
-  getMaxColumnWidth,
   shouldUseSticky,
   getDefaultSortDirection,
   HeaderConfig,
@@ -15,7 +13,7 @@ export function initializeColumnWidths(
   task: TaskType, 
   showByDifficulty: boolean = false
 ): Record<string, number> {
-  const headers = getTaskHeaders(task, showByDifficulty);
+  const headers = getTaskHeaders(task);
   const newWidths: Record<string, number> = {};
   
   headers.forEach(header => {
@@ -31,7 +29,7 @@ export function getFilteredTableHeaders(
   showByDifficulty: boolean,
   sortedResults: any[]
 ): HeaderConfig[] {
-  const allHeaders = getTaskHeaders(task, showByDifficulty);
+  const allHeaders = getTaskHeaders(task);
   
   // Keep rank and model headers
   const fixedHeaders = allHeaders.filter(header => 
@@ -73,7 +71,6 @@ export function updateColumnWidthsForFilteredHeaders(
   currentColumnWidths: Record<string, number>
 ): Record<string, number> {
   const newWidths: Record<string, number> = {};
-  const filteredHeaderKeys = new Set(filteredHeaders.map(h => h.key));
   
   filteredHeaders.forEach(header => {
     // If we already have a width for this header, use it

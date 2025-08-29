@@ -69,7 +69,7 @@ export class FileSystemDataSource extends BaseDataSource implements IFileDataSou
     const errors: string[] = [];
 
     // Load data from all task directories
-    for (const [taskType, directory] of Object.entries(TASK_DIRECTORIES)) {
+    for (const [taskType, _] of Object.entries(TASK_DIRECTORIES)) {
       try {
         const taskResult = await this.doLoadByTask(taskType as TaskType, config);
         allData.push(...taskResult.data);

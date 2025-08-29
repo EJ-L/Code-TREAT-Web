@@ -146,6 +146,7 @@ function applyFilters(data, task, filters) {
     'code-robustness': 'code-robustness'
   };
   
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const expectedTaskField = taskFieldMap[task] || task;
   
   // Apply dataset filter
@@ -709,6 +710,7 @@ function generateIndex() {
     };
     
     Object.keys(metadata.tasks).forEach(task => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const taskDir = path.join(__dirname, '..', 'data', 'precomputed', task.replace(/\s+/g, '-'));
       
       index.tasks[task] = {

@@ -55,6 +55,7 @@ const filterAndAggregateByLanguages = (results: ProcessedResult[], selectedLangs
   console.log(`按模型分组结果: ${modelGroups.size} 个模型组`);
 
   // 对每个模型的结果计算平均值
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const aggregatedResults = Array.from(modelGroups.entries()).map(([modelName, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     const metrics = ['pass1', 'pass3', 'pass5', 'codebleu', 'llmjudge', 'executionAccuracy'] as const;
@@ -94,7 +95,8 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       console.log(`📊 First precomputed result:`, precomputedResults[0]);
       
       // Return precomputed results directly - formatResults will handle them
-      return precomputedResults as any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return precomputedResults as any[];
     } else {
       console.log(`⚠️ No precomputed results found for ${task} - this is likely the root issue!`);
       console.log(`🔍 Filter details:`, JSON.stringify(filters, null, 2));
@@ -450,7 +452,8 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     if (!['code-web', 'interaction-2-code', 'code-robustness'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         // Check if the result has a framework field and if it matches the selected frameworks
-        return (result as any).framework && filters.framework && filters.framework.includes((result as any).framework);
+        const resultObj = result as Record<string, unknown>;
+        return resultObj.framework && filters.framework && filters.framework.includes(resultObj.framework as string);
       });
     }
     
@@ -469,31 +472,35 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
   console.log(`📊 First result sample:`, results[0]);
 
   // Check if this is precomputed data (has rank field and is already formatted)
-  const isPrecomputedData = results.length > 0 && 'rank' in results[0] && 
-    (typeof (results[0] as any)['pass@1'] === 'string' || 
-     typeof (results[0] as any)['LLM Judge'] === 'string' ||
-     typeof (results[0] as any)['Accuracy'] === 'string' ||
-     typeof (results[0] as any)['CLIP'] === 'string' ||
-     typeof (results[0] as any)['VAN'] === 'string' ||
-     typeof (results[0] as any)['easy_pass@1'] === 'string');
+  const firstResult = results[0] as Record<string, unknown>;
+  const isPrecomputedData = results.length > 0 && 'rank' in firstResult && 
+    (typeof firstResult['pass@1'] === 'string' || 
+     typeof firstResult['LLM Judge'] === 'string' ||
+     typeof firstResult['Accuracy'] === 'string' ||
+     typeof firstResult['CLIP'] === 'string' ||
+     typeof firstResult['VAN'] === 'string' ||
+     typeof firstResult['easy_pass@1'] === 'string');
   
   console.log(`📊 Is precomputed data: ${isPrecomputedData}`);
   
   if (isPrecomputedData) {
     // For precomputed data, results are already sorted and formatted
     console.log('✅ Using precomputed data, processing for display');
-    const formattedResults = results.map((result: any) => {
+    const formattedResults = results.map((result: Record<string, unknown>) => {
       // Create a properly formatted result object
       const formattedResult: Record<string, string | number> = {
-        rank: result.rank,
-        model: result.model,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        rank: result.rank as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        model: result.model as any,
       };
       
       // Copy all other fields from the precomputed data
       // This includes metrics like 'LLM Judge', 'pass@1', etc.
       Object.keys(result).forEach(key => {
         if (key !== 'rank' && key !== 'model') {
-          formattedResult[key] = result[key];
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          formattedResult[key] = result[key] as any;
         }
       });
       

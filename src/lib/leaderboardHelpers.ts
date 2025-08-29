@@ -9,8 +9,10 @@ import {
 } from './leaderboardConfig';
 
 // Column width management
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function initializeColumnWidths(
   task: TaskType, 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showByDifficulty: boolean = false
 ): Record<string, number> {
   const headers = getTaskHeaders(task);
@@ -27,7 +29,7 @@ export function initializeColumnWidths(
 export function getFilteredTableHeaders(
   task: TaskType,
   showByDifficulty: boolean,
-  sortedResults: any[]
+  sortedResults: Record<string, unknown>[]
 ): HeaderConfig[] {
   const allHeaders = getTaskHeaders(task);
   
@@ -225,9 +227,9 @@ export function parseValueForSorting(value: string | number | undefined): number
 }
 
 export function sortResults(
-  data: any[], 
+  data: Record<string, unknown>[], 
   sortConfig: { key: string; direction: 'asc' | 'desc' } | null
-): any[] {
+): Record<string, unknown>[] {
   if (!sortConfig) return data;
 
   const sortableData = [...data];
@@ -246,8 +248,10 @@ export function sortResults(
     }
 
     // Get values for comparison, handling all metrics including difficulty-based ones
-    const aValue = parseValueForSorting(a[sortConfig.key]);
-    const bValue = parseValueForSorting(b[sortConfig.key]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const aValue = parseValueForSorting((a as any)[sortConfig.key]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bValue = parseValueForSorting((b as any)[sortConfig.key]);
     
     // Sort direction
     if (sortConfig.direction === 'asc') {

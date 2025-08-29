@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { CSVLink } from 'react-csv';
 
 interface ClientOnlyCSVLinkProps {
-  data: Array<any>;
+  data: Array<Record<string, unknown>>;
   headers: Array<{ label: string; key: string }>;
   filename: string;
   className?: string;

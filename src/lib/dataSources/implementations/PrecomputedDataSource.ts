@@ -5,7 +5,8 @@ import {
   DataSourceMetadata 
 } from '../interfaces';
 import { BaseDataSource } from '../base/BaseDataSource';
-import { ResultEntry, TaskType, FilterOptions } from '../../types';
+import { ResultEntry, TaskType, FilterOptions, ProcessedResult } from '../../types';
+import { debug } from '../../debug';
 
 /**
  * Interface for precomputed data structure
@@ -18,7 +19,7 @@ interface PrecomputedData {
       knowledge?: string[];
       reasoning?: string[];
       dataset?: string[];
-      [key: string]: any;
+      [key: string]: string[] | number[] | unknown;
     };
   };
   data: {
@@ -32,7 +33,7 @@ interface PrecomputedResult {
   rank: number;
   model: string;
   model_url?: string;
-  [key: string]: any; // For metrics like pass@1, LLM Judge, etc.
+  [key: string]: number | string | undefined; // For metrics like pass@1, LLM Judge, etc.
 }
 
 /**
@@ -59,6 +60,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     super(metadata);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doInitialize(config?: DataLoadConfig): Promise<void> {
     // Validate that the direct-files API is available
     try {
@@ -104,6 +106,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     return this.createResult(allData, this.metadata.name, loadTime, false, errors.length > 0 ? errors : undefined);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doLoadByTask(task: TaskType, config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
 
@@ -125,6 +128,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doLoadByFilters(filters: FilterOptions, config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
     const allData: ResultEntry[] = [];
@@ -153,7 +157,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     return this.createResult(allData, this.metadata.name, loadTime, false, errors.length > 0 ? errors : undefined);
   }
 
-  async getAvailableFilterCombinations(task: TaskType): Promise<Record<string, any>> {
+  async getAvailableFilterCombinations(task: TaskType): Promise<Record<string, Record<string, string[] | number[] | unknown>>> {
     const precomputedData = await this.loadPrecomputedData(task, false);
     return precomputedData?.filterMappings || {};
   }
@@ -161,7 +165,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
   /**
    * Load precomputed results in leaderboard-ready format
    */
-  async getLeaderboardResults(task: TaskType, filters: FilterOptions): Promise<any[]> {
+  async getLeaderboardResults(task: TaskType, filters: FilterOptions): Promise<ProcessedResult[]> {
     const result = await this.loadPrecomputedResults(task, filters);
     return this.convertResultEntriesToLeaderboardFormat(result.data);
   }
@@ -205,6 +209,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
 
       // Check if the combination actually has data
       let hasAnyData = false;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       for (const [modelName, modelData] of Object.entries(precomputedData.data)) {
         if (modelData[matchingCombination]) {
           hasAnyData = true;
@@ -333,8 +338,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     }
   }
 
-  private findMatchingCombination(userFilters: FilterOptions, filterMappings: Record<string, any>): string | null {
-    const { debug } = require('../../debug');
+  private findMatchingCombination(userFilters: FilterOptions, filterMappings: PrecomputedData['filterMappings']): string | null {
     
     // Create effective user filters by normalizing modalities/langs
     const effectiveUserFilters: Record<string, string[]> = {
@@ -363,7 +367,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     const availableOptions: { [key: string]: Set<string> } = {};
     
     for (const mapping of Object.values(filterMappings)) {
-      for (const [category, values] of Object.entries(mapping as any)) {
+      for (const [category, values] of Object.entries(mapping)) {
         if (!availableOptions[category]) {
           availableOptions[category] = new Set();
         }
@@ -428,7 +432,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       // For categories supported by this mapping, check exact match
       for (const category of supportedCategories) {
         const userFilterArray = effectiveUserFilters[category] || [];
-        const mappingFilterArray = mapping[category] || [];
+        const mappingFilterArray = Array.isArray(mapping[category]) ? mapping[category] as string[] : [];
         
         if (!this.arraysMatch(userFilterArray, mappingFilterArray)) {
           matches = false;
@@ -472,6 +476,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     const results: ResultEntry[] = [];
     
     // For each model and combination, create result entries
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [modelName, modelData] of Object.entries(precomputedData.data)) {
       for (const [combination, result] of Object.entries(modelData)) {
         const entry = this.convertPrecomputedResultToEntry(result, task, combination);
@@ -484,7 +489,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
 
   private convertPrecomputedResultToEntry(result: PrecomputedResult, task: TaskType, combination: string): ResultEntry {
     // Extract metrics from the result - these will be flattened for the leaderboard
-    const metrics: any = {};
+    const metrics: Record<string, number | string | undefined> = {};
     
     // Copy all properties except known metadata fields
     const metadataFields = ['rank', 'model', 'model_url'];
@@ -511,7 +516,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       dataset: this.extractDatasetFromCombination(combination),
       task,
       lang: this.extractLangFromCombination(combination),
-      metrics,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      metrics: metrics as any,
       url: result?.model_url
     };
   }
@@ -519,13 +525,35 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
   /**
    * Convert ResultEntry objects to the format expected by the Leaderboard component
    */
-  private convertResultEntriesToLeaderboardFormat(entries: ResultEntry[]): any[] {
-    const { debug } = require('../../debug');
+  private convertResultEntriesToLeaderboardFormat(entries: ResultEntry[]): ProcessedResult[] {
     
     const converted = entries.map(entry => {
-      const leaderboardResult: any = {
+      const leaderboardResult: Record<string, unknown> = {
+        modelId: entry.id,
+        modelName: entry.model_name,
         model: entry.model_name,
-        rank: entry.metrics?.rank || 0
+        rank: entry.metrics?.rank || 0,
+        dataset: entry.dataset || null,
+        task: entry.task || null,
+        lang: entry.lang || null,
+        sourceLang: entry.source_lang || null,
+        targetLang: entry.target_lang || null,
+        pass1: null,
+        pass3: null,
+        pass5: null,
+        easyPass1: null,
+        mediumPass1: null,
+        hardPass1: null,
+        easyPass3: null,
+        mediumPass3: null,
+        hardPass3: null,
+        easyPass5: null,
+        mediumPass5: null,
+        hardPass5: null,
+        codebleu: null,
+        llmjudge: null,
+        executionAccuracy: null,
+        difficulty: null
       };
 
       // Process metrics with proper formatting
@@ -558,7 +586,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
 
     debug.dataSource(`Converted ${entries.length} entries to leaderboard format. Sample:`, converted[0]);
     
-    return converted;
+    return converted as ProcessedResult[];
   }
 
   private extractDatasetFromCombination(combination: string): string {

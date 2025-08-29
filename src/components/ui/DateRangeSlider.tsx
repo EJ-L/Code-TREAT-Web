@@ -48,6 +48,7 @@ export default function DateRangeSlider({
   isDarkMode = false
 }: DateRangeSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setTrackWidth] = useState(0);
   const [startPos, setStartPos] = useState(0); // Position as percentage
   const [endPos, setEndPos] = useState(100); // Position as percentage

@@ -42,6 +42,7 @@ export class FileSystemDataSource extends BaseDataSource implements IFileDataSou
     super(metadata);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doInitialize(config?: DataLoadConfig): Promise<void> {
     // Validate that the API endpoints are available
     try {
@@ -69,6 +70,7 @@ export class FileSystemDataSource extends BaseDataSource implements IFileDataSou
     const errors: string[] = [];
 
     // Load data from all task directories
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [taskType, _] of Object.entries(TASK_DIRECTORIES)) {
       try {
         const taskResult = await this.doLoadByTask(taskType as TaskType, config);
@@ -172,6 +174,7 @@ export class FileSystemDataSource extends BaseDataSource implements IFileDataSou
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async loadFile(filePath: string, config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
     

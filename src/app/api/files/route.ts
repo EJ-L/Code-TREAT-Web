@@ -127,7 +127,7 @@ export async function GET(request: NextRequest) {
       // Handle JSONL file (line-by-line JSON)
       const lines = fileContent.split('\n').filter(line => line.trim() !== '');
       
-      const data: any[] = [];
+      const data: Record<string, unknown>[] = [];
       const lineCount = lines.length;
       const MAX_LINES = 100000; // Limit lines to prevent memory issues
 

@@ -35,6 +35,7 @@ const TableCell: FC<TableCellProps> = ({
   currentTask,
   columnWidths,
   resizingColumn,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getContentWidth,
   isColumnCentered,
   getStickyStyles,

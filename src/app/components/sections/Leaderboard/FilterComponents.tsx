@@ -241,6 +241,7 @@ export const DataLeakageWarning: FC<DataLeakageWarningProps> = ({ taskType, isDa
                 <div className="font-semibold mb-3 text-base">Data Leakage Definition</div>
                 <div className="space-y-2">
                   <p>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                     Data leakage occurs when a <strong>model's release time</strong> is later than the 
                     leaderboard dataset release time (<strong>{releaseDate}</strong>).
                   </p>

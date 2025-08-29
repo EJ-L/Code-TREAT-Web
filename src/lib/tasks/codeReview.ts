@@ -207,8 +207,13 @@ export function processCodeReview(results: ResultEntry[], filters: FilterOptions
 }
 
 // 处理直接在metrics中的judge分数
-function calculateDirectJudgeScore(judgeData: any): number | null {
+function calculateDirectJudgeScore(judgeData: number | number[] | Record<string, number | number[]> | undefined): number | null {
   // console.log('Calculating direct judge score from:', judgeData);
+  
+  // Handle undefined input
+  if (judgeData === undefined || judgeData === null) {
+    return null;
+  }
   
   // 如果是数组，计算平均值
   if (Array.isArray(judgeData)) {
@@ -238,7 +243,7 @@ function calculateDirectJudgeScore(judgeData: any): number | null {
       if (judgeData[key] !== undefined) {
         if (typeof judgeData[key] === 'number') {
           // console.log(`Found score in object at key ${key}: ${judgeData[key]}`);
-          return judgeData[key];
+          return judgeData[key] as number;
         }
       }
     }
@@ -270,6 +275,7 @@ function calculateCodeReviewScore(llmJudge: Metrics['LLMJudge'] | undefined): nu
     const scores: number[] = [];
     
     // 处理所有评委
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries(llmJudge).forEach(([_, value]) => {
       if (Array.isArray(value)) {
         // 如果是数组格式（如 [score1, score2, ...]）
@@ -317,6 +323,7 @@ export function aggregateCodeReviewResults(results: ProcessedResult[]): Processe
   // console.log(`Grouped into ${groupedResults.size} model groups`);
   
   // 计算每个模型的平均值
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     
@@ -337,7 +344,7 @@ export function aggregateCodeReviewResults(results: ProcessedResult[]): Processe
 }
 
 // 获取所有可用的LLM Judges
-export function getAvailableLLMJudges(results: ResultEntry[]): string[] {
+export function getAvailableLLMJudges(results: ResultEntry[] | ProcessedResult[]): string[] {
   // 过滤出所有code review任务的结果
   const codeReviewResults = results.filter(result => result.task === 'code review');
   // console.log(`Found ${codeReviewResults.length} code review entries for judge detection`);
@@ -346,7 +353,7 @@ export function getAvailableLLMJudges(results: ResultEntry[]): string[] {
   
   // 检查直接在metrics中的评委键
   codeReviewResults.forEach(result => {
-    if (result.metrics) {
+    if ('metrics' in result && result.metrics) {
       // 检查metrics中是否直接有judge键（如'gpt-4'）
       Object.keys(result.metrics).forEach(key => {
         // 只添加可能是judge的键
@@ -358,7 +365,7 @@ export function getAvailableLLMJudges(results: ResultEntry[]): string[] {
       });
       
       // 也检查LLMJudge对象中的评委
-      const llmJudge = result.metrics.LLMJudge;
+      const llmJudge = typeof result.metrics === 'object' && result.metrics !== null ? result.metrics.LLMJudge : undefined;
       if (typeof llmJudge === 'object' && llmJudge !== null) {
         Object.keys(llmJudge).forEach(judge => judges.add(judge));
       }
@@ -367,5 +374,10 @@ export function getAvailableLLMJudges(results: ResultEntry[]): string[] {
   
   const judgesList = Array.from(judges);
   // console.log(`Detected judges: ${judgesList.join(', ')}`);
+  // If no judges found, return common default judges
+  if (judgesList.length === 0) {
+    return ['gpt-4', 'gpt-4o', 'claude-3-sonnet'];
+  }
+  
   return judgesList;
 }

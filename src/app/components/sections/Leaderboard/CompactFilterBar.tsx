@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TaskType, Ability } from '@/lib/types';
-import { getAvailableFilters, filterConditions } from '@/lib/filterConfig';
+import { getAvailableFilters, filterConditions, FilterConfig } from '@/lib/filterConfig';
 import { FilterState } from '@/lib/filterHelpers';
 import MultiSelectDropdown from '@/app/components/ui/MultiSelectDropdown';
 
@@ -29,7 +29,7 @@ const CompactFilterBar: FC<CompactFilterBarProps> = ({
   const availableFilters = getAvailableFilters(currentTask, taskAbilities, availableLLMJudges);
 
   // Transform filter data into dropdown options
-  const getDropdownOptions = (filter: any) => {
+  const getDropdownOptions = (filter: FilterConfig) => {
     const values = filter.getValues(currentTask, taskAbilities, availableLLMJudges);
     const filterState = new FilterState(filter, selectedAbilities, currentTask, showByDifficulty, taskAbilities);
     

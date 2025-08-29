@@ -39,7 +39,7 @@ export function DataLoader() {
     };
 
     loadData();
-  }, []); // 仅在组件挂载时执行一次
+  }, [isLoading]); // Include isLoading dependency
 
   return null; // 这是一个纯功能组件，不需要渲染任何内容
 } 

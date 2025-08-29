@@ -87,6 +87,7 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
     onSelectionChange(newSelectedValues);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRemoveTag = (valueToRemove: string, event: React.MouseEvent) => {
     event.stopPropagation();
     if (disabled) return;

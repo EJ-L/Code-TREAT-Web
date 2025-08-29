@@ -26,11 +26,13 @@ export class GitHubDataSource extends BaseDataSource implements IDataSource {
     super(metadata);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doInitialize(config?: DataLoadConfig): Promise<void> {
     // Check if GitHub data downloading is enabled
     try {
       const response = await fetch('/api/download-github-data');
       if (response.ok) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const result = await response.json();
         // GitHub downloading is currently disabled
         this.isGitHubEnabled = false;
@@ -53,6 +55,7 @@ export class GitHubDataSource extends BaseDataSource implements IDataSource {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doLoadAll(config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
     
@@ -71,6 +74,7 @@ export class GitHubDataSource extends BaseDataSource implements IDataSource {
     return this.createResult([], this.metadata.name, loadTime, false, ['GitHub data loading not implemented']);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doLoadByTask(task: TaskType, config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
     
@@ -89,6 +93,7 @@ export class GitHubDataSource extends BaseDataSource implements IDataSource {
     return this.createResult([], this.metadata.name, loadTime, false, ['GitHub data loading not implemented']);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async doLoadByFilters(filters: FilterOptions, config?: DataLoadConfig): Promise<DataLoadResult> {
     const startTime = Date.now();
     

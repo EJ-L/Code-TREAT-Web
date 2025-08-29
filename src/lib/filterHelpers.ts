@@ -142,7 +142,12 @@ export const getFilterButtonAnimationProps = getButtonAnimation;
 
 // Legacy individual helper functions for backward compatibility
 export const isFilterValueSelected = (
-  filterType: { key: keyof Ability | 'llmJudges'; specialBehaviors?: any },
+  filterType: { 
+    key: keyof Ability | 'llmJudges'; 
+    specialBehaviors?: {
+      autoSelect?: (task: TaskType, showByDifficulty: boolean) => string[];
+    }
+  },
   value: string,
   selectedAbilities: Partial<Ability>,
   currentTask: TaskType,
@@ -156,7 +161,11 @@ export const isFilterValueSelected = (
 };
 
 export const isFilterValueDisabled = (
-  filterType: { specialBehaviors?: any },
+  filterType: { 
+    specialBehaviors?: {
+      disabling?: (task: TaskType, showByDifficulty: boolean, abilities: Record<TaskType, Ability>) => string[];
+    }
+  },
   value: string,
   currentTask: TaskType,
   showByDifficulty: boolean,
@@ -171,7 +180,12 @@ export const isFilterValueDisabled = (
 };
 
 export const isFilterValueRestricted = (
-  filterType: { key: keyof Ability | 'llmJudges'; specialBehaviors?: any },
+  filterType: { 
+    key: keyof Ability | 'llmJudges'; 
+    specialBehaviors?: {
+      restrictions?: (task: TaskType) => { limit: number; message: string } | null;
+    }
+  },
   value: string,
   selectedAbilities: Partial<Ability>,
   currentTask: TaskType
@@ -186,7 +200,12 @@ export const isFilterValueRestricted = (
 };
 
 export const getFilterTooltipText = (
-  filterType: { label: string; specialBehaviors?: any },
+  filterType: { 
+    label: string; 
+    specialBehaviors?: {
+      restrictions?: (task: TaskType) => { limit: number; message: string } | null;
+    }
+  },
   currentTask: TaskType
 ): string | undefined => {
   const restriction = filterType.specialBehaviors?.restrictions?.(currentTask);

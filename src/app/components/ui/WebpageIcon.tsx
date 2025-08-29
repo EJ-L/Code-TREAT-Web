@@ -14,7 +14,7 @@ const WebpageIcon: FC<WebpageIconProps> = ({ className = "w-10 h-10", isDarkMode
       style={{ 
         shapeRendering: 'geometricPrecision' as const, 
         textRendering: 'geometricPrecision' as const, 
-        imageRendering: 'optimizeQuality' as any,
+        imageRendering: 'auto' as const,
         fillRule: 'evenodd' as const, 
         clipRule: 'evenodd' as const 
       }}

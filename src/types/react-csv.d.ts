@@ -2,6 +2,7 @@ declare module 'react-csv' {
   import { ComponentType, ReactNode } from 'react';
 
   export interface CSVLinkProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: Array<any>;
     headers?: Array<{ label: string; key: string }>;
     target?: string;
@@ -16,6 +17,7 @@ declare module 'react-csv' {
   export const CSVLink: ComponentType<CSVLinkProps>;
 
   export interface CSVDownloadProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: Array<any>;
     headers?: Array<{ label: string; key: string }>;
     target?: string;

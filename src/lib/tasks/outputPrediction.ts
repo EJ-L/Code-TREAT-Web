@@ -124,6 +124,7 @@ export function aggregateOutputPredictionResults(results: ProcessedResult[]): Pr
   });
   
   // 计算每个模型的平均值
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     

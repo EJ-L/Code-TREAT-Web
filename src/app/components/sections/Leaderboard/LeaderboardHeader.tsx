@@ -9,7 +9,7 @@ interface LeaderboardHeaderProps {
   setViewMode: (mode: 'table' | 'scatter') => void;
   setIsComparisonModalOpen: (isOpen: boolean) => void;
   shouldShowChartButton: boolean;
-  csvData: { headers: any[]; data: any[] };
+  csvData: { headers: { label: string; key: string }[]; data: Record<string, string | number>[] };
   csvFilename: string;
 }
 

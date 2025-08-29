@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
-import { FilterOptions, TaskType, Ability } from '@/lib/types';
+import { FilterOptions, TaskType, Ability, ProcessedResult } from '@/lib/types';
 import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/lib/constants';
 
 import FilterPanel from './FilterPanel';
@@ -49,8 +49,9 @@ interface LeaderboardProps {
   const [currentTask, setCurrentTask] = useState<TaskType>(initialTask || 'overall');
   const [timelineRange, setTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<ProcessedResult[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setIsDataComplete] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(
     getDefaultSortConfig(initialTask || 'overall')
@@ -104,7 +105,7 @@ interface LeaderboardProps {
   
 
 
-  const handleTaskChange = (task: TaskType) => {
+  const handleTaskChange = useCallback((task: TaskType) => {
     setCurrentTask(task);
     setSortConfig(getDefaultSortConfig(task));
     setSelectedAbilities({});
@@ -117,7 +118,7 @@ interface LeaderboardProps {
     
     // Close comparison modal when task changes
     setIsComparisonModalOpen(false);
-  };
+  }, [supportsChartView]);
 
   const handleAbilityChange = (key: keyof Ability, value: string) => {
     setSelectedAbilities(prev => {
@@ -205,8 +206,9 @@ interface LeaderboardProps {
     
     const sorted = sortResults(filtered, sortConfig);
     debug.leaderboard(`Sorted ${sorted.length} results. Sample sorted:`, sorted.slice(0, 3));
-    return sorted;
-  }, [results, sortConfig, timelineRange, currentTask]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return sorted as any;
+  }, [results, sortConfig, timelineRange]);
 
   // Handle sorting using new helper
   const handleSort = useCallback((key: string) => {
@@ -278,7 +280,7 @@ interface LeaderboardProps {
                 results = results || [];
                 // Exclude Code Summarization Human Baseline from overall aggregation
                 if (task === 'code summarization') {
-                  results = results.filter((r: any) => r.model !== 'Code Summarization Human Baseline');
+                  results = results.filter((r: ProcessedResult) => r.model !== 'Code Summarization Human Baseline');
                 }
                 return { task, results };
               } catch (error) {
@@ -297,8 +299,8 @@ interface LeaderboardProps {
           }>();
           
           allTaskResults.forEach(({ task, results }) => {
-            results.forEach((result: any) => {
-              const modelName = canonicalizeModelName(result.model);
+            results.forEach((result: ProcessedResult) => {
+              const modelName = result.model ? canonicalizeModelName(result.model) : null;
               if (!modelName) return;
               
               if (!modelAggregates.has(modelName)) {
@@ -315,18 +317,18 @@ interface LeaderboardProps {
               // Get primary metric for each task type
               let primaryScore = 0;
               if (task === 'code summarization' || task === 'code review') {
-                primaryScore = parseFloat(result['LLM Judge']) || 0;
+                primaryScore = parseFloat(String(result['LLM Judge'] || '0')) || 0;
               } else if (task === 'vulnerability detection') {
-                primaryScore = parseFloat(result['F1 Score']) || 0;
+                primaryScore = parseFloat(String(result['F1 Score'] || '0')) || 0;
               } else if (task === 'code-web' || task === 'interaction-2-code') {
-                primaryScore = parseFloat(result['CLIP']) || 0;
+                primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
               } else if (task === 'code-robustness') {
-                primaryScore = parseFloat(result['ALL']) || 0;
+                primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
               } else if (task === 'mr-web') {
-                primaryScore = parseFloat(result['CLIP']) || 0;
+                primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
               } else {
                 // For other tasks, use pass@1
-                primaryScore = parseFloat(result['pass@1']) || 0;
+                primaryScore = parseFloat(String(result['pass@1'] || '0')) || 0;
               }
               
               if (primaryScore > 0) {
@@ -346,9 +348,33 @@ interface LeaderboardProps {
               taskCount: aggregate.taskCount
             }))
             .sort((a, b) => b.averageScore - a.averageScore)
-            .map((result, index) => ({
-              rank: index + 1,
+            .map((result, index): ProcessedResult => ({
+              modelId: result.model,
+              modelName: result.model,
               model: result.model,
+              rank: index + 1,
+              dataset: 'Overall',
+              task: 'overall',
+              lang: 'Multiple',
+              sourceLang: null,
+              targetLang: null,
+              pass1: null,
+              pass3: null,
+              pass5: null,
+              easyPass1: null,
+              mediumPass1: null,
+              hardPass1: null,
+              easyPass3: null,
+              mediumPass3: null,
+              hardPass3: null,
+              easyPass5: null,
+              mediumPass5: null,
+              hardPass5: null,
+              codebleu: null,
+              llmjudge: null,
+              executionAccuracy: null,
+              difficulty: null,
+              // Store the score and task count in the dynamic properties
               score: result.averageScore.toFixed(1),
               tasks: result.taskCount
             }));
@@ -415,7 +441,7 @@ interface LeaderboardProps {
         Object.keys(columnWidths).some(key => !filteredHeaderKeys.has(key))) {
       setColumnWidths(newWidths);
     }
-  }, [currentTask, sortedResults, getFilteredTableHeadersMemo]);
+  }, [currentTask, sortedResults, getFilteredTableHeadersMemo, columnWidths]);
 
   // Listen for task change events from PaperCitationModal
   useEffect(() => {
@@ -482,8 +508,8 @@ interface LeaderboardProps {
       key: header.key
     }));
     
-    const csvDataRows = sortedResults.map(result => {
-      const row: any = {};
+    const csvDataRows = sortedResults.map((result: ProcessedResult) => {
+      const row: Record<string, string | number> = {};
       headers.forEach(header => {
         row[header.key] = result[header.key] || '';
       });
@@ -639,6 +665,7 @@ interface LeaderboardProps {
             isDarkMode={isDarkMode}
             currentTask={currentTask}
             selectedAbilities={selectedAbilities}
+            availableMetrics={availableMetrics}
           />
         </div>
       </section>

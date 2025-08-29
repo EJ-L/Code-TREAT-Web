@@ -56,7 +56,7 @@ export async function loadFilteredData(filters: FilterOptions, config?: DataLoad
 /**
  * Get precomputed results for specific filters (optimized)
  */
-export async function getPrecomputedResults(task: TaskType, filters: FilterOptions): Promise<any[]> {
+export async function getPrecomputedResults(task: TaskType, filters: FilterOptions): Promise<ProcessedResult[]> {
   try {
     return await dataLoaderManager.getPrecomputedResults(task, filters);
   } catch (error) {
@@ -68,7 +68,7 @@ export async function getPrecomputedResults(task: TaskType, filters: FilterOptio
 /**
  * Get available filter combinations for a task
  */
-export async function getAvailableFilterCombinations(task: TaskType): Promise<Record<string, any>> {
+export async function getAvailableFilterCombinations(task: TaskType): Promise<Record<string, Record<string, string[] | number[] | unknown>>> {
   try {
     return await dataLoaderManager.getAvailableFilterCombinations(task);
   } catch (error) {
@@ -112,6 +112,7 @@ export async function clearAllCaches(): Promise<void> {
 /**
  * @deprecated Use loadTaskData instead
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getTaskData(taskType: string): ResultEntry[] {
   // This is now async, but we maintain sync interface for compatibility
   // In practice, this should be replaced with async calls
@@ -122,6 +123,7 @@ export function getTaskData(taskType: string): ResultEntry[] {
 /**
  * @deprecated Use loadFilteredData instead
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getDatasetData(dataset: string): ResultEntry[] {
   console.warn('getDatasetData is deprecated. Use loadFilteredData with dataset filter instead.');
   return [];
@@ -130,6 +132,7 @@ export function getDatasetData(dataset: string): ResultEntry[] {
 /**
  * @deprecated Use loadFilteredData instead
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getModelData(modelName: string): ResultEntry[] {
   console.warn('getModelData is deprecated. Use loadFilteredData instead.');
   return [];
@@ -286,6 +289,7 @@ export function getAvailableModels(): string[] {
 }
 
 // Debounced versions for compatibility
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number

@@ -128,6 +128,7 @@ function getDisplayText(value: string, key: keyof Ability, task: TaskType): stri
   return value;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getFilterRestrictions(key: keyof Ability, task: TaskType) {
   return null;
 }
@@ -141,6 +142,7 @@ export const filterConditions = {
   hasAvailableFilters: (task: TaskType, abilities: Record<TaskType, Ability>, judges: string[], excludeFilter?: string) =>
     task !== 'interaction-2-code' && getAvailableFilters(task, abilities, judges, excludeFilter).length > 0,
   
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shouldShowDifficultyToggle: (task: TaskType) =>
     false,
   
@@ -156,6 +158,7 @@ export const filterConditions = {
   shouldShowDataLeakageWarning: (task: TaskType) =>
     task === 'vulnerability detection',
     
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shouldShowTimeline: (task: TaskType) =>
     true
 };

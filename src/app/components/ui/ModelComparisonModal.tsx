@@ -3,15 +3,16 @@ import { Card, CardContent } from './card';
 import { motion } from 'framer-motion';
 import ModelComparisonRadarChart from './ModelComparisonRadarChart';
 import ModelComparisonBarChart from './ModelComparisonBarChart';
-import { Ability } from '@/lib/types';
+import { Ability, ProcessedResult } from '@/lib/types';
 
 type ModelComparisonModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  results: Array<any>;
+  results: ProcessedResult[];
   isDarkMode: boolean;
   currentTask: string;
   selectedAbilities: Partial<Ability>;
+  availableMetrics: string[];
 };
 
 const MAX_MODELS = 5;
@@ -21,7 +22,8 @@ const ModelComparisonModal = ({
   onClose, 
   results, 
   isDarkMode,
-  selectedAbilities
+  selectedAbilities,
+  availableMetrics
 }: ModelComparisonModalProps) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   
@@ -36,6 +38,7 @@ const ModelComparisonModal = ({
   const uniqueModels = useMemo(() => {
     const modelNames = new Set<string>();
     return results.filter(result => {
+      if (!result.model) return false;
       if (modelNames.has(result.model)) {
         return false;
       }
@@ -78,13 +81,8 @@ const ModelComparisonModal = ({
   const radarData = useMemo(() => {
     if (!selectedModels.length) return [];
 
-    // Get all numeric metrics for the current task
-    const allMetrics = Object.keys(results[0] || {}).filter(key => {
-      // Skip non-numeric or special fields
-      if (['rank', 'model', 'model_url', 'ability', 'task'].includes(key)) {
-        return false;
-      }
-      
+    // Use only the metrics available in the current leaderboard view
+    const allMetrics = availableMetrics.filter(key => {
       // Check if any selected model has a numeric value for this metric
       const hasData = selectedModels.some(modelName => {
         const modelData = results.find(r => r.model === modelName);
@@ -114,7 +112,7 @@ const ModelComparisonModal = ({
       
       return dataPoint;
     });
-  }, [results, selectedModels]);
+  }, [results, selectedModels, availableMetrics]);
 
   // Determine if we should use bar chart (1-2 metrics) or radar chart (3+ metrics)
   const shouldUseBarChart = radarData.length <= 2;
@@ -188,11 +186,11 @@ const ModelComparisonModal = ({
               {uniqueModels.map((result, index) => (
                 <button
                   key={index}
-                  onClick={() => handleModelToggle(result.model)}
-                  disabled={!selectedModels.includes(result.model) && selectedModels.length >= MAX_MODELS}
+                  onClick={() => handleModelToggle(result.model!)}
+                  disabled={!selectedModels.includes(result.model!) && selectedModels.length >= MAX_MODELS}
                   className={`
                     px-3 py-2 rounded-lg text-sm transition-all
-                    ${selectedModels.includes(result.model)
+                    ${selectedModels.includes(result.model!)
                       ? isDarkMode 
                         ? 'bg-blue-700 text-white' 
                         : 'bg-blue-500 text-white'
@@ -200,13 +198,13 @@ const ModelComparisonModal = ({
                         ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' 
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }
-                    ${(!selectedModels.includes(result.model) && selectedModels.length >= MAX_MODELS)
+                    ${(!selectedModels.includes(result.model!) && selectedModels.length >= MAX_MODELS)
                       ? 'opacity-50 cursor-not-allowed'
                       : ''
                     }
                   `}
                 >
-                  {result.model}
+                  {result.model!}
                 </button>
               ))}
             </div>

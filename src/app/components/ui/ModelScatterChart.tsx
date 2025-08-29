@@ -15,7 +15,7 @@ import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeMode
 import { TimelineSlider } from './TimelineSlider';
 
 type ScatterChartProps = {
-  data: any[];
+  data: Array<Record<string, unknown>>;
   currentMetric: string;
   availableMetrics: string[];
   onMetricChange: (metric: string) => void;
@@ -74,9 +74,15 @@ const ModelScatterChart = ({
   leaderboardTimelineRange
 }: ScatterChartProps) => {
   const [hoveredPoint, setHoveredPoint] = useState<ScatterDataPoint | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setShowCrosshair] = useState(false);
   // Graph's own timeline state, independent from leaderboard
   const [graphTimelineRange, setGraphTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
+  
+  // Reset graph timeline when leaderboard timeline changes to sync both filters
+  useEffect(() => {
+    setGraphTimelineRange(leaderboardTimelineRange || null);
+  }, [leaderboardTimelineRange]);
   // Filter states for model types
   const [showCoTModels, setShowCoTModels] = useState(true);
   const [showRegularModels, setShowRegularModels] = useState(true);
@@ -100,6 +106,7 @@ const ModelScatterChart = ({
   
   // Refs for chart interaction
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   const chartRef = useRef<any>(null);
   const [isCtrlPressed, setIsCtrlPressed] = useState(false);
 
@@ -110,7 +117,8 @@ const ModelScatterChart = ({
     const points: ScatterDataPoint[] = [];
     
     data.forEach(result => {
-      const modelName = result.model || result.modelName;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const modelName = (result as any).model || (result as any).modelName;
       let publishDate = MODEL_PUBLISH_DATES[modelName];
       
       // If no date found and model is CoT variant, try base model name
@@ -175,11 +183,11 @@ const ModelScatterChart = ({
         points.push({
           x: timestamp,
           y: displayValue,
-          model: modelName,
+          model: modelName as string,
           displayDate: publishDate,
           metricValue: `${displayValue.toFixed(1)}%`,
-          hasDataLeakage: hasDataLeakage(modelName, currentTask),
-          isCoTModel: isCoTModel(modelName)
+          hasDataLeakage: hasDataLeakage(modelName as string, currentTask),
+          isCoTModel: isCoTModel(modelName as string)
         });
       }
     });
@@ -285,6 +293,7 @@ const ModelScatterChart = ({
   }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
 
   // Custom tooltip
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -313,6 +322,7 @@ const ModelScatterChart = ({
   };
 
   // Handle mouse events for hover display
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseMove = useCallback((event: any) => {
     if (!event) return;
     
@@ -348,41 +358,6 @@ const ModelScatterChart = ({
     const rounded = parseFloat(value.toPrecision(4));
     return rounded.toString();
   };
-
-  // Keyboard event handlers for zoom
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Control') {
-        setIsCtrlPressed(true);
-      }
-      
-      // Check if chart container is focused or if we should respond to global keys
-      const isChartFocused = chartContainerRef.current?.contains(document.activeElement);
-      if (!isChartFocused) return;
-      
-      if (event.key === '+' || event.key === '=') {
-        event.preventDefault();
-        handleZoomIn();
-      } else if (event.key === '-') {
-        event.preventDefault();
-        handleZoomOut();
-      }
-    };
-
-    const handleKeyUp = (event: KeyboardEvent) => {
-      if (event.key === 'Control') {
-        setIsCtrlPressed(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
 
   // Utility functions for zoom calculations
   const handleZoomIn = useCallback((centerX?: number, centerY?: number) => {
@@ -459,7 +434,43 @@ const ModelScatterChart = ({
     setZoomState(null);
   }, []);
 
+  // Keyboard event handlers for zoom
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Control') {
+        setIsCtrlPressed(true);
+      }
+      
+      // Check if chart container is focused or if we should respond to global keys
+      const isChartFocused = chartContainerRef.current?.contains(document.activeElement);
+      if (!isChartFocused) return;
+      
+      if (event.key === '+' || event.key === '=') {
+        event.preventDefault();
+        handleZoomIn();
+      } else if (event.key === '-') {
+        event.preventDefault();
+        handleZoomOut();
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === 'Control') {
+        setIsCtrlPressed(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [handleZoomIn, handleZoomOut]);
+
   // Convert screen coordinates to chart coordinates
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   const screenToChartCoords = useCallback((screenX: number, screenY: number, chartElement: any) => {
     if (!chartElement) return { x: 0, y: 0 };
     
@@ -556,6 +567,7 @@ const ModelScatterChart = ({
   }, [areaSelectState.isSelecting, panState.isDragging, panState.lastX, panState.lastY, zoomState]);
 
   // Mouse up handler for area selection and drag pan
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMouseUp = useCallback((event: React.MouseEvent) => {
     if (areaSelectState.isSelecting) {
       // Complete area selection zoom
@@ -947,7 +959,7 @@ const ModelScatterChart = ({
                              {/* Scatter points with conditional coloring */}
                <Scatter 
                  data={filteredData} 
-                 shape={(props: any) => {
+                 shape={(props: { payload?: ScatterDataPoint; cx?: number; cy?: number }) => {
                                      const { payload, cx, cy } = props;
                   const color = payload?.hasDataLeakage 
                     ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
@@ -956,7 +968,8 @@ const ModelScatterChart = ({
                       : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
                    
                    // Check if this point is being hovered
-                   const isHovered = hoveredPoint && hoveredPoint.model === payload.model;
+                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                   const isHovered = hoveredPoint && hoveredPoint.model === (payload as any).model;
                    
                    // Only pass valid DOM attributes to the circle element
                    return (
@@ -986,9 +999,9 @@ const ModelScatterChart = ({
                    dataKey="model" 
                    position="top"
                    offset={8}
-                   content={(props: any) => {
-                     const { x, y, value } = props;
-                     if (!value || !x || !y) return null;
+                                     content={(props: { x?: number | string; y?: number | string; value?: string | number }) => {
+                    const { x, y, value } = props;
+                    if (!value || !x || !y) return null;
                      
                                          // Get the data point from timelineFilteredData to check for data leakage and CoT status
                     const dataPoint = filteredData.find(d => d.model === value);

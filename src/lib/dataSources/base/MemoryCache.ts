@@ -4,7 +4,7 @@ import { IDataCache } from '../interfaces';
  * Simple in-memory cache implementation
  */
 export class MemoryCache implements IDataCache {
-  private cache = new Map<string, { value: any; expiry: number | null }>();
+  private cache = new Map<string, { value: unknown; expiry: number | null }>();
   
   async get<T>(key: string): Promise<T | null> {
     const item = this.cache.get(key);

@@ -17,16 +17,9 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
 }) => {
   const config = getMultiLeaderboardConfig(currentTask);
   const [currentPage, setCurrentPage] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setIsSmallScreen] = useState(false);
   const [pendingTabChange, setPendingTabChange] = useState<string | null>(null);
-  
-  if (!config) {
-    return null;
-  }
-
-  const tabsPerPage = 6;
-  const totalPages = Math.ceil(config.tabs.length / tabsPerPage);
-  const shouldPaginate = config.tabs.length > tabsPerPage;
 
   // Check screen size
   useEffect(() => {
@@ -46,6 +39,11 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
 
   // Auto-navigate to page containing selected tab
   useEffect(() => {
+    if (!config) return;
+    
+    const tabsPerPage = 6;
+    const shouldPaginate = config.tabs.length > tabsPerPage;
+    
     if (shouldPaginate) {
       const selectedIndex = config.tabs.indexOf(selectedTab);
       if (selectedIndex !== -1) {
@@ -55,7 +53,7 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
         }
       }
     }
-  }, [selectedTab, config.tabs, currentPage, shouldPaginate, tabsPerPage]);
+  }, [selectedTab, config, currentPage]);
 
   // Handle pending tab changes after page changes
   useEffect(() => {
@@ -64,6 +62,14 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
       setPendingTabChange(null);
     }
   }, [pendingTabChange, onTabChange]);
+  
+  if (!config) {
+    return null;
+  }
+
+  const tabsPerPage = 6;
+  const totalPages = Math.ceil(config.tabs.length / tabsPerPage);
+  const shouldPaginate = config.tabs.length > tabsPerPage;
 
   const getVisibleTabs = () => {
     if (!shouldPaginate) {

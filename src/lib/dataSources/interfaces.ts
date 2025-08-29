@@ -99,7 +99,7 @@ export interface IPrecomputedDataSource extends IDataSource {
   /**
    * Get available filter combinations for a task
    */
-  getAvailableFilterCombinations(task: TaskType): Promise<Record<string, any>>;
+  getAvailableFilterCombinations(task: TaskType): Promise<Record<string, Record<string, string[] | number[] | unknown>>>;
   
   /**
    * Load precomputed results for specific filters
@@ -109,7 +109,7 @@ export interface IPrecomputedDataSource extends IDataSource {
   /**
    * Load precomputed results in leaderboard-ready format
    */
-  getLeaderboardResults(task: TaskType, filters: FilterOptions): Promise<any[]>;
+  getLeaderboardResults(task: TaskType, filters: FilterOptions): Promise<Record<string, unknown>[]>;
 }
 
 /**

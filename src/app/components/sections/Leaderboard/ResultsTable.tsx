@@ -1,6 +1,8 @@
 import { FC, useRef, useEffect, useState, useCallback, useMemo } from 'react';
 
 import { TaskType, ProcessedResult, Ability } from '@/lib/types';
+import { FilterConfig } from '@/lib/filterConfig';
+import { HeaderConfig } from '@/lib/leaderboardConfig';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl } from '@/lib/constants';
@@ -65,7 +67,9 @@ const ResultsTable: FC<ResultsTableProps> = ({
   getBackgroundColor,
   getColumnAlignment,
   getNumericStyles,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   truncateText,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTaskSpecificColumnWidth,
   isDarkMode,
   onColumnWidthChange,
@@ -88,7 +92,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // State for current metric in scatter chart
   const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
   
-  const availableFilters: any[] = [];
+  const availableFilters: FilterConfig[] = [];
   
   // Get available numeric metrics for scatter chart
   const availableMetrics = useMemo(() => {
@@ -126,7 +130,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
     if (results.length === 0 && viewMode === 'scatter') {
       setViewMode('table');
     }
-  }, [results.length, viewMode]);
+  }, [results.length, viewMode, setViewMode]);
   
   // Calculate total table width based on column widths
   const calculateTableWidth = useCallback(() => {
@@ -250,7 +254,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
         }
         
         // Transform filter data into dropdown options
-        const getDropdownOptions = (filter: any) => {
+        const getDropdownOptions = (filter: FilterConfig) => {
           const values = filter.getValues(currentTask, taskAbilities as Record<TaskType, Ability>, availableLLMJudges);
           const filterState = new FilterState(filter, selectedAbilities, currentTask, false, taskAbilities as Record<TaskType, Ability>);
           
@@ -471,7 +475,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
             >
               <thead style={{ backgroundColor: isDarkMode ? '#1e293b' : '#f1f5f9' }}>
                 <tr>
-                  {getTableHeaders(currentTask).map((header: any) => (
+                  {getTableHeaders(currentTask).map((header: HeaderConfig) => (
                     <TableHeader 
                       key={header.key}
                       header={header}

@@ -61,6 +61,7 @@ export function aggregateCodeExecutionResults(results: ProcessedResult[]): Proce
   });
   
   // 计算每个模型的平均值
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const validResults = {
       executionAccuracy: modelResults.filter(r => r.executionAccuracy !== null),

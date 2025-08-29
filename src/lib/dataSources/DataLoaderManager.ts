@@ -5,7 +5,7 @@ import {
   DataSourceHealth,
   IPrecomputedDataSource
 } from './interfaces';
-import { TaskType, FilterOptions } from '../types';
+import { TaskType, FilterOptions, ProcessedResult } from '../types';
 import { DataSourceFactory } from './DataSourceFactory';
 
 export type DataLoadStrategy = 'precomputed-first' | 'filesystem-first' | 'all-sources' | 'precomputed-only' | 'filesystem-only';
@@ -163,7 +163,7 @@ export class DataLoaderManager {
   /**
    * Get precomputed results for specific filters (optimized path)
    */
-  async getPrecomputedResults(task: TaskType, filters: FilterOptions): Promise<any[]> {
+  async getPrecomputedResults(task: TaskType, filters: FilterOptions): Promise<ProcessedResult[]> {
     await this.initialize();
 
     const precomputedSource = this.getPrecomputedDataSource();
@@ -173,7 +173,7 @@ export class DataLoaderManager {
 
     try {
       // Use the new method that returns leaderboard-ready format
-      return await precomputedSource.getLeaderboardResults(task, filters);
+      return await precomputedSource.getLeaderboardResults(task, filters) as ProcessedResult[];
     } catch (error) {
       console.error('Error getting precomputed results:', error);
       return [];
@@ -183,7 +183,7 @@ export class DataLoaderManager {
   /**
    * Get available filter combinations for a task
    */
-  async getAvailableFilterCombinations(task: TaskType): Promise<Record<string, any>> {
+  async getAvailableFilterCombinations(task: TaskType): Promise<Record<string, Record<string, string[] | number[] | unknown>>> {
     await this.initialize();
 
     const precomputedSource = this.getPrecomputedDataSource();

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { 
   ORGANIZATION_LOGOS, 
   SVG_LOGOS, 
@@ -84,10 +85,12 @@ const OrganizationLogo: React.FC<OrganizationLogoProps> = ({ organization, size 
         }}
         className="shrink-0"
       >
-        <img
+        <Image
           src={ORGANIZATION_LOGOS[orgKey]}
           alt={`${organization} logo`}
           title={organization}
+          width={size}
+          height={size}
           style={{ 
             maxWidth: '100%', 
             maxHeight: '100%',

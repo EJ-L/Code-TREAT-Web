@@ -249,20 +249,43 @@ interface LeaderboardTableProps {
   handleColumnResize: (key: string, width: number) => void;
   renderCell: (item: any, key: string) => React.ReactNode;
   getRowClass: (index: number) => string;
+  needsHorizontalScroll?: boolean;
+  calculateTableWidth?: () => number;
 }
 
-const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ headers, visibleData, currentTask, isDarkMode, getColumnWidth, handleColumnResize, renderCell, getRowClass }) => {
+const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ 
+  headers, 
+  visibleData, 
+  currentTask, 
+  isDarkMode, 
+  getColumnWidth, 
+  handleColumnResize, 
+  renderCell, 
+  getRowClass,
+  needsHorizontalScroll = false,
+  calculateTableWidth
+}) => {
   return (
-    <div className="overflow-auto max-h-full w-full" 
-         style={{ scrollbarWidth: 'thin', scrollbarColor: isDarkMode ? '#374151 #1f2937' : '#cbd5e1 #f8fafc' }}>
+    <div 
+      className="max-h-full w-full" 
+      style={{ 
+        overflowX: needsHorizontalScroll ? 'auto' : 'hidden',
+        overflowY: 'auto',
+        scrollbarWidth: 'thin', 
+        scrollbarColor: isDarkMode ? '#374151 #1f2937' : '#cbd5e1 #f8fafc' 
+      }}
+    >
       <div className="min-w-full inline-block align-middle">
         <div className="rounded-md overflow-hidden">
-          <table className="min-w-full divide-y"
-                style={{ 
-                  tableLayout: 'fixed', // Enforce fixed layout for better column resizing
-                  borderCollapse: 'separate',
-                  borderSpacing: 0
-                 }}>
+          <table 
+            className="min-w-full divide-y"
+            style={{ 
+              tableLayout: 'fixed', // Enforce fixed layout for better column resizing
+              borderCollapse: 'separate',
+              borderSpacing: 0,
+              minWidth: needsHorizontalScroll && calculateTableWidth ? `${calculateTableWidth()}px` : '100%'
+            }}
+          >
             <thead>
               <tr>
                 {headers.map((header) => (

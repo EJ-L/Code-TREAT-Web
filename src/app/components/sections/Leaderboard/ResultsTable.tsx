@@ -165,12 +165,16 @@ const ResultsTable: FC<ResultsTableProps> = ({
     const containerWidth = tableContainerRef.current.clientWidth;
     const tableWidth = calculateTableWidth();
     
+    // Tasks that should always have horizontal scroll by default
+    const alwaysScrollTasks = ['vulnerability detection', 'code-robustness'];
+    const forceScroll = alwaysScrollTasks.includes(currentTask);
+    
     // Add some buffer for padding and borders (48px for padding, potential scrollbar, etc.)
-    const needsScroll = tableWidth > containerWidth - 48;
+    const needsScroll = forceScroll || tableWidth > containerWidth - 48;
     
     // Only update state if the value has changed to avoid unnecessary re-renders
     setNeedsHorizontalScroll(prev => prev !== needsScroll ? needsScroll : prev);
-  }, [calculateTableWidth]);
+  }, [calculateTableWidth, currentTask]);
   
   // Effect to check scroll need when dimensions change
   useEffect(() => {
@@ -478,7 +482,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           // Show complete table when loaded and has data
           <div 
             style={{ width: '100%' }}
-            className={isMultiLeaderboard && viewMode === 'table' ? 'rounded-b-lg overflow-hidden' : ''}
+            className={isMultiLeaderboard && viewMode === 'table' ? 'rounded-b-lg' : ''}
           >
             <table 
               ref={tableRef}

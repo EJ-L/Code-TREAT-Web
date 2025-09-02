@@ -11,7 +11,7 @@ import {
   LabelList,
   ReferenceLine
 } from 'recharts';
-import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName, getModelSize } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
 // Utility function to format metric names for display
@@ -319,13 +319,16 @@ const ModelScatterChart = ({
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
+      const modelSize = getModelSize(data.model);
+      const displayName = modelSize ? `${data.model} (${modelSize})` : data.model;
+      
       return (
         <div className={`p-3 rounded-lg shadow-lg border ${
           isDarkMode 
             ? 'bg-[#1a202c] border-slate-600 text-slate-200' 
             : 'bg-white border-slate-300 text-slate-800'
         }`}>
-          <p className="font-semibold">{data.model}</p>
+          <p className="font-semibold">{displayName}</p>
           <p className="text-sm">Release Date: {data.displayDate}</p>
           <p className="text-sm">{currentMetric}: {data.metricValue}</p>
         </div>

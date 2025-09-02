@@ -216,6 +216,81 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
 
 };
 
+// Model sizes (parameter count)
+export const MODEL_SIZES: Record<string, string> = {
+  // Llama Models
+  'Llama-3.1-8B-Instruct': '8B',
+  'Llama-3.1-70B-Instruct': '70B',
+  'Llama-3.1-405B-Instruct': '405B',
+  'Llama-3.3-70B-Instruct': '70B',
+  'Llama3.3-70B-Instruct': '70B',
+  'Llama-4-Scout-17B-16E-Instruct': '17B',
+  'Llama-3.2-90B-Vision': '90B',
+  'Llama-3.2-11B-Vision': '11B',
+  
+  // Qwen Models
+  'Qwen-7B': '7B',
+  'Qwen-72B': '72B',
+  'Qwen2.5-7B-Instruct': '7B',
+  'Qwen2.5-14B-Instruct': '14B',
+  'Qwen2.5-32B-Instruct': '32B',
+  'Qwen2.5-72B-Instruct': '72B',
+  'Qwen2.5-Coder-32B-Instruct': '32B',
+  'Qwen2.5-VL-3B-Instruct': '3B',
+  'Qwen2.5-VL-7B-Instruct': '7B',
+  'Qwen2.5-VL-72B-Instruct': '72B',
+  'QwQ-32B': '32B',
+  'Qwen3-30B-A3B': '30B',
+  'Qwen3-32B': '32B',
+  'Qwen3-235B-A22B': '235B',
+  
+  // Gemma Models
+  'Gemma-3-27B-Instruct': '27B',
+  
+  // Pixtral Models
+  'Pixtral-12B-2409': '12B',
+  'Pixtral-Large-Instruct-124B': '124B',
+  
+  // CoT (Chain-of-Thought) model variants - same sizes as base models
+  'Llama-3.1-8B-Instruct (CoT)': '8B',
+  'Llama-3.1-70B-Instruct (CoT)': '70B',
+  'Llama-3.1-405B-Instruct (CoT)': '405B',
+  'Llama-3.3-70B-Instruct (CoT)': '70B',
+  'Qwen2.5-7B-Instruct (CoT)': '7B',
+  'Qwen2.5-14B-Instruct (CoT)': '14B',
+  'Qwen2.5-32B-Instruct (CoT)': '32B',
+  'Qwen2.5-72B-Instruct (CoT)': '72B',
+  'Qwen2.5-Coder-32B-Instruct (CoT)': '32B',
+
+  // DeepSeek Models
+  'DeepSeek-R1': '671B',
+  'DeepSeek-R1 (0528)': '671B',
+  'DeepSeek-V3': '685B',
+  'DeepSeek-V3 (CoT)': '685B',
+};
+
+/**
+ * Helper function to get the model size for a model
+ * @param modelName The model name
+ * @returns The model size string (e.g., "7B") or undefined if not available
+ */
+export function getModelSize(modelName: string): string | undefined {
+  if (!modelName) return undefined;
+  
+  // Check for exact match first
+  if (MODEL_SIZES[modelName]) {
+    return MODEL_SIZES[modelName];
+  }
+  
+  // For CoT models, try to find the base model size
+  const baseModelName = getBaseModelName(modelName);
+  if (baseModelName !== modelName && MODEL_SIZES[baseModelName]) {
+    return MODEL_SIZES[baseModelName];
+  }
+  
+  return undefined;
+}
+
 // Dataset release dates (YYYY-MM-DD format)
 export const DATASET_RELEASE_DATES: Record<string, string> = {
   'vulnerability detection': '2024-03-27', // PrimeVul dataset release date

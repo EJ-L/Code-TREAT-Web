@@ -13,6 +13,28 @@ import {
   ReferenceLine
 } from 'recharts';
 
+// Utility function to format metric names for display
+const formatMetricName = (metric: string): string => {
+  // Handle specific metric patterns
+  if (metric.startsWith('easy_')) {
+    return metric.replace('easy_', 'Easy ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('medium_')) {
+    return metric.replace('medium_', 'Medium ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('hard_')) {
+    return metric.replace('hard_', 'Hard ').replace('pass@', 'Pass@');
+  }
+  
+  // Handle standalone pass@ metrics
+  if (metric.startsWith('pass@')) {
+    return metric.replace('pass@', 'Pass@');
+  }
+  
+  // Return the metric as-is for other cases
+  return metric;
+};
+
 type BarChartProps = {
   data: Array<{ 
     metric: string;
@@ -166,7 +188,7 @@ const ModelComparisonBarChart = ({ data, models, activeModels, isDarkMode }: Bar
               color: isDarkMode ? "#e2e8f0" : "#1a202c"
             }}
             formatter={(value) => [`${value}%`, '']}
-            labelFormatter={(value) => `Metric: ${value}`}
+            labelFormatter={(value) => `Metric: ${formatMetricName(value)}`}
             cursor={{ fill: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}
           />
           

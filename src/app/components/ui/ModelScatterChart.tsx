@@ -14,6 +14,28 @@ import {
 import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
+// Utility function to format metric names for display
+const formatMetricName = (metric: string): string => {
+  // Handle specific metric patterns
+  if (metric.startsWith('easy_')) {
+    return metric.replace('easy_', 'Easy ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('medium_')) {
+    return metric.replace('medium_', 'Medium ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('hard_')) {
+    return metric.replace('hard_', 'Hard ').replace('pass@', 'Pass@');
+  }
+  
+  // Handle standalone pass@ metrics
+  if (metric.startsWith('pass@')) {
+    return metric.replace('pass@', 'Pass@');
+  }
+  
+  // Return the metric as-is for other cases
+  return metric;
+};
+
 type ScatterChartProps = {
   data: Array<Record<string, unknown>>;
   currentMetric: string;
@@ -658,8 +680,11 @@ const ModelScatterChart = ({
                 : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
             }`}
           >
-            <span className="hidden sm:inline">{metric}</span>
-            <span className="sm:hidden text-xs">{metric.length > 10 ? metric.substring(0, 8) + '...' : metric}</span>
+            <span className="hidden sm:inline">{formatMetricName(metric)}</span>
+            <span className="sm:hidden text-xs">{(() => {
+              const formatted = formatMetricName(metric);
+              return formatted.length > 10 ? formatted.substring(0, 8) + '...' : formatted;
+            })()}</span>
           </button>
         ))}
       </div>
@@ -733,7 +758,7 @@ const ModelScatterChart = ({
           <span className={`text-sm sm:text-lg font-semibold ${
             isDarkMode ? 'text-slate-300' : 'text-slate-700'
           }`}>
-            {currentMetric}
+            {formatMetricName(currentMetric)}
           </span>
         </div>
         

@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { initializeDataLoader, loadAllData } from '@/lib/dataLoader';
 
 export function DataLoader() {
-  const [isLoading, setIsLoading] = useState(false);
+  const hasLoaded = useRef(false);
 
   useEffect(() => {
     const loadData = async () => {
       // 避免重复加载
-      if (isLoading) return;
+      if (hasLoaded.current) return;
       
-      setIsLoading(true);
+      hasLoaded.current = true;
       console.log('开始初始化数据加载系统...');
       
       try {
@@ -33,13 +33,13 @@ export function DataLoader() {
         console.log('数据预加载完成');
       } catch (error) {
         console.error('数据预加载失败:', error);
-      } finally {
-        setIsLoading(false);
+        // Reset on error so we can try again
+        hasLoaded.current = false;
       }
     };
 
     loadData();
-  }, [isLoading]); // Include isLoading dependency
+  }, []); // Run only once on mount
 
   return null; // 这是一个纯功能组件，不需要渲染任何内容
 } 

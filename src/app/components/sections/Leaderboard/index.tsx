@@ -411,7 +411,7 @@ interface LeaderboardProps {
     };
     
     loadAndProcessData();
-  }, [currentTask, selectedAbilities]);
+  }, [currentTask, selectedAbilities.dataset, selectedAbilities.modality, selectedAbilities.knowledge, selectedAbilities.robustness, selectedAbilities.privacy, selectedAbilities.llmJudges, selectedAbilities.framework]);
 
   // Get filtered table headers using new helper
   const getFilteredTableHeadersMemo = useCallback((task: TaskType) => {

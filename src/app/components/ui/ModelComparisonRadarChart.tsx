@@ -9,6 +9,28 @@ import {
   Tooltip
 } from 'recharts';
 
+// Utility function to format metric names for display
+const formatMetricName = (metric: string): string => {
+  // Handle specific metric patterns
+  if (metric.startsWith('easy_')) {
+    return metric.replace('easy_', 'Easy ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('medium_')) {
+    return metric.replace('medium_', 'Medium ').replace('pass@', 'Pass@');
+  }
+  if (metric.startsWith('hard_')) {
+    return metric.replace('hard_', 'Hard ').replace('pass@', 'Pass@');
+  }
+  
+  // Handle standalone pass@ metrics
+  if (metric.startsWith('pass@')) {
+    return metric.replace('pass@', 'Pass@');
+  }
+  
+  // Return the metric as-is for other cases
+  return metric;
+};
+
 type RadarChartProps = {
   data: Array<{ 
     metric: string;
@@ -120,7 +142,10 @@ const ModelComparisonRadarChart = ({ data, models, activeModels, isDarkMode }: R
             dataKey="metric" 
             tick={{ fill: isDarkMode ? "#cbd5e0" : "#4a5568" }}
             tickSize={5}
-            tickFormatter={(value) => value.length > 15 ? `${value.substring(0, 12)}...` : value}
+            tickFormatter={(value) => {
+              const formatted = formatMetricName(value);
+              return formatted.length > 15 ? `${formatted.substring(0, 12)}...` : formatted;
+            }}
           />
           <PolarRadiusAxis 
             angle={30} 
@@ -135,7 +160,7 @@ const ModelComparisonRadarChart = ({ data, models, activeModels, isDarkMode }: R
               color: isDarkMode ? "#e2e8f0" : "#1a202c"
             }}
             formatter={(value) => [`${value}%`, '']}
-            labelFormatter={(value) => `Metric: ${value}`}
+            labelFormatter={(value) => `Metric: ${formatMetricName(value)}`}
           />
           
           {models.map((model, index) => (

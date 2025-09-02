@@ -63,7 +63,13 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            {currentTask.charAt(0).toUpperCase() + currentTask.slice(1)} Results
+            {(() => {
+              if (currentTask === 'mr-web') return 'MR-Web';
+              if (currentTask === 'code-web') return 'Code-Web';
+              if (currentTask === 'interaction-2-code') return 'Interaction-2-Code';
+              if (currentTask === 'code-robustness') return 'Code-Robustness';
+              return currentTask.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            })()}
           </h1>
         </div>
         

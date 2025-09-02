@@ -112,10 +112,13 @@ const Sidebar: FC<SidebarProps> = ({
                           : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700 font-medium'
                     }`}
                   >
-                    {task === 'mr-web' 
-                      ? 'MR-Web' 
-                      : task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-                    }
+                    {(() => {
+                      if (task === 'mr-web') return 'MR-Web';
+                      if (task === 'code-web') return 'Code-Web';
+                      if (task === 'interaction-2-code') return 'Interaction-2-Code';
+                      if (task === 'code-robustness') return 'Code-Robustness';
+                      return task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                    })()}
                   </button>
                 ))}
               </div>

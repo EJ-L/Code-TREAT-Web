@@ -34,7 +34,11 @@ const Sidebar: FC<SidebarProps> = ({
       {/* Header */}
       <div className="flex-shrink-0 p-6 border-b border-slate-200 dark:border-blue-500/20">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <button 
+            onClick={() => onSectionChange('overview')}
+            className="flex items-center cursor-pointer"
+            aria-label="Navigate to home page"
+          >
             <WebpageIcon 
               className="w-12 h-12 mr-4"
               isDarkMode={isDarkMode}
@@ -42,7 +46,7 @@ const Sidebar: FC<SidebarProps> = ({
             <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
               Code TREAT
             </span>
-          </div>
+          </button>
           {/* Close button for mobile */}
           <button
             onClick={onToggle}
@@ -200,7 +204,11 @@ const Sidebar: FC<SidebarProps> = ({
           : 'bg-white/95'
       } backdrop-blur-sm border-b ${isDarkMode ? 'border-blue-500/20' : 'border-slate-200'} transition-colors`}>
         <div className="flex items-center justify-between px-8 py-4">
-          <div className="flex items-center">
+          <button 
+            onClick={() => onSectionChange('overview')}
+            className="flex items-center cursor-pointer"
+            aria-label="Navigate to home page"
+          >
             <WebpageIcon 
               className="w-16 h-16 mr-4"
               isDarkMode={isDarkMode}
@@ -208,7 +216,7 @@ const Sidebar: FC<SidebarProps> = ({
             <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
               Code TREAT
             </span>
-          </div>
+          </button>
           <button
             onClick={onToggle}
             className={`p-2 rounded-lg ${

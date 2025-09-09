@@ -83,7 +83,20 @@ interface AreaSelectState {
 
 // Helper function to check if a model is using Chain-of-Thought
 const isCoTModel = (modelName: string): boolean => {
-  return modelName.includes('(CoT)');
+  // Models that explicitly have (CoT) suffix
+  if (modelName.includes('(CoT)')) {
+    return true;
+  }
+  
+  // Models that are inherently CoT models but don't have (CoT) suffix
+  const inherentCoTModels = [
+    'o3-mini (High)',
+    'o3-mini (Low)', 
+    'QwQ-32B',
+    'DeepSeek-R1'
+  ];
+  
+  return inherentCoTModels.includes(modelName);
 };
 
 const ModelScatterChart = ({ 
@@ -766,64 +779,77 @@ const ModelScatterChart = ({
         </div>
         
         {/* Chart Controls - Responsive */}
-        <div className="flex flex-wrap items-center gap-1 sm:gap-2 pr-2 sm:pr-8 order-1 sm:order-2">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 pr-2 sm:pr-8 order-1 sm:order-2">
           <button
             onClick={handleResetGraphTimeline}
-            className={`px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
-              graphTimelineRange
-                ? isDarkMode
-                  ? 'bg-slate-600 text-white hover:bg-slate-500'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
-                : isDarkMode
-                ? 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-50'
-                : 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-50 border border-slate-200'
-            }`}
-            title="Reset Chart Timeline Filter"
             disabled={!graphTimelineRange}
+            className="group relative flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+            style={{
+              background: graphTimelineRange 
+                ? 'linear-gradient(to right, #6366f1, #8b5cf6)' 
+                : isDarkMode 
+                ? 'linear-gradient(to right, #374151, #4b5563)'
+                : 'linear-gradient(to right, #9ca3af, #6b7280)',
+              border: 'none'
+            }}
+            title="Reset Chart Timeline Filter"
           >
-            <span className="hidden sm:inline">🗓️ Reset Timeline</span>
-            <span className="sm:hidden">🗓️</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+            </svg>
+            <span className="hidden sm:inline">Reset Timeline</span>
           </button>
+          
           <button
             onClick={() => handleZoomIn()}
-            className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
-              isDarkMode
-                ? 'bg-slate-600 text-white hover:bg-slate-500'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
-            }`}
+            className="group relative flex items-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium text-white rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+            style={{
+              background: 'linear-gradient(to right, #10b981, #14b8a6)',
+              border: 'none'
+            }}
             title="Zoom In (+)"
           >
-            🔍+
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
+            <span className="text-lg leading-none">+</span>
           </button>
+          
           <button
             onClick={() => handleZoomOut()}
-            className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
-              isDarkMode
-                ? 'bg-slate-600 text-white hover:bg-slate-500'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
-            }`}
+            className="group relative flex items-center gap-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium text-white rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+            style={{
+              background: 'linear-gradient(to right, #f59e0b, #d97706)',
+              border: 'none'
+            }}
             title="Zoom Out (-)"
           >
-            🔍-
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
+            <span className="text-lg leading-none">−</span>
           </button>
+          
           <button
             onClick={handleResetZoom}
-            className={`px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
-              zoomState
-                ? isDarkMode
-                  ? 'bg-slate-600 text-white hover:bg-slate-500'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
-                : isDarkMode
-                ? 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-50'
-                : 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-50 border border-slate-200'
-            }`}
-            title="Reset Zoom (Double Click)"
             disabled={!zoomState}
+            className="group relative flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+            style={{
+              background: zoomState 
+                ? 'linear-gradient(to right, #ef4444, #dc2626)' 
+                : isDarkMode 
+                ? 'linear-gradient(to right, #374151, #4b5563)'
+                : 'linear-gradient(to right, #9ca3af, #6b7280)',
+              border: 'none'
+            }}
+            title="Reset Zoom (Double Click)"
           >
-            <span className="hidden sm:inline">🔄 Reset Zoom</span>
-            <span className="sm:hidden">🔄</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+            </svg>
+            <span className="hidden sm:inline">Reset Zoom</span>
           </button>
-          <span className={`text-xs sm:text-sm whitespace-nowrap ${
+          <span className={`text-sm sm:text-lg font-medium whitespace-nowrap ${
             isDarkMode ? 'text-slate-400' : 'text-slate-500'
           }`}>
             <span className="hidden sm:inline">{filteredData.length} models</span>
@@ -937,7 +963,7 @@ const ModelScatterChart = ({
                   position="bottom" 
                   offset={window.innerWidth < 640 ? -10 : -20}
                   fill={isDarkMode ? "#cbd5e0" : "#4a5568"}
-                  style={{ fontWeight: 'bold', fontSize: window.innerWidth < 640 ? '12px' : '14px' }}
+                  style={{ fontWeight: 'bold', fontSize: window.innerWidth < 640 ? '14px' : '18px' }}
                 />
               </XAxis>
               <YAxis 

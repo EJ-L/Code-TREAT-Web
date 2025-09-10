@@ -289,26 +289,32 @@ const ModelScatterChart = ({
     );
   }, [scatterData, graphTimelineRange]);
 
-  // Apply model type filtering and zoom filtering on top of timeline filtering
-  const filteredData = useMemo(() => {
-    let data = timelineFilteredData.filter(point => {
+  // Apply model type filtering on top of timeline filtering
+  const modelTypeFilteredData = useMemo(() => {
+    return timelineFilteredData.filter(point => {
       if (point.isCoTModel && !showCoTModels) return false;
       if (!point.isCoTModel && !showRegularModels) return false;
       return true;
     });
+  }, [timelineFilteredData, showCoTModels, showRegularModels]);
 
-    // Apply zoom filtering - only show points within the current zoom bounds
-    if (zoomState) {
-      data = data.filter(point => {
-        return point.x >= zoomState.xMin && 
-               point.x <= zoomState.xMax && 
-               point.y >= zoomState.yMin && 
-               point.y <= zoomState.yMax;
-      });
+  // Apply zoom filtering separately to distinguish between filter-based and viewport-based empty states
+  const filteredData = useMemo(() => {
+    if (!zoomState) {
+      return modelTypeFilteredData;
     }
 
-    return data;
-  }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
+    return modelTypeFilteredData.filter(point => {
+      return point.x >= zoomState.xMin && 
+             point.x <= zoomState.xMax && 
+             point.y >= zoomState.yMin && 
+             point.y <= zoomState.yMax;
+    });
+  }, [modelTypeFilteredData, zoomState]);
+
+  // Determine the type of empty state
+  const hasNoDataDueToFilters = modelTypeFilteredData.length === 0;
+  const hasNoDataInViewport = !hasNoDataDueToFilters && filteredData.length === 0;
 
   // Calculate date bounds for timeline slider based on current task data
   const dateBounds = useMemo(() => {
@@ -912,8 +918,8 @@ const ModelScatterChart = ({
       </div>
 
       {/* Chart or No Results Message */}
-      {filteredData.length === 0 ? (
-        // Show no results message when chart timeline filter returns 0 results - consistent with table view
+      {hasNoDataDueToFilters ? (
+        // Show no results message when filters exclude all data - consistent with table view
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -985,7 +991,7 @@ const ModelScatterChart = ({
           
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart
-              data={filteredData}
+              data={[]}
               margin={{
                 top: window.innerWidth < 640 ? 15 : 20,
                 right: window.innerWidth < 640 ? 20 : 30,
@@ -1148,6 +1154,47 @@ const ModelScatterChart = ({
               </Scatter>
             </ScatterChart>
           </ResponsiveContainer>
+          
+          {/* Empty viewport overlay - shown when zoomed and no data points in current view */}
+          {hasNoDataInViewport && (
+            <div 
+              className="absolute flex items-center justify-center pointer-events-none z-30"
+              style={{
+                // Position overlay in the chart's plot area, accounting for margins
+                top: window.innerWidth < 640 ? '15px' : '20px',
+                left: window.innerWidth < 640 ? '50px' : '60px',
+                right: window.innerWidth < 640 ? '20px' : '30px',
+                bottom: window.innerWidth < 640 ? '60px' : '80px'
+              }}
+            >
+              <div className={`${
+                isDarkMode ? 'bg-slate-800/90' : 'bg-white/90'
+              } p-6 rounded-lg shadow-lg text-center max-w-sm mx-4`}>
+                <svg className="w-12 h-12 mx-auto mb-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <h3 className={`text-lg font-medium mb-2 ${
+                  isDarkMode ? 'text-slate-200' : 'text-slate-700'
+                }`}>
+                  No data points in this area
+                </h3>
+                <p className={`text-sm ${
+                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                }`}>
+                  Pan around to explore or{' '}
+                  <button
+                    onClick={handleDoubleClick}
+                    className={`underline hover:no-underline ${
+                      isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                    } pointer-events-auto`}
+                  >
+                    reset zoom
+                  </button>
+                  {' '}to see all data
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

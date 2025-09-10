@@ -14,6 +14,47 @@ import {
 import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName, getModelSize } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
+// Helper function to calculate task-specific date bounds with buffers
+function calculateTaskSpecificDateBounds(data: Array<Record<string, unknown>>): { min: Date; max: Date } {
+  if (!data || data.length === 0) {
+    // Fallback dates if no data available
+    return {
+      min: new Date('2021-01-01'),
+      max: new Date()
+    };
+  }
+
+  // Get all model names from the data
+  const modelNames = data.map(result => result.model as string).filter(Boolean);
+  
+  // Get publish dates for models that exist in the data
+  const modelDates = modelNames
+    .map(modelName => MODEL_PUBLISH_DATES[modelName])
+    .filter(dateStr => dateStr)
+    .map(dateStr => new Date(dateStr))
+    .filter(date => !isNaN(date.getTime()))
+    .sort((a, b) => a.getTime() - b.getTime());
+
+  if (modelDates.length === 0) {
+    // Fallback dates if no model dates available
+    return {
+      min: new Date('2021-01-01'),
+      max: new Date()
+    };
+  }
+
+  const earliestDate = modelDates[0];
+  const latestDate = modelDates[modelDates.length - 1];
+
+  // Add 2-month buffer before earliest and after latest dates
+  const twoMonthsInMs = 2 * 30 * 24 * 60 * 60 * 1000; // Approximate 2 months
+  
+  return {
+    min: new Date(earliestDate.getTime() - twoMonthsInMs),
+    max: new Date(latestDate.getTime() + twoMonthsInMs)
+  };
+}
+
 // Utility function to format metric names for display
 const formatMetricName = (metric: string): string => {
   // Handle specific metric patterns
@@ -263,60 +304,51 @@ const ModelScatterChart = ({
     return data;
   }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
 
-  // Calculate date bounds for timeline slider
+  // Calculate date bounds for timeline slider based on current task data
   const dateBounds = useMemo(() => {
-    const modelDates = Object.values(MODEL_PUBLISH_DATES)
-      .map(dateStr => new Date(dateStr))
-      .filter(date => !isNaN(date.getTime()))
-      .sort((a, b) => a.getTime() - b.getTime());
-    
-    if (modelDates.length === 0) {
-      return {
-        min: new Date('2021-01-01'),
-        max: new Date()
-      };
-    }
-    
-    return {
-      min: modelDates[0],
-      max: modelDates[modelDates.length - 1]
-    };
-  }, []);
+    return calculateTaskSpecificDateBounds(data);
+  }, [data]);
 
   // Calculate domain ranges based on timeline filtered data (before zoom filtering) and zoom state
   const { xDomain, yDomain, originalXDomain, originalYDomain } = useMemo(() => {
     if (!timelineFilteredData.length) {
+      // Use task-specific date bounds even when no data is visible
+      const taskDateBounds = calculateTaskSpecificDateBounds(data);
+      const originalX = [
+        taskDateBounds.min.getTime(),
+        taskDateBounds.max.getTime()
+      ] as [number, number];
+      
       return {
-        xDomain: ['auto', 'auto'] as ['auto', 'auto'],
+        xDomain: originalX,
         yDomain: [0, 100] as [number, number],
-        originalXDomain: ['auto', 'auto'] as ['auto', 'auto'],
+        originalXDomain: originalX,
         originalYDomain: [0, 100] as [number, number]
       };
     }
     
-    // Calculate original domain based on timeline filtered data (before zoom filtering)
-    // This ensures we have stable bounds regardless of zoom level
+    // Calculate original domain based on task-specific bounds with 2-month buffer
+    // This ensures consistent x-axis limits based on all models in the task
+    const taskDateBounds = calculateTaskSpecificDateBounds(data);
+    const originalX = [
+      taskDateBounds.min.getTime(),
+      taskDateBounds.max.getTime()
+    ] as [number, number];
+    
+    // Calculate y domain based on visible data points
     const allDataInTimeline = timelineFilteredData.filter(point => {
       if (point.isCoTModel && !showCoTModels) return false;
       if (!point.isCoTModel && !showRegularModels) return false;
       return true;
     });
     
-    const dates = allDataInTimeline.map(d => d.x);
     const values = allDataInTimeline.map(d => d.y);
-    
-    const padding = 90 * 24 * 60 * 60 * 1000; // 90 days padding
     const valuePadding = 5; // 5% padding for y values
     
-    const originalX = [
-      Math.min(...dates) - padding,
-      Math.max(...dates) + padding
-    ] as [number, number];
-    
-    const originalY = [
+    const originalY = values.length > 0 ? [
       Math.max(0, Math.min(...values) - valuePadding),
       Math.min(100, Math.max(...values) + valuePadding)
-    ] as [number, number];
+    ] as [number, number] : [0, 100] as [number, number];
     
     // Use zoom state if available, otherwise use original domain
     return {
@@ -325,7 +357,7 @@ const ModelScatterChart = ({
       originalXDomain: originalX,
       originalYDomain: originalY
     };
-  }, [timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
+  }, [data, timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
 
   // Custom tooltip
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

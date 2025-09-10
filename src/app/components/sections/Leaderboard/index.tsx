@@ -599,6 +599,7 @@ interface LeaderboardProps {
                 isDarkMode={isDarkMode}
                 timelineRange={timelineRange}
                 onTimelineChange={handleTimelineChange}
+                results={results}
               />
             </div>
           )}

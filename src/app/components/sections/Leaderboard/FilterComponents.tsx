@@ -1,6 +1,6 @@
 import { FC, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { TaskType, Ability } from '@/lib/types';
+import { TaskType, Ability, ProcessedResult } from '@/lib/types';
 import { FilterConfig } from '@/lib/filterConfig';
 import { FilterState, getStyles, getButtonAnimation, createFilterClickHandler } from '@/lib/filterHelpers';
 import { MODEL_PUBLISH_DATES } from '@/lib/constants';
@@ -293,28 +293,75 @@ export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode
   );
 };
 
+// Helper function to calculate task-specific date bounds with buffers
+function calculateTaskSpecificDateBounds(results: ProcessedResult[]): { min: Date; max: Date } {
+  if (!results || results.length === 0) {
+    // Fallback dates if no results available
+    return {
+      min: new Date('2021-01-01'),
+      max: new Date()
+    };
+  }
+
+  // Get all model names from the results
+  const modelNames = results.map(result => result.model).filter(Boolean) as string[];
+  
+  // Get publish dates for models that exist in the results
+  const modelDates = modelNames
+    .map(modelName => MODEL_PUBLISH_DATES[modelName])
+    .filter(dateStr => dateStr)
+    .map(dateStr => new Date(dateStr))
+    .filter(date => !isNaN(date.getTime()))
+    .sort((a, b) => a.getTime() - b.getTime());
+
+  if (modelDates.length === 0) {
+    // Fallback dates if no model dates available
+    return {
+      min: new Date('2021-01-01'),
+      max: new Date()
+    };
+  }
+
+  const earliestDate = modelDates[0];
+  const latestDate = modelDates[modelDates.length - 1];
+
+  // Add 2-month buffer before earliest and after latest dates
+  const twoMonthsInMs = 2 * 30 * 24 * 60 * 60 * 1000; // Approximate 2 months
+  
+  return {
+    min: new Date(earliestDate.getTime() - twoMonthsInMs),
+    max: new Date(latestDate.getTime() + twoMonthsInMs)
+  };
+}
+
 // Timeline Filter Component
 interface TimelineFilterProps {
   taskType: TaskType;
   isDarkMode: boolean;
   timelineRange: { start: Date; end: Date } | null;
   onTimelineChange: (startDate: Date, endDate: Date) => void;
+  results?: ProcessedResult[]; // Add results prop for task-specific bounds
 }
 
 export const TimelineFilter: FC<TimelineFilterProps> = ({ 
   isDarkMode, 
   timelineRange, 
-  onTimelineChange 
+  onTimelineChange,
+  results
 }) => {
-  // Calculate date bounds once for the task
+  // Calculate date bounds based on task-specific results with 2-month buffers
   const dateBounds = useMemo(() => {
+    if (results && results.length > 0) {
+      return calculateTaskSpecificDateBounds(results);
+    }
+    
+    // Fallback to all model dates if no results provided
     const modelDates = Object.values(MODEL_PUBLISH_DATES)
       .map(dateStr => new Date(dateStr))
       .filter(date => !isNaN(date.getTime()))
       .sort((a, b) => a.getTime() - b.getTime());
     
     if (modelDates.length === 0) {
-      // Fallback dates if no model dates available
       return {
         min: new Date('2021-01-01'),
         max: new Date()
@@ -325,7 +372,7 @@ export const TimelineFilter: FC<TimelineFilterProps> = ({
       min: modelDates[0],
       max: modelDates[modelDates.length - 1]
     };
-  }, []); // Only calculate once
+  }, [results]); // Recalculate when results change
   
   // Use the provided range or default to full range
   const currentStart = timelineRange?.start || dateBounds.min;

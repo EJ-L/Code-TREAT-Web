@@ -123,13 +123,14 @@ interface AreaSelectState {
 }
 
 // Helper function to check if a model is using Chain-of-Thought
-const isCoTModel = (modelName: string): boolean => {
+const isCoTModel = (modelName: string, currentTask: string): boolean => {
   // Models that explicitly have (CoT) suffix
   if (modelName.includes('(CoT)')) {
     return true;
   }
   
   // Models that are inherently CoT models but don't have (CoT) suffix
+  // These should only be considered CoT in code-robustness task
   const inherentCoTModels = [
     'o3-mini (High)',
     'o3-mini (Low)', 
@@ -137,7 +138,12 @@ const isCoTModel = (modelName: string): boolean => {
     'DeepSeek-R1'
   ];
   
-  return inherentCoTModels.includes(modelName);
+  // Only mark these models as CoT for code-robustness task
+  if (currentTask === 'code-robustness') {
+    return inherentCoTModels.includes(modelName);
+  }
+  
+  return false;
 };
 
 const ModelScatterChart = ({ 
@@ -263,7 +269,7 @@ const ModelScatterChart = ({
           displayDate: publishDate,
           metricValue: `${displayValue.toFixed(1)}%`,
           hasDataLeakage: hasDataLeakage(modelName as string, currentTask),
-          isCoTModel: isCoTModel(modelName as string)
+          isCoTModel: isCoTModel(modelName as string, currentTask)
         });
       }
     });
@@ -343,7 +349,20 @@ const ModelScatterChart = ({
     });
     
     const values = allDataInTimeline.map(d => d.y);
-    const valuePadding = 5; // 5% padding for y values
+    let valuePadding = 5; // Default 5% padding for y values
+    
+    // Special handling for code review task to make datapoints less packed
+    if (currentTask === 'code review' && values.length > 0) {
+      const minVal = Math.min(...values);
+      const maxVal = Math.max(...values);
+      const range = maxVal - minVal;
+      
+      // If the range is very small (like in code review), expand it more
+      if (range < 10) {
+        // Use a larger padding to spread out the points more
+        valuePadding = Math.max(5, range * 1.5); // At least 5 units or 1.5x the range
+      }
+    }
     
     const originalY = values.length > 0 ? [
       Math.max(0, Math.min(...values) - valuePadding),
@@ -357,7 +376,7 @@ const ModelScatterChart = ({
       originalXDomain: originalX,
       originalYDomain: originalY
     };
-  }, [data, timelineFilteredData, showCoTModels, showRegularModels, zoomState]);
+  }, [data, timelineFilteredData, showCoTModels, showRegularModels, zoomState, currentTask]);
 
   // Custom tooltip
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

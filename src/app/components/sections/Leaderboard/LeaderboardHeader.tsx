@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import ClientOnlyCSVLink from '@/app/components/ui/ClientOnlyCSVLink';
 import { TaskType } from '@/lib/types';
+import { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
 
 interface LeaderboardHeaderProps {
   currentTask: TaskType;
@@ -11,6 +12,7 @@ interface LeaderboardHeaderProps {
   shouldShowChartButton: boolean;
   csvData: { headers: { label: string; key: string }[]; data: Record<string, string | number>[] };
   csvFilename: string;
+  chartExportRef?: React.RefObject<ScatterChartRef>;
 }
 
 const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
@@ -21,8 +23,18 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
   setIsComparisonModalOpen,
   shouldShowChartButton,
   csvData,
-  csvFilename
+  csvFilename,
+  chartExportRef
 }) => {
+  
+  // Handle export based on current view mode
+  const handleExport = () => {
+    if (viewMode === 'scatter' && chartExportRef?.current) {
+      // Export chart as SVG
+      chartExportRef.current.exportChart();
+    }
+    // CSV export is handled by ClientOnlyCSVLink component automatically
+  };
   return (
     <div 
       className={`w-full py-8 border-b ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}
@@ -127,23 +139,41 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
             </button>
           )}
 
-          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer min-w-0"
-               style={{
-                 background: 'linear-gradient(to right, #10b981, #14b8a6)'
-               }}>
-            <ClientOnlyCSVLink
-              data={csvData.data}
-              headers={csvData.headers}
-              filename={csvFilename}
-              className="flex items-center gap-1 sm:gap-2 text-white"
+          {viewMode === 'scatter' ? (
+            // Chart view - Export as SVG
+            <button 
+              onClick={handleExport}
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer min-w-0"
+              style={{
+                background: 'linear-gradient(to right, #10b981, #14b8a6)'
+              }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
-              <span className="hidden sm:inline">Export</span>
+              <span className="hidden sm:inline">Export Chart</span>
               <span className="sm:hidden">Export</span>
-            </ClientOnlyCSVLink>
-          </div>
+            </button>
+          ) : (
+            // Table view - Export as CSV
+            <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer min-w-0"
+                 style={{
+                   background: 'linear-gradient(to right, #10b981, #14b8a6)'
+                 }}>
+              <ClientOnlyCSVLink
+                data={csvData.data}
+                headers={csvData.headers}
+                filename={csvFilename}
+                className="flex items-center gap-1 sm:gap-2 text-white"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+                <span className="hidden sm:inline">Export CSV</span>
+                <span className="sm:hidden">Export</span>
+              </ClientOnlyCSVLink>
+            </div>
+          )}
         </div>
       </div>
     </div>

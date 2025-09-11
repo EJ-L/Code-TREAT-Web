@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { 
   ScatterChart, 
   Scatter, 
@@ -88,6 +88,10 @@ type ScatterChartProps = {
   leaderboardTimelineRange?: { start: Date; end: Date } | null;
 };
 
+export interface ScatterChartRef {
+  exportChart: () => void;
+}
+
 interface ScatterDataPoint {
   x: number; // Date as timestamp
   y: number; // Metric value
@@ -146,7 +150,7 @@ const isCoTModel = (modelName: string, currentTask: string): boolean => {
   return false;
 };
 
-const ModelScatterChart = ({ 
+const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({ 
   data, 
   currentMetric, 
   availableMetrics, 
@@ -154,7 +158,7 @@ const ModelScatterChart = ({
   isDarkMode,
   currentTask,
   leaderboardTimelineRange
-}: ScatterChartProps) => {
+}, ref) => {
   const [hoveredPoint, setHoveredPoint] = useState<ScatterDataPoint | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setShowCrosshair] = useState(false);
@@ -528,6 +532,70 @@ const ModelScatterChart = ({
   const handleResetZoom = useCallback(() => {
     setZoomState(null);
   }, []);
+
+  // Export chart as image
+  const handleExportChart = useCallback(() => {
+    try {
+      const chartContainer = chartContainerRef.current;
+      if (!chartContainer) return;
+
+      // Find the SVG element inside the chart container
+      const svgElement = chartContainer.querySelector('svg');
+      if (!svgElement) {
+        console.error('SVG element not found in chart container');
+        return;
+      }
+
+      // Clone and prepare the SVG for export
+      const svgClone = svgElement.cloneNode(true) as SVGElement;
+      
+      // Set explicit dimensions and styles for the cloned SVG
+      const rect = svgElement.getBoundingClientRect();
+      svgClone.setAttribute('width', rect.width.toString());
+      svgClone.setAttribute('height', rect.height.toString());
+      
+      // Add Y-axis label manually to the SVG
+      const yAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      yAxisLabel.setAttribute('x', '20'); // Position from left edge
+      yAxisLabel.setAttribute('y', '40'); // Position from top
+      yAxisLabel.setAttribute('fill', isDarkMode ? '#cbd5e0' : '#4a5568');
+      yAxisLabel.setAttribute('font-family', 'system-ui, -apple-system, sans-serif');
+      yAxisLabel.setAttribute('font-size', window.innerWidth < 640 ? '14px' : '18px');
+      yAxisLabel.setAttribute('font-weight', 'bold');
+      yAxisLabel.setAttribute('text-anchor', 'start');
+      yAxisLabel.textContent = formatMetricName(currentMetric);
+      
+      // Insert the Y-axis label into the SVG
+      svgClone.insertBefore(yAxisLabel, svgClone.firstChild);
+      
+      // Serialize the SVG to string
+      const svgData = new XMLSerializer().serializeToString(svgClone);
+      
+      // Create a Blob and download URL
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      
+      // Create download link
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url;
+      downloadLink.download = `${currentTask}_${currentMetric}_chart_${new Date().toISOString().split('T')[0]}.svg`;
+      
+      // Trigger download
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      
+      // Clean up the URL object
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting chart:', error);
+    }
+  }, [currentTask, currentMetric, isDarkMode]);
+
+  // Expose export function to parent via ref
+  useImperativeHandle(ref, () => ({
+    exportChart: handleExportChart
+  }), [handleExportChart]);
 
   // Keyboard event handlers for zoom
   useEffect(() => {
@@ -1199,6 +1267,8 @@ const ModelScatterChart = ({
       )}
     </div>
   );
-};
+});
+
+ModelScatterChart.displayName = 'ModelScatterChart';
 
 export default ModelScatterChart;

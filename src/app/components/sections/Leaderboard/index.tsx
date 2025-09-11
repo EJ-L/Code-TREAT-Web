@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { FilterOptions, TaskType, Ability, ProcessedResult } from '@/lib/types';
 import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/lib/constants';
 
@@ -6,6 +6,7 @@ import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
 import LeaderboardHeader from './LeaderboardHeader';
 import MultiLeaderboardHeader from './MultiLeaderboardHeader';
+import { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
 import { TimelineFilter } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
 import { AnimatedResultsWrapper } from '@/app/components/ui/AnimatedResultsWrapper';
@@ -68,6 +69,9 @@ interface LeaderboardProps {
   
   // Multi-leaderboard state
   const [selectedMultiTab, setSelectedMultiTab] = useState<string>('All');
+  
+  // Chart export ref
+  const chartExportRef = useRef<ScatterChartRef>(null);
   
   // Helper function to check if a task supports chart view
   const supportsChartView = useCallback((task: TaskType) => {
@@ -569,6 +573,7 @@ interface LeaderboardProps {
           shouldShowChartButton={shouldShowChartButton}
           csvData={csvData}
           csvFilename={csvFilename}
+          chartExportRef={chartExportRef}
         />
 
       <section>
@@ -654,6 +659,7 @@ interface LeaderboardProps {
               setViewMode={setViewMode}
               isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
               selectedMultiTab={selectedMultiTab}
+              chartExportRef={chartExportRef}
             />
             </div>
           </AnimatedResultsWrapper>

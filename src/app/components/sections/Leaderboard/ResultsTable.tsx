@@ -7,7 +7,7 @@ import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl } from '@/lib/constants';
 import { AnimatedTableRow } from '@/app/components/ui/AnimatedTableRow';
-import ModelScatterChart from '@/app/components/ui/ModelScatterChart';
+import ModelScatterChart, { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
 
 import MultiSelectDropdown from '@/app/components/ui/MultiSelectDropdown';
 import { FilterState } from '@/lib/filterHelpers';
@@ -47,6 +47,8 @@ interface ResultsTableProps {
   // Multi-leaderboard props
   isMultiLeaderboard?: boolean;
   selectedMultiTab?: string;
+  // Chart export ref
+  chartExportRef?: React.RefObject<ScatterChartRef>;
 }
 
 const ResultsTable: FC<ResultsTableProps> = ({
@@ -81,6 +83,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   viewMode,
   setViewMode,
   isMultiLeaderboard = false,
+  chartExportRef
 }) => {
   // Refs for measuring table dimensions
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -569,6 +572,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           // Show scatter chart view
           <div style={{ width: '100%', paddingTop: '32px', paddingLeft: '20px', paddingRight: '20px' }}>
             <ModelScatterChart
+              ref={chartExportRef}
               data={sortedResults}
               currentMetric={currentScatterMetric}
               availableMetrics={availableMetrics}

@@ -307,30 +307,6 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     defaultWidth: 145,
     minWidth: 80
   },
-  'REN': {
-    key: 'REN',
-    label: 'REN',
-    width: 'w-24',
-    description: 'Renaming robustness score',
-    defaultWidth: 145,
-    minWidth: 80
-  },
-  'RTF': {
-    key: 'RTF',
-    label: 'RTF',
-    width: 'w-24',
-    description: 'Runtime Function robustness score',
-    defaultWidth: 145,
-    minWidth: 80
-  },
-  'GBC': {
-    key: 'GBC',
-    label: 'GBC',
-    width: 'w-24',
-    description: 'Global Block Comment robustness score',
-    defaultWidth: 145,
-    minWidth: 80
-  },
   // MR-Web metrics
   'MAE': {
     key: 'MAE',
@@ -535,7 +511,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
-  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'REN', 'RTF', 'GBC'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
 };
 
@@ -568,7 +544,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
-  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'REN', 'RTF', 'GBC'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
 };
 

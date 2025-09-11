@@ -92,6 +92,10 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // State for current metric in scatter chart
   const [currentScatterMetric, setCurrentScatterMetric] = useState<string>('');
   
+  // State for mouse drag scrolling
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, scrollLeft: 0 });
+  
   const availableFilters: FilterConfig[] = [];
   
   // Get available numeric metrics for scatter chart
@@ -148,7 +152,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
     const tableWidth = calculateTableWidth();
     
     // Tasks that should always have horizontal scroll by default
-    const alwaysScrollTasks = ['vulnerability detection', 'code-robustness'];
+    const alwaysScrollTasks = ['vulnerability detection'];
     const forceScroll = alwaysScrollTasks.includes(currentTask);
     
     // Add some buffer for padding and borders (48px for padding, potential scrollbar, etc.)
@@ -185,6 +189,65 @@ const ResultsTable: FC<ResultsTableProps> = ({
     
     return () => clearTimeout(timer);
   }, [checkScrollNeed]);
+
+  // Mouse drag scroll handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!tableContainerRef.current || !needsHorizontalScroll) return;
+    
+    // Only handle left mouse button
+    if (e.button !== 0) return;
+    
+    // Don't interfere with text selection or other interactions
+    if ((e.target as HTMLElement).tagName === 'INPUT' || 
+        (e.target as HTMLElement).tagName === 'BUTTON' ||
+        (e.target as HTMLElement).closest('button') ||
+        (e.target as HTMLElement).closest('.resize-handle')) {
+      return;
+    }
+    
+    setIsDragging(true);
+    setDragStart({
+      x: e.pageX,
+      scrollLeft: tableContainerRef.current.scrollLeft
+    });
+    
+    // Prevent text selection during drag
+    e.preventDefault();
+  }, [needsHorizontalScroll]);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging || !tableContainerRef.current) return;
+    
+    e.preventDefault();
+    
+    const deltaX = e.pageX - dragStart.x;
+    tableContainerRef.current.scrollLeft = dragStart.scrollLeft - deltaX;
+  }, [isDragging, dragStart]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // Add global mouse event listeners for drag
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mouseleave', handleMouseUp);
+      
+      // Change cursor to grabbing
+      document.body.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+      
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('mouseleave', handleMouseUp);
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+      };
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp]);
 
   const renderResultsTable = () => {
     // Show results (this function is only called when we have data)
@@ -407,8 +470,10 @@ const ResultsTable: FC<ResultsTableProps> = ({
         style={{ 
           overflowX: needsHorizontalScroll ? 'auto' : 'hidden',
           position: 'relative',
-          width: '100%'
+          width: '100%',
+          cursor: needsHorizontalScroll && !isDragging ? 'grab' : 'default'
         }}
+        onMouseDown={handleMouseDown}
       >
         {isLoading ? (
           // Show loading state only when actually loading

@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Card, CardContent } from "@/app/components/ui/card";
 import { TaskType, Ability } from '@/lib/types';
-import { filterConditions } from '@/lib/filterConfig';
+import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
+import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 import {
   VulnerabilityMetrics,
   UnitTestGenerationMetrics,
@@ -25,6 +26,10 @@ interface FilterPanelProps {
 
 const FilterPanel: FC<FilterPanelProps> = ({
   currentTask,
+  taskAbilities,
+  selectedAbilities,
+  handleAbilityChange,
+  availableLLMJudges,
   isDarkMode,
   isMultiLeaderboard = false
 }) => {
@@ -32,6 +37,24 @@ const FilterPanel: FC<FilterPanelProps> = ({
   if (currentTask === 'interaction-2-code') {
     return null;
   }
+
+  // Only show secondary filters for specific tasks that need them
+  const tasksWithSecondaryFilters: TaskType[] = [
+    'code generation',
+    'code translation', 
+    'input prediction',
+    'output prediction',
+    'code-web'
+  ];
+
+  const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);
+
+  // Get available filters, excluding the extracted filter for multi-leaderboard tasks
+  const multiConfig = getMultiLeaderboardConfig(currentTask);
+  const excludeFilter = multiConfig?.extractedFilter;
+  const availableFilters = shouldShowSecondaryFilters 
+    ? getAvailableFilters(currentTask, taskAbilities, availableLLMJudges, excludeFilter)
+    : [];
 
 
 
@@ -69,6 +92,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           </CardContent>
         </Card>
       )}
+
 
       {/* Information section */}
       {(filterConditions.shouldShowDataLeakageWarning?.(currentTask) || 

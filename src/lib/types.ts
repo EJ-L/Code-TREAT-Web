@@ -105,6 +105,7 @@ export type ProcessedResult = {
   'NEMD'?: number | null;
   'RER'?: number | null;
   // unit test generation metrics
+  'Vanilla'?: number | null;
   'PSC-ALL'?: number | null;
   'MCC'?: number | null;
   // Allow any additional string indices for dynamic properties

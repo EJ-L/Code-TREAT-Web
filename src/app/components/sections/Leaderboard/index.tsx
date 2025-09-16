@@ -7,7 +7,7 @@ import ResultsTable from './ResultsTable';
 import LeaderboardHeader from './LeaderboardHeader';
 import MultiLeaderboardHeader from './MultiLeaderboardHeader';
 import { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
-import { TimelineFilter } from './FilterComponents';
+import { TimelineFilter, SecondaryFiltersBar } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
 import { AnimatedResultsWrapper } from '@/app/components/ui/AnimatedResultsWrapper';
 import { getAvailableLLMJudges as getSummarizationJudges } from '@/lib/tasks/codeSummarization';
@@ -625,6 +625,19 @@ interface LeaderboardProps {
                   isDarkMode={isDarkMode}
                 />
               )}
+              
+              {/* Secondary Filters Bar - positioned below header tabs */}
+              {viewMode === 'table' && (
+                <SecondaryFiltersBar
+                  currentTask={currentTask}
+                  taskAbilities={taskAbilities}
+                  selectedAbilities={selectedAbilities}
+                  availableLLMJudges={availableLLMJudges}
+                  handleAbilityChange={handleAbilityChange}
+                  isDarkMode={isDarkMode}
+                />
+              )}
+              
               <ResultsTable 
               currentTask={currentTask}
               results={results}

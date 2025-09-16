@@ -350,6 +350,14 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     minWidth: 80
   },
   // Unit Test Generation metrics
+  'Vanilla': {
+    key: 'Vanilla',
+    label: 'Vanilla',
+    width: 'w-24',
+    description: 'Vanilla baseline performance metric',
+    defaultWidth: 180,
+    minWidth: 140
+  },
   'PSC-ALL': {
     key: 'PSC-ALL',
     label: 'PSC-ALL',
@@ -530,7 +538,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
-  'unit test generation': ['PSC-ALL', 'MCC', 'MPS', 'MHC']
+  'unit test generation': ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC']
 };
 
 // Difficulty-based header configurations
@@ -564,7 +572,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
-  'unit test generation': ['PSC-ALL', 'MCC', 'MPS', 'MHC']
+  'unit test generation': ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC']
 };
 
 // Tasks that support difficulty-based results
@@ -743,7 +751,8 @@ export const HIGH_TO_LOW_METRICS = [
   'CLIP', 'Compilation',
   'SSIM', 'Text', 'Position', 'Implement Rate',
   'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
-  'MAE', 'NEMD', 'RER'
+  'MAE', 'NEMD', 'RER',
+  'Vanilla', 'PSC-ALL', 'MCC'
 ];
 
 export function getDefaultSortDirection(key: string): 'asc' | 'desc' {

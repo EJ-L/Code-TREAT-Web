@@ -535,9 +535,9 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
   private aggregateUnitTestMetrics(metrics: Record<string, number | string | undefined>): void {
     // Unit test generation data has dataset-specific metrics like:
     // HackerRank_Vanilla, HackerRank_PSC-ALL, GeeksforGeeks_Vanilla, etc.
-    // We need to extract the core metrics: PSC-ALL, MCC, MPS, MHC
+    // We need to extract the core metrics: Vanilla, PSC-ALL, MCC, MPS, MHC
     
-    const metricTypes = ['PSC-ALL', 'MCC', 'MPS', 'MHC'];
+    const metricTypes = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'];
     const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
     
     for (const metricType of metricTypes) {

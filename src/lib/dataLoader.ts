@@ -212,6 +212,7 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     'MHC': typeof entry.metrics['MHC'] === 'number' ? entry.metrics['MHC'] : null,
     
     // Unit Test Generation metrics
+    'Vanilla': typeof entry.metrics['Vanilla'] === 'number' ? entry.metrics['Vanilla'] : null,
     'PSC-ALL': typeof entry.metrics['PSC-ALL'] === 'number' ? entry.metrics['PSC-ALL'] : null,
     'MCC': typeof entry.metrics['MCC'] === 'number' ? entry.metrics['MCC'] : null,
     

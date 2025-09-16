@@ -1,7 +1,8 @@
-import { FC, useState, useMemo } from 'react';
+import { FC, useState, useMemo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { TaskType, Ability, ProcessedResult } from '@/lib/types';
-import { FilterConfig } from '@/lib/filterConfig';
+import { FilterConfig, getAvailableFilters } from '@/lib/filterConfig';
+import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 import { FilterState, getStyles, getButtonAnimation, createFilterClickHandler } from '@/lib/filterHelpers';
 import { MODEL_PUBLISH_DATES } from '@/lib/constants';
 import { TimelineSlider } from '@/app/components/ui/TimelineSlider';
@@ -108,6 +109,203 @@ export const FilterGroup: FC<FilterGroupProps> = ({
             isDarkMode={isDarkMode}
           />
         ))}
+      </div>
+    </div>
+  );
+};
+
+// Multi-select dropdown filter component
+interface MultiSelectFilterProps {
+  filter: FilterConfig;
+  currentTask: TaskType;
+  selectedAbilities: Partial<Ability>;
+  taskAbilities: Record<TaskType, Ability>;
+  availableLLMJudges: string[];
+  handleAbilityChange: (key: keyof Ability, value: string) => void;
+  isDarkMode: boolean;
+}
+
+export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
+  filter,
+  currentTask,
+  selectedAbilities,
+  taskAbilities,
+  availableLLMJudges,
+  handleAbilityChange,
+  isDarkMode
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isOpen]);
+  
+  if (!filter.isVisible(currentTask, taskAbilities, availableLLMJudges)) {
+    return null;
+  }
+
+  const values = filter.getValues(currentTask, taskAbilities, availableLLMJudges);
+  const selectedValues = selectedAbilities[filter.key as keyof Ability] || [];
+  const selectedCount = Array.isArray(selectedValues) ? selectedValues.length : 0;
+  
+  const displayText = selectedCount === 0 
+    ? filter.label 
+    : selectedCount === 1 
+      ? selectedValues[0] 
+      : `${selectedCount} selected`;
+
+  const handleToggle = (value: string) => {
+    handleAbilityChange(filter.key as keyof Ability, value);
+  };
+
+  return (
+    <div ref={dropdownRef} className="relative inline-block">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`
+          inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[140px]
+          ${isDarkMode 
+            ? 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700' 
+            : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
+          }
+        `}
+      >
+        <span className="truncate mr-2">{displayText}</span>
+        <svg 
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className={`
+          absolute z-50 mt-1 w-full min-w-[200px] rounded-lg border shadow-lg
+          ${isDarkMode 
+            ? 'bg-slate-800 border-slate-600' 
+            : 'bg-white border-slate-300'
+          }
+        `}>
+          <div className="max-h-60 overflow-auto py-1">
+            {values.map((value) => {
+              const isSelected = Array.isArray(selectedValues) && selectedValues.includes(value);
+              return (
+                <button
+                  key={value}
+                  onClick={() => handleToggle(value)}
+                  className={`
+                    w-full px-3 py-2 text-left text-sm transition-colors flex items-center
+                    ${isSelected 
+                      ? isDarkMode 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-blue-500 text-white'
+                      : isDarkMode
+                        ? 'text-slate-200 hover:bg-slate-700'
+                        : 'text-slate-700 hover:bg-slate-100'
+                    }
+                  `}
+                >
+                  <span className="truncate">{value}</span>
+                  {isSelected && (
+                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Secondary Filters Bar Component (positioned below header tabs)
+interface SecondaryFiltersBarProps {
+  currentTask: TaskType;
+  taskAbilities: Record<TaskType, Ability>;
+  selectedAbilities: Partial<Ability>;
+  availableLLMJudges: string[];
+  handleAbilityChange: (key: keyof Ability, value: string) => void;
+  isDarkMode: boolean;
+}
+
+export const SecondaryFiltersBar: FC<SecondaryFiltersBarProps> = ({
+  currentTask,
+  taskAbilities,
+  selectedAbilities,
+  availableLLMJudges,
+  handleAbilityChange,
+  isDarkMode
+}) => {
+  // Only show secondary filters for specific tasks that need them
+  const tasksWithSecondaryFilters: TaskType[] = [
+    'code generation',
+    'code translation', 
+    'input prediction',
+    'output prediction',
+    'code-web'
+  ];
+
+  const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);
+
+  if (!shouldShowSecondaryFilters) {
+    return null;
+  }
+
+  // Get available filters, excluding the extracted filter for multi-leaderboard tasks
+  const multiConfig = getMultiLeaderboardConfig(currentTask);
+  const excludeFilter = multiConfig?.extractedFilter;
+  const availableFilters = getAvailableFilters(
+    currentTask, 
+    taskAbilities, 
+    availableLLMJudges, 
+    excludeFilter
+  );
+
+  if (availableFilters.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={`w-full max-w-7xl mx-auto px-4 py-3 border-b ${
+      isDarkMode ? 'border-slate-700 bg-slate-800/30' : 'border-slate-200 bg-slate-50'
+    }`}>
+      <div className="flex items-center gap-4">
+        <span className={`text-sm font-medium ${
+          isDarkMode ? 'text-slate-300' : 'text-slate-600'
+        }`}>
+          Filters:
+        </span>
+        <div className="flex items-center gap-3">
+          {availableFilters.map((filter) => (
+            <MultiSelectFilter
+              key={filter.key}
+              filter={filter}
+              currentTask={currentTask}
+              selectedAbilities={selectedAbilities}
+              taskAbilities={taskAbilities}
+              availableLLMJudges={availableLLMJudges}
+              handleAbilityChange={handleAbilityChange}
+              isDarkMode={isDarkMode}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -197,6 +197,8 @@ export function getDefaultSortConfig(task: TaskType): { key: string; direction: 
     defaultKey = 'ALL';
   } else if (task === 'mr-web') {
     defaultKey = 'MAE';
+  } else if (task === 'unit test generation') {
+    defaultKey = 'Vanilla';
   }
   
   return {

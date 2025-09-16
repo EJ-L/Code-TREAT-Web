@@ -13,7 +13,8 @@ const TASK_MAPPINGS = {
   'code-web': 'code-web',
   'mr-web': 'mr-web',
   'interaction-2-code': 'interaction-2-code',
-  'code-robustness': 'code-robustness'
+  'code-robustness': 'code-robustness',
+  'unit code generation': 'unit-code-generation'
 };
 
 function consolidateResults() {

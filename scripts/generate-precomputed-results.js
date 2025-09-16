@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Define task abilities - same as in page.tsx
 const taskAbilities = {
@@ -100,6 +104,14 @@ const taskAbilities = {
     knowledge: [],
     reasoning: [],
     dataset: ['Merge', 'CRUXEval', 'LiveCodeBench (CE)'],
+    robustness: [],
+    privacy: [],
+  },
+  'unit code generation': {
+    dataset: ['HackerRank', 'GeeksforGeeks', 'Merged'],
+    modality: ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'],
+    knowledge: [],
+    reasoning: [],
     robustness: [],
     privacy: [],
   },
@@ -502,11 +514,10 @@ async function main() {
   }
 }
 
-if (require.main === module) {
-  main();
-}
+// Run the main function
+main();
 
-module.exports = {
+export {
   generateAllCombinations,
   generateTaskCombinations,
   generateFilename,

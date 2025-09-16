@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Simulate the data loading and processing that happens in the React app
 // This will need to be adapted based on your actual data processing logic
@@ -51,7 +55,8 @@ function loadTaskData(task) {
     'code-web': 'code-web',
     'mr-web': 'mr-web',
     'interaction-2-code': 'interaction-2-code',
-    'code-robustness': 'code-robustness'
+    'code-robustness': 'code-robustness',
+    'unit code generation': 'unit-code-generation'
   };
   
   const taskDirName = taskDirMap[task] || task.replace(/\s+/g, '-');
@@ -110,6 +115,27 @@ function loadTaskData(task) {
                 };
                 allData.push(primeVulPairsEntry);
               }
+            });
+          } else if (task === 'unit code generation' && typeof data === 'object' && !Array.isArray(data)) {
+            // Handle special case for unit code generation - convert aggregated format to individual entries
+            Object.entries(data).forEach(([modelName, modelData]) => {
+              Object.entries(modelData).forEach(([dataset, datasetMetrics]) => {
+                // Create separate entries for each metric type within each dataset
+                Object.entries(datasetMetrics).forEach(([metricType, value]) => {
+                  if (metricType !== 'Average') { // Skip the average field since it's calculated
+                    const entry = {
+                      model_name: modelName,
+                      task: 'unit code generation',
+                      dataset: dataset,
+                      modality: metricType,
+                      metrics: {
+                        'pass@1': value / 100 // Convert percentage to ratio
+                      }
+                    };
+                    allData.push(entry);
+                  }
+                });
+              });
             });
           } else if (Array.isArray(data)) {
             allData.push(...data);
@@ -427,6 +453,42 @@ function aggregateData(data, task, showByDifficulty) {
           result[metric] = '-';
         }
       });
+    } else if (task === 'unit code generation') {
+      // For unit code generation, aggregate by dataset and modality
+      const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
+      const modalities = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'];
+      
+      datasets.forEach(dataset => {
+        modalities.forEach(modality => {
+          const values = entries
+            .filter(e => e.dataset === dataset && e.modality === modality)
+            .map(e => e.metrics && e.metrics['pass@1'])
+            .filter(v => v !== undefined && v !== null);
+          
+          if (values.length > 0) {
+            const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
+            result[`${dataset}_${modality}`] = (avg * 100).toFixed(1); // Convert to percentage
+          } else {
+            result[`${dataset}_${modality}`] = '-';
+          }
+        });
+        
+        // Calculate dataset average
+        const datasetValues = modalities.map(modality => {
+          const values = entries
+            .filter(e => e.dataset === dataset && e.modality === modality)
+            .map(e => e.metrics && e.metrics['pass@1'])
+            .filter(v => v !== undefined && v !== null);
+          return values.length > 0 ? values.reduce((sum, val) => sum + val, 0) / values.length : null;
+        }).filter(v => v !== null);
+        
+        if (datasetValues.length > 0) {
+          const avg = datasetValues.reduce((sum, val) => sum + val, 0) / datasetValues.length;
+          result[`${dataset}_Average`] = (avg * 100).toFixed(1);
+        } else {
+          result[`${dataset}_Average`] = '-';
+        }
+      });
     } else {
       // For other tasks (code generation, input/output prediction, etc.), aggregate pass rates
       if (showByDifficulty) {
@@ -521,6 +583,10 @@ function aggregateData(data, task, showByDifficulty) {
       // Sort by CLIP for interaction-2-code
       aValue = parseFloat(a['CLIP']) || -Infinity;
       bValue = parseFloat(b['CLIP']) || -Infinity;
+    } else if (task === 'unit code generation') {
+      // Sort by Merged_Average for unit code generation
+      aValue = parseFloat(a['Merged_Average']) || -Infinity;
+      bValue = parseFloat(b['Merged_Average']) || -Infinity;
     } else if (showByDifficulty) {
       // Sort by easy_pass@1 for difficulty mode
       aValue = parseFloat(a['easy_pass@1']) || -Infinity;
@@ -797,11 +863,10 @@ Examples:
   }
 }
 
-if (require.main === module) {
-  main();
-}
+// Run the main function
+main();
 
-module.exports = {
+export {
   processTaskData,
   processCombination,
   processTaskCombinations,

@@ -348,6 +348,23 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     description: 'Number of tasks completed',
     defaultWidth: 100,
     minWidth: 80
+  },
+  // Unit Test Generation metrics
+  'PSC-ALL': {
+    key: 'PSC-ALL',
+    label: 'PSC-ALL',
+    width: 'w-28',
+    description: 'Aggregated Program Structure-Consistent Perturbation',
+    defaultWidth: 180,
+    minWidth: 120
+  },
+  'MCC': {
+    key: 'MCC',
+    label: 'MCC',
+    width: 'w-24',
+    description: 'Contextual-Level Misleading Code Comments',
+    defaultWidth: 160,
+    minWidth: 100
   }
 };
 
@@ -512,7 +529,8 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
-  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
+  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
+  'unit test generation': ['PSC-ALL', 'MCC', 'MPS', 'MHC']
 };
 
 // Difficulty-based header configurations
@@ -545,7 +563,8 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
-  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER']
+  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
+  'unit test generation': ['PSC-ALL', 'MCC', 'MPS', 'MHC']
 };
 
 // Tasks that support difficulty-based results
@@ -610,6 +629,11 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
     extractedFilter: 'dataset',
     overallTab: 'All',
     tabs: ['All', 'Merge', 'CRUXEval', 'LiveCodeBench (CE)']
+  },
+  'unit test generation': {
+    extractedFilter: 'dataset',
+    overallTab: 'All',
+    tabs: ['All', 'HackerRank', 'GeeksforGeeks', 'Merged']
   }
 };
 

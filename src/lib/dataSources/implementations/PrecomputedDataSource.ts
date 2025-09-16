@@ -52,7 +52,12 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
         'code translation', 
         'code summarization',
         'code review',
-        'vulnerability detection'
+        'vulnerability detection',
+        'code-web',
+        'interaction-2-code',
+        'code-robustness',
+        'mr-web',
+        'unit test generation'
       ] as TaskType[],
       cacheable: true,
       priority: 3 // Higher priority than filesystem
@@ -507,6 +512,11 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       }
     }
 
+    // Special processing for unit test generation to extract aggregate metrics
+    if (task === 'unit test generation') {
+      this.aggregateUnitTestMetrics(metrics);
+    }
+
     // Ensure we have a valid model name
     const modelName = result?.model || 'unknown';
     
@@ -520,6 +530,39 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       metrics: metrics as any,
       url: result?.model_url
     };
+  }
+
+  private aggregateUnitTestMetrics(metrics: Record<string, number | string | undefined>): void {
+    // Unit test generation data has dataset-specific metrics like:
+    // HackerRank_Vanilla, HackerRank_PSC-ALL, GeeksforGeeks_Vanilla, etc.
+    // We need to extract the core metrics: PSC-ALL, MCC, MPS, MHC
+    
+    const metricTypes = ['PSC-ALL', 'MCC', 'MPS', 'MHC'];
+    const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
+    
+    for (const metricType of metricTypes) {
+      const values: number[] = [];
+      
+      // Collect values from all datasets for this metric type
+      for (const dataset of datasets) {
+        const key = `${dataset}_${metricType}`;
+        const value = metrics[key];
+        
+        if (typeof value === 'number' && !isNaN(value)) {
+          values.push(value);
+        } else if (typeof value === 'string' && value !== '-' && !isNaN(parseFloat(value))) {
+          values.push(parseFloat(value));
+        }
+      }
+      
+      // Calculate average if we have values
+      if (values.length > 0) {
+        const average = values.reduce((sum, val) => sum + val, 0) / values.length;
+        metrics[metricType] = average;
+      } else {
+        metrics[metricType] = '-';
+      }
+    }
   }
 
   /**

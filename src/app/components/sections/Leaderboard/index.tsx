@@ -330,6 +330,8 @@ interface LeaderboardProps {
                 primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
               } else if (task === 'mr-web') {
                 primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
+              } else if (task === 'unit test generation') {
+                primaryScore = parseFloat(String(result['PSC-ALL'] || '0')) || 0;
               } else {
                 // For other tasks, use pass@1
                 primaryScore = parseFloat(String(result['pass@1'] || '0')) || 0;

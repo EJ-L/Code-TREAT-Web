@@ -21,7 +21,8 @@ const TASK_DIRECTORIES: Record<string, string> = {
   'code-web': 'data/code-web',
   'interaction-2-code': 'data/interaction-2-code',
   'code-robustness': 'data/code-robustness',
-  'mr-web': 'data/mr-web'
+  'mr-web': 'data/mr-web',
+  'unit test generation': 'data/unit-code-generation'
 };
 
 /**

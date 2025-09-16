@@ -19,6 +19,8 @@ export const MODEL_URLS: Record<string, string> = {
   "o3": "https://openai.com/index/openai-o3-mini/",
   "o4-mini": "https://openai.com/index/introducing-o3-and-o4-mini/",
   "gpt-4.1": "https://openai.com/index/gpt-4-1/",
+  "GPT-5": "https://openai.com/index/introducing-gpt-5/",
+  "GPT-OSS-120B": "https://openai.com/index/introducing-gpt-oss/",
 
   // Anthropic models
   "claude-3.5-sonnet": "https://www.anthropic.com/news/claude-3-5-sonnet",
@@ -40,6 +42,7 @@ export const MODEL_URLS: Record<string, string> = {
   "Gemini-2.0-flash": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
   "gemini-2.0": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
   "Gemini-2.5-Pro": "https://deepmind.google/models/gemini/pro/",
+  "Gemini-2.5-Flash": "https://deepmind.google/models/gemini/flash/",
 
   // Gemma models
   "gemma-2-27b-it": "https://huggingface.co/google/gemma-2-27b-it",
@@ -140,7 +143,11 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'o4-mini (Low)': '2025-04-16',
   'GPT-4o': '2023-04-11',
   'Gpt-4o-mini': '2024-07-18',
-
+  'GPT-4o-Mini': '2024-07-18',
+  'GPT-5': '2025-08-07',
+  'GPT-4.1': '2025-04-14',
+  'GPT-OSS-120B': '2025-08-25',
+  
   // Claude Models
   'Claude-3.5-Sonnet-20241022': '2024-10-22',
   'Claude-3.5-Sonnet': '2024-10-22',
@@ -152,7 +159,10 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // Llama Models
   'Llama-3.3-70B-Instruct': '2024-12-06',
   'Llama3.3-70B-Instruct': '2024-12-06',
+  'LLaMA-3.3-70B-Instruct': '2024-12-06',
   'Llama-3.1-70B-Instruct': '2024-07-23',
+  'LLaMA-3.1-70B-Instruct': '2024-07-23',
+  'LLaMA-3.1-8B-Instruct': '2024-07-23',
   'Llama-3.1-405B-Instruct': '2024-07-23',
   'Llama-3.1-8B-Instruct': '2024-07-23',
   'Llama-4-Scout-17B-16E-Instruct': '2025-04-05',
@@ -168,6 +178,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Qwen2.5-32B-Instruct': '2024-09-19',
   'Qwen2.5-14B-Instruct': '2024-09-19',
   'Qwen2.5-Coder-32B-Instruct': '2024-09-19',
+  'Qwen2.5-32B-Coder-Instruct': '2024-09-19',
   'QwQ-32B': '2025-03-10',
   'Qwen-72B': '2023-11-30',
   'Qwen-7B': '2023-11-30',
@@ -186,11 +197,13 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // Gemini Models
   'Gemma-3-27B-Instruct': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
+  'Gemini-2.5-Pro': '2024-05-06',
+  'Gemini-2.5-Flash': '2025-08-26',
   'Gemini-2.0-Flash': '2024-11-20',
   'Gemini-2.0-Pro': '2025-02-25',
   'Gemini-1.5-Pro': '2024-09-24',
   'Gemini-1.5-Flash': '2024-09-24',
-
+  
   // Pixtral Models
   'Pixtral-Large-Instruct-124B': '2024-11-18',
   'Pixtral-12B-2409': '2024-09-17',

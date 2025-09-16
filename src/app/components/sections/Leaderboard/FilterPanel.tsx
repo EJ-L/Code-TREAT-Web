@@ -4,6 +4,7 @@ import { TaskType, Ability } from '@/lib/types';
 import { filterConditions } from '@/lib/filterConfig';
 import {
   VulnerabilityMetrics,
+  UnitTestGenerationMetrics,
   OverallInfo,
   DataLeakageWarning,
 } from './FilterComponents';
@@ -46,6 +47,11 @@ const FilterPanel: FC<FilterPanelProps> = ({
       {filterConditions.shouldShowVulnerabilityMetrics(currentTask) && (
         <VulnerabilityMetrics isDarkMode={isDarkMode} />
       )}
+
+      {/* Unit test generation metrics */}
+      {filterConditions.shouldShowUnitTestGenerationMetrics(currentTask) && (
+        <UnitTestGenerationMetrics isDarkMode={isDarkMode} />
+      )}
     </div>
   );
 
@@ -66,7 +72,8 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
       {/* Information section */}
       {(filterConditions.shouldShowDataLeakageWarning?.(currentTask) || 
-        filterConditions.shouldShowVulnerabilityMetrics(currentTask)) && (
+        filterConditions.shouldShowVulnerabilityMetrics(currentTask) || 
+        filterConditions.shouldShowUnitTestGenerationMetrics(currentTask)) && (
         <Card className={`${
           isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'
         } backdrop-blur-sm border ${

@@ -43,8 +43,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
     'code generation',
     'code translation', 
     'input prediction',
-    'output prediction',
-    'code-web'
+    'output prediction'
   ];
 
   const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);

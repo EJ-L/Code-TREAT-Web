@@ -624,7 +624,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
     tabs: ['All', 'PrimeVul', 'PrimeVulPairs']
   },
   'code-web': {
-    extractedFilter: 'framework',
+    extractedFilter: 'dataset',
     overallTab: 'All',
     tabs: ['All', 'React', 'Vue', 'Angular', 'Vanilla']
   },

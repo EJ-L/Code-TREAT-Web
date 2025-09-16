@@ -626,17 +626,15 @@ interface LeaderboardProps {
                 />
               )}
               
-              {/* Secondary Filters Bar - positioned below header tabs */}
-              {viewMode === 'table' && (
-                <SecondaryFiltersBar
-                  currentTask={currentTask}
-                  taskAbilities={taskAbilities}
-                  selectedAbilities={selectedAbilities}
-                  availableLLMJudges={availableLLMJudges}
-                  handleAbilityChange={handleAbilityChange}
-                  isDarkMode={isDarkMode}
-                />
-              )}
+              {/* Secondary Filters Bar - positioned below header tabs, shown in both table and chart view */}
+              <SecondaryFiltersBar
+                currentTask={currentTask}
+                taskAbilities={taskAbilities}
+                selectedAbilities={selectedAbilities}
+                availableLLMJudges={availableLLMJudges}
+                handleAbilityChange={handleAbilityChange}
+                isDarkMode={isDarkMode}
+              />
               
               <ResultsTable 
               currentTask={currentTask}

@@ -160,30 +160,30 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
   const selectedCount = Array.isArray(selectedValues) ? selectedValues.length : 0;
   
   const displayText = selectedCount === 0 
-    ? filter.label 
+    ? `${filter.label}: ${values.join(' and ')}` // Show all options when none selected
     : selectedCount === 1 
-      ? selectedValues[0] 
-      : `${selectedCount} selected`;
+      ? `${filter.label}: ${selectedValues[0]}` 
+      : `${filter.label}: ${selectedCount} selected`;
 
   const handleToggle = (value: string) => {
     handleAbilityChange(filter.key as keyof Ability, value);
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-block">
+    <div ref={dropdownRef} className="relative inline-block w-full min-w-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[140px]
+          w-full inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[180px] sm:min-w-[200px] md:min-w-[220px]
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700' 
             : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
           }
         `}
       >
-        <span className="truncate mr-2">{displayText}</span>
+        <span className="truncate mr-2 flex-1 text-left">{displayText}</span>
         <svg 
-          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          className={`w-4 h-4 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -194,7 +194,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
 
       {isOpen && (
         <div className={`
-          absolute z-50 mt-1 w-full min-w-[200px] rounded-lg border shadow-lg
+          absolute z-50 mt-1 w-full min-w-[250px] sm:min-w-[280px] md:min-w-[300px] rounded-lg border shadow-lg
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600' 
             : 'bg-white border-slate-300'
@@ -219,9 +219,9 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
                     }
                   `}
                 >
-                  <span className="truncate">{value}</span>
+                  <span className="truncate flex-1">{value}</span>
                   {isSelected && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 ml-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   )}
@@ -258,8 +258,7 @@ export const SecondaryFiltersBar: FC<SecondaryFiltersBarProps> = ({
     'code generation',
     'code translation', 
     'input prediction',
-    'output prediction',
-    'code-web'
+    'output prediction'
   ];
 
   const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);
@@ -283,16 +282,16 @@ export const SecondaryFiltersBar: FC<SecondaryFiltersBarProps> = ({
   }
 
   return (
-    <div className={`w-full max-w-7xl mx-auto px-4 py-3 border-b ${
+    <div className={`w-full max-w-7xl mx-auto px-4 py-4 border-b ${
       isDarkMode ? 'border-slate-700 bg-slate-800/30' : 'border-slate-200 bg-slate-50'
     }`}>
-      <div className="flex items-center gap-4">
-        <span className={`text-sm font-medium ${
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <span className={`text-sm font-medium flex-shrink-0 ${
           isDarkMode ? 'text-slate-300' : 'text-slate-600'
         }`}>
           Filters:
         </span>
-        <div className="flex items-center gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 flex-1">
           {availableFilters.map((filter) => (
             <MultiSelectFilter
               key={filter.key}

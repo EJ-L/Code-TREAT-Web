@@ -165,10 +165,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   // Graph's own timeline state, independent from leaderboard
   const [graphTimelineRange, setGraphTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
   
-  // Reset graph timeline when leaderboard timeline changes to sync both filters
-  useEffect(() => {
-    setGraphTimelineRange(leaderboardTimelineRange || null);
-  }, [leaderboardTimelineRange]);
+  // Chart timeline is independent - do not sync with leaderboard timeline
   // Filter states for model types
   const [showCoTModels, setShowCoTModels] = useState(true);
   const [showRegularModels, setShowRegularModels] = useState(true);

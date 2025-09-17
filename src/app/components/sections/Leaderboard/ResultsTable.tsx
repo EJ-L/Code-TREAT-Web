@@ -573,7 +573,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
           <div style={{ width: '100%', paddingTop: '32px', paddingLeft: '20px', paddingRight: '20px' }}>
             <ModelScatterChart
               ref={chartExportRef}
-              data={sortedResults}
+              data={results}
               currentMetric={currentScatterMetric}
               availableMetrics={availableMetrics}
               onMetricChange={setCurrentScatterMetric}

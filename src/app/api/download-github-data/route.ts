@@ -1,12 +1,24 @@
 import { NextResponse } from 'next/server';
+import { downloadGitHubDataToLocal } from '@/lib/githubDataDownloader';
 
 export async function POST() {
   try {
-    // Since GitHub data downloading is disabled, just return success
-    return NextResponse.json({ 
-      success: true, 
-      message: 'GitHub data downloading is disabled, using local data only' 
-    });
+    console.log('Starting GitHub data download...');
+    
+    // Actually call the download function
+    const success = await downloadGitHubDataToLocal();
+    
+    if (success) {
+      return NextResponse.json({ 
+        success: true, 
+        message: 'GitHub data successfully downloaded and extracted to local data folder' 
+      });
+    } else {
+      return NextResponse.json({ 
+        success: false, 
+        message: 'Failed to download GitHub data - check server logs for details' 
+      }, { status: 500 });
+    }
   } catch (error) {
     console.error('Error in download-github-data API:', error);
     return NextResponse.json({ 

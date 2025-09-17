@@ -5,17 +5,6 @@
 
 # testing
 /coverage
-/data/precomputed/code-generation/*
-/data/precomputed/code-review/*
-/data/precomputed/code-robustness/*
-/data/precomputed/code-summarization/*
-/data/precomputed/code-translation/*
-/data/precomputed/code-web/*
-/data/precomputed/input-prediction/*
-/data/precomputed/interaction-2-code/*
-/data/precomputed/mr-web/*
-/data/precomputed/output-prediction/*
-/data/precomputed/vulnerability-detection/*
 
 # next.js
 /.next/
@@ -52,3 +41,6 @@ problem.md
 REFACTOR_SUMMARY.md
 src/lib/dataSources/README.md
 DEBUG_USAGE.md
+
+# data folder - ignore everything inside data directory
+data/

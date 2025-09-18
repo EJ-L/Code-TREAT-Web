@@ -104,7 +104,26 @@ export function getModelUrl(modelName: string): string | undefined {
 
 // Canonical model name aliases to unify inconsistent naming across data sources
 export const MODEL_NAME_ALIASES: Record<string, string> = {
-  'Llama3.3-70B-Instruct': 'Llama-3.3-70B-Instruct'
+  // Meta Llama 3.1 70B variants
+  'meta-llama_Meta_Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
+  
+  // Meta Llama 3.3 70B variants
+  'meta-llama_Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
+  'Llama3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
+  
+  // Meta Llama 3.1 8B variants
+  'meta-llama_Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
+  
+  // Meta Llama 4 Scout variants
+  'meta-llama_Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
+  
+  // Claude 3.5 Sonnet variants
+  'Claude-3.5-sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
+  'claude-3.5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
+  'Claude-3-5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
+  
+  // Google Gemma 3 27B variants
+  'google_gemma-3-27b-it': 'google/gemma-3-27b-it'
 };
 
 /**
@@ -226,6 +245,23 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Gemini-2.0-Flash (CoT)': '2024-11-20',
   'Gemini-1.5-Pro-002 (CoT)': '2024-09-24',
   'Gemini-1.5-Flash (CoT)': '2024-09-24',
+
+  // Models from renewed precomputed datasets (exact naming)
+  'o3-mini': '2025-04-16',
+  'o4-mini': '2025-04-16',
+  'gpt-4.1-2025-04-14': '2025-04-14',
+  'gpt-4o-2024-11-20': '2024-11-20',
+  'gpt-4-turbo-2024-04-09': '2024-04-09',
+  'claude-3-5-sonnet-20241022': '2024-10-22',
+  'deepseek-chat': '2024-12-26',
+  'deepseek/deepseek-r1:free': '2025-01-20',
+  'grok-3-mini-beta': '2025-02-17',
+  'Qwen/Qwen2.5-Coder-32B-Instruct': '2024-09-19',
+  'Qwen/Qwen2.5-72B-Instruct': '2024-09-19',
+  'Qwen/Qwen3-30B-A3B': '2025-04-29',
+  'Qwen/Qwen3-32B': '2025-04-29',
+  'Qwen/QwQ-32B': '2025-03-10',
+  'meta-llama/Llama-3.3-70B-Instruct': '2024-12-06'
 
 };
 

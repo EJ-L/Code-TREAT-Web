@@ -1,4 +1,5 @@
 import { ProcessedResult, FilterOptions, ResultEntry, Metrics } from '../types';
+import { canonicalizeModelName } from '../constants';
 
 export function processCodeReview(results: ResultEntry[], filters: FilterOptions): ProcessedResult[] {
   // 添加调试日志：输入数据
@@ -311,9 +312,9 @@ export function aggregateCodeReviewResults(results: ProcessedResult[]): Processe
   
   const groupedResults = new Map<string, ProcessedResult[]>();
   
-  // 按模型分组
+  // 按模型分组 (using canonical model names)
   results.forEach(result => {
-    const key = result.modelName;
+    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }
@@ -324,8 +325,9 @@ export function aggregateCodeReviewResults(results: ProcessedResult[]): Processe
   
   // 计算每个模型的平均值
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
+  const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
     const baseResult = { ...modelResults[0] };
+    baseResult.modelName = modelName; // Use the canonical model name
     
     // 计算LLMJudge分数的平均值
     const validScores = modelResults

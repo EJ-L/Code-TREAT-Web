@@ -5,6 +5,7 @@ import { processCodeSummarization, aggregateCodeSummarizationResults } from './c
 import { processCodeExecution, aggregateCodeExecutionResults } from './codeExecution';
 import { processVulnerabilityDetection, aggregateVulnerabilityDetectionResults } from './vulnerabilityDetection';
 import { loadAllData, processResult } from '../dataLoader';
+import { canonicalizeModelName } from '../constants';
 
 export async function processOverall(rawResults: ProcessedResult[], filters: FilterOptions): Promise<ProcessedResult[]> {
   console.log('Processing overall task:', {
@@ -114,10 +115,10 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
     vulnDetectionResults: allTasksResults.filter(r => r.task === 'vulnerability detection').length
   });
 
-  // Group by model name
+  // Group by model name (using canonical model names)
   const groupedResults = new Map<string, ProcessedResult[]>();
   allTasksResults.forEach(result => {
-    const key = result.modelName;
+    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }
@@ -128,6 +129,7 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
   const finalResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     baseResult.task = 'overall';
+    baseResult.modelName = modelName; // Use the canonical model name
     
     // Group results by difficulty level
     const easyResults = modelResults.filter(r => r.difficulty?.toLowerCase() === 'easy');

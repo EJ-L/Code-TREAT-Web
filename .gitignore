@@ -42,5 +42,7 @@ REFACTOR_SUMMARY.md
 src/lib/dataSources/README.md
 DEBUG_USAGE.md
 
-# data folder - ignore everything inside data directory
-data/
+# data folder
+data/middle_data/
+new_dataset/
+data/precomputed/middle_data/

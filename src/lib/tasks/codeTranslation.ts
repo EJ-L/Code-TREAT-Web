@@ -1,4 +1,5 @@
 import { ProcessedResult, FilterOptions } from '../types';
+import { canonicalizeModelName } from '../constants';
 
 export function processCodeTranslation(results: ProcessedResult[], filters: FilterOptions): ProcessedResult[] {
   // 移除大部分日志，只保留最基本的信息
@@ -108,9 +109,9 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
   
   const groupedResults = new Map<string, ProcessedResult[]>();
   
-  // 按模型分组
+  // 按模型分组 (using canonical model names)
   results.forEach(result => {
-    const key = result.modelName;
+    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }

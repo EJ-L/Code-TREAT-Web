@@ -41,6 +41,13 @@ interface PrecomputedResult {
  */
 export class PrecomputedDataSource extends BaseDataSource implements IPrecomputedDataSource {
   private precomputedCache = new Map<string, PrecomputedData>();
+  
+  /**
+   * Clear all cached precomputed data (useful after data renewal)
+   */
+  clearCache(): void {
+    this.precomputedCache.clear();
+  }
 
   constructor() {
     const metadata: DataSourceMetadata = {
@@ -188,6 +195,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       
       if (!regularData && !difficultyData) {
         debug.dataSource(`No precomputed data available for task: ${task}`);
+        console.log(`❌ No precomputed data available for task: ${task}`);
         return this.createResult([], this.metadata.name, Date.now() - startTime, false, [`No precomputed data available for task: ${task}`]);
       }
       
@@ -209,6 +217,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       
       if (!matchingCombination) {
         debug.dataSource('No matching combination found for filters', filters);
+        console.log(`❌ No matching combination found for filters:`, filters);
+        console.log(`📋 Available combinations:`, Object.keys(precomputedData.filterMappings));
         return this.createResult([], this.metadata.name, Date.now() - startTime, false, ['No matching combination found for filters']);
       }
 
@@ -310,9 +320,9 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     const taskKey = task.replace(/\s+/g, '-');
     const cacheKey = showByDifficulty ? `${taskKey}_difficulty` : taskKey;
     
-    // Check cache first
+    // Clear cache to ensure fresh data after renewal
     if (this.precomputedCache.has(cacheKey)) {
-      return this.precomputedCache.get(cacheKey)!;
+      this.precomputedCache.delete(cacheKey);
     }
     
     try {
@@ -324,7 +334,13 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
         fileName = `${taskKey}_consolidated.json`;
       }
       
-      const response = await fetch(`/api/direct-files?file=data/precomputed/${fileName}`);
+      const response = await fetch(`/api/direct-files?file=data/precomputed/${fileName}`, {
+        cache: 'no-cache',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
       
       if (!response.ok) {
         console.warn(`Failed to load precomputed data: ${fileName}, status: ${response.status}`);

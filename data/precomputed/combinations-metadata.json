@@ -1,5 +1,5 @@
 {
-  "generated": "2025-09-19T14:42:40.003Z",
+  "generated": "2025-09-19T15:06:50.787Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -14268,10 +14268,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-Merge.json",
+          "filename": "code-robustness_dataset-Merge-CruxEval+CE.json",
           "filters": {
             "dataset": [
-              "Merge"
+              "Merge-CruxEval+CE"
             ]
           },
           "showByDifficulty": false
@@ -14280,16 +14280,6 @@
           "filename": "code-robustness_dataset-CRUXEval.json",
           "filters": {
             "dataset": [
-              "CRUXEval"
-            ]
-          },
-          "showByDifficulty": false
-        },
-        {
-          "filename": "code-robustness_dataset-Merge-CRUXEval.json",
-          "filters": {
-            "dataset": [
-              "Merge",
               "CRUXEval"
             ]
           },
@@ -14305,21 +14295,28 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-Merge-LiveCodeBench(CE).json",
+          "filename": "code-robustness_dataset-HackerRank.json",
           "filters": {
             "dataset": [
-              "Merge",
-              "LiveCodeBench (CE)"
+              "HackerRank"
             ]
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-CRUXEval-LiveCodeBench(CE).json",
+          "filename": "code-robustness_dataset-GeeksforGeeks.json",
           "filters": {
             "dataset": [
-              "CRUXEval",
-              "LiveCodeBench (CE)"
+              "GeeksforGeeks"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "code-robustness_dataset-Merge-HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "Merge-HR+GFG"
             ]
           },
           "showByDifficulty": false

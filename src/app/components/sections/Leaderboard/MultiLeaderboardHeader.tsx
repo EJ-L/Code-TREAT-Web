@@ -37,11 +37,18 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
     setCurrentPage(0);
   }, [currentTask]);
 
+  // Get task-specific tabs per page
+  const getTabsPerPage = () => {
+    // For code-robustness, use 4 tabs per page to better distribute
+    if (currentTask === 'code-robustness') return 4;
+    return 6; // Default for other tasks
+  };
+
   // Auto-navigate to page containing selected tab
   useEffect(() => {
     if (!config) return;
     
-    const tabsPerPage = 6;
+    const tabsPerPage = getTabsPerPage();
     const shouldPaginate = config.tabs.length > tabsPerPage;
     
     if (shouldPaginate) {
@@ -67,7 +74,7 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
     return null;
   }
 
-  const tabsPerPage = 6;
+  const tabsPerPage = getTabsPerPage();
   const totalPages = Math.ceil(config.tabs.length / tabsPerPage);
   const shouldPaginate = config.tabs.length > tabsPerPage;
 

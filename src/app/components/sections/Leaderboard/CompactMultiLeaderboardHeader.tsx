@@ -36,11 +36,19 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
     setCurrentPage(0);
   }, [currentTask]);
 
+  // Get task-specific tabs per page
+  const getTabsPerPage = () => {
+    if (isSmallScreen) return 3;
+    // For code-robustness, use 4 tabs per page to better distribute
+    if (currentTask === 'code-robustness') return 4;
+    return 5; // Default for other tasks
+  };
+
   // Auto-navigate to page containing selected tab
   useEffect(() => {
     if (!config) return;
     
-    const tabsPerPage = isSmallScreen ? 3 : 5; // Fewer tabs for compact design
+    const tabsPerPage = getTabsPerPage();
     const shouldPaginate = config.tabs.length > tabsPerPage;
     
     if (shouldPaginate) {
@@ -66,7 +74,7 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
     return null;
   }
 
-  const tabsPerPage = isSmallScreen ? 3 : 5; // Compact design for chart view
+  const tabsPerPage = getTabsPerPage();
   const totalPages = Math.ceil(config.tabs.length / tabsPerPage);
   const shouldPaginate = config.tabs.length > tabsPerPage;
 
@@ -119,21 +127,21 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
           {showPagination && currentPage > 0 && (
             <button
               onClick={handlePrevPage}
-              className={`absolute left-1 top-1/2 transform -translate-y-1/2 z-10 p-1 transition-colors ${
+              className={`absolute left-2 top-1/2 transform -translate-y-1/2 z-10 p-2 transition-colors ${
                 isDarkMode 
                   ? 'text-slate-300 hover:text-white' 
                   : 'text-slate-600 hover:text-slate-900'
               }`}
               aria-label="Previous tabs"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
           )}
 
           {/* Navigation tabs - compact layout */}
-          <nav className={`flex ${showPagination ? 'px-8' : ''} ${!showPagination ? 'overflow-x-auto scrollbar-hide' : ''}`}>
+          <nav className={`flex ${showPagination ? 'pl-12 pr-12' : ''} ${!showPagination ? 'overflow-x-auto scrollbar-hide' : ''}`}>
             {visibleTabs.map((tab, index) => {
               const originalIndex = config.tabs.indexOf(tab);
               const isFirst = originalIndex === 0;
@@ -144,11 +152,11 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
                   key={tab}
                   onClick={() => onTabChange(tab)}
                   className={`
-                    whitespace-nowrap py-2 px-3 font-medium text-xs
+                    whitespace-nowrap py-2 sm:py-3 px-2 sm:px-4 lg:px-6 font-medium text-xs sm:text-sm lg:text-base
                     transition-all duration-200 relative min-w-0 flex items-center justify-center
                     ${!showPagination ? 'flex-1' : 'flex-grow'}
-                    ${isFirst && !showPagination ? 'rounded-l-lg' : ''}
-                    ${isLast && !showPagination ? 'rounded-r-lg' : ''}
+                    ${isFirst && !showPagination ? 'rounded-tl-lg' : ''}
+                    ${isLast && !showPagination ? 'rounded-tr-lg' : ''}
                     ${selectedTab === tab
                       ? isDarkMode
                         ? 'bg-blue-600 text-white shadow-sm'
@@ -179,28 +187,28 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
           {showPagination && currentPage < totalPages - 1 && (
             <button
               onClick={handleNextPage}
-              className={`absolute right-1 top-1/2 transform -translate-y-1/2 z-10 p-1 transition-colors ${
+              className={`absolute right-2 top-1/2 transform -translate-y-1/2 z-10 p-2 transition-colors ${
                 isDarkMode 
                   ? 'text-slate-300 hover:text-white' 
                   : 'text-slate-600 hover:text-slate-900'
               }`}
               aria-label="Next tabs"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           )}
         </div>
 
-        {/* Pagination indicators - more compact */}
+        {/* Pagination indicators */}
         {showPagination && totalPages > 1 && (
-          <div className="flex justify-center py-1 space-x-1">
+          <div className="flex justify-center py-2 space-x-1">
             {Array.from({ length: totalPages }).map((_, pageIndex) => (
               <button
                 key={pageIndex}
                 onClick={() => setCurrentPage(pageIndex)}
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                className={`w-2 h-2 rounded-full transition-colors ${
                   pageIndex === currentPage
                     ? isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
                     : isDarkMode ? 'bg-slate-600' : 'bg-slate-300'

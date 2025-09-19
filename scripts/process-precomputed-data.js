@@ -490,8 +490,35 @@ function aggregateData(data, task, showByDifficulty) {
       }
     } else if (task === 'code-robustness') {
       // For code robustness, use specific robustness metrics
-      // Metrics looks like {"VAN": 57.4, "REN": 53.4, "RTF": 55.6, "GBC": 50.1, "ALL": 43.6, "MDC": 49.5, "MPS": 50.9, "MHC": 41.6}
-      const robustnessMetrics = ['VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC'];
+      // Determine which metrics to use based on dataset
+      let robustnessMetrics;
+      
+      // Check if entries contain CruxEval, LiveCodeBench, or their merged versions
+      const hasCoTDatasets = entries.some(e => {
+        const dataset = e.dataset || '';
+        return dataset.includes('CRUXEval') || 
+               dataset.includes('LiveCodeBench') || 
+               dataset.includes('Merge-CruxEval+CE');
+      });
+      
+      // Check if entries contain HackerRank, GeeksforGeeks, or their merged versions
+      const hasHRGFGDatasets = entries.some(e => {
+        const dataset = e.dataset || '';
+        return dataset.includes('HackerRank') || 
+               dataset.includes('GeeksforGeeks') || 
+               dataset.includes('Merge-HR+GFG');
+      });
+      
+      if (hasCoTDatasets && !hasHRGFGDatasets) {
+        // For CruxEval, LiveCodeBench and merged versions: exclude REN, RTF, GBC
+        robustnessMetrics = ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'];
+      } else if (hasHRGFGDatasets && !hasCoTDatasets) {
+        // For HackerRank, GeeksforGeeks and merged versions: include all relevant metrics
+        robustnessMetrics = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC', 'Average'];
+      } else {
+        // Mixed or unknown datasets: use all metrics available
+        robustnessMetrics = ['VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'];
+      }
       
       robustnessMetrics.forEach(metric => {
         const values = entries

@@ -307,6 +307,38 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     defaultWidth: 145,
     minWidth: 80
   },
+  'Vanilla': {
+    key: 'Vanilla',
+    label: 'Vanilla',
+    width: 'w-30',
+    description: 'Vanilla code robustness score',
+    defaultWidth: 160,
+    minWidth: 140
+  },
+  'PSC-ALL': {
+    key: 'PSC-ALL',
+    label: 'PSC-ALL',
+    width: 'w-30',
+    description: 'PSC-ALL robustness score',
+    defaultWidth: 220,
+    minWidth: 140
+  },
+  'MCC': {
+    key: 'MCC',
+    label: 'MCC',
+    width: 'w-24',
+    description: 'MCC robustness score',
+    defaultWidth: 145,
+    minWidth: 80
+  },
+  'Average': {
+    key: 'Average',
+    label: 'Average',
+    width: 'w-28',
+    description: 'Average robustness score',
+    defaultWidth: 180,
+    minWidth: 80
+  },
   // MR-Web metrics
   'MAE': {
     key: 'MAE',
@@ -476,7 +508,13 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   'hard_pass@3': { default: 120, minWidth: 110, maxWidth: 180 },
   'easy_pass@5': { default: 120, minWidth: 110, maxWidth: 180 },
   'medium_pass@5': { default: 120, minWidth: 110, maxWidth: 180 },
-  'hard_pass@5': { default: 120, minWidth: 110, maxWidth: 180 }
+  'hard_pass@5': { default: 120, minWidth: 110, maxWidth: 180 },
+  
+  // Code-robustness metrics
+  'Vanilla': { default: 145, minWidth: 80, maxWidth: 200 },
+  'PSC-ALL': { default: 150, minWidth: 80, maxWidth: 200 },
+  'MCC': { default: 145, minWidth: 80, maxWidth: 200 },
+  'Average': { default: 150, minWidth: 80, maxWidth: 200 }
 };
 
 // Task-specific header configurations
@@ -511,7 +549,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
-  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
 };
 
@@ -544,7 +582,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
-  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'],
+  'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
 };
 
@@ -609,7 +647,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
   'code-robustness': {
     extractedFilter: 'dataset',
     overallTab: 'All',
-    tabs: ['All', 'Merge', 'CRUXEval', 'LiveCodeBench (CE)']
+    tabs: ['All', 'CRUXEval', 'LiveCodeBench (CE)', 'Merge-CruxEval+CE', 'HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG']
   },
 };
 

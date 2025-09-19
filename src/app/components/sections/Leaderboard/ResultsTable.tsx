@@ -128,9 +128,29 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // Set default metric when available metrics change
   useEffect(() => {
     if (availableMetrics.length > 0 && !currentScatterMetric) {
-      setCurrentScatterMetric(availableMetrics[0]);
+      // For code-robustness with new datasets, prefer MPS as default
+      if (currentTask === 'code-robustness' && selectedMultiTab && 
+          ['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'].includes(selectedMultiTab)) {
+        const hasMPS = availableMetrics.includes('MPS');
+        setCurrentScatterMetric(hasMPS ? 'MPS' : availableMetrics[0]);
+      } else {
+        setCurrentScatterMetric(availableMetrics[0]);
+      }
     }
-  }, [availableMetrics, currentScatterMetric]);
+  }, [availableMetrics, currentScatterMetric, currentTask, selectedMultiTab]);
+
+  // Reset metric when switching to new datasets in code-robustness
+  useEffect(() => {
+    if (currentTask === 'code-robustness' && selectedMultiTab && availableMetrics.length > 0) {
+      if (['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'].includes(selectedMultiTab)) {
+        // Switch to MPS for new datasets if available and not already selected
+        const hasMPS = availableMetrics.includes('MPS');
+        if (hasMPS && currentScatterMetric !== 'MPS') {
+          setCurrentScatterMetric('MPS');
+        }
+      }
+    }
+  }, [selectedMultiTab, currentTask, availableMetrics, currentScatterMetric]);
 
   // Reset to table view only when the original results are empty (not just timeline filtered)
   // This ensures users can stay in chart view to adjust timeline filters

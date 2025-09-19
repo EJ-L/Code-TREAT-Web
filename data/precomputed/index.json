@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-09-19T14:46:17.310Z",
+  "generatedAt": "2025-09-19T15:17:30.604Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -15298,14 +15298,14 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_overall.json"
         },
         {
-          "filename": "code-robustness_dataset-Merge.json",
+          "filename": "code-robustness_dataset-Merge-CruxEval+CE.json",
           "filters": {
             "dataset": [
-              "Merge"
+              "Merge-CruxEval+CE"
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge.json"
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-CruxEval+CE.json"
         },
         {
           "filename": "code-robustness_dataset-CRUXEval.json",
@@ -15318,17 +15318,6 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-CRUXEval.json"
         },
         {
-          "filename": "code-robustness_dataset-Merge-CRUXEval.json",
-          "filters": {
-            "dataset": [
-              "Merge",
-              "CRUXEval"
-            ]
-          },
-          "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-CRUXEval.json"
-        },
-        {
           "filename": "code-robustness_dataset-LiveCodeBench(CE).json",
           "filters": {
             "dataset": [
@@ -15339,26 +15328,34 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-LiveCodeBench(CE).json"
         },
         {
-          "filename": "code-robustness_dataset-Merge-LiveCodeBench(CE).json",
+          "filename": "code-robustness_dataset-HackerRank.json",
           "filters": {
             "dataset": [
-              "Merge",
-              "LiveCodeBench (CE)"
+              "HackerRank"
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-LiveCodeBench(CE).json"
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-HackerRank.json"
         },
         {
-          "filename": "code-robustness_dataset-CRUXEval-LiveCodeBench(CE).json",
+          "filename": "code-robustness_dataset-GeeksforGeeks.json",
           "filters": {
             "dataset": [
-              "CRUXEval",
-              "LiveCodeBench (CE)"
+              "GeeksforGeeks"
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-CRUXEval-LiveCodeBench(CE).json"
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-GeeksforGeeks.json"
+        },
+        {
+          "filename": "code-robustness_dataset-Merge-HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "Merge-HR+GFG"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-HR+GFG.json"
         }
       ]
     }

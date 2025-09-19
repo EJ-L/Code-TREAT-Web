@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Card, CardContent } from "@/app/components/ui/card";
-import { TaskType, Ability } from '@/lib/types';
+import { TaskType, Ability, ProcessedResult } from '@/lib/types';
 import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
 import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 import {
@@ -21,16 +21,18 @@ interface FilterPanelProps {
   onTimelineChange: (startDate: Date, endDate: Date) => void;
   isMultiLeaderboard?: boolean;
   selectedMultiTab?: string;
+  results?: ProcessedResult[]; // Add results to determine actual datasets being shown
 }
 
 const FilterPanel: FC<FilterPanelProps> = ({
   currentTask,
   taskAbilities,
   selectedAbilities,
-  handleAbilityChange,
+  handleAbilityChange: _handleAbilityChange,
   availableLLMJudges,
   isDarkMode,
-  isMultiLeaderboard = false
+  isMultiLeaderboard = false,
+  results = []
 }) => {
   // Early return for interaction-2-code task
   if (currentTask === 'interaction-2-code') {
@@ -50,7 +52,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
   // Get available filters, excluding the extracted filter for multi-leaderboard tasks
   const multiConfig = getMultiLeaderboardConfig(currentTask);
   const excludeFilter = multiConfig?.extractedFilter;
-  const availableFilters = shouldShowSecondaryFilters 
+  const _availableFilters = shouldShowSecondaryFilters 
     ? getAvailableFilters(currentTask, taskAbilities, availableLLMJudges, excludeFilter)
     : [];
 
@@ -60,7 +62,35 @@ const FilterPanel: FC<FilterPanelProps> = ({
   const InfoSection = () => (
     <div className="space-y-4">
       {/* Data leakage warning for applicable tasks */}
-      {filterConditions.shouldShowDataLeakageWarning && filterConditions.shouldShowDataLeakageWarning(currentTask) && (
+      {(() => {
+        // For code translation, use the actual datasets in the results
+        let datasetsToCheck = selectedAbilities.dataset || [];
+        
+        if (currentTask === 'code translation') {
+          console.log('DEBUG FilterPanel: currentTask is code translation');
+          console.log('DEBUG FilterPanel: results.length:', results.length);
+          console.log('DEBUG FilterPanel: selectedAbilities:', selectedAbilities);
+          console.log('DEBUG FilterPanel: selectedAbilities.dataset:', selectedAbilities.dataset);
+          
+          if (results.length > 0) {
+            // If we have results, use the actual datasets from the results
+            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+            console.log('DEBUG FilterPanel: datasetsToCheck from results:', datasetsToCheck);
+          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+            // If no results yet but dataset filter is selected, use the selected datasets
+            datasetsToCheck = selectedAbilities.dataset;
+            console.log('DEBUG FilterPanel: Using selectedAbilities.dataset:', datasetsToCheck);
+          } else {
+            // No results and no dataset filter selected - return early to avoid showing warning
+            console.log('DEBUG FilterPanel: No results and no dataset selected, returning false');
+            return false;
+          }
+        }
+        
+        const shouldShow = filterConditions.shouldShowDataLeakageWarning && filterConditions.shouldShowDataLeakageWarning(currentTask, datasetsToCheck);
+        console.log('DEBUG FilterPanel: shouldShow data leakage warning:', shouldShow, 'for task:', currentTask, 'datasets:', datasetsToCheck);
+        return shouldShow;
+      })() && (
         <DataLeakageWarning taskType={currentTask} isDarkMode={isDarkMode} />
       )}
 
@@ -89,9 +119,31 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
 
       {/* Information section */}
-      {(filterConditions.shouldShowDataLeakageWarning?.(currentTask) || 
-        filterConditions.shouldShowVulnerabilityMetrics(currentTask)
-        ) && (
+      {(() => {
+        // Check if we should show the information section
+        const shouldShowVulnerabilityMetrics = filterConditions.shouldShowVulnerabilityMetrics(currentTask);
+        
+        // For data leakage warning, use the same logic as inside InfoSection
+        let shouldShowDataLeakage = false;
+        if (currentTask === 'vulnerability detection') {
+          shouldShowDataLeakage = true;
+        } else if (currentTask === 'code translation') {
+          let datasetsToCheck = selectedAbilities.dataset || [];
+          if (results.length > 0) {
+            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+            datasetsToCheck = selectedAbilities.dataset;
+          } else {
+            shouldShowDataLeakage = false;
+          }
+          
+          if (datasetsToCheck.length > 0) {
+            shouldShowDataLeakage = filterConditions.shouldShowDataLeakageWarning(currentTask, datasetsToCheck);
+          }
+        }
+        
+        return shouldShowDataLeakage || shouldShowVulnerabilityMetrics;
+      })() && (
         <Card className={`${
           isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'
         } backdrop-blur-sm border ${

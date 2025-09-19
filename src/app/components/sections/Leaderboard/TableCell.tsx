@@ -26,6 +26,7 @@ interface TableCellProps {
   isDarkMode: boolean;
   modelUrl?: string;
   modelName?: string; // Add model name prop for data leakage detection
+  dataset?: string; // Add dataset prop for data leakage detection
 }
 
 const TableCell: FC<TableCellProps> = ({
@@ -44,7 +45,8 @@ const TableCell: FC<TableCellProps> = ({
   getNumericStyles,
   isDarkMode,
   modelUrl,
-  modelName
+  modelName,
+  dataset
 }) => {
   const alignment = getColumnAlignment(header.key);
   const numericStyles = getNumericStyles(header.key);
@@ -55,12 +57,18 @@ const TableCell: FC<TableCellProps> = ({
     // For model column, check the model name directly
     if (header.key === 'model') {
       const modelNameToCheck = String(value);
-      return hasDataLeakage(modelNameToCheck, currentTask);
+      // For code translation, pass dataset information to hasDataLeakage
+      return currentTask === 'code translation' 
+        ? hasDataLeakage(modelNameToCheck, currentTask, dataset)
+        : hasDataLeakage(modelNameToCheck, currentTask);
     }
     // For rank column, we need to get the model name from the row data
     // We'll pass this information via modelName prop
     if (header.key === 'rank' && modelName) {
-      return hasDataLeakage(modelName, currentTask);
+      // For code translation, pass dataset information to hasDataLeakage
+      return currentTask === 'code translation'
+        ? hasDataLeakage(modelName, currentTask, dataset)
+        : hasDataLeakage(modelName, currentTask);
     }
     return false;
   };

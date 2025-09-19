@@ -386,7 +386,7 @@ export const DataLeakageWarning: FC<DataLeakageWarningProps> = ({ taskType, isDa
     const dates: Record<TaskType, string> = {
       'vulnerability detection': '2024-03-27',
       'code generation': '2021-07-07',
-      'code translation': '2021-07-07',
+      'code translation': '2024-10-24', // PolyHumanEval dataset release date
       'input prediction': '2021-07-07',
       'output prediction': '2021-07-07',
       'code summarization': '2023-12-01',

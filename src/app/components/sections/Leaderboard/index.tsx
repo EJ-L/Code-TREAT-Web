@@ -592,6 +592,7 @@ interface LeaderboardProps {
               onTimelineChange={handleTimelineChange}
               isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
               selectedMultiTab={selectedMultiTab}
+              results={results}
             />
           </div>
 

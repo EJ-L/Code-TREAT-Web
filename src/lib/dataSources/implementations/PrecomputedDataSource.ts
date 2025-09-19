@@ -620,11 +620,11 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
   private extractDatasetFromCombination(combination: string): string {
     const lowerCombination = combination.toLowerCase();
     
-    // Common dataset patterns
+    // Common dataset patterns - ORDER MATTERS! Put longer/more specific patterns first
     const datasetPatterns = [
-      'humaneval', 'mbpp', 'codeforces', 'leetcode', 'apps', 
+      'polyhumaneval', 'hackerrank', 'humaneval', 'mbpp', 'codeforces', 'leetcode', 'apps', 
       'codenet', 'conala', 'codesearchnet', 'bigclonebench',
-      'primevul', 'polyhumaneval', 'hr', 'gfg'
+      'primevul', 'hr', 'gfg'
     ];
     
     for (const pattern of datasetPatterns) {

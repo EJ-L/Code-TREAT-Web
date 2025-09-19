@@ -315,6 +315,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               modelName={modelName}
               modelUrl={modelUrl}
               isDarkMode={isDarkMode}
+              dataset={result.dataset} // Pass dataset for data leakage detection
             />
           );
         })}

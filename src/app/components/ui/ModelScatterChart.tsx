@@ -11,7 +11,7 @@ import {
   LabelList,
   ReferenceLine
 } from 'recharts';
-import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName, getModelSize } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName, getModelSize, shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
 // Helper function to calculate task-specific date bounds with buffers
@@ -199,6 +199,14 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
 
     const points: ScatterDataPoint[] = [];
     
+    // For code translation, determine if data leakage detection should be enabled
+    // based on which datasets are present in the current data
+    let shouldCheckDataLeakage = true;
+    if (currentTask === 'code translation') {
+      const datasetsInData = [...new Set(data.map(result => result.dataset).filter(Boolean))] as string[];
+      shouldCheckDataLeakage = shouldEnableCodeTranslationDataLeakage(datasetsInData);
+    }
+    
     data.forEach(result => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const modelName = (result as any).model || (result as any).modelName;
@@ -269,7 +277,9 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
           model: modelName as string,
           displayDate: publishDate,
           metricValue: `${displayValue.toFixed(1)}%`,
-          hasDataLeakage: hasDataLeakage(modelName as string, currentTask),
+          hasDataLeakage: shouldCheckDataLeakage && (currentTask === 'code translation' 
+            ? hasDataLeakage(modelName as string, currentTask, result.dataset as string)
+            : hasDataLeakage(modelName as string, currentTask)),
           isCoTModel: isCoTModel(modelName as string, currentTask)
         });
       }

@@ -1,5 +1,5 @@
 {
-  "generated": "2025-09-19T15:06:50.787Z",
+  "generated": "2025-09-18T13:59:51.889Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -14268,10 +14268,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-Merge-CruxEval+CE.json",
+          "filename": "code-robustness_dataset-Merge.json",
           "filters": {
             "dataset": [
-              "Merge-CruxEval+CE"
+              "Merge"
             ]
           },
           "showByDifficulty": false
@@ -14280,6 +14280,16 @@
           "filename": "code-robustness_dataset-CRUXEval.json",
           "filters": {
             "dataset": [
+              "CRUXEval"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "code-robustness_dataset-Merge-CRUXEval.json",
+          "filters": {
+            "dataset": [
+              "Merge",
               "CRUXEval"
             ]
           },
@@ -14295,28 +14305,522 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-HackerRank.json",
+          "filename": "code-robustness_dataset-Merge-LiveCodeBench(CE).json",
+          "filters": {
+            "dataset": [
+              "Merge",
+              "LiveCodeBench (CE)"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "code-robustness_dataset-CRUXEval-LiveCodeBench(CE).json",
+          "filters": {
+            "dataset": [
+              "CRUXEval",
+              "LiveCodeBench (CE)"
+            ]
+          },
+          "showByDifficulty": false
+        }
+      ]
+    },
+    "unit code generation": {
+      "totalCombinations": 42,
+      "combinations": [
+        {
+          "filename": "unit-code-generation_overall.json",
+          "filters": {
+            "dataset": [],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank.json",
           "filters": {
             "dataset": [
               "HackerRank"
-            ]
+            ],
+            "modality": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-GeeksforGeeks.json",
+          "filename": "unit-code-generation_dataset-GeeksforGeeks.json",
           "filters": {
             "dataset": [
               "GeeksforGeeks"
+            ],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": []
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_modality-Vanilla.json",
+          "filters": {
+            "dataset": [],
+            "modality": [
+              "Vanilla"
             ]
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-Merge-HR+GFG.json",
+          "filename": "unit-code-generation_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_modality-MCC.json",
+          "filters": {
+            "dataset": [],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_modality-MPS.json",
+          "filters": {
+            "dataset": [],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_modality-MHC.json",
+          "filters": {
+            "dataset": [],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank_modality-Vanilla.json",
           "filters": {
             "dataset": [
-              "Merge-HR+GFG"
+              "HackerRank"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "HackerRank"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "HackerRank"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank"
+            ],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks_modality-Vanilla.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks_modality-Vanilla.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-GeeksforGeeks_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged_modality-Vanilla.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-Merged_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "Merged"
+            ],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged_modality-Vanilla.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-HackerRank-Merged_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merged"
+            ],
+            "modality": [
+              "MHC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged_modality-Vanilla.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": [
+              "Vanilla"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged_modality-PSC-ALL.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": [
+              "PSC-ALL"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged_modality-MCC.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": [
+              "MCC"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged_modality-MPS.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": [
+              "MPS"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "unit-code-generation_dataset-GeeksforGeeks-Merged_modality-MHC.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merged"
+            ],
+            "modality": [
+              "MHC"
             ]
           },
           "showByDifficulty": false

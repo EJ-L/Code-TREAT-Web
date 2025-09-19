@@ -1,4 +1,5 @@
 import { TaskType, Ability } from '@/lib/types';
+import { shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
 
 // Define tasks that have difficulty-based results
 export const TASKS_WITH_DIFFICULTY: TaskType[] = [
@@ -156,8 +157,23 @@ export const filterConditions = {
   shouldShowOverallInfo: (task: TaskType) =>
     task === 'overall',
   
-  shouldShowDataLeakageWarning: (task: TaskType) =>
-    task === 'vulnerability detection',
+  shouldShowDataLeakageWarning: (task: TaskType, selectedDatasets?: string[]) => {
+    console.log('DEBUG filterConditions: shouldShowDataLeakageWarning called with task:', task, 'datasets:', selectedDatasets);
+    
+    if (task === 'vulnerability detection') {
+      console.log('DEBUG filterConditions: vulnerability detection - returning true');
+      return true;
+    }
+    
+    if (task === 'code translation') {
+      const result = shouldEnableCodeTranslationDataLeakage(selectedDatasets || []);
+      console.log('DEBUG filterConditions: code translation result:', result);
+      return result;
+    }
+    
+    console.log('DEBUG filterConditions: other task - returning false');
+    return false;
+  },
     
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shouldShowTimeline: (task: TaskType) =>

@@ -369,19 +369,59 @@ export const DATASET_RELEASE_DATES: Record<string, string> = {
   // 'overall': '2021-07-07', // Based on oldest dataset
 };
 
-// Helper function to check if a model has data leakage
-export function hasDataLeakage(modelName: string, taskName: string): boolean {
-  const modelPublishDate = MODEL_PUBLISH_DATES[modelName];
-  const datasetReleaseDate = DATASET_RELEASE_DATES[taskName];
+// Dataset-specific release dates for code translation
+export const CODE_TRANSLATION_DATASET_RELEASE_DATES: Record<string, string> = {
+  'polyhumaneval': '2024-10-24', // PolyHumanEval dataset release date
+  // 'hackerrank': No data leakage checking
+};
+
+// Helper function to check if data leakage detection should be enabled for code translation
+export function shouldEnableCodeTranslationDataLeakage(selectedDatasets: string[]): boolean {
+  console.log('DEBUG: shouldEnableCodeTranslationDataLeakage called with:', selectedDatasets);
   
-  // Skip data leak checking if either date is missing
+  // If no datasets selected or empty array, check all datasets (default behavior)
+  if (!selectedDatasets || selectedDatasets.length === 0) {
+    console.log('DEBUG: No datasets selected, returning false');
+    return false; // When all datasets are shown, don't enable data leakage detection
+  }
+  
+  // Data leakage detection is enabled only if:
+  // 1. PolyHumanEval is selected AND HackerRank is NOT selected
+  // 2. OR only PolyHumanEval is selected
+  const hasPolyHumanEval = selectedDatasets.some(dataset => dataset.toLowerCase() === 'polyhumaneval');
+  const hasHackerRank = selectedDatasets.some(dataset => {
+    const lower = dataset.toLowerCase();
+    return lower === 'hackerrank' || lower === 'hr';
+  });
+  
+  console.log('DEBUG: hasPolyHumanEval:', hasPolyHumanEval, 'hasHackerRank:', hasHackerRank);
+  
+  // Enable data leakage detection only if PolyHumanEval is selected and HackerRank is not
+  const result = hasPolyHumanEval && !hasHackerRank;
+  console.log('DEBUG: shouldEnableCodeTranslationDataLeakage result:', result);
+  return result;
+}
+
+// Helper function to check if a model has data leakage
+export function hasDataLeakage(modelName: string, taskName: string, datasetName?: string): boolean {
+  const modelPublishDate = MODEL_PUBLISH_DATES[modelName];
+  
+  // Skip data leak checking if model publish date is missing
   if (!modelPublishDate) {
-    // Model publish date not available, skip leak checking
     return false;
   }
   
+  let datasetReleaseDate: string | undefined;
+  
+  // For code translation, use dataset-specific release dates
+  if (taskName === 'code translation' && datasetName) {
+    datasetReleaseDate = CODE_TRANSLATION_DATASET_RELEASE_DATES[datasetName];
+  } else {
+    datasetReleaseDate = DATASET_RELEASE_DATES[taskName];
+  }
+  
+  // Skip data leak checking if dataset release date is not available
   if (!datasetReleaseDate) {
-    // Dataset release date not available, skip leak checking
     return false;
   }
   

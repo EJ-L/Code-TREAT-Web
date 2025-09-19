@@ -6,6 +6,7 @@ import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
 import LeaderboardHeader from './LeaderboardHeader';
 import MultiLeaderboardHeader from './MultiLeaderboardHeader';
+import CompactMultiLeaderboardHeader from './CompactMultiLeaderboardHeader';
 import { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
 import { TimelineFilter, SecondaryFiltersBar } from './FilterComponents';
 import ModelComparisonModal from '@/app/components/ui/ModelComparisonModal';
@@ -330,8 +331,6 @@ interface LeaderboardProps {
                 primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
               } else if (task === 'mr-web') {
                 primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
-              } else if (task === 'unit test generation') {
-                primaryScore = parseFloat(String(result['PSC-ALL'] || '0')) || 0;
               } else {
                 // For other tasks, use pass@1
                 primaryScore = parseFloat(String(result['pass@1'] || '0')) || 0;
@@ -626,6 +625,16 @@ interface LeaderboardProps {
                 />
               )}
               
+              {/* Compact Multi-leaderboard header for chart view */}
+              {isMultiLeaderboardTask(currentTask) && viewMode === 'scatter' && (
+                <CompactMultiLeaderboardHeader
+                  currentTask={currentTask}
+                  selectedTab={selectedMultiTab}
+                  onTabChange={handleMultiTabChange}
+                  isDarkMode={isDarkMode}
+                />
+              )}
+              
               {/* Secondary Filters Bar - positioned below header tabs, shown in both table and chart view */}
               <SecondaryFiltersBar
                 currentTask={currentTask}
@@ -670,7 +679,7 @@ interface LeaderboardProps {
               availableLLMJudges={availableLLMJudges}
               viewMode={viewMode}
               setViewMode={setViewMode}
-              isMultiLeaderboard={isMultiLeaderboardTask(currentTask) && viewMode === 'table'}
+              isMultiLeaderboard={isMultiLeaderboardTask(currentTask)}
               selectedMultiTab={selectedMultiTab}
               chartExportRef={chartExportRef}
             />

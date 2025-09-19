@@ -111,14 +111,6 @@ const taskAbilities: Record<TaskType, Ability> = {
     robustness: [],
     privacy: [],
   },
-  'unit test generation': {
-    modality: ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'],
-    knowledge: [],
-    reasoning: [],
-    dataset: ['HackerRank', 'GeeksforGeeks', 'Merged'],
-    robustness: [],
-    privacy: [],
-  },
 };
 
 export default function Home() {

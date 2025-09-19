@@ -1,5 +1,4 @@
 import { ProcessedResult, FilterOptions } from '../types';
-import { canonicalizeModelName } from '../constants';
 
 export function processCodeGeneration(results: ProcessedResult[], filters: FilterOptions): ProcessedResult[] {
   console.log('开始处理代码生成任务:', {
@@ -95,9 +94,9 @@ export function aggregateCodeGenerationResults(results: ProcessedResult[]): Proc
 
   const groupedResults = new Map<string, ProcessedResult[]>();
   
-  // 按模型分组 (using canonical model names)
+  // 按模型分组
   results.forEach(result => {
-    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
+    const key = result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }
@@ -107,7 +106,6 @@ export function aggregateCodeGenerationResults(results: ProcessedResult[]): Proc
   // 计算每个模型的平均值
   const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
     const baseResult = { ...modelResults[0] };
-    baseResult.modelName = modelName; // Use the canonical model name
     
     // 计算标准指标的平均值
     const metrics = ['pass1', 'pass3', 'pass5'] as const;

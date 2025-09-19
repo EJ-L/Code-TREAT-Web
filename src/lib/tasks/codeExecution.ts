@@ -1,5 +1,4 @@
 import { ProcessedResult, FilterOptions } from '../types';
-import { canonicalizeModelName } from '../constants';
 
 export function processCodeExecution(results: ProcessedResult[], filters: FilterOptions): ProcessedResult[] {
   console.log(`Processing ${results.length} code execution results`);
@@ -52,9 +51,9 @@ export function aggregateCodeExecutionResults(results: ProcessedResult[]): Proce
   
   const groupedResults = new Map<string, ProcessedResult[]>();
   
-  // 按模型分组 (using canonical model names)
+  // 按模型分组
   results.forEach(result => {
-    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
+    const key = result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }
@@ -63,14 +62,13 @@ export function aggregateCodeExecutionResults(results: ProcessedResult[]): Proce
   
   // 计算每个模型的平均值
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const aggregatedResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
+  const aggregatedResults = Array.from(groupedResults.entries()).map(([_, modelResults]) => {
     const validResults = {
       executionAccuracy: modelResults.filter(r => r.executionAccuracy !== null),
       pass1: modelResults.filter(r => r.pass1 !== null),
     };
     
     const avgResult = { ...modelResults[0] };
-    avgResult.modelName = modelName; // Use the canonical model name
     
     // 计算平均值
     avgResult.executionAccuracy = validResults.executionAccuracy.length > 0

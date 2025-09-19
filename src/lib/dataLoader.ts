@@ -211,10 +211,6 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     'MPS': typeof entry.metrics['MPS'] === 'number' ? entry.metrics['MPS'] : null,
     'MHC': typeof entry.metrics['MHC'] === 'number' ? entry.metrics['MHC'] : null,
     
-    // Unit Test Generation metrics
-    'Vanilla': typeof entry.metrics['Vanilla'] === 'number' ? entry.metrics['Vanilla'] : null,
-    'PSC-ALL': typeof entry.metrics['PSC-ALL'] === 'number' ? entry.metrics['PSC-ALL'] : null,
-    'MCC': typeof entry.metrics['MCC'] === 'number' ? entry.metrics['MCC'] : null,
     
     // Mr-web metrics
     'MAE': typeof entry.metrics['MAE'] === 'number' ? entry.metrics['MAE'] : null,
@@ -274,7 +270,6 @@ export function getAvailableTasks(): string[] {
     'interaction-2-code',
     'code-robustness',
     'mr-web',
-    'unit test generation'
   ];
 }
 

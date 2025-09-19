@@ -1,5 +1,4 @@
 import { ProcessedResult, FilterOptions, LLMJudgeScores, ResultEntry, Metrics } from '../types';
-import { canonicalizeModelName } from '../constants';
 
 export function processCodeSummarization(results: ResultEntry[], filters: FilterOptions): ProcessedResult[] {
   // 添加调试日志：输入数据
@@ -158,9 +157,9 @@ function calculateLLMJudgeScore(llmJudge: Metrics['LLMJudge'] | undefined, selec
 export function aggregateCodeSummarizationResults(results: ProcessedResult[], _?: string[]): ProcessedResult[] {
   const groupedResults = new Map<string, ProcessedResult[]>();
   
-  // 按模型分组 (using canonical model names)
+  // 按模型分组
   results.forEach(result => {
-    const key = result.modelName ? canonicalizeModelName(result.modelName) : result.modelName;
+    const key = result.modelName;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }

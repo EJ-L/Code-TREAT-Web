@@ -83,6 +83,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   viewMode,
   setViewMode,
   isMultiLeaderboard = false,
+  selectedMultiTab,
   chartExportRef
 }) => {
   // Refs for measuring table dimensions

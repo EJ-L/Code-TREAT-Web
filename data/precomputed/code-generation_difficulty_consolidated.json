@@ -1386,7 +1386,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 16,
+        "rank": 15,
         "easy_pass@1": "80.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2278,7 +2278,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "60.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2616,7 +2616,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2724,7 +2724,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 13,
+        "rank": 12,
         "easy_pass@1": "81.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2736,7 +2736,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "50.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2748,7 +2748,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2832,7 +2832,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2844,7 +2844,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -2856,7 +2856,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3170,7 +3170,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 14,
+        "rank": 13,
         "easy_pass@1": "80.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3508,7 +3508,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "67.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3628,7 +3628,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "51.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3640,7 +3640,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "67.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3724,7 +3724,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "67.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3736,7 +3736,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "67.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -3748,7 +3748,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "67.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -4062,7 +4062,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 20,
+        "rank": 18,
         "easy_pass@1": "76.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -4954,7 +4954,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 19,
+        "rank": 17,
         "easy_pass@1": "76.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5738,7 +5738,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5846,7 +5846,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 22,
+        "rank": 20,
         "easy_pass@1": "69.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5870,7 +5870,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5954,7 +5954,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5966,7 +5966,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -5978,7 +5978,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 20,
         "easy_pass@1": "66.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -6304,7 +6304,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 20,
+        "rank": 19,
         "easy_pass@1": "54.0",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -7184,7 +7184,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 21,
+        "rank": 19,
         "easy_pass@1": "76.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -7642,7 +7642,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 19,
+        "rank": 18,
         "easy_pass@1": "55.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8400,7 +8400,7 @@
         "hard_pass@5": "-"
       }
     },
-    "Llama-3.3-70B-Instruct": {
+    "meta-llama/Llama-3.3-70B-Instruct": {
       "overall": {
         "rank": 19,
         "easy_pass@1": "49.4",
@@ -8414,7 +8414,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "64.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8450,7 +8450,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8522,7 +8522,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "64.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8546,7 +8546,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "64.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8558,7 +8558,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "52.0",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8594,7 +8594,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8630,7 +8630,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "64.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8642,7 +8642,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "64.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8654,7 +8654,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "64.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8738,7 +8738,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8750,7 +8750,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8762,7 +8762,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -8872,7 +8872,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "42.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9004,7 +9004,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "50.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9028,7 +9028,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "42.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9112,7 +9112,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "42.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9124,7 +9124,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "42.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9136,7 +9136,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 21,
         "easy_pass@1": "42.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9330,7 +9330,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "54.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9438,7 +9438,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "54.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9546,7 +9546,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "54.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9558,7 +9558,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "54.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9570,7 +9570,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
+        "rank": 21,
         "easy_pass@1": "54.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9654,7 +9654,7 @@
         "hard_pass@5": "-"
       }
     },
-    "Llama-3.1-70B-Instruct": {
+    "meta-llama/Meta-Llama-3.1-70B-Instruct": {
       "overall": {
         "rank": 22,
         "easy_pass@1": "46.0",
@@ -9680,7 +9680,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "40.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9704,7 +9704,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "53.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9776,7 +9776,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 18,
+        "rank": 16,
         "easy_pass@1": "77.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9812,7 +9812,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "47.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9836,7 +9836,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "40.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9848,7 +9848,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "53.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9920,7 +9920,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "40.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9932,7 +9932,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "40.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9944,7 +9944,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
+        "rank": 22,
         "easy_pass@1": "40.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -9992,7 +9992,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "53.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10004,7 +10004,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "53.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10016,7 +10016,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "53.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10096,459 +10096,13 @@
         "medium_pass@3": "-",
         "medium_pass@5": "-",
         "hard_pass@1": "20.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "Gemma-3-27B-Instruct": {
-      "overall": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 18,
-        "easy_pass@1": "67.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.0",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "37.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 21,
-        "easy_pass@1": "42.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "35.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "32.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 21,
-        "easy_pass@1": "56.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "46.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "41.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 23,
-        "easy_pass@1": "34.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "26.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "26.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python": {
-        "rank": 17,
-        "easy_pass@1": "78.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "54.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "40.1",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Java": {
-        "rank": 18,
-        "easy_pass@1": "57.0",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "31.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python-Java": {
-        "rank": 18,
-        "easy_pass@1": "67.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.0",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "37.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 21,
-        "easy_pass@1": "53.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "45.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "42.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 23,
-        "easy_pass@1": "31.6",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "25.8",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "21.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 21,
-        "easy_pass@1": "42.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "35.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "32.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 21,
-        "easy_pass@1": "56.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "46.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "41.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 23,
-        "easy_pass@1": "34.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "26.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "26.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 18,
-        "easy_pass@1": "67.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.0",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "37.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 18,
-        "easy_pass@1": "67.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.0",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "37.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
-        "easy_pass@1": "67.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.0",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "37.4",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 21,
-        "easy_pass@1": "42.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "35.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "32.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 21,
-        "easy_pass@1": "42.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "35.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "32.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "easy_pass@1": "42.5",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "35.7",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "32.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 21,
-        "easy_pass@1": "56.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "46.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "41.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 21,
-        "easy_pass@1": "56.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "46.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "41.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "easy_pass@1": "56.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "46.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "41.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 23,
-        "easy_pass@1": "34.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "26.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "26.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "34.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "26.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "26.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "34.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "26.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "26.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "45.3",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "36.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.0",
         "hard_pass@3": "-",
         "hard_pass@5": "-"
       }
     },
     "Claude-3.5-Haiku-20241022": {
       "overall": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10560,7 +10114,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10572,7 +10126,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "39.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10584,7 +10138,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10608,7 +10162,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "26.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10620,7 +10174,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10632,7 +10186,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10644,7 +10198,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10656,7 +10210,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10668,7 +10222,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 15,
+        "rank": 14,
         "easy_pass@1": "80.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10680,7 +10234,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "29.0",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10692,7 +10246,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10716,7 +10270,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "25.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10728,7 +10282,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "39.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10752,7 +10306,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "26.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10764,7 +10318,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10776,7 +10330,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10788,7 +10342,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10800,7 +10354,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "54.7",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10812,7 +10366,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "39.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10824,7 +10378,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "39.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10836,7 +10390,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "39.9",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10848,7 +10402,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10860,7 +10414,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10872,7 +10426,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10920,7 +10474,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "26.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10932,7 +10486,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "26.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10944,7 +10498,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "26.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10956,7 +10510,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10968,7 +10522,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10980,7 +10534,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
+        "rank": 23,
         "easy_pass@1": "42.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -10992,455 +10546,9 @@
         "hard_pass@5": "-"
       }
     },
-    "Llama-4-Scout-17B-16E-Instruct": {
+    "meta-llama/Llama-3.1-8B-Instruct": {
       "overall": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 23,
-        "easy_pass@1": "59.9",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "37.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 25,
-        "easy_pass@1": "36.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "28.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 22,
-        "easy_pass@1": "55.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 25,
-        "easy_pass@1": "26.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "16.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "12.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python": {
-        "rank": 12,
-        "easy_pass@1": "81.7",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "52.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "33.0",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Java": {
-        "rank": 23,
-        "easy_pass@1": "38.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "22.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "14.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python-Java": {
-        "rank": 23,
-        "easy_pass@1": "59.9",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "37.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
         "rank": 24,
-        "easy_pass@1": "49.0",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "41.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "36.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 25,
-        "easy_pass@1": "23.2",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "15.1",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "10.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 25,
-        "easy_pass@1": "36.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "28.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 22,
-        "easy_pass@1": "55.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 25,
-        "easy_pass@1": "26.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "16.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "12.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 23,
-        "easy_pass@1": "59.9",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "37.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "59.9",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "37.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "easy_pass@1": "59.9",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "37.6",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 25,
-        "easy_pass@1": "36.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "28.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "36.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "28.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "36.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "28.3",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.5",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 22,
-        "easy_pass@1": "55.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 22,
-        "easy_pass@1": "55.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
-        "easy_pass@1": "55.4",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "43.4",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "34.6",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 25,
-        "easy_pass@1": "26.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "16.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "12.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "26.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "16.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "12.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "26.1",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "16.5",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "12.8",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "easy_pass@1": "40.8",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "29.9",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "23.7",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "Llama-3.1-8B-Instruct": {
-      "overall": {
-        "rank": 26,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11452,7 +10560,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "45.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11464,7 +10572,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "28.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11476,7 +10584,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11488,7 +10596,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "39.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11500,7 +10608,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "24.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11512,7 +10620,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11524,7 +10632,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11536,7 +10644,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11548,7 +10656,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11560,7 +10668,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "57.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11572,7 +10680,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 24,
+        "rank": 22,
         "easy_pass@1": "33.3",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11584,7 +10692,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "45.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11596,7 +10704,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "34.5",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11608,7 +10716,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "21.8",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11620,7 +10728,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "28.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11632,7 +10740,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "39.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11644,7 +10752,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "24.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11656,7 +10764,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11668,7 +10776,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "45.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11680,7 +10788,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "45.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11692,7 +10800,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
+        "rank": 23,
         "easy_pass@1": "45.4",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11704,7 +10812,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "28.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11716,7 +10824,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "28.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11728,7 +10836,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "28.2",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11740,7 +10848,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11752,7 +10860,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11764,7 +10872,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11776,7 +10884,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "39.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11788,7 +10896,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "39.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11800,7 +10908,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "39.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11812,7 +10920,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "24.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11824,7 +10932,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "24.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11836,7 +10944,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "24.1",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11848,7 +10956,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11860,7 +10968,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11872,7 +10980,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 24,
         "easy_pass@1": "31.6",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11886,7 +10994,7 @@
     },
     "google/gemma-3-27b-it": {
       "overall": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11898,7 +11006,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11910,7 +11018,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11922,7 +11030,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11934,7 +11042,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11946,7 +11054,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11958,7 +11066,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11970,7 +11078,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11982,7 +11090,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -11994,7 +11102,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12006,7 +11114,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12018,7 +11126,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12030,7 +11138,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12042,7 +11150,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12054,7 +11162,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12066,7 +11174,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12078,7 +11186,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12090,7 +11198,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12102,7 +11210,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12114,7 +11222,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12126,7 +11234,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12138,7 +11246,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12150,7 +11258,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12162,7 +11270,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12174,7 +11282,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12186,7 +11294,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12198,7 +11306,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12210,7 +11318,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12222,7 +11330,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 27,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -12234,1817 +11342,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 27,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "gpt-4.1-2025-04-14": {
-      "overall": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 28,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "grok-3-mini-beta": {
-      "overall": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 29,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "meta-llama/Llama-4-Scout-17B-16E-Instruct": {
-      "overall": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 30,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "o3-mini": {
-      "overall": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 31,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      }
-    },
-    "o4-mini": {
-      "overall": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 32,
-        "easy_pass@1": "-",
-        "easy_pass@3": "-",
-        "easy_pass@5": "-",
-        "medium_pass@1": "-",
-        "medium_pass@3": "-",
-        "medium_pass@5": "-",
-        "hard_pass@1": "-",
-        "hard_pass@3": "-",
-        "hard_pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 32,
+        "rank": 25,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14058,7 +11356,7 @@
     },
     "Qwen/Qwen2.5-Coder-32B-Instruct": {
       "overall": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14070,7 +11368,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14082,7 +11380,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14094,7 +11392,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14106,7 +11404,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14118,7 +11416,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14130,7 +11428,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14142,7 +11440,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14154,7 +11452,7 @@
         "hard_pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14166,7 +11464,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14178,7 +11476,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14190,7 +11488,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14202,7 +11500,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14214,7 +11512,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14226,7 +11524,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14238,7 +11536,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14250,7 +11548,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14262,7 +11560,7 @@
         "hard_pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14274,7 +11572,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14286,7 +11584,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14298,7 +11596,7 @@
         "hard_pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14310,7 +11608,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14322,7 +11620,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14334,7 +11632,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14346,7 +11644,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14358,7 +11656,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14370,7 +11668,7 @@
         "hard_pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14382,7 +11680,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14394,7 +11692,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",
@@ -14406,7 +11704,7 @@
         "hard_pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 33,
+        "rank": 26,
         "easy_pass@1": "-",
         "easy_pass@3": "-",
         "easy_pass@5": "-",

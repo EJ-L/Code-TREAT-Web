@@ -5,7 +5,6 @@ import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
 import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 import {
   VulnerabilityMetrics,
-  UnitTestGenerationMetrics,
   OverallInfo,
   DataLeakageWarning,
 } from './FilterComponents';
@@ -70,10 +69,6 @@ const FilterPanel: FC<FilterPanelProps> = ({
         <VulnerabilityMetrics isDarkMode={isDarkMode} />
       )}
 
-      {/* Unit test generation metrics */}
-      {filterConditions.shouldShowUnitTestGenerationMetrics(currentTask) && (
-        <UnitTestGenerationMetrics isDarkMode={isDarkMode} />
-      )}
     </div>
   );
 
@@ -95,8 +90,8 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
       {/* Information section */}
       {(filterConditions.shouldShowDataLeakageWarning?.(currentTask) || 
-        filterConditions.shouldShowVulnerabilityMetrics(currentTask) || 
-        filterConditions.shouldShowUnitTestGenerationMetrics(currentTask)) && (
+        filterConditions.shouldShowVulnerabilityMetrics(currentTask)
+        ) && (
         <Card className={`${
           isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'
         } backdrop-blur-sm border ${

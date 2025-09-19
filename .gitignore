@@ -46,3 +46,5 @@ DEBUG_USAGE.md
 data/middle_data/
 new_dataset/
 data/precomputed/middle_data/
+/data/
+data/precomputed/

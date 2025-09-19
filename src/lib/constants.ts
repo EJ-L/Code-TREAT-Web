@@ -106,16 +106,25 @@ export function getModelUrl(modelName: string): string | undefined {
 export const MODEL_NAME_ALIASES: Record<string, string> = {
   // Meta Llama 3.1 70B variants
   'meta-llama_Meta_Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
+  'LLama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
+  'Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
   
   // Meta Llama 3.3 70B variants
   'meta-llama_Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
   'Llama3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
+  'LLama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
+  'Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
   
   // Meta Llama 3.1 8B variants
   'meta-llama_Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
+  'LLama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
+  'Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
   
   // Meta Llama 4 Scout variants
   'meta-llama_Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
+  'LLama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
+  'Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
+  'meta-llama/Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
   
   // Claude 3.5 Sonnet variants
   'Claude-3.5-sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
@@ -123,7 +132,11 @@ export const MODEL_NAME_ALIASES: Record<string, string> = {
   'Claude-3-5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
   
   // Google Gemma 3 27B variants
-  'google_gemma-3-27b-it': 'google/gemma-3-27b-it'
+  'google_gemma-3-27b-it': 'google/gemma-3-27b-it',
+  'Gemma-3-27B-Instruct': 'google/gemma-3-27b-it',
+  
+  // Qwen variants
+  'Qwen/Qwen2.5-Coder-32B-Instrct': 'Qwen/Qwen2.5-Coder-32B-Instruct', // Fix typo
 };
 
 /**

@@ -107,14 +107,6 @@ const taskAbilities = {
     robustness: [],
     privacy: [],
   },
-  'unit code generation': {
-    dataset: ['HackerRank', 'GeeksforGeeks', 'Merged'],
-    modality: ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'],
-    knowledge: [],
-    reasoning: [],
-    robustness: [],
-    privacy: [],
-  },
 };
 
 // Tasks that support difficulty-based results

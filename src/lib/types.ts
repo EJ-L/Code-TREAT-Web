@@ -1,4 +1,4 @@
-export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'interaction-2-code' | 'code-robustness' | 'mr-web' | 'unit test generation';
+export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'interaction-2-code' | 'code-robustness' | 'mr-web';
 
 export type LLMJudgeScores = {
   [judge: string]: number | number[];
@@ -104,10 +104,6 @@ export type ProcessedResult = {
   'MAE'?: number | null;
   'NEMD'?: number | null;
   'RER'?: number | null;
-  // unit test generation metrics
-  'Vanilla'?: number | null;
-  'PSC-ALL'?: number | null;
-  'MCC'?: number | null;
   // Allow any additional string indices for dynamic properties
   [key: string]: string | number | null | undefined;
 };

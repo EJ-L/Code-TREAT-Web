@@ -22,7 +22,6 @@ const TASK_DIRECTORIES: Record<string, string> = {
   'interaction-2-code': 'data/interaction-2-code',
   'code-robustness': 'data/code-robustness',
   'mr-web': 'data/mr-web',
-  'unit test generation': 'data/unit-code-generation'
 };
 
 /**

@@ -395,7 +395,6 @@ export const DataLeakageWarning: FC<DataLeakageWarningProps> = ({ taskType, isDa
       'code-web': '2024-09-15',
       'interaction-2-code': '2024-11-03',
       'mr-web': '2024-12-13',
-      'unit test generation': '2024-01-01',
       'overall': '2021-07-07'
     };
     
@@ -491,45 +490,6 @@ export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode
   );
 };
 
-// Unit Test Generation Metrics component
-interface UnitTestGenerationMetricsProps {
-  isDarkMode: boolean;
-}
-
-export const UnitTestGenerationMetrics: FC<UnitTestGenerationMetricsProps> = ({ isDarkMode }) => {
-  return (
-    <div className={`mt-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-      {/* Title */}
-      <div className={`text-xl md:text-2xl font-bold text-center mb-8 ${isDarkMode ? 'text-blue-200' : 'text-blue-600'}`}>
-        Unit Test Generation Metrics
-      </div>
-      
-      {/* Metrics explanation */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <div className="flex flex-col gap-2">
-            <span className={`font-bold text-base md:text-lg ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>PSC-ALL:</span>
-            <span className="text-sm md:text-base leading-relaxed">Aggregated Program Structure-Consistent Perturbation</span>
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className={`font-bold text-base md:text-lg ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MCC:</span>
-            <span className="text-sm md:text-base leading-relaxed">Contextual-Level Misleading Code Comments</span>
-          </div>
-        </div>
-        <div className="space-y-4">
-          <div className="flex flex-col gap-2">
-            <span className={`font-bold text-base md:text-lg ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MPS:</span>
-            <span className="text-sm md:text-base leading-relaxed">Contextual-Level Misleading Print Statements</span>
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className={`font-bold text-base md:text-lg ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MHC:</span>
-            <span className="text-sm md:text-base leading-relaxed">Reasoning-Level Misleading Hint Comments</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Helper function to calculate task-specific date bounds with buffers
 function calculateTaskSpecificDateBounds(results: ProcessedResult[]): { min: Date; max: Date } {

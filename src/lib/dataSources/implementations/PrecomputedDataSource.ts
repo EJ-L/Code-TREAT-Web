@@ -7,6 +7,7 @@ import {
 import { BaseDataSource } from '../base/BaseDataSource';
 import { ResultEntry, TaskType, FilterOptions, ProcessedResult } from '../../types';
 import { debug } from '../../debug';
+import { canonicalizeModelName } from '../../constants';
 
 /**
  * Interface for precomputed data structure
@@ -42,12 +43,6 @@ interface PrecomputedResult {
 export class PrecomputedDataSource extends BaseDataSource implements IPrecomputedDataSource {
   private precomputedCache = new Map<string, PrecomputedData>();
   
-  /**
-   * Clear all cached precomputed data (useful after data renewal)
-   */
-  clearCache(): void {
-    this.precomputedCache.clear();
-  }
 
   constructor() {
     const metadata: DataSourceMetadata = {
@@ -64,7 +59,6 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
         'interaction-2-code',
         'code-robustness',
         'mr-web',
-        'unit test generation'
       ] as TaskType[],
       cacheable: true,
       priority: 3 // Higher priority than filesystem
@@ -292,23 +286,34 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       mergedData.data[modelName] = { ...modelData };
     }
 
-    // Add difficulty metrics to existing models
+    // Add difficulty metrics to existing models using canonical name matching
     if (difficultyData) {
-      for (const [modelName, modelData] of Object.entries(difficultyData.data)) {
-        if (mergedData.data[modelName]) {
-          // Merge difficulty metrics into existing model data
+      // Create a mapping of canonical names to regular data model names
+      const canonicalToRegularMap = new Map<string, string>();
+      for (const modelName of Object.keys(regularData!.data)) {
+        const canonical = canonicalizeModelName(modelName);
+        canonicalToRegularMap.set(canonical, modelName);
+      }
+
+      for (const [difficultyModelName, modelData] of Object.entries(difficultyData.data)) {
+        const canonicalDifficultyName = canonicalizeModelName(difficultyModelName);
+        const matchingRegularModelName = canonicalToRegularMap.get(canonicalDifficultyName);
+        
+        if (matchingRegularModelName && mergedData.data[matchingRegularModelName]) {
+          // Merge difficulty metrics into existing model data using the regular model name
           for (const [combination, combinationData] of Object.entries(modelData)) {
-            if (mergedData.data[modelName][combination]) {
+            if (mergedData.data[matchingRegularModelName][combination]) {
               // Add difficulty-specific metrics to the existing combination
-              Object.assign(mergedData.data[modelName][combination], combinationData);
+              Object.assign(mergedData.data[matchingRegularModelName][combination], combinationData);
             } else {
               // If combination doesn't exist in regular data, add it
-              mergedData.data[modelName][combination] = { ...combinationData };
+              mergedData.data[matchingRegularModelName][combination] = { ...combinationData };
             }
           }
         } else {
           // If model doesn't exist in regular data, add it with difficulty data
-          mergedData.data[modelName] = { ...modelData };
+          // Use the original difficulty model name
+          mergedData.data[difficultyModelName] = { ...modelData };
         }
       }
     }
@@ -528,10 +533,6 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       }
     }
 
-    // Special processing for unit test generation to extract aggregate metrics
-    if (task === 'unit test generation') {
-      this.aggregateUnitTestMetrics(metrics);
-    }
 
     // Ensure we have a valid model name
     const modelName = result?.model || 'unknown';
@@ -548,38 +549,6 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     };
   }
 
-  private aggregateUnitTestMetrics(metrics: Record<string, number | string | undefined>): void {
-    // Unit test generation data has dataset-specific metrics like:
-    // HackerRank_Vanilla, HackerRank_PSC-ALL, GeeksforGeeks_Vanilla, etc.
-    // We need to extract the core metrics: Vanilla, PSC-ALL, MCC, MPS, MHC
-    
-    const metricTypes = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'];
-    const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
-    
-    for (const metricType of metricTypes) {
-      const values: number[] = [];
-      
-      // Collect values from all datasets for this metric type
-      for (const dataset of datasets) {
-        const key = `${dataset}_${metricType}`;
-        const value = metrics[key];
-        
-        if (typeof value === 'number' && !isNaN(value)) {
-          values.push(value);
-        } else if (typeof value === 'string' && value !== '-' && !isNaN(parseFloat(value))) {
-          values.push(parseFloat(value));
-        }
-      }
-      
-      // Calculate average if we have values
-      if (values.length > 0) {
-        const average = values.reduce((sum, val) => sum + val, 0) / values.length;
-        metrics[metricType] = average;
-      } else {
-        metrics[metricType] = '-';
-      }
-    }
-  }
 
   /**
    * Convert ResultEntry objects to the format expected by the Leaderboard component

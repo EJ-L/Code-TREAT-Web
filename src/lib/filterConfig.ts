@@ -152,8 +152,6 @@ export const filterConditions = {
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',
   
-  shouldShowUnitTestGenerationMetrics: (task: TaskType) =>
-    task === 'unit test generation',
   
   shouldShowOverallInfo: (task: TaskType) =>
     task === 'overall',

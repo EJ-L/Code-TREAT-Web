@@ -102,7 +102,6 @@ const TableHeader: FC<TableHeaderProps> = ({
           'VAN', 'ALL', 'MDC', 'MPS', 'MHC',
           // MR-Web metrics
           'MAE', 'NEMD', 'RER',
-          // Unit Test Generation metrics
           'Vanilla', 'PSC-ALL', 'MCC'
         ];
         if (sortableColumns.includes(header.key)) {

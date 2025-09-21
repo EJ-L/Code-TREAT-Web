@@ -107,7 +107,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     modality: [],
     knowledge: [],
     reasoning: [],
-    dataset: ['CRUXEval', 'LiveCodeBench (CE)', 'Merge-CruxEval+CE', 'HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'],
+    dataset: ['CRUXEval', 'LiveCodeBench (CE)', 'Merge-CruxEval+CE', 'HackerRank', 'GeeksforGeeks', 'Merge'],
     robustness: [],
     privacy: [],
   },

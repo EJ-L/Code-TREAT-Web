@@ -86,6 +86,8 @@ type ScatterChartProps = {
   currentTask: string;
   // Optional props for showing leaderboard timeline range as reference lines
   leaderboardTimelineRange?: { start: Date; end: Date } | null;
+  // Multi-leaderboard tab selection for code-robustness task
+  selectedMultiTab?: string;
 };
 
 export interface ScatterChartRef {
@@ -157,7 +159,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   onMetricChange, 
   isDarkMode,
   currentTask,
-  leaderboardTimelineRange
+  leaderboardTimelineRange,
+  selectedMultiTab
 }, ref) => {
   const [hoveredPoint, setHoveredPoint] = useState<ScatterDataPoint | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -169,6 +172,9 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   // Filter states for model types
   const [showCoTModels, setShowCoTModels] = useState(true);
   const [showRegularModels, setShowRegularModels] = useState(true);
+  
+  // Check if CoT filtering is enabled (only for specific datasets)
+  const cotFilterEnabled = currentTask === 'code-robustness' && selectedMultiTab && ['All', 'CRUXEval', 'LiveCodeBench (CE)'].includes(selectedMultiTab);
   
   // Zoom and pan state
   const [zoomState, setZoomState] = useState<ZoomState | null>(null);
@@ -837,8 +843,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
         ))}
       </div>
 
-      {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard - Responsive */}
-      {currentTask === 'code-robustness' && (
+      {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard with specific datasets - Responsive */}
+      {currentTask === 'code-robustness' && selectedMultiTab && ['All', 'CRUXEval', 'LiveCodeBench (CE)'].includes(selectedMultiTab) && (
         <div className="mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
           <button
             onClick={() => setShowCoTModels(!showCoTModels)}
@@ -1147,10 +1153,11 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
                  data={filteredData} 
                  shape={(props: { payload?: ScatterDataPoint; cx?: number; cy?: number }) => {
                                      const { payload, cx, cy } = props;
+                  
                   const color = payload?.hasDataLeakage 
                     ? (isDarkMode ? "#f472b6" : "#ec4899") // Pink for data leakage
-                    : payload?.isCoTModel 
-                      ? (isDarkMode ? "#22c55e" : "#16a34a") // Green for CoT models
+                    : (cotFilterEnabled && payload?.isCoTModel)
+                      ? (isDarkMode ? "#22c55e" : "#16a34a") // Green for CoT models (only when filter enabled)
                       : (isDarkMode ? "#60a5fa" : "#3b82f6"); // Blue for normal
                    
                    // Check if this point is being hovered
@@ -1165,8 +1172,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
                        fill={color}
                        stroke={payload?.hasDataLeakage 
                          ? (isDarkMode ? "#f9a8d4" : "#be185d")
-                         : payload?.isCoTModel 
-                           ? (isDarkMode ? "#4ade80" : "#15803d") // Green stroke for CoT models
+                         : (cotFilterEnabled && payload?.isCoTModel)
+                           ? (isDarkMode ? "#4ade80" : "#15803d") // Green stroke for CoT models (only when filter enabled)
                            : (isDarkMode ? "#93c5fd" : "#1d4ed8") // Blue stroke for normal
                        }
                        fillOpacity={isHovered ? 0.9 : (hoveredPoint ? 0.3 : 0.7)}
@@ -1208,13 +1215,13 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
                          textAnchor="middle"
                          fontSize={isHovered ? "14px" : "12px"} // Larger font for hovered
                          fontWeight="bold"
-                         fill={
-                           hasLeakage 
-                             ? (isDarkMode ? '#f472b6' : '#ec4899') // Pink for data leakage
-                             : isCotModel 
-                               ? (isDarkMode ? '#22c55e' : '#16a34a') // Green for CoT models
-                               : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
-                         }
+                        fill={
+                          hasLeakage 
+                            ? (isDarkMode ? '#f472b6' : '#ec4899') // Pink for data leakage
+                            : (cotFilterEnabled && isCotModel)
+                              ? (isDarkMode ? '#22c55e' : '#16a34a') // Green for CoT models (only when filter enabled)
+                              : (isDarkMode ? '#e2e8f0' : '#475569') // Normal color
+                        }
                          opacity={hoveredPoint && !isHovered ? 0.3 : 1}
                          style={{
                            filter: hoveredPoint && !isHovered ? 'blur(0.5px)' : 'none',

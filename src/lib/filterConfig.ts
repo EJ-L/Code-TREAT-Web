@@ -163,12 +163,13 @@ export const filterConditions = {
       return false;
     }
     
-    // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or Merge-HR+GFG
+    // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or Merge
     return selectedDatasets.some(dataset => {
       const lowerDataset = dataset.toLowerCase();
       return lowerDataset.includes('hackerrank') || 
              lowerDataset.includes('geeksforgeeks') || 
-             (lowerDataset === 'hr') || // Handle extracted "hr" from "Merge-HR+GFG"
+             lowerDataset === 'merge' ||
+             (lowerDataset === 'hr') || // Handle extracted "hr" from legacy Merge-HR+GFG 
              (lowerDataset === 'gfg'); // Handle extracted "gfg" from GeeksforGeeks
     });
   },

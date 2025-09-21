@@ -236,10 +236,21 @@ interface LeaderboardProps {
         // Map the filter key to the correct ability field
         const abilityKey = filterKey as keyof Ability;
         
+        // Special mapping for code-robustness: "Merge" tab should filter by "Merge-HR+GFG" dataset
+        let filterValue = tab;
+        if (currentTask === 'code-robustness' && tab === 'Merge') {
+          filterValue = 'Merge-HR+GFG';
+        }
+        
         setSelectedAbilities({
-          [abilityKey]: [tab]
+          [abilityKey]: [filterValue]
         });
       }
+    } else if (tab === 'All' && currentTask === 'code-robustness') {
+      // Special case: For code-robustness "All" tab, show Merge-CruxEval+CE data
+      setSelectedAbilities({
+        dataset: ['Merge-CruxEval+CE']
+      });
     }
   }, [currentTask]);
 

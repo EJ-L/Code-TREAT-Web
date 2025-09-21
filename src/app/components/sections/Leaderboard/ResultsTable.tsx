@@ -130,7 +130,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
     if (availableMetrics.length > 0 && !currentScatterMetric) {
       // For code-robustness with new datasets, prefer MPS as default
       if (currentTask === 'code-robustness' && selectedMultiTab && 
-          ['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'].includes(selectedMultiTab)) {
+          ['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
         const hasMPS = availableMetrics.includes('MPS');
         setCurrentScatterMetric(hasMPS ? 'MPS' : availableMetrics[0]);
       } else {
@@ -142,7 +142,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   // Reset metric when switching to new datasets in code-robustness
   useEffect(() => {
     if (currentTask === 'code-robustness' && selectedMultiTab && availableMetrics.length > 0) {
-      if (['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'].includes(selectedMultiTab)) {
+      if (['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
         // Switch to MPS for new datasets if available and not already selected
         const hasMPS = availableMetrics.includes('MPS');
         if (hasMPS && currentScatterMetric !== 'MPS') {
@@ -602,6 +602,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
               isDarkMode={isDarkMode}
               currentTask={currentTask}
               leaderboardTimelineRange={timelineRange}
+              selectedMultiTab={selectedMultiTab}
             />
           </div>
         )}

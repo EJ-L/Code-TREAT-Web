@@ -39,8 +39,8 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
   // Get task-specific tabs per page
   const getTabsPerPage = () => {
     if (isSmallScreen) return 3;
-    // For code-robustness, use 4 tabs per page to better distribute
-    if (currentTask === 'code-robustness') return 4;
+    // For code-robustness, use 3 tabs per page to show All, CRUXEval, LiveCodeBench on first page
+    if (currentTask === 'code-robustness') return 3;
     return 5; // Default for other tasks
   };
 

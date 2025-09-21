@@ -506,7 +506,8 @@ function aggregateData(data, task, showByDifficulty) {
         const dataset = e.dataset || '';
         return dataset.includes('HackerRank') || 
                dataset.includes('GeeksforGeeks') || 
-               dataset.includes('Merge-HR+GFG');
+               dataset.includes('Merge-HR+GFG') ||
+               dataset.includes('Merge');
       });
       
       if (hasCoTDatasets && !hasHRGFGDatasets) {

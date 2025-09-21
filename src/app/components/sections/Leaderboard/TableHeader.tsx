@@ -99,7 +99,7 @@ const TableHeader: FC<TableHeaderProps> = ({
           // Interaction-2-code metrics
           'SSIM', 'Text', 'Position', 'Implement Rate',
           // Code-robustness metrics
-          'VAN', 'ALL', 'MDC', 'MPS', 'MHC',
+          'VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Average',
           // MR-Web metrics
           'MAE', 'NEMD', 'RER',
           'Vanilla', 'PSC-ALL', 'MCC'

@@ -647,7 +647,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
   'code-robustness': {
     extractedFilter: 'dataset',
     overallTab: 'All',
-    tabs: ['All', 'CRUXEval', 'LiveCodeBench (CE)', 'Merge-CruxEval+CE', 'HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG']
+    tabs: ['All', 'CRUXEval', 'LiveCodeBench (CE)', 'HackerRank', 'GeeksforGeeks', 'Merge']
   },
 };
 

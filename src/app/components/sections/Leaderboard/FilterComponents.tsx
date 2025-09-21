@@ -490,6 +490,47 @@ export const VulnerabilityMetrics: FC<VulnerabilityMetricsProps> = ({ isDarkMode
   );
 };
 
+interface CodeRobustnessMetricsProps {
+  isDarkMode: boolean;
+}
+
+export const CodeRobustnessMetrics: FC<CodeRobustnessMetricsProps> = ({ isDarkMode }) => {
+  return (
+    <div className={`mt-4 space-y-3 text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+      {/* Title */}
+      <div className="text-center mb-4">
+        <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+          Code-Robustness Metrics
+        </h3>
+      </div>
+      
+      {/* Metrics explanation */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>PSC-ALL:</span>
+            <span>Aggregated Program Structure-Consistent Perturbation</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MPS:</span>
+            <span>Contextual-Level Misleading Print Statements</span>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MCC:</span>
+            <span>Contextual-Level Misleading Code Comments</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>MHC:</span>
+            <span>Reasoning-Level Misleading Hint Comments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 // Helper function to calculate task-specific date bounds with buffers
 function calculateTaskSpecificDateBounds(results: ProcessedResult[]): { min: Date; max: Date } {

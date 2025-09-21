@@ -153,6 +153,26 @@ export const filterConditions = {
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',
   
+  shouldShowCodeRobustnessMetrics: (task: TaskType, selectedDatasets?: string[]) => {
+    if (task !== 'code-robustness') {
+      return false;
+    }
+    
+    // Show metrics only when specific datasets are selected
+    if (!selectedDatasets || selectedDatasets.length === 0) {
+      return false;
+    }
+    
+    // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or Merge-HR+GFG
+    return selectedDatasets.some(dataset => {
+      const lowerDataset = dataset.toLowerCase();
+      return lowerDataset.includes('hackerrank') || 
+             lowerDataset.includes('geeksforgeeks') || 
+             (lowerDataset === 'hr') || // Handle extracted "hr" from "Merge-HR+GFG"
+             (lowerDataset === 'gfg'); // Handle extracted "gfg" from GeeksforGeeks
+    });
+  },
+  
   
   shouldShowOverallInfo: (task: TaskType) =>
     task === 'overall',

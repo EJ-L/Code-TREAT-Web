@@ -5,6 +5,7 @@ import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
 import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 import {
   VulnerabilityMetrics,
+  CodeRobustnessMetrics,
   OverallInfo,
   DataLeakageWarning,
 } from './FilterComponents';
@@ -99,6 +100,28 @@ const FilterPanel: FC<FilterPanelProps> = ({
         <VulnerabilityMetrics isDarkMode={isDarkMode} />
       )}
 
+      {/* Code robustness metrics */}
+      {(() => {
+        let datasetsToCheck = selectedAbilities.dataset || [];
+        
+        if (currentTask === 'code-robustness') {
+          if (results.length > 0) {
+            // If we have results, use the actual datasets from the results
+            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+            // If no results yet but dataset filter is selected, use the selected datasets
+            datasetsToCheck = selectedAbilities.dataset;
+          } else {
+            // No results and no dataset filter selected
+            return false;
+          }
+        }
+        
+        return filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
+      })() && (
+        <CodeRobustnessMetrics isDarkMode={isDarkMode} />
+      )}
+
     </div>
   );
 
@@ -142,7 +165,22 @@ const FilterPanel: FC<FilterPanelProps> = ({
           }
         }
         
-        return shouldShowDataLeakage || shouldShowVulnerabilityMetrics;
+        // Check if we should show code robustness metrics
+        let shouldShowCodeRobustnessMetrics = false;
+        if (currentTask === 'code-robustness') {
+          let datasetsToCheck = selectedAbilities.dataset || [];
+          if (results.length > 0) {
+            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+            datasetsToCheck = selectedAbilities.dataset;
+          }
+          
+          if (datasetsToCheck.length > 0) {
+            shouldShowCodeRobustnessMetrics = filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
+          }
+        }
+        
+        return shouldShowDataLeakage || shouldShowVulnerabilityMetrics || shouldShowCodeRobustnessMetrics;
       })() && (
         <Card className={`${
           isDarkMode ? 'bg-[#1a2333]' : 'bg-white/90'

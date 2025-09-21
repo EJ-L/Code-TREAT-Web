@@ -123,7 +123,7 @@ const TableHeader: FC<TableHeaderProps> = ({
                   currentTask === 'vulnerability detection' ? 350 :
                   300
                 ))}px`,
-                minWidth: header.label.length * 10 + 'px'
+                minWidth: Math.max(header.label.length * 12, 60) + 'px'
               }}
               {...(header.description ? { title: header.description } : {})}
             >
@@ -141,7 +141,7 @@ const TableHeader: FC<TableHeaderProps> = ({
                 300
               ))}px`,
               width: 'auto',
-              minWidth: header.label.length * 10 + 'px'
+              minWidth: Math.max(header.label.length * 12, 60) + 'px'
             }}
             {...(header.description ? { title: header.description } : {})}
           >

@@ -101,8 +101,11 @@ export function getNumericStyles(key: string): string {
 }
 
 export function getContentWidth(columnWidth: number): number {
-  // Be less aggressive - only subtract minimal padding
-  return Math.max(columnWidth - 24, 20);
+  // More conservative padding reduction that accounts for:
+  // - Responsive padding (px-2 sm:px-4 lg:px-6)
+  // - Sort indicator space (20px minimum)
+  // - Some buffer for text overflow prevention
+  return Math.max(columnWidth - 16, 30);
 }
 
 // Sticky column helpers

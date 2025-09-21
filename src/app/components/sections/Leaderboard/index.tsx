@@ -480,14 +480,27 @@ interface LeaderboardProps {
     e.preventDefault();
     setResizingColumn(key);
     
-    const startX = e.clientX;
-    const startWidth = columnWidths[key] || 100;
+    let currentX = e.clientX;
+    let currentWidth = columnWidths[key] || 100;
     const minWidth = getMinColumnWidthHelper(key);
     const maxWidth = getMaxColumnWidthHelper(key);
 
     const handleMouseMove = (moveEvent: MouseEvent) => {
-      const deltaX = moveEvent.clientX - startX;
-      const newWidth = Math.min(maxWidth, Math.max(minWidth, startWidth + deltaX));
+      const deltaX = moveEvent.clientX - currentX;
+      const proposedWidth = currentWidth + deltaX;
+      
+      // Calculate the actual new width within bounds
+      const newWidth = Math.min(maxWidth, Math.max(minWidth, proposedWidth));
+      
+      // Only update reference point if we're not at the boundary
+      // This prevents the "dead zone" when dragging past min/max limits
+      if (newWidth === proposedWidth) {
+        // Width changed as expected, update reference points
+        currentX = moveEvent.clientX;
+        currentWidth = newWidth;
+      }
+      // If we hit a boundary (newWidth !== proposedWidth), keep current reference points
+      // so that immediate reverse movement will be responsive
       
       setColumnWidths(prev => ({
           ...prev,

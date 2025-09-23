@@ -64,7 +64,7 @@ const MAIN_FILTERS: FilterConfig[] = [
 function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Ability>): FilterConfig[] {
   if (task === 'overall' || !abilities[task]) return [];
   
-  const excludedKeys = ['dataset', 'framework', 'reasoning'];
+  const excludedKeys = ['dataset', 'framework', 'reasoning', 'knowledge'];
   const dynamicFilters: FilterConfig[] = [];
   
   Object.entries(abilities[task]).forEach(([key, values]) => {
@@ -163,12 +163,18 @@ export const filterConditions = {
       return false;
     }
     
+    // Don't show metrics for the "All" result (Merge-CruxEval+CE)
+    if (selectedDatasets.includes('Merge-CruxEval+CE')) {
+      return false;
+    }
+    
     // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or Merge
     return selectedDatasets.some(dataset => {
       const lowerDataset = dataset.toLowerCase();
       return lowerDataset.includes('hackerrank') || 
              lowerDataset.includes('geeksforgeeks') || 
              lowerDataset === 'merge' ||
+             lowerDataset.includes('merge-hr+gfg') || // Handle new Merge-HR+GFG format
              (lowerDataset === 'hr') || // Handle extracted "hr" from legacy Merge-HR+GFG 
              (lowerDataset === 'gfg'); // Handle extracted "gfg" from GeeksforGeeks
     });

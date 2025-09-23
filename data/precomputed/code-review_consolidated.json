@@ -3607,7 +3607,7 @@
         "LLM Judge": "29.1"
       }
     },
-    "Claude-3-5-Haiku-20241022": {
+    "Claude-3.5-Haiku-20241022": {
       "overall": {
         "rank": 13,
         "LLM Judge": "30.6"
@@ -5671,7 +5671,7 @@
         "LLM Judge": "28.9"
       }
     },
-    "Claude-3-5-Sonnet-20241022": {
+    "Claude-3.5-Sonnet-20241022": {
       "overall": {
         "rank": 21,
         "LLM Judge": "30.0"

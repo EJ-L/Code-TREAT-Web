@@ -117,7 +117,7 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
   // Group by model name (using original model names - no canonicalization)
   const groupedResults = new Map<string, ProcessedResult[]>();
   allTasksResults.forEach(result => {
-    const key = result.modelName || result.model;
+    const key = result.modelName || result.model || 'Unknown';
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }
@@ -125,6 +125,7 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
   });
 
   // Models to exclude from overall leaderboard
+  /*
   const excludedModels = [
     'Claude-Sonnet-4',
     'Qwen3-235B-A22B',
@@ -136,7 +137,10 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
     'Qwen2.5-32B-Instruct',
     'Gemma-3-27B-it'
   ];
+  */
 
+  const excludedModels = ['N/A'];
+  
   // Calculate aggregated metrics for each model with difficulty-based grouping
   const finalResults = Array.from(groupedResults.entries())
     .filter(([modelName]) => !excludedModels.includes(modelName))

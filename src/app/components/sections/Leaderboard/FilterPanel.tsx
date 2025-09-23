@@ -33,6 +33,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
   availableLLMJudges,
   isDarkMode,
   isMultiLeaderboard = false,
+  selectedMultiTab,
   results = []
 }) => {
   // Early return for interaction-2-code task
@@ -68,28 +69,19 @@ const FilterPanel: FC<FilterPanelProps> = ({
         let datasetsToCheck = selectedAbilities.dataset || [];
         
         if (currentTask === 'code translation') {
-          console.log('DEBUG FilterPanel: currentTask is code translation');
-          console.log('DEBUG FilterPanel: results.length:', results.length);
-          console.log('DEBUG FilterPanel: selectedAbilities:', selectedAbilities);
-          console.log('DEBUG FilterPanel: selectedAbilities.dataset:', selectedAbilities.dataset);
-          
           if (results.length > 0) {
             // If we have results, use the actual datasets from the results
             datasetsToCheck = [...new Set(results.map(result => result.dataset))];
-            console.log('DEBUG FilterPanel: datasetsToCheck from results:', datasetsToCheck);
           } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
             // If no results yet but dataset filter is selected, use the selected datasets
             datasetsToCheck = selectedAbilities.dataset;
-            console.log('DEBUG FilterPanel: Using selectedAbilities.dataset:', datasetsToCheck);
           } else {
             // No results and no dataset filter selected - return early to avoid showing warning
-            console.log('DEBUG FilterPanel: No results and no dataset selected, returning false');
             return false;
           }
         }
         
         const shouldShow = filterConditions.shouldShowDataLeakageWarning && filterConditions.shouldShowDataLeakageWarning(currentTask, datasetsToCheck);
-        console.log('DEBUG FilterPanel: shouldShow data leakage warning:', shouldShow, 'for task:', currentTask, 'datasets:', datasetsToCheck);
         return shouldShow;
       })() && (
         <DataLeakageWarning taskType={currentTask} isDarkMode={isDarkMode} />
@@ -105,6 +97,11 @@ const FilterPanel: FC<FilterPanelProps> = ({
         let datasetsToCheck = selectedAbilities.dataset || [];
         
         if (currentTask === 'code-robustness') {
+          // For multi-leaderboard, check if we're on the "All" tab which should not show metrics
+          if (isMultiLeaderboard && selectedMultiTab === 'All') {
+            return false;
+          }
+          
           if (results.length > 0) {
             // If we have results, use the actual datasets from the results
             datasetsToCheck = [...new Set(results.map(result => result.dataset))];
@@ -168,15 +165,20 @@ const FilterPanel: FC<FilterPanelProps> = ({
         // Check if we should show code robustness metrics
         let shouldShowCodeRobustnessMetrics = false;
         if (currentTask === 'code-robustness') {
-          let datasetsToCheck = selectedAbilities.dataset || [];
-          if (results.length > 0) {
-            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
-          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
-            datasetsToCheck = selectedAbilities.dataset;
-          }
-          
-          if (datasetsToCheck.length > 0) {
-            shouldShowCodeRobustnessMetrics = filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
+          // For multi-leaderboard, check if we're on the "All" tab which should not show metrics
+          if (isMultiLeaderboard && selectedMultiTab === 'All') {
+            shouldShowCodeRobustnessMetrics = false;
+          } else {
+            let datasetsToCheck = selectedAbilities.dataset || [];
+            if (results.length > 0) {
+              datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+            } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+              datasetsToCheck = selectedAbilities.dataset;
+            }
+            
+            if (datasetsToCheck.length > 0) {
+              shouldShowCodeRobustnessMetrics = filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
+            }
           }
         }
         

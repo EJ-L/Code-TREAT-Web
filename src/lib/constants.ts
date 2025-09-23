@@ -174,6 +174,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
 
   // Grok Models
   'Grok-3-Mini (High)': '2025-02-17',
+  'Grok-3-Mini-Beta (High)': '2025-02-17',
 
   // DeepSeek Models
   'DeepSeek-R1': '2025-01-20',
@@ -181,7 +182,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'DeepSeek-V3': '2024-12-26',
 
   // Gemini Models
-  'Gemma-3-27B-it': '2025-03-12',
+  'Gemma-3-27b-it': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.5-Pro': '2024-05-06',
   'Gemini-2.5-Flash': '2025-08-26',

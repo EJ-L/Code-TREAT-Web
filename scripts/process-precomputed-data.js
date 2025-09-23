@@ -81,7 +81,8 @@ function loadTaskData(task) {
         if (file.endsWith('.jsonl')) {
           const data = readJSONL(filePath);
           allData.push(...data);
-        } else if (file.endsWith('.json')) {
+        } else if (file.endsWith('.json') && !file.includes('backup')) {
+          // Skip backup files to avoid duplicate model entries
           const data = readJSON(filePath);
           // Handle special case for vulnerability detection
           if (task === 'vulnerability detection' && typeof data === 'object' && !Array.isArray(data)) {
@@ -431,8 +432,7 @@ function aggregateData(data, task, showByDifficulty) {
         const dataset = e.dataset || '';
         return dataset.includes('HackerRank') || 
                dataset.includes('GeeksforGeeks') || 
-               dataset.includes('Merge-HR+GFG') ||
-               dataset.includes('Merge');
+               dataset.includes('Merge-HR+GFG');
       });
       
       if (hasCoTDatasets && !hasHRGFGDatasets) {

@@ -91,6 +91,13 @@ interface LeaderboardProps {
       const config = getMultiLeaderboardConfig(initialTask);
       if (config) {
         setSelectedMultiTab(config.overallTab);
+        
+        // Special case: For code-robustness "All" tab, apply specialized filter on initial load
+        if (initialTask === 'code-robustness' && config.overallTab === 'All') {
+          setSelectedAbilities({
+            dataset: ['Merge-CruxEval+CE']
+          });
+        }
       }
       
       // Reset viewMode to table if switching to a task that doesn't support chart view
@@ -115,6 +122,18 @@ interface LeaderboardProps {
     setSortConfig(getDefaultSortConfig(task));
     setSelectedAbilities({});
 
+    // Reset multi-leaderboard tab when task changes
+    const config = getMultiLeaderboardConfig(task);
+    if (config) {
+      setSelectedMultiTab(config.overallTab);
+      
+      // Special case: For code-robustness "All" tab, apply specialized filter
+      if (task === 'code-robustness' && config.overallTab === 'All') {
+        setSelectedAbilities({
+          dataset: ['Merge-CruxEval+CE']
+        });
+      }
+    }
     
     // Reset viewMode to table if switching to a task that doesn't support chart view
     if (!supportsChartView(task)) {

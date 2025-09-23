@@ -15,7 +15,7 @@ const ALLOWED_DIRECTORIES = [
   'data/input_prediction',
   'data/output_prediction',
   'data/vulnerability-detection',
-  'data/code-web',
+  'data/multi-modality',
   'data/interaction-2-code',
   'data/code-robustness',
   'data/mr-web',

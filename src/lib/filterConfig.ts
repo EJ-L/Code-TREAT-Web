@@ -119,8 +119,8 @@ function getFilterLabel(key: keyof Ability, task: TaskType): string {
 
 function getDisplayText(value: string, key: keyof Ability, task: TaskType): string {
   
-  // Transform Code-Web dataset display names
-  if (task === 'code-web' && key === 'dataset') {
+  // Transform Multi-Modality dataset display names
+  if (task === 'multi-modality' && key === 'dataset') {
     const displayMap: Record<string, string> = {
       'Design Generation': 'UI Code Generation',
       'Design Edit': 'UI Code Edit',
@@ -151,7 +151,7 @@ export const filterConditions = {
     false,
   
   shouldShowDataNote: (task: TaskType) =>
-    !['code-web', 'overall', 'vulnerability detection', 'unit test generation'].includes(task),
+    !['multi-modality', 'overall', 'vulnerability detection', 'unit test generation'].includes(task),
   
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',

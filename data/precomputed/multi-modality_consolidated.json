@@ -1,0 +1,2842 @@
+{
+  "task": "multi-modality",
+  "filterMappings": {
+    "overall": {
+      "dataset": [],
+      "framework": []
+    },
+    "dataset-UICodeGeneration": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": []
+    },
+    "dataset-UICodeEdit": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": []
+    },
+    "dataset-UICodeGeneration-UICodeEdit": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": []
+    },
+    "dataset-UICodeRepair": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": []
+    },
+    "dataset-UICodeGeneration-UICodeRepair": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": []
+    },
+    "dataset-UICodeEdit-UICodeRepair": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": []
+    },
+    "framework-React": {
+      "dataset": [],
+      "framework": [
+        "React"
+      ]
+    },
+    "framework-Vue": {
+      "dataset": [],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "framework-React-Vue": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "framework-Angular": {
+      "dataset": [],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "framework-React-Angular": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "framework-Vue-Angular": {
+      "dataset": [],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "framework-React-Vue-Angular": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "framework-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "framework-React-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "framework-Vue-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "framework-React-Vue-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "framework-Angular-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "framework-React-Angular-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "framework-Vue-Angular-Vanilla": {
+      "dataset": [],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Vue": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Vue": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Angular": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Angular": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Vue": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Vue": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Angular": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Angular": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Vue": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Edit"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Vue": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Vue": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Angular": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Angular": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeRepair_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Vue": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Generation",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Vue": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Vue": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Angular": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Angular": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Angular": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Angular"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Vue",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-React-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "React",
+        "Angular",
+        "Vanilla"
+      ]
+    },
+    "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular-Vanilla": {
+      "dataset": [
+        "UI Code Edit",
+        "UI Code Repair"
+      ],
+      "framework": [
+        "Vue",
+        "Angular",
+        "Vanilla"
+      ]
+    }
+  },
+  "data": {
+    "Claude-4": {
+      "overall": {
+        "rank": 1,
+        "MLLM_Score": "8.04",
+        "CMS": "0.467",
+        "Compilation": "94.6"
+      },
+      "dataset-UICodeGeneration": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "88.0"
+      },
+      "dataset-UICodeEdit": {
+        "rank": 1,
+        "MLLM_Score": "8.34",
+        "CMS": "0.430",
+        "Compilation": "95.9"
+      },
+      "dataset-UICodeGeneration-UICodeEdit": {
+        "rank": 1,
+        "MLLM_Score": "8.34",
+        "CMS": "0.430",
+        "Compilation": "92.0"
+      },
+      "dataset-UICodeRepair": {
+        "rank": 1,
+        "MLLM_Score": "7.74",
+        "CMS": "0.503",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeGeneration-UICodeRepair": {
+        "rank": 1,
+        "MLLM_Score": "7.74",
+        "CMS": "0.503",
+        "Compilation": "94.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair": {
+        "rank": 1,
+        "MLLM_Score": "8.04",
+        "CMS": "0.467",
+        "Compilation": "98.0"
+      },
+      "framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.67",
+        "CMS": "0.489",
+        "Compilation": "98.8"
+      },
+      "framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.68",
+        "CMS": "0.350",
+        "Compilation": "98.5"
+      },
+      "framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.67",
+        "CMS": "0.419",
+        "Compilation": "98.6"
+      },
+      "framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.20",
+        "CMS": "0.668",
+        "Compilation": "86.6"
+      },
+      "framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.93",
+        "CMS": "0.579",
+        "Compilation": "92.7"
+      },
+      "framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.94",
+        "CMS": "0.509",
+        "Compilation": "92.6"
+      },
+      "framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.85",
+        "CMS": "0.502",
+        "Compilation": "94.6"
+      },
+      "framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.61",
+        "CMS": "0.360",
+        "Compilation": "-"
+      },
+      "framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.424",
+        "Compilation": "98.8"
+      },
+      "framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.355",
+        "Compilation": "98.5"
+      },
+      "framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.99",
+        "CMS": "0.399",
+        "Compilation": "98.6"
+      },
+      "framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.41",
+        "CMS": "0.514",
+        "Compilation": "86.6"
+      },
+      "framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.16",
+        "CMS": "0.506",
+        "Compilation": "92.7"
+      },
+      "framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.16",
+        "CMS": "0.459",
+        "Compilation": "92.6"
+      },
+      "dataset-UICodeGeneration_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "99.1"
+      },
+      "dataset-UICodeGeneration_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "97.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "98.3"
+      },
+      "dataset-UICodeGeneration_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "67.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "83.3"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "88.0"
+      },
+      "dataset-UICodeGeneration_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "99.1"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "97.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "98.3"
+      },
+      "dataset-UICodeGeneration_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "67.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "83.3"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.5"
+      },
+      "dataset-UICodeEdit_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.69",
+        "CMS": "0.421",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.299",
+        "Compilation": "98.1"
+      },
+      "dataset-UICodeEdit_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.84",
+        "CMS": "0.360",
+        "Compilation": "97.7"
+      },
+      "dataset-UICodeEdit_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.26",
+        "CMS": "0.659",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeEdit_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.540",
+        "Compilation": "94.8"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.12",
+        "CMS": "0.479",
+        "Compilation": "95.3"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.460",
+        "Compilation": "95.9"
+      },
+      "dataset-UICodeEdit_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "9.44",
+        "CMS": "0.340",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.57",
+        "CMS": "0.381",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.71",
+        "CMS": "0.320",
+        "Compilation": "98.1"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.37",
+        "CMS": "0.353",
+        "Compilation": "97.7"
+      },
+      "dataset-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.85",
+        "CMS": "0.499",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.46",
+        "CMS": "0.473",
+        "Compilation": "94.8"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.56",
+        "CMS": "0.433",
+        "Compilation": "95.3"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.69",
+        "CMS": "0.421",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.299",
+        "Compilation": "97.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.84",
+        "CMS": "0.360",
+        "Compilation": "98.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.26",
+        "CMS": "0.659",
+        "Compilation": "79.9"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.540",
+        "Compilation": "89.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.12",
+        "CMS": "0.479",
+        "Compilation": "88.9"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.98",
+        "CMS": "0.460",
+        "Compilation": "92.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "9.44",
+        "CMS": "0.340",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.57",
+        "CMS": "0.381",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.71",
+        "CMS": "0.320",
+        "Compilation": "97.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.37",
+        "CMS": "0.353",
+        "Compilation": "98.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.85",
+        "CMS": "0.499",
+        "Compilation": "79.9"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.46",
+        "CMS": "0.473",
+        "Compilation": "89.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.56",
+        "CMS": "0.433",
+        "Compilation": "88.9"
+      },
+      "dataset-UICodeRepair_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.64",
+        "CMS": "0.557",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.37",
+        "CMS": "0.400",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.51",
+        "CMS": "0.478",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.677",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.89",
+        "CMS": "0.617",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.76",
+        "CMS": "0.539",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.72",
+        "CMS": "0.545",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.79",
+        "CMS": "0.380",
+        "Compilation": "-"
+      },
+      "dataset-UICodeRepair_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.71",
+        "CMS": "0.468",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.58",
+        "CMS": "0.390",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.60",
+        "CMS": "0.445",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.96",
+        "CMS": "0.528",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.86",
+        "CMS": "0.538",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.77",
+        "CMS": "0.486",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.64",
+        "CMS": "0.557",
+        "Compilation": "99.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.37",
+        "CMS": "0.400",
+        "Compilation": "98.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.51",
+        "CMS": "0.478",
+        "Compilation": "99.1"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.677",
+        "Compilation": "83.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.89",
+        "CMS": "0.617",
+        "Compilation": "91.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.76",
+        "CMS": "0.539",
+        "Compilation": "91.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.72",
+        "CMS": "0.545",
+        "Compilation": "94.0"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.79",
+        "CMS": "0.380",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.71",
+        "CMS": "0.468",
+        "Compilation": "99.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.58",
+        "CMS": "0.390",
+        "Compilation": "98.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.60",
+        "CMS": "0.445",
+        "Compilation": "99.1"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.96",
+        "CMS": "0.528",
+        "Compilation": "83.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.86",
+        "CMS": "0.538",
+        "Compilation": "91.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.77",
+        "CMS": "0.486",
+        "Compilation": "91.2"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React": {
+        "rank": 1,
+        "MLLM_Score": "7.67",
+        "CMS": "0.489",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.68",
+        "CMS": "0.350",
+        "Compilation": "99.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue": {
+        "rank": 1,
+        "MLLM_Score": "7.67",
+        "CMS": "0.419",
+        "Compilation": "98.8"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular": {
+        "rank": 1,
+        "MLLM_Score": "8.20",
+        "CMS": "0.668",
+        "Compilation": "96.2"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.93",
+        "CMS": "0.579",
+        "Compilation": "97.4"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.94",
+        "CMS": "0.509",
+        "Compilation": "97.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 1,
+        "MLLM_Score": "7.85",
+        "CMS": "0.502",
+        "Compilation": "98.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.61",
+        "CMS": "0.360",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.424",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.14",
+        "CMS": "0.355",
+        "Compilation": "99.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "7.99",
+        "CMS": "0.399",
+        "Compilation": "98.8"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.41",
+        "CMS": "0.514",
+        "Compilation": "96.2"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.16",
+        "CMS": "0.506",
+        "Compilation": "97.4"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 1,
+        "MLLM_Score": "8.16",
+        "CMS": "0.459",
+        "Compilation": "97.6"
+      }
+    },
+    "GPT-5": {
+      "overall": {
+        "rank": 2,
+        "MLLM_Score": "7.96",
+        "CMS": "0.343",
+        "Compilation": "92.8"
+      },
+      "dataset-UICodeGeneration": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "87.1"
+      },
+      "dataset-UICodeEdit": {
+        "rank": 2,
+        "MLLM_Score": "8.42",
+        "CMS": "0.380",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeGeneration-UICodeEdit": {
+        "rank": 2,
+        "MLLM_Score": "8.42",
+        "CMS": "0.380",
+        "Compilation": "89.8"
+      },
+      "dataset-UICodeRepair": {
+        "rank": 2,
+        "MLLM_Score": "7.49",
+        "CMS": "0.307",
+        "Compilation": "98.8"
+      },
+      "dataset-UICodeGeneration-UICodeRepair": {
+        "rank": 2,
+        "MLLM_Score": "7.49",
+        "CMS": "0.307",
+        "Compilation": "92.9"
+      },
+      "dataset-UICodeEdit-UICodeRepair": {
+        "rank": 2,
+        "MLLM_Score": "7.96",
+        "CMS": "0.343",
+        "Compilation": "95.6"
+      },
+      "framework-React": {
+        "rank": 2,
+        "MLLM_Score": "7.86",
+        "CMS": "0.324",
+        "Compilation": "96.3"
+      },
+      "framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.25",
+        "CMS": "0.292",
+        "Compilation": "93.8"
+      },
+      "framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.55",
+        "CMS": "0.308",
+        "Compilation": "95.1"
+      },
+      "framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.20",
+        "CMS": "0.553",
+        "Compilation": "88.1"
+      },
+      "framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.03",
+        "CMS": "0.439",
+        "Compilation": "92.2"
+      },
+      "framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.72",
+        "CMS": "0.423",
+        "Compilation": "91.0"
+      },
+      "framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.77",
+        "CMS": "0.390",
+        "Compilation": "92.8"
+      },
+      "framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.52",
+        "CMS": "0.204",
+        "Compilation": "-"
+      },
+      "framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.19",
+        "CMS": "0.264",
+        "Compilation": "96.3"
+      },
+      "framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.88",
+        "CMS": "0.248",
+        "Compilation": "93.8"
+      },
+      "framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.87",
+        "CMS": "0.273",
+        "Compilation": "95.1"
+      },
+      "framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.36",
+        "CMS": "0.379",
+        "Compilation": "88.1"
+      },
+      "framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.19",
+        "CMS": "0.360",
+        "Compilation": "92.2"
+      },
+      "framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.99",
+        "CMS": "0.350",
+        "Compilation": "91.0"
+      },
+      "dataset-UICodeGeneration_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "97.3"
+      },
+      "dataset-UICodeGeneration_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "96.6"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "96.9"
+      },
+      "dataset-UICodeGeneration_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "67.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.4"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.0"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "87.1"
+      },
+      "dataset-UICodeGeneration_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "97.3"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "96.6"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "96.9"
+      },
+      "dataset-UICodeGeneration_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "67.5"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.4"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "82.0"
+      },
+      "dataset-UICodeEdit_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "8.32",
+        "CMS": "0.351",
+        "Compilation": "91.7"
+      },
+      "dataset-UICodeEdit_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.46",
+        "CMS": "0.269",
+        "Compilation": "88.6"
+      },
+      "dataset-UICodeEdit_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.89",
+        "CMS": "0.310",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeEdit_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.61",
+        "CMS": "0.597",
+        "Compilation": "97.0"
+      },
+      "dataset-UICodeEdit_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.47",
+        "CMS": "0.474",
+        "Compilation": "94.3"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.03",
+        "CMS": "0.433",
+        "Compilation": "92.8"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.13",
+        "CMS": "0.405",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeEdit_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "9.29",
+        "CMS": "0.302",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.81",
+        "CMS": "0.326",
+        "Compilation": "91.7"
+      },
+      "dataset-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.37",
+        "CMS": "0.285",
+        "Compilation": "88.6"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.36",
+        "CMS": "0.307",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.95",
+        "CMS": "0.449",
+        "Compilation": "97.0"
+      },
+      "dataset-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.74",
+        "CMS": "0.416",
+        "Compilation": "94.3"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.45",
+        "CMS": "0.389",
+        "Compilation": "92.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "8.32",
+        "CMS": "0.351",
+        "Compilation": "94.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.46",
+        "CMS": "0.269",
+        "Compilation": "92.6"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.89",
+        "CMS": "0.310",
+        "Compilation": "93.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.61",
+        "CMS": "0.597",
+        "Compilation": "82.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.47",
+        "CMS": "0.474",
+        "Compilation": "88.3"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.03",
+        "CMS": "0.433",
+        "Compilation": "87.4"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.13",
+        "CMS": "0.405",
+        "Compilation": "89.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "9.29",
+        "CMS": "0.302",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.81",
+        "CMS": "0.326",
+        "Compilation": "94.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.37",
+        "CMS": "0.285",
+        "Compilation": "92.6"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.36",
+        "CMS": "0.307",
+        "Compilation": "93.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.95",
+        "CMS": "0.449",
+        "Compilation": "82.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.74",
+        "CMS": "0.416",
+        "Compilation": "88.3"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.45",
+        "CMS": "0.389",
+        "Compilation": "87.4"
+      },
+      "dataset-UICodeRepair_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.297",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.04",
+        "CMS": "0.316",
+        "Compilation": "96.3"
+      },
+      "dataset-UICodeRepair_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.21",
+        "CMS": "0.306",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeRepair_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.79",
+        "CMS": "0.510",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.59",
+        "CMS": "0.404",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.41",
+        "CMS": "0.413",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.41",
+        "CMS": "0.374",
+        "Compilation": "98.8"
+      },
+      "dataset-UICodeRepair_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.75",
+        "CMS": "0.106",
+        "Compilation": "-"
+      },
+      "dataset-UICodeRepair_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.57",
+        "CMS": "0.201",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.211",
+        "Compilation": "96.3"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.240",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.77",
+        "CMS": "0.308",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.64",
+        "CMS": "0.304",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.52",
+        "CMS": "0.311",
+        "Compilation": "98.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.297",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.04",
+        "CMS": "0.316",
+        "Compilation": "96.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.21",
+        "CMS": "0.306",
+        "Compilation": "97.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.79",
+        "CMS": "0.510",
+        "Compilation": "83.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.59",
+        "CMS": "0.404",
+        "Compilation": "91.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.41",
+        "CMS": "0.413",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.41",
+        "CMS": "0.374",
+        "Compilation": "92.9"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.75",
+        "CMS": "0.106",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.57",
+        "CMS": "0.201",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.211",
+        "Compilation": "96.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.39",
+        "CMS": "0.240",
+        "Compilation": "97.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.77",
+        "CMS": "0.308",
+        "Compilation": "83.7"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.64",
+        "CMS": "0.304",
+        "Compilation": "91.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.52",
+        "CMS": "0.311",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React": {
+        "rank": 2,
+        "MLLM_Score": "7.86",
+        "CMS": "0.324",
+        "Compilation": "95.8"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.25",
+        "CMS": "0.292",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue": {
+        "rank": 2,
+        "MLLM_Score": "7.55",
+        "CMS": "0.308",
+        "Compilation": "94.1"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.20",
+        "CMS": "0.553",
+        "Compilation": "98.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular": {
+        "rank": 2,
+        "MLLM_Score": "8.03",
+        "CMS": "0.439",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.72",
+        "CMS": "0.423",
+        "Compilation": "95.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 2,
+        "MLLM_Score": "7.77",
+        "CMS": "0.390",
+        "Compilation": "95.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.52",
+        "CMS": "0.204",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.19",
+        "CMS": "0.264",
+        "Compilation": "95.8"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.88",
+        "CMS": "0.248",
+        "Compilation": "92.4"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.87",
+        "CMS": "0.273",
+        "Compilation": "94.1"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.36",
+        "CMS": "0.379",
+        "Compilation": "98.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "8.19",
+        "CMS": "0.360",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 2,
+        "MLLM_Score": "7.99",
+        "CMS": "0.350",
+        "Compilation": "95.5"
+      }
+    },
+    "Gemini-2.5": {
+      "overall": {
+        "rank": 3,
+        "MLLM_Score": "8.09",
+        "CMS": "0.383",
+        "Compilation": "93.2"
+      },
+      "dataset-UICodeGeneration": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "84.5"
+      },
+      "dataset-UICodeEdit": {
+        "rank": 3,
+        "MLLM_Score": "8.46",
+        "CMS": "0.402",
+        "Compilation": "95.1"
+      },
+      "dataset-UICodeGeneration-UICodeEdit": {
+        "rank": 3,
+        "MLLM_Score": "8.46",
+        "CMS": "0.402",
+        "Compilation": "89.8"
+      },
+      "dataset-UICodeRepair": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.364",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeGeneration-UICodeRepair": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.364",
+        "Compilation": "92.3"
+      },
+      "dataset-UICodeEdit-UICodeRepair": {
+        "rank": 3,
+        "MLLM_Score": "8.09",
+        "CMS": "0.383",
+        "Compilation": "97.5"
+      },
+      "framework-React": {
+        "rank": 3,
+        "MLLM_Score": "8.03",
+        "CMS": "0.351",
+        "Compilation": "96.3"
+      },
+      "framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.77",
+        "CMS": "0.332",
+        "Compilation": "96.8"
+      },
+      "framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.90",
+        "CMS": "0.342",
+        "Compilation": "96.6"
+      },
+      "framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.10",
+        "CMS": "0.575",
+        "Compilation": "86.5"
+      },
+      "framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.07",
+        "CMS": "0.463",
+        "Compilation": "91.4"
+      },
+      "framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.94",
+        "CMS": "0.453",
+        "Compilation": "91.7"
+      },
+      "framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.97",
+        "CMS": "0.419",
+        "Compilation": "93.2"
+      },
+      "framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.46",
+        "CMS": "0.274",
+        "Compilation": "-"
+      },
+      "framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.25",
+        "CMS": "0.313",
+        "Compilation": "96.3"
+      },
+      "framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.12",
+        "CMS": "0.303",
+        "Compilation": "96.8"
+      },
+      "framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.09",
+        "CMS": "0.319",
+        "Compilation": "96.6"
+      },
+      "framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.28",
+        "CMS": "0.424",
+        "Compilation": "86.5"
+      },
+      "framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.20",
+        "CMS": "0.400",
+        "Compilation": "91.4"
+      },
+      "framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.11",
+        "CMS": "0.394",
+        "Compilation": "91.7"
+      },
+      "dataset-UICodeGeneration_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "91.7"
+      },
+      "dataset-UICodeGeneration_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "93.2"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "92.5"
+      },
+      "dataset-UICodeGeneration_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "68.7"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "80.2"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "80.9"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "84.5"
+      },
+      "dataset-UICodeGeneration_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "91.7"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "93.2"
+      },
+      "dataset-UICodeGeneration_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "92.5"
+      },
+      "dataset-UICodeGeneration_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "68.7"
+      },
+      "dataset-UICodeGeneration_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "80.2"
+      },
+      "dataset-UICodeGeneration_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "-",
+        "CMS": "-",
+        "Compilation": "80.9"
+      },
+      "dataset-UICodeEdit_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "8.35",
+        "CMS": "0.366",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "8.10",
+        "CMS": "0.303",
+        "Compilation": "97.1"
+      },
+      "dataset-UICodeEdit_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "8.23",
+        "CMS": "0.334",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.17",
+        "CMS": "0.582",
+        "Compilation": "90.9"
+      },
+      "dataset-UICodeEdit_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.26",
+        "CMS": "0.474",
+        "Compilation": "94.1"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.14",
+        "CMS": "0.443",
+        "Compilation": "94.0"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.21",
+        "CMS": "0.417",
+        "Compilation": "95.1"
+      },
+      "dataset-UICodeEdit_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "9.20",
+        "CMS": "0.358",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.78",
+        "CMS": "0.362",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.65",
+        "CMS": "0.330",
+        "Compilation": "97.1"
+      },
+      "dataset-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.55",
+        "CMS": "0.342",
+        "Compilation": "97.2"
+      },
+      "dataset-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.68",
+        "CMS": "0.470",
+        "Compilation": "90.9"
+      },
+      "dataset-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.57",
+        "CMS": "0.435",
+        "Compilation": "94.1"
+      },
+      "dataset-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.49",
+        "CMS": "0.414",
+        "Compilation": "94.0"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "8.35",
+        "CMS": "0.366",
+        "Compilation": "94.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "8.10",
+        "CMS": "0.303",
+        "Compilation": "95.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "8.23",
+        "CMS": "0.334",
+        "Compilation": "94.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.17",
+        "CMS": "0.582",
+        "Compilation": "79.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.26",
+        "CMS": "0.474",
+        "Compilation": "87.1"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.14",
+        "CMS": "0.443",
+        "Compilation": "87.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.21",
+        "CMS": "0.417",
+        "Compilation": "89.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "9.20",
+        "CMS": "0.358",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.78",
+        "CMS": "0.362",
+        "Compilation": "94.5"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.65",
+        "CMS": "0.330",
+        "Compilation": "95.2"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.55",
+        "CMS": "0.342",
+        "Compilation": "94.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.68",
+        "CMS": "0.470",
+        "Compilation": "79.8"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.57",
+        "CMS": "0.435",
+        "Compilation": "87.1"
+      },
+      "dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.49",
+        "CMS": "0.414",
+        "Compilation": "87.5"
+      },
+      "dataset-UICodeRepair_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.337",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.44",
+        "CMS": "0.362",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.58",
+        "CMS": "0.349",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.04",
+        "CMS": "0.567",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.87",
+        "CMS": "0.452",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.74",
+        "CMS": "0.464",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.422",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.190",
+        "Compilation": "-"
+      },
+      "dataset-UICodeRepair_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.264",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.58",
+        "CMS": "0.276",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.62",
+        "CMS": "0.296",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.88",
+        "CMS": "0.379",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.82",
+        "CMS": "0.365",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.373",
+        "Compilation": "100.0"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.337",
+        "Compilation": "95.9"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.44",
+        "CMS": "0.362",
+        "Compilation": "96.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.58",
+        "CMS": "0.349",
+        "Compilation": "96.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.04",
+        "CMS": "0.567",
+        "Compilation": "84.3"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.87",
+        "CMS": "0.452",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.74",
+        "CMS": "0.464",
+        "Compilation": "90.5"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.422",
+        "Compilation": "92.3"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.190",
+        "Compilation": "-"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.71",
+        "CMS": "0.264",
+        "Compilation": "95.9"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.58",
+        "CMS": "0.276",
+        "Compilation": "96.6"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.62",
+        "CMS": "0.296",
+        "Compilation": "96.2"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.88",
+        "CMS": "0.379",
+        "Compilation": "84.3"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.82",
+        "CMS": "0.365",
+        "Compilation": "90.1"
+      },
+      "dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "7.73",
+        "CMS": "0.373",
+        "Compilation": "90.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React": {
+        "rank": 3,
+        "MLLM_Score": "8.03",
+        "CMS": "0.351",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.77",
+        "CMS": "0.332",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue": {
+        "rank": 3,
+        "MLLM_Score": "7.90",
+        "CMS": "0.342",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.10",
+        "CMS": "0.575",
+        "Compilation": "95.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular": {
+        "rank": 3,
+        "MLLM_Score": "8.07",
+        "CMS": "0.463",
+        "Compilation": "97.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.94",
+        "CMS": "0.453",
+        "Compilation": "97.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Angular": {
+        "rank": 3,
+        "MLLM_Score": "7.97",
+        "CMS": "0.419",
+        "Compilation": "97.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.46",
+        "CMS": "0.274",
+        "Compilation": "-"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.25",
+        "CMS": "0.313",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.12",
+        "CMS": "0.303",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.09",
+        "CMS": "0.319",
+        "Compilation": "98.6"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.28",
+        "CMS": "0.424",
+        "Compilation": "95.5"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-React-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.20",
+        "CMS": "0.400",
+        "Compilation": "97.0"
+      },
+      "dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular-Vanilla": {
+        "rank": 3,
+        "MLLM_Score": "8.11",
+        "CMS": "0.394",
+        "Compilation": "97.0"
+      }
+    }
+  }
+}

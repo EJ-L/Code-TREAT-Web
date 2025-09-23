@@ -266,7 +266,7 @@ export function getAvailableTasks(): string[] {
     'vulnerability detection',
     'input prediction',
     'output prediction',
-    'code-web',
+    'multi-modality',
     'interaction-2-code',
     'code-robustness',
     'mr-web',

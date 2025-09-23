@@ -113,8 +113,8 @@ const TableHeader: FC<TableHeaderProps> = ({
           // Vulnerability detection metrics
           'Accuracy', 'Precision', 'Recall', 'F1 Score',
           'P-C', 'P-V', 'P-B', 'P-R',
-          // Code-web metrics
-          'CLIP', 'Compilation',
+          // Multi-modality metrics
+          'MLLM_Score', 'CMS', 'CLIP', 'Compilation',
           // Code-robustness metrics
           'VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Average',
           'Vanilla', 'PSC-ALL', 'MCC',

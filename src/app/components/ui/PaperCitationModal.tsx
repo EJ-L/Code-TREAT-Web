@@ -39,7 +39,7 @@ const papers: PaperInfo[] = [
     description: "A systematic evaluation framework for multimodal models in front-end development, focusing on design-to-code translation accuracy.",
     url: "https://arxiv.org/abs/2506.06251",
     codeUrl: "https://github.com/WebPAI/DesignBench",
-    leaderboardTask: "code-web"
+    leaderboardTask: "multi-modality"
   },
   {
     name: "Code-Robustness",

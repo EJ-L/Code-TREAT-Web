@@ -66,5 +66,6 @@ data/precomputed/interaction-2-code/
 data/precomputed/mr-web/
 data/precomputed/output-prediction/
 data/precomputed/vulnerability-detection/
+data/precomputed/multi-modality/
 new_dataset/
 data/backuo

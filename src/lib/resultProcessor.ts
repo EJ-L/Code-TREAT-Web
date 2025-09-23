@@ -174,9 +174,9 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       processedResults = await processOverall(data.map(processResult), filters);
       break;
       
-    case 'code-web':
+    case 'multi-modality':
     case 'code-robustness':
-      // For code-web, filter by task
+      // For multi-modality, filter by task
       const rawTaskData = data.filter(entry => entry.task === task);
       
       // Apply filters at the raw data level first, before aggregation
@@ -191,7 +191,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
         });
       }
       
-      // Apply framework filter (for code-web)
+      // Apply framework filter (for multi-modality)
       if (filters.framework && filters.framework.length > 0) {
         filteredRawData = filteredRawData.filter(entry => {
           return entry.framework && filters.framework && filters.framework.includes(entry.framework);
@@ -293,7 +293,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
 
     // Skip dataset filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'code-robustness'].includes(task.toLowerCase())) {
+    if (!['multi-modality', 'code-robustness'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         const normalizedDataset = result.dataset.toLowerCase().replace(/\s+/g, '');
         return allowedDatasets.has(normalizedDataset);
@@ -428,12 +428,12 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`LLM Judge 过滤后: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 8. Framework 过滤 (同级 OR 关系，跨级 AND 关系) - for code-web task
+  // 8. Framework 过滤 (同级 OR 关系，跨级 AND 关系) - for multi-modality task
   if (filters.framework && filters.framework.length > 0) {
     console.log(`应用 Framework 过滤: ${filters.framework.length} 种框架, ${filteredResults.length} 条结果`);
     
     // Skip framework filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'code-robustness'].includes(task.toLowerCase())) {
+    if (!['multi-modality', 'code-robustness'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         // Check if the result has a framework field and if it matches the selected frameworks
         const resultObj = result as Record<string, unknown>;
@@ -563,7 +563,9 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(1) : '-';
 
     // Add custom metrics for new tasks
-    // code-web metrics
+    // multi-modality metrics
+    formattedResult['MLLM_Score'] = result['MLLM_Score'] !== null && result['MLLM_Score'] !== undefined ? result['MLLM_Score'].toFixed(2) : '-';
+    formattedResult['CMS'] = result['CMS'] !== null && result['CMS'] !== undefined ? result['CMS'].toFixed(3) : '-';
     formattedResult['CLIP'] = result['CLIP'] !== null && result['CLIP'] !== undefined ? (result['CLIP'] * 100).toFixed(1) : '-';
     formattedResult['Compilation'] = result['Compilation'] !== null && result['Compilation'] !== undefined ? (result['Compilation'] * 100).toFixed(1) : '-';
     

@@ -74,11 +74,11 @@ const taskAbilities = {
     robustness: [],
     privacy: [],
   },
-  'code-web': {
+  'multi-modality': {
     modality: [],
     knowledge: [],
     reasoning: [],
-    dataset: ['Design Generation', 'Design Edit', 'Design Repair'],
+    dataset: ['UI Code Generation', 'UI Code Edit', 'UI Code Repair'],
     robustness: [],
     privacy: [],
     framework: ['React', 'Vue', 'Angular', 'Vanilla'],

@@ -76,7 +76,7 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
             marginRight: 'auto'
           }}>
             {(() => {
-              if (currentTask === 'code-web') return 'Multi-Modality';
+              if (currentTask === 'multi-modality') return 'Multi-Modality';
               if (currentTask === 'code-robustness') return 'Code-Robustness';
               return currentTask.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             })()}

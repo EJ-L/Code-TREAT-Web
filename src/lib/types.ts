@@ -1,4 +1,4 @@
-export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'code-robustness' | 'unit test generation';
+export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'multi-modality' | 'code-robustness' | 'unit test generation';
 
 export type LLMJudgeScores = {
   [judge: string]: number | number[];
@@ -23,7 +23,7 @@ export type Ability = {
   robustness: string[];
   privacy: string[];
   llmJudges?: string[];
-  framework?: string[];  // For code-web task
+  framework?: string[];  // For multi-modality task
 };
 
 export type ResultEntry = {
@@ -39,7 +39,7 @@ export type ResultEntry = {
   difficulty?: string;
   domain?: string;  // Knowledge domain field (math, alg, ds, etc.)
   url?: string;
-  framework?: string;  // For code-web task
+  framework?: string;  // For multi-modality task
   category?: string;   // For code-robustness task
   prompt_category?: string[];  // For reasoning type filtering (direct/cot)
 };
@@ -82,7 +82,9 @@ export type ProcessedResult = {
   'Recall'?: number | null;
   'F1 Score'?: number | null;
   // Custom metrics for new tasks
-  // code-web metrics
+  // multi-modality metrics
+  'MLLM_Score'?: number | null;
+  'CMS'?: number | null;
   'CLIP'?: number | null;
   'Compilation'?: number | null;
   // code-robustness metrics
@@ -112,6 +114,6 @@ export type FilterOptions = {
   security: string[];
   reasoning?: string[];  // Add reasoning for mr-web filtering
   llmJudges?: string[];
-  framework?: string[];  // Add framework for code-web filtering
+  framework?: string[];  // Add framework for multi-modality filtering
   showByDifficulty?: boolean;
 };

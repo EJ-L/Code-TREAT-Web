@@ -55,7 +55,7 @@ function loadTaskData(task) {
     'code summarization': 'code-summarization',
     'code review': 'code-review',
     'vulnerability detection': 'vulnerability-detection',
-    'code-web': 'code-web',
+    'multi-modality': 'multi-modality',
     'mr-web': 'mr-web',
     'interaction-2-code': 'interaction-2-code',
     'code-robustness': 'code-robustness',
@@ -431,19 +431,25 @@ function aggregateData(data, task, showByDifficulty) {
           result[metric] = '-';
         }
       });
-    } else if (task === 'code-web') {
-      // For code-web, use CLIP and Compilation metrics
-      // Metrics looks like {"CLIP": 0.8083, "Compilation": 0.9541}
-      const webMetrics = ['CLIP', 'Compilation'];
+    } else if (task === 'multi-modality') {
+      // For multi-modality, use MLLM_Score, CMS, and Compilation metrics
+      // Metrics looks like {"MLLM_Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722}
+      const modalityMetrics = ['MLLM_Score', 'CMS', 'Compilation'];
       
-      webMetrics.forEach(metric => {
+      modalityMetrics.forEach(metric => {
         const values = entries
           .map(e => e.metrics && e.metrics[metric])
           .filter(v => v !== undefined && v !== null);
         
         if (values.length > 0) {
           const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
-          result[metric] = (avg * 100).toFixed(1); // Convert to percentage
+          if (metric === 'MLLM_Score') {
+            result[metric] = avg.toFixed(2); // MLLM_Score with 2 decimal places
+          } else if (metric === 'CMS') {
+            result[metric] = avg.toFixed(3); // CMS with 3 decimal places
+          } else if (metric === 'Compilation') {
+            result[metric] = (avg * 100).toFixed(1); // Compilation as percentage
+          }
         } else {
           result[metric] = '-';
         }

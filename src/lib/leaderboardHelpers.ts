@@ -192,8 +192,8 @@ export function getDefaultSortConfig(task: TaskType): { key: string; direction: 
     defaultKey = 'LLM Judge';
   } else if (task === 'vulnerability detection') {
     defaultKey = 'Accuracy';
-  } else if (task === 'code-web') {
-    defaultKey = 'CLIP';
+  } else if (task === 'multi-modality') {
+    defaultKey = 'MLLM_Score';
   } else if (task === 'code-robustness') {
     defaultKey = 'ALL';
   } else if (task === 'unit test generation') {

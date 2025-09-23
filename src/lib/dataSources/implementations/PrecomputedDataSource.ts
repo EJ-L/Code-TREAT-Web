@@ -54,7 +54,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
         'code summarization',
         'code review',
         'vulnerability detection',
-        'code-web',
+        'multi-modality',
         'interaction-2-code',
         'code-robustness',
         'mr-web',

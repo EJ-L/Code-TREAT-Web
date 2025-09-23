@@ -18,7 +18,7 @@ const TASK_DIRECTORIES: Record<string, string> = {
   'code review': 'data/code-review',
   'input prediction': 'data/input_prediction',
   'output prediction': 'data/output_prediction',
-  'code-web': 'data/code-web',
+  'multi-modality': 'data/multi-modality',
   'interaction-2-code': 'data/interaction-2-code',
   'code-robustness': 'data/code-robustness',
   'mr-web': 'data/mr-web',
@@ -265,7 +265,7 @@ export class FileSystemDataSource extends BaseDataSource implements IFileDataSou
         if (!langMatch) return false;
       }
 
-      // Apply framework filter (for code-web)
+      // Apply framework filter (for multi-modality)
       if (filters.framework && filters.framework.length > 0 && entry.framework) {
         const frameworkMatch = filters.framework.includes(entry.framework);
         if (!frameworkMatch) return false;

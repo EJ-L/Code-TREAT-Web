@@ -216,7 +216,23 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     defaultWidth: 140,
     minWidth: 60
   },
-  // Code-web metrics
+  // Multi-modality metrics
+  'MLLM_Score': {
+    key: 'MLLM_Score',
+    label: 'MLLM Score',
+    width: 'w-28',
+    description: 'Multi-modal Large Language Model Score for UI code quality',
+    defaultWidth: 150,
+    minWidth: 120
+  },
+  'CMS': {
+    key: 'CMS',
+    label: 'CMS',
+    width: 'w-24',
+    description: 'Code Metrics Score for code structure evaluation',
+    defaultWidth: 130,
+    minWidth: 100
+  },
   'CLIP': {
     key: 'CLIP',
     label: 'CLIP',
@@ -426,7 +442,7 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'input prediction': 300,
       'output prediction': 300,
       'vulnerability detection': 350,
-      'code-web': 360,
+      'multi-modality': 360,
       'code-robustness': 400
     },
     minWidth: 300,
@@ -477,10 +493,20 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   'Compilation': {
     default: 200,
     taskSpecific: {
-      'code-web': 180
+      'multi-modality': 180
     },
     minWidth: 100,
     maxWidth: 300
+  },
+  'MLLM_Score': {
+    default: 150,
+    minWidth: 120,
+    maxWidth: 200
+  },
+  'CMS': {
+    default: 130,
+    minWidth: 100,
+    maxWidth: 180
   },
   'CLIP': {
     default: 130,
@@ -535,7 +561,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
-  'code-web': ['CLIP', 'Compilation'],
+  'multi-modality': ['MLLM_Score', 'CMS', 'Compilation'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
@@ -567,7 +593,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
-  'code-web': ['CLIP', 'Compilation'],
+  'multi-modality': ['MLLM_Score', 'CMS', 'Compilation'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
@@ -620,7 +646,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
     overallTab: 'All',
     tabs: ['All', 'PrimeVul', 'PrimeVulPairs']
   },
-  'code-web': {
+  'multi-modality': {
     extractedFilter: 'dataset',
     overallTab: 'All',
     tabs: ['All', 'UI Code Generation', 'UI Code Edit', 'UI Code Repair']
@@ -681,7 +707,7 @@ export function getMinColumnWidth(task: TaskType, headerKey: string): number {
   // Special cases
   if (headerKey === 'model') {
     if (task === 'overall') return 800;
-    if (task === 'code-web') return 320;
+    if (task === 'multi-modality') return 320;
     if (task === 'output prediction' || task === 'input prediction') return 350;
     return 300;
   }
@@ -734,7 +760,7 @@ export const HIGH_TO_LOW_METRICS = [
   'CodeBLEU', 'LLMJudge', 'llmjudge', 'LLM Judge', 'Execution',
   'Accuracy', 'Precision', 'Recall', 'F1 Score',
   'P-C', 'P-V', 'P-B', 'P-R',
-  'CLIP', 'Compilation',
+  'MLLM_Score', 'CMS', 'CLIP', 'Compilation',
   'SSIM', 'Text', 'Position', 'Implement Rate',
   'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
   'MAE', 'NEMD', 'RER',

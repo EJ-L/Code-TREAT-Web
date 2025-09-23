@@ -71,8 +71,8 @@ const ResizableHeader: React.FC<ResizableHeaderProps> = ({ header, onResize, wid
       if (task === 'code summarization' || task === 'code review') {
         return Math.max(baseMinWidth, 250); // Adjusted to match parent component width
       }
-      if (task === 'code-web') {
-        return Math.max(baseMinWidth, 320); // Set higher minimum width for code-web to prevent truncation issues
+      if (task === 'multi-modality') {
+        return Math.max(baseMinWidth, 320); // Set higher minimum width for multi-modality to prevent truncation issues
       }
       return Math.max(baseMinWidth, 200); // Regular model field minimum
     }
@@ -191,8 +191,8 @@ const getMinCellWidth = (columnKey: string, taskType: TaskType): string => {
     if (taskType === 'code summarization' || taskType === 'code review') {
       return '250px'; // Adjusted to match parent component width
     }
-    if (taskType === 'code-web') {
-      return '320px'; // Set higher minimum width for code-web to prevent truncation issues
+    if (taskType === 'multi-modality') {
+      return '320px'; // Set higher minimum width for multi-modality to prevent truncation issues
     }
     return '200px'; // Regular model cell minimum
   }

@@ -18,6 +18,7 @@ const TASK_MAPPINGS = {
   'output prediction': 'output-prediction',
   'vulnerability detection': 'vulnerability-detection',
   'code-web': 'code-web',
+  'multi-modality': 'multi-modality',
   'mr-web': 'mr-web',
   'interaction-2-code': 'interaction-2-code',
   'code-robustness': 'code-robustness',

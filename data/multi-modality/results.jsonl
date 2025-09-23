@@ -1,0 +1,36 @@
+{"id": "claude-4-Edit-React", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722}}
+{"id": "claude-4-Edit-Vue", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 7.9809, "CMS": 0.2992, "Compilation": 0.981}}
+{"id": "claude-4-Edit-Angular", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 8.2576, "CMS": 0.6588, "Compilation": 0.9242}}
+{"id": "claude-4-Edit-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 9.4375, "CMS": 0.34}}
+{"id": "gpt-5-Edit-React", "model_name": "GPT-5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 8.3241, "CMS": 0.3512, "Compilation": 0.9167}}
+{"id": "gpt-5-Edit-Vue", "model_name": "GPT-5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 7.4571, "CMS": 0.2687, "Compilation": 0.8857}}
+{"id": "gpt-5-Edit-Angular", "model_name": "GPT-5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 8.6061, "CMS": 0.5965, "Compilation": 0.9697}}
+{"id": "gpt-5-Edit-Vanilla", "model_name": "GPT-5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 9.2875, "CMS": 0.3016}}
+{"id": "gemini-2.5-Edit-React", "model_name": "Gemini-2.5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 8.3518, "CMS": 0.366, "Compilation": 0.9722}}
+{"id": "gemini-2.5-Edit-Vue", "model_name": "Gemini-2.5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 8.1047, "CMS": 0.3028, "Compilation": 0.9714}}
+{"id": "gemini-2.5-Edit-Angular", "model_name": "Gemini-2.5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 8.1692, "CMS": 0.5823, "Compilation": 0.9091}}
+{"id": "gemini-2.5-Edit-Vanilla", "model_name": "Gemini-2.5", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 9.2, "CMS": 0.3576}}
+{"id": "claude-4-Generation-React", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.8385, "Compilation": 0.9908}}
+{"id": "claude-4-Generation-Vue", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.8116, "Compilation": 0.9746}}
+{"id": "claude-4-Generation-Angular", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5907, "Compilation": 0.6747}}
+{"id": "claude-4-Generation-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.8115}}
+{"id": "gpt-5-Generation-React", "model_name": "GPT-5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.8369, "Compilation": 0.9725}}
+{"id": "gpt-5-Generation-Vue", "model_name": "GPT-5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.7903, "Compilation": 0.9661}}
+{"id": "gpt-5-Generation-Angular", "model_name": "GPT-5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5958, "Compilation": 0.6747}}
+{"id": "gpt-5-Generation-Vanilla", "model_name": "GPT-5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.8058}}
+{"id": "gemini-2.5-Generation-React", "model_name": "Gemini-2.5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.7936, "Compilation": 0.9174}}
+{"id": "gemini-2.5-Generation-Vue", "model_name": "Gemini-2.5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.7776, "Compilation": 0.9322}}
+{"id": "gemini-2.5-Generation-Angular", "model_name": "Gemini-2.5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5997, "Compilation": 0.6867}}
+{"id": "gemini-2.5-Generation-Vanilla", "model_name": "Gemini-2.5", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.8023}}
+{"id": "claude-4-Repair-React", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 7.6429, "CMS": 0.5568, "Compilation": 1.0}}
+{"id": "claude-4-Repair-Vue", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 7.3704, "CMS": 0.4, "Compilation": 1.0}}
+{"id": "claude-4-Repair-Angular", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 8.1429, "CMS": 0.6772, "Compilation": 1.0}}
+{"id": "claude-4-Repair-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 7.7857, "CMS": 0.3795}}
+{"id": "gpt-5-Repair-React", "model_name": "GPT-5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 7.3929, "CMS": 0.2971, "Compilation": 1.0}}
+{"id": "gpt-5-Repair-Vue", "model_name": "GPT-5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 7.037, "CMS": 0.3156, "Compilation": 0.963}}
+{"id": "gpt-5-Repair-Angular", "model_name": "GPT-5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 7.7857, "CMS": 0.5103, "Compilation": 1.0}}
+{"id": "gpt-5-Repair-Vanilla", "model_name": "GPT-5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 7.75, "CMS": 0.1059}}
+{"id": "gemini-2.5-Repair-React", "model_name": "Gemini-2.5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM_Score": 7.7142, "CMS": 0.3369, "Compilation": 1.0}}
+{"id": "gemini-2.5-Repair-Vue", "model_name": "Gemini-2.5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM_Score": 7.4444, "CMS": 0.362, "Compilation": 1.0}}
+{"id": "gemini-2.5-Repair-Angular", "model_name": "Gemini-2.5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM_Score": 8.0357, "CMS": 0.5668, "Compilation": 1.0}}
+{"id": "gemini-2.5-Repair-Vanilla", "model_name": "Gemini-2.5", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM_Score": 7.7143, "CMS": 0.1904}}

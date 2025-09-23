@@ -259,15 +259,7 @@ interface LeaderboardProps {
           filterValue = 'Merge-HR+GFG';
         }
         
-        // Special mapping for code-web: UI Code tabs should filter by original Design dataset names
-        if (currentTask === 'code-web') {
-          const codeWebMapping: Record<string, string> = {
-            'UI Code Generation': 'Design Generation',
-            'UI Code Edit': 'Design Edit',
-            'UI Code Repair': 'Design Repair'
-          };
-          filterValue = codeWebMapping[tab] || tab;
-        }
+        // No special mapping needed for multi-modality - tab names match dataset names exactly
         
         setSelectedAbilities({
           [abilityKey]: [filterValue]
@@ -363,8 +355,8 @@ interface LeaderboardProps {
                 primaryScore = parseFloat(String(result['LLM Judge'] || '0')) || 0;
               } else if (task === 'vulnerability detection') {
                 primaryScore = parseFloat(String(result['F1 Score'] || '0')) || 0;
-              } else if (task === 'code-web') {
-                primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
+              } else if (task === 'multi-modality') {
+                primaryScore = parseFloat(String(result['MLLM_Score'] || '0')) || 0;
               } else if (task === 'code-robustness') {
                 primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
               } else {

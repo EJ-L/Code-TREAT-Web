@@ -1,5 +1,5 @@
 {
-  "generated": "2025-09-23T15:39:25.215Z",
+  "generated": "2025-09-23T16:42:43.503Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -12545,11 +12545,11 @@
         }
       ]
     },
-    "code-web": {
+    "multi-modality": {
       "totalCombinations": 105,
       "combinations": [
         {
-          "filename": "code-web_overall.json",
+          "filename": "multi-modality_overall.json",
           "filters": {
             "dataset": [],
             "framework": []
@@ -12557,70 +12557,70 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration.json",
+          "filename": "multi-modality_dataset-UICodeGeneration.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit.json",
+          "filename": "multi-modality_dataset-UICodeEdit.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair.json",
+          "filename": "multi-modality_dataset-UICodeRepair.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": []
           },
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React.json",
+          "filename": "multi-modality_framework-React.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12630,7 +12630,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Vue.json",
+          "filename": "multi-modality_framework-Vue.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12640,7 +12640,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Vue.json",
+          "filename": "multi-modality_framework-React-Vue.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12651,7 +12651,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Angular.json",
+          "filename": "multi-modality_framework-Angular.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12661,7 +12661,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Angular.json",
+          "filename": "multi-modality_framework-React-Angular.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12672,7 +12672,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Vue-Angular.json",
+          "filename": "multi-modality_framework-Vue-Angular.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12683,7 +12683,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12695,7 +12695,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Vanilla.json",
+          "filename": "multi-modality_framework-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12705,7 +12705,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Vanilla.json",
+          "filename": "multi-modality_framework-React-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12716,7 +12716,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12727,7 +12727,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12739,7 +12739,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12750,7 +12750,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12762,7 +12762,7 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [],
             "framework": [
@@ -12774,10 +12774,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React"
@@ -12786,10 +12786,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Vue"
@@ -12798,10 +12798,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12811,10 +12811,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Angular"
@@ -12823,10 +12823,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12836,10 +12836,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Vue",
@@ -12849,10 +12849,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12863,10 +12863,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Vanilla"
@@ -12875,10 +12875,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12888,10 +12888,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Vue",
@@ -12901,10 +12901,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12915,10 +12915,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Angular",
@@ -12928,10 +12928,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "React",
@@ -12942,10 +12942,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation"
+              "UI Code Generation"
             ],
             "framework": [
               "Vue",
@@ -12956,10 +12956,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React"
@@ -12968,10 +12968,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Vue"
@@ -12980,10 +12980,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -12993,10 +12993,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Angular"
@@ -13005,10 +13005,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13018,10 +13018,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13031,10 +13031,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13045,10 +13045,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Vanilla"
@@ -13057,10 +13057,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13070,10 +13070,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13083,10 +13083,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13097,10 +13097,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Angular",
@@ -13110,10 +13110,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13124,10 +13124,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit"
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13138,11 +13138,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React"
@@ -13151,11 +13151,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Vue"
@@ -13164,11 +13164,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13178,11 +13178,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Angular"
@@ -13191,11 +13191,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13205,11 +13205,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13219,11 +13219,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13234,11 +13234,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Vanilla"
@@ -13247,11 +13247,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13261,11 +13261,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13275,11 +13275,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13290,11 +13290,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Angular",
@@ -13304,11 +13304,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "React",
@@ -13319,11 +13319,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignEdit_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeEdit_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Edit"
+              "UI Code Generation",
+              "UI Code Edit"
             ],
             "framework": [
               "Vue",
@@ -13334,10 +13334,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React"
@@ -13346,10 +13346,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Vue"
@@ -13358,10 +13358,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13371,10 +13371,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Angular"
@@ -13383,10 +13383,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13396,10 +13396,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13409,10 +13409,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13423,10 +13423,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Vanilla"
@@ -13435,10 +13435,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13448,10 +13448,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13461,10 +13461,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13475,10 +13475,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Angular",
@@ -13488,10 +13488,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13502,10 +13502,10 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignRepair_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeRepair_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Repair"
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13516,11 +13516,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React"
@@ -13529,11 +13529,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue"
@@ -13542,11 +13542,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13556,11 +13556,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Angular"
@@ -13569,11 +13569,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13583,11 +13583,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13597,11 +13597,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13612,11 +13612,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Vanilla"
@@ -13625,11 +13625,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13639,11 +13639,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13653,11 +13653,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13668,11 +13668,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Angular",
@@ -13682,11 +13682,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13697,11 +13697,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignGeneration-DesignRepair_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeGeneration-UICodeRepair_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Generation",
-              "Design Repair"
+              "UI Code Generation",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13712,11 +13712,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React"
@@ -13725,11 +13725,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Vue.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Vue.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue"
@@ -13738,11 +13738,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Vue.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Vue.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13752,11 +13752,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Angular"
@@ -13765,11 +13765,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13779,11 +13779,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13793,11 +13793,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Vue-Angular.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Angular.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13808,11 +13808,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Vanilla"
@@ -13821,11 +13821,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13835,11 +13835,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",
@@ -13849,11 +13849,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Vue-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Vue-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13864,11 +13864,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Angular",
@@ -13878,11 +13878,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-React-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-React-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "React",
@@ -13893,11 +13893,11 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-web_dataset-DesignEdit-DesignRepair_framework-Vue-Angular-Vanilla.json",
+          "filename": "multi-modality_dataset-UICodeEdit-UICodeRepair_framework-Vue-Angular-Vanilla.json",
           "filters": {
             "dataset": [
-              "Design Edit",
-              "Design Repair"
+              "UI Code Edit",
+              "UI Code Repair"
             ],
             "framework": [
               "Vue",

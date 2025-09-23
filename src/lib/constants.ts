@@ -30,6 +30,7 @@ export const MODEL_URLS: Record<string, string> = {
   "claude-3.7-sonnet": "https://www.anthropic.com/news/claude-3-7-sonnet",
   "claude-3.7": "https://www.anthropic.com/news/claude-3-7-sonnet",
   "Claude-4-Sonnet": "https://www.anthropic.com/news/claude-4",
+  "Claude-4": "https://www.anthropic.com/news/claude-4",
 
   // DeepSeek models
   "deepseek-v3": "https://github.com/deepseek-ai/DeepSeek-V3",
@@ -42,6 +43,7 @@ export const MODEL_URLS: Record<string, string> = {
   "Gemini-2.0-flash": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
   "gemini-2.0": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash",
   "Gemini-2.5-Pro": "https://deepmind.google/models/gemini/pro/",
+  "Gemini-2.5": "https://deepmind.google/models/gemini/pro/",
   "Gemini-2.5-Flash": "https://deepmind.google/models/gemini/flash/",
 
   // Gemma models
@@ -139,6 +141,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Claude-3.5-Sonnet': '2024-10-22',
   'Claude-3.5-Sonnet-20240620': '2024-06-20',
   'Claude-4-Sonnet': '2025-05-22',
+  'Claude-4': '2025-05-22',
   'Claude-3.7-Sonnet': '2025-02-24',
   'Claude-3.5-Haiku-20241022': '2024-10-22',
 
@@ -185,6 +188,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Gemma-3-27b-it': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.5-Pro': '2024-05-06',
+  'Gemini-2.5': '2024-05-06',
   'Gemini-2.5-Flash': '2025-08-26',
   'Gemini-2.0-Flash': '2024-11-20',
   'Gemini-2.0-Pro': '2025-02-25',
@@ -306,7 +310,7 @@ export const DATASET_RELEASE_DATES: Record<string, string> = {
   // 'input prediction': '2021-07-07', // Based on HumanEval
   // 'output prediction': '2021-07-07', // Based on HumanEval
   // 'code-robustness': '2023-06-15', // CodeCrash dataset
-  // 'code-web': '2024-09-15', // DesignBench dataset
+  // 'multi-modality': '2024-09-15', // DesignBench dataset
   // 'interaction-2-code': '2024-11-03', // Interaction2Code dataset
   // 'mr-web': '2024-12-13', // MR-Web dataset
   // 'overall': '2021-07-07', // Based on oldest dataset

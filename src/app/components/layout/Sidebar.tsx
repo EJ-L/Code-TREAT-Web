@@ -119,7 +119,7 @@ const Sidebar: FC<SidebarProps> = ({
                         }`}
                       >
                         {(() => {
-                          if (task === 'code-web') return 'Multi-modality';
+                          if (task === 'multi-modality') return 'Multi-modality';
                           if (task === 'code-robustness') return 'Code-Robustness';
                           if (task === 'unit test generation') return 'Unit Test Generation';
                           if (task === 'input prediction') return 'Code Reasoning (Input Prediction)';

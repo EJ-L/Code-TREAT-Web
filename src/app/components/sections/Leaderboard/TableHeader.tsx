@@ -22,7 +22,7 @@ interface TableHeaderProps {
   isDarkMode: boolean;
 }
 
-// Helper function to format difficulty headers
+// Helper function to format difficulty headers and multi-line headers
 const formatDifficultyHeader = (label: string): JSX.Element => {
   // Check if it's a difficulty-specific header
   if (label.startsWith('Easy ') || label.startsWith('Medium ') || label.startsWith('Hard ')) {
@@ -34,6 +34,21 @@ const formatDifficultyHeader = (label: string): JSX.Element => {
       </div>
     );
   }
+  
+  // Check if it's a multi-line header (contains newline character)
+  if (label.includes('\n')) {
+    const lines = label.split('\n');
+    return (
+      <div className="flex flex-col items-center justify-center">
+        {lines.map((line, index) => (
+          <span key={index} className="text-sm sm:text-base md:text-lg font-extrabold leading-tight">
+            {line}
+          </span>
+        ))}
+      </div>
+    );
+  }
+  
   return <span className="flex items-center justify-center">{label}</span>;
 };
 
@@ -102,7 +117,9 @@ const TableHeader: FC<TableHeaderProps> = ({
           'VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Average',
           // MR-Web metrics
           'MAE', 'NEMD', 'RER',
-          'Vanilla', 'PSC-ALL', 'MCC'
+          'Vanilla', 'PSC-ALL', 'MCC',
+          // Unit test generation metrics
+          'csr', 'line_coverage', 'branch_coverage'
         ];
         if (sortableColumns.includes(header.key)) {
           handleSort(header.key);

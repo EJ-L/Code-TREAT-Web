@@ -381,6 +381,31 @@ export const BASE_HEADERS: Record<string, HeaderConfig> = {
     defaultWidth: 100,
     minWidth: 80
   },
+  // Unit test generation metrics
+  'csr': {
+    key: 'csr',
+    label: 'CSR',
+    width: 'w-24',
+    description: 'Compilation Success Rate - percentage of generated tests that compile successfully',
+    defaultWidth: 100,
+    minWidth: 80
+  },
+  'line_coverage': {
+    key: 'line_coverage',
+    label: 'Line\nCoverage',
+    width: 'w-32',
+    description: 'Percentage of source code lines covered by the generated unit tests',
+    defaultWidth: 130,
+    minWidth: 110
+  },
+  'branch_coverage': {
+    key: 'branch_coverage',
+    label: 'Branch\nCoverage',
+    width: 'w-32',
+    description: 'Percentage of code branches covered by the generated unit tests',
+    defaultWidth: 140,
+    minWidth: 120
+  },
 };
 
 // Column width configurations with task-specific overrides
@@ -551,6 +576,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
+  'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
 
 // Difficulty-based header configurations
@@ -584,6 +610,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
+  'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
 
 // Tasks that support difficulty-based results
@@ -637,7 +664,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
   'code-web': {
     extractedFilter: 'dataset',
     overallTab: 'All',
-    tabs: ['All', 'Design Generation', 'Design Edit', 'Design Repair']
+    tabs: ['All', 'UI Code Generation', 'UI Code Edit', 'UI Code Repair']
   },
   'mr-web': {
     extractedFilter: 'knowledge',
@@ -758,7 +785,8 @@ export const HIGH_TO_LOW_METRICS = [
   'SSIM', 'Text', 'Position', 'Implement Rate',
   'VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC',
   'MAE', 'NEMD', 'RER',
-  'Vanilla', 'PSC-ALL', 'MCC'
+  'Vanilla', 'PSC-ALL', 'MCC',
+  'csr', 'line_coverage', 'branch_coverage'
 ];
 
 export function getDefaultSortDirection(key: string): 'asc' | 'desc' {

@@ -259,6 +259,16 @@ interface LeaderboardProps {
           filterValue = 'Merge-HR+GFG';
         }
         
+        // Special mapping for code-web: UI Code tabs should filter by original Design dataset names
+        if (currentTask === 'code-web') {
+          const codeWebMapping: Record<string, string> = {
+            'UI Code Generation': 'Design Generation',
+            'UI Code Edit': 'Design Edit',
+            'UI Code Repair': 'Design Repair'
+          };
+          filterValue = codeWebMapping[tab] || tab;
+        }
+        
         setSelectedAbilities({
           [abilityKey]: [filterValue]
         });

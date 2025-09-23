@@ -53,7 +53,7 @@ const papers: PaperInfo[] = [
     leaderboardTask: "mr-web"
   },
   {
-    name: "Code-Web",
+    name: "Multi-Modality",
     title: "DesignBench: A Comprehensive Benchmark for MLLM-based Front-end Code Generation",
     authors: "Xiao et al.",
     venue: "arXiv",

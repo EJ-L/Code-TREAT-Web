@@ -111,6 +111,14 @@ const taskAbilities: Record<TaskType, Ability> = {
     robustness: [],
     privacy: [],
   },
+  'unit test generation': {
+    modality: ['Python'],
+    knowledge: [],
+    reasoning: ['Direct'],
+    dataset: ['symprompt'],
+    robustness: [],
+    privacy: [],
+  },
 };
 
 export default function Home() {

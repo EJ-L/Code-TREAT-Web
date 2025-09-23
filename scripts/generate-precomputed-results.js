@@ -107,6 +107,14 @@ const taskAbilities = {
     robustness: [],
     privacy: [],
   },
+  'unit test generation': {
+    modality: ['Python'],
+    knowledge: [],
+    reasoning: ['Direct'],
+    dataset: ['symprompt'],
+    robustness: [],
+    privacy: [],
+  },
 };
 
 // Tasks that support difficulty-based results

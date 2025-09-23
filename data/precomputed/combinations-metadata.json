@@ -1,5 +1,5 @@
 {
-  "generated": "2025-09-23T14:20:46.830Z",
+  "generated": "2025-09-23T15:39:25.215Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -14319,6 +14319,16 @@
               "Merge-HR+GFG"
             ]
           },
+          "showByDifficulty": false
+        }
+      ]
+    },
+    "unit test generation": {
+      "totalCombinations": 1,
+      "combinations": [
+        {
+          "filename": "unit-test-generation_overall.json",
+          "filters": {},
           "showByDifficulty": false
         }
       ]

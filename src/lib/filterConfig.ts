@@ -133,6 +133,17 @@ function getDisplayText(value: string, key: keyof Ability, task: TaskType): stri
     };
     return displayMap[value] || value;
   }
+  
+  // Transform Code-Web dataset display names
+  if (task === 'code-web' && key === 'dataset') {
+    const displayMap: Record<string, string> = {
+      'Design Generation': 'UI Code Generation',
+      'Design Edit': 'UI Code Edit',
+      'Design Repair': 'UI Code Repair'
+    };
+    return displayMap[value] || value;
+  }
+  
   return value;
 }
 
@@ -155,7 +166,7 @@ export const filterConditions = {
     false,
   
   shouldShowDataNote: (task: TaskType) =>
-    !['code-web', 'mr-web', 'interaction-2-code', 'overall', 'vulnerability detection'].includes(task),
+    !['code-web', 'mr-web', 'interaction-2-code', 'overall', 'vulnerability detection', 'unit test generation'].includes(task),
   
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',

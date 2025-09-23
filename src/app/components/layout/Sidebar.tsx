@@ -99,32 +99,39 @@ const Sidebar: FC<SidebarProps> = ({
             {/* Task List - Always shown */}
             {taskAbilities && (
               <div className="ml-4 mt-1 space-y-1">
-                {Object.keys(taskAbilities).map((task) => (
-                  <button
-                    key={task}
-                    onClick={() => {
-                      onSectionChange('tasks');
-                      onTaskChange?.(task as TaskType);
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors ${
-                      currentTask === task && currentSection === 'tasks'
-                        ? isDarkMode 
-                          ? 'bg-blue-900/50 text-blue-100 font-semibold' 
-                          : 'bg-blue-100 text-blue-800 font-semibold'
-                        : isDarkMode 
-                          ? 'text-slate-400 hover:bg-blue-900/20 hover:text-blue-200 font-medium' 
-                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700 font-medium'
-                    }`}
-                  >
-                    {(() => {
-                      if (task === 'mr-web') return 'MR-Web';
-                      if (task === 'code-web') return 'Code-Web';
-                      if (task === 'interaction-2-code') return 'Interaction-2-Code';
-                      if (task === 'code-robustness') return 'Code-Robustness';
-                      return task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                    })()}
-                  </button>
-                ))}
+                {Object.keys(taskAbilities).map((task) => {
+                  
+                  return (
+                    <div key={task}>
+                      <button
+                        onClick={() => {
+                          onSectionChange('tasks');
+                          onTaskChange?.(task as TaskType);
+                        }}
+                        className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors ${
+                          currentTask === task && currentSection === 'tasks'
+                            ? isDarkMode 
+                              ? 'bg-blue-900/50 text-blue-100 font-semibold' 
+                              : 'bg-blue-100 text-blue-800 font-semibold'
+                            : isDarkMode 
+                              ? 'text-slate-400 hover:bg-blue-900/20 hover:text-blue-200 font-medium' 
+                              : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700 font-medium'
+                        }`}
+                      >
+                        {(() => {
+                          if (task === 'mr-web') return 'MR-Web';
+                          if (task === 'code-web') return 'Multi-modality';
+                          if (task === 'interaction-2-code') return 'Interaction-2-Code';
+                          if (task === 'code-robustness') return 'Code-Robustness';
+                          if (task === 'unit test generation') return 'Unit Test Generation';
+                          if (task === 'input prediction') return 'Code Reasoning (Input Prediction)';
+                          if (task === 'output prediction') return 'Code Reasoning (Output Prediction)';
+                          return task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                        })()}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </li>

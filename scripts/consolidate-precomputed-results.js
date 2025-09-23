@@ -21,6 +21,7 @@ const TASK_MAPPINGS = {
   'mr-web': 'mr-web',
   'interaction-2-code': 'interaction-2-code',
   'code-robustness': 'code-robustness',
+  'unit test generation': 'unit-test-generation',
 };
 
 function consolidateResults() {

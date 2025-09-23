@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-09-23T14:21:48.857Z",
+  "generatedAt": "2025-09-23T15:39:38.852Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -15356,6 +15356,17 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-HR+GFG.json"
+        }
+      ]
+    },
+    "unit test generation": {
+      "totalCombinations": 1,
+      "files": [
+        {
+          "filename": "unit-test-generation_overall.json",
+          "filters": {},
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\unit-test-generation\\unit-test-generation_overall.json"
         }
       ]
     }

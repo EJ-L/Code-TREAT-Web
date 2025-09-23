@@ -8,6 +8,7 @@ import { processVulnerabilityDetection, aggregateVulnerabilityDetectionResults }
 import { processCodeReview, aggregateCodeReviewResults } from './tasks/codeReview';
 import { processInputPrediction, aggregateInputPredictionResults } from './tasks/inputPrediction';
 import { processOutputPrediction, aggregateOutputPredictionResults } from './tasks/outputPrediction';
+import { processUnitTestGeneration, aggregateUnitTestGenerationResults } from './tasks/unitTestGeneration';
 import { processOverall } from './tasks/overall';
 import { MODEL_URLS } from './constants';
 
@@ -153,6 +154,11 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     case 'vulnerability detection':
       const vulnResults = await processVulnerabilityDetection(data.map(processResult), filters);
       processedResults = aggregateVulnerabilityDetectionResults(vulnResults);
+      break;
+      
+    case 'unit test generation':
+      const unitTestResults = await processUnitTestGeneration(data.map(processResult), filters);
+      processedResults = aggregateUnitTestGenerationResults(unitTestResults);
       break;
       
     case 'input prediction':
@@ -479,7 +485,8 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
      typeof firstResult['Accuracy'] === 'string' ||
      typeof firstResult['CLIP'] === 'string' ||
      typeof firstResult['VAN'] === 'string' ||
-     typeof firstResult['easy_pass@1'] === 'string');
+     typeof firstResult['easy_pass@1'] === 'string' ||
+     typeof firstResult['csr'] === 'string');
   
   console.log(`📊 Is precomputed data: ${isPrecomputedData}`);
   
@@ -600,7 +607,12 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     formattedResult['MAE'] = result['MAE'] !== null && result['MAE'] !== undefined ? result['MAE'].toFixed(3) : '-';
     formattedResult['NEMD'] = result['NEMD'] !== null && result['NEMD'] !== undefined ? result['NEMD'].toFixed(3) : '-';
     formattedResult['RER'] = result['RER'] !== null && result['RER'] !== undefined ? (result['RER'] * 100).toFixed(1) : '-';
-
+    
+    // unit test generation metrics
+    formattedResult['csr'] = result['csr'] !== null && result['csr'] !== undefined ? result['csr'].toFixed(3) : '-';
+    formattedResult['line_coverage'] = result['line_coverage'] !== null && result['line_coverage'] !== undefined ? result['line_coverage'].toFixed(1) : '-';
+    formattedResult['branch_coverage'] = result['branch_coverage'] !== null && result['branch_coverage'] !== undefined ? result['branch_coverage'].toFixed(1) : '-';
+    
     return formattedResult;
   });
-} 
+}

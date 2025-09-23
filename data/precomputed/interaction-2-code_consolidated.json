@@ -14,7 +14,7 @@
         "Implement Rate": "78.7"
       }
     },
-    "GPT-4o-20240806": {
+    "GPT-4o-2024-08-06": {
       "overall": {
         "rank": 2,
         "CLIP": "56.0",
@@ -34,7 +34,7 @@
         "Implement Rate": "70.6"
       }
     },
-    "Qwen2.5-VL-72B-Instruct": {
+    "Qwen-2.5-VL-72B-Instruct": {
       "overall": {
         "rank": 4,
         "CLIP": "49.0",
@@ -44,7 +44,7 @@
         "Implement Rate": "70.0"
       }
     },
-    "Qwen2.5-VL-7B-Instruct": {
+    "Qwen-2.5-VL-7B-Instruct": {
       "overall": {
         "rank": 5,
         "CLIP": "31.9",
@@ -54,7 +54,7 @@
         "Implement Rate": "47.9"
       }
     },
-    "Qwen2.5-VL-3B-Instruct": {
+    "Qwen-2.5-VL-3B-Instruct": {
       "overall": {
         "rank": 6,
         "CLIP": "16.8",

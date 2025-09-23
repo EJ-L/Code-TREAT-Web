@@ -1,6 +1,8 @@
 "use client";
 import { FC } from 'react';
 import Hero from '../sections/Hero';
+import Introduction from '../sections/Introduction';
+import BenchmarkConstruction from '../sections/BenchmarkConstruction';
 import PaperOverview from '../sections/PaperOverview';
 
 interface OverviewPageProps {
@@ -13,6 +15,12 @@ const OverviewPage: FC<OverviewPageProps> = ({ isDarkMode, onNavigateToTask }) =
     <div className="flex-1">
       {/* Hero Section */}
       <Hero isDarkMode={isDarkMode} onNavigateToTask={onNavigateToTask} />
+      
+      {/* Introduction Section */}
+      <Introduction isDarkMode={isDarkMode} />
+      
+      {/* Benchmark Construction Section */}
+      <BenchmarkConstruction isDarkMode={isDarkMode} />
       
       {/* Paper Overview Section */}
       <PaperOverview isDarkMode={isDarkMode} />

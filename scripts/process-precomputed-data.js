@@ -5,76 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Model alias mapping to normalize model names - keep in sync with src/lib/constants.ts
-const MODEL_NAME_ALIASES = {
-  // Meta Llama 3.1 70B variants
-  'meta-llama_Meta_Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'LLama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  
-  // Meta Llama 3.3 70B variants
-  'meta-llama_Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'LLama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  
-  // Meta Llama 3.1 8B variants
-  'meta-llama_Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'LLama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  
-  // Meta Llama 4 Scout variants
-  'meta-llama_Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'LLama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'meta-llama/Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  
-  // Claude 3.5 Sonnet variants
-  'Claude-3.5-sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'claude-3.5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'Claude-3-5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  
-  // Google Gemma 3 27B variants
-  'google_gemma-3-27b-it': 'google/gemma-3-27b-it',
-  'Gemma-3-27B-Instruct': 'google/gemma-3-27b-it',
-  
-  // Qwen variants
-  'Qwen/Qwen2.5-Coder-32B-Instrct': 'Qwen/Qwen2.5-Coder-32B-Instruct', // Fix typo
-};
 
-/**
- * Normalize a model name to a canonical form to prevent duplicates
- */
-function canonicalizeModelName(modelName) {
-  if (!modelName) return modelName;
-  // Only apply explicit alias mapping; do not trim or fuzzy-match to preserve version semantics
-  if (MODEL_NAME_ALIASES[modelName]) return MODEL_NAME_ALIASES[modelName];
-  return modelName;
-}
-
-// Models to exclude from generation (as specified in todo.md)
-const EXCLUDED_MODELS = new Set([
-  'o3-mini',
-  'o4-mini', 
-  'gpt-4.1-2025-04-14',
-  'grok-3-mini-beta',
-  'Gemma-3-27B-Instruct',
-  'Llama-4-Scout-17B-16E-Instruct',
-  'google/gemma-3-27b=it', // Note: this appears to be a typo, should be 'google/gemma-3-27b-it'
-  'Qwen/Qwen2.5-Coder-32B-Instrct', // Note: this appears to be a typo, should be 'Qwen/Qwen2.5-Coder-32B-Instruct'
-  'meta-llama/Llama-4-Scout-17B-16E-Instruct'
-]);
-
-/**
- * Check if a model should be excluded from processing
- */
-function shouldExcludeModel(modelName) {
-  if (!modelName) return false;
-  
-  // Check both original and canonical names
-  const canonicalName = canonicalizeModelName(modelName);
-  return EXCLUDED_MODELS.has(modelName) || EXCLUDED_MODELS.has(canonicalName);
-}
+// No model exclusions - process all models
 
 // Simulate the data loading and processing that happens in the React app
 // This will need to be adapted based on your actual data processing logic
@@ -332,29 +264,21 @@ function applyFilters(data, task, filters) {
 function aggregateData(data, task, showByDifficulty) {
   const modelGroups = new Map();
   
-  // Group by model using canonical names to prevent duplicates and exclude unwanted models
+  // Group by model using original names
   data.forEach(entry => {
-    const originalModelName = entry.model_name;
+    const modelName = entry.model_name;
     
-    // Skip excluded models
-    if (shouldExcludeModel(originalModelName)) {
+    // Skip entries without model names
+    if (!modelName) {
       return;
     }
     
-    const canonicalModelName = canonicalizeModelName(originalModelName);
-    
-    // Double-check after canonicalization
-    if (shouldExcludeModel(canonicalModelName)) {
-      return;
+    if (!modelGroups.has(modelName)) {
+      modelGroups.set(modelName, []);
     }
     
-    if (!modelGroups.has(canonicalModelName)) {
-      modelGroups.set(canonicalModelName, []);
-    }
-    
-    // Update the entry to use the canonical name for consistency
-    const processedEntry = { ...entry, model_name: canonicalModelName };
-    modelGroups.get(canonicalModelName).push(processedEntry);
+    // Use the original entry without modification
+    modelGroups.get(modelName).push(entry);
   });
   
   // Aggregate metrics for each model
@@ -364,7 +288,8 @@ function aggregateData(data, task, showByDifficulty) {
   for (const [modelName, entries] of modelGroups.entries()) {
     const result = {
       rank: rank++,
-      model: modelName,
+      model: modelName,  // Keep for backwards compatibility with PrecomputedDataSource
+      model_name: modelName,  // Use model_name field for consistency with main app
       model_url: getModelUrl(modelName)
     };
     

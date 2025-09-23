@@ -372,9 +372,191 @@
     }
   },
   "data": {
-    "o3-mini (Med)": {
+    "Claude-Sonnet-4": {
       "overall": {
         "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 2,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python": {
+        "rank": 3,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Java": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python-Java": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 2,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 2,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "60.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "62.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "o3-mini (Med)": {
+      "overall": {
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -392,7 +574,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -410,25 +592,25 @@
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -452,7 +634,7 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 5,
+        "rank": 4,
         "pass@1": "62.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -482,7 +664,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -524,19 +706,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -578,475 +760,27 @@
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "56.7",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "GPT-4.1-2025-04-14": {
-      "overall": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 3,
-        "pass@1": "59.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 2,
-        "pass@1": "55.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 3,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 4,
-        "pass@1": "49.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python": {
-        "rank": 7,
-        "pass@1": "60.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Java": {
-        "rank": 3,
-        "pass@1": "58.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python-Java": {
-        "rank": 3,
-        "pass@1": "59.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 2,
-        "pass@1": "64.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 4,
-        "pass@1": "46.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 2,
-        "pass@1": "55.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 3,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 4,
-        "pass@1": "49.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "59.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "59.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "59.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "55.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "55.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "55.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 4,
-        "pass@1": "49.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "49.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "49.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "56.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "Claude-Sonnet-4": {
-      "overall": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 1,
-        "pass@1": "62.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 5,
-        "pass@1": "54.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 8,
-        "pass@1": "61.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 2,
-        "pass@1": "51.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python": {
-        "rank": 3,
-        "pass@1": "64.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Java": {
-        "rank": 1,
-        "pass@1": "60.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python-Java": {
-        "rank": 1,
-        "pass@1": "62.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 9,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 3,
-        "pass@1": "48.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 5,
-        "pass@1": "54.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 8,
-        "pass@1": "61.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 2,
-        "pass@1": "51.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 1,
-        "pass@1": "62.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 1,
-        "pass@1": "62.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 1,
-        "pass@1": "62.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 5,
-        "pass@1": "54.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "54.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "54.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 8,
-        "pass@1": "61.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "61.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "61.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "51.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "51.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "51.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "56.2",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
     "Claude-3.7-Sonnet": {
       "overall": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -1058,19 +792,19 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "54.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 2,
+        "rank": 3,
         "pass@1": "63.3",
         "pass@3": "-",
         "pass@5": "-"
@@ -1082,25 +816,25 @@
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -1124,25 +858,25 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 7,
+        "rank": 6,
         "pass@1": "62.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 5,
+        "rank": 4,
         "pass@1": "45.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "54.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 2,
+        "rank": 3,
         "pass@1": "63.3",
         "pass@3": "-",
         "pass@5": "-"
@@ -1154,7 +888,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -1178,55 +912,55 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "54.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "54.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "54.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 2,
+        "rank": 3,
         "pass@1": "63.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 2,
+        "rank": 3,
         "pass@1": "63.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
+        "rank": 3,
         "pass@1": "63.3",
         "pass@3": "-",
         "pass@5": "-"
@@ -1250,20 +984,244 @@
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "55.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "GPT-4.1-2025-04-14": {
+      "overall": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 3,
+        "pass@1": "59.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks": {
+        "rank": 6,
+        "pass@1": "53.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 7,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 6,
+        "pass@1": "47.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python": {
+        "rank": 7,
+        "pass@1": "60.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Java": {
+        "rank": 3,
+        "pass@1": "58.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python-Java": {
+        "rank": 3,
+        "pass@1": "59.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python": {
+        "rank": 7,
+        "pass@1": "61.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Java": {
+        "rank": 6,
+        "pass@1": "45.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python-Java": {
+        "rank": 6,
+        "pass@1": "53.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 7,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 6,
+        "pass@1": "47.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 3,
+        "pass@1": "59.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "59.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "59.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "53.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "53.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "53.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "47.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "47.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "47.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.7",
         "pass@3": "-",
         "pass@5": "-"
       }
@@ -1282,7 +1240,7 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "55.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -1294,13 +1252,13 @@
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -1330,7 +1288,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -1360,19 +1318,19 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "55.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -1402,19 +1360,19 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "55.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "55.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "55.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -1438,37 +1396,37 @@
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 1,
+        "rank": 2,
         "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -1492,27 +1450,209 @@
         "pass@5": "-"
       }
     },
-    "o4-mini (Med)": {
+    "Claude-4-Sonnet": {
       "overall": {
         "rank": 6,
-        "pass@1": "53.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 17,
-        "pass@1": "49.7",
+        "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
         "rank": 4,
-        "pass@1": "54.5",
+        "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
         "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 10,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 4,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python": {
+        "rank": 9,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Java": {
+        "rank": 3,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python-Java": {
+        "rank": 4,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 10,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 4,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 10,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "60.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "o4-mini (Med)": {
+      "overall": {
+        "rank": 7,
+        "pass@1": "53.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 18,
+        "pass@1": "49.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks": {
+        "rank": 3,
+        "pass@1": "54.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1524,67 +1664,67 @@
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "44.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "57.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "42.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "49.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 3,
+        "rank": 2,
         "pass@1": "63.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "54.5",
         "pass@3": "-",
         "pass@5": "-"
@@ -1596,67 +1736,67 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "44.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "49.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "49.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "49.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "54.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "54.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "54.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1680,37 +1820,37 @@
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "44.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "44.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "44.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
+        "rank": 7,
         "pass@1": "53.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1718,7 +1858,7 @@
     },
     "DeepSeek-R1 (0528)": {
       "overall": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1736,7 +1876,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1748,37 +1888,37 @@
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "55.3",
         "pass@3": "-",
         "pass@5": "-"
@@ -1796,13 +1936,13 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 4,
+        "rank": 3,
         "pass@1": "63.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 10,
+        "rank": 9,
         "pass@1": "39.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -1820,13 +1960,13 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1868,19 +2008,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -1904,45 +2044,227 @@
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "52.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "Gemma-3-27B-Instruct": {
+      "overall": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 13,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 12,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 9,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python": {
+        "rank": 8,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Java": {
+        "rank": 18,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python-Java": {
+        "rank": 13,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 12,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 9,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "59.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "42.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
     "Gemini-2.5-Pro-Preview-05-06": {
       "overall": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -1960,7 +2282,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -1972,31 +2294,31 @@
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "36.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -2008,7 +2330,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -2044,13 +2366,13 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "36.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -2092,19 +2414,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -2128,37 +2450,37 @@
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "36.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "36.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "36.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -2166,7 +2488,7 @@
     },
     "DeepSeek-R1": {
       "overall": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -2184,49 +2506,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "61.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "39.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 8,
+        "rank": 9,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -2244,13 +2566,13 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 6,
+        "rank": 5,
         "pass@1": "62.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 19,
+        "rank": 18,
         "pass@1": "33.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -2262,19 +2584,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "61.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "39.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -2316,73 +2638,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "61.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "61.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
+        "rank": 8,
         "pass@1": "61.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "39.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "39.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "39.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "50.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -2390,7 +2712,7 @@
     },
     "Claude-3.5-Sonnet-20241022": {
       "overall": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2408,7 +2730,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2420,31 +2742,31 @@
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "39.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2474,7 +2796,7 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 11,
+        "rank": 10,
         "pass@1": "38.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -2492,13 +2814,13 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "39.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2540,19 +2862,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2576,45 +2898,45 @@
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "39.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "39.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "39.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 12,
         "pass@1": "50.0",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "Qwen3-235B-A22B": {
+    "Qwen-3-235B-A22B": {
       "overall": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2632,49 +2954,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "40.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "55.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -2710,19 +3032,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "40.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -2764,87 +3086,87 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "57.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "40.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "40.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "40.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "49.0",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "Qwen3-30B-A3B": {
+    "Qwen-3-30B-A3B": {
       "overall": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -2856,49 +3178,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "54.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "41.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "50.5",
         "pass@3": "-",
         "pass@5": "-"
@@ -2910,7 +3232,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -2934,37 +3256,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "54.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "41.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -2988,73 +3310,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "54.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "54.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "54.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "41.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "41.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
+        "rank": 10,
         "pass@1": "41.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "48.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -3062,13 +3384,13 @@
     },
     "GPT-4o-2024-11-20": {
       "overall": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 14,
+        "rank": 15,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -3080,49 +3402,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "58.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "37.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "56.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -3134,7 +3456,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 14,
+        "rank": 15,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -3158,37 +3480,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "58.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "37.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 14,
+        "rank": 15,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 15,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 15,
         "pass@1": "50.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -3212,87 +3534,87 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "58.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "58.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "58.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "37.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "37.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "37.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 15,
         "pass@1": "47.9",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "Qwen2.5-72B-Instruct": {
+    "Qwen-2.5-72B-Instruct": {
       "overall": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 13,
+        "rank": 14,
         "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -3304,49 +3626,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "41.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 11,
+        "rank": 13,
         "pass@1": "57.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -3358,7 +3680,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 13,
+        "rank": 14,
         "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -3382,37 +3704,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "41.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 13,
+        "rank": 14,
         "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 13,
+        "rank": 14,
         "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
+        "rank": 14,
         "pass@1": "51.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -3436,311 +3758,87 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 18,
         "pass@1": "54.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "41.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "41.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "41.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "Qwen2.5-Coder-32B-Instruct": {
+    "Qwen-3-32B": {
       "overall": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 11,
-        "pass@1": "52.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
         "rank": 16,
-        "pass@1": "45.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 19,
-        "pass@1": "52.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 9,
-        "pass@1": "41.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python": {
-        "rank": 14,
-        "pass@1": "55.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Java": {
-        "rank": 9,
-        "pass@1": "48.7",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_modality-Python-Java": {
-        "rank": 11,
-        "pass@1": "52.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 19,
-        "pass@1": "51.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 9,
-        "pass@1": "39.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 16,
-        "pass@1": "45.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 19,
-        "pass@1": "52.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 9,
-        "pass@1": "41.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 11,
-        "pass@1": "52.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "52.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "52.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 16,
-        "pass@1": "45.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "45.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "45.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 19,
-        "pass@1": "52.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "52.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "52.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 9,
-        "pass@1": "41.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "41.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "41.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "Qwen3-32B": {
-      "overall": {
-        "rank": 16,
-        "pass@1": "47.2",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 15,
         "pass@1": "50.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -3752,49 +3850,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "56.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "38.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -3806,7 +3904,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 15,
+        "rank": 16,
         "pass@1": "50.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -3830,37 +3928,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "56.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "38.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 15,
+        "rank": 16,
         "pass@1": "50.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 15,
+        "rank": 16,
         "pass@1": "50.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
+        "rank": 16,
         "pass@1": "50.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -3884,73 +3982,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "56.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "56.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "56.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "38.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "38.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
+        "rank": 17,
         "pass@1": "38.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "47.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -3958,7 +4056,7 @@
     },
     "DeepSeek-V3": {
       "overall": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -3970,49 +4068,49 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 17,
+        "rank": 16,
         "pass@1": "44.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "59.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "34.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -4042,31 +4140,31 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 21,
+        "rank": 20,
         "pass@1": "30.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 17,
+        "rank": 16,
         "pass@1": "44.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "59.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "34.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -4090,91 +4188,91 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 17,
+        "rank": 16,
         "pass@1": "44.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 16,
         "pass@1": "44.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 16,
         "pass@1": "44.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "59.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "59.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
+        "rank": 11,
         "pass@1": "59.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "34.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "34.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "34.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 18,
         "pass@1": "46.7",
         "pass@3": "-",
         "pass@5": "-"
@@ -4182,67 +4280,67 @@
     },
     "GPT-4-turbo-2024-04-09": {
       "overall": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "50.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
-        "rank": 18,
+        "rank": 17,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 12,
+        "rank": 14,
         "pass@1": "57.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -4254,7 +4352,7 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "50.3",
         "pass@3": "-",
         "pass@5": "-"
@@ -4266,153 +4364,377 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 20,
+        "rank": 19,
         "pass@1": "33.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 18,
+        "rank": 17,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "50.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "50.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
+        "rank": 17,
         "pass@1": "50.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 18,
+        "rank": 17,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 17,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 17,
         "pass@1": "43.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
+        "rank": 19,
         "pass@1": "53.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 19,
         "pass@1": "45.0",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "meta-llama/Llama-3.3-70B-Instruct": {
+    "Qwen-2.5-Coder-32B-Instruct": {
       "overall": {
-        "rank": 19,
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 11,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks": {
+        "rank": 18,
+        "pass@1": "43.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 22,
+        "pass@1": "49.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 12,
+        "pass@1": "40.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python": {
+        "rank": 16,
+        "pass@1": "55.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Java": {
+        "rank": 9,
+        "pass@1": "48.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python-Java": {
+        "rank": 11,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python": {
+        "rank": 21,
+        "pass@1": "47.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Java": {
+        "rank": 11,
+        "pass@1": "38.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python-Java": {
+        "rank": 18,
+        "pass@1": "43.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 22,
+        "pass@1": "49.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 12,
+        "pass@1": "40.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "43.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "43.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "43.0",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 22,
+        "pass@1": "49.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "49.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "49.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "40.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "40.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "40.3",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "44.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "Llama-3.3-70B-Instruct": {
+      "overall": {
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -4424,49 +4746,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "38.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "46.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -4478,13 +4800,13 @@
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 21,
+        "rank": 20,
         "pass@1": "48.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -4502,37 +4824,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "38.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 20,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
@@ -4556,73 +4878,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "38.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "38.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
+        "rank": 16,
         "pass@1": "38.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
@@ -4630,7 +4952,7 @@
     },
     "Grok-3-Mini-Beta (High)": {
       "overall": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -4642,49 +4964,49 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "35.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 20,
+        "rank": 19,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -4702,19 +5024,19 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "35.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -4738,73 +5060,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "49.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "35.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "35.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
+        "rank": 21,
         "pass@1": "35.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 22,
         "pass@1": "42.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -4812,13 +5134,13 @@
     },
     "GPT-3.5-turbo-0125": {
       "overall": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -4830,61 +5152,61 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "47.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 22,
+        "rank": 23,
         "pass@1": "32.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "52.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -4896,7 +5218,7 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 22,
+        "rank": 21,
         "pass@1": "30.6",
         "pass@3": "-",
         "pass@5": "-"
@@ -4908,37 +5230,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "47.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 22,
+        "rank": 23,
         "pass@1": "32.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
+        "rank": 21,
         "pass@1": "45.4",
         "pass@3": "-",
         "pass@5": "-"
@@ -4962,73 +5284,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "47.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "47.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "47.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 22,
+        "rank": 23,
         "pass@1": "32.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 23,
         "pass@1": "32.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 23,
         "pass@1": "32.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -5036,13 +5358,13 @@
     },
     "Claude-3.5-Haiku-20241022": {
       "overall": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -5054,61 +5376,61 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "53.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 25,
+        "rank": 26,
         "pass@1": "23.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 9,
+        "rank": 11,
         "pass@1": "57.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "22.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -5120,7 +5442,7 @@
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 25,
+        "rank": 24,
         "pass@1": "23.8",
         "pass@3": "-",
         "pass@5": "-"
@@ -5132,37 +5454,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "53.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 25,
+        "rank": 26,
         "pass@1": "23.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "39.9",
         "pass@3": "-",
         "pass@5": "-"
@@ -5186,675 +5508,717 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "53.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "53.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
+        "rank": 20,
         "pass@1": "53.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 25,
+        "rank": 26,
         "pass@1": "23.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 25,
+        "rank": 26,
         "pass@1": "23.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
+        "rank": 26,
         "pass@1": "23.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
+        "rank": 24,
         "pass@1": "38.6",
         "pass@3": "-",
         "pass@5": "-"
       }
     },
-    "meta-llama/Meta-Llama-3.1-70B-Instruct": {
+    "Gemma-3-27b-it": {
       "overall": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 21,
-        "pass@1": "41.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks": {
         "rank": 23,
-        "pass@1": "36.1",
+        "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 23,
-        "pass@1": "44.1",
+        "rank": 26,
+        "pass@1": "44.4",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 23,
-        "pass@1": "30.8",
+        "rank": 25,
+        "pass@1": "27.9",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python": {
         "rank": 23,
+        "pass@1": "44.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Java": {
+        "rank": 23,
+        "pass@1": "27.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python-Java": {
+        "rank": 23,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 26,
+        "pass@1": "44.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 25,
+        "pass@1": "27.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct": {
+        "rank": 23,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "44.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "44.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "44.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "27.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "27.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "27.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "Llama-3.1-70B-Instruct": {
+      "overall": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 23,
+        "pass@1": "41.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks": {
+        "rank": 24,
+        "pass@1": "36.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 27,
+        "pass@1": "44.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 24,
+        "pass@1": "30.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 26,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "47.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 21,
+        "rank": 22,
         "pass@1": "36.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "41.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "43.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 23,
+        "rank": 22,
         "pass@1": "29.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 23,
+        "rank": 27,
         "pass@1": "44.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "30.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 23,
+        "rank": 26,
         "pass@1": "37.5",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "41.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "41.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
+        "rank": 23,
         "pass@1": "41.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
+        "rank": 24,
         "pass@1": "36.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "44.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "44.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "44.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "30.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "30.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "30.8",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "37.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "google/gemma-3-27b-it": {
-      "overall": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "35.5",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "24.1",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "33.4",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "Qwen/Qwen2.5-Coder-32B-Instruct": {
-      "overall": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java": {
-        "rank": 21,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Java": {
-        "rank": 18,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_modality-Python-Java": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 21,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "31.3",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct": {
-        "rank": 21,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "33.9",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      },
-      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "32.6",
-        "pass@3": "-",
-        "pass@5": "-"
-      }
-    },
-    "meta-llama/Llama-3.1-8B-Instruct": {
-      "overall": {
         "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 27,
+        "pass@1": "44.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "44.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "44.1",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "30.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "30.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "30.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "37.5",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "Llama-4-Scout-17B-16E-Instruct": {
+      "overall": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 22,
+        "pass@1": "41.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks": {
+        "rank": 25,
+        "pass@1": "31.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python": {
+        "rank": 25,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java": {
+        "rank": 27,
+        "pass@1": "21.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python": {
+        "rank": 10,
+        "pass@1": "57.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Java": {
+        "rank": 23,
+        "pass@1": "26.2",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_modality-Python-Java": {
+        "rank": 22,
+        "pass@1": "41.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python": {
+        "rank": 25,
+        "pass@1": "42.8",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Java": {
+        "rank": 25,
+        "pass@1": "20.4",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_modality-Python-Java": {
+        "rank": 25,
+        "pass@1": "31.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python": {
+        "rank": 25,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Java": {
+        "rank": 27,
+        "pass@1": "21.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 22,
+        "pass@1": "41.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "41.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "41.9",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "31.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "31.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "31.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct": {
+        "rank": 27,
+        "pass@1": "21.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "21.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "21.6",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      },
+      "modality-Python-Java_reasoning-Direct-CoTReasoning": {
+        "rank": 27,
+        "pass@1": "33.7",
+        "pass@3": "-",
+        "pass@5": "-"
+      }
+    },
+    "Llama-3.1-8B-Instruct": {
+      "overall": {
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "25.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -5866,61 +6230,61 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "30.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "17.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "31.8",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Java": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "18.2",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_modality-Python-Java": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "25.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -5944,37 +6308,37 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "30.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Java": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "17.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_modality-Python-Java": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "25.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "25.0",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
+        "rank": 25,
         "pass@1": "25.0",
         "pass@3": "-",
         "pass@5": "-"
@@ -5998,73 +6362,73 @@
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "dataset-HackerRank-GeeksForGeeks_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "30.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "30.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "30.1",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "17.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "17.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "17.3",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"
       },
       "modality-Python-Java_reasoning-Direct-CoTReasoning": {
-        "rank": 26,
+        "rank": 28,
         "pass@1": "23.7",
         "pass@3": "-",
         "pass@5": "-"

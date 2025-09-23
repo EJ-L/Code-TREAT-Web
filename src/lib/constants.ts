@@ -29,7 +29,7 @@ export const MODEL_URLS: Record<string, string> = {
   "claude-3-5-haiku": "https://www.anthropic.com/news/3-5-models-and-computer-use",
   "claude-3.7-sonnet": "https://www.anthropic.com/news/claude-3-7-sonnet",
   "claude-3.7": "https://www.anthropic.com/news/claude-3-7-sonnet",
-  "Claude-Sonnet-4": "https://www.anthropic.com/news/claude-4",
+  "Claude-4-Sonnet": "https://www.anthropic.com/news/claude-4",
 
   // DeepSeek models
   "deepseek-v3": "https://github.com/deepseek-ai/DeepSeek-V3",
@@ -50,21 +50,21 @@ export const MODEL_URLS: Record<string, string> = {
   "gemma-3-27b": "https://huggingface.co/google/gemma-3-27b-it",
 
   // Qwen models
-  "Qwen2.5-72B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
-  "Qwen2.5-Coder-32B-Instruct": "https://qwenlm.github.io/zh/blog/qwen2.5-coder-family/",
+  "Qwen-2.5-72B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
+  "Qwen-2.5-Coder-32B-Instruct": "https://qwenlm.github.io/zh/blog/qwen2.5-coder-family/",
   "QwQ-32B": "https://qwenlm.github.io/zh/blog/qwq-32b/",
-  "Qwen2.5-32B": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct",
-  "Qwen3-32B": "https://huggingface.co/Qwen/Qwen3-32B",
-  "Qwen3-30B-A3B": "https://huggingface.co/Qwen/Qwen3-30B-A3B",
-  "Qwen3-235B-A22B": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
-  "Qwen2.5-vl-72B": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct",
-  "Qwen2.5-vl-7B": "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
-  "Qwen2.5-vl-32B": "https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct",
+  "Qwen-2.5-32B": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct",
+  "Qwen-3-32B": "https://huggingface.co/Qwen/Qwen3-32B",
+  "Qwen-3-30B-A3B": "https://huggingface.co/Qwen/Qwen3-30B-A3B",
+  "Qwen-3-235B-A22B": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+  "Qwen-2.5-vl-72B": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct",
+  "Qwen-2.5-vl-7B": "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
+  "Qwen-2.5-vl-32B": "https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct",
   "Qwen-7B": "https://huggingface.co/Qwen/Qwen-7B",
   "Qwen-72B": "https://huggingface.co/Qwen/Qwen-72B",
-  "Qwen2.5-7B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
-  "Qwen2.5-14B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct",
-  "Qwen2.5-VL-3B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct",
+  "Qwen-2.5-7B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+  "Qwen-2.5-14B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct",
+  "Qwen-2.5-VL-3B-Instruct": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct",
 
   // Grok models
   "grok-3-mini": "https://x.ai/news/grok-3",
@@ -102,52 +102,6 @@ export function getModelUrl(modelName: string): string | undefined {
   return undefined;
 }
 
-// Canonical model name aliases to unify inconsistent naming across data sources
-export const MODEL_NAME_ALIASES: Record<string, string> = {
-  // Meta Llama 3.1 70B variants
-  'meta-llama_Meta_Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'LLama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  
-  // Meta Llama 3.3 70B variants
-  'meta-llama_Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'LLama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  
-  // Meta Llama 3.1 8B variants
-  'meta-llama_Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'LLama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  
-  // Meta Llama 4 Scout variants
-  'meta-llama_Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'LLama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'meta-llama/Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  
-  // Claude 3.5 Sonnet variants
-  'Claude-3.5-sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'claude-3.5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'Claude-3-5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  
-  // Google Gemma 3 27B variants
-  'google_gemma-3-27b-it': 'google/gemma-3-27b-it',
-  'Gemma-3-27B-Instruct': 'google/gemma-3-27b-it',
-  
-  // Qwen variants
-  'Qwen/Qwen2.5-Coder-32B-Instrct': 'Qwen/Qwen2.5-Coder-32B-Instruct', // Fix typo
-};
-
-/**
- * Normalize a model name to a canonical key used elsewhere (URLs, publish dates)
- */
-export function canonicalizeModelName(modelName: string): string {
-  if (!modelName) return modelName;
-  // Only apply explicit alias mapping; do not trim or fuzzy-match to preserve version semantics
-  if (MODEL_NAME_ALIASES[modelName]) return MODEL_NAME_ALIASES[modelName];
-  return modelName;
-}
 
 /**
  * Get the base model name by stripping (CoT) suffix if present
@@ -184,7 +138,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Claude-3.5-Sonnet-20241022': '2024-10-22',
   'Claude-3.5-Sonnet': '2024-10-22',
   'Claude-3.5-Sonnet-20240620': '2024-06-20',
-  'Claude-Sonnet-4': '2025-05-22',
+  'Claude-4-Sonnet': '2025-05-22',
   'Claude-3.7-Sonnet': '2025-02-24',
   'Claude-3.5-Haiku-20241022': '2024-10-22',
 
@@ -202,21 +156,21 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Llama-3.2-11B-Vision': '2025-09-25',
 
   // Qwen Models
-  'Qwen3-235B-A22B': '2025-04-29',
-  'Qwen3-30B-A3B': '2025-04-29',
-  'Qwen3-32B': '2025-04-29',
-  'Qwen2.5-72B-Instruct': '2024-09-19',
-  'Qwen2.5-7B-Instruct': '2024-09-19',
-  'Qwen2.5-32B-Instruct': '2024-09-19',
-  'Qwen2.5-14B-Instruct': '2024-09-19',
-  'Qwen2.5-Coder-32B-Instruct': '2024-09-19',
-  'Qwen2.5-32B-Coder-Instruct': '2024-09-19',
+  'Qwen-3-235B-A22B': '2025-04-29',
+  'Qwen-3-30B-A3B': '2025-04-29',
+  'Qwen-3-32B': '2025-04-29',
+  'Qwen-2.5-72B-Instruct': '2024-09-19',
+  'Qwen-2.5-7B-Instruct': '2024-09-19',
+  'Qwen-2.5-32B-Instruct': '2024-09-19',
+  'Qwen-2.5-14B-Instruct': '2024-09-19',
+  'Qwen-2.5-Coder-32B-Instruct': '2024-09-19',
+  'Qwen-2.5-32B-Coder-Instruct': '2024-09-19',
   'QwQ-32B': '2025-03-10',
   'Qwen-72B': '2023-11-30',
   'Qwen-7B': '2023-11-30',
-  'Qwen2.5-VL-72B-Instruct': '2025-01-28',
-  'Qwen2.5-VL-7B-Instruct': '2025-01-28',
-  'Qwen2.5-VL-3B-Instruct': '2025-01-28',
+  'Qwen-2.5-VL-72B-Instruct': '2025-01-28',
+  'Qwen-2.5-VL-7B-Instruct': '2025-01-28',
+  'Qwen-2.5-VL-3B-Instruct': '2025-01-28',
 
   // Grok Models
   'Grok-3-Mini (High)': '2025-02-17',
@@ -269,11 +223,6 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'deepseek-chat': '2024-12-26',
   'deepseek/deepseek-r1:free': '2025-01-20',
   'grok-3-mini-beta': '2025-02-17',
-  'Qwen/Qwen2.5-Coder-32B-Instruct': '2024-09-19',
-  'Qwen/Qwen2.5-72B-Instruct': '2024-09-19',
-  'Qwen/Qwen3-30B-A3B': '2025-04-29',
-  'Qwen/Qwen3-32B': '2025-04-29',
-  'Qwen/QwQ-32B': '2025-03-10',
   'meta-llama/Llama-3.3-70B-Instruct': '2024-12-06'
 
 };

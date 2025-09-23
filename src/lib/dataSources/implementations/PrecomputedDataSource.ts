@@ -7,7 +7,6 @@ import {
 import { BaseDataSource } from '../base/BaseDataSource';
 import { ResultEntry, TaskType, FilterOptions, ProcessedResult } from '../../types';
 import { debug } from '../../debug';
-import { canonicalizeModelName } from '../../constants';
 
 /**
  * Interface for precomputed data structure
@@ -286,33 +285,22 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       mergedData.data[modelName] = { ...modelData };
     }
 
-    // Add difficulty metrics to existing models using canonical name matching
+    // Add difficulty metrics to existing models using direct name matching
     if (difficultyData) {
-      // Create a mapping of canonical names to regular data model names
-      const canonicalToRegularMap = new Map<string, string>();
-      for (const modelName of Object.keys(regularData!.data)) {
-        const canonical = canonicalizeModelName(modelName);
-        canonicalToRegularMap.set(canonical, modelName);
-      }
-
       for (const [difficultyModelName, modelData] of Object.entries(difficultyData.data)) {
-        const canonicalDifficultyName = canonicalizeModelName(difficultyModelName);
-        const matchingRegularModelName = canonicalToRegularMap.get(canonicalDifficultyName);
-        
-        if (matchingRegularModelName && mergedData.data[matchingRegularModelName]) {
-          // Merge difficulty metrics into existing model data using the regular model name
+        if (mergedData.data[difficultyModelName]) {
+          // Merge difficulty metrics into existing model data with same name
           for (const [combination, combinationData] of Object.entries(modelData)) {
-            if (mergedData.data[matchingRegularModelName][combination]) {
+            if (mergedData.data[difficultyModelName][combination]) {
               // Add difficulty-specific metrics to the existing combination
-              Object.assign(mergedData.data[matchingRegularModelName][combination], combinationData);
+              Object.assign(mergedData.data[difficultyModelName][combination], combinationData);
             } else {
               // If combination doesn't exist in regular data, add it
-              mergedData.data[matchingRegularModelName][combination] = { ...combinationData };
+              mergedData.data[difficultyModelName][combination] = { ...combinationData };
             }
           }
         } else {
           // If model doesn't exist in regular data, add it with difficulty data
-          // Use the original difficulty model name
           mergedData.data[difficultyModelName] = { ...modelData };
         }
       }

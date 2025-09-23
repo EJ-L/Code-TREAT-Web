@@ -1027,7 +1027,7 @@
         "LLM Judge": "96.3"
       }
     },
-    "Llama3.3-70B-Instruct": {
+    "Llama-3.3-70B-Instruct": {
       "overall": {
         "rank": 3,
         "LLM Judge": "96.0"
@@ -1285,7 +1285,7 @@
         "LLM Judge": "95.6"
       }
     },
-    "Qwen3-235B-A22B": {
+    "Qwen-3-235B-A22B": {
       "overall": {
         "rank": 4,
         "LLM Judge": "95.3"
@@ -1543,7 +1543,7 @@
         "LLM Judge": "95.6"
       }
     },
-    "Claude-Sonnet-4": {
+    "Claude-4-Sonnet": {
       "overall": {
         "rank": 5,
         "LLM Judge": "93.8"
@@ -2317,7 +2317,7 @@
         "LLM Judge": "90.9"
       }
     },
-    "Qwen3-32B": {
+    "Qwen-3-32B": {
       "overall": {
         "rank": 8,
         "LLM Judge": "90.2"
@@ -3349,7 +3349,7 @@
         "LLM Judge": "86.6"
       }
     },
-    "Qwen2.5-Coder-32B-Instruct": {
+    "Qwen-2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 12,
         "LLM Judge": "86.8"
@@ -3607,7 +3607,7 @@
         "LLM Judge": "86.1"
       }
     },
-    "Qwen2.5-72B-Instruct": {
+    "Qwen-2.5-72B-Instruct": {
       "overall": {
         "rank": 13,
         "LLM Judge": "86.5"
@@ -4897,7 +4897,7 @@
         "LLM Judge": "83.8"
       }
     },
-    "Gemma-3-27B-Instruct": {
+    "Gemma-3-27b-it": {
       "overall": {
         "rank": 18,
         "LLM Judge": "83.0"
@@ -5155,7 +5155,7 @@
         "LLM Judge": "81.4"
       }
     },
-    "Qwen3-30B-A3B": {
+    "Qwen-3-30B-A3B": {
       "overall": {
         "rank": 19,
         "LLM Judge": "81.4"

@@ -839,7 +839,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Claude-Sonnet-4": {
+    "Claude-4-Sonnet": {
       "overall": {
         "rank": 7,
         "pass@1": "70.3",
@@ -1181,7 +1181,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen3-235B-A22B": {
+    "Qwen-3-235B-A22B": {
       "overall": {
         "rank": 10,
         "pass@1": "67.7",
@@ -1637,7 +1637,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen3-32B": {
+    "Qwen-3-32B": {
       "overall": {
         "rank": 14,
         "pass@1": "65.7",
@@ -1751,7 +1751,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen2.5-Coder-32B-Instruct": {
+    "Qwen-2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 15,
         "pass@1": "64.6",
@@ -1865,7 +1865,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen3-30B-A3B": {
+    "Qwen-3-30B-A3B": {
       "overall": {
         "rank": 16,
         "pass@1": "63.9",
@@ -1979,7 +1979,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen2.5-72B-Instruct": {
+    "Qwen-2.5-72B-Instruct": {
       "overall": {
         "rank": 17,
         "pass@1": "62.3",
@@ -2891,7 +2891,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Gemma-3-27B-Instruct": {
+    "Gemma-3-27b-it": {
       "overall": {
         "rank": 25,
         "pass@1": "36.8",

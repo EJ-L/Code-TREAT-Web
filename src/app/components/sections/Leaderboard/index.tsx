@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { FilterOptions, TaskType, Ability, ProcessedResult } from '@/lib/types';
-import { MODEL_PUBLISH_DATES, canonicalizeModelName, getBaseModelName } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, getBaseModelName } from '@/lib/constants';
 
 import FilterPanel from './FilterPanel';
 import ResultsTable from './ResultsTable';
@@ -191,14 +191,12 @@ interface LeaderboardProps {
     if (timelineRange) {
       filtered = results.filter(result => {
         if (!result.model) return true; // Include if no model name
-        const canonicalName = canonicalizeModelName(result.model);
-        let modelReleaseDate = MODEL_PUBLISH_DATES[canonicalName] || MODEL_PUBLISH_DATES[result.model];
+        let modelReleaseDate = MODEL_PUBLISH_DATES[result.model];
         
         // If no date found and model is CoT variant, try base model name
         if (!modelReleaseDate && result.model.includes('(CoT)')) {
           const baseName = getBaseModelName(result.model);
-          const canonicalBaseName = canonicalizeModelName(baseName);
-          modelReleaseDate = MODEL_PUBLISH_DATES[canonicalBaseName] || MODEL_PUBLISH_DATES[baseName];
+          modelReleaseDate = MODEL_PUBLISH_DATES[baseName];
         }
         
         if (!modelReleaseDate) return true; // Include if no release date available
@@ -316,7 +314,7 @@ interface LeaderboardProps {
           
           allTaskResults.forEach(({ task, results }) => {
             results.forEach((result: ProcessedResult) => {
-              const modelName = result.model ? canonicalizeModelName(result.model) : null;
+              const modelName = result.model || null;
               if (!modelName) return;
               
               if (!modelAggregates.has(modelName)) {

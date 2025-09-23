@@ -43,8 +43,4 @@ src/lib/dataSources/README.md
 DEBUG_USAGE.md
 
 # data folder
-data/middle_data/
-new_dataset/
-data/precomputed/middle_data/
-/data/
-data/precomputed/
+data/

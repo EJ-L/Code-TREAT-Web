@@ -11,7 +11,7 @@ import {
   LabelList,
   ReferenceLine
 } from 'recharts';
-import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, canonicalizeModelName, getModelSize, shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, getModelSize, shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
 import { TimelineSlider } from './TimelineSlider';
 
 // Helper function to calculate task-specific date bounds with buffers
@@ -221,8 +221,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
       // If no date found and model is CoT variant, try base model name
       if (!publishDate && modelName.includes('(CoT)')) {
         const baseName = getBaseModelName(modelName);
-        const canonicalBaseName = canonicalizeModelName(baseName);
-        publishDate = MODEL_PUBLISH_DATES[canonicalBaseName] || MODEL_PUBLISH_DATES[baseName];
+        publishDate = MODEL_PUBLISH_DATES[baseName];
       }
       
       const metricValue = result[currentMetric];

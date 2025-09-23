@@ -5,76 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Model alias mapping to normalize model names - keep in sync with src/lib/constants.ts
-const MODEL_NAME_ALIASES = {
-  // Meta Llama 3.1 70B variants
-  'meta-llama_Meta_Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'LLama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  'Llama-3.1-70B-Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-  
-  // Meta Llama 3.3 70B variants
-  'meta-llama_Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'LLama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  'Llama-3.3-70B-Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-  
-  // Meta Llama 3.1 8B variants
-  'meta-llama_Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'LLama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  'Llama-3.1-8B-Instruct': 'meta-llama/Llama-3.1-8B-Instruct',
-  
-  // Meta Llama 4 Scout variants
-  'meta-llama_Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'LLama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  'meta-llama/Llama-4-Scout-17B-16E-Instruct': 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
-  
-  // Claude 3.5 Sonnet variants
-  'Claude-3.5-sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'claude-3.5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  'Claude-3-5-Sonnet-20241022': 'Claude-3.5-Sonnet-20241022',
-  
-  // Google Gemma 3 27B variants
-  'google_gemma-3-27b-it': 'google/gemma-3-27b-it',
-  'Gemma-3-27B-Instruct': 'google/gemma-3-27b-it',
-  
-  // Qwen variants
-  'Qwen/Qwen2.5-Coder-32B-Instrct': 'Qwen/Qwen2.5-Coder-32B-Instruct', // Fix typo
-};
 
-/**
- * Normalize a model name to a canonical form to prevent duplicates
- */
-function canonicalizeModelName(modelName) {
-  if (!modelName) return modelName;
-  // Only apply explicit alias mapping; do not trim or fuzzy-match to preserve version semantics
-  if (MODEL_NAME_ALIASES[modelName]) return MODEL_NAME_ALIASES[modelName];
-  return modelName;
-}
-
-// Models to exclude from generation (as specified in todo.md)
-const EXCLUDED_MODELS = new Set([
-  'o3-mini',
-  'o4-mini', 
-  'gpt-4.1-2025-04-14',
-  'grok-3-mini-beta',
-  'Gemma-3-27B-Instruct',
-  'Llama-4-Scout-17B-16E-Instruct',
-  'google/gemma-3-27b=it', // Note: this appears to be a typo, should be 'google/gemma-3-27b-it'
-  'Qwen/Qwen2.5-Coder-32B-Instrct', // Note: this appears to be a typo, should be 'Qwen/Qwen2.5-Coder-32B-Instruct'
-  'meta-llama/Llama-4-Scout-17B-16E-Instruct'
-]);
-
-/**
- * Check if a model should be excluded from processing
- */
-function shouldExcludeModel(modelName) {
-  if (!modelName) return false;
-  
-  // Check both original and canonical names
-  const canonicalName = canonicalizeModelName(modelName);
-  return EXCLUDED_MODELS.has(modelName) || EXCLUDED_MODELS.has(canonicalName);
-}
+// No model exclusions - process all models
 
 // Task mappings
 const TASK_MAPPINGS = {
@@ -156,35 +88,29 @@ function consolidateResults() {
           targetFilterMappings[comboKey] = data.filters;
         }
         
-        // Group results by model using canonical names to prevent duplicates and exclude unwanted models
+        // Group results by model using canonical names to prevent duplicates
         if (data.results && Array.isArray(data.results)) {
           data.results.forEach(modelResult => {
-            const originalModelName = modelResult.model;
+            // Use model_name field if available, fall back to model for backwards compatibility
+            const modelName = modelResult.model_name || modelResult.model;
             
-            // Skip excluded models
-            if (shouldExcludeModel(originalModelName)) {
+            // Skip entries without model names
+            if (!modelName) {
               return;
             }
             
-            const canonicalModelName = canonicalizeModelName(originalModelName);
-            
-            // Double-check after canonicalization
-            if (shouldExcludeModel(canonicalModelName)) {
-              return;
-            }
-            
-            if (!targetData[canonicalModelName]) {
-              targetData[canonicalModelName] = {};
+            if (!targetData[modelName]) {
+              targetData[modelName] = {};
             }
             
             // Remove model_url if it exists (as it's not needed)
             const cleanResult = { ...modelResult };
             delete cleanResult.model_url;
             delete cleanResult.model; // Remove model name since it's the key
+            delete cleanResult.model_name; // Remove model_name since it's the key
             
-            // If this canonical model already has data for this combination, merge/overwrite
-            // (This handles the case where multiple alias variants exist in the data)
-            targetData[canonicalModelName][comboKey] = cleanResult;
+            // Use original model name without canonicalization
+            targetData[modelName][comboKey] = cleanResult;
           });
         }
       } catch (error) {

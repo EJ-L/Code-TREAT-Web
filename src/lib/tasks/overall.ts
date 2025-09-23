@@ -124,8 +124,23 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
     groupedResults.get(key)!.push(result);
   });
 
+  // Models to exclude from overall leaderboard
+  const excludedModels = [
+    'Claude-Sonnet-4',
+    'Qwen3-235B-A22B',
+    'Qwen3-32B',
+    'Qwen3-30B-A3B',
+    'Claude-3-5-Haiku-2024102',
+    'claude-3-5-haiku-20241022',
+    'Qwen2.5-72B-Instruct',
+    'Qwen2.5-32B-Instruct',
+    'Gemma-3-27B-it'
+  ];
+
   // Calculate aggregated metrics for each model with difficulty-based grouping
-  const finalResults = Array.from(groupedResults.entries()).map(([modelName, modelResults]) => {
+  const finalResults = Array.from(groupedResults.entries())
+    .filter(([modelName]) => !excludedModels.includes(modelName))
+    .map(([modelName, modelResults]) => {
     const baseResult = { ...modelResults[0] };
     baseResult.task = 'overall';
     baseResult.modelName = modelName; // Use the original model name

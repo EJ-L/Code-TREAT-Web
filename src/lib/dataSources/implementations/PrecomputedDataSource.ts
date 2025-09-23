@@ -248,7 +248,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       debug.dataSource(`Collected ${results.length} results for combination "${matchingCombination}"`);
 
       // Convert to ResultEntry format
-      const resultEntries = results.map(result => this.convertPrecomputedResultToEntry(result, task, matchingCombination));
+      const resultEntries = results.map(result => this.convertPrecomputedResultToEntry(result, task, matchingCombination, result.model));
 
       debug.dataSource(`Converted to ${resultEntries.length} result entries`);
 

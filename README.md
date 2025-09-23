@@ -34,25 +34,3 @@ npm run dev
 yarn dev
 ```
 
-4. 在浏览器中打开 [http://localhost:3000](http://localhost:3000)
-
-## 部署
-
-项目已配置为可以直接部署到 Vercel 平台。只需将代码推送到主分支，Vercel 将自动部署更新。
-
-## 环境变量
-
-如果需要设置环境变量，请在项目根目录创建 `.env.local` 文件：
-
-```env
-# 示例环境变量
-NEXT_PUBLIC_API_URL=your-api-url
-```
-
-## 贡献指南
-
-1. Fork 该仓库
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启一个 Pull Request 

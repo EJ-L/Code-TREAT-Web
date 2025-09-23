@@ -64,7 +64,14 @@ const MAIN_FILTERS: FilterConfig[] = [
 function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Ability>): FilterConfig[] {
   if (task === 'overall' || !abilities[task]) return [];
   
-  const excludedKeys = ['dataset', 'framework', 'reasoning', 'knowledge'];
+  // Base excluded keys for all tasks
+  let excludedKeys = ['dataset', 'framework', 'reasoning'];
+  
+  // Additionally exclude 'knowledge' for specific tasks only
+  if (task === 'code generation' || task === 'code translation') {
+    excludedKeys.push('knowledge');
+  }
+  
   const dynamicFilters: FilterConfig[] = [];
   
   Object.entries(abilities[task]).forEach(([key, values]) => {

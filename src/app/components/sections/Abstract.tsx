@@ -38,10 +38,6 @@ const Abstract: FC<AbstractProps> = ({ isDarkMode }) => {
         >
           <div className="space-y-8">
             <div className="space-y-12 max-w-4xl mx-auto">
-              <p className={`text-lg text-center leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                A comprehensive evaluation framework addressing key limitations in existing approaches to assess 
-                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}> code intelligence models</strong> across real-world scenarios.
-              </p>
               
               <p className={`text-xl leading-relaxed text-justify ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                 Large foundation models are transforming software engineering, yet significant gaps remain in comprehensive evaluation methodologies. 

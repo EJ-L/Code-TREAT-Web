@@ -161,17 +161,13 @@ export const filterConditions = {
       return false;
     }
     
-    // Show metrics only when specific datasets are selected
+    // Show metrics for "All" results since they now represent HR+GFG merged data
+    // Also show for specific HR/GFG datasets
     if (!selectedDatasets || selectedDatasets.length === 0) {
-      return false;
+      return true; // Show metrics for "All" result by default
     }
     
-    // Don't show metrics for the "All" result (Merge-CruxEval+CE)
-    if (selectedDatasets.includes('Merge-CruxEval+CE')) {
-      return false;
-    }
-    
-    // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or Merge
+    // Check if any of the selected datasets are HackerRank, GeeksforGeeks, or related
     return selectedDatasets.some(dataset => {
       const lowerDataset = dataset.toLowerCase();
       return lowerDataset.includes('hackerrank') || 
@@ -179,7 +175,8 @@ export const filterConditions = {
              lowerDataset === 'merge' ||
              lowerDataset.includes('merge-hr+gfg') || // Handle new Merge-HR+GFG format
              (lowerDataset === 'hr') || // Handle extracted "hr" from legacy Merge-HR+GFG 
-             (lowerDataset === 'gfg'); // Handle extracted "gfg" from GeeksforGeeks
+             (lowerDataset === 'gfg') || // Handle extracted "gfg" from GeeksforGeeks
+             lowerDataset === 'all'; // Handle "All" tab which represents HR+GFG
     });
   },
   

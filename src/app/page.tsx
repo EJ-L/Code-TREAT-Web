@@ -91,7 +91,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     modality: [],
     knowledge: [],
     reasoning: [],
-    dataset: ['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'],
+    dataset: ['HackerRank', 'GeeksforGeeks'],
     robustness: [],
     privacy: [],
   },

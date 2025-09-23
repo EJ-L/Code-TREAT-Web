@@ -93,10 +93,8 @@ const FilterPanel: FC<FilterPanelProps> = ({
         let datasetsToCheck = selectedAbilities.dataset || [];
         
         if (currentTask === 'code-robustness') {
-          // For multi-leaderboard, check if we're on the "All" tab which should not show metrics
-          if (isMultiLeaderboard && selectedMultiTab === 'All') {
-            return false;
-          }
+          // For multi-leaderboard, the "All" tab now shows metrics since it represents HR+GFG
+          // No need to exclude the "All" tab anymore
           
           if (results.length > 0) {
             // If we have results, use the actual datasets from the results
@@ -161,20 +159,16 @@ const FilterPanel: FC<FilterPanelProps> = ({
         // Check if we should show code robustness metrics
         let shouldShowCodeRobustnessMetrics = false;
         if (currentTask === 'code-robustness') {
-          // For multi-leaderboard, check if we're on the "All" tab which should not show metrics
-          if (isMultiLeaderboard && selectedMultiTab === 'All') {
-            shouldShowCodeRobustnessMetrics = false;
-          } else {
-            let datasetsToCheck = selectedAbilities.dataset || [];
-            if (results.length > 0) {
-              datasetsToCheck = [...new Set(results.map(result => result.dataset))];
-            } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
-              datasetsToCheck = selectedAbilities.dataset;
-            }
-            
-            if (datasetsToCheck.length > 0) {
-              shouldShowCodeRobustnessMetrics = filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
-            }
+          // For multi-leaderboard, the "All" tab now shows metrics since it represents HR+GFG
+          let datasetsToCheck = selectedAbilities.dataset || [];
+          if (results.length > 0) {
+            datasetsToCheck = [...new Set(results.map(result => result.dataset))];
+          } else if (selectedAbilities.dataset && selectedAbilities.dataset.length > 0) {
+            datasetsToCheck = selectedAbilities.dataset;
+          }
+          
+          if (datasetsToCheck.length > 0) {
+            shouldShowCodeRobustnessMetrics = filterConditions.shouldShowCodeRobustnessMetrics && filterConditions.shouldShowCodeRobustnessMetrics(currentTask, datasetsToCheck);
           }
         }
         

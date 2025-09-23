@@ -393,8 +393,7 @@ export const DataLeakageWarning: FC<DataLeakageWarningProps> = ({ taskType, isDa
       'code review': '2023-12-01',
       'code-robustness': '2023-06-15',
       'code-web': '2024-09-15',
-      'interaction-2-code': '2024-11-03',
-      'mr-web': '2024-12-13',
+      'unit test generation': '2024-01-01',
       'overall': '2021-07-07'
     };
     

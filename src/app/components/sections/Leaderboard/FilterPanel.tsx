@@ -36,10 +36,6 @@ const FilterPanel: FC<FilterPanelProps> = ({
   selectedMultiTab,
   results = []
 }) => {
-  // Early return for interaction-2-code task
-  if (currentTask === 'interaction-2-code') {
-    return null;
-  }
 
   // Only show secondary filters for specific tasks that need them
   const tasksWithSecondaryFilters: TaskType[] = [

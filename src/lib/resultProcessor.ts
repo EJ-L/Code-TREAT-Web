@@ -175,15 +175,9 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       break;
       
     case 'code-web':
-    case 'interaction-2-code':
     case 'code-robustness':
-    case 'mr-web':
-      // For MR-Web, we need to filter by dataset since the raw data transformation may not have happened
-      const rawTaskData = task === 'mr-web' 
-        ? data.filter(entry => entry.dataset === 'MR-Web' || entry.task === task)
-        : data.filter(entry => entry.task === task);
-      
-
+      // For code-web, filter by task
+      const rawTaskData = data.filter(entry => entry.task === task);
       
       // Apply filters at the raw data level first, before aggregation
       let filteredRawData = rawTaskData;
@@ -201,22 +195,6 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
       if (filters.framework && filters.framework.length > 0) {
         filteredRawData = filteredRawData.filter(entry => {
           return entry.framework && filters.framework && filters.framework.includes(entry.framework);
-        });
-      }
-      
-      // Apply knowledge filter (for mr-web subtask)
-      if (task === 'mr-web' && filters.knowledge && filters.knowledge.length > 0) {
-        filteredRawData = filteredRawData.filter(entry => {
-          // For mr-web, check both the task field (raw data) and subtask field (processed data)
-          const subtaskValue = entry.subtask || entry.task;
-          return subtaskValue && filters.knowledge && filters.knowledge.includes(subtaskValue);
-        });
-      }
-      
-      // Apply reasoning filter (for mr-web method)
-      if (task === 'mr-web' && filters.reasoning && filters.reasoning.length > 0) {
-        filteredRawData = filteredRawData.filter(entry => {
-          return entry.method && filters.reasoning && filters.reasoning.includes(entry.method);
         });
       }
       
@@ -315,7 +293,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`开始数据集过滤: ${filters.datasets.length} 个数据集, ${filteredResults.length} 条结果`);
 
     // Skip dataset filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'interaction-2-code', 'code-robustness', 'mr-web'].includes(task.toLowerCase())) {
+    if (!['code-web', 'code-robustness'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         const normalizedDataset = result.dataset.toLowerCase().replace(/\s+/g, '');
         return allowedDatasets.has(normalizedDataset);
@@ -337,10 +315,10 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`语言过滤完成: 剩余 ${filteredResults.length} 条结果`);
   }
 
-  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系) - skip for mr-web as it's handled during raw data processing
+  // 3. 知识领域过滤 (同级 OR 关系，跨级 AND 关系)
   // NOTE: Knowledge filtering is now handled at the task level (before aggregation) for better results
   // This section is kept for non-special tasks
-  if (filters.knowledge && filters.knowledge.length > 0 && task !== 'mr-web') {
+  if (filters.knowledge && filters.knowledge.length > 0) {
     console.log(`开始知识领域过滤: ${filters.knowledge.length} 个领域, ${filteredResults.length} 条结果`);
     
     filteredResults = filteredResults.filter(result => {
@@ -455,7 +433,7 @@ export async function processResults(task: TaskType, filters: FilterOptions): Pr
     console.log(`应用 Framework 过滤: ${filters.framework.length} 种框架, ${filteredResults.length} 条结果`);
     
     // Skip framework filtering for new tasks as they're already filtered during processing
-    if (!['code-web', 'interaction-2-code', 'code-robustness'].includes(task.toLowerCase())) {
+    if (!['code-web', 'code-robustness'].includes(task.toLowerCase())) {
       filteredResults = filteredResults.filter(result => {
         // Check if the result has a framework field and if it matches the selected frameworks
         const resultObj = result as Record<string, unknown>;
@@ -585,13 +563,9 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     formattedResult['F1 Score'] = result['F1 Score'] !== null && result['F1 Score'] !== undefined ? (result['F1 Score'] * 100).toFixed(1) : '-';
 
     // Add custom metrics for new tasks
-    // code-web and interaction-2-code metrics
+    // code-web metrics
     formattedResult['CLIP'] = result['CLIP'] !== null && result['CLIP'] !== undefined ? (result['CLIP'] * 100).toFixed(1) : '-';
     formattedResult['Compilation'] = result['Compilation'] !== null && result['Compilation'] !== undefined ? (result['Compilation'] * 100).toFixed(1) : '-';
-    formattedResult['SSIM'] = result['SSIM'] !== null && result['SSIM'] !== undefined ? (result['SSIM'] * 100).toFixed(1) : '-';
-    formattedResult['Text'] = result['Text'] !== null && result['Text'] !== undefined ? (result['Text'] * 100).toFixed(1) : '-';
-    formattedResult['Position'] = result['Position'] !== null && result['Position'] !== undefined ? (result['Position'] * 100).toFixed(1) : '-';
-    formattedResult['Implement Rate'] = result['Implement Rate'] !== null && result['Implement Rate'] !== undefined ? (result['Implement Rate'] * 100).toFixed(1) : '-';
     
     // code-robustness metrics  
     formattedResult['VAN'] = result['VAN'] !== null && result['VAN'] !== undefined ? result['VAN'].toFixed(1) : '-';
@@ -603,10 +577,6 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     formattedResult['MPS'] = result['MPS'] !== null && result['MPS'] !== undefined ? result['MPS'].toFixed(1) : '-';
     formattedResult['MHC'] = result['MHC'] !== null && result['MHC'] !== undefined ? result['MHC'].toFixed(1) : '-';
     
-    // mr-web metrics
-    formattedResult['MAE'] = result['MAE'] !== null && result['MAE'] !== undefined ? result['MAE'].toFixed(3) : '-';
-    formattedResult['NEMD'] = result['NEMD'] !== null && result['NEMD'] !== undefined ? result['NEMD'].toFixed(3) : '-';
-    formattedResult['RER'] = result['RER'] !== null && result['RER'] !== undefined ? (result['RER'] * 100).toFixed(1) : '-';
     
     // unit test generation metrics
     formattedResult['csr'] = result['csr'] !== null && result['csr'] !== undefined ? result['csr'].toFixed(3) : '-';

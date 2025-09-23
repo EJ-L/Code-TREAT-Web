@@ -31,28 +31,6 @@ const papers: PaperInfo[] = [
     url: "https://arxiv.org/abs/2404.00160"
   },
   {
-    name: "Interaction-2-Code",
-    title: "Interaction2Code: Benchmarking MLLM-based Interactive Webpage Code Generation from Interactive Prototyping",
-    authors: "Xiao et al.",
-    venue: "arXiv",
-    year: "2024",
-    description: "A comprehensive benchmark for evaluating multimodal large language models on generating interactive webpage code from UI prototypes.",
-    url: "https://arxiv.org/abs/2411.03292",
-    codeUrl: "https://github.com/WebPAI/Interaction2Code",
-    leaderboardTask: "interaction-2-code"
-  },
-  {
-    name: "MR-Web", 
-    title: "MRWeb: An Exploration of Generating Multi-Page Resource-Aware Web Code from UI Designs",
-    authors: "Wan et al.",
-    venue: "arXiv",
-    year: "2024",
-    description: "Exploring the generation of comprehensive multi-page web applications with proper resource management from design specifications.",
-    url: "https://arxiv.org/abs/2412.15310",
-    codeUrl: "https://github.com/WebPAI/MRWeb",
-    leaderboardTask: "mr-web"
-  },
-  {
     name: "Multi-Modality",
     title: "DesignBench: A Comprehensive Benchmark for MLLM-based Front-end Code Generation",
     authors: "Xiao et al.",

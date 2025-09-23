@@ -416,35 +416,8 @@ function aggregateData(data, task, showByDifficulty) {
       }
     } else if (task === 'code-robustness') {
       // For code robustness, use specific robustness metrics
-      // Determine which metrics to use based on dataset
-      let robustnessMetrics;
-      
-      // Check if entries contain CruxEval, LiveCodeBench, or their merged versions
-      const hasCoTDatasets = entries.some(e => {
-        const dataset = e.dataset || '';
-        return dataset.includes('CRUXEval') || 
-               dataset.includes('LiveCodeBench') || 
-               dataset.includes('Merge-CruxEval+CE');
-      });
-      
-      // Check if entries contain HackerRank, GeeksforGeeks, or their merged versions
-      const hasHRGFGDatasets = entries.some(e => {
-        const dataset = e.dataset || '';
-        return dataset.includes('HackerRank') || 
-               dataset.includes('GeeksforGeeks') || 
-               dataset.includes('Merge-HR+GFG');
-      });
-      
-      if (hasCoTDatasets && !hasHRGFGDatasets) {
-        // For CruxEval, LiveCodeBench and merged versions: exclude REN, RTF, GBC
-        robustnessMetrics = ['VAN', 'ALL', 'MDC', 'MPS', 'MHC'];
-      } else if (hasHRGFGDatasets && !hasCoTDatasets) {
-        // For HackerRank, GeeksforGeeks and merged versions: include all relevant metrics
-        robustnessMetrics = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC', 'Average'];
-      } else {
-        // Mixed or unknown datasets: use all metrics available
-        robustnessMetrics = ['VAN', 'REN', 'RTF', 'GBC', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'];
-      }
+      // Since we removed CRUXEval and LiveCodeBench, only use HackerRank/GeeksforGeeks metrics
+      const robustnessMetrics = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC', 'Average'];
       
       robustnessMetrics.forEach(metric => {
         const values = entries
@@ -475,24 +448,7 @@ function aggregateData(data, task, showByDifficulty) {
           result[metric] = '-';
         }
       });
-    } else if (task === 'interaction-2-code') {
-      // For interaction-2-code, use multiple visual metrics
-      // Metrics looks like {"CLIP": 0.1675, "SSIM": 0.1204, "Text": 0.0427, "Position": 0.1669, "Implement Rate": 0.2692}
-      const interactionMetrics = ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'];
-      
-      interactionMetrics.forEach(metric => {
-        const values = entries
-          .map(e => e.metrics && e.metrics[metric])
-          .filter(v => v !== undefined && v !== null);
-        
-        if (values.length > 0) {
-          const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
-          result[metric] = (avg * 100).toFixed(1); // Convert to percentage
-        } else {
-          result[metric] = '-';
-        }
-      });
-    } else if (task === 'unit code generation') {
+    } else if (task === 'unit test generation') {
       // For unit code generation, aggregate by dataset and modality
       const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
       const modalities = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'];

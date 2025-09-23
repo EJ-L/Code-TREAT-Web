@@ -1,4 +1,4 @@
-export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'interaction-2-code' | 'code-robustness' | 'mr-web' | 'unit test generation';
+export type TaskType = 'overall' | 'code generation' | 'code translation' | 'code summarization' | 'input prediction' | 'output prediction' | 'vulnerability detection' | 'code review' | 'code-web' | 'code-robustness' | 'unit test generation';
 
 export type LLMJudgeScores = {
   [judge: string]: number | number[];
@@ -41,8 +41,6 @@ export type ResultEntry = {
   url?: string;
   framework?: string;  // For code-web task
   category?: string;   // For code-robustness task
-  subtask?: string;    // For mr-web task (Visual/RER)
-  method?: string;     // For mr-web task (CoT/ZS/SR)
   prompt_category?: string[];  // For reasoning type filtering (direct/cot)
 };
 
@@ -84,13 +82,9 @@ export type ProcessedResult = {
   'Recall'?: number | null;
   'F1 Score'?: number | null;
   // Custom metrics for new tasks
-  // code-web and interaction-2-code metrics
+  // code-web metrics
   'CLIP'?: number | null;
   'Compilation'?: number | null;
-  'SSIM'?: number | null;
-  'Text'?: number | null;
-  'Position'?: number | null;
-  'Implement Rate'?: number | null;
   // code-robustness metrics
   'VAN'?: number | null;
   'REN'?: number | null;
@@ -100,10 +94,6 @@ export type ProcessedResult = {
   'MDC'?: number | null;
   'MPS'?: number | null;
   'MHC'?: number | null;
-  // mr-web metrics
-  'MAE'?: number | null;
-  'NEMD'?: number | null;
-  'RER'?: number | null;
   // unit test generation metrics
   'csr'?: number | null;
   'line_coverage'?: number | null;

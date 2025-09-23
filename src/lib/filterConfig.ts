@@ -31,7 +31,7 @@ const MAIN_FILTERS: FilterConfig[] = [
     key: 'dataset',
     label: 'Dataset',
     isVisible: (task, abilities) => 
-      task !== 'overall' && task !== 'mr-web' && (abilities[task]?.dataset?.length || 0) > 1,
+      task !== 'overall' && (abilities[task]?.dataset?.length || 0) > 1,
     getValues: (task, abilities) => abilities[task]?.dataset || [],
     specialBehaviors: {
       disabling: (task, showByDifficulty, abilities) => 
@@ -114,25 +114,10 @@ export function getAvailableFilters(
 
 // Utility functions (simplified)
 function getFilterLabel(key: keyof Ability, task: TaskType): string {
-  if (task === 'mr-web') {
-    const labelMap: Record<string, string> = {
-      knowledge: 'Task',
-      reasoning: 'Method'
-    };
-    return labelMap[key] || capitalizeFirst(key);
-  }
   return capitalizeFirst(key);
 }
 
 function getDisplayText(value: string, key: keyof Ability, task: TaskType): string {
-  if (task === 'mr-web' && key === 'reasoning') {
-    const displayMap: Record<string, string> = {
-      'CoT': 'Chain-of-Thought (CoT)',
-      'ZS': 'Zero-Shot (ZS)',
-      'SR': 'Self-Refine (SR)'
-    };
-    return displayMap[value] || value;
-  }
   
   // Transform Code-Web dataset display names
   if (task === 'code-web' && key === 'dataset') {
@@ -159,14 +144,14 @@ function capitalizeFirst(str: string): string {
 // Simplified condition checks
 export const filterConditions = {
   hasAvailableFilters: (task: TaskType, abilities: Record<TaskType, Ability>, judges: string[], excludeFilter?: string) =>
-    task !== 'interaction-2-code' && getAvailableFilters(task, abilities, judges, excludeFilter).length > 0,
+    getAvailableFilters(task, abilities, judges, excludeFilter).length > 0,
   
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shouldShowDifficultyToggle: (task: TaskType) =>
     false,
   
   shouldShowDataNote: (task: TaskType) =>
-    !['code-web', 'mr-web', 'interaction-2-code', 'overall', 'vulnerability detection', 'unit test generation'].includes(task),
+    !['code-web', 'overall', 'vulnerability detection', 'unit test generation'].includes(task),
   
   shouldShowVulnerabilityMetrics: (task: TaskType) =>
     task === 'vulnerability detection',

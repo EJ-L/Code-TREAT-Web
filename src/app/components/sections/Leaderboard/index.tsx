@@ -363,12 +363,10 @@ interface LeaderboardProps {
                 primaryScore = parseFloat(String(result['LLM Judge'] || '0')) || 0;
               } else if (task === 'vulnerability detection') {
                 primaryScore = parseFloat(String(result['F1 Score'] || '0')) || 0;
-              } else if (task === 'code-web' || task === 'interaction-2-code') {
+              } else if (task === 'code-web') {
                 primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
               } else if (task === 'code-robustness') {
                 primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
-              } else if (task === 'mr-web') {
-                primaryScore = parseFloat(String(result['CLIP'] || '0')) || 0;
               } else {
                 // For other tasks, use pass@1
                 primaryScore = parseFloat(String(result['pass@1'] || '0')) || 0;

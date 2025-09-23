@@ -80,7 +80,10 @@ const TableHeader: FC<TableHeaderProps> = ({
     <th 
       key={header.key} 
       data-key={header.key}
-      className={`relative px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wider cursor-pointer font-jetbrains-mono group ${alignment} ${
+      className={`relative px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-wider font-jetbrains-mono group ${alignment} ${
+        // Dynamic cursor based on sortability
+        (header.key === 'rank' && currentTask !== 'overall') ? 'cursor-default' : 'cursor-pointer'
+      } ${
         // Only apply base background colors if getBackgroundColor doesn't return a custom color
         bgColor ? '' : (isDarkMode 
           ? 'text-slate-300 bg-[#121c2b]' 
@@ -99,8 +102,9 @@ const TableHeader: FC<TableHeaderProps> = ({
       }}
       onClick={() => {
         // Enable sorting for all numeric columns including difficulty-based metrics and model names
-        const sortableColumns = [
-          'rank', 'model', // Add model to sortable columns
+        // But disable rank sorting for non-overall tasks
+        const baseSortableColumns = [
+          'model', // Add model to sortable columns
           'pass@1', 'pass@3', 'pass@5', 
           'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
           'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
@@ -111,16 +115,18 @@ const TableHeader: FC<TableHeaderProps> = ({
           'P-C', 'P-V', 'P-B', 'P-R',
           // Code-web metrics
           'CLIP', 'Compilation',
-          // Interaction-2-code metrics
-          'SSIM', 'Text', 'Position', 'Implement Rate',
           // Code-robustness metrics
           'VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Average',
-          // MR-Web metrics
-          'MAE', 'NEMD', 'RER',
           'Vanilla', 'PSC-ALL', 'MCC',
           // Unit test generation metrics
           'csr', 'line_coverage', 'branch_coverage'
         ];
+        
+        // Only allow rank sorting for the overall task
+        const sortableColumns = currentTask === 'overall' 
+          ? ['rank', ...baseSortableColumns]
+          : baseSortableColumns;
+          
         if (sortableColumns.includes(header.key)) {
           handleSort(header.key);
         }

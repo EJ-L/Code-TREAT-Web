@@ -427,9 +427,7 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
       'output prediction': 300,
       'vulnerability detection': 350,
       'code-web': 360,
-      'interaction-2-code': 220,
-      'code-robustness': 400,
-      'mr-web': 300
+      'code-robustness': 400
     },
     minWidth: 300,
     maxWidth: 600
@@ -486,43 +484,8 @@ export const COLUMN_WIDTH_CONFIG: Record<string, ColumnWidthConfig> = {
   },
   'CLIP': {
     default: 130,
-    taskSpecific: {
-      'interaction-2-code': 150
-    },
     minWidth: 80,
     maxWidth: 250
-  },
-  'SSIM': {
-    default: 110,
-    taskSpecific: {
-      'interaction-2-code': 150
-    },
-    minWidth: 80,
-    maxWidth: 250
-  },
-  'Text': {
-    default: 110,
-    taskSpecific: {
-      'interaction-2-code': 150
-    },
-    minWidth: 80,
-    maxWidth: 250
-  },
-  'Position': {
-    default: 150,
-    taskSpecific: {
-      'interaction-2-code': 210
-    },
-    minWidth: 100,
-    maxWidth: 300
-  },
-  'Implement Rate': {
-    default: 230,
-    taskSpecific: {
-      'interaction-2-code': 270
-    },
-    minWidth: 150,
-    maxWidth: 400
   },
   // Difficulty metric configurations (more compact)
   'easy_pass@1': { default: 120, minWidth: 110, maxWidth: 180 },
@@ -573,9 +536,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
-  'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
-  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
 
@@ -607,9 +568,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
   'code-web': ['CLIP', 'Compilation'],
-  'interaction-2-code': ['CLIP', 'SSIM', 'Text', 'Position', 'Implement Rate'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
-  'mr-web': ['MAE', 'NEMD', 'CLIP', 'RER'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
 
@@ -666,15 +625,10 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
     overallTab: 'All',
     tabs: ['All', 'UI Code Generation', 'UI Code Edit', 'UI Code Repair']
   },
-  'mr-web': {
-    extractedFilter: 'knowledge',
-    overallTab: 'All',
-    tabs: ['All', 'Visual', 'RER']
-  },
   'code-robustness': {
     extractedFilter: 'dataset',
     overallTab: 'All',
-    tabs: ['All', 'CRUXEval', 'LiveCodeBench (CE)', 'HackerRank', 'GeeksforGeeks', 'Merge']
+    tabs: ['All', 'HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG']
   },
 };
 
@@ -763,8 +717,7 @@ export function getMaxColumnWidth(task: TaskType, headerKey: string): number {
 
 export function getStickyColumnTasks(): TaskType[] {
   return [
-    'vulnerability detection', 'code-robustness',
-    'interaction-2-code'
+    'vulnerability detection', 'code-robustness'
   ];
 }
 

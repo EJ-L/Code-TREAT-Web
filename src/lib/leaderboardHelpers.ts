@@ -194,12 +194,8 @@ export function getDefaultSortConfig(task: TaskType): { key: string; direction: 
     defaultKey = 'Accuracy';
   } else if (task === 'code-web') {
     defaultKey = 'CLIP';
-  } else if (task === 'interaction-2-code') {
-    defaultKey = 'CLIP';
   } else if (task === 'code-robustness') {
     defaultKey = 'ALL';
-  } else if (task === 'mr-web') {
-    defaultKey = 'MAE';
   } else if (task === 'unit test generation') {
     defaultKey = 'line_coverage';
   }

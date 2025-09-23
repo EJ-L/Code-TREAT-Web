@@ -1,0 +1,822 @@
+{
+  "task": "mr-web",
+  "filterMappings": {
+    "overall": {
+      "knowledge": [],
+      "reasoning": []
+    },
+    "knowledge-Visual": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": []
+    },
+    "knowledge-RER": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": []
+    },
+    "knowledge-Visual-RER": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": []
+    },
+    "reasoning-CoT": {
+      "knowledge": [],
+      "reasoning": [
+        "CoT"
+      ]
+    },
+    "reasoning-ZS": {
+      "knowledge": [],
+      "reasoning": [
+        "ZS"
+      ]
+    },
+    "reasoning-CoT-ZS": {
+      "knowledge": [],
+      "reasoning": [
+        "CoT",
+        "ZS"
+      ]
+    },
+    "reasoning-SR": {
+      "knowledge": [],
+      "reasoning": [
+        "SR"
+      ]
+    },
+    "reasoning-CoT-SR": {
+      "knowledge": [],
+      "reasoning": [
+        "CoT",
+        "SR"
+      ]
+    },
+    "reasoning-ZS-SR": {
+      "knowledge": [],
+      "reasoning": [
+        "ZS",
+        "SR"
+      ]
+    },
+    "knowledge-Visual_reasoning-CoT": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "CoT"
+      ]
+    },
+    "knowledge-Visual_reasoning-ZS": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "ZS"
+      ]
+    },
+    "knowledge-Visual_reasoning-CoT-ZS": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "CoT",
+        "ZS"
+      ]
+    },
+    "knowledge-Visual_reasoning-SR": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "SR"
+      ]
+    },
+    "knowledge-Visual_reasoning-CoT-SR": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "CoT",
+        "SR"
+      ]
+    },
+    "knowledge-Visual_reasoning-ZS-SR": {
+      "knowledge": [
+        "Visual"
+      ],
+      "reasoning": [
+        "ZS",
+        "SR"
+      ]
+    },
+    "knowledge-RER_reasoning-CoT": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "CoT"
+      ]
+    },
+    "knowledge-RER_reasoning-ZS": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "ZS"
+      ]
+    },
+    "knowledge-RER_reasoning-CoT-ZS": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "CoT",
+        "ZS"
+      ]
+    },
+    "knowledge-RER_reasoning-SR": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "SR"
+      ]
+    },
+    "knowledge-RER_reasoning-CoT-SR": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "CoT",
+        "SR"
+      ]
+    },
+    "knowledge-RER_reasoning-ZS-SR": {
+      "knowledge": [
+        "RER"
+      ],
+      "reasoning": [
+        "ZS",
+        "SR"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-CoT": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "CoT"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-ZS": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "ZS"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-CoT-ZS": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "CoT",
+        "ZS"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-SR": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "SR"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-CoT-SR": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "CoT",
+        "SR"
+      ]
+    },
+    "knowledge-Visual-RER_reasoning-ZS-SR": {
+      "knowledge": [
+        "Visual",
+        "RER"
+      ],
+      "reasoning": [
+        "ZS",
+        "SR"
+      ]
+    }
+  },
+  "data": {
+    "Gemini-2.0-Pro": {
+      "overall": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-RER": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-CoT": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-CoT-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-CoT-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "reasoning-ZS-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual_reasoning-CoT": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "-"
+      },
+      "knowledge-RER_reasoning-CoT": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-RER_reasoning-ZS": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-RER_reasoning-CoT-ZS": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-RER_reasoning-SR": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-RER_reasoning-CoT-SR": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-RER_reasoning-ZS-SR": {
+        "rank": 1,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-CoT": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-ZS": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      },
+      "knowledge-Visual-RER_reasoning-ZS-SR": {
+        "rank": 1,
+        "MAE": "65.433",
+        "NEMD": "0.748",
+        "CLIP": "79.0",
+        "RER": "82.4"
+      }
+    },
+    "Claude-3.5-Sonnet": {
+      "overall": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-RER": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-CoT": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-CoT-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-CoT-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "reasoning-ZS-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual_reasoning-CoT": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "-"
+      },
+      "knowledge-RER_reasoning-CoT": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-RER_reasoning-ZS": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-RER_reasoning-CoT-ZS": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-RER_reasoning-SR": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-RER_reasoning-CoT-SR": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-RER_reasoning-ZS-SR": {
+        "rank": 3,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-CoT": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-ZS": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      },
+      "knowledge-Visual-RER_reasoning-ZS-SR": {
+        "rank": 2,
+        "MAE": "69.267",
+        "NEMD": "0.729",
+        "CLIP": "78.8",
+        "RER": "64.1"
+      }
+    },
+    "GPT-4o": {
+      "overall": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-RER": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-CoT": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-CoT-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-CoT-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "reasoning-ZS-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual_reasoning-CoT": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-CoT-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-Visual_reasoning-ZS-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "-"
+      },
+      "knowledge-RER_reasoning-CoT": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-RER_reasoning-ZS": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-RER_reasoning-CoT-ZS": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-RER_reasoning-SR": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-RER_reasoning-CoT-SR": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-RER_reasoning-ZS-SR": {
+        "rank": 2,
+        "MAE": "-",
+        "NEMD": "-",
+        "CLIP": "-",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-CoT": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-ZS": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-CoT-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      },
+      "knowledge-Visual-RER_reasoning-ZS-SR": {
+        "rank": 3,
+        "MAE": "66.900",
+        "NEMD": "0.740",
+        "CLIP": "76.9",
+        "RER": "78.5"
+      }
+    }
+  }
+}

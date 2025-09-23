@@ -181,7 +181,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'DeepSeek-V3': '2024-12-26',
 
   // Gemini Models
-  'Gemma-3-27B-Instruct': '2025-03-12',
+  'Gemma-3-27B-it': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.5-Pro': '2024-05-06',
   'Gemini-2.5-Flash': '2025-08-26',
@@ -203,11 +203,11 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Llama-3.1-70B-Instruct (CoT)': '2024-07-23',
   'Llama-3.1-405B-Instruct (CoT)': '2024-07-23',
   'Llama-3.1-8B-Instruct (CoT)': '2024-07-23',
-  'Qwen2.5-72B-Instruct (CoT)': '2024-09-19',
-  'Qwen2.5-7B-Instruct (CoT)': '2024-09-19',
-  'Qwen2.5-32B-Instruct (CoT)': '2024-09-19',
-  'Qwen2.5-14B-Instruct (CoT)': '2024-09-19',
-  'Qwen2.5-Coder-32B-Instruct (CoT)': '2024-09-19',
+  'Qwen-2.5-72B-Instruct (CoT)': '2024-09-19',
+  'Qwen-2.5-7B-Instruct (CoT)': '2024-09-19',
+  'Qwen-2.5-32B-Instruct (CoT)': '2024-09-19',
+  'Qwen-2.5-14B-Instruct (CoT)': '2024-09-19',
+  'Qwen-2.5-Coder-32B-Instruct (CoT)': '2024-09-19',
   'DeepSeek-V3 (CoT)': '2024-12-26',
   'Gemini-2.0-Flash (CoT)': '2024-11-20',
   'Gemini-1.5-Pro-002 (CoT)': '2024-09-24',
@@ -216,15 +216,8 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   // Models from renewed precomputed datasets (exact naming)
   'o3-mini': '2025-04-16',
   'o4-mini': '2025-04-16',
-  'gpt-4.1-2025-04-14': '2025-04-14',
-  'gpt-4o-2024-11-20': '2024-11-20',
-  'gpt-4-turbo-2024-04-09': '2024-04-09',
-  'claude-3-5-sonnet-20241022': '2024-10-22',
-  'deepseek-chat': '2024-12-26',
-  'deepseek/deepseek-r1:free': '2025-01-20',
-  'grok-3-mini-beta': '2025-02-17',
-  'meta-llama/Llama-3.3-70B-Instruct': '2024-12-06'
-
+  'Deepseek-Chat': '2024-12-26',
+  'Grok-3-Mini-Beta': '2025-02-17',
 };
 
 // Model sizes (parameter count)
@@ -242,21 +235,21 @@ export const MODEL_SIZES: Record<string, string> = {
   // Qwen Models
   'Qwen-7B': '7B',
   'Qwen-72B': '72B',
-  'Qwen2.5-7B-Instruct': '7B',
-  'Qwen2.5-14B-Instruct': '14B',
-  'Qwen2.5-32B-Instruct': '32B',
-  'Qwen2.5-72B-Instruct': '72B',
-  'Qwen2.5-Coder-32B-Instruct': '32B',
-  'Qwen2.5-VL-3B-Instruct': '3B',
-  'Qwen2.5-VL-7B-Instruct': '7B',
-  'Qwen2.5-VL-72B-Instruct': '72B',
+  'Qwen-2.5-7B-Instruct': '7B',
+  'Qwen-2.5-14B-Instruct': '14B',
+  'Qwen-2.5-32B-Instruct': '32B',
+  'Qwen-2.5-72B-Instruct': '72B',
+  'Qwen-2.5-Coder-32B-Instruct': '32B',
+  'Qwen-2.5-VL-3B-Instruct': '3B',
+  'Qwen-2.5-VL-7B-Instruct': '7B',
+  'Qwen-2.5-VL-72B-Instruct': '72B',
   'QwQ-32B': '32B',
-  'Qwen3-30B-A3B': '30B',
-  'Qwen3-32B': '32B',
-  'Qwen3-235B-A22B': '235B',
+  'Qwen-3-30B-A3B': '30B',
+  'Qwen-3-32B': '32B',
+  'Qwen-3-235B-A22B': '235B',
   
   // Gemma Models
-  'Gemma-3-27B-Instruct': '27B',
+  'Gemma-3-27B-it': '27B',
   
   // Pixtral Models
   'Pixtral-12B-2409': '12B',
@@ -267,11 +260,11 @@ export const MODEL_SIZES: Record<string, string> = {
   'Llama-3.1-70B-Instruct (CoT)': '70B',
   'Llama-3.1-405B-Instruct (CoT)': '405B',
   'Llama-3.3-70B-Instruct (CoT)': '70B',
-  'Qwen2.5-7B-Instruct (CoT)': '7B',
-  'Qwen2.5-14B-Instruct (CoT)': '14B',
-  'Qwen2.5-32B-Instruct (CoT)': '32B',
-  'Qwen2.5-72B-Instruct (CoT)': '72B',
-  'Qwen2.5-Coder-32B-Instruct (CoT)': '32B',
+  'Qwen-2.5-7B-Instruct (CoT)': '7B',
+  'Qwen-2.5-14B-Instruct (CoT)': '14B',
+  'Qwen-2.5-32B-Instruct (CoT)': '32B',
+  'Qwen-2.5-72B-Instruct (CoT)': '72B',
+  'Qwen-2.5-Coder-32B-Instruct (CoT)': '32B',
 
   // DeepSeek Models
   'DeepSeek-R1': '671B',

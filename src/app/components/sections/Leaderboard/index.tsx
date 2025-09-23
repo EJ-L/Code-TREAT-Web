@@ -314,7 +314,7 @@ interface LeaderboardProps {
           
           allTaskResults.forEach(({ task, results }) => {
             results.forEach((result: ProcessedResult) => {
-              const modelName = result.model || null;
+              const modelName = result.modelName || result.model || null;
               if (!modelName) return;
               
               if (!modelAggregates.has(modelName)) {

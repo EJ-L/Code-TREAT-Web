@@ -88,7 +88,7 @@ function consolidateResults() {
           targetFilterMappings[comboKey] = data.filters;
         }
         
-        // Group results by model using canonical names to prevent duplicates
+        // Group results by model using original names from dataset
         if (data.results && Array.isArray(data.results)) {
           data.results.forEach(modelResult => {
             // Use model_name field if available, fall back to model for backwards compatibility

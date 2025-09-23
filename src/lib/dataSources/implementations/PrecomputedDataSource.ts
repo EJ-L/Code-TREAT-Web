@@ -490,10 +490,9 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     const results: ResultEntry[] = [];
     
     // For each model and combination, create result entries
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [modelName, modelData] of Object.entries(precomputedData.data)) {
       for (const [combination, result] of Object.entries(modelData)) {
-        const entry = this.convertPrecomputedResultToEntry(result, task, combination);
+        const entry = this.convertPrecomputedResultToEntry(result, task, combination, modelName);
         results.push(entry);
       }
     }
@@ -501,7 +500,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
     return results;
   }
 
-  private convertPrecomputedResultToEntry(result: PrecomputedResult, task: TaskType, combination: string): ResultEntry {
+  private convertPrecomputedResultToEntry(result: PrecomputedResult, task: TaskType, combination: string, modelName: string): ResultEntry {
     // Extract metrics from the result - these will be flattened for the leaderboard
     const metrics: Record<string, number | string | undefined> = {};
     
@@ -521,9 +520,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       }
     }
 
-
-    // Ensure we have a valid model name
-    const modelName = result?.model || 'unknown';
+    // Use the model name from the data structure key (passed as parameter)
+    // This ensures we use the original model name from the dataset
     
     return {
       id: `${modelName}-${task}-${combination}`,

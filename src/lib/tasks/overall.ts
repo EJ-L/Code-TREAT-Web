@@ -117,7 +117,7 @@ export async function processOverall(rawResults: ProcessedResult[], filters: Fil
   // Group by model name (using original model names - no canonicalization)
   const groupedResults = new Map<string, ProcessedResult[]>();
   allTasksResults.forEach(result => {
-    const key = result.modelName || result.modelName;
+    const key = result.modelName || result.model;
     if (!groupedResults.has(key)) {
       groupedResults.set(key, []);
     }

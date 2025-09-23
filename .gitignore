@@ -43,4 +43,27 @@ src/lib/dataSources/README.md
 DEBUG_USAGE.md
 
 # data folder
-data/
+data/code-generation/
+data/code-review/
+data/code-robustness/
+data/code-summarization/
+data/code-translation/
+data/code-web/
+data/input_prediction/
+data/interaction-2-code/
+data/mr-web/
+data/output_prediction/
+data/vulnerability-detection/
+data/overall/
+data/precomputed/code-generation/
+data/precomputed/code-review/
+data/precomputed/code-robustness/
+data/precomputed/code-summarization/
+data/precomputed/code-translation/
+data/precomputed/code-web/
+data/precomputed/input-prediction/
+data/precomputed/interaction-2-code/
+data/precomputed/mr-web/
+data/precomputed/output-prediction/
+data/precomputed/vulnerability-detection/
+new_dataset/

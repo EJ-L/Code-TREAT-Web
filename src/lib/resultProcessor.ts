@@ -581,7 +581,7 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
     
     
     // unit test generation metrics
-    formattedResult['csr'] = result['csr'] !== null && result['csr'] !== undefined ? result['csr'].toFixed(3) : '-';
+    formattedResult['csr'] = result['csr'] !== null && result['csr'] !== undefined ? (result['csr'] * 100).toFixed(1) : '-';
     formattedResult['line_coverage'] = result['line_coverage'] !== null && result['line_coverage'] !== undefined ? result['line_coverage'].toFixed(1) : '-';
     formattedResult['branch_coverage'] = result['branch_coverage'] !== null && result['branch_coverage'] !== undefined ? result['branch_coverage'].toFixed(1) : '-';
     

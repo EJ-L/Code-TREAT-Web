@@ -463,7 +463,8 @@ function aggregateData(data, task, showByDifficulty) {
       
       if (csrValues.length > 0) {
         const avgCsr = csrValues.reduce((sum, val) => sum + val, 0) / csrValues.length;
-        result['csr'] = avgCsr.toFixed(4);
+        // Convert from 0-1 scale to 0-100 scale and round to 1 decimal place
+        result['csr'] = (avgCsr * 100).toFixed(1);
       } else {
         result['csr'] = '-';
       }

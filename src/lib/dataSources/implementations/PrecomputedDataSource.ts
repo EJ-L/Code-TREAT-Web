@@ -583,8 +583,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
             // Keep rank as integer (no decimal)
             leaderboardResult[key] = value;
           } else if (key === 'csr') {
-            // CSR is in 0-1 scale, format to 3 decimal places
-            leaderboardResult[key] = value.toFixed(3);
+            // CSR is in 0-1 scale, convert to 0-100 scale and format to 1 decimal place
+            leaderboardResult[key] = (value * 100).toFixed(1);
           } else if (Number.isInteger(value)) {
             // Show other integers with .0 for consistency
             leaderboardResult[key] = value.toFixed(1);

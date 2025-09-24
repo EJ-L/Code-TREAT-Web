@@ -169,7 +169,7 @@ const TableCell: FC<TableCellProps> = ({
           
           if (typeof value === 'number') {
             // Special handling for percentage values
-            if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'].includes(header.key)) {
+            if (['pass@1', 'pass@3', 'pass@5', 'CodeBLEU', 'Execution', 'Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R', 'csr'].includes(header.key)) {
               return (value * 100).toFixed(1);
             } else if (header.key === 'llmjudge' || header.key === 'LLMJudge' || header.key === 'LLM Judge') {
               // For LLM Judge, the precomputed values are already percentages as strings
@@ -189,6 +189,20 @@ const TableCell: FC<TableCellProps> = ({
             const numValue = parseFloat(value);
             if (!isNaN(numValue)) {
               return numValue.toFixed(1);
+            }
+          }
+          
+          // Handle CSR values that come as strings (already processed)
+          if (typeof value === 'string' && header.key === 'csr') {
+            const numValue = parseFloat(value);
+            if (!isNaN(numValue)) {
+              // If the value is already in 0-100 scale (> 1), display as-is
+              // If it's still in 0-1 scale (≤ 1), convert to 0-100 scale
+              if (numValue <= 1) {
+                return (numValue * 100).toFixed(1);
+              } else {
+                return numValue.toFixed(1);
+              }
             }
           }
           

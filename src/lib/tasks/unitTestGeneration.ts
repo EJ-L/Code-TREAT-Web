@@ -167,6 +167,7 @@ export function aggregateUnitTestGenerationResults(results: ProcessedResult[]): 
     // Calculate average metrics across all datasets for this model
     const validResults = modelResults.filter(r => r.csr !== null);
     if (validResults.length > 0) {
+      // CSR values are in 0-1 scale from the raw data, so we keep them as is here since TableCell.tsx will handle the scaling
       aggregatedResult.csr = validResults.reduce((sum, r) => sum + (r.csr || 0), 0) / validResults.length;
       aggregatedResult.line_coverage = validResults.reduce((sum, r) => sum + (r.line_coverage || 0), 0) / validResults.length;
       aggregatedResult.branch_coverage = validResults.reduce((sum, r) => sum + (r.branch_coverage || 0), 0) / validResults.length;

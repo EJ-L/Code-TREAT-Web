@@ -13,25 +13,5 @@ Code LLM Trustworthiness/Reliability Evaluation and Testing
 - TypeScript
 - TailwindCSS
 
-## 本地开发
-
-1. 克隆仓库：
-```bash
-git clone [repository-url]
-```
-
-2. 安装依赖：
-```bash
-npm install
-# 或
-yarn install
-```
-
-3. 运行开发服务器：
-```bash
-npm run dev
-# 或
-yarn dev
-```
-4. Visit our website
+Visit our website
 code-treat.vercel.app

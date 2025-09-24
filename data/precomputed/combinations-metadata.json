@@ -1,5 +1,5 @@
 {
-  "generated": "2025-09-24T04:41:37.406Z",
+  "generated": "2025-09-24T04:54:12.607Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -13615,33 +13615,6 @@
           "showByDifficulty": false
         },
         {
-          "filename": "code-robustness_dataset-Merge_CruxEval+CE.json",
-          "filters": {
-            "dataset": [
-              "Merge-CruxEval+CE"
-            ]
-          },
-          "showByDifficulty": false
-        },
-        {
-          "filename": "code-robustness_dataset-CRUXEval.json",
-          "filters": {
-            "dataset": [
-              "CRUXEval"
-            ]
-          },
-          "showByDifficulty": false
-        },
-        {
-          "filename": "code-robustness_dataset-LiveCodeBench(CE).json",
-          "filters": {
-            "dataset": [
-              "LiveCodeBench (CE)"
-            ]
-          },
-          "showByDifficulty": false
-        },
-        {
           "filename": "code-robustness_dataset-HackerRank.json",
           "filters": {
             "dataset": [
@@ -13660,9 +13633,39 @@
           "showByDifficulty": false
         },
         {
+          "filename": "code-robustness_dataset-HackerRank-GeeksforGeeks.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
           "filename": "code-robustness_dataset-Merge_HR+GFG.json",
           "filters": {
             "dataset": [
+              "Merge-HR+GFG"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "code-robustness_dataset-HackerRank-Merge_HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merge-HR+GFG"
+            ]
+          },
+          "showByDifficulty": false
+        },
+        {
+          "filename": "code-robustness_dataset-GeeksforGeeks-Merge_HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
               "Merge-HR+GFG"
             ]
           },

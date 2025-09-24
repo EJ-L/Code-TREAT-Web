@@ -4,21 +4,6 @@
     "overall": {
       "dataset": []
     },
-    "dataset-Merge_CruxEval+CE": {
-      "dataset": [
-        "Merge-CruxEval+CE"
-      ]
-    },
-    "dataset-CRUXEval": {
-      "dataset": [
-        "CRUXEval"
-      ]
-    },
-    "dataset-LiveCodeBench(CE)": {
-      "dataset": [
-        "LiveCodeBench (CE)"
-      ]
-    },
     "dataset-HackerRank": {
       "dataset": [
         "HackerRank"
@@ -29,1989 +14,43 @@
         "GeeksforGeeks"
       ]
     },
+    "dataset-HackerRank-GeeksforGeeks": {
+      "dataset": [
+        "HackerRank",
+        "GeeksforGeeks"
+      ]
+    },
     "dataset-Merge_HR+GFG": {
       "dataset": [
+        "Merge-HR+GFG"
+      ]
+    },
+    "dataset-HackerRank-Merge_HR+GFG": {
+      "dataset": [
+        "HackerRank",
+        "Merge-HR+GFG"
+      ]
+    },
+    "dataset-GeeksforGeeks-Merge_HR+GFG": {
+      "dataset": [
+        "GeeksforGeeks",
         "Merge-HR+GFG"
       ]
     }
   },
   "data": {
-    "Claude-3.5-Haiku-20241022": {
-      "overall": {
-        "rank": 1,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "52.2",
-        "MHC": "35.0",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 1,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "51.4",
-        "MHC": "38.9",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 1,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "51.4",
-        "MHC": "38.9",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 1,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "53.6",
-        "MHC": "27.2",
-        "Average": "-"
-      }
-    },
-    "Claude-3.5-Sonnet-20241022": {
-      "overall": {
-        "rank": 2,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.6",
-        "MHC": "52.3",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 2,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.4",
-        "MHC": "57.5",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 2,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.4",
-        "MHC": "57.5",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 2,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "66.0",
-        "MHC": "41.8",
-        "Average": "-"
-      }
-    },
-    "DeepSeek-V3": {
-      "overall": {
-        "rank": 3,
-        "Vanilla": "72.4",
-        "PSC-ALL": "57.1",
-        "MCC": "49.7",
-        "MPS": "53.4",
-        "MHC": "52.4",
-        "Average": "52.5"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 3,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "57.9",
-        "MHC": "58.2",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 3,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "57.9",
-        "MHC": "58.2",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 3,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "44.6",
-        "MHC": "47.7",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 10,
-        "Vanilla": "71.7",
-        "PSC-ALL": "56.7",
-        "MCC": "48.3",
-        "MPS": "55.0",
-        "MHC": "58.3",
-        "Average": "54.6"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 10,
-        "Vanilla": "73.0",
-        "PSC-ALL": "57.4",
-        "MCC": "50.7",
-        "MPS": "52.0",
-        "MHC": "43.9",
-        "Average": "51.0"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 10,
-        "Vanilla": "72.6",
-        "PSC-ALL": "57.2",
-        "MCC": "50.0",
-        "MPS": "52.9",
-        "MHC": "48.1",
-        "Average": "52.0"
-      }
-    },
-    "Gemini-1.5-Flash": {
-      "overall": {
-        "rank": 4,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "33.9",
-        "MHC": "44.0",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 4,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "37.6",
-        "MHC": "48.8",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 4,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "37.6",
-        "MHC": "48.8",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 4,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "26.4",
-        "MHC": "34.4",
-        "Average": "-"
-      }
-    },
-    "Gemini-1.5-Pro-002": {
-      "overall": {
-        "rank": 5,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.9",
-        "MHC": "50.2",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 5,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "49.9",
-        "MHC": "56.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 5,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "49.9",
-        "MHC": "56.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 5,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "37.7",
-        "MHC": "37.9",
-        "Average": "-"
-      }
-    },
-    "Gemini-2.0-Flash": {
-      "overall": {
-        "rank": 6,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "38.6",
-        "MHC": "56.7",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 6,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "41.5",
-        "MHC": "58.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 6,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "41.5",
-        "MHC": "58.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 6,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "32.8",
-        "MHC": "53.1",
-        "Average": "-"
-      }
-    },
-    "GPT-4o": {
-      "overall": {
-        "rank": 7,
-        "Vanilla": "73.8",
-        "PSC-ALL": "63.2",
-        "MCC": "58.1",
-        "MPS": "54.3",
-        "MHC": "58.3",
-        "Average": "58.6"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 7,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "57.1",
-        "MHC": "63.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 7,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "57.1",
-        "MHC": "63.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 7,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "48.9",
-        "MHC": "47.3",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 8,
-        "Vanilla": "76.7",
-        "PSC-ALL": "60.0",
-        "MCC": "60.0",
-        "MPS": "61.7",
-        "MHC": "63.3",
-        "Average": "61.3"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 8,
-        "Vanilla": "71.6",
-        "PSC-ALL": "65.5",
-        "MCC": "56.8",
-        "MPS": "48.6",
-        "MHC": "55.4",
-        "Average": "56.6"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 8,
-        "Vanilla": "73.1",
-        "PSC-ALL": "63.9",
-        "MCC": "57.7",
-        "MPS": "52.4",
-        "MHC": "57.7",
-        "Average": "57.9"
-      }
-    },
-    "GPT-4o-mini": {
-      "overall": {
-        "rank": 8,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "41.4",
-        "MHC": "41.0",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 8,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "42.9",
-        "MHC": "46.7",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 8,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "42.9",
-        "MHC": "46.7",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 8,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "38.3",
-        "MHC": "29.6",
-        "Average": "-"
-      }
-    },
-    "Llama-3.1-8B-Instruct": {
-      "overall": {
-        "rank": 9,
-        "Vanilla": "37.3",
-        "PSC-ALL": "22.4",
-        "MCC": "25.6",
-        "MPS": "29.6",
-        "MHC": "27.1",
-        "Average": "26.8"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 9,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "29.0",
-        "MHC": "28.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 9,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "29.0",
-        "MHC": "28.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 9,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "26.7",
-        "MHC": "21.1",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 4,
-        "Vanilla": "36.7",
-        "PSC-ALL": "23.3",
-        "MCC": "30.0",
-        "MPS": "31.7",
-        "MHC": "28.3",
-        "Average": "28.3"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 4,
-        "Vanilla": "37.8",
-        "PSC-ALL": "21.6",
-        "MCC": "22.3",
-        "MPS": "30.4",
-        "MHC": "28.4",
-        "Average": "25.7"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 4,
-        "Vanilla": "37.5",
-        "PSC-ALL": "22.1",
-        "MCC": "24.5",
-        "MPS": "30.8",
-        "MHC": "28.4",
-        "Average": "26.4"
-      }
-    },
-    "Llama-3.1-70B-Instruct": {
-      "overall": {
-        "rank": 10,
-        "Vanilla": "58.4",
-        "PSC-ALL": "44.6",
-        "MCC": "46.8",
-        "MPS": "36.6",
-        "MHC": "45.0",
-        "Average": "44.5"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 10,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "38.6",
-        "MHC": "47.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 10,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "38.6",
-        "MHC": "47.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 10,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "27.5",
-        "MHC": "30.4",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 2,
-        "Vanilla": "65.0",
-        "PSC-ALL": "50.0",
-        "MCC": "43.3",
-        "MPS": "41.7",
-        "MHC": "55.0",
-        "Average": "47.5"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 2,
-        "Vanilla": "53.4",
-        "PSC-ALL": "40.5",
-        "MCC": "49.3",
-        "MPS": "35.8",
-        "MHC": "43.2",
-        "Average": "42.2"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 2,
-        "Vanilla": "56.7",
-        "PSC-ALL": "43.3",
-        "MCC": "47.6",
-        "MPS": "37.5",
-        "MHC": "46.6",
-        "Average": "43.8"
-      }
-    },
-    "Llama-3.1-405B-Instruct": {
-      "overall": {
-        "rank": 11,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "49.1",
-        "MHC": "49.3",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 11,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "53.4",
-        "MHC": "55.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 11,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "53.4",
-        "MHC": "55.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 11,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "40.6",
-        "MHC": "37.6",
-        "Average": "-"
-      }
-    },
-    "Llama-3.3-70B-Instruct": {
-      "overall": {
-        "rank": 12,
-        "Vanilla": "59.6",
-        "PSC-ALL": "47.3",
-        "MCC": "45.5",
-        "MPS": "42.4",
-        "MHC": "50.0",
-        "Average": "46.3"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 12,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "48.9",
-        "MHC": "52.6",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 12,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "48.9",
-        "MHC": "52.6",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 12,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "36.2",
-        "MHC": "38.3",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 18,
-        "Vanilla": "63.3",
-        "PSC-ALL": "50.0",
-        "MCC": "45.0",
-        "MPS": "43.3",
-        "MHC": "56.7",
-        "Average": "48.8"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 18,
-        "Vanilla": "56.8",
-        "PSC-ALL": "45.3",
-        "MCC": "45.9",
-        "MPS": "37.8",
-        "MHC": "48.6",
-        "Average": "44.4"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 18,
-        "Vanilla": "58.7",
-        "PSC-ALL": "46.6",
-        "MCC": "45.7",
-        "MPS": "39.4",
-        "MHC": "51.0",
-        "Average": "45.7"
-      }
-    },
-    "Qwen-2.5-7B-Instruct": {
-      "overall": {
-        "rank": 13,
-        "Vanilla": "41.6",
-        "PSC-ALL": "29.8",
-        "MCC": "17.1",
-        "MPS": "27.6",
-        "MHC": "25.6",
-        "Average": "24.9"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 13,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "25.5",
-        "MHC": "29.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 13,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "25.5",
-        "MHC": "29.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 13,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "33.2",
-        "MHC": "18.4",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 5,
-        "Vanilla": "46.7",
-        "PSC-ALL": "30.0",
-        "MCC": "20.0",
-        "MPS": "31.7",
-        "MHC": "28.3",
-        "Average": "27.5"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 5,
-        "Vanilla": "37.8",
-        "PSC-ALL": "29.7",
-        "MCC": "14.9",
-        "MPS": "23.6",
-        "MHC": "23.6",
-        "Average": "23.0"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 5,
-        "Vanilla": "40.4",
-        "PSC-ALL": "29.8",
-        "MCC": "16.3",
-        "MPS": "26.0",
-        "MHC": "25.0",
-        "Average": "24.3"
-      }
-    },
-    "Qwen-2.5-14B-Instruct": {
-      "overall": {
-        "rank": 14,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "32.5",
-        "MHC": "41.1",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 14,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "32.3",
-        "MHC": "42.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 14,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "32.3",
-        "MHC": "42.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 14,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "32.7",
-        "MHC": "38.5",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-32B-Instruct": {
-      "overall": {
-        "rank": 15,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.7",
-        "MHC": "47.2",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 15,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.8",
-        "MHC": "50.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 15,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.8",
-        "MHC": "50.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 15,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.6",
-        "MHC": "41.3",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-72B-Instruct": {
-      "overall": {
-        "rank": 16,
-        "Vanilla": "64.4",
-        "PSC-ALL": "50.8",
-        "MCC": "47.7",
-        "MPS": "42.4",
-        "MHC": "39.6",
-        "Average": "44.3"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 16,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "44.7",
-        "MHC": "47.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 16,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "44.7",
-        "MHC": "47.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 16,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "40.5",
-        "MHC": "32.6",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 9,
-        "Vanilla": "68.3",
-        "PSC-ALL": "48.3",
-        "MCC": "48.3",
-        "MPS": "48.3",
-        "MHC": "38.3",
-        "Average": "45.8"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 9,
-        "Vanilla": "61.5",
-        "PSC-ALL": "52.7",
-        "MCC": "47.3",
-        "MPS": "36.5",
-        "MHC": "35.8",
-        "Average": "43.1"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 9,
-        "Vanilla": "63.5",
-        "PSC-ALL": "51.4",
-        "MCC": "47.6",
-        "MPS": "39.9",
-        "MHC": "36.5",
-        "Average": "43.9"
-      }
-    },
-    "Qwen-2.5-Coder-32B-Instruct": {
-      "overall": {
-        "rank": 17,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "48.4",
-        "MHC": "52.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 17,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "52.8",
-        "MHC": "57.0",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 17,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "52.8",
-        "MHC": "57.0",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 17,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "39.5",
-        "MHC": "44.3",
-        "Average": "-"
-      }
-    },
-    "Claude-3.5-Haiku-20241022 (CoT)": {
-      "overall": {
-        "rank": 18,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "67.1",
-        "MHC": "62.4",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 18,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.6",
-        "MHC": "62.9",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 18,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.6",
-        "MHC": "62.9",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 18,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "69.9",
-        "MHC": "61.4",
-        "Average": "-"
-      }
-    },
-    "Claude-3.5-Sonnet-20241022 (CoT)": {
-      "overall": {
-        "rank": 19,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "80.7",
-        "MHC": "79.3",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 19,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "80.3",
-        "MHC": "78.9",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 19,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "80.3",
-        "MHC": "78.9",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 19,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "81.4",
-        "MHC": "80.2",
-        "Average": "-"
-      }
-    },
-    "DeepSeek-V3 (CoT)": {
-      "overall": {
-        "rank": 20,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "72.4",
-        "MHC": "86.9",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 20,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "73.4",
-        "MHC": "85.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 20,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "73.4",
-        "MHC": "85.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 20,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.4",
-        "MHC": "90.0",
-        "Average": "-"
-      }
-    },
-    "Gemini-1.5-Flash (CoT)": {
-      "overall": {
-        "rank": 21,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "42.2",
-        "MHC": "73.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 21,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "46.4",
-        "MHC": "73.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 21,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "46.4",
-        "MHC": "73.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 21,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "33.8",
-        "MHC": "74.5",
-        "Average": "-"
-      }
-    },
-    "Gemini-1.5-Pro-002 (CoT)": {
-      "overall": {
-        "rank": 22,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "74.4",
-        "MHC": "84.5",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 22,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "74.4",
-        "MHC": "82.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 22,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "74.4",
-        "MHC": "82.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 22,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "74.3",
-        "MHC": "88.9",
-        "Average": "-"
-      }
-    },
-    "Gemini-2.0-Flash (CoT)": {
-      "overall": {
-        "rank": 23,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "75.4",
-        "MHC": "87.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 23,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "78.5",
-        "MHC": "86.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 23,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "78.5",
-        "MHC": "86.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 23,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "69.3",
-        "MHC": "90.8",
-        "Average": "-"
-      }
-    },
-    "GPT-4o (CoT)": {
-      "overall": {
-        "rank": 24,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "86.8",
-        "MHC": "91.1",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 24,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "86.3",
-        "MHC": "89.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 24,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "86.3",
-        "MHC": "89.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 24,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "87.7",
-        "MHC": "94.8",
-        "Average": "-"
-      }
-    },
-    "GPT-4o-mini (CoT)": {
-      "overall": {
-        "rank": 25,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "73.3",
-        "MHC": "79.7",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 25,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "71.0",
-        "MHC": "78.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 25,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "71.0",
-        "MHC": "78.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 25,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "77.9",
-        "MHC": "82.7",
-        "Average": "-"
-      }
-    },
-    "Llama-3.1-8B-Instruct (CoT)": {
-      "overall": {
-        "rank": 26,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "34.8",
-        "MHC": "40.1",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 26,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "35.7",
-        "MHC": "42.5",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 26,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "35.7",
-        "MHC": "42.5",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 26,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "33.0",
-        "MHC": "35.3",
-        "Average": "-"
-      }
-    },
-    "Llama-3.1-70B-Instruct (CoT)": {
-      "overall": {
-        "rank": 27,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "46.8",
-        "MHC": "64.3",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 27,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "50.7",
-        "MHC": "65.7",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 27,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "50.7",
-        "MHC": "65.7",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 27,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "39.0",
-        "MHC": "61.4",
-        "Average": "-"
-      }
-    },
-    "Llama-3.1-405B-Instruct (CoT)": {
-      "overall": {
-        "rank": 28,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "65.2",
-        "MHC": "71.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 28,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "68.5",
-        "MHC": "74.2",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 28,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "68.5",
-        "MHC": "74.2",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 28,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "58.5",
-        "MHC": "67.2",
-        "Average": "-"
-      }
-    },
-    "Llama-3.3-70B-Instruct (CoT)": {
-      "overall": {
-        "rank": 29,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "67.6",
-        "MHC": "72.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 29,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.0",
-        "MHC": "74.0",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 29,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.0",
-        "MHC": "74.0",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 29,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "62.6",
-        "MHC": "70.6",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-7B-Instruct (CoT)": {
-      "overall": {
-        "rank": 30,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "42.4",
-        "MHC": "54.4",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 30,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "40.9",
-        "MHC": "53.6",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 30,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "40.9",
-        "MHC": "53.6",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 30,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "45.3",
-        "MHC": "55.9",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-14B-Instruct (CoT)": {
-      "overall": {
-        "rank": 31,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "40.5",
-        "MHC": "63.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 31,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "39.0",
-        "MHC": "61.2",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 31,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "39.0",
-        "MHC": "61.2",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 31,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "43.4",
-        "MHC": "69.1",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-32B-Instruct (CoT)": {
-      "overall": {
-        "rank": 32,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "60.2",
-        "MHC": "75.8",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 32,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "60.2",
-        "MHC": "73.9",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 32,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "60.2",
-        "MHC": "73.9",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 32,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "60.1",
-        "MHC": "79.7",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-72B-Instruct (CoT)": {
-      "overall": {
-        "rank": 33,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.3",
-        "MHC": "78.0",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 33,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "67.3",
-        "MHC": "75.7",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 33,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "67.3",
-        "MHC": "75.7",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 33,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "76.2",
-        "MHC": "82.7",
-        "Average": "-"
-      }
-    },
-    "Qwen-2.5-Coder-32B-Instruct (CoT)": {
-      "overall": {
-        "rank": 34,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "66.9",
-        "MHC": "76.7",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 34,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.1",
-        "MHC": "77.1",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 34,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "70.1",
-        "MHC": "77.1",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 34,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "60.3",
-        "MHC": "76.0",
-        "Average": "-"
-      }
-    },
-    "o3-mini (Low)": {
-      "overall": {
-        "rank": 35,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "96.1",
-        "MHC": "83.4",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 35,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "96.4",
-        "MHC": "85.4",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 35,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "96.4",
-        "MHC": "85.4",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 35,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "95.4",
-        "MHC": "79.3",
-        "Average": "-"
-      }
-    },
-    "o3-mini (High)": {
-      "overall": {
-        "rank": 36,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "99.2",
-        "MHC": "78.9",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 36,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "99.1",
-        "MHC": "82.5",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 36,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "99.1",
-        "MHC": "82.5",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 36,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "99.4",
-        "MHC": "71.6",
-        "Average": "-"
-      }
-    },
-    "DeepSeek-R1": {
-      "overall": {
-        "rank": 37,
-        "Vanilla": "97.8",
-        "PSC-ALL": "96.3",
-        "MCC": "95.2",
-        "MPS": "96.7",
-        "MHC": "94.0",
-        "Average": "95.0"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 37,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "95.8",
-        "MHC": "94.3",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 37,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "95.8",
-        "MHC": "94.3",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 37,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "99.4",
-        "MHC": "99.2",
-        "Average": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 12,
-        "Vanilla": "96.7",
-        "PSC-ALL": "95.0",
-        "MCC": "93.3",
-        "MPS": "95.0",
-        "MHC": "91.7",
-        "Average": "93.8"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 12,
-        "Vanilla": "98.6",
-        "PSC-ALL": "97.3",
-        "MCC": "96.6",
-        "MPS": "97.3",
-        "MHC": "92.6",
-        "Average": "95.9"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 12,
-        "Vanilla": "98.1",
-        "PSC-ALL": "96.6",
-        "MCC": "95.7",
-        "MPS": "96.6",
-        "MHC": "92.3",
-        "Average": "95.3"
-      }
-    },
-    "QwQ-32B": {
-      "overall": {
-        "rank": 38,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "94.4",
-        "MHC": "95.0",
-        "Average": "-"
-      },
-      "dataset-Merge_CruxEval+CE": {
-        "rank": 38,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "93.1",
-        "MHC": "93.5",
-        "Average": "-"
-      },
-      "dataset-CRUXEval": {
-        "rank": 38,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "93.1",
-        "MHC": "93.5",
-        "Average": "-"
-      },
-      "dataset-LiveCodeBench(CE)": {
-        "rank": 38,
-        "Vanilla": "-",
-        "PSC-ALL": "-",
-        "MCC": "-",
-        "MPS": "97.1",
-        "MHC": "97.9",
-        "Average": "-"
-      }
-    },
-    "GPT-OSS-120B": {
-      "overall": {
-        "rank": 39,
-        "Vanilla": "100.0",
-        "PSC-ALL": "99.2",
-        "MCC": "98.8",
-        "MPS": "98.9",
-        "MHC": "98.2",
-        "Average": "98.8"
-      },
-      "dataset-HackerRank": {
-        "rank": 1,
-        "Vanilla": "100.0",
-        "PSC-ALL": "100.0",
-        "MCC": "100.0",
-        "MPS": "98.3",
-        "MHC": "96.7",
-        "Average": "98.8"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 1,
-        "Vanilla": "100.0",
-        "PSC-ALL": "98.6",
-        "MCC": "98.0",
-        "MPS": "99.3",
-        "MHC": "99.3",
-        "Average": "98.8"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 1,
-        "Vanilla": "100.0",
-        "PSC-ALL": "99.0",
-        "MCC": "98.6",
-        "MPS": "99.0",
-        "MHC": "98.6",
-        "Average": "98.8"
-      }
-    },
-    "Qwen-2.5-32B-Coder-Instruct": {
-      "overall": {
-        "rank": 40,
-        "Vanilla": "60.6",
-        "PSC-ALL": "53.1",
-        "MCC": "37.6",
-        "MPS": "42.4",
-        "MHC": "49.2",
-        "Average": "45.6"
-      },
-      "dataset-HackerRank": {
-        "rank": 3,
-        "Vanilla": "56.7",
-        "PSC-ALL": "50.0",
-        "MCC": "40.0",
-        "MPS": "46.7",
-        "MHC": "50.0",
-        "Average": "46.7"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 3,
-        "Vanilla": "63.5",
-        "PSC-ALL": "55.4",
-        "MCC": "35.8",
-        "MPS": "39.2",
-        "MHC": "48.6",
-        "Average": "44.8"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 3,
-        "Vanilla": "61.5",
-        "PSC-ALL": "53.8",
-        "MCC": "37.0",
-        "MPS": "41.3",
-        "MHC": "49.0",
-        "Average": "45.3"
-      }
-    },
-    "Gemini-2.5-Pro": {
-      "overall": {
-        "rank": 41,
-        "Vanilla": "100.0",
-        "PSC-ALL": "98.6",
-        "MCC": "99.3",
-        "MPS": "99.6",
-        "MHC": "98.1",
-        "Average": "98.9"
-      },
-      "dataset-HackerRank": {
-        "rank": 6,
-        "Vanilla": "100.0",
-        "PSC-ALL": "96.7",
-        "MCC": "98.3",
-        "MPS": "100.0",
-        "MHC": "98.3",
-        "Average": "98.3"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 6,
-        "Vanilla": "100.0",
-        "PSC-ALL": "100.0",
-        "MCC": "100.0",
-        "MPS": "99.3",
-        "MHC": "98.0",
-        "Average": "99.3"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 6,
-        "Vanilla": "100.0",
-        "PSC-ALL": "99.0",
-        "MCC": "99.5",
-        "MPS": "99.5",
-        "MHC": "98.1",
-        "Average": "99.0"
-      }
-    },
-    "GPT-4.1": {
-      "overall": {
-        "rank": 42,
-        "Vanilla": "79.7",
-        "PSC-ALL": "68.7",
-        "MCC": "55.5",
-        "MPS": "59.4",
-        "MHC": "65.0",
-        "Average": "62.1"
-      },
-      "dataset-HackerRank": {
-        "rank": 7,
-        "Vanilla": "83.3",
-        "PSC-ALL": "68.3",
-        "MCC": "58.3",
-        "MPS": "68.3",
-        "MHC": "75.0",
-        "Average": "67.5"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 7,
-        "Vanilla": "77.0",
-        "PSC-ALL": "68.9",
-        "MCC": "53.4",
-        "MPS": "52.7",
-        "MHC": "57.4",
-        "Average": "58.1"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 7,
-        "Vanilla": "78.8",
-        "PSC-ALL": "68.8",
-        "MCC": "54.8",
-        "MPS": "57.2",
-        "MHC": "62.5",
-        "Average": "60.8"
-      }
-    },
-    "Qwen-3-32B": {
-      "overall": {
-        "rank": 43,
-        "Vanilla": "98.5",
-        "PSC-ALL": "93.4",
-        "MCC": "94.3",
-        "MPS": "94.8",
-        "MHC": "94.8",
-        "Average": "94.3"
-      },
-      "dataset-HackerRank": {
-        "rank": 11,
-        "Vanilla": "98.3",
-        "PSC-ALL": "90.0",
-        "MCC": "96.7",
-        "MPS": "93.3",
-        "MHC": "93.3",
-        "Average": "93.3"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 11,
-        "Vanilla": "98.6",
-        "PSC-ALL": "95.9",
-        "MCC": "92.6",
-        "MPS": "95.9",
-        "MHC": "95.9",
-        "Average": "95.1"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 11,
-        "Vanilla": "98.6",
-        "PSC-ALL": "94.2",
-        "MCC": "93.8",
-        "MPS": "95.2",
-        "MHC": "95.2",
-        "Average": "94.6"
-      }
-    },
-    "Gemini-2.5-Flash": {
-      "overall": {
-        "rank": 44,
-        "Vanilla": "96.4",
-        "PSC-ALL": "97.7",
-        "MCC": "97.4",
-        "MPS": "96.6",
-        "MHC": "97.4",
-        "Average": "97.3"
-      },
-      "dataset-HackerRank": {
-        "rank": 13,
-        "Vanilla": "93.3",
-        "PSC-ALL": "98.3",
-        "MCC": "98.3",
-        "MPS": "96.7",
-        "MHC": "98.3",
-        "Average": "97.9"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 13,
-        "Vanilla": "98.6",
-        "PSC-ALL": "97.3",
-        "MCC": "96.6",
-        "MPS": "96.6",
-        "MHC": "96.6",
-        "Average": "96.8"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 13,
-        "Vanilla": "97.1",
-        "PSC-ALL": "97.6",
-        "MCC": "97.1",
-        "MPS": "96.6",
-        "MHC": "97.1",
-        "Average": "97.1"
-      }
-    },
-    "Claude-3.7-Sonnet": {
-      "overall": {
-        "rank": 45,
-        "Vanilla": "84.8",
-        "PSC-ALL": "79.4",
-        "MCC": "78.7",
-        "MPS": "79.8",
-        "MHC": "83.4",
-        "Average": "80.3"
-      },
-      "dataset-HackerRank": {
-        "rank": 14,
-        "Vanilla": "81.7",
-        "PSC-ALL": "81.7",
-        "MCC": "78.3",
-        "MPS": "81.7",
-        "MHC": "88.3",
-        "Average": "82.5"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 14,
-        "Vanilla": "87.2",
-        "PSC-ALL": "77.7",
-        "MCC": "79.1",
-        "MPS": "78.4",
-        "MHC": "79.7",
-        "Average": "78.7"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 14,
-        "Vanilla": "85.6",
-        "PSC-ALL": "78.8",
-        "MCC": "78.8",
-        "MPS": "79.3",
-        "MHC": "82.2",
-        "Average": "79.8"
-      }
-    },
-    "Claude-3.5-Sonnet": {
-      "overall": {
-        "rank": 46,
-        "Vanilla": "66.1",
-        "PSC-ALL": "63.8",
-        "MCC": "59.3",
-        "MPS": "59.5",
-        "MHC": "53.1",
-        "Average": "58.9"
-      },
-      "dataset-HackerRank": {
-        "rank": 15,
-        "Vanilla": "65.0",
-        "PSC-ALL": "65.0",
-        "MCC": "60.0",
-        "MPS": "65.0",
-        "MHC": "60.0",
-        "Average": "62.5"
-      },
-      "dataset-GeeksforGeeks": {
-        "rank": 15,
-        "Vanilla": "66.9",
-        "PSC-ALL": "62.8",
-        "MCC": "58.8",
-        "MPS": "55.4",
-        "MHC": "48.0",
-        "Average": "56.3"
-      },
-      "dataset-Merge_HR+GFG": {
-        "rank": 15,
-        "Vanilla": "66.3",
-        "PSC-ALL": "63.5",
-        "MCC": "59.1",
-        "MPS": "58.2",
-        "MHC": "51.4",
-        "Average": "58.1"
-      }
-    },
     "GPT-5": {
       "overall": {
-        "rank": 47,
-        "Vanilla": "99.3",
+        "rank": 1,
+        "Vanilla": "99.5",
         "PSC-ALL": "100.0",
-        "MCC": "99.3",
-        "MPS": "99.6",
-        "MHC": "98.9",
-        "Average": "99.4"
+        "MCC": "99.5",
+        "MPS": "99.5",
+        "MHC": "99.0",
+        "Average": "99.5"
       },
       "dataset-HackerRank": {
-        "rank": 16,
+        "rank": 1,
         "Vanilla": "98.3",
         "PSC-ALL": "100.0",
         "MCC": "98.3",
@@ -2020,7 +59,7 @@
         "Average": "99.2"
       },
       "dataset-GeeksforGeeks": {
-        "rank": 16,
+        "rank": 1,
         "Vanilla": "100.0",
         "PSC-ALL": "100.0",
         "MCC": "100.0",
@@ -2028,28 +67,965 @@
         "MHC": "99.3",
         "Average": "99.7"
       },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 1,
+        "Vanilla": "99.2",
+        "PSC-ALL": "100.0",
+        "MCC": "99.2",
+        "MPS": "99.7",
+        "MHC": "98.8",
+        "Average": "99.4"
+      },
       "dataset-Merge_HR+GFG": {
-        "rank": 16,
+        "rank": 1,
         "Vanilla": "99.5",
         "PSC-ALL": "100.0",
         "MCC": "99.5",
         "MPS": "99.5",
         "MHC": "99.0",
         "Average": "99.5"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 1,
+        "Vanilla": "98.9",
+        "PSC-ALL": "100.0",
+        "MCC": "98.9",
+        "MPS": "99.8",
+        "MHC": "98.7",
+        "Average": "99.3"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 1,
+        "Vanilla": "99.8",
+        "PSC-ALL": "100.0",
+        "MCC": "99.8",
+        "MPS": "99.4",
+        "MHC": "99.2",
+        "Average": "99.6"
+      }
+    },
+    "Gemini-2.5-Pro": {
+      "overall": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.0",
+        "MCC": "99.5",
+        "MPS": "99.5",
+        "MHC": "98.1",
+        "Average": "99.0"
+      },
+      "dataset-HackerRank": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "96.7",
+        "MCC": "98.3",
+        "MPS": "100.0",
+        "MHC": "98.3",
+        "Average": "98.3"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "100.0",
+        "MCC": "100.0",
+        "MPS": "99.3",
+        "MHC": "98.0",
+        "Average": "99.3"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "98.3",
+        "MCC": "99.2",
+        "MPS": "99.7",
+        "MHC": "98.2",
+        "Average": "98.8"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.0",
+        "MCC": "99.5",
+        "MPS": "99.5",
+        "MHC": "98.1",
+        "Average": "99.0"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "97.9",
+        "MCC": "98.9",
+        "MPS": "99.8",
+        "MHC": "98.2",
+        "Average": "98.7"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.5",
+        "MCC": "99.8",
+        "MPS": "99.4",
+        "MHC": "98.0",
+        "Average": "99.2"
+      }
+    },
+    "GPT-OSS-120B": {
+      "overall": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.0",
+        "MCC": "98.6",
+        "MPS": "99.0",
+        "MHC": "98.6",
+        "Average": "98.8"
+      },
+      "dataset-HackerRank": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "100.0",
+        "MCC": "100.0",
+        "MPS": "98.3",
+        "MHC": "96.7",
+        "Average": "98.8"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "98.6",
+        "MCC": "98.0",
+        "MPS": "99.3",
+        "MHC": "99.3",
+        "Average": "98.8"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.3",
+        "MCC": "99.0",
+        "MPS": "98.8",
+        "MHC": "98.0",
+        "Average": "98.8"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.0",
+        "MCC": "98.6",
+        "MPS": "99.0",
+        "MHC": "98.6",
+        "Average": "98.8"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 2,
+        "Vanilla": "100.0",
+        "PSC-ALL": "99.5",
+        "MCC": "99.3",
+        "MPS": "98.7",
+        "MHC": "97.6",
+        "Average": "98.8"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 3,
+        "Vanilla": "100.0",
+        "PSC-ALL": "98.8",
+        "MCC": "98.3",
+        "MPS": "99.2",
+        "MHC": "98.9",
+        "Average": "98.8"
+      }
+    },
+    "Gemini-2.5-Flash": {
+      "overall": {
+        "rank": 4,
+        "Vanilla": "97.1",
+        "PSC-ALL": "97.6",
+        "MCC": "97.1",
+        "MPS": "96.6",
+        "MHC": "97.1",
+        "Average": "97.1"
+      },
+      "dataset-HackerRank": {
+        "rank": 4,
+        "Vanilla": "93.3",
+        "PSC-ALL": "98.3",
+        "MCC": "98.3",
+        "MPS": "96.7",
+        "MHC": "98.3",
+        "Average": "97.9"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 4,
+        "Vanilla": "98.6",
+        "PSC-ALL": "97.3",
+        "MCC": "96.6",
+        "MPS": "96.6",
+        "MHC": "96.6",
+        "Average": "96.8"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 4,
+        "Vanilla": "96.0",
+        "PSC-ALL": "97.8",
+        "MCC": "97.5",
+        "MPS": "96.6",
+        "MHC": "97.5",
+        "Average": "97.4"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 4,
+        "Vanilla": "97.1",
+        "PSC-ALL": "97.6",
+        "MCC": "97.1",
+        "MPS": "96.6",
+        "MHC": "97.1",
+        "Average": "97.1"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 4,
+        "Vanilla": "95.2",
+        "PSC-ALL": "98.0",
+        "MCC": "97.7",
+        "MPS": "96.7",
+        "MHC": "97.7",
+        "Average": "97.5"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 4,
+        "Vanilla": "97.9",
+        "PSC-ALL": "97.4",
+        "MCC": "96.9",
+        "MPS": "96.6",
+        "MHC": "96.9",
+        "Average": "97.0"
+      }
+    },
+    "DeepSeek-R1": {
+      "overall": {
+        "rank": 5,
+        "Vanilla": "98.1",
+        "PSC-ALL": "96.6",
+        "MCC": "95.7",
+        "MPS": "96.6",
+        "MHC": "92.3",
+        "Average": "95.3"
+      },
+      "dataset-HackerRank": {
+        "rank": 5,
+        "Vanilla": "96.7",
+        "PSC-ALL": "95.0",
+        "MCC": "93.3",
+        "MPS": "95.0",
+        "MHC": "91.7",
+        "Average": "93.8"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 5,
+        "Vanilla": "98.6",
+        "PSC-ALL": "97.3",
+        "MCC": "96.6",
+        "MPS": "97.3",
+        "MHC": "92.6",
+        "Average": "95.9"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 5,
+        "Vanilla": "97.7",
+        "PSC-ALL": "96.1",
+        "MCC": "95.0",
+        "MPS": "96.1",
+        "MHC": "92.1",
+        "Average": "94.8"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 5,
+        "Vanilla": "98.1",
+        "PSC-ALL": "96.6",
+        "MCC": "95.7",
+        "MPS": "96.6",
+        "MHC": "92.3",
+        "Average": "95.3"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 5,
+        "Vanilla": "97.4",
+        "PSC-ALL": "95.8",
+        "MCC": "94.5",
+        "MPS": "95.8",
+        "MHC": "92.0",
+        "Average": "94.5"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 5,
+        "Vanilla": "98.4",
+        "PSC-ALL": "97.0",
+        "MCC": "96.1",
+        "MPS": "97.0",
+        "MHC": "92.4",
+        "Average": "95.6"
+      }
+    },
+    "Qwen-3-32B": {
+      "overall": {
+        "rank": 6,
+        "Vanilla": "98.6",
+        "PSC-ALL": "94.2",
+        "MCC": "93.8",
+        "MPS": "95.2",
+        "MHC": "95.2",
+        "Average": "94.6"
+      },
+      "dataset-HackerRank": {
+        "rank": 6,
+        "Vanilla": "98.3",
+        "PSC-ALL": "90.0",
+        "MCC": "96.7",
+        "MPS": "93.3",
+        "MHC": "93.3",
+        "Average": "93.3"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 6,
+        "Vanilla": "98.6",
+        "PSC-ALL": "95.9",
+        "MCC": "92.6",
+        "MPS": "95.9",
+        "MHC": "95.9",
+        "Average": "95.1"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 6,
+        "Vanilla": "98.5",
+        "PSC-ALL": "93.0",
+        "MCC": "94.6",
+        "MPS": "94.6",
+        "MHC": "94.6",
+        "Average": "94.2"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 6,
+        "Vanilla": "98.6",
+        "PSC-ALL": "94.2",
+        "MCC": "93.8",
+        "MPS": "95.2",
+        "MHC": "95.2",
+        "Average": "94.6"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 6,
+        "Vanilla": "98.4",
+        "PSC-ALL": "92.1",
+        "MCC": "95.2",
+        "MPS": "94.3",
+        "MHC": "94.3",
+        "Average": "94.0"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 6,
+        "Vanilla": "98.6",
+        "PSC-ALL": "95.1",
+        "MCC": "93.2",
+        "MPS": "95.6",
+        "MHC": "95.6",
+        "Average": "94.8"
+      }
+    },
+    "Claude-3.7-Sonnet": {
+      "overall": {
+        "rank": 7,
+        "Vanilla": "85.6",
+        "PSC-ALL": "78.8",
+        "MCC": "78.8",
+        "MPS": "79.3",
+        "MHC": "82.2",
+        "Average": "79.8"
+      },
+      "dataset-HackerRank": {
+        "rank": 7,
+        "Vanilla": "81.7",
+        "PSC-ALL": "81.7",
+        "MCC": "78.3",
+        "MPS": "81.7",
+        "MHC": "88.3",
+        "Average": "82.5"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 7,
+        "Vanilla": "87.2",
+        "PSC-ALL": "77.7",
+        "MCC": "79.1",
+        "MPS": "78.4",
+        "MHC": "79.7",
+        "Average": "78.7"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 7,
+        "Vanilla": "84.4",
+        "PSC-ALL": "79.7",
+        "MCC": "78.7",
+        "MPS": "80.0",
+        "MHC": "84.0",
+        "Average": "80.6"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 7,
+        "Vanilla": "85.6",
+        "PSC-ALL": "78.8",
+        "MCC": "78.8",
+        "MPS": "79.3",
+        "MHC": "82.2",
+        "Average": "79.8"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 7,
+        "Vanilla": "83.6",
+        "PSC-ALL": "80.3",
+        "MCC": "78.6",
+        "MPS": "80.5",
+        "MHC": "85.3",
+        "Average": "81.2"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 7,
+        "Vanilla": "86.4",
+        "PSC-ALL": "78.3",
+        "MCC": "79.0",
+        "MPS": "78.9",
+        "MHC": "81.0",
+        "Average": "79.3"
+      }
+    },
+    "GPT-4.1": {
+      "overall": {
+        "rank": 8,
+        "Vanilla": "78.8",
+        "PSC-ALL": "68.8",
+        "MCC": "54.8",
+        "MPS": "57.2",
+        "MHC": "62.5",
+        "Average": "60.8"
+      },
+      "dataset-HackerRank": {
+        "rank": 8,
+        "Vanilla": "83.3",
+        "PSC-ALL": "68.3",
+        "MCC": "58.3",
+        "MPS": "68.3",
+        "MHC": "75.0",
+        "Average": "67.5"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 8,
+        "Vanilla": "77.0",
+        "PSC-ALL": "68.9",
+        "MCC": "53.4",
+        "MPS": "52.7",
+        "MHC": "57.4",
+        "Average": "58.1"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 8,
+        "Vanilla": "80.2",
+        "PSC-ALL": "68.6",
+        "MCC": "55.9",
+        "MPS": "60.5",
+        "MHC": "66.2",
+        "Average": "62.8"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 8,
+        "Vanilla": "78.8",
+        "PSC-ALL": "68.8",
+        "MCC": "54.8",
+        "MPS": "57.2",
+        "MHC": "62.5",
+        "Average": "60.8"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 8,
+        "Vanilla": "81.1",
+        "PSC-ALL": "68.5",
+        "MCC": "56.6",
+        "MPS": "62.8",
+        "MHC": "68.8",
+        "Average": "64.2"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 8,
+        "Vanilla": "77.9",
+        "PSC-ALL": "68.8",
+        "MCC": "54.1",
+        "MPS": "55.0",
+        "MHC": "60.0",
+        "Average": "59.5"
+      }
+    },
+    "Claude-3.5-Sonnet": {
+      "overall": {
+        "rank": 9,
+        "Vanilla": "66.3",
+        "PSC-ALL": "63.5",
+        "MCC": "59.1",
+        "MPS": "58.2",
+        "MHC": "51.4",
+        "Average": "58.1"
+      },
+      "dataset-HackerRank": {
+        "rank": 9,
+        "Vanilla": "65.0",
+        "PSC-ALL": "65.0",
+        "MCC": "60.0",
+        "MPS": "65.0",
+        "MHC": "60.0",
+        "Average": "62.5"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 10,
+        "Vanilla": "66.9",
+        "PSC-ALL": "62.8",
+        "MCC": "58.8",
+        "MPS": "55.4",
+        "MHC": "48.0",
+        "Average": "56.3"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 9,
+        "Vanilla": "65.9",
+        "PSC-ALL": "63.9",
+        "MCC": "59.4",
+        "MPS": "60.2",
+        "MHC": "54.0",
+        "Average": "59.4"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 9,
+        "Vanilla": "66.3",
+        "PSC-ALL": "63.5",
+        "MCC": "59.1",
+        "MPS": "58.2",
+        "MHC": "51.4",
+        "Average": "58.1"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 9,
+        "Vanilla": "65.7",
+        "PSC-ALL": "64.2",
+        "MCC": "59.6",
+        "MPS": "61.6",
+        "MHC": "55.7",
+        "Average": "60.3"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 10,
+        "Vanilla": "66.6",
+        "PSC-ALL": "63.1",
+        "MCC": "59.0",
+        "MPS": "56.8",
+        "MHC": "49.7",
+        "Average": "57.2"
+      }
+    },
+    "GPT-4o": {
+      "overall": {
+        "rank": 10,
+        "Vanilla": "73.1",
+        "PSC-ALL": "63.9",
+        "MCC": "57.7",
+        "MPS": "52.4",
+        "MHC": "57.7",
+        "Average": "57.9"
+      },
+      "dataset-HackerRank": {
+        "rank": 10,
+        "Vanilla": "76.7",
+        "PSC-ALL": "60.0",
+        "MCC": "60.0",
+        "MPS": "61.7",
+        "MHC": "63.3",
+        "Average": "61.3"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 9,
+        "Vanilla": "71.6",
+        "PSC-ALL": "65.5",
+        "MCC": "56.8",
+        "MPS": "48.6",
+        "MHC": "55.4",
+        "Average": "56.6"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 10,
+        "Vanilla": "74.1",
+        "PSC-ALL": "62.8",
+        "MCC": "58.4",
+        "MPS": "55.2",
+        "MHC": "59.4",
+        "Average": "58.9"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 10,
+        "Vanilla": "73.1",
+        "PSC-ALL": "63.9",
+        "MCC": "57.7",
+        "MPS": "52.4",
+        "MHC": "57.7",
+        "Average": "57.9"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 10,
+        "Vanilla": "74.9",
+        "PSC-ALL": "62.0",
+        "MCC": "58.8",
+        "MPS": "57.0",
+        "MHC": "60.5",
+        "Average": "59.6"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 9,
+        "Vanilla": "72.3",
+        "PSC-ALL": "64.7",
+        "MCC": "57.2",
+        "MPS": "50.5",
+        "MHC": "56.5",
+        "Average": "57.3"
+      }
+    },
+    "DeepSeek-V3": {
+      "overall": {
+        "rank": 11,
+        "Vanilla": "72.6",
+        "PSC-ALL": "57.2",
+        "MCC": "50.0",
+        "MPS": "52.9",
+        "MHC": "48.1",
+        "Average": "52.0"
+      },
+      "dataset-HackerRank": {
+        "rank": 11,
+        "Vanilla": "71.7",
+        "PSC-ALL": "56.7",
+        "MCC": "48.3",
+        "MPS": "55.0",
+        "MHC": "58.3",
+        "Average": "54.6"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 11,
+        "Vanilla": "73.0",
+        "PSC-ALL": "57.4",
+        "MCC": "50.7",
+        "MPS": "52.0",
+        "MHC": "43.9",
+        "Average": "51.0"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 11,
+        "Vanilla": "72.3",
+        "PSC-ALL": "57.0",
+        "MCC": "49.5",
+        "MPS": "53.5",
+        "MHC": "51.1",
+        "Average": "52.8"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 11,
+        "Vanilla": "72.6",
+        "PSC-ALL": "57.2",
+        "MCC": "50.0",
+        "MPS": "52.9",
+        "MHC": "48.1",
+        "Average": "52.0"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 11,
+        "Vanilla": "72.1",
+        "PSC-ALL": "56.9",
+        "MCC": "49.2",
+        "MPS": "53.9",
+        "MHC": "53.2",
+        "Average": "53.3"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 11,
+        "Vanilla": "72.8",
+        "PSC-ALL": "57.3",
+        "MCC": "50.3",
+        "MPS": "52.5",
+        "MHC": "46.0",
+        "Average": "51.5"
+      }
+    },
+    "Llama-3.3-70B-Instruct": {
+      "overall": {
+        "rank": 12,
+        "Vanilla": "58.7",
+        "PSC-ALL": "46.6",
+        "MCC": "45.7",
+        "MPS": "39.4",
+        "MHC": "51.0",
+        "Average": "45.7"
+      },
+      "dataset-HackerRank": {
+        "rank": 12,
+        "Vanilla": "63.3",
+        "PSC-ALL": "50.0",
+        "MCC": "45.0",
+        "MPS": "43.3",
+        "MHC": "56.7",
+        "Average": "48.8"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 13,
+        "Vanilla": "56.8",
+        "PSC-ALL": "45.3",
+        "MCC": "45.9",
+        "MPS": "37.8",
+        "MHC": "48.6",
+        "Average": "44.4"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 12,
+        "Vanilla": "60.0",
+        "PSC-ALL": "47.6",
+        "MCC": "45.5",
+        "MPS": "40.6",
+        "MHC": "52.7",
+        "Average": "46.6"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 12,
+        "Vanilla": "58.7",
+        "PSC-ALL": "46.6",
+        "MCC": "45.7",
+        "MPS": "39.4",
+        "MHC": "51.0",
+        "Average": "45.7"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 12,
+        "Vanilla": "61.0",
+        "PSC-ALL": "48.3",
+        "MCC": "45.3",
+        "MPS": "41.4",
+        "MHC": "53.8",
+        "Average": "47.2"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 13,
+        "Vanilla": "57.7",
+        "PSC-ALL": "46.0",
+        "MCC": "45.8",
+        "MPS": "38.6",
+        "MHC": "49.8",
+        "Average": "45.0"
+      }
+    },
+    "Qwen-2.5-32B-Coder-Instruct": {
+      "overall": {
+        "rank": 13,
+        "Vanilla": "61.5",
+        "PSC-ALL": "53.8",
+        "MCC": "37.0",
+        "MPS": "41.3",
+        "MHC": "49.0",
+        "Average": "45.3"
+      },
+      "dataset-HackerRank": {
+        "rank": 14,
+        "Vanilla": "56.7",
+        "PSC-ALL": "50.0",
+        "MCC": "40.0",
+        "MPS": "46.7",
+        "MHC": "50.0",
+        "Average": "46.7"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 12,
+        "Vanilla": "63.5",
+        "PSC-ALL": "55.4",
+        "MCC": "35.8",
+        "MPS": "39.2",
+        "MHC": "48.6",
+        "Average": "44.8"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 13,
+        "Vanilla": "60.1",
+        "PSC-ALL": "52.7",
+        "MCC": "37.9",
+        "MPS": "42.9",
+        "MHC": "49.3",
+        "Average": "45.7"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 13,
+        "Vanilla": "61.5",
+        "PSC-ALL": "53.8",
+        "MCC": "37.0",
+        "MPS": "41.3",
+        "MHC": "49.0",
+        "Average": "45.3"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 13,
+        "Vanilla": "59.1",
+        "PSC-ALL": "51.9",
+        "MCC": "38.5",
+        "MPS": "44.0",
+        "MHC": "49.5",
+        "Average": "46.0"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 12,
+        "Vanilla": "62.5",
+        "PSC-ALL": "54.6",
+        "MCC": "36.4",
+        "MPS": "40.3",
+        "MHC": "48.8",
+        "Average": "45.0"
+      }
+    },
+    "Qwen-2.5-72B-Instruct": {
+      "overall": {
+        "rank": 14,
+        "Vanilla": "63.5",
+        "PSC-ALL": "51.4",
+        "MCC": "47.6",
+        "MPS": "39.9",
+        "MHC": "36.5",
+        "Average": "43.9"
+      },
+      "dataset-HackerRank": {
+        "rank": 15,
+        "Vanilla": "68.3",
+        "PSC-ALL": "48.3",
+        "MCC": "48.3",
+        "MPS": "48.3",
+        "MHC": "38.3",
+        "Average": "45.8"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 14,
+        "Vanilla": "61.5",
+        "PSC-ALL": "52.7",
+        "MCC": "47.3",
+        "MPS": "36.5",
+        "MHC": "35.8",
+        "Average": "43.1"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 15,
+        "Vanilla": "64.9",
+        "PSC-ALL": "50.5",
+        "MCC": "47.8",
+        "MPS": "42.4",
+        "MHC": "37.1",
+        "Average": "44.5"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 14,
+        "Vanilla": "63.5",
+        "PSC-ALL": "51.4",
+        "MCC": "47.6",
+        "MPS": "39.9",
+        "MHC": "36.5",
+        "Average": "43.9"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 15,
+        "Vanilla": "65.9",
+        "PSC-ALL": "49.9",
+        "MCC": "48.0",
+        "MPS": "44.1",
+        "MHC": "37.4",
+        "Average": "44.9"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 14,
+        "Vanilla": "62.5",
+        "PSC-ALL": "52.1",
+        "MCC": "47.4",
+        "MPS": "38.2",
+        "MHC": "36.2",
+        "Average": "43.5"
+      }
+    },
+    "Llama-3.1-70B-Instruct": {
+      "overall": {
+        "rank": 15,
+        "Vanilla": "56.7",
+        "PSC-ALL": "43.3",
+        "MCC": "47.6",
+        "MPS": "37.5",
+        "MHC": "46.6",
+        "Average": "43.8"
+      },
+      "dataset-HackerRank": {
+        "rank": 13,
+        "Vanilla": "65.0",
+        "PSC-ALL": "50.0",
+        "MCC": "43.3",
+        "MPS": "41.7",
+        "MHC": "55.0",
+        "Average": "47.5"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 15,
+        "Vanilla": "53.4",
+        "PSC-ALL": "40.5",
+        "MCC": "49.3",
+        "MPS": "35.8",
+        "MHC": "43.2",
+        "Average": "42.2"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 14,
+        "Vanilla": "59.2",
+        "PSC-ALL": "45.3",
+        "MCC": "46.3",
+        "MPS": "38.7",
+        "MHC": "49.1",
+        "Average": "44.9"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 15,
+        "Vanilla": "56.7",
+        "PSC-ALL": "43.3",
+        "MCC": "47.6",
+        "MPS": "37.5",
+        "MHC": "46.6",
+        "Average": "43.8"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 14,
+        "Vanilla": "60.9",
+        "PSC-ALL": "46.6",
+        "MCC": "45.5",
+        "MPS": "39.6",
+        "MHC": "50.8",
+        "Average": "45.6"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 15,
+        "Vanilla": "55.1",
+        "PSC-ALL": "41.9",
+        "MCC": "48.5",
+        "MPS": "36.7",
+        "MHC": "44.9",
+        "Average": "43.0"
       }
     },
     "GPT-4o-Mini": {
       "overall": {
-        "rank": 48,
-        "Vanilla": "64.9",
-        "PSC-ALL": "48.1",
+        "rank": 16,
+        "Vanilla": "64.4",
+        "PSC-ALL": "47.6",
         "MCC": "31.3",
-        "MPS": "35.4",
-        "MHC": "46.4",
-        "Average": "40.3"
+        "MPS": "34.6",
+        "MHC": "44.7",
+        "Average": "39.5"
       },
       "dataset-HackerRank": {
-        "rank": 17,
+        "rank": 16,
         "Vanilla": "66.7",
         "PSC-ALL": "50.0",
         "MCC": "31.7",
@@ -2058,7 +1034,7 @@
         "Average": "43.3"
       },
       "dataset-GeeksforGeeks": {
-        "rank": 17,
+        "rank": 16,
         "Vanilla": "63.5",
         "PSC-ALL": "46.6",
         "MCC": "31.1",
@@ -2066,14 +1042,171 @@
         "MHC": "41.2",
         "Average": "38.0"
       },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 16,
+        "Vanilla": "65.1",
+        "PSC-ALL": "48.3",
+        "MCC": "31.4",
+        "MPS": "35.7",
+        "MHC": "47.3",
+        "Average": "40.7"
+      },
       "dataset-Merge_HR+GFG": {
-        "rank": 17,
+        "rank": 16,
         "Vanilla": "64.4",
         "PSC-ALL": "47.6",
         "MCC": "31.3",
         "MPS": "34.6",
         "MHC": "44.7",
         "Average": "39.5"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 16,
+        "Vanilla": "65.5",
+        "PSC-ALL": "48.8",
+        "MCC": "31.5",
+        "MPS": "36.5",
+        "MHC": "49.0",
+        "Average": "41.4"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 16,
+        "Vanilla": "64.0",
+        "PSC-ALL": "47.1",
+        "MCC": "31.2",
+        "MPS": "33.9",
+        "MHC": "43.0",
+        "Average": "38.8"
+      }
+    },
+    "Llama-3.1-8B-Instruct": {
+      "overall": {
+        "rank": 17,
+        "Vanilla": "37.5",
+        "PSC-ALL": "22.1",
+        "MCC": "24.5",
+        "MPS": "30.8",
+        "MHC": "28.4",
+        "Average": "26.4"
+      },
+      "dataset-HackerRank": {
+        "rank": 17,
+        "Vanilla": "36.7",
+        "PSC-ALL": "23.3",
+        "MCC": "30.0",
+        "MPS": "31.7",
+        "MHC": "28.3",
+        "Average": "28.3"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 17,
+        "Vanilla": "37.8",
+        "PSC-ALL": "21.6",
+        "MCC": "22.3",
+        "MPS": "30.4",
+        "MHC": "28.4",
+        "Average": "25.7"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 17,
+        "Vanilla": "37.3",
+        "PSC-ALL": "22.5",
+        "MCC": "26.1",
+        "MPS": "31.0",
+        "MHC": "28.4",
+        "Average": "27.0"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 17,
+        "Vanilla": "37.5",
+        "PSC-ALL": "22.1",
+        "MCC": "24.5",
+        "MPS": "30.8",
+        "MHC": "28.4",
+        "Average": "26.4"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 17,
+        "Vanilla": "37.1",
+        "PSC-ALL": "22.7",
+        "MCC": "27.3",
+        "MPS": "31.2",
+        "MHC": "28.3",
+        "Average": "27.4"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 17,
+        "Vanilla": "37.7",
+        "PSC-ALL": "21.9",
+        "MCC": "23.4",
+        "MPS": "30.6",
+        "MHC": "28.4",
+        "Average": "26.1"
+      }
+    },
+    "Qwen-2.5-7B-Instruct": {
+      "overall": {
+        "rank": 18,
+        "Vanilla": "40.4",
+        "PSC-ALL": "29.8",
+        "MCC": "16.3",
+        "MPS": "26.0",
+        "MHC": "25.0",
+        "Average": "24.3"
+      },
+      "dataset-HackerRank": {
+        "rank": 18,
+        "Vanilla": "46.7",
+        "PSC-ALL": "30.0",
+        "MCC": "20.0",
+        "MPS": "31.7",
+        "MHC": "28.3",
+        "Average": "27.5"
+      },
+      "dataset-GeeksforGeeks": {
+        "rank": 18,
+        "Vanilla": "37.8",
+        "PSC-ALL": "29.7",
+        "MCC": "14.9",
+        "MPS": "23.6",
+        "MHC": "23.6",
+        "Average": "23.0"
+      },
+      "dataset-HackerRank-GeeksforGeeks": {
+        "rank": 18,
+        "Vanilla": "42.3",
+        "PSC-ALL": "29.9",
+        "MCC": "17.4",
+        "MPS": "27.7",
+        "MHC": "26.0",
+        "Average": "25.2"
+      },
+      "dataset-Merge_HR+GFG": {
+        "rank": 18,
+        "Vanilla": "40.4",
+        "PSC-ALL": "29.8",
+        "MCC": "16.3",
+        "MPS": "26.0",
+        "MHC": "25.0",
+        "Average": "24.3"
+      },
+      "dataset-HackerRank-Merge_HR+GFG": {
+        "rank": 18,
+        "Vanilla": "43.5",
+        "PSC-ALL": "29.9",
+        "MCC": "18.2",
+        "MPS": "28.8",
+        "MHC": "26.7",
+        "Average": "25.9"
+      },
+      "dataset-GeeksforGeeks-Merge_HR+GFG": {
+        "rank": 18,
+        "Vanilla": "39.1",
+        "PSC-ALL": "29.8",
+        "MCC": "15.6",
+        "MPS": "24.8",
+        "MHC": "24.3",
+        "Average": "23.6"
       }
     }
   }

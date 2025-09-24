@@ -176,6 +176,12 @@ function applyFilters(data, task, filters) {
                (filter === 'GeeksForGeeks' && entryDataset.toLowerCase() === 'geeksforgeeks');
       });
     });
+  } else if (task === 'code-robustness') {
+    // For code-robustness, when no specific dataset filter is applied, only use Merge-HR+GFG for overall results
+    filteredData = filteredData.filter(entry => {
+      const entryDataset = entry.dataset || '';
+      return entryDataset === 'Merge-HR+GFG';
+    });
   }
   
   // Apply modality filter (language)
@@ -404,7 +410,6 @@ function aggregateData(data, task, showByDifficulty) {
       }
     } else if (task === 'code-robustness') {
       // For code robustness, use specific robustness metrics
-      // Since we removed CRUXEval and LiveCodeBench, only use HackerRank/GeeksforGeeks metrics
       const robustnessMetrics = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC', 'Average'];
       
       robustnessMetrics.forEach(metric => {
@@ -566,9 +571,9 @@ function aggregateData(data, task, showByDifficulty) {
       aValue = parseFloat(a['LLM Judge']) || -Infinity;
       bValue = parseFloat(b['LLM Judge']) || -Infinity;
     } else if (task === 'code-robustness') {
-      // Sort by ALL metric for code robustness
-      aValue = parseFloat(a['ALL']) || -Infinity;
-      bValue = parseFloat(b['ALL']) || -Infinity;
+      // Sort by Average metric for code robustness
+      aValue = parseFloat(a['Average']) || -Infinity;
+      bValue = parseFloat(b['Average']) || -Infinity;
     } else if (task === 'code-web') {
       // Sort by CLIP for code-web
       aValue = parseFloat(a['CLIP']) || -Infinity;

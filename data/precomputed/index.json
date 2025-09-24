@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-09-24T04:42:00.043Z",
+  "generatedAt": "2025-09-24T04:52:49.780Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -14600,36 +14600,6 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_overall.json"
         },
         {
-          "filename": "code-robustness_dataset-Merge_CruxEval+CE.json",
-          "filters": {
-            "dataset": [
-              "Merge-CruxEval+CE"
-            ]
-          },
-          "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge_CruxEval+CE.json"
-        },
-        {
-          "filename": "code-robustness_dataset-CRUXEval.json",
-          "filters": {
-            "dataset": [
-              "CRUXEval"
-            ]
-          },
-          "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-CRUXEval.json"
-        },
-        {
-          "filename": "code-robustness_dataset-LiveCodeBench(CE).json",
-          "filters": {
-            "dataset": [
-              "LiveCodeBench (CE)"
-            ]
-          },
-          "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-LiveCodeBench(CE).json"
-        },
-        {
           "filename": "code-robustness_dataset-HackerRank.json",
           "filters": {
             "dataset": [
@@ -14650,6 +14620,17 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-GeeksforGeeks.json"
         },
         {
+          "filename": "code-robustness_dataset-HackerRank-GeeksforGeeks.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "GeeksforGeeks"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-HackerRank-GeeksforGeeks.json"
+        },
+        {
           "filename": "code-robustness_dataset-Merge_HR+GFG.json",
           "filters": {
             "dataset": [
@@ -14658,6 +14639,28 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge_HR+GFG.json"
+        },
+        {
+          "filename": "code-robustness_dataset-HackerRank-Merge_HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "HackerRank",
+              "Merge-HR+GFG"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-HackerRank-Merge_HR+GFG.json"
+        },
+        {
+          "filename": "code-robustness_dataset-GeeksforGeeks-Merge_HR+GFG.json",
+          "filters": {
+            "dataset": [
+              "GeeksforGeeks",
+              "Merge-HR+GFG"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-GeeksforGeeks-Merge_HR+GFG.json"
         }
       ]
     },

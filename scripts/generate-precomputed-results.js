@@ -103,7 +103,7 @@ const taskAbilities = {
     modality: [],
     knowledge: [],
     reasoning: [],
-    dataset: ['Merge-CruxEval+CE', 'CRUXEval', 'LiveCodeBench (CE)', 'HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'],
+    dataset: ['HackerRank', 'GeeksforGeeks', 'Merge-HR+GFG'],
     robustness: [],
     privacy: [],
   },

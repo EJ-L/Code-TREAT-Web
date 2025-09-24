@@ -271,9 +271,9 @@ interface LeaderboardProps {
         });
       }
     } else if (tab === 'All' && currentTask === 'code-robustness') {
-      // Special case: For code-robustness "All" tab, show Merge-CruxEval+CE data
+      // Special case: For code-robustness "All" tab, show Merge-HR+GFG data
       setSelectedAbilities({
-        dataset: ['Merge-CruxEval+CE']
+        dataset: ['Merge-HR+GFG']
       });
     }
   }, [currentTask]);

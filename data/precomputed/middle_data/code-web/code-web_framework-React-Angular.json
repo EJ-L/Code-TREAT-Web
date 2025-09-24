@@ -1,0 +1,81 @@
+{
+  "task": "code-web",
+  "filters": {
+    "dataset": [],
+    "framework": [
+      "React",
+      "Angular"
+    ]
+  },
+  "showByDifficulty": false,
+  "generatedAt": "2025-09-18T14:30:11.878Z",
+  "results": [
+    {
+      "rank": 1,
+      "model": "Claude-3.7-Sonnet",
+      "model_url": "",
+      "CLIP": "73.2",
+      "Compilation": "91.3"
+    },
+    {
+      "rank": 2,
+      "model": "Pixtral-Large-Instruct-124B",
+      "model_url": "",
+      "CLIP": "72.4",
+      "Compilation": "95.1"
+    },
+    {
+      "rank": 3,
+      "model": "GPT-4o",
+      "model_url": "https://openai.com/research/gpt-4",
+      "CLIP": "70.3",
+      "Compilation": "92.9"
+    },
+    {
+      "rank": 4,
+      "model": "Gemini-2.0-Flash",
+      "model_url": "",
+      "CLIP": "70.3",
+      "Compilation": "93.7"
+    },
+    {
+      "rank": 5,
+      "model": "Qwen-72B",
+      "model_url": "",
+      "CLIP": "68.9",
+      "Compilation": "89.0"
+    },
+    {
+      "rank": 6,
+      "model": "Pixtral-12B-2409",
+      "model_url": "",
+      "CLIP": "62.4",
+      "Compilation": "89.1"
+    },
+    {
+      "rank": 7,
+      "model": "Llama-3.2-90B-Vision",
+      "model_url": "",
+      "CLIP": "55.1",
+      "Compilation": "86.2"
+    },
+    {
+      "rank": 8,
+      "model": "Llama-3.2-11B-Vision",
+      "model_url": "",
+      "CLIP": "45.4",
+      "Compilation": "74.7"
+    },
+    {
+      "rank": 9,
+      "model": "Qwen-7B",
+      "model_url": "",
+      "CLIP": "10.9",
+      "Compilation": "23.1"
+    }
+  ],
+  "metadata": {
+    "totalResults": 9,
+    "hasResults": true
+  }
+}

@@ -29,7 +29,8 @@ export function initializeColumnWidths(
 export function getFilteredTableHeaders(
   task: TaskType,
   showByDifficulty: boolean,
-  sortedResults: Record<string, unknown>[]
+  sortedResults: Record<string, unknown>[],
+  activeFilters?: { datasets?: string[] }
 ): HeaderConfig[] {
   const allHeaders = getTaskHeaders(task);
   
@@ -39,9 +40,20 @@ export function getFilteredTableHeaders(
   );
   
   // Filter metric headers based on data availability
-  const metricHeaders = allHeaders.filter(header => 
+  let metricHeaders = allHeaders.filter(header => 
     header.key !== 'rank' && header.key !== 'model'
   );
+  
+  // For multi-modality task, hide CLIP column for UI Code Edit and UI Code Repair datasets
+  if (task === 'multi-modality' && activeFilters?.datasets) {
+    const hasEditOrRepair = activeFilters.datasets.some(dataset => 
+      dataset.includes('UI Code Edit') || dataset.includes('UI Code Repair')
+    );
+    
+    if (hasEditOrRepair) {
+      metricHeaders = metricHeaders.filter(header => header.key !== 'CLIP');
+    }
+  }
   
   // For code summarization and code review, always show LLM Judge if it's defined in headers
   if (task === 'code summarization' || task === 'code review') {

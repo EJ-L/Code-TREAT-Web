@@ -285,6 +285,13 @@ const ResultsTable: FC<ResultsTableProps> = ({
 
   const renderResultsTable = () => {
     // Show results (this function is only called when we have data)
+    
+    // Add specific debug for unit test generation
+    if (currentTask === 'unit test generation') {
+      console.log(`🔍 RENDER DEBUG: Rendering ${sortedResults.length} sorted results for unit test generation`);
+      console.log(`🔍 RENDER DEBUG: Sample sorted results:`, sortedResults.slice(0, 5));
+    }
+    
     return sortedResults.map((result, index) => {
       // Get model name for passing to cells (but don't change row background)
       const modelName = result.model || result.modelName || '';

@@ -425,9 +425,9 @@ function aggregateData(data, task, showByDifficulty) {
         }
       });
     } else if (task === 'multi-modality') {
-      // For multi-modality, use MLLM_Score, CMS, and Compilation metrics
-      // Metrics looks like {"MLLM_Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722}
-      const modalityMetrics = ['MLLM_Score', 'CMS', 'Compilation'];
+      // For multi-modality, use MLLM_Score, CMS, CLIP, and Compilation metrics
+      // Metrics looks like {"MLLM_Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722} or {"CLIP": 0.8385, "Compilation": 0.9908}
+      const modalityMetrics = ['MLLM_Score', 'CMS', 'CLIP', 'Compilation'];
       
       modalityMetrics.forEach(metric => {
         const values = entries
@@ -440,6 +440,8 @@ function aggregateData(data, task, showByDifficulty) {
             result[metric] = avg.toFixed(2); // MLLM_Score with 2 decimal places
           } else if (metric === 'CMS') {
             result[metric] = avg.toFixed(3); // CMS with 3 decimal places
+          } else if (metric === 'CLIP') {
+            result[metric] = avg.toFixed(3); // CLIP with 3 decimal places
           } else if (metric === 'Compilation') {
             result[metric] = (avg * 100).toFixed(1); // Compilation as percentage
           }

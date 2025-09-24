@@ -17,7 +17,7 @@ const About: FC<AboutProps> = ({ isDarkMode }) => {
       >
         <h2 className="text-5xl font-bold text-center text-transparent bg-clip-text 
           bg-gradient-to-r from-blue-500 to-purple-500 mb-16">
-          Contact Information
+          About Code TREAT
         </h2>
         
         <div className="flex justify-center">
@@ -25,14 +25,10 @@ const About: FC<AboutProps> = ({ isDarkMode }) => {
             <div className="space-y-4 text-center">
               <div>
                 <p className={`text-lg ${isDarkMode ? 'text-blue-200' : 'text-slate-600'} mb-4`}>
-                  For questions about this research, please contact:
+                  Code TREAT is a comprehensive framework for evaluating large language models on code generation tasks. 
+                  Our leaderboards provide insights into model performance across various coding challenges and benchmarks.
                 </p>
-                <a 
-                  href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                  className={`text-xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 hover:underline`}
-                >
-                  lyu@cse.cuhk.edu.hk, ejli@cse.cuhk.edu.hk
-                </a>
+                {/* Contact information hidden for privacy reasons */}
               </div>
             </div>
           </div>

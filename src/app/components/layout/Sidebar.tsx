@@ -156,18 +156,7 @@ const Sidebar: FC<SidebarProps> = ({
                   Paper
                 </button>
               </li>
-              <li>
-                <a
-                  href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                  className={`block w-full text-left px-4 py-2 rounded-lg font-semibold text-xl transition-colors ${
-                    isDarkMode 
-                      ? 'text-slate-400 hover:bg-blue-900/20 hover:text-blue-200' 
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-700'
-                  }`}
-                >
-                  Contact
-                </a>
-              </li>
+              {/* Contact information hidden for privacy reasons */}
             </ul>
           </li>
         </ul>

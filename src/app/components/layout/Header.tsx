@@ -72,12 +72,7 @@ const Header: FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, currentSection, on
               >
                 Evaluation
               </button>
-              <a 
-                href="mailto:lyu@cse.cuhk.edu.hk,ejli@cse.cuhk.edu.hk"
-                className={`text-lg ${isDarkMode ? 'text-blue-200 hover:text-blue-400' : 'text-slate-600 hover:text-slate-900'} transition-colors`}
-              >
-                Contact
-              </a>
+              {/* Contact information hidden for privacy reasons */}
             </nav>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}

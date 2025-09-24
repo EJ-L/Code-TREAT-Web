@@ -564,8 +564,8 @@ export function formatResults(results: ProcessedResult[], filters?: FilterOption
 
     // Add custom metrics for new tasks
     // multi-modality metrics
-    formattedResult['MLLM_Score'] = result['MLLM_Score'] !== null && result['MLLM_Score'] !== undefined ? result['MLLM_Score'].toFixed(2) : '-';
-    formattedResult['CMS'] = result['CMS'] !== null && result['CMS'] !== undefined ? result['CMS'].toFixed(3) : '-';
+    formattedResult['MLLM_Score'] = result['MLLM_Score'] !== null && result['MLLM_Score'] !== undefined ? (result['MLLM_Score'] * 10).toFixed(1) : '-';
+    formattedResult['CMS'] = result['CMS'] !== null && result['CMS'] !== undefined ? (result['CMS'] * 100).toFixed(1) : '-';
     formattedResult['CLIP'] = result['CLIP'] !== null && result['CLIP'] !== undefined ? (result['CLIP'] * 100).toFixed(1) : '-';
     formattedResult['Compilation'] = result['Compilation'] !== null && result['Compilation'] !== undefined ? (result['Compilation'] * 100).toFixed(1) : '-';
     

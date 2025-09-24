@@ -95,7 +95,7 @@ interface LeaderboardProps {
         // Special case: For code-robustness "All" tab, apply specialized filter on initial load
         if (initialTask === 'code-robustness' && config.overallTab === 'All') {
           setSelectedAbilities({
-            dataset: ['Merge-CruxEval+CE']
+            dataset: ['Merge-HR+GFG']
           });
         }
       }
@@ -130,7 +130,7 @@ interface LeaderboardProps {
       // Special case: For code-robustness "All" tab, apply specialized filter
       if (task === 'code-robustness' && config.overallTab === 'All') {
         setSelectedAbilities({
-          dataset: ['Merge-CruxEval+CE']
+          dataset: ['Merge-HR+GFG']
         });
       }
     }
@@ -450,6 +450,14 @@ interface LeaderboardProps {
 
           debug.leaderboard(`Loaded ${results.length} results for ${currentTask}`, results.slice(0, 3));
           debug.leaderboard(`Sample result object keys:`, results.length > 0 ? Object.keys(results[0]) : 'No results');
+          
+          // Add specific debug for unit test generation
+          if (currentTask === 'unit test generation') {
+            console.log(`🔍 UNIT TEST DEBUG: Loaded ${results.length} results`);
+            console.log(`🔍 UNIT TEST DEBUG: Filter options:`, filterOptions);
+            console.log(`🔍 UNIT TEST DEBUG: Sample results:`, results.slice(0, 5));
+          }
+          
           setResults(results);
           setIsDataComplete(true);
                   setIsLoading(false);
@@ -467,8 +475,8 @@ interface LeaderboardProps {
 
   // Get filtered table headers using new helper
   const getFilteredTableHeadersMemo = useCallback((task: TaskType) => {
-    return getFilteredTableHeaders(task, false, sortedResults);
-  }, [sortedResults]);
+    return getFilteredTableHeaders(task, false, sortedResults, { datasets: selectedAbilities.dataset });
+  }, [sortedResults, selectedAbilities.dataset]);
 
   // Initialize column widths when task changes
   useEffect(() => {

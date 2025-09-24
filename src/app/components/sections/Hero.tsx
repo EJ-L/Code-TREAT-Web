@@ -1,6 +1,5 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { motion } from 'framer-motion';
-import PaperCitationModal from '../ui/PaperCitationModal';
 
 interface HeroProps {
   isDarkMode: boolean;
@@ -8,8 +7,6 @@ interface HeroProps {
 }
 
 const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
-  const [isPaperModalOpen, setIsPaperModalOpen] = useState(false);
-
   return (
     <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16" id="home">
       <div className="relative mt-[180px]">
@@ -22,39 +19,7 @@ const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
           Code TREAT
         </motion.h1>
         <div className="flex flex-wrap justify-center gap-4">
-          <motion.button
-            onClick={() => setIsPaperModalOpen(true)}
-            className={`relative inline-flex items-center px-6 py-4 text-lg text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg
-              overflow-hidden group hover:scale-105 transition-transform cursor-pointer`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <div className="flex items-center gap-6">
-              <span className="relative z-10 flex items-center justify-center">
-                <svg 
-                  aria-hidden="true" 
-                  focusable="false" 
-                  className="w-5 h-5" 
-                  role="img" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 384 512"
-                >
-                  <path 
-                    fill="currentColor" 
-                    d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"
-                  ></path>
-                </svg>
-              </span>
-              <span className="relative z-10">Papers</span>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 
-              group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/50 to-purple-400/50 blur-xl 
-              opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.button>
+          {/* Paper button hidden for privacy reasons */}
           
           <motion.a
             href="https://github.com/CUHK-ARISE/Code-TREAT"
@@ -163,14 +128,6 @@ const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
           </motion.a>
         </div>
       </div>
-
-      {/* Paper Citation Modal */}
-      <PaperCitationModal 
-        isOpen={isPaperModalOpen}
-        onClose={() => setIsPaperModalOpen(false)}
-        isDarkMode={isDarkMode}
-        onNavigateToTask={onNavigateToTask}
-      />
     </main>
   );
 };

@@ -574,7 +574,27 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
       for (const [key, value] of Object.entries(entry.metrics || {})) {
         if (key === 'rank') continue; // Already handled above
         
-        if (typeof value === 'number') {
+        // Handle string values that might be numbers or "-"
+        if (typeof value === 'string' && value !== '-' && !isNaN(Number(value))) {
+          const numValue = Number(value);
+          
+          // For pass@k metrics, keep as percentage but ensure 1 decimal places
+          if (key.includes('pass@') || key.includes('_pass@')) {
+            leaderboardResult[key] = numValue.toFixed(1);
+          } else if (key === 'csr') {
+            // CSR is in 0-1 scale, convert to 0-100 scale and format to 1 decimal place
+            leaderboardResult[key] = (numValue * 100).toFixed(1);
+          } else if (key === 'MLLM_Score') {
+            // MLLM_Score: multiply by 10 to get 100 scale
+            leaderboardResult[key] = (numValue * 10).toFixed(1);
+          } else if (key === 'CMS' || key === 'CLIP') {
+            // CMS and CLIP: multiply by 100 to get 100 scale
+            leaderboardResult[key] = (numValue * 100).toFixed(1);
+          } else {
+            // Keep other numeric values formatted to 1 decimal place
+            leaderboardResult[key] = numValue.toFixed(1);
+          }
+        } else if (typeof value === 'number') {
           // For pass@k metrics, keep as percentage but ensure 1 decimal places
           if (key.includes('pass@') || key.includes('_pass@')) {
             // Format percentage with 1 decimal places
@@ -584,6 +604,12 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
             leaderboardResult[key] = value;
           } else if (key === 'csr') {
             // CSR is in 0-1 scale, convert to 0-100 scale and format to 1 decimal place
+            leaderboardResult[key] = (value * 100).toFixed(1);
+          } else if (key === 'MLLM_Score') {
+            // MLLM_Score: multiply by 10 to get 100 scale
+            leaderboardResult[key] = (value * 10).toFixed(1);
+          } else if (key === 'CMS' || key === 'CLIP') {
+            // CMS and CLIP: multiply by 100 to get 100 scale
             leaderboardResult[key] = (value * 100).toFixed(1);
           } else if (Number.isInteger(value)) {
             // Show other integers with .0 for consistency

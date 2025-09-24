@@ -558,7 +558,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
-  'multi-modality': ['MLLM_Score', 'CMS', 'Compilation'],
+  'multi-modality': ['MLLM_Score', 'CMS', 'CLIP', 'Compilation'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };
@@ -587,7 +587,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'vulnerability detection': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'P-C', 'P-V', 'P-B', 'P-R'],
-  'multi-modality': ['MLLM_Score', 'CMS', 'Compilation'],
+  'multi-modality': ['MLLM_Score', 'CMS', 'CLIP', 'Compilation'],
   'code-robustness': ['VAN', 'ALL', 'MDC', 'MPS', 'MHC', 'Vanilla', 'PSC-ALL', 'MCC', 'Average'],
   'unit test generation': ['csr', 'line_coverage', 'branch_coverage'],
 };

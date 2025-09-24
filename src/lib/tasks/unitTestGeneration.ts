@@ -68,7 +68,7 @@ export async function processUnitTestGeneration(rawData: ProcessedResult[], filt
     llmjudge: null,
     difficulty: null,
     // Unit test generation specific metrics
-    'csr': Number(data.csr).toFixed(3),
+    'csr': Number(data.csr),
     'line_coverage': data.line_coverage,
     'branch_coverage': data.branch_coverage,
     // Set rank for initial sorting

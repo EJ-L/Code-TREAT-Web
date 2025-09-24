@@ -108,7 +108,7 @@ const Sidebar: FC<SidebarProps> = ({
                           onSectionChange('tasks');
                           onTaskChange?.(task as TaskType);
                         }}
-                        className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors ${
+                        className={`w-full text-left px-4 py-3 rounded-lg text-xl transition-colors whitespace-pre-line ${
                           currentTask === task && currentSection === 'tasks'
                             ? isDarkMode 
                               ? 'bg-blue-900/50 text-blue-100 font-semibold' 
@@ -122,8 +122,8 @@ const Sidebar: FC<SidebarProps> = ({
                           if (task === 'multi-modality') return 'Multi-modality';
                           if (task === 'code-robustness') return 'Code-Robustness';
                           if (task === 'unit test generation') return 'Unit Test Generation';
-                          if (task === 'input prediction') return 'Code Reasoning (Input Prediction)';
-                          if (task === 'output prediction') return 'Code Reasoning (Output Prediction)';
+                          if (task === 'input prediction') return 'Code Reasoning\n(Input Prediction)';
+                          if (task === 'output prediction') return 'Code Reasoning\n(Output Prediction)';
                           return task.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                         })()}
                       </button>

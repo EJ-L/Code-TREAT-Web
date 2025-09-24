@@ -177,25 +177,25 @@ const BenchmarkConstruction: FC<BenchmarkConstructionProps> = ({ isDarkMode }) =
                 <div className={`mr-4 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                   {category.icon}
                 </div>
-                <h4 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                <h4 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
                   {category.title}
                 </h4>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className={`grid gap-6 ${category.tasks.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
                 {category.tasks.map((task, taskIndex) => (
                   <motion.div
                     key={taskIndex}
-                    className={`p-4 rounded-lg ${isDarkMode ? 'bg-gray-700/50' : 'bg-gray-50'}`}
+                    className={`p-6 rounded-lg ${isDarkMode ? 'bg-gray-700/50' : 'bg-gray-50'}`}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: (categoryIndex * 0.2) + (taskIndex * 0.05) }}
                   >
-                    <h5 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                    <h5 className={`text-xl font-semibold mb-3 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                       {task.name}
                     </h5>
-                    <p className={`text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                       {task.desc}
                     </p>
                   </motion.div>

@@ -137,13 +137,24 @@ const ResultsTable: FC<ResultsTableProps> = ({
         // For multi-modality, prefer Compilation as default (especially for UI Code Generation)
         const hasCompilation = availableMetrics.includes('Compilation');
         setCurrentScatterMetric(hasCompilation ? 'Compilation' : availableMetrics[0]);
+      } else if (currentTask === 'vulnerability detection') {
+        // For vulnerability detection, choose appropriate default based on selected dataset
+        if (selectedMultiTab === 'PrimeVulPairs') {
+          // For PrimeVulPairs (PrimeVulPlus), prefer P-C as default since it has the highest values
+          const hasPC = availableMetrics.includes('P-C');
+          setCurrentScatterMetric(hasPC ? 'P-C' : availableMetrics[0]);
+        } else {
+          // For PrimeVul or All, prefer Accuracy as default
+          const hasAccuracy = availableMetrics.includes('Accuracy');
+          setCurrentScatterMetric(hasAccuracy ? 'Accuracy' : availableMetrics[0]);
+        }
       } else {
         setCurrentScatterMetric(availableMetrics[0]);
       }
     }
   }, [availableMetrics, currentScatterMetric, currentTask, selectedMultiTab]);
 
-  // Reset metric when switching to new datasets in code-robustness or multi-modality
+  // Reset metric when switching to new datasets in code-robustness, multi-modality, or vulnerability detection
   useEffect(() => {
     if (currentTask === 'code-robustness' && selectedMultiTab && availableMetrics.length > 0) {
       if (['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
@@ -158,6 +169,21 @@ const ResultsTable: FC<ResultsTableProps> = ({
       const hasCompilation = availableMetrics.includes('Compilation');
       if (hasCompilation && currentScatterMetric !== 'Compilation') {
         setCurrentScatterMetric('Compilation');
+      }
+    } else if (currentTask === 'vulnerability detection' && selectedMultiTab && availableMetrics.length > 0) {
+      // For vulnerability detection, switch default metric based on selected dataset
+      if (selectedMultiTab === 'PrimeVulPairs') {
+        // For PrimeVulPairs (PrimeVulPlus), switch to P-C if not already selected
+        const hasPC = availableMetrics.includes('P-C');
+        if (hasPC && currentScatterMetric !== 'P-C') {
+          setCurrentScatterMetric('P-C');
+        }
+      } else if (selectedMultiTab === 'PrimeVul' || selectedMultiTab === 'All') {
+        // For PrimeVul or All, switch to Accuracy if not already selected
+        const hasAccuracy = availableMetrics.includes('Accuracy');
+        if (hasAccuracy && currentScatterMetric !== 'Accuracy') {
+          setCurrentScatterMetric('Accuracy');
+        }
       }
     }
   }, [selectedMultiTab, currentTask, availableMetrics, currentScatterMetric]);

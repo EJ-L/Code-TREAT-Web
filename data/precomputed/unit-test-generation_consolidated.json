@@ -7,7 +7,7 @@
     "Claude-3.5-Sonnet-20241022": {
       "overall": {
         "rank": 1,
-        "csr": "0.9983",
+        "csr": "99.8",
         "line_coverage": "73.22",
         "branch_coverage": "43.24",
         "dataset": "symprompt",
@@ -18,7 +18,7 @@
     "o4-mini (Med)": {
       "overall": {
         "rank": 2,
-        "csr": "0.9983",
+        "csr": "99.8",
         "line_coverage": "81.07",
         "branch_coverage": "47.51",
         "dataset": "symprompt",
@@ -29,7 +29,7 @@
     "Claude-3.5-Haiku-20241022": {
       "overall": {
         "rank": 3,
-        "csr": "0.9967",
+        "csr": "99.7",
         "line_coverage": "44.59",
         "branch_coverage": "23.49",
         "dataset": "symprompt",
@@ -40,7 +40,7 @@
     "Qwen-3-235B-A22B": {
       "overall": {
         "rank": 4,
-        "csr": "0.9967",
+        "csr": "99.7",
         "line_coverage": "66.72",
         "branch_coverage": "36.23",
         "dataset": "symprompt",
@@ -51,7 +51,7 @@
     "Claude-3.7-Sonnet": {
       "overall": {
         "rank": 5,
-        "csr": "0.9933",
+        "csr": "99.3",
         "line_coverage": "75.29",
         "branch_coverage": "43.65",
         "dataset": "symprompt",
@@ -62,7 +62,7 @@
     "GPT-4-turbo-2024-04-09": {
       "overall": {
         "rank": 6,
-        "csr": "0.9933",
+        "csr": "99.3",
         "line_coverage": "67.70",
         "branch_coverage": "37.11",
         "dataset": "symprompt",
@@ -73,7 +73,7 @@
     "o3-mini (Med)": {
       "overall": {
         "rank": 7,
-        "csr": "0.9933",
+        "csr": "99.3",
         "line_coverage": "69.70",
         "branch_coverage": "41.05",
         "dataset": "symprompt",
@@ -84,7 +84,7 @@
     "Qwen-2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 8,
-        "csr": "0.9933",
+        "csr": "99.3",
         "line_coverage": "64.98",
         "branch_coverage": "35.75",
         "dataset": "symprompt",
@@ -95,7 +95,7 @@
     "Qwen-3-30B-A3B": {
       "overall": {
         "rank": 9,
-        "csr": "0.9933",
+        "csr": "99.3",
         "line_coverage": "64.89",
         "branch_coverage": "36.52",
         "dataset": "symprompt",
@@ -106,7 +106,7 @@
     "Claude-4-Sonnet": {
       "overall": {
         "rank": 10,
-        "csr": "0.9917",
+        "csr": "99.2",
         "line_coverage": "77.05",
         "branch_coverage": "45.23",
         "dataset": "symprompt",
@@ -117,7 +117,7 @@
     "GPT-4.1-2025-04-14": {
       "overall": {
         "rank": 11,
-        "csr": "0.9917",
+        "csr": "99.2",
         "line_coverage": "75.42",
         "branch_coverage": "44.48",
         "dataset": "symprompt",
@@ -128,7 +128,7 @@
     "GPT-5": {
       "overall": {
         "rank": 12,
-        "csr": "0.9917",
+        "csr": "99.2",
         "line_coverage": "82.63",
         "branch_coverage": "50.28",
         "dataset": "symprompt",
@@ -136,10 +136,10 @@
         "task": "unit_test_generation"
       }
     },
-    "Gemini-2.5-Pro-Preview-05-06": {
+    "Gemini-2.5-Pro-05-06": {
       "overall": {
         "rank": 13,
-        "csr": "0.9900",
+        "csr": "99.0",
         "line_coverage": "32.56",
         "branch_coverage": "15.45",
         "dataset": "symprompt",
@@ -150,7 +150,7 @@
     "Qwen-2.5-72B-Instruct": {
       "overall": {
         "rank": 14,
-        "csr": "0.9900",
+        "csr": "99.0",
         "line_coverage": "64.78",
         "branch_coverage": "34.45",
         "dataset": "symprompt",
@@ -161,7 +161,7 @@
     "Qwen-3-32B": {
       "overall": {
         "rank": 15,
-        "csr": "0.9900",
+        "csr": "99.0",
         "line_coverage": "65.23",
         "branch_coverage": "35.80",
         "dataset": "symprompt",
@@ -172,7 +172,7 @@
     "DeepSeek-V3": {
       "overall": {
         "rank": 16,
-        "csr": "0.9883",
+        "csr": "98.8",
         "line_coverage": "68.61",
         "branch_coverage": "39.04",
         "dataset": "symprompt",
@@ -183,7 +183,7 @@
     "GPT-3.5-turbo-0125": {
       "overall": {
         "rank": 17,
-        "csr": "0.9883",
+        "csr": "98.8",
         "line_coverage": "67.47",
         "branch_coverage": "34.09",
         "dataset": "symprompt",
@@ -194,7 +194,7 @@
     "DeepSeek-R1 (0528)": {
       "overall": {
         "rank": 18,
-        "csr": "0.9867",
+        "csr": "98.7",
         "line_coverage": "67.39",
         "branch_coverage": "36.16",
         "dataset": "symprompt",
@@ -205,7 +205,7 @@
     "DeepSeek-R1": {
       "overall": {
         "rank": 19,
-        "csr": "0.9850",
+        "csr": "98.5",
         "line_coverage": "69.01",
         "branch_coverage": "38.65",
         "dataset": "symprompt",
@@ -216,7 +216,7 @@
     "GPT-4o-2024-11-20": {
       "overall": {
         "rank": 20,
-        "csr": "0.9850",
+        "csr": "98.5",
         "line_coverage": "69.34",
         "branch_coverage": "39.11",
         "dataset": "symprompt",
@@ -227,7 +227,7 @@
     "Llama-3.1-70B-Instruct": {
       "overall": {
         "rank": 21,
-        "csr": "0.9850",
+        "csr": "98.5",
         "line_coverage": "66.29",
         "branch_coverage": "34.55",
         "dataset": "symprompt",
@@ -238,7 +238,7 @@
     "Grok-3-Mini (High)": {
       "overall": {
         "rank": 22,
-        "csr": "0.9833",
+        "csr": "98.3",
         "line_coverage": "65.86",
         "branch_coverage": "38.42",
         "dataset": "symprompt",
@@ -249,7 +249,7 @@
     "Llama-3.3-70B-Instruct": {
       "overall": {
         "rank": 23,
-        "csr": "0.9833",
+        "csr": "98.3",
         "line_coverage": "66.67",
         "branch_coverage": "35.69",
         "dataset": "symprompt",
@@ -260,7 +260,7 @@
     "Llama-4-Scout-17B-16E-Instruct": {
       "overall": {
         "rank": 24,
-        "csr": "0.9767",
+        "csr": "97.7",
         "line_coverage": "68.68",
         "branch_coverage": "35.88",
         "dataset": "symprompt",
@@ -271,7 +271,7 @@
     "Gemma-3-27B-Instruct": {
       "overall": {
         "rank": 25,
-        "csr": "0.9750",
+        "csr": "97.5",
         "line_coverage": "64.69",
         "branch_coverage": "34.64",
         "dataset": "symprompt",
@@ -282,7 +282,7 @@
     "Llama-3.1-8B-Instruct": {
       "overall": {
         "rank": 26,
-        "csr": "0.9600",
+        "csr": "96.0",
         "line_coverage": "46.01",
         "branch_coverage": "20.75",
         "dataset": "symprompt",

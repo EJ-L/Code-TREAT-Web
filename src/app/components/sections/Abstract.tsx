@@ -41,10 +41,10 @@ const Abstract: FC<AbstractProps> = ({ isDarkMode }) => {
               
               <p className={`text-xl leading-relaxed text-justify ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                 Large foundation models are transforming software engineering, yet significant gaps remain in comprehensive evaluation methodologies. 
-                Our framework addresses this with four key improvements: <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>Multi-Task Holistic Evaluation</strong>, 
-                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>Multi-Language and Multi-Modality Assessment</strong>, 
-                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>Robustness Assessment</strong>, and 
-                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>Rigorous Evaluation Methodology</strong>.
+                Our framework addresses this with four key improvements: <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}> Multi-Task Holistic Evaluation</strong>, 
+                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}> Multi-Language and Multi-Modality Assessment</strong>, 
+                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}> Robustness Assessment</strong>, and 
+                <strong className={`${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}> Rigorous Evaluation Methodology</strong>.
               </p>
             </div>
 

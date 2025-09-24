@@ -59,6 +59,7 @@ function loadTaskData(task) {
     'mr-web': 'mr-web',
     'interaction-2-code': 'interaction-2-code',
     'code-robustness': 'code-robustness',
+    'unit test generation': 'unit_test_generation',
   };
   
   const taskDirName = taskDirMap[task] || task.replace(/\s+/g, '-');
@@ -118,27 +119,6 @@ function loadTaskData(task) {
                 };
                 allData.push(primeVulPairsEntry);
               }
-            });
-          } else if (task === 'unit code generation' && typeof data === 'object' && !Array.isArray(data)) {
-            // Handle special case for unit code generation - convert aggregated format to individual entries
-            Object.entries(data).forEach(([modelName, modelData]) => {
-              Object.entries(modelData).forEach(([dataset, datasetMetrics]) => {
-                // Create separate entries for each metric type within each dataset
-                Object.entries(datasetMetrics).forEach(([metricType, value]) => {
-                  if (metricType !== 'Average') { // Skip the average field since it's calculated
-                    const entry = {
-                      model_name: modelName,
-                      task: 'unit code generation',
-                      dataset: dataset,
-                      modality: metricType,
-                      metrics: {
-                        'pass@1': value / 100 // Convert percentage to ratio
-                      }
-                    };
-                    allData.push(entry);
-                  }
-                });
-              });
             });
           } else if (Array.isArray(data)) {
             allData.push(...data);
@@ -463,41 +443,46 @@ function aggregateData(data, task, showByDifficulty) {
         }
       });
     } else if (task === 'unit test generation') {
-      // For unit code generation, aggregate by dataset and modality
-      const datasets = ['HackerRank', 'GeeksforGeeks', 'Merged'];
-      const modalities = ['Vanilla', 'PSC-ALL', 'MCC', 'MPS', 'MHC'];
+      // For unit test generation, aggregate CSR, line coverage, and branch coverage
+      const csrValues = entries
+        .map(e => e.csr)
+        .filter(v => v !== undefined && v !== null);
       
-      datasets.forEach(dataset => {
-        modalities.forEach(modality => {
-          const values = entries
-            .filter(e => e.dataset === dataset && e.modality === modality)
-            .map(e => e.metrics && e.metrics['pass@1'])
-            .filter(v => v !== undefined && v !== null);
-          
-          if (values.length > 0) {
-            const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
-            result[`${dataset}_${modality}`] = (avg * 100).toFixed(1); // Convert to percentage
-          } else {
-            result[`${dataset}_${modality}`] = '-';
-          }
-        });
-        
-        // Calculate dataset average
-        const datasetValues = modalities.map(modality => {
-          const values = entries
-            .filter(e => e.dataset === dataset && e.modality === modality)
-            .map(e => e.metrics && e.metrics['pass@1'])
-            .filter(v => v !== undefined && v !== null);
-          return values.length > 0 ? values.reduce((sum, val) => sum + val, 0) / values.length : null;
-        }).filter(v => v !== null);
-        
-        if (datasetValues.length > 0) {
-          const avg = datasetValues.reduce((sum, val) => sum + val, 0) / datasetValues.length;
-          result[`${dataset}_Average`] = (avg * 100).toFixed(1);
-        } else {
-          result[`${dataset}_Average`] = '-';
-        }
-      });
+      const lineCoverageValues = entries
+        .map(e => e.line_coverage)
+        .filter(v => v !== undefined && v !== null);
+      
+      const branchCoverageValues = entries
+        .map(e => e.branch_coverage)
+        .filter(v => v !== undefined && v !== null);
+      
+      if (csrValues.length > 0) {
+        const avgCsr = csrValues.reduce((sum, val) => sum + val, 0) / csrValues.length;
+        result['csr'] = avgCsr.toFixed(4);
+      } else {
+        result['csr'] = '-';
+      }
+      
+      if (lineCoverageValues.length > 0) {
+        const avgLineCoverage = lineCoverageValues.reduce((sum, val) => sum + val, 0) / lineCoverageValues.length;
+        result['line_coverage'] = avgLineCoverage.toFixed(2);
+      } else {
+        result['line_coverage'] = '-';
+      }
+      
+      if (branchCoverageValues.length > 0) {
+        const avgBranchCoverage = branchCoverageValues.reduce((sum, val) => sum + val, 0) / branchCoverageValues.length;
+        result['branch_coverage'] = avgBranchCoverage.toFixed(2);
+      } else {
+        result['branch_coverage'] = '-';
+      }
+      
+      // Add dataset and language information for consistency
+      if (entries.length > 0) {
+        result['dataset'] = entries[0].dataset || 'symprompt';
+        result['lang'] = entries[0].lang || 'python';
+        result['task'] = 'unit_test_generation';
+      }
     } else {
       // For other tasks (code generation, input/output prediction, etc.), aggregate pass rates
       if (showByDifficulty) {
@@ -592,10 +577,10 @@ function aggregateData(data, task, showByDifficulty) {
       // Sort by CLIP for interaction-2-code
       aValue = parseFloat(a['CLIP']) || -Infinity;
       bValue = parseFloat(b['CLIP']) || -Infinity;
-    } else if (task === 'unit code generation') {
-      // Sort by Merged_Average for unit code generation
-      aValue = parseFloat(a['Merged_Average']) || -Infinity;
-      bValue = parseFloat(b['Merged_Average']) || -Infinity;
+    } else if (task === 'unit test generation') {
+      // Sort by CSR for unit test generation
+      aValue = parseFloat(a['csr']) || -Infinity;
+      bValue = parseFloat(b['csr']) || -Infinity;
     } else if (showByDifficulty) {
       // Sort by easy_pass@1 for difficulty mode
       aValue = parseFloat(a['easy_pass@1']) || -Infinity;

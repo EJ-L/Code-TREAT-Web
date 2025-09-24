@@ -170,11 +170,11 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-block w-full min-w-0">
+    <div ref={dropdownRef} className="relative inline-block flex-1 min-w-[240px]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          w-full inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[320px] sm:min-w-[380px] md:min-w-[420px] lg:min-w-[450px]
+          w-full inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-0
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700' 
             : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
@@ -194,7 +194,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
 
       {isOpen && (
         <div className={`
-          absolute z-50 mt-1 w-full min-w-[320px] sm:min-w-[380px] md:min-w-[420px] lg:min-w-[450px] rounded-lg border shadow-lg
+          absolute z-50 mt-1 w-full min-w-[240px] rounded-lg border shadow-lg
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600' 
             : 'bg-white border-slate-300'
@@ -291,7 +291,7 @@ export const SecondaryFiltersBar: FC<SecondaryFiltersBarProps> = ({
         }`}>
           Filters:
         </span>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 flex-1">
+        <div className="flex flex-wrap gap-4 flex-1">
           {availableFilters.map((filter) => (
             <MultiSelectFilter
               key={filter.key}

@@ -197,7 +197,7 @@ const CompactFilterBar: FC<CompactFilterBarProps> = ({
 
           {/* Filter Dropdowns - only show if we have filters */}
           {hasFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="flex flex-wrap gap-4">
               {renderableFilters.map((filter) => {
                 const options = getDropdownOptions(filter);
                 const currentSelections = getCurrentSelections(filter.key);
@@ -211,7 +211,7 @@ const CompactFilterBar: FC<CompactFilterBarProps> = ({
                     onSelectionChange={(values) => handleMultiSelectChange(filter.key, values)}
                     isDarkMode={isDarkMode}
                     maxDisplayedTags={2}
-                    className="min-w-0"
+                    className="min-w-[240px] flex-1"
                   />
                 );
               })}

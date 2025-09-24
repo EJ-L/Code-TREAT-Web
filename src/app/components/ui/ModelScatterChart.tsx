@@ -798,7 +798,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   }, [areaSelectState, panState.isDragging, zoomState, originalXDomain, originalYDomain]);
 
   // Double click handler for reset zoom
-  const handleDoubleClick = useCallback((event: React.PointerEvent) => {
+  const handleDoubleClick = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     handleResetZoom();
   }, [handleResetZoom]);

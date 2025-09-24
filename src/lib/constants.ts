@@ -187,7 +187,6 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
 
   // Gemini Models
   'Gemma-3-27b-it': '2025-03-12',
-  'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.5-Pro': '2024-05-06',
   'Gemini-2.5-Pro-05-06': '2024-05-06',
   'Gemini-2.5': '2024-05-06',

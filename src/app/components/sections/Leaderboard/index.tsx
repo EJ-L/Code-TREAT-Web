@@ -234,7 +234,7 @@ interface LeaderboardProps {
 
   // Handle sorting using new helper
   const handleSort = useCallback((key: string) => {
-    // Special handling for rank column - always sort by rank in ascending order (reset behavior)
+    // Special handling for rank column - sort by original rank values
     if (key === 'rank') {
       setSortConfig({ key: 'rank', direction: 'asc' });
     } else {

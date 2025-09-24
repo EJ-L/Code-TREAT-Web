@@ -669,8 +669,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
 
   // Mouse wheel handler removed - no longer supporting scroll zoom
 
-  // Mouse down handler for area selection and drag pan
-  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+  // Pointer down handler for area selection and drag pan
+  const handlePointerDown = useCallback((event: React.PointerEvent) => {
     if (event.button !== 0) return; // Only left mouse button
     
     const chartElement = chartContainerRef.current?.querySelector('.recharts-wrapper');
@@ -699,8 +699,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
     event.preventDefault();
   }, [isCtrlPressed]);
 
-  // Mouse move handler for area selection and drag pan
-  const handleMouseMoveCapture = useCallback((event: React.MouseEvent) => {
+  // Pointer move handler for area selection and drag pan
+  const handlePointerMoveCapture = useCallback((event: React.PointerEvent) => {
     if (areaSelectState.isSelecting) {
       // Update area selection
       setAreaSelectState(prev => ({
@@ -741,9 +741,9 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
     }
   }, [areaSelectState.isSelecting, panState.isDragging, panState.lastX, panState.lastY, zoomState]);
 
-  // Mouse up handler for area selection and drag pan
+  // Pointer up handler for area selection and drag pan
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleMouseUp = useCallback((event: React.MouseEvent) => {
+  const handlePointerUp = useCallback((event: React.PointerEvent) => {
     if (areaSelectState.isSelecting) {
       // Complete area selection zoom
       const chartElement = chartContainerRef.current?.querySelector('.recharts-wrapper');
@@ -798,7 +798,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   }, [areaSelectState, panState.isDragging, zoomState, originalXDomain, originalYDomain]);
 
   // Double click handler for reset zoom
-  const handleDoubleClick = useCallback((event: React.MouseEvent) => {
+  const handleDoubleClick = useCallback((event: React.PointerEvent) => {
     event.preventDefault();
     handleResetZoom();
   }, [handleResetZoom]);
@@ -1027,12 +1027,13 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
           ref={chartContainerRef}
           className="h-[400px] sm:h-[500px] lg:h-[700px] relative"
           tabIndex={0}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMoveCapture}
-          onMouseUp={handleMouseUp}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMoveCapture}
+          onPointerUp={handlePointerUp}
           onDoubleClick={handleDoubleClick}
           style={{ 
-            cursor: isCtrlPressed ? 'crosshair' : (panState.isDragging ? 'grabbing' : (zoomState ? 'grab' : 'default'))
+            cursor: isCtrlPressed ? 'crosshair' : (panState.isDragging ? 'grabbing' : (zoomState ? 'grab' : 'default')),
+            touchAction: 'none' // Prevent default touch actions to avoid scrolling conflicts on mobile
           }}
         >
           {/* Area selection overlay */}

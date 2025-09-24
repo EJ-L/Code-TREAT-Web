@@ -177,10 +177,10 @@ function applyFilters(data, task, filters) {
       });
     });
   } else if (task === 'code-robustness') {
-    // For code-robustness, when no specific dataset filter is applied, only use Merge-HR+GFG for overall results
+    // For code-robustness, when no specific dataset filter is applied, only use Merge-CRUXEval+CE for overall results
     filteredData = filteredData.filter(entry => {
       const entryDataset = entry.dataset || '';
-      return entryDataset === 'Merge-HR+GFG';
+      return entryDataset === 'Merge-CRUXEval+CE';
     });
   }
   

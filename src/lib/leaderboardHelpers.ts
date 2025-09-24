@@ -195,22 +195,12 @@ export function getTaskSpecificColumnWidth(task: TaskType, key: string): string 
 
 // Default sort configuration
 export function getDefaultSortConfig(task: TaskType): { key: string; direction: 'asc' | 'desc' } {
-  // Default sort by Pass@1 for most tasks, rank for overall
-  let defaultKey = 'pass@1';
+  // Use rank sorting for all tasks to unify initial load and rank reset behavior
+  // This ensures the initial leaderboard display matches what users see when they click rank to "reset"
+  let defaultKey = 'rank';
   
-  if (task === 'overall') {
-    defaultKey = 'rank';
-  } else if (task === 'code summarization' || task === 'code review') {
-    defaultKey = 'LLM Judge';
-  } else if (task === 'vulnerability detection') {
-    defaultKey = 'Accuracy';
-  } else if (task === 'multi-modality') {
-    defaultKey = 'MLLM_Score';
-  } else if (task === 'code-robustness') {
-    defaultKey = 'ALL';
-  } else if (task === 'unit test generation') {
-    defaultKey = 'line_coverage';
-  }
+  // Only the overall leaderboard keeps rank as default since it's already rank-based
+  // All other leaderboards now use rank to show the original precomputed rankings
   
   return {
     key: defaultKey,
@@ -247,20 +237,33 @@ export function sortResults(
 
   const sortableData = [...data];
   
+  // Store original ranks before any sorting (use originalRank if available, fallback to rank)
+  sortableData.forEach((item, index) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((item as any).originalRank === undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (item as any).originalRank = (item as any).rank || (index + 1);
+    }
+  });
+  
   // Special handling for rank column - sort by original rank values
   if (sortConfig.key === 'rank') {
     sortableData.sort((a, b) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const aRank = parseValueForSorting((a as any).rank);
+      const aRank = parseValueForSorting((a as any).originalRank);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const bRank = parseValueForSorting((b as any).rank);
+      const bRank = parseValueForSorting((b as any).originalRank);
       
       // Always sort rank in ascending order for "reset" behavior
       return aRank - bRank;
     });
     
-    // Don't update ranks when sorting by rank - preserve original values
-    return sortableData;
+    // Restore original ranks when sorting by rank
+    return sortableData.map(item => ({
+      ...item,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rank: (item as any).originalRank
+    }));
   }
   
   sortableData.sort((a, b) => {

@@ -58,6 +58,7 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
         'interaction-2-code',
         'code-robustness',
         'mr-web',
+        'unit test generation',
       ] as TaskType[],
       cacheable: true,
       priority: 3 // Higher priority than filesystem
@@ -582,8 +583,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
           if (key.includes('pass@') || key.includes('_pass@')) {
             leaderboardResult[key] = numValue.toFixed(1);
           } else if (key === 'csr') {
-            // CSR is in 0-1 scale, convert to 0-100 scale and format to 1 decimal place
-            leaderboardResult[key] = (numValue * 100).toFixed(1);
+            // CSR is already in 0-100 scale in precomputed data, just format to 1 decimal place
+            leaderboardResult[key] = numValue.toFixed(1);
           } else if (key === 'MLLM_Score') {
             // MLLM_Score: multiply by 10 to get 100 scale
             leaderboardResult[key] = (numValue * 10).toFixed(1);
@@ -603,8 +604,8 @@ export class PrecomputedDataSource extends BaseDataSource implements IPrecompute
             // Keep rank as integer (no decimal)
             leaderboardResult[key] = value;
           } else if (key === 'csr') {
-            // CSR is in 0-1 scale, convert to 0-100 scale and format to 1 decimal place
-            leaderboardResult[key] = (value * 100).toFixed(1);
+            // CSR is already in 0-100 scale in precomputed data, just format to 1 decimal place
+            leaderboardResult[key] = value.toFixed(1);
           } else if (key === 'MLLM_Score') {
             // MLLM_Score: multiply by 10 to get 100 scale
             leaderboardResult[key] = (value * 10).toFixed(1);

@@ -63,14 +63,14 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
     return new Date(reference.getFullYear(), reference.getMonth() + 1, 1);
   };
   
-  // Handle mouse down on handles
-  const handleMouseDown = useCallback((type: 'start' | 'end') => (e: React.MouseEvent) => {
+  // Handle pointer down on handles
+  const handlePointerDown = useCallback((type: 'start' | 'end') => (e: React.PointerEvent) => {
     e.preventDefault();
     setIsDragging(type);
   }, []);
   
-  // Handle mouse move
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  // Handle pointer move
+  const handlePointerMove = useCallback((e: PointerEvent) => {
     if (!isDragging || !sliderRef.current) return;
     
     const rect = sliderRef.current.getBoundingClientRect();
@@ -101,8 +101,8 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
     }
   }, [isDragging, minDate, maxDate, tempStartDate, tempEndDate, percentageToDate]);
   
-  // Handle mouse up - this is where we update the actual filter
-  const handleMouseUp = useCallback(() => {
+  // Handle pointer up - this is where we update the actual filter
+  const handlePointerUp = useCallback(() => {
     if (isDragging) {
       setIsDragging(null);
       // Only call the callback when dragging ends
@@ -113,14 +113,14 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
   // Add global event listeners
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('pointermove', handlePointerMove);
+      document.addEventListener('pointerup', handlePointerUp);
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('pointermove', handlePointerMove);
+        document.removeEventListener('pointerup', handlePointerUp);
       };
     }
-  }, [isDragging, handleMouseMove, handleMouseUp]);
+  }, [isDragging, handlePointerMove, handlePointerUp]);
   
   // Update temp dates when props change (but not during dragging)
   useEffect(() => {
@@ -259,7 +259,8 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
                   ? 'bg-slate-800 border-blue-400 hover:border-blue-300' 
                   : 'bg-white border-blue-500 hover:border-blue-600'
               } ${isDragging === 'start' ? 'cursor-grabbing scale-125 shadow-lg' : 'hover:scale-110'}`}
-              onMouseDown={handleMouseDown('start')}
+              onPointerDown={handlePointerDown('start')}
+              style={{ touchAction: 'none' }}
             />
           </div>
           
@@ -283,7 +284,8 @@ export const TimelineSlider: FC<TimelineSliderProps> = ({
                   ? 'bg-slate-800 border-blue-400 hover:border-blue-300' 
                   : 'bg-white border-blue-500 hover:border-blue-600'
               } ${isDragging === 'end' ? 'cursor-grabbing scale-125 shadow-lg' : 'hover:scale-110'}`}
-              onMouseDown={handleMouseDown('end')}
+              onPointerDown={handlePointerDown('end')}
+              style={{ touchAction: 'none' }}
             />
           </div>
         </div>

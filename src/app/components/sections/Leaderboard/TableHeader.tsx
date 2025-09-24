@@ -165,11 +165,11 @@ const TableHeader: FC<TableHeaderProps> = ({
         )}
         {/* Sort indicator */}
         <span className={`ml-2 shrink-0 min-w-[20px] transition-all duration-200 ${
-          sortConfig && sortConfig.key === header.key 
+          sortConfig && sortConfig.key === header.key && header.key !== 'rank'
             ? 'text-amber-500 opacity-100 scale-110' 
             : isDarkMode ? 'text-slate-400 opacity-60 group-hover:text-blue-400 group-hover:opacity-80' : 'text-slate-500 opacity-60 group-hover:text-blue-500 group-hover:opacity-80'
         }`}>
-          {sortConfig && sortConfig.key === header.key ? (
+          {sortConfig && sortConfig.key === header.key && header.key !== 'rank' ? (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               {sortConfig.direction === 'asc' ? (
                 <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />

@@ -234,7 +234,12 @@ interface LeaderboardProps {
 
   // Handle sorting using new helper
   const handleSort = useCallback((key: string) => {
-    setSortConfig(prev => handleSortChange(prev, key));
+    // Special handling for rank column - always sort by rank in ascending order (reset behavior)
+    if (key === 'rank') {
+      setSortConfig({ key: 'rank', direction: 'asc' });
+    } else {
+      setSortConfig(prev => handleSortChange(prev, key));
+    }
   }, []);
 
   // Handle multi-leaderboard tab change

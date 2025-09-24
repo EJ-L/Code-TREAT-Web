@@ -133,13 +133,17 @@ const ResultsTable: FC<ResultsTableProps> = ({
           ['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
         const hasMPS = availableMetrics.includes('MPS');
         setCurrentScatterMetric(hasMPS ? 'MPS' : availableMetrics[0]);
+      } else if (currentTask === 'multi-modality') {
+        // For multi-modality, prefer Compilation as default (especially for UI Code Generation)
+        const hasCompilation = availableMetrics.includes('Compilation');
+        setCurrentScatterMetric(hasCompilation ? 'Compilation' : availableMetrics[0]);
       } else {
         setCurrentScatterMetric(availableMetrics[0]);
       }
     }
   }, [availableMetrics, currentScatterMetric, currentTask, selectedMultiTab]);
 
-  // Reset metric when switching to new datasets in code-robustness
+  // Reset metric when switching to new datasets in code-robustness or multi-modality
   useEffect(() => {
     if (currentTask === 'code-robustness' && selectedMultiTab && availableMetrics.length > 0) {
       if (['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
@@ -148,6 +152,12 @@ const ResultsTable: FC<ResultsTableProps> = ({
         if (hasMPS && currentScatterMetric !== 'MPS') {
           setCurrentScatterMetric('MPS');
         }
+      }
+    } else if (currentTask === 'multi-modality' && selectedMultiTab && availableMetrics.length > 0) {
+      // For multi-modality, prefer Compilation when switching datasets
+      const hasCompilation = availableMetrics.includes('Compilation');
+      if (hasCompilation && currentScatterMetric !== 'Compilation') {
+        setCurrentScatterMetric('Compilation');
       }
     }
   }, [selectedMultiTab, currentTask, availableMetrics, currentScatterMetric]);

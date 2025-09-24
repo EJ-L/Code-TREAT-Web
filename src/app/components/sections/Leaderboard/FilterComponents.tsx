@@ -174,14 +174,14 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          w-full inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[180px] sm:min-w-[200px] md:min-w-[220px]
+          w-full inline-flex items-center justify-between px-4 py-2 text-sm rounded-lg border transition-colors min-w-[320px] sm:min-w-[380px] md:min-w-[420px] lg:min-w-[450px]
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700' 
             : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
           }
         `}
       >
-        <span className="truncate mr-2 flex-1 text-left">{displayText}</span>
+        <span className="truncate mr-2 flex-1 text-left font-bold">{displayText}</span>
         <svg 
           className={`w-4 h-4 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
           fill="none" 
@@ -194,7 +194,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
 
       {isOpen && (
         <div className={`
-          absolute z-50 mt-1 w-full min-w-[250px] sm:min-w-[280px] md:min-w-[300px] rounded-lg border shadow-lg
+          absolute z-50 mt-1 w-full min-w-[320px] sm:min-w-[380px] md:min-w-[420px] lg:min-w-[450px] rounded-lg border shadow-lg
           ${isDarkMode 
             ? 'bg-slate-800 border-slate-600' 
             : 'bg-white border-slate-300'

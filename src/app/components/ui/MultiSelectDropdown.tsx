@@ -187,7 +187,7 @@ const MultiSelectDropdown: FC<MultiSelectDropdownProps> = ({
               >
                 {label}:
               </span>
-              <span className={`ml-1 truncate ${
+              <span className={`ml-1 truncate font-bold ${
                 isDarkMode ? 'text-slate-500' : 'text-slate-400'
               }`}>
                 {getAvailableOptionsDisplay()}

@@ -132,6 +132,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'GPT-4o': '2023-04-11',
   'Gpt-4o-mini': '2024-07-18',
   'GPT-4o-Mini': '2024-07-18',
+  'GPT-4o-mini': '2024-07-18',
   'GPT-5': '2025-08-07',
   'GPT-4.1': '2025-04-14',
   'GPT-OSS-120B': '2025-08-25',
@@ -188,11 +189,13 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Gemma-3-27b-it': '2025-03-12',
   'Gemini-2.5-Pro-Preview-05-06': '2024-05-06',
   'Gemini-2.5-Pro': '2024-05-06',
+  'Gemini-2.5-Pro-05-06': '2024-05-06',
   'Gemini-2.5': '2024-05-06',
   'Gemini-2.5-Flash': '2025-08-26',
   'Gemini-2.0-Flash': '2024-11-20',
   'Gemini-2.0-Pro': '2025-02-25',
   'Gemini-1.5-Pro': '2024-09-24',
+  'Gemini-1.5-Pro-002': '2024-09-24',
   'Gemini-1.5-Flash': '2024-09-24',
   
   // Pixtral Models

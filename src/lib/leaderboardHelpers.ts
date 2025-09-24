@@ -235,6 +235,22 @@ export function sortResults(
 
   const sortableData = [...data];
   
+  // Special handling for rank column - sort by original rank values
+  if (sortConfig.key === 'rank') {
+    sortableData.sort((a, b) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const aRank = parseValueForSorting((a as any).rank);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const bRank = parseValueForSorting((b as any).rank);
+      
+      // Always sort rank in ascending order for "reset" behavior
+      return aRank - bRank;
+    });
+    
+    // Don't update ranks when sorting by rank - preserve original values
+    return sortableData;
+  }
+  
   sortableData.sort((a, b) => {
     // Special handling for model names (string sorting)
     if (sortConfig.key === 'model') {
@@ -262,7 +278,7 @@ export function sortResults(
     }
   });
 
-  // Update ranks after sorting
+  // Update ranks to reflect new sort order for non-rank columns
   return sortableData.map((item, index) => ({
     ...item,
     rank: index + 1

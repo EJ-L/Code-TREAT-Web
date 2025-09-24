@@ -159,6 +159,7 @@ export function processResult(entry: ResultEntry): ProcessedResult {
     sourceLang: entry.source_lang || null,
     lang: entry.lang,
     targetLang: entry.target_lang || null,
+    modality: entry.modality || undefined,
     domain: entry.domain,
     
     // Basic metrics

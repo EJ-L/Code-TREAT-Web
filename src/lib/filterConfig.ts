@@ -5,7 +5,6 @@ import { shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
 export const TASKS_WITH_DIFFICULTY: TaskType[] = [
   'overall',
   'code generation', 
-  'code translation',
   'input prediction',
   'output prediction'
 ];
@@ -34,12 +33,8 @@ const MAIN_FILTERS: FilterConfig[] = [
       task !== 'overall' && (abilities[task]?.dataset?.length || 0) > 1,
     getValues: (task, abilities) => abilities[task]?.dataset || [],
     specialBehaviors: {
-      disabling: (task, showByDifficulty, abilities) => 
-        showByDifficulty && task === 'code translation'
-          ? abilities[task]?.dataset?.filter(v => v !== 'HackerRank') || []
-          : [],
-      autoSelect: (task, showByDifficulty) =>
-        showByDifficulty && task === 'code translation' ? ['HackerRank'] : []
+      disabling: () => [],
+      autoSelect: () => []
     }
   },
   {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-09-23T16:50:41.051Z",
+  "generatedAt": "2025-09-24T01:14:05.907Z",
   "tasks": {
     "code generation": {
       "totalCombinations": 194,
@@ -2987,7 +2987,7 @@
       ]
     },
     "code translation": {
-      "totalCombinations": 181,
+      "totalCombinations": 136,
       "files": [
         {
           "filename": "code-translation_overall.json",
@@ -3001,95 +3001,82 @@
           "path": "data\\precomputed\\code-translation\\code-translation_overall.json"
         },
         {
-          "filename": "code-translation_difficulty_overall.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_overall.json"
-        },
-        {
-          "filename": "code-translation_modality-Python.json",
+          "filename": "code-translation_modality-python__java.json",
           "filters": {
             "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [],
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python.json",
+          "filename": "code-translation_modality-java__python.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python.json"
-        },
-        {
-          "filename": "code-translation_modality-Java.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [],
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java.json",
+          "filename": "code-translation_modality-python__cpp.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [],
             "reasoning": [],
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java.json",
+          "filename": "code-translation_modality-cpp__python.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [],
             "reasoning": [],
             "dataset": []
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms.json",
@@ -3105,19 +3092,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures.json",
           "filters": {
             "modality": [],
@@ -3129,19 +3103,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms-DataStructures.json",
@@ -3158,20 +3119,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-DataStructures.json"
-        },
-        {
           "filename": "code-translation_knowledge-Math.json",
           "filters": {
             "modality": [],
@@ -3183,19 +3130,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Math.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Math.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms-Math.json",
@@ -3212,20 +3146,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-Math.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures-Math.json",
           "filters": {
             "modality": [],
@@ -3238,20 +3158,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures-Math.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures-Math.json"
         },
         {
           "filename": "code-translation_reasoning-Direct.json",
@@ -3267,19 +3173,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -3291,19 +3184,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_reasoning-Direct-CoTReasoning.json",
@@ -3320,20 +3200,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank.json",
           "filters": {
             "modality": [],
@@ -3345,19 +3211,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval.json",
@@ -3387,23 +3240,10 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-Algorithms.json",
+          "filename": "code-translation_modality-python__java_knowledge-Algorithms.json",
           "filters": {
             "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Algorithms"
@@ -3412,28 +3252,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-Algorithms.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-Algorithms.json",
+          "filename": "code-translation_modality-python__java_knowledge-DataStructures.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-Algorithms.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-DataStructures.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Data Structures"
@@ -3442,28 +3267,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-DataStructures.json",
+          "filename": "code-translation_modality-python__java_knowledge-Algorithms-DataStructures.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Algorithms",
@@ -3473,29 +3283,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-Algorithms-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-Algorithms-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-Algorithms-DataStructures.json",
+          "filename": "code-translation_modality-python__java_knowledge-Math.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-Algorithms-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-Math.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Math"
@@ -3504,28 +3298,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-Math.json",
+          "filename": "code-translation_modality-python__java_knowledge-Algorithms-Math.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Algorithms",
@@ -3535,29 +3314,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-Algorithms-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-Algorithms-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-Algorithms-Math.json",
+          "filename": "code-translation_modality-python__java_knowledge-DataStructures-Math.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-Algorithms-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [
               "Data Structures",
@@ -3567,29 +3330,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_knowledge-DataStructures-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_knowledge-DataStructures-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_knowledge-DataStructures-Math.json",
+          "filename": "code-translation_modality-java__python_knowledge-Algorithms.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_knowledge-DataStructures-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-Algorithms.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Algorithms"
@@ -3598,28 +3345,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-Algorithms.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-Algorithms.json",
+          "filename": "code-translation_modality-java__python_knowledge-DataStructures.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-Algorithms.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-DataStructures.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Data Structures"
@@ -3628,28 +3360,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-DataStructures.json",
+          "filename": "code-translation_modality-java__python_knowledge-Algorithms-DataStructures.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Algorithms",
@@ -3659,29 +3376,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-Algorithms-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-Algorithms-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-Algorithms-DataStructures.json",
+          "filename": "code-translation_modality-java__python_knowledge-Math.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-Algorithms-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-Math.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Math"
@@ -3690,28 +3391,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-Math.json",
+          "filename": "code-translation_modality-java__python_knowledge-Algorithms-Math.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Algorithms",
@@ -3721,29 +3407,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-Algorithms-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-Algorithms-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-Algorithms-Math.json",
+          "filename": "code-translation_modality-java__python_knowledge-DataStructures-Math.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-Algorithms-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [
               "Data Structures",
@@ -3753,30 +3423,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_knowledge-DataStructures-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_knowledge-DataStructures-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_knowledge-DataStructures-Math.json",
+          "filename": "code-translation_modality-python__cpp_knowledge-Algorithms.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_knowledge-DataStructures-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_knowledge-Algorithms.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [
               "Algorithms"
@@ -3785,14 +3438,91 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-Algorithms.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-Algorithms.json",
+          "filename": "code-translation_modality-python__cpp_knowledge-DataStructures.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
+            ],
+            "knowledge": [
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-python__cpp_knowledge-Algorithms-DataStructures.json",
+          "filters": {
+            "modality": [
+              "python->cpp"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-Algorithms-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-python__cpp_knowledge-Math.json",
+          "filters": {
+            "modality": [
+              "python->cpp"
+            ],
+            "knowledge": [
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-python__cpp_knowledge-Algorithms-Math.json",
+          "filters": {
+            "modality": [
+              "python->cpp"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-Algorithms-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-python__cpp_knowledge-DataStructures-Math.json",
+          "filters": {
+            "modality": [
+              "python->cpp"
+            ],
+            "knowledge": [
+              "Data Structures",
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_knowledge-DataStructures-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__python_knowledge-Algorithms.json",
+          "filters": {
+            "modality": [
+              "cpp->python"
             ],
             "knowledge": [
               "Algorithms"
@@ -3800,15 +3530,14 @@
             "reasoning": [],
             "dataset": []
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-Algorithms.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_modality-Python-Java_knowledge-DataStructures.json",
+          "filename": "code-translation_modality-cpp__python_knowledge-DataStructures.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [
               "Data Structures"
@@ -3817,30 +3546,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-DataStructures.json",
+          "filename": "code-translation_modality-cpp__python_knowledge-Algorithms-DataStructures.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [
               "Algorithms",
@@ -3850,31 +3562,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-Algorithms-DataStructures.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-Algorithms-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-Algorithms-DataStructures.json",
+          "filename": "code-translation_modality-cpp__python_knowledge-Math.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-Algorithms-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_knowledge-Math.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [
               "Math"
@@ -3883,30 +3577,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-Math.json",
+          "filename": "code-translation_modality-cpp__python_knowledge-Algorithms-Math.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [
               "Algorithms",
@@ -3916,31 +3593,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-Algorithms-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-Algorithms-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-Algorithms-Math.json",
+          "filename": "code-translation_modality-cpp__python_knowledge-DataStructures-Math.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-Algorithms-Math.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [
               "Data Structures",
@@ -3950,14 +3609,90 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_knowledge-DataStructures-Math.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_knowledge-DataStructures-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_knowledge-DataStructures-Math.json",
+          "filename": "code-translation_modality-java__cpp_knowledge-Algorithms.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "java->cpp"
+            ],
+            "knowledge": [
+              "Algorithms"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-Algorithms.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_knowledge-DataStructures.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_knowledge-Algorithms-DataStructures.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-Algorithms-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_knowledge-Math.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_knowledge-Algorithms-Math.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-Algorithms-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_knowledge-DataStructures-Math.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
             ],
             "knowledge": [
               "Data Structures",
@@ -3966,14 +3701,107 @@
             "reasoning": [],
             "dataset": []
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_knowledge-DataStructures-Math.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_knowledge-DataStructures-Math.json"
         },
         {
-          "filename": "code-translation_modality-Python_reasoning-Direct.json",
+          "filename": "code-translation_modality-cpp__java_knowledge-Algorithms.json",
           "filters": {
             "modality": [
-              "Python"
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Algorithms"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-Algorithms.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_knowledge-DataStructures.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_knowledge-Algorithms-DataStructures.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Data Structures"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-Algorithms-DataStructures.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_knowledge-Math.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_knowledge-Algorithms-Math.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Algorithms",
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-Algorithms-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_knowledge-DataStructures-Math.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [
+              "Data Structures",
+              "Math"
+            ],
+            "reasoning": [],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_knowledge-DataStructures-Math.json"
+        },
+        {
+          "filename": "code-translation_modality-python__java_reasoning-Direct.json",
+          "filters": {
+            "modality": [
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [
@@ -3982,28 +3810,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_reasoning-Direct.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_reasoning-Direct.json",
+          "filename": "code-translation_modality-python__java_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_reasoning-Direct.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4012,28 +3825,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_reasoning-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_reasoning-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_reasoning-CoTReasoning.json",
+          "filename": "code-translation_modality-python__java_reasoning-Direct-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_modality-Python_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4043,29 +3841,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python_reasoning-Direct-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__java_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python_reasoning-Direct-CoTReasoning.json",
+          "filename": "code-translation_modality-java__python_reasoning-Direct.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python_reasoning-Direct-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_reasoning-Direct.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4074,28 +3856,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_reasoning-Direct.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_reasoning-Direct.json",
+          "filename": "code-translation_modality-java__python_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_reasoning-Direct.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4104,28 +3871,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_reasoning-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_reasoning-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_reasoning-CoTReasoning.json",
+          "filename": "code-translation_modality-java__python_reasoning-Direct-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_modality-Java_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4135,30 +3887,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Java_reasoning-Direct-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__python_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Java_reasoning-Direct-CoTReasoning.json",
+          "filename": "code-translation_modality-python__cpp_reasoning-Direct.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Java_reasoning-Direct-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_reasoning-Direct.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4167,14 +3902,44 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_reasoning-Direct.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_reasoning-Direct.json",
+          "filename": "code-translation_modality-python__cpp_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "CoT Reasoning"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_reasoning-CoTReasoning.json"
+        },
+        {
+          "filename": "code-translation_modality-python__cpp_reasoning-Direct-CoTReasoning.json",
+          "filters": {
+            "modality": [
+              "python->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "Direct",
+              "CoT Reasoning"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-python__cpp_reasoning-Direct-CoTReasoning.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__python_reasoning-Direct.json",
+          "filters": {
+            "modality": [
+              "cpp->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4182,15 +3947,14 @@
             ],
             "dataset": []
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_reasoning-Direct.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_modality-Python-Java_reasoning-CoTReasoning.json",
+          "filename": "code-translation_modality-cpp__python_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4199,30 +3963,13 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_reasoning-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_reasoning-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_reasoning-CoTReasoning.json",
+          "filename": "code-translation_modality-cpp__python_reasoning-Direct-CoTReasoning.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_modality-Python-Java_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4232,14 +3979,43 @@
             "dataset": []
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_modality-Python-Java_reasoning-Direct-CoTReasoning.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__python_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_modality-Python-Java_reasoning-Direct-CoTReasoning.json",
+          "filename": "code-translation_modality-java__cpp_reasoning-Direct.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "Direct"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_reasoning-Direct.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_reasoning-CoTReasoning.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "CoT Reasoning"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_reasoning-CoTReasoning.json"
+        },
+        {
+          "filename": "code-translation_modality-java__cpp_reasoning-Direct-CoTReasoning.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
             ],
             "knowledge": [],
             "reasoning": [
@@ -4248,14 +4024,60 @@
             ],
             "dataset": []
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_modality-Python-Java_reasoning-Direct-CoTReasoning.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-java__cpp_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_dataset-HackerRank_modality-Python.json",
+          "filename": "code-translation_modality-cpp__java_reasoning-Direct.json",
           "filters": {
             "modality": [
-              "Python"
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "Direct"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_reasoning-Direct.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_reasoning-CoTReasoning.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "CoT Reasoning"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_reasoning-CoTReasoning.json"
+        },
+        {
+          "filename": "code-translation_modality-cpp__java_reasoning-Direct-CoTReasoning.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [
+              "Direct",
+              "CoT Reasoning"
+            ],
+            "dataset": []
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_modality-cpp__java_reasoning-Direct-CoTReasoning.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank_modality-python__java.json",
+          "filters": {
+            "modality": [
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4264,28 +4086,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-Python.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-python__java.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Python.json",
+          "filename": "code-translation_dataset-PolyHumanEval_modality-python__java.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Python.json"
-        },
-        {
-          "filename": "code-translation_dataset-PolyHumanEval_modality-Python.json",
-          "filters": {
-            "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4294,13 +4101,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-Python.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-python__java.json"
         },
         {
-          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-Python.json",
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-python__java.json",
           "filters": {
             "modality": [
-              "Python"
+              "python->java"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4310,28 +4117,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-Python.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-python__java.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Python.json",
+          "filename": "code-translation_dataset-HackerRank_modality-java__python.json",
           "filters": {
             "modality": [
-              "Python"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Python.json"
-        },
-        {
-          "filename": "code-translation_dataset-HackerRank_modality-Java.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4340,28 +4132,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-java__python.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Java.json",
+          "filename": "code-translation_dataset-PolyHumanEval_modality-java__python.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Java.json"
-        },
-        {
-          "filename": "code-translation_dataset-PolyHumanEval_modality-Java.json",
-          "filters": {
-            "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4370,13 +4147,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-java__python.json"
         },
         {
-          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-Java.json",
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-java__python.json",
           "filters": {
             "modality": [
-              "Java"
+              "java->python"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4386,29 +4163,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-java__python.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Java.json",
+          "filename": "code-translation_dataset-HackerRank_modality-python__cpp.json",
           "filters": {
             "modality": [
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Java.json"
-        },
-        {
-          "filename": "code-translation_dataset-HackerRank_modality-Python-Java.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4417,30 +4178,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-Python-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-python__cpp.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Python-Java.json",
+          "filename": "code-translation_dataset-PolyHumanEval_modality-python__cpp.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
-            ],
-            "knowledge": [],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Python-Java.json"
-        },
-        {
-          "filename": "code-translation_dataset-PolyHumanEval_modality-Python-Java.json",
-          "filters": {
-            "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4449,14 +4193,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-Python-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-python__cpp.json"
         },
         {
-          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-Python-Java.json",
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-python__cpp.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "python->cpp"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4466,14 +4209,13 @@
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-Python-Java.json"
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-python__cpp.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_modality-Python-Java.json",
+          "filename": "code-translation_dataset-HackerRank_modality-cpp__python.json",
           "filters": {
             "modality": [
-              "Python",
-              "Java"
+              "cpp->python"
             ],
             "knowledge": [],
             "reasoning": [],
@@ -4481,8 +4223,131 @@
               "HackerRank"
             ]
           },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_modality-Python-Java.json"
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-cpp__python.json"
+        },
+        {
+          "filename": "code-translation_dataset-PolyHumanEval_modality-cpp__python.json",
+          "filters": {
+            "modality": [
+              "cpp->python"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-cpp__python.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-cpp__python.json",
+          "filters": {
+            "modality": [
+              "cpp->python"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "HackerRank",
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-cpp__python.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank_modality-java__cpp.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "HackerRank"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-java__cpp.json"
+        },
+        {
+          "filename": "code-translation_dataset-PolyHumanEval_modality-java__cpp.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-java__cpp.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-java__cpp.json",
+          "filters": {
+            "modality": [
+              "java->cpp"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "HackerRank",
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-java__cpp.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank_modality-cpp__java.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "HackerRank"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_modality-cpp__java.json"
+        },
+        {
+          "filename": "code-translation_dataset-PolyHumanEval_modality-cpp__java.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-PolyHumanEval_modality-cpp__java.json"
+        },
+        {
+          "filename": "code-translation_dataset-HackerRank-PolyHumanEval_modality-cpp__java.json",
+          "filters": {
+            "modality": [
+              "cpp->java"
+            ],
+            "knowledge": [],
+            "reasoning": [],
+            "dataset": [
+              "HackerRank",
+              "PolyHumanEval"
+            ]
+          },
+          "showByDifficulty": false,
+          "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_modality-cpp__java.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms_reasoning-Direct.json",
@@ -4500,21 +4365,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-Algorithms_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -4528,21 +4378,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-Algorithms_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms_reasoning-Direct-CoTReasoning.json",
@@ -4561,22 +4396,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -4592,21 +4411,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-DataStructures_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -4620,21 +4424,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-DataStructures_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-DataStructures_reasoning-Direct-CoTReasoning.json",
@@ -4653,22 +4442,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-DataStructures_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_knowledge-Algorithms-DataStructures_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -4685,22 +4458,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-DataStructures_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-Algorithms-DataStructures_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -4715,22 +4472,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-DataStructures_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms-DataStructures_reasoning-Direct-CoTReasoning.json",
@@ -4750,23 +4491,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-DataStructures_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-DataStructures_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_knowledge-Math_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -4782,21 +4506,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Math_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Math_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Math_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-Math_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -4810,21 +4519,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Math_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-Math_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Math_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-Math_reasoning-Direct-CoTReasoning.json",
@@ -4843,22 +4537,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Math_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Math_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Math_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_knowledge-Algorithms-Math_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -4875,22 +4553,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-Math_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-Math_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-Math_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-Algorithms-Math_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -4905,22 +4567,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-Math_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-Math_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-Math_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-Algorithms-Math_reasoning-Direct-CoTReasoning.json",
@@ -4940,23 +4586,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-Algorithms-Math_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-Algorithms-Math_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-Algorithms-Math_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures-Math_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -4973,22 +4602,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures-Math_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-DataStructures-Math_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures-Math_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_knowledge-DataStructures-Math_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -5003,22 +4616,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures-Math_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_knowledge-DataStructures-Math_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures-Math_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_knowledge-DataStructures-Math_reasoning-Direct-CoTReasoning.json",
@@ -5038,23 +4635,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_knowledge-DataStructures-Math_reasoning-Direct-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_knowledge-DataStructures-Math_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": []
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_knowledge-DataStructures-Math_reasoning-Direct-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-Algorithms.json",
           "filters": {
             "modality": [],
@@ -5068,21 +4648,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-Algorithms.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-Algorithms.json",
@@ -5116,21 +4681,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-Algorithms.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-DataStructures.json",
           "filters": {
             "modality": [],
@@ -5144,21 +4694,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-DataStructures.json",
@@ -5192,21 +4727,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-Algorithms-DataStructures.json",
           "filters": {
             "modality": [],
@@ -5221,22 +4741,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-Algorithms-DataStructures.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-DataStructures.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-Algorithms-DataStructures.json",
@@ -5272,22 +4776,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-Algorithms-DataStructures.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-DataStructures.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Data Structures"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-DataStructures.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-Math.json",
           "filters": {
             "modality": [],
@@ -5301,21 +4789,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-Math.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Math.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-Math.json",
@@ -5349,21 +4822,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Math.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-Algorithms-Math.json",
           "filters": {
             "modality": [],
@@ -5378,22 +4836,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-Algorithms-Math.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-Math.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-Algorithms-Math.json",
@@ -5429,22 +4871,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-Algorithms-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Algorithms",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-Algorithms-Math.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_knowledge-DataStructures-Math.json",
           "filters": {
             "modality": [],
@@ -5459,22 +4885,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_knowledge-DataStructures-Math.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures-Math.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_knowledge-DataStructures-Math.json",
@@ -5510,22 +4920,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_knowledge-DataStructures-Math.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures-Math.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [
-              "Data Structures",
-              "Math"
-            ],
-            "reasoning": [],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_knowledge-DataStructures-Math.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_reasoning-Direct.json",
           "filters": {
             "modality": [],
@@ -5539,21 +4933,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_reasoning-Direct.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-Direct.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_reasoning-Direct.json",
@@ -5587,21 +4966,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_reasoning-Direct.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-Direct.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-Direct.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_reasoning-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -5615,21 +4979,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_reasoning-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-CoTReasoning.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_reasoning-CoTReasoning.json",
@@ -5663,21 +5012,6 @@
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning.json"
         },
         {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "CoT Reasoning"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-CoTReasoning.json"
-        },
-        {
           "filename": "code-translation_dataset-HackerRank_reasoning-Direct-CoTReasoning.json",
           "filters": {
             "modality": [],
@@ -5692,22 +5026,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank_reasoning-Direct-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-Direct-CoTReasoning.json"
         },
         {
           "filename": "code-translation_dataset-PolyHumanEval_reasoning-Direct-CoTReasoning.json",
@@ -5741,22 +5059,6 @@
           },
           "showByDifficulty": false,
           "path": "data\\precomputed\\code-translation\\code-translation_dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning.json"
-        },
-        {
-          "filename": "code-translation_difficulty_dataset-HackerRank_reasoning-Direct-CoTReasoning.json",
-          "filters": {
-            "modality": [],
-            "knowledge": [],
-            "reasoning": [
-              "Direct",
-              "CoT Reasoning"
-            ],
-            "dataset": [
-              "HackerRank"
-            ]
-          },
-          "showByDifficulty": true,
-          "path": "data\\precomputed\\code-translation\\code-translation_difficulty_dataset-HackerRank_reasoning-Direct-CoTReasoning.json"
         }
       ]
     },
@@ -15298,14 +14600,14 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_overall.json"
         },
         {
-          "filename": "code-robustness_dataset-Merge-CruxEval+CE.json",
+          "filename": "code-robustness_dataset-Merge_CruxEval+CE.json",
           "filters": {
             "dataset": [
               "Merge-CruxEval+CE"
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-CruxEval+CE.json"
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge_CruxEval+CE.json"
         },
         {
           "filename": "code-robustness_dataset-CRUXEval.json",
@@ -15348,14 +14650,14 @@
           "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-GeeksforGeeks.json"
         },
         {
-          "filename": "code-robustness_dataset-Merge-HR+GFG.json",
+          "filename": "code-robustness_dataset-Merge_HR+GFG.json",
           "filters": {
             "dataset": [
               "Merge-HR+GFG"
             ]
           },
           "showByDifficulty": false,
-          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge-HR+GFG.json"
+          "path": "data\\precomputed\\code-robustness\\code-robustness_dataset-Merge_HR+GFG.json"
         }
       ]
     },

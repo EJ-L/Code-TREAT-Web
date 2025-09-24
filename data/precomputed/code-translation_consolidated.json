@@ -7,6 +7,22 @@
       "reasoning": [],
       "dataset": []
     },
+    "modality-python__java": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": []
+    },
+    "modality-java__python": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": []
+    },
     "reasoning-Direct": {
       "modality": [],
       "knowledge": [],
@@ -50,6 +66,130 @@
     },
     "dataset-HackerRank-PolyHumanEval": {
       "modality": [],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "HackerRank",
+        "PolyHumanEval"
+      ]
+    },
+    "modality-python__java_reasoning-Direct": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "Direct"
+      ],
+      "dataset": []
+    },
+    "modality-python__java_reasoning-CoTReasoning": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "CoT Reasoning"
+      ],
+      "dataset": []
+    },
+    "modality-python__java_reasoning-Direct-CoTReasoning": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "Direct",
+        "CoT Reasoning"
+      ],
+      "dataset": []
+    },
+    "modality-java__python_reasoning-Direct": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "Direct"
+      ],
+      "dataset": []
+    },
+    "modality-java__python_reasoning-CoTReasoning": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "CoT Reasoning"
+      ],
+      "dataset": []
+    },
+    "modality-java__python_reasoning-Direct-CoTReasoning": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [
+        "Direct",
+        "CoT Reasoning"
+      ],
+      "dataset": []
+    },
+    "dataset-HackerRank_modality-python__java": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "HackerRank"
+      ]
+    },
+    "dataset-PolyHumanEval_modality-python__java": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "PolyHumanEval"
+      ]
+    },
+    "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+      "modality": [
+        "python->java"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "HackerRank",
+        "PolyHumanEval"
+      ]
+    },
+    "dataset-HackerRank_modality-java__python": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "HackerRank"
+      ]
+    },
+    "dataset-PolyHumanEval_modality-java__python": {
+      "modality": [
+        "java->python"
+      ],
+      "knowledge": [],
+      "reasoning": [],
+      "dataset": [
+        "PolyHumanEval"
+      ]
+    },
+    "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+      "modality": [
+        "java->python"
+      ],
       "knowledge": [],
       "reasoning": [],
       "dataset": [
@@ -155,115 +295,213 @@
     }
   },
   "data": {
-    "DeepSeek-R1": {
+    "GPT-5": {
       "overall": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 1,
+        "pass@1": "98.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 1,
+        "pass@1": "97.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
         "rank": 1,
-        "pass@1": "79.5",
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 8,
-        "pass@1": "80.8",
+        "rank": 1,
+        "pass@1": "99.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "98.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "98.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "98.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 1,
+        "pass@1": "97.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "97.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 1,
+        "pass@1": "97.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 1,
+        "pass@1": "97.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 1,
+        "pass@1": "98.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 1,
+        "pass@1": "98.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 1,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 2,
+        "pass@1": "99.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 1,
+        "pass@1": "97.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
         "rank": 1,
-        "pass@1": "79.5",
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 8,
-        "pass@1": "80.8",
+        "rank": 1,
+        "pass@1": "99.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.5",
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "80.8",
+        "rank": 1,
+        "pass@1": "99.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.5",
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "80.8",
+        "rank": 1,
+        "pass@1": "99.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 1,
-        "pass@1": "79.9",
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -272,1252 +510,634 @@
     "o3-mini (Med)": {
       "overall": {
         "rank": 2,
-        "pass@1": "76.6",
+        "pass@1": "92.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 3,
+        "pass@1": "90.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 2,
+        "pass@1": "94.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
         "rank": 2,
-        "pass@1": "76.6",
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
         "rank": 2,
-        "pass@1": "76.6",
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 2,
-        "pass@1": "76.6",
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 6,
-        "pass@1": "72.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 4,
-        "pass@1": "85.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
         "rank": 2,
-        "pass@1": "76.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 6,
-        "pass@1": "72.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 4,
-        "pass@1": "85.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "76.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "72.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "85.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "76.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "72.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "85.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "76.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "o4-mini (Med)": {
-      "overall": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 8,
-        "pass@1": "68.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 1,
-        "pass@1": "90.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 8,
-        "pass@1": "68.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 1,
-        "pass@1": "90.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "68.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 1,
-        "pass@1": "90.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "68.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 1,
-        "pass@1": "90.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "DeepSeek-R1 (0528)": {
-      "overall": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 3,
-        "pass@1": "76.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 17,
-        "pass@1": "66.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 3,
-        "pass@1": "76.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 17,
-        "pass@1": "66.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "66.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 3,
-        "pass@1": "76.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "66.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "72.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "GPT-4o-2024-11-20": {
-      "overall": {
-        "rank": 5,
-        "pass@1": "71.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 5,
-        "pass@1": "71.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "71.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "71.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 12,
-        "pass@1": "64.4",
+        "pass@1": "89.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
         "rank": 3,
-        "pass@1": "85.6",
+        "pass@1": "97.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
+        "rank": 2,
+        "pass@1": "92.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 3,
+        "pass@1": "90.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "90.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "90.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 2,
+        "pass@1": "94.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "94.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "94.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 3,
+        "pass@1": "87.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 6,
+        "pass@1": "95.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 3,
+        "pass@1": "90.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 2,
+        "pass@1": "91.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
         "rank": 5,
-        "pass@1": "71.7",
+        "pass@1": "99.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 2,
+        "pass@1": "94.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 12,
-        "pass@1": "64.4",
+        "rank": 2,
+        "pass@1": "89.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
         "rank": 3,
-        "pass@1": "85.6",
+        "pass@1": "97.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 5,
-        "pass@1": "71.7",
+        "rank": 2,
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "64.4",
+        "rank": 2,
+        "pass@1": "89.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 3,
-        "pass@1": "85.6",
+        "pass@1": "97.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "71.7",
+        "rank": 2,
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "64.4",
+        "rank": 2,
+        "pass@1": "89.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 3,
-        "pass@1": "85.6",
+        "pass@1": "97.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "71.7",
+        "rank": 2,
+        "pass@1": "92.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       }
     },
-    "Gemini-2.5-Pro-Preview-05-06": {
+    "Gemini-2.5-Pro-05-06": {
       "overall": {
-        "rank": 6,
-        "pass@1": "70.4",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
-      "reasoning-Direct": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 4,
-        "pass@1": "75.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 20,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 4,
-        "pass@1": "75.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 20,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "75.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 4,
-        "pass@1": "75.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "70.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Claude-4-Sonnet": {
-      "overall": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
+      "modality-python__java": {
         "rank": 2,
-        "pass@1": "76.2",
+        "pass@1": "92.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
-      "dataset-PolyHumanEval": {
-        "rank": 23,
-        "pass@1": "58.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "58.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "58.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "76.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "58.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "70.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "DeepSeek-V3": {
-      "overall": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 13,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 7,
-        "pass@1": "83.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 13,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 7,
-        "pass@1": "83.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "83.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "63.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 7,
-        "pass@1": "83.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 8,
-        "pass@1": "70.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Claude-3.7-Sonnet": {
-      "overall": {
+      "modality-java__python": {
         "rank": 9,
-        "pass@1": "69.3",
+        "pass@1": "88.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 10,
-        "pass@1": "67.4",
+        "rank": 3,
+        "pass@1": "84.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 13,
-        "pass@1": "72.8",
+        "rank": 5,
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
+        "rank": 3,
+        "pass@1": "90.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 2,
+        "pass@1": "92.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "92.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 2,
+        "pass@1": "92.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
         "rank": 9,
-        "pass@1": "69.3",
+        "pass@1": "88.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "88.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "88.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 2,
+        "pass@1": "88.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 2,
+        "pass@1": "97.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 2,
+        "pass@1": "92.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 8,
+        "pass@1": "80.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 13,
+        "pass@1": "97.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 9,
+        "pass@1": "88.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 10,
-        "pass@1": "67.4",
+        "rank": 3,
+        "pass@1": "84.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 13,
-        "pass@1": "72.8",
+        "rank": 5,
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.4",
+        "rank": 3,
+        "pass@1": "84.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "72.8",
+        "rank": 5,
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.4",
+        "rank": 3,
+        "pass@1": "84.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "72.8",
+        "rank": 5,
+        "pass@1": "97.1",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "69.3",
+        "rank": 3,
+        "pass@1": "90.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       }
     },
-    "Qwen-3-235B-A22B": {
+    "DeepSeek-R1": {
       "overall": {
-        "rank": 10,
-        "pass@1": "67.7",
+        "rank": 4,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 4,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 4,
+        "pass@1": "91.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
-        "rank": 10,
-        "pass@1": "67.7",
+        "rank": 4,
+        "pass@1": "89.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.7",
+        "rank": 4,
+        "pass@1": "89.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.7",
+        "rank": 4,
+        "pass@1": "89.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 7,
-        "pass@1": "71.5",
+        "rank": 4,
+        "pass@1": "84.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 22,
-        "pass@1": "60.7",
+        "rank": 7,
+        "pass@1": "95.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
-        "rank": 10,
-        "pass@1": "67.7",
+        "rank": 4,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 5,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 11,
+        "pass@1": "92.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 4,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 4,
+        "pass@1": "85.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 7,
+        "pass@1": "98.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 4,
+        "pass@1": "91.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 7,
-        "pass@1": "71.5",
+        "rank": 4,
+        "pass@1": "84.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 22,
-        "pass@1": "60.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 10,
-        "pass@1": "67.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
         "rank": 7,
-        "pass@1": "71.5",
+        "pass@1": "95.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "84.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 22,
-        "pass@1": "60.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
         "rank": 7,
-        "pass@1": "71.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 22,
-        "pass@1": "60.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "67.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "GPT-4-turbo-2024-04-09": {
-      "overall": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 15,
-        "pass@1": "58.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 6,
-        "pass@1": "83.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "58.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 6,
-        "pass@1": "83.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "58.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "83.8",
+        "pass@1": "95.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "67.3",
+        "rank": 4,
+        "pass@1": "89.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "58.7",
+        "rank": 4,
+        "pass@1": "84.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 6,
-        "pass@1": "83.8",
+        "rank": 7,
+        "pass@1": "95.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "GPT-4.1-2025-04-14": {
-      "overall": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 5,
-        "pass@1": "72.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 24,
-        "pass@1": "57.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 5,
-        "pass@1": "72.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "57.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "72.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "57.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "67.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "72.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "57.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "67.3",
+        "rank": 4,
+        "pass@1": "89.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -1525,113 +1145,1059 @@
     },
     "Grok-3-Mini (High)": {
       "overall": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 7,
+        "pass@1": "86.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 7,
+        "pass@1": "88.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 5,
+        "pass@1": "87.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 5,
+        "pass@1": "87.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 6,
+        "pass@1": "81.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 9,
+        "pass@1": "95.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "86.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "86.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "86.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 6,
+        "pass@1": "81.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 12,
+        "pass@1": "92.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 7,
+        "pass@1": "86.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 7,
+        "pass@1": "81.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 10,
+        "pass@1": "98.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 7,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "81.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "95.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "81.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "95.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "81.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "95.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "87.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "GPT-4.1-2025-04-14": {
+      "overall": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 6,
+        "pass@1": "86.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 8,
+        "pass@1": "88.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 8,
+        "pass@1": "80.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 4,
+        "pass@1": "97.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "86.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "86.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "86.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "88.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "88.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "88.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 8,
+        "pass@1": "79.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 5,
+        "pass@1": "95.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 6,
+        "pass@1": "86.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 9,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 6,
+        "pass@1": "99.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 8,
+        "pass@1": "88.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "80.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 4,
+        "pass@1": "97.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "80.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "97.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "80.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 4,
+        "pass@1": "97.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "87.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Qwen-3-235B-A22B": {
+      "overall": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 3,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 7,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 12,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 3,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 3,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 12,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
         "rank": 13,
-        "pass@1": "66.0",
+        "pass@1": "91.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 3,
+        "pass@1": "87.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 8,
+        "pass@1": "98.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 3,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 7,
+        "pass@1": "87.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "DeepSeek-R1 (0528)": {
+      "overall": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 8,
+        "pass@1": "84.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 6,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 5,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 19,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "84.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "84.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "84.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 4,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 21,
+        "pass@1": "86.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 8,
+        "pass@1": "84.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 5,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 17,
+        "pass@1": "96.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 6,
+        "pass@1": "89.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 5,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "83.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "91.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "87.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Claude-4-Sonnet": {
+      "overall": {
+        "rank": 9,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 5,
+        "pass@1": "86.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 11,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
         "rank": 11,
-        "pass@1": "66.6",
+        "pass@1": "76.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 18,
-        "pass@1": "64.7",
+        "rank": 2,
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 9,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 5,
+        "pass@1": "86.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "86.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "86.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 10,
+        "pass@1": "79.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 3,
+        "pass@1": "96.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 5,
+        "pass@1": "86.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 12,
+        "pass@1": "73.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 3,
+        "pass@1": "99.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 11,
+        "pass@1": "85.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
         "rank": 11,
-        "pass@1": "66.6",
+        "pass@1": "76.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 18,
-        "pass@1": "64.7",
+        "rank": 2,
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 9,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
         "rank": 11,
-        "pass@1": "66.6",
+        "pass@1": "76.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "64.7",
+        "rank": 2,
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 9,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
         "rank": 11,
-        "pass@1": "66.6",
+        "pass@1": "76.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "64.7",
+        "rank": 2,
+        "pass@1": "97.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 13,
-        "pass@1": "66.0",
+        "rank": 9,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -1639,911 +2205,847 @@
     },
     "Qwen-3-32B": {
       "overall": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 9,
-        "pass@1": "68.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 21,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 9,
-        "pass@1": "68.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 21,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "68.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "68.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "60.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "65.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Qwen-2.5-Coder-32B-Instruct": {
-      "overall": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 16,
-        "pass@1": "53.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 2,
-        "pass@1": "86.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 16,
-        "pass@1": "53.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 2,
-        "pass@1": "86.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "53.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "86.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "53.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 2,
-        "pass@1": "86.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "64.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Qwen-3-30B-A3B": {
-      "overall": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 14,
-        "pass@1": "61.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 16,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 14,
-        "pass@1": "61.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 16,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "61.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "61.8",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 16,
-        "pass@1": "63.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Qwen-2.5-72B-Instruct": {
-      "overall": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 18,
-        "pass@1": "50.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 5,
-        "pass@1": "84.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 18,
-        "pass@1": "50.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 5,
-        "pass@1": "84.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "50.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "84.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "50.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 5,
-        "pass@1": "84.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "62.3",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Llama-3.3-70B-Instruct": {
-      "overall": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 17,
-        "pass@1": "51.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 11,
-        "pass@1": "78.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 17,
-        "pass@1": "51.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 11,
-        "pass@1": "78.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "51.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "78.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 17,
-        "pass@1": "51.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 11,
-        "pass@1": "78.6",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 18,
-        "pass@1": "60.4",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Llama-3.1-70B-Instruct": {
-      "overall": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 19,
-        "pass@1": "44.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 9,
-        "pass@1": "80.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 19,
-        "pass@1": "44.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 9,
-        "pass@1": "80.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "44.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "80.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "44.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 9,
-        "pass@1": "80.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "56.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Claude-3.5-Haiku-20241022": {
-      "overall": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 21,
-        "pass@1": "43.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
         "rank": 10,
-        "pass@1": "80.0",
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 20,
-        "pass@1": "55.7",
+      "modality-python__java": {
+        "rank": 11,
+        "pass@1": "82.3",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 21,
-        "pass@1": "43.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 10,
-        "pass@1": "80.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "43.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "80.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "43.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 10,
-        "pass@1": "80.0",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "55.7",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Llama-4-Scout-17B-16E-Instruct": {
-      "overall": {
-        "rank": 21,
-        "pass@1": "53.6",
+      "modality-java__python": {
+        "rank": 5,
+        "pass@1": "89.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 23,
-        "pass@1": "42.8",
+        "rank": 9,
+        "pass@1": "79.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 12,
-        "pass@1": "74.1",
+        "rank": 14,
+        "pass@1": "93.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "82.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "82.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "82.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 5,
+        "pass@1": "89.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "89.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 5,
+        "pass@1": "89.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 11,
+        "pass@1": "76.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 15,
+        "pass@1": "89.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 11,
+        "pass@1": "82.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 6,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 12,
+        "pass@1": "98.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 5,
+        "pass@1": "89.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 23,
-        "pass@1": "42.8",
+        "rank": 9,
+        "pass@1": "79.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 12,
-        "pass@1": "74.1",
+        "rank": 14,
+        "pass@1": "93.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "42.8",
+        "rank": 9,
+        "pass@1": "79.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "74.1",
+        "rank": 14,
+        "pass@1": "93.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 23,
-        "pass@1": "42.8",
+        "rank": 9,
+        "pass@1": "79.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 12,
-        "pass@1": "74.1",
+        "rank": 14,
+        "pass@1": "93.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 21,
-        "pass@1": "53.6",
+        "rank": 10,
+        "pass@1": "86.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Claude-3.7-Sonnet": {
+      "overall": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 9,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 10,
+        "pass@1": "86.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 10,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 13,
+        "pass@1": "94.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 9,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 9,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 10,
+        "pass@1": "86.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "86.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "86.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 7,
+        "pass@1": "80.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 18,
+        "pass@1": "88.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 9,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 10,
+        "pass@1": "75.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 1,
+        "pass@1": "99.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 10,
+        "pass@1": "86.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 10,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "94.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "94.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "94.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "85.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "DeepSeek-V3": {
+      "overall": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 14,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 13,
+        "pass@1": "83.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 13,
+        "pass@1": "71.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 8,
+        "pass@1": "95.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 14,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "83.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "83.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "83.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 14,
+        "pass@1": "70.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 10,
+        "pass@1": "93.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 14,
+        "pass@1": "80.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 13,
+        "pass@1": "72.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 11,
+        "pass@1": "98.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 13,
+        "pass@1": "83.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "71.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 8,
+        "pass@1": "95.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "71.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "95.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "71.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 8,
+        "pass@1": "95.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "82.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "GPT-4o-2024-11-20": {
+      "overall": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 13,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 14,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 14,
+        "pass@1": "70.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 6,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 14,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 13,
+        "pass@1": "70.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 8,
+        "pass@1": "93.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 13,
+        "pass@1": "80.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 16,
+        "pass@1": "70.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 4,
+        "pass@1": "99.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 14,
+        "pass@1": "83.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 14,
+        "pass@1": "70.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 6,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "70.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "82.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "70.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 6,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 13,
+        "pass@1": "82.0",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -2551,113 +3053,1907 @@
     },
     "Claude-3.5-Sonnet-20241022": {
       "overall": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 10,
+        "pass@1": "82.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 17,
+        "pass@1": "80.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 12,
+        "pass@1": "74.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 20,
+        "pass@1": "91.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 10,
+        "pass@1": "82.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "82.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "82.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "80.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 9,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 20,
+        "pass@1": "87.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 10,
+        "pass@1": "82.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 17,
+        "pass@1": "68.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 20,
+        "pass@1": "95.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 17,
+        "pass@1": "80.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "74.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "91.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "74.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "91.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "74.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "91.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 14,
+        "pass@1": "81.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "o4-mini (Med)": {
+      "overall": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 15,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 15,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 15,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 11,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 16,
+        "pass@1": "67.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 7,
+        "pass@1": "94.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 15,
+        "pass@1": "79.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 14,
+        "pass@1": "72.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 18,
+        "pass@1": "95.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 15,
+        "pass@1": "82.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 11,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 11,
+        "pass@1": "95.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "81.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "GPT-4-turbo-2024-04-09": {
+      "overall": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 16,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 16,
+        "pass@1": "82.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 17,
+        "pass@1": "69.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 15,
+        "pass@1": "93.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "82.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "82.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "82.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 15,
+        "pass@1": "68.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 14,
+        "pass@1": "90.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 16,
+        "pass@1": "78.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 15,
+        "pass@1": "70.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 14,
+        "pass@1": "97.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 16,
+        "pass@1": "82.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "69.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 15,
+        "pass@1": "93.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "69.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "93.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "69.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 15,
+        "pass@1": "93.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Qwen-3-30B-A3B": {
+      "overall": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 18,
+        "pass@1": "75.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 12,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 16,
+        "pass@1": "69.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 16,
+        "pass@1": "93.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "75.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 12,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 12,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 17,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 17,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 18,
+        "pass@1": "75.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 11,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 9,
+        "pass@1": "98.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 12,
+        "pass@1": "85.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "69.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 16,
+        "pass@1": "93.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "69.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "93.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "69.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 16,
+        "pass@1": "93.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "80.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Claude-3.5-Haiku-20241022": {
+      "overall": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 20,
+        "pass@1": "72.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 18,
+        "pass@1": "77.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 18,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 18,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "72.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "77.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "77.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "77.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 18,
+        "pass@1": "61.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 19,
+        "pass@1": "87.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 20,
+        "pass@1": "72.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 18,
+        "pass@1": "61.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 15,
+        "pass@1": "96.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 18,
+        "pass@1": "77.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "61.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "92.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 18,
+        "pass@1": "75.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Qwen-2.5-Coder-32B-Instruct": {
+      "overall": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 19,
+        "pass@1": "74.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 19,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 19,
+        "pass@1": "58.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 10,
+        "pass@1": "95.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "74.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 19,
+        "pass@1": "59.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 9,
+        "pass@1": "93.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 19,
+        "pass@1": "74.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 19,
+        "pass@1": "56.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 16,
+        "pass@1": "96.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 19,
+        "pass@1": "74.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "58.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 10,
+        "pass@1": "95.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "58.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "95.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "58.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 10,
+        "pass@1": "95.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 19,
+        "pass@1": "74.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Qwen-2.5-72B-Instruct": {
+      "overall": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 17,
+        "pass@1": "75.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 21,
+        "pass@1": "69.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 21,
+        "pass@1": "56.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 17,
+        "pass@1": "93.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "75.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "75.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "75.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 21,
+        "pass@1": "69.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "69.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "69.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 20,
+        "pass@1": "59.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 4,
+        "pass@1": "96.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 17,
+        "pass@1": "75.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 21,
+        "pass@1": "52.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 24,
+        "pass@1": "90.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 21,
+        "pass@1": "69.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 21,
+        "pass@1": "56.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 17,
+        "pass@1": "93.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "56.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "93.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "56.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 17,
+        "pass@1": "93.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "72.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Llama-3.3-70B-Instruct": {
+      "overall": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 21,
+        "pass@1": "68.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 20,
+        "pass@1": "71.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 20,
+        "pass@1": "57.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 24,
+        "pass@1": "86.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 21,
+        "pass@1": "68.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "68.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "68.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "71.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "71.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "71.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 21,
+        "pass@1": "58.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 24,
+        "pass@1": "82.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 21,
+        "pass@1": "68.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 20,
+        "pass@1": "55.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "90.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 20,
+        "pass@1": "71.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 20,
+        "pass@1": "57.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "86.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "57.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "86.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 20,
+        "pass@1": "57.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "86.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 21,
+        "pass@1": "70.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Llama-3.1-70B-Instruct": {
+      "overall": {
+        "rank": 22,
+        "pass@1": "67.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 22,
+        "pass@1": "68.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 22,
+        "pass@1": "67.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
         "rank": 22,
-        "pass@1": "42.8",
+        "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 14,
-        "pass@1": "70.0",
+        "rank": 23,
+        "pass@1": "87.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 22,
+        "pass@1": "68.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "68.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "68.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 22,
+        "pass@1": "67.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "67.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "67.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 22,
+        "pass@1": "54.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 22,
+        "pass@1": "85.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 22,
+        "pass@1": "68.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 22,
+        "pass@1": "49.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 23,
+        "pass@1": "90.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 22,
+        "pass@1": "67.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
         "rank": 22,
-        "pass@1": "42.8",
+        "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 14,
-        "pass@1": "70.0",
+        "rank": 23,
+        "pass@1": "87.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
         "rank": 22,
-        "pass@1": "42.8",
+        "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "70.0",
+        "rank": 23,
+        "pass@1": "87.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
         "rank": 22,
-        "pass@1": "42.8",
+        "pass@1": "51.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 14,
-        "pass@1": "70.0",
+        "rank": 23,
+        "pass@1": "87.9",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 22,
-        "pass@1": "52.2",
+        "pass@1": "67.7",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -2666,226 +4962,210 @@
     "GPT-3.5-turbo-0125": {
       "overall": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 23,
+        "pass@1": "66.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 24,
+        "pass@1": "66.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 20,
-        "pass@1": "44.4",
+        "rank": 24,
+        "pass@1": "47.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
-        "rank": 19,
-        "pass@1": "64.1",
+        "rank": 21,
+        "pass@1": "90.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 23,
+        "pass@1": "66.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "66.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "66.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "66.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "66.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "66.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 25,
+        "pass@1": "49.5",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 16,
+        "pass@1": "88.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 23,
+        "pass@1": "66.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 24,
+        "pass@1": "45.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 21,
+        "pass@1": "92.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 24,
+        "pass@1": "66.2",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 20,
-        "pass@1": "44.4",
+        "rank": 24,
+        "pass@1": "47.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 19,
-        "pass@1": "64.1",
+        "rank": 21,
+        "pass@1": "90.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "44.4",
+        "rank": 24,
+        "pass@1": "47.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "64.1",
+        "rank": 21,
+        "pass@1": "90.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 23,
-        "pass@1": "51.2",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 20,
-        "pass@1": "44.4",
+        "rank": 24,
+        "pass@1": "47.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 19,
-        "pass@1": "64.1",
+        "rank": 21,
+        "pass@1": "90.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 23,
-        "pass@1": "51.2",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      }
-    },
-    "Llama-3.1-8B-Instruct": {
-      "overall": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank": {
-        "rank": 25,
-        "pass@1": "26.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval": {
-        "rank": 15,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct": {
-        "rank": 25,
-        "pass@1": "26.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct": {
-        "rank": 15,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "26.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "40.5",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 25,
-        "pass@1": "26.1",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 15,
-        "pass@1": "67.9",
-        "pass@3": "-",
-        "pass@5": "-",
-        "CodeBLEU": "-"
-      },
-      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "40.5",
+        "pass@1": "66.5",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
@@ -2893,113 +5173,635 @@
     },
     "Gemma-3-27b-it": {
       "overall": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 24,
+        "pass@1": "65.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 23,
+        "pass@1": "66.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "46.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 22,
+        "pass@1": "90.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "65.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 23,
+        "pass@1": "66.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "66.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 23,
+        "pass@1": "66.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 24,
+        "pass@1": "49.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 23,
+        "pass@1": "85.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 24,
+        "pass@1": "65.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 25,
+        "pass@1": "43.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 19,
+        "pass@1": "95.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 23,
+        "pass@1": "66.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "46.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 22,
+        "pass@1": "90.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "46.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "90.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "46.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 22,
+        "pass@1": "90.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 24,
+        "pass@1": "65.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Llama-4-Scout-17B-16E-Instruct": {
+      "overall": {
+        "rank": 25,
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 25,
+        "pass@1": "63.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 25,
+        "pass@1": "65.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-CoTReasoning": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "reasoning-Direct-CoTReasoning": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank": {
-        "rank": 24,
-        "pass@1": "41.8",
+        "rank": 23,
+        "pass@1": "49.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval": {
         "rank": 25,
-        "pass@1": "27.2",
+        "pass@1": "83.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "63.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "63.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "63.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 25,
+        "pass@1": "65.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "65.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 25,
+        "pass@1": "65.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 23,
+        "pass@1": "50.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 25,
+        "pass@1": "78.9",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 25,
+        "pass@1": "63.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 23,
+        "pass@1": "48.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 25,
+        "pass@1": "88.0",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 25,
+        "pass@1": "65.8",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct": {
-        "rank": 24,
-        "pass@1": "41.8",
+        "rank": 23,
+        "pass@1": "49.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct": {
         "rank": 25,
-        "pass@1": "27.2",
+        "pass@1": "83.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "41.8",
+        "rank": 23,
+        "pass@1": "49.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 25,
-        "pass@1": "27.2",
+        "pass@1": "83.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
-        "rank": 24,
-        "pass@1": "41.8",
+        "rank": 23,
+        "pass@1": "49.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 25,
-        "pass@1": "27.2",
+        "pass@1": "83.4",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"
       },
       "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
         "rank": 25,
-        "pass@1": "36.8",
+        "pass@1": "64.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      }
+    },
+    "Llama-3.1-8B-Instruct": {
+      "overall": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java": {
+        "rank": 26,
+        "pass@1": "47.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python": {
+        "rank": 26,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank": {
+        "rank": 26,
+        "pass@1": "29.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval": {
+        "rank": 26,
+        "pass@1": "75.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "47.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "47.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-python__java_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "47.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "modality-java__python_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-python__java": {
+        "rank": 26,
+        "pass@1": "31.4",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-python__java": {
+        "rank": 26,
+        "pass@1": "67.3",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-python__java": {
+        "rank": 26,
+        "pass@1": "47.2",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_modality-java__python": {
+        "rank": 26,
+        "pass@1": "26.8",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_modality-java__python": {
+        "rank": 26,
+        "pass@1": "84.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_modality-java__python": {
+        "rank": 26,
+        "pass@1": "52.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "29.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "75.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "29.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "75.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "49.6",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "29.1",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "75.7",
+        "pass@3": "-",
+        "pass@5": "-",
+        "CodeBLEU": "-"
+      },
+      "dataset-HackerRank-PolyHumanEval_reasoning-Direct-CoTReasoning": {
+        "rank": 26,
+        "pass@1": "49.6",
         "pass@3": "-",
         "pass@5": "-",
         "CodeBLEU": "-"

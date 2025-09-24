@@ -541,10 +541,7 @@ export const TASK_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'code translation': [
-    'pass@1', 'pass@3', 'pass@5', 'CodeBLEU',
-    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-    'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
+    'pass@1', 'pass@3', 'pass@5', 'CodeBLEU'
   ],
   'code summarization': ['LLM Judge'],
   'code review': ['LLM Judge'],
@@ -575,9 +572,6 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
     'easy_pass@5', 'medium_pass@5', 'hard_pass@5'
   ],
   'code translation': [
-    'easy_pass@1', 'medium_pass@1', 'hard_pass@1',
-    'easy_pass@3', 'medium_pass@3', 'hard_pass@3',
-    'easy_pass@5', 'medium_pass@5', 'hard_pass@5',
     'CodeBLEU'
   ],
   'code summarization': ['LLM Judge'],
@@ -600,7 +594,7 @@ export const DIFFICULTY_HEADERS: Record<TaskType, string[]> = {
 
 // Tasks that support difficulty-based results
 export const TASKS_WITH_DIFFICULTY = [
-  'overall', 'code generation', 'code translation', 'input prediction', 'output prediction'
+  'overall', 'code generation', 'input prediction', 'output prediction'
 ];
 
 // Multi-leaderboard configuration
@@ -619,7 +613,7 @@ export const MULTI_LEADERBOARD_CONFIG: Partial<Record<TaskType, MultiLeaderboard
   'code translation': {
     extractedFilter: 'modality',
     overallTab: 'All',
-    tabs: ['All', 'Python', 'Java']
+    tabs: ['All', 'python->java', 'java->python']
   },
   'code summarization': {
     extractedFilter: 'modality',

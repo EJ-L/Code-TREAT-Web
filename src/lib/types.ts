@@ -35,6 +35,7 @@ export type ResultEntry = {
   lang: string;
   language?: string;
   target_lang?: string;
+  modality?: string;  // For code translation (e.g., "java->python")
   metrics: Metrics;
   difficulty?: string;
   domain?: string;  // Knowledge domain field (math, alg, ds, etc.)
@@ -53,6 +54,7 @@ export type ProcessedResult = {
   sourceLang: string | null;
   lang: string;
   targetLang: string | null;
+  modality?: string; // Modality field for code translation (e.g., "java->python")
   domain?: string; // Knowledge domain field (math, alg, ds, etc.)
   pass1: number | null;
   pass3: number | null;

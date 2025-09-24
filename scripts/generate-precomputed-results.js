@@ -25,7 +25,7 @@ const taskAbilities = {
     privacy: [],
   },
   'code translation': {
-    modality: ['Python', 'Java'],
+    modality: ['python->java', 'java->python', 'python->cpp', 'cpp->python', 'java->cpp', 'cpp->java'],
     knowledge: ['Algorithms', 'Data Structures', 'Math'],
     reasoning: ['Direct', 'CoT Reasoning'],
     dataset: ['HackerRank', 'PolyHumanEval'],
@@ -118,7 +118,7 @@ const taskAbilities = {
 };
 
 // Tasks that support difficulty-based results
-const tasksWithDifficulty = ['code generation', 'code translation', 'input prediction', 'output prediction'];
+const tasksWithDifficulty = ['code generation', 'input prediction', 'output prediction'];
 
 // Generate all possible combinations for a given array
 // function generateCombinations(arr) {
@@ -158,7 +158,11 @@ function generateFilename(task, filters, showByDifficulty = false) {
   
   for (const filterType of filterOrder) {
     if (filters[filterType] && filters[filterType].length > 0) {
-      filterParts.push(`${filterType}-${filters[filterType].join('-').replace(/\s+/g, '')}`);
+      // Sanitize filter values to remove invalid filename characters
+      const sanitizedValues = filters[filterType].map(value => 
+        value.replace(/\s+/g, '').replace(/[->]/g, '_')
+      );
+      filterParts.push(`${filterType}-${sanitizedValues.join('-')}`);
     }
   }
   

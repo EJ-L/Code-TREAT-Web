@@ -201,6 +201,14 @@ function applyFilters(data, task, filters) {
   // Apply modality filter (language)
   if (filters.modality && filters.modality.length > 0) {
     filteredData = filteredData.filter(entry => {
+      // For code translation, check the modality field (e.g., "java->python")
+      if (task === 'code translation' && entry.modality) {
+        return filters.modality.some(filter => 
+          entry.modality.toLowerCase() === filter.toLowerCase()
+        );
+      }
+      
+      // For other tasks, check the lang field
       const entryLang = entry.lang || '';
       return filters.modality.some(filter => 
         entryLang.toLowerCase() === filter.toLowerCase() ||

@@ -25,19 +25,17 @@ export function processCodeTranslation(results: ProcessedResult[], filters: Filt
       }
     }
 
-    // 3. 检查语言 - 只检查目标语言
-    if (filters.langs?.length > 0) {
-      const targetLang = (result.targetLang || '').toLowerCase();
-      const allowedLangs = filters.langs.map(lang => lang.toLowerCase());
+    // 3. 检查模态 - 检查 "original->target" 格式
+    if (filters.modalities?.length > 0) {
+      const entryModality = (result.modality || '').toLowerCase();
+      const allowedModalities = filters.modalities.map(mod => mod.toLowerCase());
 
-      // 检查目标语言是否匹配选定的语言
-      const isLanguageMatched = allowedLangs.some(lang => {
-        const normalizedLang = lang.replace(/[^a-z]/g, ''); // 移除非字母字符
-        const normalizedTarget = targetLang.replace(/[^a-z]/g, '');
-        return normalizedTarget === normalizedLang;
+      // 检查模态是否匹配选定的语言对
+      const isModalityMatched = allowedModalities.some(modality => {
+        return entryModality === modality;
       });
 
-      if (!isLanguageMatched) {
+      if (!isModalityMatched) {
         return false;
       }
     }
@@ -76,24 +74,7 @@ export function processCodeTranslation(results: ProcessedResult[], filters: Filt
     return true;
   });
 
-  // If we're showing by difficulty, populate the difficulty-specific metrics
-  if (filters.showByDifficulty) {
-    filteredResults.forEach(result => {
-      if (result.difficulty === 'Easy' && result.pass1 !== null) {
-        result.easyPass1 = result.pass1;
-        result.easyPass3 = result.pass3;
-        result.easyPass5 = result.pass5;
-      } else if (result.difficulty === 'Medium' && result.pass1 !== null) {
-        result.mediumPass1 = result.pass1;
-        result.mediumPass3 = result.pass3;
-        result.mediumPass5 = result.pass5;
-      } else if (result.difficulty === 'Hard' && result.pass1 !== null) {
-        result.hardPass1 = result.pass1;
-        result.hardPass3 = result.pass3;
-        result.hardPass5 = result.pass5;
-      }
-    });
-  }
+  // Note: Code translation no longer supports difficulty-based filtering
 
   console.log(`Filtered to ${filteredResults.length} code translation results`);
 
@@ -124,16 +105,6 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
       pass3: modelResults.filter(r => r.pass3 !== null),
       pass5: modelResults.filter(r => r.pass5 !== null),
       codebleu: modelResults.filter(r => r.codebleu !== null),
-      // Difficulty-specific metrics
-      easyPass1: modelResults.filter(r => r.easyPass1 !== null),
-      easyPass3: modelResults.filter(r => r.easyPass3 !== null),
-      easyPass5: modelResults.filter(r => r.easyPass5 !== null),
-      mediumPass1: modelResults.filter(r => r.mediumPass1 !== null),
-      mediumPass3: modelResults.filter(r => r.mediumPass3 !== null),
-      mediumPass5: modelResults.filter(r => r.mediumPass5 !== null),
-      hardPass1: modelResults.filter(r => r.hardPass1 !== null),
-      hardPass3: modelResults.filter(r => r.hardPass3 !== null),
-      hardPass5: modelResults.filter(r => r.hardPass5 !== null),
     };
     
     const avgResult = { ...modelResults[0] };
@@ -155,60 +126,17 @@ export function aggregateCodeTranslationResults(results: ProcessedResult[]): Pro
       ? validResults.codebleu.reduce((sum, r) => sum + r.codebleu!, 0) / validResults.codebleu.length
       : null;
     
-    // Calculate difficulty-specific metrics
-    // Easy difficulty
-    avgResult.easyPass1 = validResults.easyPass1.length > 0
-      ? validResults.easyPass1.reduce((sum, r) => sum + r.easyPass1!, 0) / validResults.easyPass1.length
-      : null;
-    
-    avgResult.easyPass3 = validResults.easyPass3.length > 0
-      ? validResults.easyPass3.reduce((sum, r) => sum + r.easyPass3!, 0) / validResults.easyPass3.length
-      : null;
-    
-    avgResult.easyPass5 = validResults.easyPass5.length > 0
-      ? validResults.easyPass5.reduce((sum, r) => sum + r.easyPass5!, 0) / validResults.easyPass5.length
-      : null;
-    
-    // Medium difficulty
-    avgResult.mediumPass1 = validResults.mediumPass1.length > 0
-      ? validResults.mediumPass1.reduce((sum, r) => sum + r.mediumPass1!, 0) / validResults.mediumPass1.length
-      : null;
-    
-    avgResult.mediumPass3 = validResults.mediumPass3.length > 0
-      ? validResults.mediumPass3.reduce((sum, r) => sum + r.mediumPass3!, 0) / validResults.mediumPass3.length
-      : null;
-    
-    avgResult.mediumPass5 = validResults.mediumPass5.length > 0
-      ? validResults.mediumPass5.reduce((sum, r) => sum + r.mediumPass5!, 0) / validResults.mediumPass5.length
-      : null;
-    
-    // Hard difficulty
-    avgResult.hardPass1 = validResults.hardPass1.length > 0
-      ? validResults.hardPass1.reduce((sum, r) => sum + r.hardPass1!, 0) / validResults.hardPass1.length
-      : null;
-    
-    avgResult.hardPass3 = validResults.hardPass3.length > 0
-      ? validResults.hardPass3.reduce((sum, r) => sum + r.hardPass3!, 0) / validResults.hardPass3.length
-      : null;
-    
-    avgResult.hardPass5 = validResults.hardPass5.length > 0
-      ? validResults.hardPass5.reduce((sum, r) => sum + r.hardPass5!, 0) / validResults.hardPass5.length
-      : null;
-    
-    // 使用目标语言作为语言显示
-    avgResult.lang = avgResult.targetLang || '';
+    // 使用模态作为语言显示（如果没有 targetLang）
+    avgResult.lang = avgResult.targetLang || avgResult.modality || '';
     
     console.log(`Aggregated metrics for model ${modelName}:`, {
       metrics: {
         pass1: avgResult.pass1,
         pass3: avgResult.pass3,
         pass5: avgResult.pass5,
-        codebleu: avgResult.codebleu,
-        // Log difficulty metrics if any exist
-        ...(avgResult.easyPass1 !== null && { easyPass1: avgResult.easyPass1 }),
-        ...(avgResult.mediumPass1 !== null && { mediumPass1: avgResult.mediumPass1 }),
-        ...(avgResult.hardPass1 !== null && { hardPass1: avgResult.hardPass1 })
+        codebleu: avgResult.codebleu
       },
+      modality: avgResult.modality,
       language: avgResult.lang
     });
     

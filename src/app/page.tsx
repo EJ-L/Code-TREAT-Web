@@ -29,7 +29,7 @@ const taskAbilities: Record<TaskType, Ability> = {
     privacy: [],
   },
   'code translation': {
-    modality: ['Python', 'Java'],
+    modality: ['python->java', 'java->python', 'python->cpp', 'cpp->python', 'java->cpp', 'cpp->java'],
     knowledge: ['Algorithms', 'Data Structures', 'Math'],
     reasoning: ['Direct', 'CoT Reasoning'],
     dataset: ['HackerRank', 'PolyHumanEval'],

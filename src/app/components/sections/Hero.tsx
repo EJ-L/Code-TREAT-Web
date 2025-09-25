@@ -22,7 +22,7 @@ const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
           {/* Paper button hidden for privacy reasons */}
           
           <motion.a
-            href="https://github.com/CUHK-ARISE/Code-TREAT"
+            href="https://anonymous.4open.science/r/Code-TREAT-887A/README.md"
             target="_blank"
             rel="noopener noreferrer"
             className={`relative inline-flex items-center px-6 py-4 text-lg text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg
@@ -58,7 +58,7 @@ const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
           </motion.a>
           
           <motion.a
-            href="https://huggingface.co/datasets/CUHK-ARISE/Code-TREAT"
+            href="https://huggingface.co/Code-TREAT/datasets"
             target="_blank"
             rel="noopener noreferrer"
             className={`relative inline-flex items-center px-6 py-4 text-lg text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg

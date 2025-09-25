@@ -11,6 +11,8 @@ export const MODEL_URLS: Record<string, string> = {
   "LLaMA-3.1-405B-Instruct": "https://huggingface.co/meta-llama/Llama-3.1-405B-Instruct",
   "Llama-3.2-90B-Vision": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision",
   "Llama-3.2-11B-Vision": "https://huggingface.co/meta-llama/Llama-3.2-11B-Vision",
+  "Llama-90B": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+  "Llama-11B": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
 
   // OpenAI models
   "gpt-4-turbo": "https://openai.com/index/new-models-and-developer-products-announced-at-devday/",
@@ -74,7 +76,8 @@ export const MODEL_URLS: Record<string, string> = {
   // Pixtral models
   "Pixtral-12B": "https://huggingface.co/mistralai/Pixtral-12B-2409",
   "Pixtral-Large-Instruct-124B": "https://huggingface.co/mistralai/Pixtral-Large-Instruct-2411",
-
+  "Pixtral-124B": "https://huggingface.co/mistralai/Pixtral-Large-Instruct-2411",
+  
   // Other models - add more as needed
   "baseline": "#"
 };
@@ -144,6 +147,7 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Claude-4-Sonnet': '2025-05-22',
   'Claude-4': '2025-05-22',
   'Claude-3.7-Sonnet': '2025-02-24',
+  'Claude-3.7': '2025-02-24',
   'Claude-3.5-Haiku-20241022': '2024-10-22',
 
   // Llama Models
@@ -157,7 +161,9 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Llama-3.1-8B-Instruct': '2024-07-23',
   'Llama-4-Scout-17B-16E-Instruct': '2025-04-05',
   'Llama-3.2-90B-Vision': '2025-09-25',
+  'Llama-90B': '2025-09-25',
   'Llama-3.2-11B-Vision': '2025-09-25',
+  'Llama-11B': '2025-09-25',
 
   // Qwen Models
   'Qwen-3-235B-A22B': '2025-04-29',
@@ -198,8 +204,10 @@ export const MODEL_PUBLISH_DATES: Record<string, string> = {
   'Gemini-1.5-Flash': '2024-09-24',
   
   // Pixtral Models
-  'Pixtral-Large-Instruct-124B': '2024-11-18',
-  'Pixtral-12B-2409': '2024-09-17',
+    'Pixtral-Large-Instruct-124B': '2024-11-18',
+    'Pixtral-12B-2409': '2024-09-17',
+    'Pixtral-12B': '2024-09-17',
+    'Pixtral-124B': '2024-09-17',
 
   // CoT (Chain-of-Thought) model variants - same dates as base models
   'GPT-4o (CoT)': '2023-04-11',

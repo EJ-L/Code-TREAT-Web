@@ -168,6 +168,19 @@ function applyFilters(data, task, filters) {
           return entryDataset.toLowerCase() === filter.toLowerCase();
         }
         
+        // For multi-modality, handle specific dataset mappings
+        if (task === 'multi-modality') {
+          return entryDataset.toLowerCase().includes(filter.toLowerCase()) ||
+                 filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
+                 // Handle specific mappings for multi-modality
+                 (filter === 'UI Code Edit' && entryDataset.toLowerCase() === 'ui code edit') ||
+                 (filter === 'UICodeEdit' && entryDataset.toLowerCase() === 'ui code edit') ||
+                 (filter === 'UI Code Generation' && entryDataset.toLowerCase() === 'ui code generation') ||
+                 (filter === 'UICodeGeneration' && entryDataset.toLowerCase() === 'ui code generation') ||
+                 (filter === 'UI Code Repair' && entryDataset.toLowerCase() === 'ui code repair') ||
+                 (filter === 'UICodeRepair' && entryDataset.toLowerCase() === 'ui code repair');
+        }
+        
         // For other tasks, use partial matching as before
         return entryDataset.toLowerCase().includes(filter.toLowerCase()) ||
         filter.toLowerCase().includes(entryDataset.toLowerCase()) ||
@@ -244,11 +257,18 @@ function applyFilters(data, task, filters) {
   
 
   
-  // Apply framework filter (for code-web)
+  // Apply framework filter (for code-web and multi-modality)
   if (filters.framework && filters.framework.length > 0) {
     filteredData = filteredData.filter(entry => {
       const entryFramework = entry.framework || '';
-      return filters.framework.includes(entryFramework);
+      return filters.framework.some(filter => {
+        // Case-insensitive comparison for multi-modality
+        if (task === 'multi-modality') {
+          return entryFramework.toLowerCase() === filter.toLowerCase();
+        }
+        // Exact matching for other tasks
+        return filter === entryFramework;
+      });
     });
   }
   
@@ -425,24 +445,35 @@ function aggregateData(data, task, showByDifficulty) {
         }
       });
     } else if (task === 'multi-modality') {
-      // For multi-modality, use MLLM_Score, CMS, CLIP, and Compilation metrics
-      // Metrics looks like {"MLLM_Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722} or {"CLIP": 0.8385, "Compilation": 0.9908}
-      const modalityMetrics = ['MLLM_Score', 'CMS', 'CLIP', 'Compilation'];
+      // For multi-modality, use MLLM Score, CMS, CLIP, and Compilation metrics
+      // Metrics looks like {"MLLM Score": 7.6944, "CMS": 0.4213, "Compilation": 0.9722} or {"CLIP": 0.8385, "Compilation": 0.9908}
+      const modalityMetrics = ['MLLM Score', 'CMS', 'CLIP', 'Compilation'];
       
       modalityMetrics.forEach(metric => {
         const values = entries
-          .map(e => e.metrics && e.metrics[metric])
+          .map(e => {
+            if (e.metrics && e.metrics[metric] !== undefined && e.metrics[metric] !== null) {
+              // Handle special case for Compilation values that might be formatted as strings like "1.00"
+              if (metric === 'Compilation' && typeof e.metrics[metric] === 'string') {
+                return parseFloat(e.metrics[metric]);
+              }
+              return e.metrics[metric];
+            }
+            return undefined;
+          })
           .filter(v => v !== undefined && v !== null);
         
         if (values.length > 0) {
           const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
-          if (metric === 'MLLM_Score') {
-            result[metric] = avg.toFixed(2); // MLLM_Score with 2 decimal places
+          if (metric === 'MLLM Score') {
+            result[metric] = avg.toFixed(2); // MLLM Score with 2 decimal places
           } else if (metric === 'CMS') {
             result[metric] = avg.toFixed(3); // CMS with 3 decimal places
           } else if (metric === 'CLIP') {
             result[metric] = avg.toFixed(3); // CLIP with 3 decimal places
           } else if (metric === 'Compilation') {
+            // Parse Compilation values which might be in formats like "1.00" or "0.9722"
+            // Ensure we're treating them as proper numbers before calculating
             result[metric] = (avg * 100).toFixed(1); // Compilation as percentage
           }
         } else {

@@ -1543,7 +1543,7 @@
         "LLM Judge": "29.8"
       }
     },
-    "o3-mini": {
+    "o3-mini (Med)": {
       "overall": {
         "rank": 5,
         "LLM Judge": "31.2"
@@ -2833,7 +2833,7 @@
         "LLM Judge": "29.1"
       }
     },
-    "Deepseek-Chat": {
+    "DeepSeek-V3": {
       "overall": {
         "rank": 10,
         "LLM Judge": "30.9"
@@ -6445,7 +6445,7 @@
         "LLM Judge": "28.2"
       }
     },
-    "o4-mini": {
+    "o4-mini (Med)": {
       "overall": {
         "rank": 24,
         "LLM Judge": "29.0"

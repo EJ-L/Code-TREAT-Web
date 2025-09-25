@@ -44,6 +44,7 @@ DEBUG_USAGE.md
 
 # data folder
 data/code-generation/
+data/multi-modality/
 data/code-review/
 data/code-robustness/
 data/code-summarization/

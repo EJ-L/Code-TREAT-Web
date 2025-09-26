@@ -316,7 +316,7 @@
         "Average": "95.6"
       }
     },
-    "Qwen-3-32B": {
+    "Qwen3-32B": {
       "dataset-HackerRank": {
         "rank": 6,
         "Vanilla": "98.3",
@@ -764,7 +764,7 @@
         "Average": "43.0"
       }
     },
-    "Qwen-2.5-32B-Coder-Instruct": {
+    "Qwen2.5-32B-Coder-Instruct": {
       "dataset-HackerRank": {
         "rank": 14,
         "Vanilla": "56.7",
@@ -820,7 +820,7 @@
         "Average": "45.0"
       }
     },
-    "Qwen-2.5-72B-Instruct": {
+    "Qwen2.5-72B-Instruct": {
       "dataset-HackerRank": {
         "rank": 15,
         "Vanilla": "68.3",
@@ -988,7 +988,7 @@
         "Average": "26.1"
       }
     },
-    "Qwen-2.5-7B-Instruct": {
+    "Qwen2.5-7B-Instruct": {
       "dataset-HackerRank": {
         "rank": 18,
         "Vanilla": "46.7",

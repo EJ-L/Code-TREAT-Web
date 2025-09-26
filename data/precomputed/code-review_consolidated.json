@@ -769,7 +769,7 @@
         "LLM Judge": "29.9"
       }
     },
-    "Qwen-3-30B-A3B": {
+    "Qwen3-30B-A3B": {
       "overall": {
         "rank": 2,
         "LLM Judge": "31.6"
@@ -1285,7 +1285,7 @@
         "LLM Judge": "29.9"
       }
     },
-    "Qwen-2.5-72B-Instruct": {
+    "Qwen2.5-72B-Instruct": {
       "overall": {
         "rank": 4,
         "LLM Judge": "31.3"
@@ -2059,7 +2059,7 @@
         "LLM Judge": "29.7"
       }
     },
-    "Qwen-2.5-Coder-32B-Instruct": {
+    "Qwen2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 7,
         "LLM Judge": "31.1"
@@ -3091,7 +3091,7 @@
         "LLM Judge": "29.3"
       }
     },
-    "Qwen-3-235B-A22B": {
+    "Qwen3-235B-A22B": {
       "overall": {
         "rank": 11,
         "LLM Judge": "30.9"
@@ -4381,7 +4381,7 @@
         "LLM Judge": "30.6"
       }
     },
-    "Qwen-3-32B": {
+    "Qwen3-32B": {
       "overall": {
         "rank": 16,
         "LLM Judge": "30.4"

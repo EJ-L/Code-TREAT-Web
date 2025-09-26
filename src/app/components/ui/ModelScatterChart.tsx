@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, getModelSize } from '@/lib/constants';
 import { filterConditions } from '@/lib/filterConfig';
+import { TaskType } from '@/lib/types';
 import { TimelineSlider } from './TimelineSlider';
 
 // Helper function to calculate task-specific date bounds with buffers
@@ -208,7 +209,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
     
     // Check if data leakage detection should be enabled for this task using global filter conditions
     const datasetsInData = [...new Set(data.map(result => result.dataset).filter(Boolean))] as string[];
-    const shouldCheckDataLeakage = filterConditions.shouldShowDataLeakageWarning(currentTask, datasetsInData);
+    const shouldCheckDataLeakage = filterConditions.shouldShowDataLeakageWarning(currentTask as TaskType, datasetsInData);
     
     data.forEach(result => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

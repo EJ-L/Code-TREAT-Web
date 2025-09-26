@@ -1567,7 +1567,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen-3-235B-A22B": {
+    "Qwen3-235B-A22B": {
       "overall": {
         "rank": 7,
         "pass@1": "87.1",
@@ -2203,7 +2203,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen-3-32B": {
+    "Qwen3-32B": {
       "overall": {
         "rank": 10,
         "pass@1": "86.0",
@@ -3687,7 +3687,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen-3-30B-A3B": {
+    "Qwen3-30B-A3B": {
       "overall": {
         "rank": 17,
         "pass@1": "80.1",
@@ -4111,7 +4111,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen-2.5-Coder-32B-Instruct": {
+    "Qwen2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 19,
         "pass@1": "74.6",
@@ -4323,7 +4323,7 @@
         "CodeBLEU": "-"
       }
     },
-    "Qwen-2.5-72B-Instruct": {
+    "Qwen2.5-72B-Instruct": {
       "overall": {
         "rank": 20,
         "pass@1": "72.5",

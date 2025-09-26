@@ -37,7 +37,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Qwen-3-235B-A22B": {
+    "Qwen3-235B-A22B": {
       "overall": {
         "rank": 4,
         "csr": "99.7",
@@ -81,7 +81,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Qwen-2.5-Coder-32B-Instruct": {
+    "Qwen2.5-Coder-32B-Instruct": {
       "overall": {
         "rank": 8,
         "csr": "99.3",
@@ -92,7 +92,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Qwen-3-30B-A3B": {
+    "Qwen3-30B-A3B": {
       "overall": {
         "rank": 9,
         "csr": "99.3",
@@ -147,7 +147,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Qwen-2.5-72B-Instruct": {
+    "Qwen2.5-72B-Instruct": {
       "overall": {
         "rank": 14,
         "csr": "99.0",
@@ -158,7 +158,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Qwen-3-32B": {
+    "Qwen3-32B": {
       "overall": {
         "rank": 15,
         "csr": "99.0",

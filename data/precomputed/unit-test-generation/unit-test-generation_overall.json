@@ -2,7 +2,7 @@
   "task": "unit test generation",
   "filters": {},
   "showByDifficulty": false,
-  "generatedAt": "2025-09-24T09:07:24.968Z",
+  "generatedAt": "2025-09-26T07:23:00.726Z",
   "results": [
     {
       "rank": 1,
@@ -294,8 +294,8 @@
     },
     {
       "rank": 25,
-      "model": "Gemma-3-27B-Instruct",
-      "model_name": "Gemma-3-27B-Instruct",
+      "model": "Gemma-3-27b-it",
+      "model_name": "Gemma-3-27b-it",
       "model_url": "",
       "csr": "97.5",
       "line_coverage": "64.69",

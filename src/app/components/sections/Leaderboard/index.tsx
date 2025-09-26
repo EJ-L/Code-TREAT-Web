@@ -335,24 +335,21 @@ interface LeaderboardProps {
             model: string, 
             taskCount: number, 
             totalScore: number, 
+            totalRank: number, // Added for average rank calculation
             taskScores: Record<string, number> 
           }>();
           
+          // Process each task separately to calculate ranks
           allTaskResults.forEach(({ task, results }) => {
+            // Skip empty results
+            if (!results || results.length === 0) return;
+            
+            // Step 1: Extract scores for this task and map to models
+            const taskScores: { model: string; score: number }[] = [];
+            
             results.forEach((result: ProcessedResult) => {
               const modelName = result.modelName || result.model || null;
               if (!modelName) return;
-              
-              if (!modelAggregates.has(modelName)) {
-                modelAggregates.set(modelName, {
-                  model: modelName,
-                  taskCount: 0,
-                  totalScore: 0,
-                  taskScores: {}
-                });
-              }
-              
-              const aggregate = modelAggregates.get(modelName)!;
               
               // Get primary metric for each task type
               let primaryScore = 0;
@@ -372,12 +369,36 @@ interface LeaderboardProps {
               }
               
               if (primaryScore > 0) {
-                aggregate.taskScores[task] = primaryScore;
-                aggregate.taskCount++;
-                aggregate.totalScore += primaryScore;
+                taskScores.push({ model: modelName, score: primaryScore });
               }
-                  });
+            });
+            
+            // Step 2: Sort by score (descending) and assign ranks
+            taskScores.sort((a, b) => b.score - a.score);
+            const taskRanks: Record<string, number> = {};
+            taskScores.forEach((item, index) => {
+              taskRanks[item.model] = index + 1; // Rank starts at 1
+            });
+            
+            // Step 3: Add scores and ranks to model aggregates
+            taskScores.forEach(({ model: modelName, score: primaryScore }) => {
+              if (!modelAggregates.has(modelName)) {
+                modelAggregates.set(modelName, {
+                  model: modelName,
+                  taskCount: 0,
+                  totalScore: 0,
+                  totalRank: 0,
+                  taskScores: {}
                 });
+              }
+              
+              const aggregate = modelAggregates.get(modelName)!;
+              aggregate.taskScores[task] = primaryScore;
+              aggregate.taskCount++;
+              aggregate.totalScore += primaryScore;
+              aggregate.totalRank += taskRanks[modelName]; // Add rank for this task
+            });
+          });
           
           // Models to exclude from overall leaderboard
           const excludedModels = [
@@ -392,16 +413,18 @@ interface LeaderboardProps {
             'Gemma-3-27B-it'
           ];
 
-          // Calculate final rankings
+          // Calculate final rankings using average rank (not average score)
+          // This matches the logic in generate-model-comparison-table-fixed.js
           const overallResults = Array.from(modelAggregates.values())
             .filter(aggregate => aggregate.taskCount > 0)
             .filter(aggregate => !excludedModels.includes(aggregate.model))
             .map(aggregate => ({
               model: aggregate.model,
               averageScore: aggregate.totalScore / aggregate.taskCount,
+              averageRank: aggregate.totalRank / aggregate.taskCount,
               taskCount: aggregate.taskCount
             }))
-            .sort((a, b) => b.averageScore - a.averageScore)
+            .sort((a, b) => a.averageRank - b.averageRank) // Sort by average rank (ascending)
             .map((result, index): ProcessedResult => ({
               modelId: result.model,
               modelName: result.model,
@@ -428,12 +451,27 @@ interface LeaderboardProps {
               llmjudge: null,
               executionAccuracy: null,
               difficulty: null,
-              // Store the score and task count in the dynamic properties
+              // Store both score and average rank in the dynamic properties
               score: result.averageScore.toFixed(1),
+              avgRank: result.averageRank.toFixed(1),
               tasks: result.taskCount
             }));
           
-          debug.leaderboard(`Generated overall leaderboard with ${overallResults.length} models`, overallResults.slice(0, 3));
+          // Add debug logs to verify rank calculation
+          debug.leaderboard(`Generated overall leaderboard with ${overallResults.length} models using average rank sorting`, overallResults.slice(0, 3));
+          
+          // Log a sample of models with their average ranks for verification
+          const sampleModels = Array.from(modelAggregates.values())
+            .filter(aggregate => aggregate.taskCount > 0)
+            .filter(aggregate => !excludedModels.includes(aggregate.model))
+            .slice(0, 5)
+            .map(model => ({
+              model: model.model,
+              taskCount: model.taskCount,
+              totalRank: model.totalRank,
+              avgRank: model.totalRank / model.taskCount
+            }));
+          debug.leaderboard(`Sample model ranks (matches script logic):`, sampleModels);
           setResults(overallResults);
           setIsDataComplete(true);
           setIsLoading(false);

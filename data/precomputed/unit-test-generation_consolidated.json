@@ -268,7 +268,7 @@
         "task": "unit_test_generation"
       }
     },
-    "Gemma-3-27B-Instruct": {
+    "Gemma-3-27b-it": {
       "overall": {
         "rank": 25,
         "csr": "97.5",

@@ -182,15 +182,19 @@ export const filterConditions = {
   shouldShowDataLeakageWarning: (task: TaskType, selectedDatasets?: string[]) => {
     console.log('DEBUG filterConditions: shouldShowDataLeakageWarning called with task:', task, 'datasets:', selectedDatasets);
     
+    // Temporarily disabled data leakage detection for vulnerability and code translation
+    // TODO: Re-enable in next version after refinement
     if (task === 'vulnerability detection') {
-      console.log('DEBUG filterConditions: vulnerability detection - returning true');
-      return true;
+      console.log('DEBUG filterConditions: vulnerability detection - returning false (temporarily disabled)');
+      return false; // Temporarily disabled
     }
     
     if (task === 'code translation') {
-      const result = shouldEnableCodeTranslationDataLeakage(selectedDatasets || []);
-      console.log('DEBUG filterConditions: code translation result:', result);
-      return result;
+      console.log('DEBUG filterConditions: code translation - returning false (temporarily disabled)');
+      return false; // Temporarily disabled
+      // const result = shouldEnableCodeTranslationDataLeakage(selectedDatasets || []);
+      // console.log('DEBUG filterConditions: code translation result:', result);
+      // return result;
     }
     
     console.log('DEBUG filterConditions: other task - returning false');

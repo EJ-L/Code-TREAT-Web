@@ -258,7 +258,8 @@ export const SecondaryFiltersBar: FC<SecondaryFiltersBarProps> = ({
     'code generation',
     'code translation', 
     'input prediction',
-    'output prediction'
+    'output prediction',
+    'multi-modality'
   ];
 
   const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);

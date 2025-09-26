@@ -194,10 +194,11 @@ export function getTaskSpecificColumnWidth(task: TaskType, key: string): string 
 }
 
 // Default sort configuration
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getDefaultSortConfig(task: TaskType): { key: string; direction: 'asc' | 'desc' } {
   // Use rank sorting for all tasks to unify initial load and rank reset behavior
   // This ensures the initial leaderboard display matches what users see when they click rank to "reset"
-  let defaultKey = 'rank';
+  const defaultKey = 'rank';
   
   // Only the overall leaderboard keeps rank as default since it's already rank-based
   // All other leaderboards now use rank to show the original precomputed rankings

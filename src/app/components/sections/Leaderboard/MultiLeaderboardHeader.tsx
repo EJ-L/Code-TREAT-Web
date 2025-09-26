@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { TaskType } from '@/lib/types';
 import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 
@@ -38,11 +38,11 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
   }, [currentTask]);
 
   // Get task-specific tabs per page
-  const getTabsPerPage = () => {
+  const getTabsPerPage = useCallback(() => {
     // For code-robustness, use 3 tabs per page to show All, CRUXEval, LiveCodeBench on first page
     if (currentTask === 'code-robustness') return 3;
     return 6; // Default for other tasks
-  };
+  }, [currentTask]);
 
   // Auto-navigate to page containing selected tab
   useEffect(() => {
@@ -60,7 +60,7 @@ const MultiLeaderboardHeader: FC<MultiLeaderboardHeaderProps> = ({
         }
       }
     }
-  }, [selectedTab, config, currentPage]);
+  }, [selectedTab, config, currentPage, getTabsPerPage]);
 
   // Handle pending tab changes after page changes
   useEffect(() => {

@@ -20,8 +20,11 @@
  * the performance of each model across different tasks, with average rank calculation.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { table } = require('table');
 
 // Parse command line arguments
@@ -172,6 +175,47 @@ function getTopModels(taskData, metric, n = 3) {
   return scores.sort((a, b) => b.score - a.score).slice(0, n);
 }
 
+// Function to calculate combined Code Reasoning ranks
+function calculateCombinedCodeReasoningRanks(taskDataMap) {
+  const inputPredictionData = taskDataMap['input prediction'];
+  const outputPredictionData = taskDataMap['output prediction'];
+  
+  // Get all models that have scores in either input or output prediction
+  const allModels = new Set();
+  if (inputPredictionData && inputPredictionData.data) {
+    Object.keys(inputPredictionData.data).forEach(model => allModels.add(model));
+  }
+  if (outputPredictionData && outputPredictionData.data) {
+    Object.keys(outputPredictionData.data).forEach(model => allModels.add(model));
+  }
+  
+  // Calculate combined scores for Code Reasoning
+  const combinedScores = [];
+  allModels.forEach(model => {
+    const inputScore = extractModelScore(inputPredictionData, model, 'pass@1');
+    const outputScore = extractModelScore(outputPredictionData, model, 'pass@1');
+    
+    const validScores = [];
+    if (inputScore !== null) validScores.push(inputScore);
+    if (outputScore !== null) validScores.push(outputScore);
+    
+    if (validScores.length > 0) {
+      const avgScore = validScores.reduce((a, b) => a + b, 0) / validScores.length;
+      combinedScores.push({ model, score: avgScore });
+    }
+  });
+  
+  // Sort by combined score (descending) and assign ranks
+  combinedScores.sort((a, b) => b.score - a.score);
+  
+  const combinedRanks = {};
+  combinedScores.forEach((item, index) => {
+    combinedRanks[item.model] = index + 1;
+  });
+  
+  return combinedRanks;
+}
+
 // Main function to generate the comparison table
 function generateComparisonTable(opts = options) {
   // Define the tasks to include
@@ -204,12 +248,15 @@ function generateComparisonTable(opts = options) {
     });
   });
   
-  // Calculate ranks for each task
+  // Calculate ranks for each individual task
   const taskRanks = {};
   tasks.forEach(task => {
     const metric = TASK_PRIMARY_METRICS[task];
     taskRanks[task] = calculateRanks(taskDataMap[task], metric);
   });
+  
+  // Calculate combined Code Reasoning ranks
+  const codeReasoningRanks = calculateCombinedCodeReasoningRanks(taskDataMap);
   
   // Get top N models for each task for highlighting
   const topModels = {};
@@ -239,6 +286,17 @@ function generateComparisonTable(opts = options) {
     }
   });
   
+  // Define task groups for average ranking calculation (grouped by abbreviation)
+  const rankingTaskGroups = [
+    'code generation',
+    'code summarization', 
+    'code translation',
+    'code review',
+    'code-reasoning', // Combined input/output prediction
+    'unit test generation',
+    'vulnerability detection'
+  ];
+  
   // Prepare data for the table
   const tableData = [];
   
@@ -255,18 +313,34 @@ function generateComparisonTable(opts = options) {
   allModels.forEach(model => {
     const row = { model, scores: {}, ranks: {}, taskCount: 0, totalRank: 0 };
     
-    // Get scores and ranks for each task
+    // Get scores and ranks for each task (for display purposes)
     tasks.forEach(task => {
       const metric = TASK_PRIMARY_METRICS[task];
       const score = extractModelScore(taskDataMap[task], model, metric);
       if (score !== null) {
         row.scores[task] = score;
         row.ranks[task] = taskRanks[task][model] || null;
-        row.taskCount++;
-        row.totalRank += taskRanks[task][model] || 0;
       } else {
         row.scores[task] = null;
         row.ranks[task] = null;
+      }
+    });
+    
+    // Calculate average rank using grouped tasks
+    rankingTaskGroups.forEach(taskGroup => {
+      let rankToAdd = null;
+      
+      if (taskGroup === 'code-reasoning') {
+        // Use combined Code Reasoning rank
+        rankToAdd = codeReasoningRanks[model] || null;
+      } else {
+        // Use individual task rank
+        rankToAdd = taskRanks[taskGroup] ? taskRanks[taskGroup][model] : null;
+      }
+      
+      if (rankToAdd !== null) {
+        row.taskCount++;
+        row.totalRank += rankToAdd;
       }
     });
     
@@ -284,7 +358,7 @@ function generateComparisonTable(opts = options) {
   });
   
   // Add model data to table
-  modelData.forEach((row, index) => {
+  modelData.forEach((row) => {
     const tableRow = [row.model];
     
     // For each unique abbreviation, calculate the combined score
@@ -381,7 +455,7 @@ function generateComparisonTable(opts = options) {
       csvRows.push(header.join(','));
       
       // Add data rows (without color codes)
-      modelData.forEach((row, index) => {
+      modelData.forEach((row) => {
         const csvRow = [row.model];
         
         // For each unique abbreviation, calculate the combined score

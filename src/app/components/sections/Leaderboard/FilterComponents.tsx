@@ -658,7 +658,7 @@ export const OverallInfo: FC<OverallInfoProps> = ({ isDarkMode }) => {
                 }`}
                 style={{ left: '-280%', transform: 'translateX(-50%)' }}
               >
-                <span className="font-semibold">Average calculation:</span> For each model, we compute the arithmetic mean of all their metric scores across the included tasks.
+                <span className="font-semibold">Average ranking calculation:</span> For each model, we first calculate their rank in each task category (with Code Reasoning combining input and output prediction), then compute the arithmetic mean of these ranks across 7 task groups.
               </span>
             )}
           </span>
@@ -677,7 +677,7 @@ export const OverallInfo: FC<OverallInfoProps> = ({ isDarkMode }) => {
                 }`}
                 style={{ left: '50%', transform: 'translateX(-50%)' }}
               >
-                <span className="font-semibold">Included:</span> Code Generation, Code Translation, Code Summarization, Code Review, Input Prediction, Output Prediction, Vulnerability Detection.
+                <span className="font-semibold">7 Task Groups:</span> Code Generation, Code Translation, Code Summarization, Code Review, Code Reasoning (Input + Output Prediction), Unit Test Generation, Vulnerability Detection.
               </span>
             )}
           </span>

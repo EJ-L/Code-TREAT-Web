@@ -11,7 +11,8 @@ import {
   LabelList,
   ReferenceLine
 } from 'recharts';
-import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, getModelSize, shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
+import { MODEL_PUBLISH_DATES, hasDataLeakage, getBaseModelName, getModelSize } from '@/lib/constants';
+import { filterConditions } from '@/lib/filterConfig';
 import { TimelineSlider } from './TimelineSlider';
 
 // Helper function to calculate task-specific date bounds with buffers
@@ -205,13 +206,9 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
 
     const points: ScatterDataPoint[] = [];
     
-    // For code translation, determine if data leakage detection should be enabled
-    // based on which datasets are present in the current data
-    let shouldCheckDataLeakage = true;
-    if (currentTask === 'code translation') {
-      const datasetsInData = [...new Set(data.map(result => result.dataset).filter(Boolean))] as string[];
-      shouldCheckDataLeakage = shouldEnableCodeTranslationDataLeakage(datasetsInData);
-    }
+    // Check if data leakage detection should be enabled for this task using global filter conditions
+    const datasetsInData = [...new Set(data.map(result => result.dataset).filter(Boolean))] as string[];
+    const shouldCheckDataLeakage = filterConditions.shouldShowDataLeakageWarning(currentTask, datasetsInData);
     
     data.forEach(result => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

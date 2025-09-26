@@ -8,8 +8,8 @@
 {"id": "Llama-11B-Edit-React", "model_name": "Llama-11B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 4.8148, "CMS": 0.1819, "Compilation": 0.7963}}
 {"id": "Pixtral-124B-Edit-React", "model_name": "Pixtral-124B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 8.0185, "CMS": 0.4093, "Compilation": 0.9907}}
 {"id": "Pixtral-12B-Edit-React", "model_name": "Pixtral-12B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 7.6111, "CMS": 0.412, "Compilation": 1.00}}
-{"id": "Qwen-72B-Edit-React", "model_name": "Qwen-72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 8.0833, "CMS": 0.4398, "Compilation": 0.9907}}
-{"id": "Qwen-7B-Edit-React", "model_name": "Qwen-7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 1.8796, "CMS": 0.0815, "Compilation": 0.4815}}
+{"id": "Qwen72B-Edit-React", "model_name": "Qwen72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 8.0833, "CMS": 0.4398, "Compilation": 0.9907}}
+{"id": "Qwen7B-Edit-React", "model_name": "Qwen7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 1.8796, "CMS": 0.0815, "Compilation": 0.4815}}
 {"id": "Claude-3.7-Edit-Vue", "model_name": "Claude-3.7", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 8.3619, "CMS": 0.405, "Compilation": 0.981}}
 {"id": "Claude-4-Edit-Vue", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 7.9809, "CMS": 0.2992, "Compilation": 0.981}}
 {"id": "GPT-4o-Edit-Vue", "model_name": "GPT-4o", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 8.181, "CMS": 0.3698, "Compilation": 0.9429}}
@@ -20,8 +20,8 @@
 {"id": "Llama-11B-Edit-Vue", "model_name": "Llama-11B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 3.1333, "CMS": 0.0655, "Compilation": 0.5905}}
 {"id": "Pixtral-124B-Edit-Vue", "model_name": "Pixtral-124B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 8.0381, "CMS": 0.3046, "Compilation": 0.9619}}
 {"id": "Pixtral-12B-Edit-Vue", "model_name": "Pixtral-12B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 7.019, "CMS": 0.2394, "Compilation": 0.9048}}
-{"id": "Qwen-72B-Edit-Vue", "model_name": "Qwen-72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 7.5714, "CMS": 0.3276, "Compilation": 0.9333}}
-{"id": "Qwen-7B-Edit-Vue", "model_name": "Qwen-7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 2.2952, "CMS": 0.0862, "Compilation": 0.4286}}
+{"id": "Qwen72B-Edit-Vue", "model_name": "Qwen72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 7.5714, "CMS": 0.3276, "Compilation": 0.9333}}
+{"id": "Qwen7B-Edit-Vue", "model_name": "Qwen7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 2.2952, "CMS": 0.0862, "Compilation": 0.4286}}
 {"id": "Claude-3.7-Edit-Angular", "model_name": "Claude-3.7", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.0152, "CMS": 0.4659, "Compilation": 0.9091}}
 {"id": "Claude-4-Edit-Angular", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.2576, "CMS": 0.6588, "Compilation": 0.9242}}
 {"id": "GPT-4o-Edit-Angular", "model_name": "GPT-4o", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.2879, "CMS": 0.5246, "Compilation": 0.9091}}
@@ -32,8 +32,8 @@
 {"id": "Llama-11B-Edit-Angular", "model_name": "Llama-11B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 5.1212, "CMS": 0.3621, "Compilation": 0.7727}}
 {"id": "Pixtral-124B-Edit-Angular", "model_name": "Pixtral-124B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.6818, "CMS": 0.3264, "Compilation": 0.9848}}
 {"id": "Pixtral-12B-Edit-Angular", "model_name": "Pixtral-12B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 7.803, "CMS": 0.2567, "Compilation": 0.9242}}
-{"id": "Qwen-72B-Edit-Angular", "model_name": "Qwen-72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.197, "CMS": 0.6018, "Compilation": 0.9091}}
-{"id": "Qwen-7B-Edit-Angular", "model_name": "Qwen-7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 2.0152, "CMS": 0.1367, "Compilation": 0.3333}}
+{"id": "Qwen72B-Edit-Angular", "model_name": "Qwen72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.197, "CMS": 0.6018, "Compilation": 0.9091}}
+{"id": "Qwen7B-Edit-Angular", "model_name": "Qwen7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 2.0152, "CMS": 0.1367, "Compilation": 0.3333}}
 {"id": "Claude-3.7-Edit-Vanilla", "model_name": "Claude-3.7", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.15, "CMS": 0.3439, "Compilation": 1.00}}
 {"id": "Claude-4-Edit-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.4375, "CMS": 0.34, "Compilation": 1.00}}
 {"id": "GPT-4o-Edit-Vanilla", "model_name": "GPT-4o", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.225, "CMS": 0.3394, "Compilation": 1.00}}
@@ -44,8 +44,8 @@
 {"id": "Llama-11B-Edit-Vanilla", "model_name": "Llama-11B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 6.575, "CMS": 0.1582, "Compilation": 1.00}}
 {"id": "Pixtral-124B-Edit-Vanilla", "model_name": "Pixtral-124B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.1125, "CMS": 0.3651, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Edit-Vanilla", "model_name": "Pixtral-12B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 8.6, "CMS": 0.277, "Compilation": 1.00}}
-{"id": "Qwen-72B-Edit-Vanilla", "model_name": "Qwen-72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.125, "CMS": 0.3209, "Compilation": 1.00}}
-{"id": "Qwen-7B-Edit-Vanilla", "model_name": "Qwen-7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 5.9125, "CMS": 0.1635, "Compilation": 1.00}}
+{"id": "Qwen72B-Edit-Vanilla", "model_name": "Qwen72B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 9.125, "CMS": 0.3209, "Compilation": 1.00}}
+{"id": "Qwen7B-Edit-Vanilla", "model_name": "Qwen7B", "dataset": "UI Code Edit", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 5.9125, "CMS": 0.1635, "Compilation": 1.00}}
 {"id": "Claude-3.7-Generation-React", "model_name": "Claude-3.7", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.8083, "Compilation": 0.9541}}
 {"id": "Claude-4-Generation-React", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.8385, "Compilation": 0.9908}}
 {"id": "GPT-4o-Generation-React", "model_name": "GPT-4o", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.7637, "Compilation": 0.9725}}
@@ -56,8 +56,8 @@
 {"id": "Llama-11B-Generation-React", "model_name": "Llama-11B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.6401, "Compilation": 0.3909}}
 {"id": "Pixtral-124B-Generation-React", "model_name": "Pixtral-124B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.7395, "Compilation": 0.9725}}
 {"id": "Pixtral-12B-Generation-React", "model_name": "Pixtral-12B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.6168, "Compilation": 0.8532}}
-{"id": "Qwen-72B-Generation-React", "model_name": "Qwen-72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.779, "Compilation": 0.9541}}
-{"id": "Qwen-7B-Generation-React", "model_name": "Qwen-7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.0875, "Compilation": 0.1284}}
+{"id": "Qwen72B-Generation-React", "model_name": "Qwen72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.779, "Compilation": 0.9541}}
+{"id": "Qwen7B-Generation-React", "model_name": "Qwen7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "React", "metrics": {"CLIP": 0.0875, "Compilation": 0.1284}}
 {"id": "Claude-3.7-Generation-Vue", "model_name": "Claude-3.7", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.8319, "Compilation": 0.9746}}
 {"id": "Claude-4-Generation-Vue", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.8116, "Compilation": 0.9746}}
 {"id": "GPT-4o-Generation-Vue", "model_name": "GPT-4o", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.7734, "Compilation": 0.9492}}
@@ -68,8 +68,8 @@
 {"id": "Llama-11B-Generation-Vue", "model_name": "Llama-11B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.3243, "Compilation": 0.4915}}
 {"id": "Pixtral-124B-Generation-Vue", "model_name": "Pixtral-124B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.7811, "Compilation": 0.9746}}
 {"id": "Pixtral-12B-Generation-Vue", "model_name": "Pixtral-12B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.7434, "Compilation": 0.9407}}
-{"id": "Qwen-72B-Generation-Vue", "model_name": "Qwen-72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.6836, "Compilation": 0.8559}}
-{"id": "Qwen-7B-Generation-Vue", "model_name": "Qwen-7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.0452, "Compilation": 0.0678}}
+{"id": "Qwen72B-Generation-Vue", "model_name": "Qwen72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.6836, "Compilation": 0.8559}}
+{"id": "Qwen7B-Generation-Vue", "model_name": "Qwen7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vue", "metrics": {"CLIP": 0.0452, "Compilation": 0.0678}}
 {"id": "Claude-3.7-Generation-Angular", "model_name": "Claude-3.7", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.6024, "Compilation": 0.6867}}
 {"id": "Claude-4-Generation-Angular", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5907, "Compilation": 0.6747}}
 {"id": "GPT-4o-Generation-Angular", "model_name": "GPT-4o", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5963, "Compilation": 0.7108}}
@@ -80,8 +80,8 @@
 {"id": "Llama-11B-Generation-Angular", "model_name": "Llama-11B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.4891, "Compilation": 0.6988}}
 {"id": "Pixtral-124B-Generation-Angular", "model_name": "Pixtral-124B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.6324, "Compilation": 0.759}}
 {"id": "Pixtral-12B-Generation-Angular", "model_name": "Pixtral-12B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.4876, "Compilation": 0.6024}}
-{"id": "Qwen-72B-Generation-Angular", "model_name": "Qwen-72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5149, "Compilation": 0.6265}}
-{"id": "Qwen-7B-Generation-Angular", "model_name": "Qwen-7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.0851, "Compilation": 0.1205}}
+{"id": "Qwen72B-Generation-Angular", "model_name": "Qwen72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.5149, "Compilation": 0.6265}}
+{"id": "Qwen7B-Generation-Angular", "model_name": "Qwen7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Angular", "metrics": {"CLIP": 0.0851, "Compilation": 0.1205}}
 {"id": "Claude-3.7-Generation-Vanilla", "model_name": "Claude-3.7", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.8132, "Compilation": 1.00}}
 {"id": "Claude-4-Generation-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.8115}}
 {"id": "GPT-4o-Generation-Vanilla", "model_name": "GPT-4o", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7683, "Compilation": 1.00}}
@@ -92,8 +92,8 @@
 {"id": "Llama-11B-Generation-Vanilla", "model_name": "Llama-11B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.6304, "Compilation": 1.00}}
 {"id": "Pixtral-124B-Generation-Vanilla", "model_name": "Pixtral-124B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7403, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Generation-Vanilla", "model_name": "Pixtral-12B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7043, "Compilation": 1.00}}
-{"id": "Qwen-72B-Generation-Vanilla", "model_name": "Qwen-72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7597, "Compilation": 1.00}}
-{"id": "Qwen-7B-Generation-Vanilla", "model_name": "Qwen-7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7411, "Compilation": 1.00}}
+{"id": "Qwen72B-Generation-Vanilla", "model_name": "Qwen72B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7597, "Compilation": 1.00}}
+{"id": "Qwen7B-Generation-Vanilla", "model_name": "Qwen7B", "dataset": "UI Code Generation", "task": "multi-modality", "framework": "Vanilla", "metrics": {"CLIP": 0.7411, "Compilation": 1.00}}
 {"id": "Claude-3.7-Repair-React", "model_name": "Claude-3.7", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 6.7857, "CMS": 0.4827, "Compilation": 1.00}}
 {"id": "Claude-4-Repair-React", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 7.6429, "CMS": 0.5568, "Compilation": 1.00}}
 {"id": "GPT-4o-Repair-React", "model_name": "GPT-4o", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 6.3571, "CMS": 0.2752, "Compilation": 1.00}}
@@ -104,8 +104,8 @@
 {"id": "Llama-11B-Repair-React", "model_name": "Llama-11B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 2.75, "CMS": 0.1047, "Compilation": 0.9643}}
 {"id": "Pixtral-124B-Repair-React", "model_name": "Pixtral-124B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 6.4643, "CMS": 0.2972, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Repair-React", "model_name": "Pixtral-12B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 5.3571, "CMS": 0.1557, "Compilation": 0.9643}}
-{"id": "Qwen-72B-Repair-React", "model_name": "Qwen-72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 5.6429, "CMS": 0.1866, "Compilation": 0.9286}}
-{"id": "Qwen-7B-Repair-React", "model_name": "Qwen-7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 0.8929, "CMS": 0.0, "Compilation": 0.2857}}
+{"id": "Qwen72B-Repair-React", "model_name": "Qwen72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 5.6429, "CMS": 0.1866, "Compilation": 0.9286}}
+{"id": "Qwen7B-Repair-React", "model_name": "Qwen7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "React", "metrics": {"MLLM Score": 0.8929, "CMS": 0.0, "Compilation": 0.2857}}
 {"id": "Claude-3.7-Repair-Vue", "model_name": "Claude-3.7", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.5926, "CMS": 0.3065, "Compilation": 1.00}}
 {"id": "Claude-4-Repair-Vue", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 7.3704, "CMS": 0.4, "Compilation": 1.00}}
 {"id": "GPT-4o-Repair-Vue", "model_name": "GPT-4o", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.2593, "CMS": 0.2524, "Compilation": 1.00}}
@@ -116,8 +116,8 @@
 {"id": "Llama-11B-Repair-Vue", "model_name": "Llama-11B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 3.5185, "CMS": 0.0474, "Compilation": 0.8889}}
 {"id": "Pixtral-124B-Repair-Vue", "model_name": "Pixtral-124B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.3704, "CMS": 0.223, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Repair-Vue", "model_name": "Pixtral-12B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.037, "CMS": 0.1557, "Compilation": 1.00}}
-{"id": "Qwen-72B-Repair-Vue", "model_name": "Qwen-72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.037, "CMS": 0.1131, "Compilation": 1.00}}
-{"id": "Qwen-7B-Repair-Vue", "model_name": "Qwen-7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 0.4815, "CMS": 0.0127, "Compilation": 0.1111}}
+{"id": "Qwen72B-Repair-Vue", "model_name": "Qwen72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 6.037, "CMS": 0.1131, "Compilation": 1.00}}
+{"id": "Qwen7B-Repair-Vue", "model_name": "Qwen7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vue", "metrics": {"MLLM Score": 0.4815, "CMS": 0.0127, "Compilation": 0.1111}}
 {"id": "Claude-3.7-Repair-Angular", "model_name": "Claude-3.7", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 6.8571, "CMS": 0.5719, "Compilation": 0.9286}}
 {"id": "Claude-4-Repair-Angular", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 8.1429, "CMS": 0.6772, "Compilation": 1.00}}
 {"id": "GPT-4o-Repair-Angular", "model_name": "GPT-4o", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 5.9286, "CMS": 0.5073, "Compilation": 1.00}}
@@ -128,8 +128,8 @@
 {"id": "Llama-11B-Repair-Angular", "model_name": "Llama-11B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 3.25, "CMS": 0.2688, "Compilation": 0.8571}}
 {"id": "Pixtral-124B-Repair-Angular", "model_name": "Pixtral-124B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 6.5357, "CMS": 0.2618, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Repair-Angular", "model_name": "Pixtral-12B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 5.6429, "CMS": 0.2546, "Compilation": 1.00}}
-{"id": "Qwen-72B-Repair-Angular", "model_name": "Qwen-72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 6.5, "CMS": 0.5563, "Compilation": 0.9286}}
-{"id": "Qwen-7B-Repair-Angular", "model_name": "Qwen-7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 0.0, "CMS": 0.0, "Compilation": 0.0357}}
+{"id": "Qwen72B-Repair-Angular", "model_name": "Qwen72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 6.5, "CMS": 0.5563, "Compilation": 0.9286}}
+{"id": "Qwen7B-Repair-Angular", "model_name": "Qwen7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Angular", "metrics": {"MLLM Score": 0.0, "CMS": 0.0, "Compilation": 0.0357}}
 {"id": "Claude-3.7-Repair-Vanilla", "model_name": "Claude-3.7", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 7.1786, "CMS": 0.2287, "Compilation": 1.00}}
 {"id": "Claude-4-Repair-Vanilla", "model_name": "Claude-4", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 7.7857, "CMS": 0.3795, "Compilation": 1.00}}
 {"id": "GPT-4o-Repair-Vanilla", "model_name": "GPT-4o", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 7.0714, "CMS": 0.1637, "Compilation": 1.00}}
@@ -140,5 +140,5 @@
 {"id": "Llama-11B-Repair-Vanilla", "model_name": "Llama-11B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 5.7857, "CMS": 0.069, "Compilation": 1.00}}
 {"id": "Pixtral-124B-Repair-Vanilla", "model_name": "Pixtral-124B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 6.9643, "CMS": 0.1398, "Compilation": 1.00}}
 {"id": "Pixtral-12B-Repair-Vanilla", "model_name": "Pixtral-12B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 6.6786, "CMS": 0.1188, "Compilation": 1.00}}
-{"id": "Qwen-72B-Repair-Vanilla", "model_name": "Qwen-72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 6.8929, "CMS": 0.1446, "Compilation": 1.00}}
-{"id": "Qwen-7B-Repair-Vanilla", "model_name": "Qwen-7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 3.8571, "CMS": 0.0277, "Compilation": 1.00}}
+{"id": "Qwen72B-Repair-Vanilla", "model_name": "Qwen72B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 6.8929, "CMS": 0.1446, "Compilation": 1.00}}
+{"id": "Qwen7B-Repair-Vanilla", "model_name": "Qwen7B", "dataset": "UI Code Repair", "task": "multi-modality", "framework": "Vanilla", "metrics": {"MLLM Score": 3.8571, "CMS": 0.0277, "Compilation": 1.00}}

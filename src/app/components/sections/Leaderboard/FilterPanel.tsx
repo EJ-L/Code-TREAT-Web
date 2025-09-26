@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Card, CardContent } from "@/app/components/ui/card";
 import { TaskType, Ability, ProcessedResult } from '@/lib/types';
-import { filterConditions, getAvailableFilters } from '@/lib/filterConfig';
-import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
+import { filterConditions } from '@/lib/filterConfig';
 import {
   VulnerabilityMetrics,
   CodeRobustnessMetrics,
@@ -27,33 +26,12 @@ interface FilterPanelProps {
 
 const FilterPanel: FC<FilterPanelProps> = ({
   currentTask,
-  taskAbilities,
   selectedAbilities,
-  handleAbilityChange: _handleAbilityChange,
-  availableLLMJudges,
   isDarkMode,
   isMultiLeaderboard = false,
-  selectedMultiTab,
   results = []
 }) => {
 
-  // Only show secondary filters for specific tasks that need them
-  const tasksWithSecondaryFilters: TaskType[] = [
-    'code generation',
-    'code translation', 
-    'input prediction',
-    'output prediction',
-    'multi-modality'
-  ];
-
-  const shouldShowSecondaryFilters = tasksWithSecondaryFilters.includes(currentTask);
-
-  // Get available filters, excluding the extracted filter for multi-leaderboard tasks
-  const multiConfig = getMultiLeaderboardConfig(currentTask);
-  const excludeFilter = multiConfig?.extractedFilter;
-  const _availableFilters = shouldShowSecondaryFilters 
-    ? getAvailableFilters(currentTask, taskAbilities, availableLLMJudges, excludeFilter)
-    : [];
 
 
 

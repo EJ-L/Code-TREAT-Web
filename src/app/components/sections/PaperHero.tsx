@@ -5,7 +5,7 @@ interface PaperHeroProps {
   isDarkMode: boolean;
 }
 
-const PaperHero: FC<PaperHeroProps> = ({ isDarkMode }) => {
+const PaperHero: FC<PaperHeroProps> = () => {
   return (
     <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16 pt-20">
       <div className="relative">

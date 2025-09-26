@@ -3,6 +3,7 @@ import { TaskType } from '@/lib/types';
 import OrganizationLogo from '@/app/components/ui/OrganizationLogo';
 import { getOrganizationFromModel } from '@/lib/organization-logos';
 import { hasDataLeakage } from '@/lib/constants';
+import { filterConditions } from '@/lib/filterConfig';
 
 interface TableCellProps {
   header: {
@@ -27,6 +28,7 @@ interface TableCellProps {
   modelUrl?: string;
   modelName?: string; // Add model name prop for data leakage detection
   dataset?: string; // Add dataset prop for data leakage detection
+  selectedDatasets?: string[]; // Add selectedDatasets prop for data leakage detection control
 }
 
 const TableCell: FC<TableCellProps> = ({
@@ -46,14 +48,20 @@ const TableCell: FC<TableCellProps> = ({
   isDarkMode,
   modelUrl,
   modelName,
-  dataset
+  dataset,
+  selectedDatasets
 }) => {
   const alignment = getColumnAlignment(header.key);
   const numericStyles = getNumericStyles(header.key);
   const stickyStyles = getStickyStyles(header.key);
-  // Check if current row has data leakage
+  // Check if current row has data leakage (only if detection is enabled)
   const hasDataLeakageForRow = () => {
     if (!value) return false;
+    
+    // First check if data leakage detection should be enabled for this task
+    const shouldShowDetection = filterConditions.shouldShowDataLeakageWarning(currentTask, selectedDatasets);
+    if (!shouldShowDetection) return false;
+    
     // For model column, check the model name directly
     if (header.key === 'model') {
       const modelNameToCheck = String(value);

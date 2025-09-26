@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Code, Database, Shield, Layers, GitBranch, Bug, TestTube, Eye } from 'lucide-react';
+import { Code, Database, Shield, Layers, GitBranch, TestTube, Eye } from 'lucide-react';
 
 interface BenchmarkConstructionProps {
   isDarkMode: boolean;

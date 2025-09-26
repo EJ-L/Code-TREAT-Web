@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { TaskType } from '@/lib/types';
 import { getMultiLeaderboardConfig } from '@/lib/leaderboardConfig';
 
@@ -37,12 +37,12 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
   }, [currentTask]);
 
   // Get task-specific tabs per page
-  const getTabsPerPage = () => {
+  const getTabsPerPage = useCallback(() => {
     if (isSmallScreen) return 3;
     // For code-robustness, use 3 tabs per page to show All, CRUXEval, LiveCodeBench on first page
     if (currentTask === 'code-robustness') return 3;
     return 5; // Default for other tasks
-  };
+  }, [isSmallScreen, currentTask]);
 
   // Auto-navigate to page containing selected tab
   useEffect(() => {
@@ -60,7 +60,7 @@ const CompactMultiLeaderboardHeader: FC<CompactMultiLeaderboardHeaderProps> = ({
         }
       }
     }
-  }, [selectedTab, config, currentPage, isSmallScreen]);
+  }, [selectedTab, config, currentPage, isSmallScreen, getTabsPerPage]);
 
   // Handle pending tab changes after page changes
   useEffect(() => {

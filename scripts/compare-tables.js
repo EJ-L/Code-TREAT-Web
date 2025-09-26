@@ -10,8 +10,8 @@
  *   node compare-tables.js model-comparison-corrected.csv model-comparison-gt.csv
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
-const path = require('path');
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -281,7 +281,7 @@ if (extraModels.length > 0) {
 
 // Find metrics with most differences
 const problematicMetrics = sortedMetricDiffs
-  .filter(([_, stats]) => stats.count > 0)
+  .filter(([, stats]) => stats.count > 0)
   .slice(0, 3)
   .map(([metric, stats]) => `${metric} (${stats.count} differences)`);
 

@@ -10,8 +10,8 @@
  *   node normalize-model-names.js model-comparison-corrected.csv model-comparison-normalized.csv model-comparison-gt.csv
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
-const path = require('path');
 
 // Parse command line arguments
 const args = process.argv.slice(2);

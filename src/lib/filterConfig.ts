@@ -1,5 +1,4 @@
 import { TaskType, Ability } from '@/lib/types';
-import { shouldEnableCodeTranslationDataLeakage } from '@/lib/constants';
 
 // Define tasks that have difficulty-based results
 export const TASKS_WITH_DIFFICULTY: TaskType[] = [
@@ -60,7 +59,7 @@ function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Abilit
   if (task === 'overall' || !abilities[task]) return [];
   
   // Base excluded keys for all tasks
-  let excludedKeys = ['dataset', 'framework', 'reasoning'];
+  const excludedKeys = ['dataset', 'framework', 'reasoning'];
   
   // Additionally exclude 'knowledge' for specific tasks only
   if (task === 'code generation' || task === 'code translation') {
@@ -73,7 +72,7 @@ function createDynamicFilters(task: TaskType, abilities: Record<TaskType, Abilit
     if (!excludedKeys.includes(key) && values && values.length > 1) {
       dynamicFilters.push({
         key: key as keyof Ability,
-        label: getFilterLabel(key as keyof Ability, task),
+        label: getFilterLabel(key as keyof Ability),
         isVisible: () => true,
         getValues: () => values,
         specialBehaviors: {
@@ -108,7 +107,7 @@ export function getAvailableFilters(
 }
 
 // Utility functions (simplified)
-function getFilterLabel(key: keyof Ability, task: TaskType): string {
+function getFilterLabel(key: keyof Ability): string {
   return capitalizeFirst(key);
 }
 

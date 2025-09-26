@@ -6,7 +6,7 @@ interface HeroProps {
   onNavigateToTask?: (task: string) => void;
 }
 
-const Hero: FC<HeroProps> = ({ isDarkMode, onNavigateToTask }) => {
+const Hero: FC<HeroProps> = () => {
   return (
     <main className="relative flex-grow flex flex-col items-center justify-center text-center px-4 pb-16" id="home">
       <div className="relative mt-[180px]">

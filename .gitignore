@@ -68,5 +68,7 @@ data/precomputed/mr-web/
 data/precomputed/output-prediction/
 data/precomputed/vulnerability-detection/
 data/precomputed/multi-modality/
+data/unit_test_generation/
+data/multi-modality/
 new_dataset/
 data/backuo

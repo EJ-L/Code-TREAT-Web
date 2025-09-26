@@ -308,7 +308,7 @@ interface LeaderboardProps {
           // Get the list of tasks to aggregate (excluding overall itself)
           const tasksToAggregate: TaskType[] = [
             'code generation', 'code translation', 'code summarization', 'code review',
-            'input prediction', 'output prediction', 'vulnerability detection'
+            'input prediction', 'output prediction', 'vulnerability detection', 'unit test generation'
           ];
           
           // Load results from all tasks
@@ -359,11 +359,13 @@ interface LeaderboardProps {
               if (task === 'code summarization' || task === 'code review') {
                 primaryScore = parseFloat(String(result['LLM Judge'] || '0')) || 0;
               } else if (task === 'vulnerability detection') {
-                primaryScore = parseFloat(String(result['F1 Score'] || '0')) || 0;
+                primaryScore = parseFloat(String(result['Accuracy'] || '0')) || 0;
               } else if (task === 'multi-modality') {
                 primaryScore = parseFloat(String(result['MLLM_Score'] || '0')) || 0;
               } else if (task === 'code-robustness') {
                 primaryScore = parseFloat(String(result['ALL'] || '0')) || 0;
+              } else if (task === 'unit test generation') {
+                primaryScore = parseFloat(String(result['line_coverage'] || '0')) || 0;
               } else {
                 // For other tasks, use pass@1
                 primaryScore = parseFloat(String(result['pass@1'] || '0')) || 0;

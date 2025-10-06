@@ -13,8 +13,11 @@ const GuidelinePage: FC<GuidelinePageProps> = ({ isDarkMode }) => {
       {/* Guideline Hero */}
       <GuidelineHero isDarkMode={isDarkMode} />
       
-      {/* Guideline Content */}
-      <GuidelineContent isDarkMode={isDarkMode} />
+      {/* Guideline Content - key forces remount when navigating back */}
+      <GuidelineContent 
+        key="guideline-content"
+        isDarkMode={isDarkMode} 
+      />
     </div>
   );
 };

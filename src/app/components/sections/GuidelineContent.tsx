@@ -1,7 +1,17 @@
 "use client";
 import { FC, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import { 
+  ChevronLeftIcon, 
+  ChevronRightIcon,
+  ChartBarIcon,
+  Cog6ToothIcon,
+  TableCellsIcon,
+  PresentationChartLineIcon,
+  ArrowsPointingOutIcon,
+  ArrowDownTrayIcon,
+  Bars3Icon
+} from '@heroicons/react/24/outline';
 import Image from 'next/image';
 
 interface GuidelineContentProps {
@@ -24,12 +34,16 @@ interface GuidelineSubsection {
 
 interface GuidelineSection {
   title: string;
+  icon?: JSX.Element;
   subsections: GuidelineSubsection[];
 }
 
 const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
-  const [expandedSection, setExpandedSection] = useState<string | null>('leaderboard');
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  // Navigation levels: 'sections' | 'subsections' | 'questions' | 'detail'
+  const [currentLevel, setCurrentLevel] = useState<'sections' | 'subsections' | 'questions' | 'detail'>('sections');
+  const [selectedSection, setSelectedSection] = useState<GuidelineSection | null>(null);
+  const [selectedSubsection, setSelectedSubsection] = useState<GuidelineSubsection | null>(null);
+  const [selectedItem, setSelectedItem] = useState<GuidelineItem | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect if user is on mobile
@@ -43,9 +57,19 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const subsectionIcons: Record<string, JSX.Element> = {
+    'Filtering': <ChartBarIcon className="w-8 h-8" />,
+    'Chart View': <PresentationChartLineIcon className="w-8 h-8" />,
+    'Table View': <TableCellsIcon className="w-8 h-8" />,
+    'Compare': <ArrowsPointingOutIcon className="w-8 h-8" />,
+    'Exporting': <ArrowDownTrayIcon className="w-8 h-8" />,
+    'Sidebar': <Bars3Icon className="w-8 h-8" />,
+  };
+
   const guidelineData: GuidelineSection[] = [
     {
       title: "Leaderboard",
+      icon: <ChartBarIcon className="w-16 h-16" />,
       subsections: [
         {
           title: "Filtering",
@@ -199,6 +223,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
     },
     {
       title: "Additional",
+      icon: <Cog6ToothIcon className="w-16 h-16" />,
       subsections: [
         {
           title: "Sidebar",
@@ -220,13 +245,248 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
     }
   ];
 
-  const toggleSection = (sectionTitle: string) => {
-    setExpandedSection(expandedSection === sectionTitle ? null : sectionTitle);
-    setExpandedItem(null); // Reset expanded item when changing sections
+  // Navigation handlers
+  const handleSectionClick = (section: GuidelineSection) => {
+    setSelectedSection(section);
+    setCurrentLevel('subsections');
   };
 
-  const toggleItem = (itemKey: string) => {
-    setExpandedItem(expandedItem === itemKey ? null : itemKey);
+  const handleSubsectionClick = (subsection: GuidelineSubsection) => {
+    setSelectedSubsection(subsection);
+    setCurrentLevel('questions');
+  };
+
+  const handleQuestionClick = (item: GuidelineItem) => {
+    setSelectedItem(item);
+    setCurrentLevel('detail');
+  };
+
+  const handleBack = () => {
+    if (currentLevel === 'detail') {
+      setSelectedItem(null);
+      setCurrentLevel('questions');
+    } else if (currentLevel === 'questions') {
+      setSelectedSubsection(null);
+      setCurrentLevel('subsections');
+    } else if (currentLevel === 'subsections') {
+      setSelectedSection(null);
+      setCurrentLevel('sections');
+    }
+  };
+
+  // Render different views based on current level
+  const renderSections = () => (
+    <div className="grid md:grid-cols-2 gap-6">
+      {guidelineData.map((section, index) => (
+        <motion.button
+          key={section.title}
+          onClick={() => handleSectionClick(section)}
+          className={`p-12 rounded-xl text-center transition-all ${
+            isDarkMode 
+              ? 'bg-[#0f1729]/80 border-2 border-blue-500/20 hover:border-blue-500/50 hover:bg-blue-900/20' 
+              : 'bg-white border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50'
+          } shadow-lg`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className={`flex justify-center mb-6 ${
+            isDarkMode ? 'text-blue-400' : 'text-blue-600'
+          }`}>
+            {section.icon}
+          </div>
+          <h2 className={`text-4xl font-bold ${
+            isDarkMode ? 'text-blue-300' : 'text-blue-700'
+          }`}>
+            {section.title}
+          </h2>
+          <div className={`mt-4 flex items-center justify-center gap-2 text-lg ${
+            isDarkMode ? 'text-gray-400' : 'text-gray-600'
+          }`}>
+            <span>Explore</span>
+            <ChevronRightIcon className="w-5 h-5" />
+          </div>
+        </motion.button>
+      ))}
+    </div>
+  );
+
+  const renderSubsections = () => {
+    if (!selectedSection) return null;
+
+    return (
+      <div className="space-y-6">
+        {selectedSection.subsections.map((subsection, index) => (
+          <motion.button
+            key={index}
+            onClick={() => handleSubsectionClick(subsection)}
+            className={`w-full p-8 rounded-xl text-left transition-all flex items-center justify-between ${
+              isDarkMode 
+                ? 'bg-[#0f1729]/80 border-2 border-blue-500/20 hover:border-blue-500/50 hover:bg-blue-900/20' 
+                : 'bg-white border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50'
+            } shadow-lg`}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+          >
+            <div className="flex items-center gap-6">
+              <div className={`${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                {subsectionIcons[subsection.title] || <ChartBarIcon className="w-8 h-8" />}
+              </div>
+              <div>
+                <h3 className={`text-3xl font-bold ${
+                  isDarkMode ? 'text-white' : 'text-gray-800'
+                }`}>
+                  {subsection.title}
+                </h3>
+                <p className={`text-lg mt-2 ${
+                  isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  {subsection.items.length} guide{subsection.items.length !== 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+            <ChevronRightIcon className={`w-8 h-8 ${
+              isDarkMode ? 'text-blue-400' : 'text-blue-600'
+            }`} />
+          </motion.button>
+        ))}
+      </div>
+    );
+  };
+
+  const renderQuestions = () => {
+    if (!selectedSubsection) return null;
+
+    return (
+      <div className="space-y-4">
+        {selectedSubsection.items.map((item, index) => (
+          <motion.button
+            key={index}
+            onClick={() => handleQuestionClick(item)}
+            className={`w-full p-6 rounded-xl text-left transition-all flex items-center justify-between ${
+              isDarkMode 
+                ? 'bg-[#0f1729]/80 border border-blue-500/20 hover:border-blue-500/50 hover:bg-blue-900/20' 
+                : 'bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50'
+            } shadow-md`}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.05 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+          >
+            <h4 className={`text-xl font-semibold ${
+              isDarkMode ? 'text-blue-300' : 'text-blue-700'
+            }`}>
+              {item.question}
+            </h4>
+            <ChevronRightIcon className={`w-6 h-6 flex-shrink-0 ml-4 ${
+              isDarkMode ? 'text-blue-400' : 'text-blue-600'
+            }`} />
+          </motion.button>
+        ))}
+      </div>
+    );
+  };
+
+  const renderDetail = () => {
+    if (!selectedItem) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="space-y-8"
+      >
+        {/* Question Title */}
+        <div className={`p-8 rounded-xl ${
+          isDarkMode 
+            ? 'bg-blue-900/20 border-2 border-blue-500/30' 
+            : 'bg-blue-50 border-2 border-blue-300'
+        }`}>
+          <h3 className={`text-3xl font-bold ${
+            isDarkMode ? 'text-blue-200' : 'text-blue-800'
+          }`}>
+            {selectedItem.question}
+          </h3>
+        </div>
+
+        {/* Steps */}
+        <div className={`p-8 rounded-xl ${
+          isDarkMode 
+            ? 'bg-[#0f1729]/80 border border-blue-500/20' 
+            : 'bg-white border border-slate-200'
+        } shadow-lg`}>
+          <h4 className={`text-2xl font-bold mb-6 ${
+            isDarkMode ? 'text-white' : 'text-gray-800'
+          }`}>
+            Steps
+          </h4>
+          <div className="space-y-4">
+            {selectedItem.steps.map((step, stepIndex) => (
+              <div key={stepIndex} className="flex items-start gap-4">
+                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                  isDarkMode 
+                    ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' 
+                    : 'bg-blue-100 text-blue-700 border border-blue-300'
+                }`}>
+                  {stepIndex + 1}
+                </div>
+                <p className={`text-lg pt-1 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  {step}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Screenshot */}
+        {selectedItem.images && (
+          <div className={`p-8 rounded-xl ${
+            isDarkMode 
+              ? 'bg-[#0f1729]/80 border border-blue-500/20' 
+              : 'bg-white border border-slate-200'
+          } shadow-lg`}>
+            <h4 className={`text-2xl font-bold mb-6 ${
+              isDarkMode ? 'text-white' : 'text-gray-800'
+            }`}>
+              Screenshot
+            </h4>
+            <div className={`rounded-lg overflow-hidden ${
+              isDarkMode 
+                ? 'bg-gray-900/50 border border-gray-700' 
+                : 'bg-white border border-gray-300'
+            } p-4`}>
+              <div className="relative w-full" style={{ minHeight: '200px' }}>
+                <Image
+                  src={isMobile && selectedItem.images.mobile ? selectedItem.images.mobile : selectedItem.images.pc || '/guidelines/placeholder.svg'}
+                  alt={`${selectedItem.question} - ${isMobile ? 'Mobile' : 'Desktop'} View`}
+                  width={800}
+                  height={450}
+                  className="rounded-lg w-full h-auto"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/guidelines/placeholder.svg';
+                  }}
+                />
+                <div className={`mt-4 text-center text-sm font-medium ${
+                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                }`}>
+                  {isMobile ? 'Mobile View' : 'Desktop View'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </motion.div>
+    );
   };
 
   return (
@@ -234,179 +494,78 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
       <motion.div 
         className="max-w-6xl mx-auto px-4"
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="space-y-6">
-          {guidelineData.map((section, sectionIndex) => (
-            <motion.div
-              key={section.title}
-              className={`rounded-xl overflow-hidden ${
+        {/* Back Button */}
+        <AnimatePresence>
+          {currentLevel !== 'sections' && (
+            <motion.button
+              onClick={handleBack}
+              className={`mb-8 flex items-center gap-3 px-6 py-3 rounded-lg font-semibold text-lg transition-all ${
                 isDarkMode 
-                  ? 'bg-[#0f1729]/80 border border-blue-500/20' 
-                  : 'bg-white border border-slate-200'
-              } shadow-lg`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: sectionIndex * 0.1 }}
+                  ? 'bg-blue-900/30 text-blue-200 hover:bg-blue-900/50 border border-blue-500/30' 
+                  : 'bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-300'
+              }`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {/* Section Header */}
-              <button
-                onClick={() => toggleSection(section.title)}
-                className={`w-full px-8 py-6 flex items-center justify-between ${
-                  isDarkMode 
-                    ? 'bg-blue-900/20 hover:bg-blue-900/30' 
-                    : 'bg-blue-50 hover:bg-blue-100'
-                } transition-colors`}
-              >
-                <h2 className={`text-4xl font-bold ${
-                  isDarkMode ? 'text-blue-300' : 'text-blue-700'
-                }`}>
-                  {section.title}
-                </h2>
-                {expandedSection === section.title ? (
-                  <ChevronUpIcon className={`w-8 h-8 ${isDarkMode ? 'text-blue-300' : 'text-blue-700'}`} />
-                ) : (
-                  <ChevronDownIcon className={`w-8 h-8 ${isDarkMode ? 'text-blue-300' : 'text-blue-700'}`} />
-                )}
-              </button>
+              <ChevronLeftIcon className="w-6 h-6" />
+              <span>Back</span>
+            </motion.button>
+          )}
+        </AnimatePresence>
 
-              {/* Section Content */}
-              <AnimatePresence>
-                {expandedSection === section.title && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-8 space-y-8">
-                      {section.subsections.map((subsection, subsectionIndex) => (
-                        <div key={subsectionIndex} className="space-y-4">
-                          {/* Subsection Title */}
-                          <h3 className={`text-3xl font-bold ${
-                            isDarkMode ? 'text-white' : 'text-gray-800'
-                          }`}>
-                            {subsection.title}
-                          </h3>
-
-                          {/* Items */}
-                          <div className="space-y-4">
-                            {subsection.items.map((item, itemIndex) => {
-                              const itemKey = `${section.title}-${subsectionIndex}-${itemIndex}`;
-                              const isExpanded = expandedItem === itemKey;
-
-                              return (
-                                <div
-                                  key={itemIndex}
-                                  className={`rounded-lg overflow-hidden ${
-                                    isDarkMode 
-                                      ? 'bg-gray-800/50 border border-gray-700' 
-                                      : 'bg-gray-50 border border-gray-200'
-                                  }`}
-                                >
-                                  {/* Question Header */}
-                                  <button
-                                    onClick={() => toggleItem(itemKey)}
-                                    className={`w-full px-6 py-4 flex items-center justify-between ${
-                                      isDarkMode 
-                                        ? 'hover:bg-gray-700/50' 
-                                        : 'hover:bg-gray-100'
-                                    } transition-colors`}
-                                  >
-                                    <h4 className={`text-xl font-semibold text-left ${
-                                      isDarkMode ? 'text-blue-300' : 'text-blue-700'
-                                    }`}>
-                                      {item.question}
-                                    </h4>
-                                    {isExpanded ? (
-                                      <ChevronUpIcon className={`w-6 h-6 flex-shrink-0 ml-4 ${
-                                        isDarkMode ? 'text-blue-300' : 'text-blue-700'
-                                      }`} />
-                                    ) : (
-                                      <ChevronDownIcon className={`w-6 h-6 flex-shrink-0 ml-4 ${
-                                        isDarkMode ? 'text-blue-300' : 'text-blue-700'
-                                      }`} />
-                                    )}
-                                  </button>
-
-                                  {/* Answer Content */}
-                                  <AnimatePresence>
-                                    {isExpanded && (
-                                      <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="overflow-hidden"
-                                      >
-                                        <div className="px-6 pb-6 space-y-6">
-                                          {/* Steps */}
-                                          <div className="space-y-3">
-                                            {item.steps.map((step, stepIndex) => (
-                                              <div key={stepIndex} className="flex items-start">
-                                                <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 mr-3 ${
-                                                  isDarkMode ? 'bg-blue-400' : 'bg-blue-600'
-                                                }`} />
-                                                <p className={`text-lg ${
-                                                  isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                                                }`}>
-                                                  {step}
-                                                </p>
-                                              </div>
-                                            ))}
-                                          </div>
-
-                                          {/* Image */}
-                                          {item.images && (
-                                            <div className="mt-6">
-                                              <div className={`rounded-lg overflow-hidden ${
-                                                isDarkMode 
-                                                  ? 'bg-gray-900/50 border border-gray-700' 
-                                                  : 'bg-white border border-gray-300'
-                                              } p-4`}>
-                                                <div className="relative w-full" style={{ minHeight: '200px' }}>
-                                                  <Image
-                                                    src={isMobile && item.images.mobile ? item.images.mobile : item.images.pc || '/guidelines/placeholder.png'}
-                                                    alt={`${item.question} - ${isMobile ? 'Mobile' : 'Desktop'} View`}
-                                                    width={800}
-                                                    height={450}
-                                                    className="rounded-lg w-full h-auto"
-                                                    onError={(e) => {
-                                                      // Fallback to placeholder on error
-                                                      const target = e.target as HTMLImageElement;
-                                                      target.src = '/guidelines/placeholder.svg';
-                                                    }}
-                                                  />
-                                                  <div className={`mt-2 text-center text-sm ${
-                                                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                                                  }`}>
-                                                    {isMobile ? 'Mobile View' : 'Desktop View'}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          )}
-                                        </div>
-                                      </motion.div>
-                                    )}
-                                  </AnimatePresence>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+        {/* Breadcrumb */}
+        <AnimatePresence>
+          {currentLevel !== 'sections' && (
+            <motion.div
+              className={`mb-8 flex items-center gap-2 text-lg ${
+                isDarkMode ? 'text-gray-400' : 'text-gray-600'
+              }`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="font-medium">{selectedSection?.title}</span>
+              {currentLevel !== 'subsections' && (
+                <>
+                  <span>/</span>
+                  <span className="font-medium">{selectedSubsection?.title}</span>
+                </>
+              )}
+              {currentLevel === 'detail' && (
+                <>
+                  <span>/</span>
+                  <span className={`font-medium ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                    {selectedItem?.question}
+                  </span>
+                </>
+              )}
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
+
+        {/* Content based on current level */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentLevel}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {currentLevel === 'sections' && renderSections()}
+            {currentLevel === 'subsections' && renderSubsections()}
+            {currentLevel === 'questions' && renderQuestions()}
+            {currentLevel === 'detail' && renderDetail()}
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
     </section>
   );

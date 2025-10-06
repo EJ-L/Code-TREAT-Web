@@ -1,15 +1,15 @@
 "use client";
 import { FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import WebpageIcon from '../ui/WebpageIcon';
 import { TaskType, Ability } from '@/lib/types';
 
 interface SidebarProps {
   isDarkMode: boolean;
   setIsDarkMode: (value: boolean) => void;
-  currentSection: 'overview' | 'tasks' | 'about';
-  onSectionChange: (section: 'overview' | 'tasks' | 'about') => void;
+  currentSection: 'overview' | 'tasks' | 'about' | 'guide';
+  onSectionChange: (section: 'overview' | 'tasks' | 'about' | 'guide') => void;
   isOpen: boolean;
   onToggle: () => void;
   taskAbilities?: Record<TaskType, Ability>;
@@ -158,6 +158,25 @@ const Sidebar: FC<SidebarProps> = ({
               </li>
               {/* Contact information hidden for privacy reasons */}
             </ul>
+          </li>
+
+          {/* User Guide */}
+          <li>
+            <button
+              onClick={() => onSectionChange('guide')}
+              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors flex items-center gap-3 ${
+                currentSection === 'guide'
+                  ? isDarkMode 
+                    ? 'bg-blue-900/30 text-blue-200' 
+                    : 'bg-blue-50 text-blue-700'
+                  : isDarkMode 
+                    ? 'text-blue-200 hover:bg-blue-900/20' 
+                    : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <QuestionMarkCircleIcon className="w-8 h-8" />
+              <span>User Guide</span>
+            </button>
           </li>
         </ul>
       </nav>

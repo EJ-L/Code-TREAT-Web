@@ -8,6 +8,7 @@ import Sidebar from '@/app/components/layout/Sidebar';
 import OverviewPage from '@/app/components/pages/OverviewPage';
 import TasksPage from '@/app/components/pages/TasksPage';
 import AboutPage from '@/app/components/pages/AboutPage';
+import GuidelinePage from '@/app/components/pages/GuidelinePage';
 
 // Define task abilities - mapping each task type to its associated capabilities
 const taskAbilities: Record<TaskType, Ability> = {
@@ -108,7 +109,7 @@ const taskAbilities: Record<TaskType, Ability> = {
 export default function Home() {
   // Main app state
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [currentSection, setCurrentSection] = useState<'overview' | 'tasks' | 'about'>('overview');
+  const [currentSection, setCurrentSection] = useState<'overview' | 'tasks' | 'about' | 'guide'>('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState<TaskType>('overall');
 
@@ -118,7 +119,8 @@ export default function Home() {
       const sectionToHash = {
         'overview': '#home',
         'tasks': '#evaluation', 
-        'about': '#about'
+        'about': '#about',
+        'guide': '#guide'
       };
       window.location.hash = sectionToHash[currentSection];
     }
@@ -131,6 +133,7 @@ export default function Home() {
         '#home': 'overview' as const,
         '#evaluation': 'tasks' as const,
         '#about': 'about' as const,
+        '#guide': 'guide' as const,
         '': 'overview' as const // Default case
       };
       
@@ -155,7 +158,7 @@ export default function Home() {
     }
   }, [currentSection]);
 
-  const handleSectionChange = (section: 'overview' | 'tasks' | 'about') => {
+  const handleSectionChange = (section: 'overview' | 'tasks' | 'about' | 'guide') => {
     setCurrentSection(section);
     setIsSidebarOpen(false); // Close sidebar on mobile after selection
     
@@ -187,6 +190,8 @@ export default function Home() {
         return <TasksPage taskAbilities={taskAbilities} isDarkMode={isDarkMode} currentTask={currentTask} />;
       case 'about':
         return <AboutPage isDarkMode={isDarkMode} />;
+      case 'guide':
+        return <GuidelinePage isDarkMode={isDarkMode} />;
       default:
         return <OverviewPage isDarkMode={isDarkMode} onNavigateToTask={handleNavigateToTask} />;
     }

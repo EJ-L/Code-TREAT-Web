@@ -232,6 +232,12 @@ interface LeaderboardProps {
         return releaseDate >= timelineRange.start && releaseDate <= timelineRange.end;
       });
       debug.leaderboard(`Timeline filtered: ${filtered.length}/${results.length} results`);
+      
+      // Normalize ranks after timeline filtering to ensure continuous ranking
+      filtered = filtered.map((result, index) => ({
+        ...result,
+        rank: index + 1
+      }));
     }
     
     const sorted = sortResults(filtered, sortConfig);
@@ -738,6 +744,53 @@ interface LeaderboardProps {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
+  // Touch-based column resizing functionality for mobile
+  const handleTouchResizeStart = (e: React.TouchEvent, key: string) => {
+    e.preventDefault();
+    setResizingColumn(key);
+    
+    const touch = e.touches[0];
+    let currentX = touch.clientX;
+    let currentWidth = columnWidths[key] || 100;
+    const minWidth = getMinColumnWidthHelper(key);
+    const maxWidth = getMaxColumnWidthHelper(key);
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      if (moveEvent.touches.length === 0) return;
+      
+      const touch = moveEvent.touches[0];
+      const deltaX = touch.clientX - currentX;
+      const proposedWidth = currentWidth + deltaX;
+      
+      // Calculate the actual new width within bounds
+      const newWidth = Math.min(maxWidth, Math.max(minWidth, proposedWidth));
+      
+      // Only update reference point if we're not at the boundary
+      // This prevents the "dead zone" when dragging past min/max limits
+      if (newWidth === proposedWidth) {
+        // Width changed as expected, update reference points
+        currentX = touch.clientX;
+        currentWidth = newWidth;
+      }
+      // If we hit a boundary (newWidth !== proposedWidth), keep current reference points
+      // so that immediate reverse movement will be responsive
+      
+      setColumnWidths(prev => ({
+          ...prev,
+        [key]: newWidth
+      }));
+    };
+
+    const handleTouchEnd = () => {
+      setResizingColumn(null);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+  };
+
   // Generate CSV data
   const csvData = useMemo(() => {
     const headers = getFilteredTableHeadersMemo(currentTask);
@@ -890,6 +943,7 @@ interface LeaderboardProps {
               resizingColumn={resizingColumn}
               handleSort={handleSort}
               handleResizeStart={handleResizeStart}
+              handleTouchResizeStart={handleTouchResizeStart}
               getContentWidth={getContentWidth}
               isColumnCentered={isColumnCentered}
               getStickyStyles={(key: string) => getStickyStyles(currentTask, key)}

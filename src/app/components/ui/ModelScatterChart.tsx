@@ -176,7 +176,8 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
   const [showRegularModels, setShowRegularModels] = useState(true);
   
   // Check if CoT filtering is enabled (only for specific datasets)
-  const cotFilterEnabled = currentTask === 'code-robustness' && selectedMultiTab && ['All', 'CRUXEval', 'LiveCodeBench (CE)'].includes(selectedMultiTab);
+  // Disabled for code-robustness as requested
+  const cotFilterEnabled = false; // currentTask === 'code-robustness' && selectedMultiTab && ['All', 'CRUXEval', 'LiveCodeBench (CE)'].includes(selectedMultiTab);
   
   // Zoom and pan state
   const [zoomState, setZoomState] = useState<ZoomState | null>(null);
@@ -841,7 +842,7 @@ const ModelScatterChart = forwardRef<ScatterChartRef, ScatterChartProps>(({
       </div>
 
       {/* Model Type Filter Buttons - only show for Code-Robustness leaderboard with specific datasets - Responsive */}
-      {currentTask === 'code-robustness' && selectedMultiTab && ['All', 'CRUXEval', 'LiveCodeBench (CE)'].includes(selectedMultiTab) && (
+      {cotFilterEnabled && (
         <div className="mb-2 sm:mb-4 flex flex-wrap gap-2 sm:gap-3 justify-center">
           <button
             onClick={() => setShowCoTModels(!showCoTModels)}

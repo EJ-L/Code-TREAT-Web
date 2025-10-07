@@ -23,6 +23,7 @@ interface ResultsTableProps {
   resizingColumn: string | null;
   handleSort: (key: string) => void;
   handleResizeStart: (e: React.MouseEvent, key: string) => void;
+  handleTouchResizeStart: (e: React.TouchEvent, key: string) => void;
   getContentWidth: (columnWidth: number) => number;
   isColumnCentered: (key: string) => boolean;
   getStickyStyles: (key: string) => string;
@@ -62,6 +63,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
   resizingColumn,
   handleSort,
   handleResizeStart,
+  handleTouchResizeStart,
   getContentWidth,
   isColumnCentered,
   getStickyStyles,
@@ -619,6 +621,7 @@ const ResultsTable: FC<ResultsTableProps> = ({
                       resizingColumn={resizingColumn}
                       handleSort={handleSort}
                       handleResizeStart={handleResizeStart}
+                      handleTouchResizeStart={handleTouchResizeStart}
                       getContentWidth={getContentWidth}
                       isColumnCentered={isColumnCentered}
                       getStickyStyles={getStickyStyles}

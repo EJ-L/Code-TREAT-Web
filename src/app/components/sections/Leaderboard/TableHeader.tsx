@@ -14,6 +14,7 @@ interface TableHeaderProps {
   resizingColumn: string | null;
   handleSort: (key: string) => void;
   handleResizeStart: (e: React.MouseEvent, key: string) => void;
+  handleTouchResizeStart: (e: React.TouchEvent, key: string) => void;
   getContentWidth: (columnWidth: number) => number;
   isColumnCentered: (key: string) => boolean;
   getStickyStyles: (key: string) => string;
@@ -60,6 +61,7 @@ const TableHeader: FC<TableHeaderProps> = ({
   resizingColumn,
   handleSort,
   handleResizeStart,
+  handleTouchResizeStart,
   getContentWidth,
   isColumnCentered,
   getStickyStyles,
@@ -188,6 +190,7 @@ const TableHeader: FC<TableHeaderProps> = ({
       <div 
         className={`absolute right-0 top-0 h-full ${header.key === 'rank' || (currentTask === 'overall' && header.key === 'model') ? '' : 'cursor-col-resize'} flex items-center justify-center`}
         onMouseDown={(e) => header.key !== 'rank' && !(currentTask === 'overall' && header.key === 'model') && handleResizeStart(e, header.key)}
+        onTouchStart={(e) => header.key !== 'rank' && !(currentTask === 'overall' && header.key === 'model') && handleTouchResizeStart(e, header.key)}
         onClick={(e) => e.stopPropagation()} // Prevent sort on resize handle click
       >
         {resizingColumn === header.key ? (

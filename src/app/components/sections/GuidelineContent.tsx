@@ -21,10 +21,14 @@ interface GuidelineContentProps {
 
 interface GuidelineItem {
   question: string;
-  steps: string[];
+  instructions: string[];
   images?: {
     pc?: string | string[];
     mobile?: string | string[];
+    captions?: {
+      pc?: string | string[];
+      mobile?: string | string[];
+    };
   };
   navigateToTask?: string;
 }
@@ -79,39 +83,50 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "How to filter using the time range",
-              steps: [
-                "Step 1: Each leaderboard has a timeline bar at the top of the table or chart.",
-                "Step 2: The tooltip shows the selected time range. Drag the handles to adjust the range. For example, you might select [Mar 2025, Aug 2025]."
+              instructions: [
+                "Each leaderboard has a timeline bar at the top of the table or chart.",
+                "The tooltip shows the selected time range. Drag the handles to adjust the range. For example, you might select [Mar 2025, Aug 2025]."
               ],
               images: {
                 pc: ["/guidelines/desktop/timeline-filter-pc-1.png", "/guidelines/desktop/timeline-filter-pc-2.png"],
-                mobile: ["/guidelines/mobile/timeline-filter-mobile-1.png", "/guidelines/mobile/timeline-filter-mobile-2.png"]
+                mobile: ["/guidelines/mobile/timeline-filter-mobile-1.png", "/guidelines/mobile/timeline-filter-mobile-2.png"],
+                captions: {
+                  pc: ["Timeline bar showing the full date range", "Dragging the handles to adjust the selected time range (Models from Dec 2024 to May 2025)"],
+                  mobile: ["Timeline bar on mobile view", "Adjusting time range on mobile interface (Models from Dec 2024 to May 2025)"]
+                }
               }
             },
             {
               question: "What filters are available in the leaderboard?",
-              steps: [
+              instructions: [
                 "In table view, there is a timeline range bar (blue bar at the top) and a header bar for modality/dataset filters.",
                 "Some leaderboards include checkboxes that let you filter by additional dimensions.",
                 "In chart view, you can also switch the displayed metric by clicking the metric buttons."
               ],
               images: {
                 pc: ["/guidelines/desktop/filters-available-pc-1.png", "/guidelines/desktop/filters-available-pc-2.png"],
-                mobile: ["/guidelines/mobile/filters-available-mobile-1.png", "/guidelines/mobile/filters-available-mobile-2.png"]
+                mobile: ["/guidelines/mobile/filters-available-mobile-1.png", "/guidelines/mobile/filters-available-mobile-2.png"],
+                captions: {
+                  pc: ["", "In here, user can select other metric graph result by clicking the buttons (e.g. Easy Pass@1)"],
+                  mobile: ["", "In here, user can select other metric graph result by clicking the buttons (e.g. Easy Pass@1)"]
+                }
               }
             },
             {
               question: "How to apply additional filters",
-              steps: [
-                "Step 1: In certain leaderboards (Code Generation, Code Translation, Code Reasoning, Multi‑Modality), additional filters appear between the header filters and the results.",
-                "Step 2: By default, no additional filters are applied (equivalent to selecting all options).",
-                "Step 3: Use the checkboxes to narrow the results. For example, filter by dataset \"HackerRank\" and knowledge \"Data Structures\"."
+              instructions: [
+                "In certain leaderboards (Code Generation, Code Translation, Code Reasoning, Multi‑Modality), additional filters appear between the header filters and the results.",
+                "By default, no additional filters are applied (equivalent to selecting all options).",
+                "Use the checkboxes to narrow the results. For example, filter by dataset \"HackerRank\" and knowledge \"Data Structures\"."
               ],
               images: {
                 pc: ["/guidelines/desktop/additional-filters-pc-1.png", "/guidelines/desktop/additional-filters-pc-2.png"],
-                mobile: ["/guidelines/mobile/additional-filters-mobile-1.png", "/guidelines/mobile/additional-filters-mobile-2.png"]
+                mobile: ["/guidelines/mobile/additional-filters-mobile-1.png", "/guidelines/mobile/additional-filters-mobile-2.png"],
+                captions: {
+                  pc: ["In default, the table is showing all results", "In here, HackerRank and Algorithms results are shown"],
+                  mobile: ["In default, the table is showing all results", "In here, HackerRank and Algorithms results are shown"]
+                }
               },
-              navigateToTask: "code-robustness"
             }
           ]
         },
@@ -120,7 +135,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "What is in the chart view",
-              steps: [
+              instructions: [
                 "The chart view shows model performance for a selected metric over the model release date.",
                 "It includes the header filter bar (modality/dataset), any additional dimension filters, and the timeline range bar.",
                 "Below the graph, the model results for the selected metric are listed."
@@ -132,17 +147,21 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
             },
             {
               question: "How to see extra information in the graph",
-              steps: [
-                "Step 1: Hover over a data point to see the model name, release date, and exact metric value.",
-                "Step 2: Zoom in or out using the green (zoom in) and orange (zoom out) buttons.",
-                "Step 3 (PC only): After zooming in, you can:",
+              instructions: [
+                "Hover over a data point to see the model name, release date, and exact metric value.",
+                "Zoom in or out using the green (zoom in) and orange (zoom out) buttons.",
+                "After zooming in, you can:",
                 "  • Dragging: Pan the view",
-                "  • Ctrl+Drag: Select an area",
+                "  • Ctrl+Drag: Select an area (PC only)",
                 "  • Double‑click: Reset"
               ],
               images: {
                 pc: ["/guidelines/desktop/chart-interactions-pc-1.png", "/guidelines/desktop/chart-interactions-pc-2.png"],
-                mobile: ["/guidelines/mobile/chart-interactions-mobile-1.png", "/guidelines/mobile/chart-interactions-mobile-2.png"]
+                mobile: ["/guidelines/mobile/chart-interactions-mobile-1.png", "/guidelines/mobile/chart-interactions-mobile-2.png"],
+                captions: {
+                  pc: ["", "User can also click the 'Reset Zoom' (Red button) to reset the zoom effect"],
+                  mobile: ["", "User can also click the 'Reset Zoom' (Red button) to reset the zoom effect"]
+                }
               }
             }
           ]
@@ -152,17 +171,21 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "How to adjust the table",
-              steps: [
-                "Step 1: Besides using filters, click a column header to sort ascending or descending (default: ascending by rank).",
-                "Step 2: Click the Rank header to reset sorting.",
-                "Step 3: Drag a header edge to increase or decrease the column width to focus on specific results.",
-                "Step 4: Hover a header to see the full metric name.",
-                "Step 5: Click a model name in the Model column to open that model's detail page.",
-                "Step 6: Use the horizontal scrollbar under the table to view columns that are off‑screen."
+              instructions: [
+                "Besides using filters, click a column header to sort ascending or descending (default: ascending by rank).",
+                "Click the Rank header to reset sorting.",
+                "Drag a header edge to increase or decrease the column width to focus on specific results.",
+                "Hover a header to see the full metric name.",
+                "Click a model name in the Model column to open that model's detail page.",
+                "Use the horizontal scrollbar under the table to view columns that are off‑screen."
               ],
               images: {
                 pc: ["/guidelines/desktop/table-adjust-pc-1.png", "/guidelines/desktop/table-adjust-pc-2.png", "/guidelines/desktop/table-adjust-pc-3.png", "/guidelines/desktop/table-adjust-pc-4.png", "/guidelines/desktop/table-adjust-pc-5.png", "/guidelines/desktop/table-adjust-pc-6.png"],
-                mobile: ["/guidelines/mobile/table-adjust-mobile-1.png", "/guidelines/mobile/table-adjust-mobile-2.png", "/guidelines/mobile/table-adjust-mobile-3.png", "/guidelines/mobile/table-adjust-mobile-4.png", "/guidelines/mobile/table-adjust-mobile-5.png", "/guidelines/mobile/table-adjust-mobile-6.png"]
+                mobile: ["/guidelines/mobile/table-adjust-mobile-1.png", "/guidelines/mobile/table-adjust-mobile-2.png", "/guidelines/mobile/table-adjust-mobile-3.png", "/guidelines/mobile/table-adjust-mobile-4.png", "/guidelines/mobile/table-adjust-mobile-5.png", "/guidelines/mobile/table-adjust-mobile-6.png"],
+                captions: {
+                  pc: ["", "Here showing ranking by sorting the models based on CLIP metric descendingly", "User can increase or decrease the column width in the table", "It will show the detail name Compliation metric when hovering it", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the horizontal scrollbar at the bottom"],
+                  mobile: ["", "Here showing ranking by sorting the models based on CLIP metric descendingly", "User can increase or decrease the column width in the table", "It will show the detail name Compliation metric when hovering it", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the horizontal scrollbar at the bottom"]
+                }
               }
             }
           ]
@@ -172,17 +195,21 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "How to open the compare section",
-              steps: [
+              instructions: [
                 "Click the \"Compare\" button under the title."
               ],
               images: {
                 pc: "/guidelines/desktop/compare-open-pc.png",
-                mobile: "/guidelines/mobile/compare-open-mobile.png"
+                mobile: "/guidelines/mobile/compare-open-mobile.png",
+                captions: {
+                  pc: ["Clicking the 'Compare' button (purple button) can go to the compare section"],
+                  mobile: ["Clicking the 'Compare' button (purple button) can go to the compare section"]
+                }
               }
             },
             {
               question: "What is in the compare section",
-              steps: [
+              instructions: [
                 "The compare section visualizes the table results using bar or radar charts for a clearer, side‑by‑side comparison between models."
               ],
               images: {
@@ -192,16 +219,20 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
             },
             {
               question: "How to compare models",
-              steps: [
-                "Step 1: In the Select Models area, choose up to 5 models to compare.",
-                "Step 2: The Performance Comparison chart updates to show the selected models.",
-                "Step 3: Click a model name in the legend to temporarily hide or show it in the chart.",
-                "Step 4: Hover to see detailed metric values.",
+              instructions: [
+                "In the Select Models area, choose up to 5 models to compare.",
+                "The Performance Comparison chart updates to show the selected models.",
+                "Click a model name in the legend to temporarily hide or show it in the chart.",
+                "Hover to see detailed metric values.",
                 "Notice: If filters are enabled, the compare section reflects them (e.g., it shows \"Modality: Python\" for the Python leaderboard)."
               ],
               images: {
                 pc: ["/guidelines/desktop/compare-models-pc-1.png", "/guidelines/desktop/compare-models-pc-2.png", "/guidelines/desktop/compare-models-pc-3.png", "/guidelines/desktop/compare-models-pc-4.png"],
-                mobile: ["/guidelines/mobile/compare-models-mobile-1.png", "/guidelines/mobile/compare-models-mobile-2.png", "/guidelines/mobile/compare-models-mobile-3.png", "/guidelines/mobile/compare-models-mobile-4.png"]
+                mobile: ["/guidelines/mobile/compare-models-mobile-1.png", "/guidelines/mobile/compare-models-mobile-2.png", "/guidelines/mobile/compare-models-mobile-3.png", "/guidelines/mobile/compare-models-mobile-4.png"],
+                captions: {
+                  pc: ["Here is showing the comparison between 3 models", "Here is the result when 'Claude-3.7-Sonnet' (orange button) is hidden", "", "When user selected some filter outside, it will show the filter in the section as well"],
+                  mobile: ["Here is showing the comparison between 3 models", "Here is the result when 'Claude-3.7-Sonnet' (orange button) is hidden", "", "When user selected some filter outside, it will show the filter in the section as well"]
+                }
               }
             }
           ]
@@ -211,7 +242,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "How to export the results",
-              steps: [
+              instructions: [
                 "Click the green \"Export\" button under the title.",
                 "In table view, a CSV file with the numerical data is exported.",
                 "In chart view, the chart image is exported."
@@ -234,13 +265,17 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           items: [
             {
               question: "How to switch dark/light mode",
-              steps: [
-                "Step 1: On small screens, click the top‑right menu.",
-                "Step 2: Click the Dark Mode button to toggle between dark and light modes."
+              instructions: [
+                "On small screens, click the top‑right menu.",
+                "Click the Dark Mode button to toggle between dark and light modes."
               ],
               images: {
                     pc: ["/guidelines/desktop/dark-mode-pc-1.png", "/guidelines/desktop/dark-mode-pc-2.png", "/guidelines/desktop/dark-mode-pc-3.png"],
-                    mobile: ["/guidelines/mobile/dark-mode-mobile-1.png", "/guidelines/mobile/dark-mode-mobile-2.png", "/guidelines/mobile/dark-mode-mobile-3.png"]
+                    mobile: ["/guidelines/mobile/dark-mode-mobile-1.png", "/guidelines/mobile/dark-mode-mobile-2.png", "/guidelines/mobile/dark-mode-mobile-3.png"],
+                    captions: {
+                      pc: ["The sidebar is always showing in the full screen", "In small screen, user need to click the top-right icon to first open the sidebar first", ""],
+                      mobile: ["The sidebar is always showing in the full screen", "In small screen, user need to click the top-right icon to first open the sidebar first", ""]
+                    }
                   }
                 }
               ]
@@ -250,27 +285,21 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
               items: [
                 {
                   question: "How to navigate between different leaderboards",
-                  steps: [
-                    "Step 1: Use the sidebar on the left to access different sections.",
-                    "Step 2: Click on 'Tasks' to view all available leaderboards.",
-                    "Step 3: Select a specific task (e.g., Code Generation, Code Robustness) to view its leaderboard.",
-                    "Step 4: Use the task selector at the top of the leaderboard to switch between tasks."
-                  ],
-                  images: {
-                    pc: "/guidelines/desktop/navigation-pc.png",
-                    mobile: "/guidelines/mobile/navigation-mobile.png"
-                  }
+                  instructions: [
+                    "Use the sidebar on the left to access different sections. (For smaller screen or mobile version, user need to click the top-right icon to open the sidebar first)",
+                    "Select the leaderboard task under the 'Tasks' section",
+                    ]
                 },
                 {
                   question: "What do the different task types mean?",
-                  steps: [
-                    "• Code Generation: Evaluates models' ability to generate code from natural language descriptions",
-                    "• Code Translation: Tests translation between different programming languages",
-                    "• Code Summarization: Measures ability to create concise summaries of code functionality",
-                    "• Code Review: Assesses models' capability to identify issues and suggest improvements",
-                    "• Code Robustness: Tests resilience against various code perturbations and edge cases",
-                    "• Vulnerability Detection: Evaluates detection of security vulnerabilities in code",
-                    "• Multi-Modality: Tests understanding of code with visual elements like UI components"
+                  instructions: [
+                    "Code Generation: Evaluates models' ability to generate code from natural language descriptions",
+                    "Code Translation: Tests translation between different programming languages",
+                    "Code Summarization: Measures ability to create concise summaries of code functionality",
+                    "Code Review: Assesses models' capability to identify issues and suggest improvements",
+                    "Code Robustness: Tests resilience against various code perturbations and edge cases",
+                    "Vulnerability Detection: Evaluates detection of security vulnerabilities in code",
+                    "Multi-Modality: Tests understanding of code with visual elements like UI components"
                   ],
                   images: {
                     pc: "/guidelines/desktop/task-types-pc.png",
@@ -284,29 +313,41 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
               items: [
                 {
                   question: "What should I do if the leaderboard is not loading?",
-                  steps: [
-                    "Step 1: Check your internet connection and refresh the page.",
-                    "Step 2: Clear your browser cache and cookies.",
-                    "Step 3: Try using a different browser or incognito/private mode.",
-                    "Step 4: If the issue persists, the data might be temporarily unavailable."
-                  ],
-                  images: {
-                    pc: "/guidelines/desktop/troubleshooting-pc.png",
-                    mobile: "/guidelines/mobile/troubleshooting-mobile.png"
-                  }
+                  instructions: [
+                    "Check your internet connection and refresh the page.",
+                    "Clear your browser cache and cookies.",
+                    "Try using a different browser or incognito/private mode.",
+                    "If the issue persists, the data might be temporarily unavailable."
+                  ]
                 },
                 {
                   question: "Why are some models missing from the leaderboard?",
-                  steps: [
+                  instructions: [
                     "Models may be missing due to:",
-                    "• Filters applied that exclude certain models",
-                    "• Time range selection that doesn't include the model's release date",
-                    "• The model hasn't been evaluated on the selected task/dataset",
-                    "• The model data is still being processed"
+                    "Filters applied that exclude certain models",
+                    "The model hasn't been evaluated on the selected task/dataset",
+                    "You need to check the paper detail to find the evaluated model list for each task"
                   ],
-                  images: {
-                    pc: "/guidelines/desktop/missing-models-pc.png",
-                    mobile: "/guidelines/mobile/missing-models-mobile.png"
+            }
+          ]
+        },
+        {
+          title: "External Resources",
+          items: [
+            {
+              question: "How to access other resources",
+              instructions: [
+                "You need to navigate to overview page (via sidebar). Then there are 3 buttons in the hero section. Inside:",
+                "Code - Linking to the Github project page",
+                "Data - Linking to the huggingface page storing the dataset"
+              ],
+              images: {
+                pc: ["/guidelines/desktop/external-resources-pc-1.png", "/guidelines/desktop/external-resources-pc-2.png", "/guidelines/desktop/external-resources-pc-3.png"],
+                mobile: ["/guidelines/mobile/external-resources-mobile-1.png", "/guidelines/mobile/external-resources-mobile-2.png", "/guidelines/mobile/external-resources-mobile-3.png"],
+                captions: {
+                  pc: ["The 'Code' and the 'Data' buttons are in the overview page", "Here is the Github page after clicking the 'Code' button", "Here is the HuggingFace page after clicking the 'Dataset' button"],
+                  mobile: ["The 'Code' and the 'Data' buttons are in the overview page", "Here is the Github page after clicking the 'Code' button", "Here is the HuggingFace page after clicking the 'Dataset' button"]
+                }
               }
             }
           ]
@@ -374,11 +415,11 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           }`}>
             {section.title}
           </h2>
-          <div className={`mt-4 flex items-center justify-center gap-2 text-lg ${
+          <div className={`mt-4 flex items-center justify-center gap-2 text-xl ${
             isDarkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>
             <span>Explore</span>
-            <ChevronRightIcon className="w-5 h-5" />
+            <ChevronRightIcon className="w-6 h-6" />
           </div>
         </motion.button>
       ))}
@@ -415,7 +456,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
                 }`}>
                   {subsection.title}
                 </h3>
-                <p className={`text-lg mt-2 ${
+                <p className={`text-xl mt-2 ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                   {subsection.items.length} guide{subsection.items.length !== 1 ? 's' : ''}
@@ -451,7 +492,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            <h4 className={`text-xl font-semibold ${
+            <h4 className={`text-2xl font-semibold ${
               isDarkMode ? 'text-blue-300' : 'text-blue-700'
             }`}>
               {item.question}
@@ -502,7 +543,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           )}
         </div>
 
-        {/* Steps */}
+        {/* Instructions */}
         <div className={`p-8 rounded-xl ${
           isDarkMode 
             ? 'bg-[#0f1729]/80 border border-blue-500/20' 
@@ -511,22 +552,22 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           <h4 className={`text-2xl font-bold mb-6 ${
             isDarkMode ? 'text-white' : 'text-gray-800'
           }`}>
-            Steps
+            Instructions
           </h4>
           <div className="space-y-4">
-            {selectedItem.steps.map((step, stepIndex) => (
-              <div key={stepIndex} className="flex items-start gap-4">
+            {selectedItem.instructions.map((instruction, instructionIndex) => (
+              <div key={instructionIndex} className="flex items-start gap-4">
                 <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                   isDarkMode 
                     ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' 
                     : 'bg-blue-100 text-blue-700 border border-blue-300'
                 }`}>
-                  {stepIndex + 1}
+                  {instructionIndex + 1}
                 </div>
-                <p className={`text-lg pt-1 ${
-                  isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                <p className={`text-xl pt-1 leading-relaxed ${
+                  isDarkMode ? 'text-gray-200' : 'text-gray-800'
                 }`}>
-                  {step}
+                  {instruction}
                 </p>
               </div>
             ))}
@@ -603,21 +644,44 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
                       )}
                     </div>
                     
-                    {/* Image Counter and Device Info */}
-                    <div className="mt-4 flex justify-between items-center">
-                      <div className={`text-sm font-medium ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  {isMobile ? 'Mobile View' : 'Desktop View'}
-                </div>
-                      
-                      {imagesToShow.length > 1 && (
+                    {/* Image Counter, Device Info, and Caption */}
+                    <div className="mt-4 space-y-3">
+                      <div className="flex justify-between items-center">
                         <div className={`text-sm font-medium ${
                           isDarkMode ? 'text-gray-400' : 'text-gray-500'
                         }`}>
-                          {currentImageIndex + 1} of {imagesToShow.length}
+                          {isMobile ? 'Mobile View' : 'Desktop View'}
                         </div>
-                      )}
+                        
+                        {imagesToShow.length > 1 && (
+                          <div className={`text-sm font-medium ${
+                            isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                          }`}>
+                            {currentImageIndex + 1} of {imagesToShow.length}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Image Caption */}
+                      {(() => {
+                        const captions = selectedItem.images?.captions;
+                        if (!captions) return null;
+                        
+                        const deviceCaptions = isMobile && captions.mobile ? captions.mobile : captions.pc;
+                        const captionsToShow = Array.isArray(deviceCaptions) ? deviceCaptions : [deviceCaptions].filter(Boolean);
+                        
+                        if (captionsToShow.length === 0 || !captionsToShow[currentImageIndex]) return null;
+                        
+                        return (
+                          <div className={`text-base italic text-center px-4 py-2 rounded-lg ${
+                            isDarkMode 
+                              ? 'bg-gray-800/50 text-gray-300 border border-gray-700' 
+                              : 'bg-gray-50 text-gray-600 border border-gray-200'
+                          }`}>
+                            {captionsToShow[currentImageIndex]}
+                          </div>
+                        );
+                      })()}
                     </div>
                     
                     {/* Dots Indicator */}
@@ -678,36 +742,6 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
           )}
         </AnimatePresence>
 
-        {/* Breadcrumb */}
-        <AnimatePresence>
-          {currentLevel !== 'sections' && (
-            <motion.div
-              className={`mb-8 flex items-center gap-2 text-lg ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="font-medium">{selectedSection?.title}</span>
-              {currentLevel !== 'subsections' && (
-                <>
-                  <span>/</span>
-                  <span className="font-medium">{selectedSubsection?.title}</span>
-                </>
-              )}
-              {currentLevel === 'detail' && (
-                <>
-                  <span>/</span>
-                  <span className={`font-medium ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
-                    {selectedItem?.question}
-                  </span>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Content based on current level */}
         <AnimatePresence mode="wait">

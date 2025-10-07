@@ -191,7 +191,7 @@ export default function Home() {
       case 'about':
         return <AboutPage isDarkMode={isDarkMode} />;
       case 'guide':
-        return <GuidelinePage isDarkMode={isDarkMode} />;
+        return <GuidelinePage isDarkMode={isDarkMode} onNavigateToTask={handleNavigateToTask} />;
       default:
         return <OverviewPage isDarkMode={isDarkMode} onNavigateToTask={handleNavigateToTask} />;
     }

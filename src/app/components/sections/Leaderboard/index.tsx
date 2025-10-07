@@ -48,7 +48,7 @@ interface LeaderboardProps {
 }
 
   const Leaderboard: FC<LeaderboardProps> = ({ taskAbilities, isDarkMode, initialTask }) => {
-  const [currentTask, setCurrentTask] = useState<TaskType>(initialTask || 'overall');
+  const [currentTask, setCurrentTask] = useState<TaskType>('overall');
   const [timelineRange, setTimelineRange] = useState<{ start: Date; end: Date } | null>(null);
   const [selectedAbilities, setSelectedAbilities] = useState<Partial<Ability>>({});
   const [results, setResults] = useState<ProcessedResult[]>([]);
@@ -79,12 +79,10 @@ interface LeaderboardProps {
     return task !== 'overall';
   }, []);
   
-  // Update currentTask when initialTask changes
+  // Initialize with initialTask on component mount
   useEffect(() => {
-    if (initialTask && initialTask !== currentTask) {
+    if (initialTask) {
       setCurrentTask(initialTask);
-      // Reset filters and settings when task changes
-      setSelectedAbilities({});
       setSortConfig(getDefaultSortConfig(initialTask));
       
       // Reset multi-leaderboard tab when task changes
@@ -97,7 +95,11 @@ interface LeaderboardProps {
           setSelectedAbilities({
             dataset: ['Merge-HR+GFG']
           });
+        } else {
+          setSelectedAbilities({});
         }
+      } else {
+        setSelectedAbilities({});
       }
       
       // Reset viewMode to table if switching to a task that doesn't support chart view
@@ -108,7 +110,8 @@ interface LeaderboardProps {
       // Close comparison modal when task changes
       setIsComparisonModalOpen(false);
     }
-  }, [initialTask, currentTask, supportsChartView]);
+  }, [initialTask, supportsChartView]);
+
   
   // Callback for when column widths change to trigger scroll check
   const handleColumnWidthChange = useCallback(() => {
@@ -120,8 +123,7 @@ interface LeaderboardProps {
   const handleTaskChange = useCallback((task: TaskType) => {
     setCurrentTask(task);
     setSortConfig(getDefaultSortConfig(task));
-    setSelectedAbilities({});
-
+    
     // Reset multi-leaderboard tab when task changes
     const config = getMultiLeaderboardConfig(task);
     if (config) {
@@ -132,7 +134,13 @@ interface LeaderboardProps {
         setSelectedAbilities({
           dataset: ['Merge-HR+GFG']
         });
+      } else {
+        // Clear abilities for other tasks
+        setSelectedAbilities({});
       }
+    } else {
+      // Clear abilities for non-multi-leaderboard tasks
+      setSelectedAbilities({});
     }
     
     // Reset viewMode to table if switching to a task that doesn't support chart view

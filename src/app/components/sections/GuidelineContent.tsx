@@ -16,15 +16,17 @@ import Image from 'next/image';
 
 interface GuidelineContentProps {
   isDarkMode: boolean;
+  onNavigateToTask?: (task: string) => void;
 }
 
 interface GuidelineItem {
   question: string;
   steps: string[];
   images?: {
-    pc?: string;
-    mobile?: string;
+    pc?: string | string[];
+    mobile?: string | string[];
   };
+  navigateToTask?: string;
 }
 
 interface GuidelineSubsection {
@@ -38,13 +40,14 @@ interface GuidelineSection {
   subsections: GuidelineSubsection[];
 }
 
-const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
+const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToTask }) => {
   // Navigation levels: 'sections' | 'subsections' | 'questions' | 'detail'
   const [currentLevel, setCurrentLevel] = useState<'sections' | 'subsections' | 'questions' | 'detail'>('sections');
   const [selectedSection, setSelectedSection] = useState<GuidelineSection | null>(null);
   const [selectedSubsection, setSelectedSubsection] = useState<GuidelineSubsection | null>(null);
   const [selectedItem, setSelectedItem] = useState<GuidelineItem | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Detect if user is on mobile
   useEffect(() => {
@@ -81,8 +84,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Step 2: The tooltip shows the selected time range. Drag the handles to adjust the range. For example, you might select [Mar 2025, Aug 2025]."
               ],
               images: {
-                pc: "/guidelines/timeline-filter-pc.png",
-                mobile: "/guidelines/timeline-filter-mobile.png"
+                pc: ["/guidelines/desktop/timeline-filter-pc-1.png", "/guidelines/desktop/timeline-filter-pc-2.png"],
+                mobile: ["/guidelines/mobile/timeline-filter-mobile-1.png", "/guidelines/mobile/timeline-filter-mobile-2.png"]
               }
             },
             {
@@ -93,8 +96,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "In chart view, you can also switch the displayed metric by clicking the metric buttons."
               ],
               images: {
-                pc: "/guidelines/filters-available-pc.png",
-                mobile: "/guidelines/filters-available-mobile.png"
+                pc: ["/guidelines/desktop/filters-available-pc-1.png", "/guidelines/desktop/filters-available-pc-2.png"],
+                mobile: ["/guidelines/mobile/filters-available-mobile-1.png", "/guidelines/mobile/filters-available-mobile-2.png"]
               }
             },
             {
@@ -105,9 +108,10 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Step 3: Use the checkboxes to narrow the results. For example, filter by dataset \"HackerRank\" and knowledge \"Data Structures\"."
               ],
               images: {
-                pc: "/guidelines/additional-filters-pc.png",
-                mobile: "/guidelines/additional-filters-mobile.png"
-              }
+                pc: ["/guidelines/desktop/additional-filters-pc-1.png", "/guidelines/desktop/additional-filters-pc-2.png"],
+                mobile: ["/guidelines/mobile/additional-filters-mobile-1.png", "/guidelines/mobile/additional-filters-mobile-2.png"]
+              },
+              navigateToTask: "code-robustness"
             }
           ]
         },
@@ -122,8 +126,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Below the graph, the model results for the selected metric are listed."
               ],
               images: {
-                pc: "/guidelines/chart-view-pc.png",
-                mobile: "/guidelines/chart-view-mobile.png"
+                pc: "/guidelines/desktop/chart-view-pc.png",
+                mobile: "/guidelines/mobile/chart-view-mobile.png"
               }
             },
             {
@@ -137,8 +141,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "  • Double‑click: Reset"
               ],
               images: {
-                pc: "/guidelines/chart-interactions-pc.png",
-                mobile: "/guidelines/chart-interactions-mobile.png"
+                pc: ["/guidelines/desktop/chart-interactions-pc-1.png", "/guidelines/desktop/chart-interactions-pc-2.png"],
+                mobile: ["/guidelines/mobile/chart-interactions-mobile-1.png", "/guidelines/mobile/chart-interactions-mobile-2.png"]
               }
             }
           ]
@@ -157,8 +161,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Step 6: Use the horizontal scrollbar under the table to view columns that are off‑screen."
               ],
               images: {
-                pc: "/guidelines/table-adjust-pc.png",
-                mobile: "/guidelines/table-adjust-mobile.png"
+                pc: ["/guidelines/desktop/table-adjust-pc-1.png", "/guidelines/desktop/table-adjust-pc-2.png", "/guidelines/desktop/table-adjust-pc-3.png", "/guidelines/desktop/table-adjust-pc-4.png", "/guidelines/desktop/table-adjust-pc-5.png", "/guidelines/desktop/table-adjust-pc-6.png"],
+                mobile: ["/guidelines/mobile/table-adjust-mobile-1.png", "/guidelines/mobile/table-adjust-mobile-2.png", "/guidelines/mobile/table-adjust-mobile-3.png", "/guidelines/mobile/table-adjust-mobile-4.png", "/guidelines/mobile/table-adjust-mobile-5.png", "/guidelines/mobile/table-adjust-mobile-6.png"]
               }
             }
           ]
@@ -172,8 +176,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Click the \"Compare\" button under the title."
               ],
               images: {
-                pc: "/guidelines/compare-open-pc.png",
-                mobile: "/guidelines/compare-open-mobile.png"
+                pc: "/guidelines/desktop/compare-open-pc.png",
+                mobile: "/guidelines/mobile/compare-open-mobile.png"
               }
             },
             {
@@ -182,8 +186,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "The compare section visualizes the table results using bar or radar charts for a clearer, side‑by‑side comparison between models."
               ],
               images: {
-                pc: "/guidelines/compare-section-pc.png",
-                mobile: "/guidelines/compare-section-mobile.png"
+                pc: "/guidelines/desktop/compare-section-pc.png",
+                mobile: "/guidelines/mobile/compare-section-mobile.png"
               }
             },
             {
@@ -196,8 +200,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Notice: If filters are enabled, the compare section reflects them (e.g., it shows \"Modality: Python\" for the Python leaderboard)."
               ],
               images: {
-                pc: "/guidelines/compare-models-pc.png",
-                mobile: "/guidelines/compare-models-mobile.png"
+                pc: ["/guidelines/desktop/compare-models-pc-1.png", "/guidelines/desktop/compare-models-pc-2.png", "/guidelines/desktop/compare-models-pc-3.png", "/guidelines/desktop/compare-models-pc-4.png"],
+                mobile: ["/guidelines/mobile/compare-models-mobile-1.png", "/guidelines/mobile/compare-models-mobile-2.png", "/guidelines/mobile/compare-models-mobile-3.png", "/guidelines/mobile/compare-models-mobile-4.png"]
               }
             }
           ]
@@ -213,8 +217,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "In chart view, the chart image is exported."
               ],
               images: {
-                pc: "/guidelines/export-pc.png",
-                mobile: "/guidelines/export-mobile.png"
+                pc: "/guidelines/desktop/export-pc-1.png",
+                mobile: "/guidelines/mobile/export-mobile-1.png"
               }
             }
           ]
@@ -235,8 +239,74 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
                 "Step 2: Click the Dark Mode button to toggle between dark and light modes."
               ],
               images: {
-                pc: "/guidelines/dark-mode-pc.png",
-                mobile: "/guidelines/dark-mode-mobile.png"
+                    pc: ["/guidelines/desktop/dark-mode-pc-1.png", "/guidelines/desktop/dark-mode-pc-2.png", "/guidelines/desktop/dark-mode-pc-3.png"],
+                    mobile: ["/guidelines/mobile/dark-mode-mobile-1.png", "/guidelines/mobile/dark-mode-mobile-2.png", "/guidelines/mobile/dark-mode-mobile-3.png"]
+                  }
+                }
+              ]
+            },
+            {
+              title: "Navigation",
+              items: [
+                {
+                  question: "How to navigate between different leaderboards",
+                  steps: [
+                    "Step 1: Use the sidebar on the left to access different sections.",
+                    "Step 2: Click on 'Tasks' to view all available leaderboards.",
+                    "Step 3: Select a specific task (e.g., Code Generation, Code Robustness) to view its leaderboard.",
+                    "Step 4: Use the task selector at the top of the leaderboard to switch between tasks."
+                  ],
+                  images: {
+                    pc: "/guidelines/desktop/navigation-pc.png",
+                    mobile: "/guidelines/mobile/navigation-mobile.png"
+                  }
+                },
+                {
+                  question: "What do the different task types mean?",
+                  steps: [
+                    "• Code Generation: Evaluates models' ability to generate code from natural language descriptions",
+                    "• Code Translation: Tests translation between different programming languages",
+                    "• Code Summarization: Measures ability to create concise summaries of code functionality",
+                    "• Code Review: Assesses models' capability to identify issues and suggest improvements",
+                    "• Code Robustness: Tests resilience against various code perturbations and edge cases",
+                    "• Vulnerability Detection: Evaluates detection of security vulnerabilities in code",
+                    "• Multi-Modality: Tests understanding of code with visual elements like UI components"
+                  ],
+                  images: {
+                    pc: "/guidelines/desktop/task-types-pc.png",
+                    mobile: "/guidelines/mobile/task-types-mobile.png"
+                  }
+                }
+              ]
+            },
+            {
+              title: "Troubleshooting",
+              items: [
+                {
+                  question: "What should I do if the leaderboard is not loading?",
+                  steps: [
+                    "Step 1: Check your internet connection and refresh the page.",
+                    "Step 2: Clear your browser cache and cookies.",
+                    "Step 3: Try using a different browser or incognito/private mode.",
+                    "Step 4: If the issue persists, the data might be temporarily unavailable."
+                  ],
+                  images: {
+                    pc: "/guidelines/desktop/troubleshooting-pc.png",
+                    mobile: "/guidelines/mobile/troubleshooting-mobile.png"
+                  }
+                },
+                {
+                  question: "Why are some models missing from the leaderboard?",
+                  steps: [
+                    "Models may be missing due to:",
+                    "• Filters applied that exclude certain models",
+                    "• Time range selection that doesn't include the model's release date",
+                    "• The model hasn't been evaluated on the selected task/dataset",
+                    "• The model data is still being processed"
+                  ],
+                  images: {
+                    pc: "/guidelines/desktop/missing-models-pc.png",
+                    mobile: "/guidelines/mobile/missing-models-mobile.png"
               }
             }
           ]
@@ -259,6 +329,8 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
   const handleQuestionClick = (item: GuidelineItem) => {
     setSelectedItem(item);
     setCurrentLevel('detail');
+    setCurrentImageIndex(0); // Reset image index when opening a new question
+    // Navigation is now handled only by the button click, not when opening the question
   };
 
   const handleBack = () => {
@@ -414,6 +486,20 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
           }`}>
             {selectedItem.question}
           </h3>
+          {selectedItem.navigateToTask && (
+            <div className="mt-4">
+              <button
+                onClick={() => selectedItem.navigateToTask && onNavigateToTask && onNavigateToTask(selectedItem.navigateToTask)}
+                className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all ${
+                  isDarkMode 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                } shadow-lg hover:shadow-xl`}
+              >
+                View {selectedItem.navigateToTask.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} Leaderboard
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Steps */}
@@ -447,7 +533,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
           </div>
         </div>
 
-        {/* Screenshot */}
+        {/* Screenshots */}
         {selectedItem.images && (
           <div className={`p-8 rounded-xl ${
             isDarkMode 
@@ -457,31 +543,103 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode }) => {
             <h4 className={`text-2xl font-bold mb-6 ${
               isDarkMode ? 'text-white' : 'text-gray-800'
             }`}>
-              Screenshot
+              Screenshots
             </h4>
             <div className={`rounded-lg overflow-hidden ${
               isDarkMode 
                 ? 'bg-gray-900/50 border border-gray-700' 
                 : 'bg-white border border-gray-300'
             } p-4`}>
-              <div className="relative w-full" style={{ minHeight: '200px' }}>
+              {(() => {
+                const deviceImages = isMobile && selectedItem.images.mobile ? selectedItem.images.mobile : selectedItem.images.pc;
+                const imagesToShow = Array.isArray(deviceImages) ? deviceImages : [deviceImages].filter(Boolean);
+                
+                if (imagesToShow.length === 0) return null;
+                
+                return (
+                  <div className="relative">
+                    {/* Image Container */}
+                    <div className="relative w-full" style={{ minHeight: '400px' }}>
                 <Image
-                  src={isMobile && selectedItem.images.mobile ? selectedItem.images.mobile : selectedItem.images.pc || '/guidelines/placeholder.svg'}
-                  alt={`${selectedItem.question} - ${isMobile ? 'Mobile' : 'Desktop'} View`}
-                  width={800}
-                  height={450}
-                  className="rounded-lg w-full h-auto"
+                        src={imagesToShow[currentImageIndex] || '/guidelines/placeholder.svg'}
+                        alt={`${selectedItem.question} - ${isMobile ? 'Mobile' : 'Desktop'} View ${imagesToShow.length > 1 ? `(${currentImageIndex + 1}/${imagesToShow.length})` : ''}`}
+                        width={1000}
+                        height={600}
+                        className="rounded-lg w-full h-auto max-w-full object-contain"
+                        style={{ minHeight: '400px', maxHeight: '800px' }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = '/guidelines/placeholder.svg';
                   }}
                 />
-                <div className={`mt-4 text-center text-sm font-medium ${
+                      
+                      {/* Navigation Arrows */}
+                      {imagesToShow.length > 1 && (
+                        <>
+                          <button
+                            onClick={() => setCurrentImageIndex(prev => prev > 0 ? prev - 1 : imagesToShow.length - 1)}
+                            className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all ${
+                              isDarkMode 
+                                ? 'bg-gray-800/80 text-white hover:bg-gray-700/90' 
+                                : 'bg-white/80 text-gray-800 hover:bg-white/90'
+                            } shadow-lg hover:shadow-xl`}
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeftIcon className="w-6 h-6" />
+                          </button>
+                          
+                          <button
+                            onClick={() => setCurrentImageIndex(prev => prev < imagesToShow.length - 1 ? prev + 1 : 0)}
+                            className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all ${
+                              isDarkMode 
+                                ? 'bg-gray-800/80 text-white hover:bg-gray-700/90' 
+                                : 'bg-white/80 text-gray-800 hover:bg-white/90'
+                            } shadow-lg hover:shadow-xl`}
+                            aria-label="Next image"
+                          >
+                            <ChevronRightIcon className="w-6 h-6" />
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    
+                    {/* Image Counter and Device Info */}
+                    <div className="mt-4 flex justify-between items-center">
+                      <div className={`text-sm font-medium ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-500'
                 }`}>
                   {isMobile ? 'Mobile View' : 'Desktop View'}
                 </div>
+                      
+                      {imagesToShow.length > 1 && (
+                        <div className={`text-sm font-medium ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          {currentImageIndex + 1} of {imagesToShow.length}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Dots Indicator */}
+                    {imagesToShow.length > 1 && (
+                      <div className="flex justify-center mt-4 space-x-2">
+                        {imagesToShow.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={`w-3 h-3 rounded-full transition-all ${
+                              index === currentImageIndex
+                                ? isDarkMode ? 'bg-blue-400' : 'bg-blue-600'
+                                : isDarkMode ? 'bg-gray-600' : 'bg-gray-300'
+                            }`}
+                            aria-label={`Go to image ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+                    )}
               </div>
+                );
+              })()}
             </div>
           </div>
         )}

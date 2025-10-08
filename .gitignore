@@ -71,4 +71,6 @@ data/precomputed/multi-modality/
 data/unit_test_generation/
 data/multi-modality/
 new_dataset/
-data/backuo
+data/backuo/
+data/precomputed/unit-test-generation/
+data/precomputed/middle_data/code-web/

@@ -6,8 +6,8 @@ import { ScatterChartRef } from '@/app/components/ui/ModelScatterChart';
 interface LeaderboardHeaderProps {
   currentTask: TaskType;
   isDarkMode: boolean;
-  viewMode: 'table' | 'scatter';
-  setViewMode: (mode: 'table' | 'scatter') => void;
+  viewMode: 'table' | 'scatter' | 'code-questions';
+  setViewMode: (mode: 'table' | 'scatter' | 'code-questions') => void;
   setIsComparisonModalOpen: (isOpen: boolean) => void;
   shouldShowChartButton: boolean;
   csvData: { headers: { label: string; key: string }[]; data: Record<string, string | number>[] };
@@ -107,12 +107,28 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
           {/* Show chart view button only when we have metrics and data */}
           {shouldShowChartButton && (
             <button
-              onClick={() => setViewMode(viewMode === 'table' ? 'scatter' : 'table')}
+              onClick={() => {
+                if (currentTask === 'code translation') {
+                  // For code translation, cycle through all three modes
+                  if (viewMode === 'table') {
+                    setViewMode('scatter');
+                  } else if (viewMode === 'scatter') {
+                    setViewMode('code-questions');
+                  } else {
+                    setViewMode('table');
+                  }
+                } else {
+                  // For other tasks, toggle between table and scatter
+                  setViewMode(viewMode === 'table' ? 'scatter' : 'table');
+                }
+              }}
               className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg min-w-0"
               style={{
                 background: viewMode === 'table' 
                   ? 'linear-gradient(to right, #f59e0b, #d97706)' 
-                  : 'linear-gradient(to right, #10b981, #14b8a6)',
+                  : viewMode === 'scatter'
+                  ? 'linear-gradient(to right, #10b981, #14b8a6)'
+                  : 'linear-gradient(to right, #8b5cf6, #7c3aed)',
                 border: 'none',
                 cursor: 'pointer'
               }}
@@ -122,8 +138,16 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
                   </svg>
-                  <span className="hidden sm:inline">{viewMode === 'table' ? 'Chart View' : 'Table View'}</span>
+                  <span className="hidden sm:inline">Chart View</span>
                   <span className="sm:hidden">Chart</span>
+                </>
+              ) : viewMode === 'scatter' ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span className="hidden sm:inline">{currentTask === 'code translation' ? 'Code View' : 'Table View'}</span>
+                  <span className="sm:hidden">{currentTask === 'code translation' ? 'Code' : 'Table'}</span>
                 </>
               ) : (
                 <>

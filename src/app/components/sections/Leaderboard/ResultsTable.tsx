@@ -2,7 +2,8 @@ import { FC, useRef, useEffect, useState, useCallback, useMemo } from 'react';
 
 import { TaskType, ProcessedResult, Ability } from '@/lib/types';
 import { FilterConfig } from '@/lib/filterConfig';
-import { HeaderConfig } from '@/lib/leaderboardConfig';
+import { HeaderConfig, getTaskHeaders } from '@/lib/leaderboardConfig';
+import { getFilteredTableHeaders } from '@/lib/leaderboardHelpers';
 import TableHeader from './TableHeader';
 import TableCell from './TableCell';
 import { getModelUrl } from '@/lib/constants';
@@ -108,87 +109,177 @@ const ResultsTable: FC<ResultsTableProps> = ({
   const availableMetrics = useMemo(() => {
     if (!results || !results.length) return [];
     
-    const headers = getTableHeaders(currentTask);
-    return headers
+    // For chart view, we want to show all possible metrics for the task that have ANY data
+    // This allows users to switch between metrics even if some don't have data in current filter
+    // But we still hide metrics that have NO data at all
+    const allHeaders = getTaskHeaders(currentTask);
+    
+    // However, we still need to apply specific dataset-based filtering rules
+    let filteredHeaders = allHeaders;
+    
+    // Apply the same dataset-specific filtering as getFilteredTableHeaders
+    if (currentTask === 'multi-modality' && selectedAbilities?.dataset) {
+      const hasEditOrRepair = selectedAbilities.dataset.some(dataset => 
+        dataset.includes('UI Code Edit') || dataset.includes('UI Code Repair')
+      );
+      
+      if (hasEditOrRepair) {
+        filteredHeaders = filteredHeaders.filter(header => header.key !== 'CLIP');
+      }
+    }
+    
+    return filteredHeaders
       .filter(header => {
         // Skip non-numeric columns
         if (['rank', 'model', 'model_url', 'ability', 'task'].includes(header.key)) {
           return false;
         }
         
-        // Check if this metric has numeric data in the results
+        // For chart view, only include metrics that have at least SOME valid data
+        // Check if this metric has numeric data in ANY of the results (not just current filter)
         const hasNumericData = results.some(result => {
           const value = result[header.key];
-          return value !== '-' && value !== undefined && !isNaN(Number(value));
+          return value != null && value !== undefined && String(value) !== '-' && String(value) !== '' && !isNaN(Number(value));
         });
         
         return hasNumericData;
       })
       .map(header => header.key);
-  }, [results, currentTask, getTableHeaders]);
+  }, [results, currentTask, selectedAbilities]);
   
   // Set default metric when available metrics change
   useEffect(() => {
-    if (availableMetrics.length > 0 && !currentScatterMetric) {
-      // For code-robustness with new datasets, prefer MPS as default
-      if (currentTask === 'code-robustness' && selectedMultiTab && 
-          ['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
-        const hasMPS = availableMetrics.includes('MPS');
-        setCurrentScatterMetric(hasMPS ? 'MPS' : availableMetrics[0]);
-      } else if (currentTask === 'multi-modality') {
-        // For multi-modality, prefer Compilation as default (especially for UI Code Generation)
-        const hasCompilation = availableMetrics.includes('Compilation');
-        setCurrentScatterMetric(hasCompilation ? 'Compilation' : availableMetrics[0]);
-      } else if (currentTask === 'vulnerability detection') {
-        // For vulnerability detection, choose appropriate default based on selected dataset
-        if (selectedMultiTab === 'PrimeVulPairs') {
-          // For PrimeVulPairs (PrimeVulPlus), prefer P-C as default since it has the highest values
-          const hasPC = availableMetrics.includes('P-C');
-          setCurrentScatterMetric(hasPC ? 'P-C' : availableMetrics[0]);
+    if (availableMetrics.length > 0) {
+      // Check if current metric is still available, if not reset to a valid one
+      if (!currentScatterMetric || !availableMetrics.includes(currentScatterMetric)) {
+        // For code-robustness with new datasets, prefer MPS as default
+        if (currentTask === 'code-robustness' && selectedMultiTab && 
+            ['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
+          const hasMPS = availableMetrics.includes('MPS');
+          setCurrentScatterMetric(hasMPS ? 'MPS' : availableMetrics[0]);
+        } else if (currentTask === 'multi-modality') {
+          // For multi-modality, prefer Compilation as default (especially for UI Code Generation)
+          const hasCompilation = availableMetrics.includes('Compilation');
+          setCurrentScatterMetric(hasCompilation ? 'Compilation' : availableMetrics[0]);
+        } else if (currentTask === 'vulnerability detection') {
+          // For vulnerability detection, choose appropriate default based on selected dataset
+          if (selectedMultiTab === 'PrimeVulPairs') {
+            // For PrimeVulPairs (PrimeVulPlus), prefer P-C as default since it has the highest values
+            const hasPC = availableMetrics.includes('P-C');
+            setCurrentScatterMetric(hasPC ? 'P-C' : availableMetrics[0]);
+          } else {
+            // For PrimeVul or All, prefer Accuracy as default
+            const hasAccuracy = availableMetrics.includes('Accuracy');
+            setCurrentScatterMetric(hasAccuracy ? 'Accuracy' : availableMetrics[0]);
+          }
         } else {
-          // For PrimeVul or All, prefer Accuracy as default
-          const hasAccuracy = availableMetrics.includes('Accuracy');
-          setCurrentScatterMetric(hasAccuracy ? 'Accuracy' : availableMetrics[0]);
+          setCurrentScatterMetric(availableMetrics[0]);
         }
-      } else {
-        setCurrentScatterMetric(availableMetrics[0]);
       }
     }
   }, [availableMetrics, currentScatterMetric, currentTask, selectedMultiTab]);
 
   // Reset metric when switching to new datasets in code-robustness, multi-modality, or vulnerability detection
   useEffect(() => {
-    if (currentTask === 'code-robustness' && selectedMultiTab && availableMetrics.length > 0) {
-      if (['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
-        // Switch to MPS for new datasets if available and not already selected
-        const hasMPS = availableMetrics.includes('MPS');
-        if (hasMPS && currentScatterMetric !== 'MPS') {
-          setCurrentScatterMetric('MPS');
-        }
-      }
-    } else if (currentTask === 'multi-modality' && selectedMultiTab && availableMetrics.length > 0) {
-      // For multi-modality, prefer Compilation when switching datasets
-      const hasCompilation = availableMetrics.includes('Compilation');
-      if (hasCompilation && currentScatterMetric !== 'Compilation') {
-        setCurrentScatterMetric('Compilation');
-      }
-    } else if (currentTask === 'vulnerability detection' && selectedMultiTab && availableMetrics.length > 0) {
-      // For vulnerability detection, switch default metric based on selected dataset
-      if (selectedMultiTab === 'PrimeVulPairs') {
-        // For PrimeVulPairs (PrimeVulPlus), switch to P-C if not already selected
-        const hasPC = availableMetrics.includes('P-C');
-        if (hasPC && currentScatterMetric !== 'P-C') {
-          setCurrentScatterMetric('P-C');
-        }
-      } else if (selectedMultiTab === 'PrimeVul' || selectedMultiTab === 'All') {
-        // For PrimeVul or All, switch to Accuracy if not already selected
-        const hasAccuracy = availableMetrics.includes('Accuracy');
-        if (hasAccuracy && currentScatterMetric !== 'Accuracy') {
-          setCurrentScatterMetric('Accuracy');
+    if (availableMetrics.length > 0) {
+      // Always validate that the current metric is available in the new tab's data
+      const hasValidData = results.some(result => {
+        const value = result[currentScatterMetric];
+        return value !== '-' && value !== undefined && !isNaN(Number(value));
+      });
+      
+      // If current metric has no valid data in this tab, switch to appropriate default
+      if (!hasValidData && currentScatterMetric && availableMetrics.includes(currentScatterMetric)) {
+        if (currentTask === 'code-robustness' && selectedMultiTab && 
+            ['HackerRank', 'GeeksforGeeks', 'Merge'].includes(selectedMultiTab)) {
+          // Switch to MPS for new datasets if available
+          const hasMPS = availableMetrics.includes('MPS');
+          const mpsHasData = hasMPS && results.some(result => {
+            const value = result['MPS'];
+            return value != null && value !== undefined && String(value) !== '-' && !isNaN(Number(value));
+          });
+          if (mpsHasData) {
+            setCurrentScatterMetric('MPS');
+          } else {
+            // Find first metric with actual data
+            const firstMetricWithData = availableMetrics.find(metric => 
+              results.some(result => {
+                const value = result[metric];
+                return value !== '-' && value !== undefined && !isNaN(Number(value));
+              })
+            );
+            if (firstMetricWithData) {
+              setCurrentScatterMetric(firstMetricWithData);
+            }
+          }
+        } else if (currentTask === 'multi-modality' && selectedMultiTab) {
+          // For multi-modality, prefer Compilation when switching datasets
+          const hasCompilation = availableMetrics.includes('Compilation');
+          const compilationHasData = hasCompilation && results.some(result => {
+            const value = result['Compilation'];
+            return value != null && value !== undefined && String(value) !== '-' && !isNaN(Number(value));
+          });
+          if (compilationHasData) {
+            setCurrentScatterMetric('Compilation');
+          } else {
+            // Find first metric with actual data
+            const firstMetricWithData = availableMetrics.find(metric => 
+              results.some(result => {
+                const value = result[metric];
+                return value !== '-' && value !== undefined && !isNaN(Number(value));
+              })
+            );
+            if (firstMetricWithData) {
+              setCurrentScatterMetric(firstMetricWithData);
+            }
+          }
+        } else if (currentTask === 'vulnerability detection' && selectedMultiTab) {
+          // For vulnerability detection, switch default metric based on selected dataset
+          if (selectedMultiTab === 'PrimeVulPairs') {
+            const hasPC = availableMetrics.includes('P-C');
+            const pcHasData = hasPC && results.some(result => {
+              const value = result['P-C'];
+              return value != null && value !== undefined && String(value) !== '-' && !isNaN(Number(value));
+            });
+            if (pcHasData) {
+              setCurrentScatterMetric('P-C');
+            } else {
+              // Find first metric with actual data
+              const firstMetricWithData = availableMetrics.find(metric => 
+                results.some(result => {
+                  const value = result[metric];
+                  return value !== '-' && value !== undefined && !isNaN(Number(value));
+                })
+              );
+              if (firstMetricWithData) {
+                setCurrentScatterMetric(firstMetricWithData);
+              }
+            }
+          } else if (selectedMultiTab === 'PrimeVul' || selectedMultiTab === 'All') {
+            const hasAccuracy = availableMetrics.includes('Accuracy');
+            const accuracyHasData = hasAccuracy && results.some(result => {
+              const value = result['Accuracy'];
+              return value != null && value !== undefined && String(value) !== '-' && !isNaN(Number(value));
+            });
+            if (accuracyHasData) {
+              setCurrentScatterMetric('Accuracy');
+            } else {
+              // Find first metric with actual data
+              const firstMetricWithData = availableMetrics.find(metric => 
+                results.some(result => {
+                  const value = result[metric];
+                  return value !== '-' && value !== undefined && !isNaN(Number(value));
+                })
+              );
+              if (firstMetricWithData) {
+                setCurrentScatterMetric(firstMetricWithData);
+              }
+            }
+          }
         }
       }
     }
-  }, [selectedMultiTab, currentTask, availableMetrics, currentScatterMetric]);
+  }, [selectedMultiTab, currentTask, availableMetrics, currentScatterMetric, results]);
 
   // Reset to table view only when the original results are empty (not just timeline filtered)
   // This ensures users can stay in chart view to adjust timeline filters

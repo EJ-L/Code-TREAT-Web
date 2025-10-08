@@ -646,7 +646,13 @@ interface LeaderboardProps {
 
   // Get filtered table headers using new helper
   const getFilteredTableHeadersMemo = useCallback((task: TaskType) => {
-    return getFilteredTableHeaders(task, false, sortedResults, { datasets: selectedAbilities.dataset });
+    // Pass all relevant active filters to ensure proper metric filtering
+    const activeFilters: { datasets?: string[] } = {};
+    if (selectedAbilities.dataset) {
+      activeFilters.datasets = selectedAbilities.dataset;
+    }
+    
+    return getFilteredTableHeaders(task, false, sortedResults, activeFilters);
   }, [sortedResults, selectedAbilities.dataset]);
 
   // Initialize column widths when task changes

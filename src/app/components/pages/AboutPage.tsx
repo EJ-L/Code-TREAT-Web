@@ -26,7 +26,7 @@ const AboutPage: FC<AboutPageProps> = ({ isDarkMode }) => {
       <Results isDarkMode={isDarkMode} />
       
       {/* About Section */}
-      <About isDarkMode={isDarkMode} />
+      {/*<About isDarkMode={isDarkMode} />*/}
     </div>
   );
 };

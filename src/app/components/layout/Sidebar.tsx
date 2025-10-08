@@ -164,7 +164,7 @@ const Sidebar: FC<SidebarProps> = ({
           <li>
             <button
               onClick={() => onSectionChange('guide')}
-              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors flex items-center gap-3 ${
+              className={`w-full text-left px-6 py-4 rounded-lg font-bold text-2xl transition-colors ${
                 currentSection === 'guide'
                   ? isDarkMode 
                     ? 'bg-blue-900/30 text-blue-200' 
@@ -174,8 +174,7 @@ const Sidebar: FC<SidebarProps> = ({
                     : 'text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <QuestionMarkCircleIcon className="w-8 h-8" />
-              <span>User Guide</span>
+              User Guide
             </button>
           </li>
         </ul>

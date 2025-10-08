@@ -153,7 +153,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
                 "After zooming in, you can:",
                 "  • Dragging: Pan the view",
                 "  • Ctrl+Drag: Select an area (PC only)",
-                "  • Double‑click: Reset"
+                "  • Double‑click (PC only): Reset zoom"
               ],
               images: {
                 pc: ["/guidelines/desktop/chart-interactions-pc-1.png", "/guidelines/desktop/chart-interactions-pc-2.png"],
@@ -181,10 +181,10 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
               ],
               images: {
                 pc: ["/guidelines/desktop/table-adjust-pc-1.png", "/guidelines/desktop/table-adjust-pc-2.png", "/guidelines/desktop/table-adjust-pc-3.png", "/guidelines/desktop/table-adjust-pc-4.png", "/guidelines/desktop/table-adjust-pc-5.png", "/guidelines/desktop/table-adjust-pc-6.png"],
-                mobile: ["/guidelines/mobile/table-adjust-mobile-1.png", "/guidelines/mobile/table-adjust-mobile-2.png", "/guidelines/mobile/table-adjust-mobile-3.png", "/guidelines/mobile/table-adjust-mobile-4.png", "/guidelines/mobile/table-adjust-mobile-5.png", "/guidelines/mobile/table-adjust-mobile-6.png"],
+                mobile: ["/guidelines/mobile/table-adjust-mobile-1.png", "/guidelines/mobile/table-adjust-mobile-2.png", "/guidelines/mobile/table-adjust-mobile-3.png", "/guidelines/mobile/table-adjust-mobile-4.png", "/guidelines/mobile/table-adjust-mobile-5.png"],
                 captions: {
-                  pc: ["", "Here showing ranking by sorting the models based on CLIP metric descendingly", "User can increase or decrease the column width in the table", "It will show the detail name Compliation metric when hovering it", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the horizontal scrollbar at the bottom"],
-                  mobile: ["", "Here showing ranking by sorting the models based on CLIP metric descendingly", "User can increase or decrease the column width in the table", "It will show the detail name Compliation metric when hovering it", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the horizontal scrollbar at the bottom"]
+                  pc: ["", "Here showing ranking by sorting the models based on Easy Pass@1 metric descendingly", "User can increase or decrease the column width in the table", "It will show the detail name Easy Pass@1 metric when hovering it", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the horizontal scrollbar at the bottom"],
+                  mobile: ["", "Here showing ranking by sorting the models based on Accuracy metric descendingly", "User can increase or decrease the column width in the table", "When clicking the model name, it will navigate to the model page", "If the table contains too much information, user can use the touch and drag to scroll the table"]
                 }
               }
             }
@@ -223,7 +223,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
                 "In the Select Models area, choose up to 5 models to compare.",
                 "The Performance Comparison chart updates to show the selected models.",
                 "Click a model name in the legend to temporarily hide or show it in the chart.",
-                "Hover to see detailed metric values.",
+                "Hover (Or touch in mobile view) to see detailed metric values.",
                 "Notice: If filters are enabled, the compare section reflects them (e.g., it shows \"Modality: Python\" for the Python leaderboard)."
               ],
               images: {
@@ -271,10 +271,10 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
               ],
               images: {
                     pc: ["/guidelines/desktop/dark-mode-pc-1.png", "/guidelines/desktop/dark-mode-pc-2.png", "/guidelines/desktop/dark-mode-pc-3.png"],
-                    mobile: ["/guidelines/mobile/dark-mode-mobile-1.png", "/guidelines/mobile/dark-mode-mobile-2.png", "/guidelines/mobile/dark-mode-mobile-3.png"],
+                    mobile: ["/guidelines/mobile/dark-mode-mobile-1.png"],
                     captions: {
                       pc: ["The sidebar is always showing in the full screen", "In small screen, user need to click the top-right icon to first open the sidebar first", ""],
-                      mobile: ["The sidebar is always showing in the full screen", "In small screen, user need to click the top-right icon to first open the sidebar first", ""]
+                      mobile: ["In mobile view, user need to click the top-right icon to open the sidebar first"]
                     }
                   }
                 }
@@ -343,7 +343,7 @@ const GuidelineContent: FC<GuidelineContentProps> = ({ isDarkMode, onNavigateToT
               ],
               images: {
                 pc: ["/guidelines/desktop/external-resources-pc-1.png", "/guidelines/desktop/external-resources-pc-2.png", "/guidelines/desktop/external-resources-pc-3.png"],
-                mobile: ["/guidelines/mobile/external-resources-mobile-1.png", "/guidelines/mobile/external-resources-mobile-2.png", "/guidelines/mobile/external-resources-mobile-3.png"],
+                mobile: ["/guidelines/mobile/external-resources-mobile-1.png",  "/guidelines/desktop/external-resources-pc-2.png", "/guidelines/desktop/external-resources-pc-3.png"],
                 captions: {
                   pc: ["The 'Code' and the 'Data' buttons are in the overview page", "Here is the Github page after clicking the 'Code' button", "Here is the HuggingFace page after clicking the 'Dataset' button"],
                   mobile: ["The 'Code' and the 'Data' buttons are in the overview page", "Here is the Github page after clicking the 'Code' button", "Here is the HuggingFace page after clicking the 'Dataset' button"]

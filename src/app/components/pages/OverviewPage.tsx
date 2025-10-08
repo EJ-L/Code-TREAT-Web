@@ -3,6 +3,7 @@ import { FC } from 'react';
 import Hero from '../sections/Hero';
 import Abstract from '../sections/Abstract';
 import Introduction from '../sections/Introduction';
+import BenchmarkConstructionOverview from '../sections/BenchmarkConstructionOverview';
 
 interface OverviewPageProps {
   isDarkMode: boolean;
@@ -20,6 +21,9 @@ const OverviewPage: FC<OverviewPageProps> = ({ isDarkMode, onNavigateToTask }) =
       
       {/* Introduction Section */}
       <Introduction isDarkMode={isDarkMode} />
+      
+      {/* Benchmark Construction Section */}
+      <BenchmarkConstructionOverview isDarkMode={isDarkMode} />
       
     </div>
   );

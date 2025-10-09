@@ -108,27 +108,15 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
           {shouldShowChartButton && (
             <button
               onClick={() => {
-                if (currentTask === 'code translation') {
-                  // For code translation, cycle through all three modes
-                  if (viewMode === 'table') {
-                    setViewMode('scatter');
-                  } else if (viewMode === 'scatter') {
-                    setViewMode('code-questions');
-                  } else {
-                    setViewMode('table');
-                  }
-                } else {
-                  // For other tasks, toggle between table and scatter
-                  setViewMode(viewMode === 'table' ? 'scatter' : 'table');
-                }
+                // For all tasks, toggle between table and scatter only
+                // Code-questions view is temporarily hidden during development
+                setViewMode(viewMode === 'table' ? 'scatter' : 'table');
               }}
               className="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-white font-medium text-sm sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg min-w-0"
               style={{
                 background: viewMode === 'table' 
                   ? 'linear-gradient(to right, #f59e0b, #d97706)' 
-                  : viewMode === 'scatter'
-                  ? 'linear-gradient(to right, #10b981, #14b8a6)'
-                  : 'linear-gradient(to right, #8b5cf6, #7c3aed)',
+                  : 'linear-gradient(to right, #10b981, #14b8a6)',
                 border: 'none',
                 cursor: 'pointer'
               }}
@@ -140,14 +128,6 @@ const LeaderboardHeader: FC<LeaderboardHeaderProps> = ({
                   </svg>
                   <span className="hidden sm:inline">Chart View</span>
                   <span className="sm:hidden">Chart</span>
-                </>
-              ) : viewMode === 'scatter' ? (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  <span className="hidden sm:inline">{currentTask === 'code translation' ? 'Code View' : 'Table View'}</span>
-                  <span className="sm:hidden">{currentTask === 'code translation' ? 'Code' : 'Table'}</span>
                 </>
               ) : (
                 <>

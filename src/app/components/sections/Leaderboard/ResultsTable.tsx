@@ -44,8 +44,8 @@ interface ResultsTableProps {
   handleAbilityChange?: (key: keyof Ability, value: string) => void;
   availableLLMJudges?: string[];
   // View mode props
-  viewMode: 'table' | 'scatter';
-  setViewMode: (mode: 'table' | 'scatter') => void;
+  viewMode: 'table' | 'scatter' | 'code-questions';
+  setViewMode: (mode: 'table' | 'scatter' | 'code-questions') => void;
   // Multi-leaderboard props
   isMultiLeaderboard?: boolean;
   selectedMultiTab?: string;

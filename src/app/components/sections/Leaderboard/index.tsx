@@ -66,7 +66,7 @@ interface LeaderboardProps {
   });
   const [resizingColumn, setResizingColumn] = useState<string | null>(null);
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'table' | 'scatter'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'scatter' | 'code-questions'>('table');
   
   // Multi-leaderboard state
   const [selectedMultiTab, setSelectedMultiTab] = useState<string>('All');

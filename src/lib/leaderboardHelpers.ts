@@ -239,6 +239,7 @@ export function sortResults(
   const sortableData = [...data];
   
   // Store original ranks before any sorting (use originalRank if available, fallback to rank)
+  // But only if originalRank doesn't exist yet - this preserves the first time ranks are set
   sortableData.forEach((item, index) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((item as any).originalRank === undefined) {
@@ -247,23 +248,26 @@ export function sortResults(
     }
   });
   
-  // Special handling for rank column - sort by original rank values
+  // Special handling for rank column - sort by current rank values, not original
+  // This ensures that after timeline filtering, we sort by the filtered ranks
   if (sortConfig.key === 'rank') {
     sortableData.sort((a, b) => {
+      // Use current rank instead of originalRank for sorting
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const aRank = parseValueForSorting((a as any).originalRank);
+      const aRank = parseValueForSorting((a as any).rank);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const bRank = parseValueForSorting((b as any).originalRank);
+      const bRank = parseValueForSorting((b as any).rank);
       
       // Always sort rank in ascending order for "reset" behavior
       return aRank - bRank;
     });
     
-    // Restore original ranks when sorting by rank
-    return sortableData.map(item => ({
+    // Keep current ranks when sorting by rank (don't restore originalRank)
+    return sortableData.map((item, index) => ({
       ...item,
+      // Keep the current rank as-is, which should be the filtered continuous rank
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rank: (item as any).originalRank
+      rank: (item as any).rank
     }));
   }
   
